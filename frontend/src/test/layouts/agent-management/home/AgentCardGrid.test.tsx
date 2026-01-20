@@ -89,12 +89,18 @@ describe('AgentCardGrid Component', () => {
   });
 
   test('applies correct styles when card is selected', () => {
-    render(
-      <AgentCardGrid 
-        agentMetricsTilesData={mockAgentMetricsTilesData} 
-        onSelectStatus={mockOnSelectStatus} 
-      />
-    );
+    const Wrapper = () => {
+      const [currentStatus, setCurrentStatus] = React.useState('Recent');
+      return (
+        <AgentCardGrid
+          agentMetricsTilesData={mockAgentMetricsTilesData}
+          onSelectStatus={setCurrentStatus}
+          currentStatus={currentStatus}
+        />
+      );
+    };
+
+    render(<Wrapper />);
 
     jest.advanceTimersByTime(1000);
 
@@ -103,9 +109,8 @@ describe('AgentCardGrid Component', () => {
 
     // Verify the selected card has the active class
     expect(activeCard).toHaveClass('selected');
-    // Verify the text color changes to white
-    expect(screen.getByText('Active Servers')).toHaveStyle('color: #fff');
-    expect(screen.getByText('5')).toHaveStyle('color: #fff');
+    // Verify selected styles are applied
+    expect(activeCard).toHaveStyle('border: 1px solid #2961F4');
   });
 
   test('handles empty array for agentMetricsTilesData', () => {

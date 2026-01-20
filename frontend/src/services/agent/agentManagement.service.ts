@@ -2,11 +2,11 @@
  * Service dependencies
  *
  */
+import Cookies from "universal-cookie";
 import axios from "axios";
 import Config from "../../config/config";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
 import AxiosInstanceClass from "../axiosInstance";
-import { getMockGlobalConfig, saveMockGlobalConfig } from "../../mocks/globalConfigMock";
 
 /**
  * Getting Local Access data
@@ -28,7 +28,9 @@ interface RustAgentConfig {
 // const { post, get, put, baseURL } = Config.apiEndpoints.agentManagement;
 const rustAgent = Config.apiEndpoints.rustagentManagement as RustAgentConfig;
 const rustAgentbaseURL = Config.apiEndpoints.rustagentManagement.baseURL;
-export const AxiosInstace = new AxiosInstanceClass(rustAgentbaseURL).init(token);
+const cookies = new Cookies();
+const accessToken = cookies.get("iasphere_access_token");
+export const AxiosInstace = new AxiosInstanceClass(rustAgentbaseURL).init(accessToken);
 
 // Define interfaces for request and response data
 interface AgentActionData {
@@ -211,18 +213,6 @@ const fetchBuildInfo = async () => {
 
 // Saving Global Configuration Data's
 const saveGlobalConfig = async (data: any) => {
-  // Using mock data for development
-  const USE_MOCK_DATA = true; // Set to false to use real API
-  
-  if (USE_MOCK_DATA) {
-    try {
-      const mockResponse = await saveMockGlobalConfig(data);
-      return { data: mockResponse, status: 200 };
-    } catch (error: unknown) {
-      return { status: 500, data: { message: "Failed to save mock data" } };
-    }
-  }
-  
   try {
     return await AxiosInstace.post(`${rustAgent.post.globalConfiguration}`, data);
   } catch (error: unknown) {
@@ -232,18 +222,6 @@ const saveGlobalConfig = async (data: any) => {
 
 // Getting global configuration Data's
 const fetchGlobalConfig = async () => {
-  // Using mock data for development
-  const USE_MOCK_DATA = true; // Set to false to use real API
-  
-  if (USE_MOCK_DATA) {
-    try {
-      const mockData = await getMockGlobalConfig();
-      return { data: mockData, status: 200 };
-    } catch (error: unknown) {
-      return { status: 500, data: { message: "Failed to fetch mock data" } };
-    }
-  }
-  
   try {
     return await AxiosInstace.get(`${rustAgent.get.globalConfiguration}`);
   } catch (error: unknown) {
@@ -258,8 +236,8 @@ const fetchAgentService = async (data: PaginationData) => {
     const baseUrl = `${rustAgent.get.getAgents}?pageSize=${pageSize}&pageNo=${pageNo}&status=${status}&search=${agentSearch}&osTypes=${os}&regions=${region}&environments=${environment}&platforms=${platform}&sids=${sid}&agentVersions=${agentVersion}&serviceNames=${serviceName}`;
     const sortParams = sortBy && sortOrder ? `&sortBy=${sortBy}&sortOrder=${sortOrder}` : '';
 
-    console.log('ð [API Call] Sorting Parameters:', { sortBy, sortOrder, sortParams });
-    console.log('ð [API Call] Full URL:', `${baseUrl}${sortParams}`);
+    console.log('🔍 [API Call] Sorting Parameters:', { sortBy, sortOrder, sortParams });
+    console.log('🌐 [API Call] Full URL:', `${baseUrl}${sortParams}`);
 
     return await AxiosInstace.get(
       `${baseUrl}${sortParams}`,

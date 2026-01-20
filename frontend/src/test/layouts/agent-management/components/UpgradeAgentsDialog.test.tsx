@@ -7,18 +7,16 @@ import UpgradeAgentsDialog from "../../../../layouts/agent-management/components
 import { errortoast } from "../../../../layouts/agent-management/helpers/CustomToast";
 import '@testing-library/jest-dom/extend-expect';
 
-
-jest.mock("../../../../layouts/agent-management/helpers/CustomToast.tsx", () => ({
-  errortoast: jest.fn(),
-}));
-
 // Mock dependencies
 jest.mock("../../../../redux/selectors/agentManagement.selectors.ts", () => ({
   getUpgradeAgentVersion: jest.fn(),
 }));
 
 jest.mock("../../../../redux/actions/agentManagement.action.ts", () => ({
-  upgradeSelectedAgents: jest.fn(),
+  __esModule: true,
+  default: {
+    upgradeSelectedAgents: jest.fn(),
+  },
 }));
 
 jest.mock("../../../../layouts/agent-management/helpers/CustomToast.tsx", () => ({
@@ -74,7 +72,7 @@ describe("UpgradeAgentsDialog", () => {
   it("renders the modal when showAgentUpgrade is true", () => {
     setup();
     expect(screen.getByTestId("upgradeAgentTestId")).toBeInTheDocument();
-    expect(screen.getByText("Upgrade RISEBOT")).toBeInTheDocument();
+    expect(screen.getByText("Upgrade RISEAGENT")).toBeInTheDocument();
   });
 
   it("displays available agent versions", () => {
@@ -102,7 +100,7 @@ describe("UpgradeAgentsDialog", () => {
   it("shows error toast if upgrade is clicked without selecting version", () => {
     setup();
     fireEvent.click(screen.getByTestId("upgradeBtnTestId"));
-    expect(errortoast).toHaveBeenCalledWith("Please select the RISEBOT version", { autoClose: 1500 });
+    expect(errortoast).toHaveBeenCalledWith("Please select the RISEAGENT version");
   });
   
 
@@ -121,7 +119,6 @@ describe("UpgradeAgentsDialog", () => {
         { hostname: "host2", port: 5678 },
       ],
       risebotAgentVersion: "1.0.2",
-      agentpath: "/path/to/agent2",
     });
 
     expect(closeMock).toHaveBeenCalled();
@@ -163,7 +160,6 @@ describe("UpgradeAgentsDialog", () => {
     expect(agentManagementActions.upgradeSelectedAgents).toHaveBeenCalledWith({
       data: [{ hostname: "host1", port: 1111 }],
       risebotAgentVersion: "Unknown",
-      agentpath: null, 
     });
   
     expect(closeMock).toHaveBeenCalled();

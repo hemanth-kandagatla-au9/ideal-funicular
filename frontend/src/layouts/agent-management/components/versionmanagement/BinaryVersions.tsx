@@ -1,5 +1,4 @@
 /* eslint-disable no-shadow */
-//@ts-nocheck
 import { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { message, Spin } from "antd";
@@ -30,7 +29,7 @@ const BinaryVersions = () => {
   });
 
   // Define filter options
-  const osOptions = ["windows", "rustlinux"];
+  const osOptions = ["windows", "linux"];
   const typeOptions = ["Mandatory", "Optional"];
 
   // Dynamic version options from actual data

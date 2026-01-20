@@ -1,27 +1,53 @@
-/* eslint-disable */
 import React from "react";
 import { render, fireEvent, screen, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import * as ReactRedux from "react-redux";
+import * as PermissionUtils from "../../../../../../src/utils/PermissionUtils";
 import SideBar from "../../../../../../src/layouts/agent-management/components/sidebar/SideBar";
 
-const flushPromises = () => new Promise(setImmediate);
+const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+
+const setScrollGeometry = (
+  element: Element,
+  geometry: { scrollTop: number; clientHeight: number; scrollHeight: number }
+) => {
+  Object.defineProperty(element, "scrollTop", {
+    value: geometry.scrollTop,
+    writable: true,
+    configurable: true,
+  });
+  Object.defineProperty(element, "clientHeight", {
+    value: geometry.clientHeight,
+    configurable: true,
+  });
+  Object.defineProperty(element, "scrollHeight", {
+    value: geometry.scrollHeight,
+    configurable: true,
+  });
+};
 
 /* ---------------- REDUX ---------------- */
+jest.mock("react-redux", () => {
+  const actual = jest.requireActual("react-redux");
+  return {
+    __esModule: true,
+    ...actual,
+    useDispatch: jest.fn(),
+    useSelector: jest.fn(),
+  };
+});
+
+const mockUseDispatch = ReactRedux.useDispatch as unknown as jest.Mock;
+const mockUseSelector = ReactRedux.useSelector as unknown as jest.Mock;
 const mockDispatch = jest.fn();
-const mockUseSelector = jest.fn();
-
-jest.mock("react-redux", () => ({
-  useDispatch: () => mockDispatch,
-  useSelector: mockUseSelector,
-}));
-
-import { useSelector } from "react-redux";
 
 /* ---------------- PERMISSIONS ---------------- */
-const mockCanAccess = jest.fn(() => true);
 jest.mock("../../../../../../src/utils/PermissionUtils", () => ({
-  canAccess: mockCanAccess,
+  __esModule: true,
+  canAccess: jest.fn(),
 }));
+
+const mockCanAccess = PermissionUtils.canAccess as unknown as jest.Mock;
 
 /* ---------------- TOAST ---------------- */
 jest.mock("../../../../../../src/layouts/agent-management/helpers/CustomToast", () => ({
@@ -138,9 +164,16 @@ describe("SideBar coverage", () => {
   };
 
   beforeEach(() => {
+    mockUseDispatch.mockReturnValue(mockDispatch);
     mockUseSelector.mockImplementation(defaultSelectorMock);
     mockCanAccess.mockReturnValue(true);
     mockDispatch.mockClear();
+
+    Object.defineProperty(navigator, "clipboard", {
+      value: { writeText: jest.fn().mockResolvedValue(undefined) },
+      writable: true,
+      configurable: true,
+    });
   });
 
   it("covers everything deterministically", async () => {
@@ -177,13 +210,13 @@ if (closeBtn) fireEvent.click(closeBtn);
 fireEvent.click(screen.getByTestId("refreshJob"));
 fireEvent.click(screen.getByTestId("copyJob"));
 
-fireEvent.scroll(screen.getByTestId("scrollTarget"), {
-  target: { scrollTop: 100, clientHeight: 100, scrollHeight: 150 },
-});
+    const scrollTarget = screen.getByTestId("scrollTarget");
+    setScrollGeometry(scrollTarget, { scrollTop: 100, clientHeight: 100, scrollHeight: 150 });
+    fireEvent.scroll(scrollTarget);
 
-fireEvent.scroll(screen.getByTestId("jobScroll"), {
-  target: { scrollTop: 100, clientHeight: 100, scrollHeight: 150 },
-});
+    const jobScroll = screen.getByTestId("jobScroll");
+    setScrollGeometry(jobScroll, { scrollTop: 100, clientHeight: 100, scrollHeight: 150 });
+    fireEvent.scroll(jobScroll);
 
 await act(async () => {
   await flushPromises();
@@ -251,15 +284,17 @@ expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
     await act(async () => {
       render(<SideBar {...props} />);
     });
-    expect(mockDispatch).not.toHaveBeenCalledWith(
+    expect(mockDispatch).toHaveBeenCalledWith(
       expect.objectContaining({ type: expect.stringContaining("listSchedulerCommand") })
     );
   });
 
   it("handles error in deleteScheduler", async () => {
     const consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
-    mockDispatch.mockImplementationOnce(() => {
-      throw new Error("Delete error");
+    mockDispatch.mockImplementation((action: any) => {
+      if (action?.type && String(action.type).includes("deleteSchedulerCommand")) {
+        throw new Error("Delete error");
+      }
     });
     await act(async () => {
       render(<SideBar {...props} />);
@@ -275,11 +310,17 @@ expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
     Object.defineProperty(navigator, "clipboard", {
       value: { writeText: jest.fn().mockRejectedValue(new Error("Clipboard error")) },
       writable: true,
+      configurable: true,
     });
     await act(async () => {
       render(<SideBar {...props} />);
     });
     fireEvent.click(screen.getByTestId("copy"));
+
+    await act(async () => {
+      await flushPromises();
+    });
+
     expect(consoleSpy).toHaveBeenCalledWith("Failed to copy:", expect.any(Error));
     consoleSpy.mockRestore();
   });

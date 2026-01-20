@@ -24,7 +24,7 @@ const scheduleJobText = "Schedule Job";
 
 // placeholder texts
 const enterPlaceholderText = "Enter";
-const searchPlaceholderText = "Search by Hostname";
+const searchPlaceholderText = "Search";
 const searchByHostnamePlaceholderText = "Search by Hostname";
 
 // title texts
@@ -33,7 +33,7 @@ const activeTitle = "Active Servers";
 const inactiveTitle = "Inactive Servers";
 const warningTitle = "Warning";
 const failedTitle = "Failed Servers";
-const risebotAgentTitleText = "RISEAGENT Installed Servers";
+const risebotAgentTitleText = "Installed Servers";
 const agentTitle = "RISEAGENTSs";
 const agentMasterDataTitle = "RISEAGENT Masterdata";
 const agentConfigurationTitle = "Configuration";
@@ -54,9 +54,9 @@ const jobLogsTitle = "Job Logs";
 const utilizationMetricsTitle = "Utilization Metrics";
 
 // button texts
-const startAgentButtonText = "Start RISEAGENT";
-const stopAgentButtonText = "Stop RISEAGENT";
-const restartAgentButtonText = "Restart RISEAGENT";
+const startAgentButtonText = "Start Agent";
+const stopAgentButtonText = "Stop Agent";
+const restartAgentButtonText = "Restart Agent";
 const checkStatusAgentButtonText = "Check Status";
 const upgradeAgentText = "Upgrade RISEAGENT";
 const downloadToExcelButtonText = "Download to Excel";
@@ -184,4 +184,5 @@ export {
   statusButtonText,
   selectedItemsText,
   clearSelectionText,
+  
 };

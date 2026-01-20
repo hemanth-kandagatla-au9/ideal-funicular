@@ -67,9 +67,9 @@ export interface UserApiResponse {
 /**
  * Props for User Authorization component
  */
-export interface UserAuthorizationProps {
-  // Add component specific props as needed
-}
+// export interface UserAuthorizationProps {
+//   // Add component specific props as needed
+// }
 
 /**
  * Permission interface - represents a single permission in the system

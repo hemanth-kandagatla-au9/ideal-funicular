@@ -1,13 +1,16 @@
 /**
  * Importing dependencies.
  */
+import Cookies from "universal-cookie";
 import { AxiosResponse, AxiosError } from "axios";
 import Config from "../../config/config";
 import AxiosInstanceClass from "../axiosInstance";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
 
 const { post, get, baseUrl } = Config.apiEndpoints.auth;
-export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init(getLocalAccessToken());
+const cookies = new Cookies();
+const accessToken = cookies.get("iasphere_access_token");
+export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init(accessToken);
 
 // Define types for your permission data and responses
 interface PermissionData {

@@ -41,51 +41,51 @@ describe("Agent Management Reducer - Coverage Tests", () => {
 
   it("handles FETCH_AGENT_MANAGEMENT_SERVICES", () => {
     const state = agentManagementReducer(initialState, {
-      type: AGENT_MANAGEMENT.FETCH_AGENT_MANAGEMENT_SERVICES,
+      type: AGENT_MANAGEMENT.FETCH_AGENT_MANAGEMENT_SERVICE,
     });
     expect(state.loading).toBe(true);
   });
 
-  it("handles SUCCESS_FETCH_AGENT_MANAGEMENT_SERVICES", () => {
+  it("handles SUCCESS_FETCH_AGENT_MANAGEMENT_SERVICE", () => {
     const payload = [
       { id: 1, name: "Agent1" },
       { id: 2, name: "Agent2" },
     ];
     const state = agentManagementReducer(initialState, {
-      type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_MANAGEMENT_SERVICES,
-      payload,
+      type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_MANAGEMENT_SERVICE,
+      agentServers: payload,
     });
     expect(state.loading).toBe(false);
-    expect(state.agentManagementServices).toBeDefined();
+    expect(state.agentServers).toBeDefined();
   });
 
-  it("handles FAILURE_FETCH_AGENT_MANAGEMENT_SERVICES", () => {
+  it("handles FAILURE_FETCH_AGENT_MANAGEMENT_SERVICE", () => {
     const state = agentManagementReducer(initialState, {
-      type: AGENT_MANAGEMENT.FAILURE_FETCH_AGENT_MANAGEMENT_SERVICES,
-      payload: { error: "Failed to fetch" },
+      type: AGENT_MANAGEMENT.FAILURE_FETCH_AGENT_MANAGEMENT_SERVICE,
+      error: "Failed to fetch",
     });
     expect(state.loading).toBe(false);
   });
 
-  it("handles FILTER_AGENTS action", () => {
+  it("handles SUCCESS_FETCH_AGENT_FILTER", () => {
     const state = agentManagementReducer(initialState, {
-      type: AGENT_MANAGEMENT.FILTER_AGENTS,
-      payload: { os: ["Linux"] },
+      type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_FILTER,
+      filterAgents: [{ os: ["Linux"] }],
     });
-    expect(state.filters).toBeDefined();
+    expect(state.filterAgents).toBeDefined();
   });
 
   it("handles multiple consecutive actions", () => {
     let state = initialState;
     
     state = agentManagementReducer(state, {
-      type: AGENT_MANAGEMENT.FETCH_AGENT_MANAGEMENT_SERVICES,
+      type: AGENT_MANAGEMENT.FETCH_AGENT_MANAGEMENT_SERVICE,
     });
     expect(state.loading).toBe(true);
     
     state = agentManagementReducer(state, {
-      type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_MANAGEMENT_SERVICES,
-      payload: [],
+      type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_MANAGEMENT_SERVICE,
+      agentServers: [],
     });
     expect(state.loading).toBe(false);
   });

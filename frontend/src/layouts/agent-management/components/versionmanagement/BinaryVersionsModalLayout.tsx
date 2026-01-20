@@ -3,7 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 
 interface BinaryVersionsModalLayoutProps {
   open: boolean;
-  onClose: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
+  onClose: (event: object, reason: "backdropClick" | "escapeKeyDown") => void;
   title: string;
   children: React.ReactNode;
 }

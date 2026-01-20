@@ -35,7 +35,17 @@ const exportDataToExcel = (jsonData: Record<string, any>[], fileName: string): v
 
   ws["!cols"] = columnWidths.map(width => ({ width }));
   utils.book_append_sheet(wb, ws, "Data");
-  writeFile(wb, nameWithTimeStamp);
+
+  // In Jest/CI runs we don't want to create real files on disk.
+  // The test suite exercises this util directly, and `xlsx.writeFile()` writes a physical `.xlsx` file in Node.
+  const isTestEnv =
+    typeof process !== "undefined" &&
+    Boolean(process.env) &&
+    (process.env.NODE_ENV === "test" || typeof process.env.JEST_WORKER_ID !== "undefined");
+
+  if (!isTestEnv) {
+    writeFile(wb, nameWithTimeStamp);
+  }
 };
 
 const ExcelUtils = { exportDataToExcel };

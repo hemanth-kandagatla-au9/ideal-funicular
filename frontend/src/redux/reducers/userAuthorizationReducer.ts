@@ -8,193 +8,24 @@ import { AUTH } from "../../config/actions";
 import { UserAuthorizationState } from "../../types/UserAuthorization";
 
 /**
- * Dummy Data for Development/Testing
- */
-const dummyUsers = [
-  {
-    id: "user001",
-    userName: "john.doe",
-    isActive: true,
-    rolesCount: 3,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:30:00.000Z",
-    updatedAt: "2024-12-15T14:20:00.000Z",
-  },
-  {
-    id: "user002",
-    userName: "jane.smith",
-    isActive: true,
-    rolesCount: 4,
-    createdBy: "Admin",
-    updatedBy: "john.doe",
-    createdAt: "2024-11-15T08:45:00.000Z",
-    updatedAt: "2024-12-10T16:10:00.000Z",
-  },
-  {
-    id: "user003",
-    userName: "mike.wilson",
-    isActive: false,
-    rolesCount: 1,
-    createdBy: "Admin",
-    updatedBy: "jane.smith",
-    createdAt: "2024-10-20T12:00:00.000Z",
-    updatedAt: "2024-11-25T09:30:00.000Z",
-  },
-];
-
-const dummyPermissions = [
-  {
-    id: "perm001",
-    project: "agent",
-    module: "status",
-    permission: "read",
-    code: "agent:status:read",
-    description: "View agent status and health information",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-  {
-    id: "perm002",
-    project: "agent",
-    module: "status",
-    permission: "update",
-    code: "agent:status:update",
-    description: "Update agent status (start, stop, restart)",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-  {
-    id: "perm003",
-    project: "agent",
-    module: "metrics",
-    permission: "read",
-    code: "agent:metrics:read",
-    description: "View agent performance metrics and statistics",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-  {
-    id: "perm004",
-    project: "agent",
-    module: "config",
-    permission: "read",
-    code: "agent:config:read",
-    description: "View agent configuration settings",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-  {
-    id: "perm005",
-    project: "agent",
-    module: "config",
-    permission: "update",
-    code: "agent:config:update",
-    description: "Modify agent configuration settings",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-  {
-    id: "perm006",
-    project: "agent",
-    module: "logs",
-    permission: "read",
-    code: "agent:logs:read",
-    description: "View agent logs and error messages",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-  {
-    id: "perm007",
-    project: "agent",
-    module: "deployment",
-    permission: "execute",
-    code: "agent:deployment:execute",
-    description: "Deploy and upgrade agent versions",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-  {
-    id: "perm008",
-    project: "agent",
-    module: "deployment",
-    permission: "rollback",
-    code: "agent:deployment:rollback",
-    description: "Rollback agent deployments",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-  {
-    id: "perm009",
-    project: "monitoring",
-    module: "dashboard",
-    permission: "read",
-    code: "monitoring:dashboard:read",
-    description: "View monitoring dashboards",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-  {
-    id: "perm010",
-    project: "monitoring",
-    module: "alerts",
-    permission: "manage",
-    code: "monitoring:alerts:manage",
-    description: "Manage monitoring alerts and notifications",
-    isActive: true,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: "2024-12-01T10:00:00.000Z",
-    updatedAt: "2024-12-01T10:00:00.000Z",
-  },
-];
-
-/**
- * Initial State with Dummy Data
+ * Initial State
  */
 const initialState: UserAuthorizationState = {
-  users: dummyUsers,
+  users: [],
   loading: false,
   error: null,
   pagination: {
     page: 1,
     limit: 10,
-    total: dummyUsers.length,
+    total: 0,
   },
   selectedUsers: [],
-  permissions: dummyPermissions,
+  permissions: [],
   globalPermissions: null,
   permissionsPagination: {
     page: 1,
     limit: 10,
-    total: dummyPermissions.length,
+    total: 0,
   },
 };
 
@@ -214,8 +45,7 @@ export default function userAuthorizationReducer(
   switch (action.type) {
     // FETCH USERS
     case AUTH.USER.GET_USERS_REQUEST:
-      // BYPASS: Keep dummy data and set loading to false since we're not making API calls
-      return { ...state, loading: false, error: null };
+      return { ...state, loading: true, error: null };
 
     // FETCH USERS SUCCESS - Updates state with user list from backend
     // Transforms backend response format to frontend state format
@@ -306,8 +136,7 @@ export default function userAuthorizationReducer(
 
     
     case AUTH.PERMISSION.GET_PERMISSIONS_REQUEST:
-      // BYPASS: Keep dummy data and set loading to false since we're not making API calls
-      return { ...state, loading: false, error: null };
+      return { ...state, loading: true, error: null };
 
     case AUTH.PERMISSION.GET_PERMISSIONS_SUCCESS: {
       const backendData = action.data?.data?.data || {};

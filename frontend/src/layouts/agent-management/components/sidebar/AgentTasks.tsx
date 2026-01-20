@@ -110,7 +110,9 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
   const isAgentTaskEditBtnEnabled = canAccess("Agent Task Button: Edit");
   const isAgentTaskDeleteBtnEnabled = canAccess("Agent Task Button: Delete");
 
-  const [buttonDisabled, setButtonDisabled] = useState<{ [key: string]: boolean }>({});
+  const [allButtonsDisabled, setAllButtonsDisabled] = useState<boolean>(false);
+  const [clickedButton, setClickedButton] = useState<string | null>(null);
+
 
   const dispatch = useDispatch();
   const listScheduledCommands = (port: string, hostname: string) => {
@@ -118,24 +120,25 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
   };
 
   useEffect(() => {
-    // Cleanup function to clear all pending timeouts when component unmounts
+    // Cleanup function when component unmounts
     return () => {
-      setButtonDisabled({});
+      setAllButtonsDisabled(false);
+      setClickedButton(null);
     };
   }, []);
 
   const handleButtonClick = (buttonKey: string, action: () => void) => {
-    if (buttonDisabled[buttonKey]) return;
+    if (allButtonsDisabled) return;
     
-    setButtonDisabled(prev => ({ ...prev, [buttonKey]: true }));
+    setAllButtonsDisabled(true);
+    setClickedButton(buttonKey);
     action();
     
-    const timer = setTimeout(() => {
-      setButtonDisabled(prev => ({ ...prev, [buttonKey]: false }));
-    }, 3000); // 3 seconds delay
-    
-    // Store timer reference for potential cleanup (optional enhancement)
-    return () => clearTimeout(timer);
+    // Re-enable all buttons after 4 seconds
+    setTimeout(() => {
+      setAllButtonsDisabled(false);
+      setClickedButton(null);
+    }, 4000);
   };
 
   useEffect(() => {
@@ -159,13 +162,13 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
         </AccordionContext.Consumer>
       </Accordion.Header>
       <Accordion.Body className="buttonBody risebotagentHealCheck" style={{ position: "relative" }}>
-        <>
+         <>
           {isAgentTaskStartBtnEnabled && (
               <Button 
-                className="agentTriggerBtn"
+                className={`agentTriggerBtn ${clickedButton === 'startJob' ? 'button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('startJob', () => startJob(hostname, port))}
-                disabled={buttonDisabled['startJob']}
+                disabled={allButtonsDisabled}
                 data-testid="agentSubServiceStartBtn"
               >
                 {startJobButtonText}
@@ -173,10 +176,10 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskStopBtnEnabled && (
               <Button 
-                className="agentTriggerBtn"
+                className={`agentTriggerBtn ${clickedButton === 'stopJob' ? 'button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('stopJob', () => stopJob(hostname, port))}
-                disabled={buttonDisabled['stopJob']}
+                disabled={allButtonsDisabled}
                 data-testid="agentSubServiceStopBtn"
               >
                 {stopJobButtonText}
@@ -184,10 +187,10 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskRestartBtnEnabled && (
               <Button 
-                className="agentTriggerBtn"
+                className={`agentTriggerBtn ${clickedButton === 'restartJob' ? 'button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('restartJob', () => restartJob(hostname, port))}
-                disabled={buttonDisabled['restartJob']}
+                disabled={allButtonsDisabled}
                 data-testid="restartAgentStatusId"
               >
                 {restartJobButtonText}
@@ -195,10 +198,10 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskUpgradeBtnEnabled && (
               <Button 
-                className="agentTriggerBtn"
+                className={`agentTriggerBtn ${clickedButton === 'upgradeAgent' ? 'button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('upgradeAgent', () => upgradeAgent(port, type))}
-                disabled={buttonDisabled['upgradeAgent']}
+                disabled={allButtonsDisabled}
                 data-testid="agentSubServiceUpdateBtn"
               >
                 {upgradeJobButtonText}
@@ -206,10 +209,10 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskCheckStatusBtnEnabled && (
               <Button 
-                className="agentTriggerBtn"
+                className={`agentTriggerBtn ${clickedButton === 'checkStatus' ? 'button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('checkStatus', () => checkAgentStatus(hostname, port))}
-                disabled={buttonDisabled['checkStatus']}
+                disabled={allButtonsDisabled}
                 data-testid="checkAgentStatusId"
               >
                 {checkStatusAgentButtonText}
@@ -217,10 +220,10 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskRestartBtnEnabled && (
               <Button 
-                className="agentTriggerBtn"
+                className={`agentTriggerBtn ${clickedButton === 'startSSH' ? 'button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('startSSH', () => startAgentviaSSH(hostname, port, osVersion))}
-                disabled={buttonDisabled['startSSH']}
+                disabled={allButtonsDisabled}
                 data-testid="startAgentviaSSHId"
               >
                 {startAgentButtonText}
@@ -228,10 +231,10 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskRestartBtnEnabled && (
               <Button 
-                className="agentTriggerBtn"
+                className={`agentTriggerBtn ${clickedButton === 'shutDown' ? 'button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('shutDown', () => shutDownAgent(hostname, port))}
-                disabled={buttonDisabled['shutDown']}
+                disabled={allButtonsDisabled}
                 data-testid="shutDownAgentId"
               >
                 {stopAgentButtonText}
@@ -239,10 +242,10 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskRestartBtnEnabled && (
               <Button 
-                className="agentTriggerBtn"
+                className={`agentTriggerBtn ${clickedButton === 'restartAgent' ? 'button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('restartAgent', () => restartAgent(hostname, port))}
-                disabled={buttonDisabled['restartAgent']}
+                disabled={allButtonsDisabled}
                 data-testid="restartAgentId"
               >
                 {restartAgentButtonText}

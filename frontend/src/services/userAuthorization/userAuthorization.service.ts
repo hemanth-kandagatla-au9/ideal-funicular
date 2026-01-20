@@ -2,7 +2,7 @@
  * User Authorization Service
  * API service for user management operations
  */
-
+import Cookies from "universal-cookie"
 import axios from "axios";
 import Config from "../../config/config";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
@@ -33,7 +33,9 @@ const userAuthConfig = Config.apiEndpoints.userAuthorization as UserAuthConfig;
 const userAuthBaseURL = userAuthConfig?.baseURL || process.env.REACT_APP_USER_AUTH_URL || "http://localhost:3001";
 
 // Initialize Axios instance
-export const AxiosInstance = new AxiosInstanceClass(userAuthBaseURL).init(token);
+const cookies = new Cookies();
+const accessToken = cookies.get("iasphere_access_token");
+export const AxiosInstance = new AxiosInstanceClass(userAuthBaseURL).init(accessToken);
 
 function handleAxiosError(error: unknown) {
   if (axios.isAxiosError(error)) {

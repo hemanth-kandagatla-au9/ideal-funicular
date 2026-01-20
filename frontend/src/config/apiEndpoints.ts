@@ -72,7 +72,7 @@ const apiEndpoints: ApiEndpoints = {
       getAgents: "/agents",
       healthByPort: "/agents/health/port",
       buildInfo: "/agents/build-info",
-      globalConfiguration: "/agents/global-configuration",
+      globalConfiguration: "/agents/agent-config-details",
       filterAgents: "/agents/filters",
       getRepos: "/agents/repositories",
       getAgentLogs: "/agents/logs",
@@ -98,7 +98,7 @@ const apiEndpoints: ApiEndpoints = {
     post: {
       start: "/agents/start",
       propertySetup: "/agents/property-setup",
-      globalConfiguration: "/agents/global-configuration",
+      globalConfiguration: "/agents/update-agentconfig",
       addAgent: "/agents",
       scheduler: "/agents/scheduler",
       healthCheck: "dnd/executejob/100009",
@@ -132,7 +132,7 @@ const apiEndpoints: ApiEndpoints = {
       getAgents: "/agents",
       healthByPort: "/agents/health/port",
       buildInfo: "/agents/build-info",
-      globalConfiguration: "/agents/global-configuration",
+      globalConfiguration: "/agents/agent-config-details",
       filterAgents: "/agents/filters",
       getRepos: "/agents/repositories",
       getAgentLogs: "/agents/logs",
@@ -159,7 +159,7 @@ const apiEndpoints: ApiEndpoints = {
     post: {
       start: "/agents/jobs/start",
       propertySetup: "/agents/property-setup",
-      globalConfiguration: "/agents/global-configuration",
+      globalConfiguration: "/agents/update-agentconfig",
       addAgent: "/agents",
       scheduler: "/agents/jobs",
       postjob: "/agents/postjob",
@@ -197,7 +197,7 @@ const apiEndpoints: ApiEndpoints = {
     },
   },
   userAuthorization: {
-    baseURL: process.env.REACT_APP_USER_AUTH_URL || "http://localhost:3001"||"https://predev.agent.iasp.apps.jnj.com/api/agent",
+    baseURL: process.env.REACT_APP_USER_AUTH_URL || "https://predev.agent.ias.apps.jnj.com/api/agent",
     get: {
       users: "/auth/user-details",
       PermissionsList:"auth/permissionsList",

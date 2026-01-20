@@ -1786,7 +1786,7 @@ describe('getAgentVersions Saga', () => {
         .run()
         .then(() => {
           expect(errortoast).toHaveBeenCalledWith(
-            'Failed to fetch RISEBOT Masterdata: Failed to fetch data'
+            'Failed to fetch RISEAGENT Masterdata: Failed to fetch data'
           );
         });
     });

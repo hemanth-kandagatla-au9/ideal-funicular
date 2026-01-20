@@ -4,6 +4,8 @@ jest.mock('../../store/selector', () => ({
   default: jest.fn((state) => state)
 }));
 
+import { dataSelector } from "../../store/selector";
+
 describe("dataSelector", () => {
   it("should return the full state object", () => {
     const mockState = {

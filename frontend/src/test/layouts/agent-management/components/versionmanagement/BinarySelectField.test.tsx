@@ -30,9 +30,8 @@ describe("BinarySelectField", () => {
 
     const select = screen.getByRole("combobox");
 
-    fireEvent.change(select, {
-      target: { value: "Agent" },
-    });
+    fireEvent.mouseDown(select);
+    fireEvent.click(screen.getByRole("option", { name: "Agent" }));
 
     expect(baseProps.onChange).toHaveBeenCalled();
   });

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { filtersToViewAllAgentsText,viewEditConfigurationButtonText, refreshTooltipText,userAuthorisationTooltipText, risebotAgentTitleText, searchPlaceholderText, syncStatusButtonText } from "@/constants/strings";
+import { filtersToViewAllAgentsText,viewEditConfigurationButtonText, refreshTooltipText,userAuthorisationTooltipText, risebotAgentTitleText, searchByHostnamePlaceholderText, syncStatusButtonText } from "@/constants/strings";
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,8 @@ import restartIcon from "../../../images/agent-management/assets/RestartIcon.svg
 import searchIcon from "../../../images/agent-management/assets/searchIcon.svg";
 import userAuthIcon from "../../../images/agent-management/assets/Button_base.png";
 import { useHistory } from "react-router-dom";
-import GlobalConfigurationModal from '../components/GlobalConfigurationModal' 
+import GlobalConfigurationModal from '../components/GlobalConfigurationModal';
+
 interface SearchContainerProps {
   state: any;
   getJsonData: () => {
@@ -38,7 +39,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
   const history = useHistory();
   const [refreshspin, setRefreshspin] = useState(false);
   const [syncspin, setSyncspin] = useState(false);
-  const [showGlobalConfigModal, setshowGlobalConfigModal] = useState(false);
+  const [showGlobalConfigModal, setShowGlobalConfigModal] = useState(false);
   const { showFilters, agentSearch, ...rest } = state;
   const updateState = useCallback((newState: Partial<AgentManagementState>) => setState(prevState => ({ ...prevState, ...newState })), []);
   const timeoutRef = useRef<number | null>(null);
@@ -149,7 +150,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
             type="text"
             id="agentSearch"
             name="agentSearch"
-            placeholder={searchPlaceholderText}
+            placeholder={searchByHostnamePlaceholderText}
             value={agentSearch}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("agentSearch", e)}
             onKeyDown={(e: React.KeyboardEvent) => {
@@ -260,14 +261,21 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
               alt="refresh"
             />
           </Button>
-        
-          </div>
-          <Button className="sidebar-action-btn" onClick={() => setshowGlobalConfigModal(true)}>{viewEditConfigurationButtonText}</Button>
-          <GlobalConfigurationModal show={showGlobalConfigModal} onHide={() => setshowGlobalConfigModal(false)} />
-        
+        </div>
+           <Button
+                    className="sidebar-action-btn"
+                    onClick={() => setShowGlobalConfigModal(true)}
+                  >
+                    {viewEditConfigurationButtonText}
+            </Button>
         
       </div>
+      <GlobalConfigurationModal
+              show={showGlobalConfigModal}
+              onHide={() => setShowGlobalConfigModal(false)}
+            />
     </div>
+    
   );
 };
 

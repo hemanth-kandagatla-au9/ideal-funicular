@@ -18,7 +18,7 @@ const initialState = {
   jobReload: false,
   localConfigReload: false,
   agentServers: {},
-  agentGlobalConfiguration: { data: { configs: [] } },
+  agentGlobalConfiguration: [],
   filterAgents: [],
   filterRepo: [],
   addAgents: [],
@@ -215,11 +215,12 @@ export default function agentManagementReducer(
 
     /* Fetch Agent Global Config Data */
     case AGENT_MANAGEMENT.FETCH_GLOBAL_CONFIG:
-      return { ...state, globalConfigLoading: true };
+      return { ...state, globalConfigLoading: true, agentGlobalConfiguration: "" };
     case AGENT_MANAGEMENT.REQUEST_FETCH_GLOBAL_CONFIG:
       return {
         ...state,
         globalConfigLoading: true,
+        agentGlobalConfiguration: "",
         reload: false,
       };
     case AGENT_MANAGEMENT.SUCCESS_FETCH_GLOBAL_CONFIG:
@@ -233,18 +234,18 @@ export default function agentManagementReducer(
 
     /* Save Agent Global Config Data */
     case AGENT_MANAGEMENT.SAVE_GLOBAL_CONFIG:
-      return { ...state, globalConfigLoading: true, successMessage: "" };
+      return { ...state, loading: true, successMessage: "" };
     case AGENT_MANAGEMENT.REQUEST_SAVE_GLOBAL_CONFIG:
-      return { ...state, globalConfigLoading: true, successMessage: "" };
+      return { ...state, loading: true, successMessage: "" };
     case AGENT_MANAGEMENT.SUCCESS_SAVE_GLOBAL_CONFIG:
       return {
         ...state,
-        globalConfigLoading: false,
-        successMessage: "Configuration saved successfully",
+        loading: false,
+        successMessage: action.successMessage,
         reload: true,
       };
     case AGENT_MANAGEMENT.FAILURE_SAVE_GLOBAL_CONFIG:
-      return { ...state, globalConfigLoading: false, error: action.error };
+      return { ...state, loading: false, error: action.error };
 
     /* Fetch Agent Management Service */
     case AGENT_MANAGEMENT.FETCH_AGENT_MANAGEMENT_SERVICE:

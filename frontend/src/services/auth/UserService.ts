@@ -1,6 +1,7 @@
 /**
  * Importing dependencies.
  */
+import Cookies from "universal-cookie";
 import Config from "../../config/config";
 import AxiosInstanceClass from "../axiosInstance";
 // Importing required function from tokenUtils
@@ -8,7 +9,9 @@ import { getLocalAccessToken } from "../../utils/TokenUtils";
 
 // endpoints for auth service
 const { patch, get, baseUrl } = Config.apiEndpoints.auth;
-export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init(getLocalAccessToken());
+const cookies = new Cookies();
+const accessToken = cookies.get("iasphere_access_token");
+export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init(accessToken);
 
 // Define interfaces for the payloads and responses
 interface Pagination {

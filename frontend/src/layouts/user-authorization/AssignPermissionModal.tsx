@@ -174,7 +174,7 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
       <Modal.Header className="assign-permissions-modal-header">
         <Modal.Title className="assign-permissions-modal-title">Assign Permission: {selectedUser.userName}</Modal.Title>
         <button type="button" className="assign-permissions-modal-close" onClick={handleCancel} disabled={loading} aria-label="Close">
-          Ã
+          ×
         </button>
       </Modal.Header>
 

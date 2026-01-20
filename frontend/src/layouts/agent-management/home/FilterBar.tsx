@@ -98,23 +98,18 @@ const FilterBar: React.FC<FilterBarProps> = ({
   }, [sortDropdownOpen]);
 
     const handleSortClick = (field: string) => {
-    console.log('ð¯ [FilterBar] Sort clicked - Field:', field, 'Current sortBy:', sortBy, 'Current sortOrder:', sortOrder);
     
     if (sortBy === field) {
       // Cycle through: asc -> desc -> null
       if (sortOrder === 'asc') {
-        console.log('â¡ï¸ [FilterBar] Cycling to DESC');
         onSortChange(field, 'desc');
       } else if (sortOrder === 'desc') {
-        console.log('â¡ï¸ [FilterBar] Cycling to NULL (no sort)');
         onSortChange('', null);
       } else {
-        console.log('â¡ï¸ [FilterBar] Cycling to ASC');
         onSortChange(field, 'asc');
       }
     } else {
       // New field, start with asc
-      console.log('â¡ï¸ [FilterBar] New field selected, starting with ASC');
       onSortChange(field, 'asc');
     }
     setSortDropdownOpen(false);
@@ -311,7 +306,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      fontFamily: 'Kumbh Sans',
+                      fontFamily: 'Johnson Text',
                       fontSize: '14px',
                       borderBottom: '1px solid #f0f0f0',
                     }}
@@ -331,7 +326,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      fontFamily: 'Kumbh Sans',
+                      fontFamily: 'Johnson Text',
                       fontSize: '14px',
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f5f5f5')}

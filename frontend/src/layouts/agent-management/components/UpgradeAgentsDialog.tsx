@@ -64,7 +64,7 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
     }));
 
     if (isEmpty(risebotAgentVersion)) {
-      errortoast("Please select the RISEBOT version");
+      errortoast("Please select the RISEAGENT version");
     } else {
       const jsonData = {
         data,

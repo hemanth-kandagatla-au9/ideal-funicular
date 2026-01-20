@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import BinaryDatePickerField from "./BinaryDatePickerField";
+import BinaryDatePickerField from "../../../../../layouts/agent-management/components/versionmanagement/BinaryDatePickerField";
 import "@testing-library/jest-dom";
+import { format } from "date-fns";
 
 describe("BinaryDatePickerField", () => {
   const baseProps = {
@@ -28,8 +29,7 @@ describe("BinaryDatePickerField", () => {
 
   it("uses today's date as placeholder when showToday=true", () => {
     render(<BinaryDatePickerField {...baseProps} showToday />);
-    const today = new Date();
-    const formatted = today.toLocaleDateString("en-US");
+    const formatted = format(new Date(), "MM/dd/yyyy");
     expect(screen.getByPlaceholderText(formatted)).toBeInTheDocument();
   });
 

@@ -19,12 +19,14 @@ interface AgentManagementState {
   agentServers: Record<string, any>;
   agentGlobalConfiguration: {
     data: {
-      configs: Array<{
+      risebot?: {
+        label: string;
         propertyName: string;
         propertyValue: string;
-        canModify: boolean;
-        isVisible: boolean;
-      }>;
+        propertyType: string;
+        encrypted?: boolean;
+        error?: boolean;
+      };
     };
   };
   filterAgents: any[];
@@ -74,8 +76,8 @@ const agentSelector = (state: RootState) => state.agentMangement;
 export const getError = createSelector(agentSelector, props => get(props, "error", ""));
 export const isLoading = createSelector(agentSelector, props => get(props, "loading", false));
 export const isSchedulerLoading = createSelector(agentSelector, props => get(props, "schedulerLoading", false));
+export const isGlobalConfigLoading = createSelector(agentSelector, props => get(props, "globalConfigLoading", false));
 export const isReload = createSelector(agentSelector, props => get(props, "reload", false));
-export const isGlobalConfigLoading = createSelector(agentSelector, props => get(props, "globalconfigLoading", false));
 export const isJobReload = createSelector(agentSelector, props => get(props, "jobReload", false));
 export const isServiceLoading = createSelector(agentSelector, props => get(props, "serviceLoading", false));
 export const isLocalConfigReload = createSelector(agentSelector, props => get(props, "localConfigReload", false));
@@ -96,7 +98,7 @@ export const getAgentsService = createSelector(agentSelector, props => get(props
 /**
  * Agent Management Global Configuration Data
  */
-export const getAgentGlobalConfig = createSelector(agentSelector, props => get(props, "agentGlobalConfiguration.data", { configs: [] }));
+export const getAgentGlobalConfig = createSelector(agentSelector, props => get(props, "agentGlobalConfiguration.data", []));
 
 /**
  * Get Agent Filters

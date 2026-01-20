@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ToastContainer } from "react-toastify";
 import { Accordion, Offcanvas } from "react-bootstrap";
 import { get, isEmpty } from "lodash";
 import "../../css/common-style.css";
@@ -380,7 +379,6 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
   return (
     <div data-testid="sidebarId">
       <Offcanvas show={state.openBar} onHide={handleClose} placement="end" className="risebot-agentDrawer">
-        <ToastContainer />
         <Offcanvas.Header closeButton>
           <Offcanvas.Title className="risebot-offcanvas-title">
             {viewDetailsTitle} ({hostname ? hostname.toUpperCase() : ""})

@@ -15,7 +15,9 @@ const postEndpoints = authEndpoints.post || {};
 const delEndpoints = authEndpoints.del || {};
 
 // exporting auth service axios instance
-export const AxiosInstance = new AxiosInstanceClass(baseUrl).init();
+const cookies = new Cookies();
+const accessToken = cookies.get("iasphere_access_token");
+export const AxiosInstance = new AxiosInstanceClass(baseUrl).init(accessToken);
 
 // Interface for user data (adjust according to your actual data structure)
 interface UserData {
@@ -88,7 +90,7 @@ const logout = async (userId: string | null): Promise<ApiResponse> => {
 
     const cookies = new Cookies();
     const accessToken = cookies.get("token");
-    const response = await AxiosInstance.patch(`${patchEndpoints.logout}/${userId}`, null, { headers: { Authorization: `Bearer ${accessToken}` } });
+    const response = await AxiosInstance.patch(`${patchEndpoints.logout}/${userId}`, null, { headers: { Authorization: `Bearer ${accessToken}` }});
     return response?.data?.data || { success: true, message: "Logged out successfully" };
   } catch (error: unknown) {
     const err = error as ErrorResponse;
@@ -105,7 +107,7 @@ const modifyUser = async (userId: string, body: Partial<UserData>): Promise<User
 
     const cookies = new Cookies();
     const accessToken = cookies.get("token");
-    const response = await AxiosInstance.patch(`${patchEndpoints.updateUser}/${userId}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
+    const response = await AxiosInstance.patch(`${patchEndpoints.updateUser}/${userId}`, body, { headers: { token: `Bearer ${accessToken}` } });
     return response?.data?.data || {};
   } catch (error: unknown) {
     const err = error as ErrorResponse;
@@ -224,7 +226,7 @@ const AuthService = {
   updateApplication,
   deleteApplication,
   blockApplication,
-  getAuthAuditLogForCSV,
+  getAuthAuditLogForCSV
 };
 
 export default AuthService;

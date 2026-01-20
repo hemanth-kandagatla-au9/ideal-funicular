@@ -116,11 +116,11 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     if (usernameErr || passwordErr) return;
 
-    onAdd({
+  onAdd({
       username: username.trim().toLowerCase(),
       password,
       isActive,
-      cloneFromUserId: selectedCloneUser?.id
+      cloneFromUserId: selectedCloneUser?.userName
     });
 
     // clear form
@@ -176,20 +176,20 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             disabled={loading}
             aria-label="Close"
           >
-            â
+            ✕
           </button>
         </Modal.Header>
 
         <Modal.Body className="add-user-modal-body">
           <div className="add-user-form-group">
             <label className="add-user-label" htmlFor="username-input">
-              Enter User Name
+              Username :
             </label>
             <input
               id="username-input"
               type="text"
               className={`add-user-input ${usernameError ? 'add-user-input-error' : ''}`}
-              placeholder="Enter"
+              placeholder="Enter username"
               value={username}
               onChange={handleUsernameChange}
               onBlur={handleUsernameBlur}
@@ -205,14 +205,14 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           {/* Clone Permissions Section */}
           <div className="add-user-form-group">
             <label className="add-user-label">
-              Select Permissions
+              Clone Permissions from :
             </label>
             
             {selectedCloneUser ? (
               <div className="clone-user-selected">
-                <div className="clone-user-info">
+                <div>
                   <span className="clone-user-name">{selectedCloneUser.userName}</span>
-                  <span className="clone-user-count">{selectedCloneUser.rolesCount} permissions</span>
+                  {/* <span className="clone-user-count">{selectedCloneUser.rolesCount} permissions</span> */}
                 </div>
                 <button
                   type="button"
@@ -221,7 +221,7 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   disabled={loading}
                   aria-label="Clear selection"
                 >
-                  <FaTimes size={18} />
+                  X
                 </button>
               </div>
             ) : (
@@ -260,7 +260,7 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                               <span className="clone-user-item-name">{user.userName}</span>
                               {!user.isActive && <span className="clone-user-inactive-badge">Inactive</span>}
                             </div>
-                            <span className="clone-user-item-count">{user.rolesCount} permissions</span>
+                            {/* <span className="clone-user-item-count">{user.rolesCount} permissions</span> */}
                           </div>
                         ))
                       ) : (
@@ -277,13 +277,13 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
           <div className="add-user-form-group" style={{ position: "relative" }}>
             <label className="add-user-label" htmlFor="password-input">
-              Password
+              Password :
             </label>
             <input
               id="password-input"
               type={showPassword ? "text" : "password"}
               className={`add-user-input ${passwordError ? 'add-user-input-error' : ''}`}
-              placeholder="Enter"
+              placeholder="Enter password"
               value={password}
               onChange={handlePasswordChange}
               onBlur={handlePasswordBlur}

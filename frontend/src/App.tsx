@@ -6,21 +6,31 @@ import "font-awesome/css/font-awesome.min.css";
 import "./App.css";
 import "bootstrap-daterangepicker/daterangepicker.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+ 
 import AgentManagement from "./layouts/agent-management/AgentManagement";
-
-import initializeStore from "./redux/initializeStore";
+ 
 import BinaryVersions from "./layouts/agent-management/components/versionmanagement/BinaryVersions";
 import UserAuthorization from "./layouts/user-authorization/UserAuthorization";
 import Permissions from "./layouts/user-authorization/Permissions";
-
-const store = initializeStore();
-
+import initializeStore from "./redux/initializeStore";
+ 
+declare global {
+  interface Window {
+    __HOST_APP__?: boolean;
+  }
+}
+ 
+ 
+const basepath = window.__HOST_APP__?"/app/risebot":"/"
+console.log("window.__HOST_APP__ = " ,basepath)
 const App: React.FC = () => {
+  const store = initializeStore();
   return (
-    <Provider store={store}>
-      <BrowserRouter>
+      <Provider store={store}>
+      <BrowserRouter basename = {basepath}>
+       
         <ToastContainer />
         <Switch>
           <Route exact path="/" component={AgentManagement} />
@@ -28,9 +38,10 @@ const App: React.FC = () => {
           <Route path="/userAuthorization" component={UserAuthorization} />
           <Route path="/permissions" component={Permissions} />
         </Switch>
+       
       </BrowserRouter>
-    </Provider>
+      </Provider>
   );
 };
-
+ 
 export default App;

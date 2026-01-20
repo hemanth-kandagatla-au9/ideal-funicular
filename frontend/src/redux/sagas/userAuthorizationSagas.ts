@@ -24,17 +24,12 @@ interface ActionProps {
  */
 export function* fetchUsersSaga({ props }: ActionProps): Generator<any, void, any> {
   try {
-    // BYPASS: Using dummy data from initial state, no API call needed
-    // Comment out for production when backend is ready
-    // const output = yield call(userAuthorizationService.fetchUsers, props);
-    // yield put(userAuthorizationActions.successFetchUsers(output));
+    const output = yield call(userAuthorizationService.fetchUsers, props);
+    yield put(userAuthorizationActions.successFetchUsers(output));
 
-    // if (get(output, "data.flag") !== "success") {
-    //   errortoast(`Failed to load users: ${output.data.error}`);
-    // }
-    
-    // For now, just mark as success since dummy data is already in initial state
-    console.log("Using dummy user data from initial state");
+    if (get(output, "data.flag") !== "success") {
+      errortoast(`Failed to load users: ${output.data.error}`);
+    }
   } catch (error: any) {
     yield put(userAuthorizationActions.failureFetchUsers(error));
     errortoast(`Failed to load users: ${error.message}`);
@@ -114,20 +109,15 @@ export function* deleteUserSaga({ username }: ActionProps): Generator<any, void,
  */
 export function* fetchPermissionsSaga(action: any): Generator<any, void, any> {
   try {
-    // BYPASS: Using dummy data from initial state, no API call needed
-    // Comment out for production when backend is ready
-    console.log("Fetch Permissions Saga - Using dummy data from initial state");
-    // const output = yield call(userAuthorizationService.fetchPermissions, action.filters);
-    // console.log("Fetch Permissions Response:", output);
+    console.log("Fetch Permissions Saga - Filters:", action.filters);
+    const output = yield call(userAuthorizationService.fetchPermissions, action.filters);
+    console.log("Fetch Permissions Response:", output);
     
-    // if (output.data.flag === "success") {
-    //   yield put(userAuthorizationActions.successFetchPermissions(output));
-    // } else {
-    //   yield put(userAuthorizationActions.failureFetchPermissions(output.data.error));
-    // }
-    
-    // For now, just mark as success since dummy data is already in initial state
-    console.log("Using dummy permissions data from initial state");
+    if (output.data.flag === "success") {
+      yield put(userAuthorizationActions.successFetchPermissions(output));
+    } else {
+      yield put(userAuthorizationActions.failureFetchPermissions(output.data.error));
+    }
   } catch (error: any) {
     console.error("Fetch Permissions Error:", error);
     yield put(userAuthorizationActions.failureFetchPermissions(error.message));

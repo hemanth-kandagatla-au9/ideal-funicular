@@ -93,7 +93,7 @@ describe("agentManagementSelectors", () => {
   });
 
   it("getAgentGlobalConfig() fn", () => {
-    expect(getAgentGlobalConfig(state)).toEqual({ configs: [] });
+    expect(getAgentGlobalConfig(state)).toEqual([]);
   });
 
   it("getFilterAgents() fn", () => {

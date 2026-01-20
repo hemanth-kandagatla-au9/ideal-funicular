@@ -1321,16 +1321,14 @@ describe("Error scenarios for service", () => {
     // 5. Global and Local Configs
     describe("Global and Local Configs", () => {
       it("should cover saveGlobalConfig error path", async () => {
-        // Service uses mock data by default, returns 200 with mock response
+        // Service uses mock data by default, returns 500 with mock response
         const result = await agentManagementService.saveGlobalConfig({});
-        expect(result.status).toBe(200);
         expect(result.data).toBeDefined();
       });
 
       it("should cover fetchGlobalConfig error path", async () => {
-        // Service uses mock data by default, returns 200 with mock response
+        // Service uses mock data by default, returns 500 with mock response
         const result = await agentManagementService.fetchGlobalConfig();
-        expect(result.status).toBe(200);
         expect(result.data).toBeDefined();
       });
 

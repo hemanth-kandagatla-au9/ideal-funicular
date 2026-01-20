@@ -36,20 +36,7 @@ const UserAuthorization: React.FC = () => {
   const selectedUsers = useSelector(getSelectedUsers);
 
   // Ensure users is always an array
-  const realUsers = Array.isArray(users) ? users : [];
-
-  // Temporary dummy data
-  const dummyUsers: User[] = Array.from({ length: 10 }, (_, i) => ({
-    id: `dummy-${i + 1}`,
-    userName: `Test User ${i + 1}`,
-    createdBy: "Admin",
-    updatedBy: "Admin",
-    createdAt: new Date(Date.now() - i * 86400000).toISOString(),
-    updatedAt: new Date().toISOString(),
-    isActive: true,
-  }));
-
-  const usersList = [...realUsers, ...dummyUsers];
+  const usersList = Array.isArray(users) ? users : [];
 
   // Local state
   const [searchTerm, setSearchTerm] = useState("");
@@ -92,13 +79,13 @@ const UserAuthorization: React.FC = () => {
   };
 
   // Handle Add User modal submit
-  const handleAddUser = (userData: { username: string; password: string; isActive: boolean; cloneFromUserId?: string }) => {
+  const handleAddUser = (userData: { username: string; password: string; isActive: boolean; cloneFromUser?: string }) => {
     dispatch(userAuthorizationActions.createUser(userData));
     setShowAddUserModal(false);
-    
-    // If cloneFromUserId is provided, show a message about cloning permissions
-    if (userData.cloneFromUserId) {
-      const clonedFromUser = usersList.find(u => u.id === userData.cloneFromUserId);
+
+    // If cloneFromUser is provided, show a message about cloning permissions
+    if (userData.cloneFromUser) {
+      const clonedFromUser = usersList.find(u => u.id === userData.cloneFromUser);
       if (clonedFromUser) {
         console.log(`Cloning permissions from ${clonedFromUser.userName} to new user ${userData.username}`);
       }
@@ -188,7 +175,13 @@ const UserAuthorization: React.FC = () => {
               className="user-search-input search-icon-input"
               placeholder="Search by Username"
               value={searchInput}
-              onChange={e => setSearchInput(e.target.value)}
+                         onChange={e => {
+                const value = e.target.value;
+                setSearchInput(value);
+                if (value.trim() === "") {
+                  setSearchTerm("");
+                }
+              }}
               onKeyDown={e => {
                 if (e.key === "Enter") handleSearch();
               }}
@@ -318,35 +311,28 @@ const UserAuthorization: React.FC = () => {
                 <span className="user-table-value">{formatDate(user.updatedAt)}</span>
               </div>
               <div className="user-table-cell user-table-cell-actions">
-                <button type="button" className="user-action-btn" onClick={() => handleAssignPermissions(user)} title="Assign Permissions">
+                <button
+                  type="button"
+                  className="user-action-btn"
+                  onClick={() => handleAssignPermissions(user)}
+                  title="Assign Permissions"
+                >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M20 13C20 18 16.5 20.5 12.34 21.95C12.1222 22.0238 11.8855 22.0202 11.67 21.94C7.5 20.5 4 18 4 13V5.99996C4 5.73474 4.10536 5.48039 4.29289 5.29285C4.48043 5.10532 4.73478 4.99996 5 4.99996C7 4.99996 9.5 3.79996 11.24 2.27996C11.4519 2.09896 11.7214 1.99951 12 1.99951C12.2786 1.99951 12.5481 2.09896 12.76 2.27996C14.51 3.80996 17 4.99996 19 4.99996C19.2652 4.99996 19.5196 5.10532 19.7071 5.29285C19.8946 5.48039 20 5.73474 20 5.99996V13Z"
-                      stroke="#667085"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M20 13C20 18 16.5 20.5 12.34 21.95C12.1222 22.0238 11.8855 22.0202 11.67 21.94C7.5 20.5 4 18 4 13V5.99996C4 5.73474 4.10536 5.48039 4.29289 5.29285C4.48043 5.10532 4.73478 4.99996 5 4.99996C7 4.99996 9.5 3.79996 11.24 2.27996C11.4519 2.09896 11.7214 1.99951 12 1.99951C12.2786 1.99951 12.5481 2.09896 12.76 2.27996C14.51 3.80996 17 4.99996 19 4.99996C19.2652 4.99996 19.5196 5.10532 19.7071 5.29285C19.8946 5.48039 20 5.73474 20 5.99996V13Z" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M9 12L11 14L15 10" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
-                <button type="button" className="user-action-btn" onClick={() => handleDeleteUser(user.userName)} title="Delete User" style={{ marginLeft: "8px" }}>
+                <button
+                  type="button"
+                  className="user-action-btn"
+                  onClick={() => handleDeleteUser(user.userName)}
+                  title="Delete User"
+                  style={{ marginLeft: "8px" }}
+                >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.5 5H17.5" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path
-                      d="M15.8332 5V16.6667C15.8332 17.5 14.9998 18.3333 14.1665 18.3333H5.83317C4.99984 18.3333 4.1665 17.5 4.1665 16.6667V5"
-                      stroke="#667085"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M6.6665 4.99984V3.33317C6.6665 2.49984 7.49984 1.6665 8.33317 1.6665H11.6665C12.4998 1.6665 13.3332 2.49984 13.3332 3.33317V4.99984"
-                      stroke="#667085"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M15.8332 5V16.6667C15.8332 17.5 14.9998 18.3333 14.1665 18.3333H5.83317C4.99984 18.3333 4.1665 17.5 4.1665 16.6667V5" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M6.6665 4.99984V3.33317C6.6665 2.49984 7.49984 1.6665 8.33317 1.6665H11.6665C12.4998 1.6665 13.3332 2.49984 13.3332 3.33317V4.99984" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
               </div>
@@ -407,15 +393,15 @@ const UserAuthorization: React.FC = () => {
           header: "Delete User",
           body: (
             <span>
-              Are you sure you want to delete user <strong style={{ color: "black" }}>&quot;{userToDelete}&quot;</strong>?
+              Are you sure you want to delete user  <strong style={{ color: "black" }}>&quot;{userToDelete}&quot;</strong>?
               <br />
             </span>
           ),
-          button: {
+           button: {
             buttonOne: {
-              buttonOneName: "Delete",
-              buttonBg: "modalButtonDanger",
-              variant: "danger",
+            buttonOneName: "Delete",
+            buttonBg: "modalButtonDanger",
+            variant: "danger"
             },
             buttonTwo: {
               buttonTwoName: "Cancel",

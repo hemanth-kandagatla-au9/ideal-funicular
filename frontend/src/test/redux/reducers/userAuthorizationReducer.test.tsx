@@ -11,7 +11,7 @@ describe('userAuthorizationReducer - REAL FUNCTIONAL TESTS', () => {
     expect(state.permissions).toBeDefined();
     expect(state.loading).toBe(false);
     expect(Array.isArray(state.users)).toBe(true);
-    expect(state.users.length).toBeGreaterThan(0);
+    expect(state.users.length).toBe(0); // Initial state has empty users array
   });
 
   // Test GET_USERS_REQUEST
@@ -19,7 +19,7 @@ describe('userAuthorizationReducer - REAL FUNCTIONAL TESTS', () => {
     const state = userAuthorizationReducer(initialState, {
       type: AUTH.USER.GET_USERS_REQUEST,
     });
-    expect(state.loading).toBe(false);
+    expect(state.loading).toBe(true); // Should be true when requesting
     expect(state.error).toBeNull();
   });
 
@@ -74,7 +74,7 @@ describe('userAuthorizationReducer - REAL FUNCTIONAL TESTS', () => {
     const state = userAuthorizationReducer(initialState, {
       type: AUTH.PERMISSION.GET_PERMISSIONS_REQUEST,
     });
-    expect(state.loading).toBe(false);
+    expect(state.loading).toBe(true); // Should be true when requesting
   });
 
   // Test GET_PERMISSIONS_SUCCESS
@@ -186,7 +186,7 @@ describe('userAuthorizationReducer - REAL FUNCTIONAL TESTS', () => {
     state = userAuthorizationReducer(state, {
       type: AUTH.USER.GET_USERS_REQUEST,
     });
-    expect(state.loading).toBe(false);
+    expect(state.loading).toBe(true); // Should be true during request
 
     state = userAuthorizationReducer(state, {
       type: AUTH.USER.GET_USERS_SUCCESS,

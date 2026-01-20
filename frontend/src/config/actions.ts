@@ -4,7 +4,6 @@ export const UPDATE_APP_READY = "updateAppReady";
 
 export const ADD_FORM_VALUES = "addFormValues";
 export const CLEAR_FORM_VALUES = "clearFormValues";
-// export const CLEAR_FORM_VALUES = "clearFormValues";
 
 interface AuthActionTypes {
   GROUP: {

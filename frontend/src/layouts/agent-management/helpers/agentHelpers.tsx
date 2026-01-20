@@ -67,7 +67,8 @@ const prepareAgentDetails = (agentServer: AgentServer): AgentDetail[] => {
   console.log("agentServer => ", agentServer);
   const risebotProperties: RisebotProperties = get(agentServer, "agent_details", {});
   const cmdbProperties: CmdbProperties = get(agentServer, "cmdb", {});
-
+console.log("cmdbProperties",cmdbProperties)
+console.log("risebotProperties",risebotProperties)
   const agentDetailsArray: AgentDetail[] = [
     { label: "RISEBOT Type", value: get(risebotProperties, "agent_type", "NOT_FOUND") },
     { label: "Version", value: get(risebotProperties, "version", "NOT_FOUND") },

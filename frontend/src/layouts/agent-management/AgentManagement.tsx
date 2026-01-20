@@ -57,7 +57,7 @@ const AgentManagement = () => {
     selectedAgent: {},
     openDrawer: false,
     agentSearch: "",
-    pageSize: "10",
+    pageSize: 10,
     pageNo: 1,
     openAgentModal: false,
     showFilters: false,
@@ -112,7 +112,7 @@ const AgentManagement = () => {
 
   useEffect(() => {
     if (JSON.stringify(globalConfigs) !== JSON.stringify(state.globalConfigs)) {
-      updateState({ ...globalConfigs });
+      updateState({ globalConfigs });
     }
   }, [globalConfigs]);
 
@@ -125,7 +125,7 @@ const AgentManagement = () => {
   const getJsonData = useCallback(
     () => {
       const jsonData = {
-        pageSize: state.pageSize,
+        pageSize: String(state.pageSize),
         pageNo: state.pageNo - 1,
         status,
         agentSearch: state.agentSearch,
@@ -158,7 +158,7 @@ const AgentManagement = () => {
     async (selectedAgentHostName: string) => {
       const selectedAgent = getAgents().find(({ hostname }) => hostname === selectedAgentHostName);
       if (!selectedAgent) {
-        errortoast("Selected RISEBOT not found");
+        errortoast("Selected RISEAGENT not found");
         return;
       }
       const serverPort = selectedAgent.agent_details?.server_port || "";
@@ -215,13 +215,15 @@ const AgentManagement = () => {
 
   const pagination: Pagination = {
     totalRows: get(agentServices, "pagination.totalPage", 0),
-    limit: Number(state.pageSize),
+    limit: state.pageSize,
     pageNo: state.pageNo,
     totalPage: getTotalPageNumber(),
+    page: state.pageNo,
+    total: get(agentServices, "pagination.allCount", 0),
   };
 
-  const handlePagination = (pageSize: number | string = Number("10"), pageNo: number = 1) => {
-    updateState({ pageSize: String(pageSize), pageNo: pageNo });
+  const handlePagination = (pageSize: number = 10, pageNo: number = 1) => {
+    updateState({ pageSize: pageSize, pageNo: pageNo });
   };
 
   const handleSelectHostAgent = (agentHostName: string) => {
@@ -231,8 +233,7 @@ const AgentManagement = () => {
     } else {
       const agent = getAgents().find(({ hostname: filterHostName }) => agentHostName === filterHostName);
       if (agent) {
-        const { hostname = "", agent_details = {} } = agent;
-        setSelectedHostnameAgentsData([...selectedHostnameAgentsData, { hostname, agent_details }]);
+        setSelectedHostnameAgentsData([...selectedHostnameAgentsData, agent]);
       }
     }
   };
@@ -259,6 +260,7 @@ const AgentManagement = () => {
 
   const setFilters = useCallback((newFilters: Partial<FilteredData>) => {
     setFilteredData(prev => ({ ...prev, ...newFilters }));
+    updateState({ pageNo: 1 });
   }, []);
 
   const handleCustomFilterCallback = async (e: DropdownOption[] | any, catName: keyof FilteredData, displayName: string) => {
@@ -274,6 +276,7 @@ const AgentManagement = () => {
       ...prev,
       [catName]: data,
     }));
+    updateState({ pageNo: 1 });
   };
 
   const handleClearFilter = async () => {
@@ -286,6 +289,7 @@ const AgentManagement = () => {
       environment: [],
       sid: [],
     });
+    updateState({ pageNo: 1 });
     loadAgentServices();
   };
 
@@ -346,10 +350,7 @@ const AgentManagement = () => {
       errortoast("Please select the Agent Server");
       return [];
     }
-    return clonedUpgradeAgents.map(({ hostname, agent_details }) => ({
-      hostname,
-      agent_details,
-    }));
+    return clonedUpgradeAgents;
   };
 
   const getTotalRowsCount = (): number => {
@@ -413,10 +414,12 @@ const AgentManagement = () => {
 
   const handleStatusSelect = (action: string) => {
     setStatus(action);
+    updateState({ pageNo: 1 });
     dispatch(
       agentManagementAction.fetchAgentManagementServices({
         ...getJsonData(),
         status: action,
+        pageNo: 0,
       }),
     );
   };
@@ -517,7 +520,7 @@ const AgentManagement = () => {
         show={showAgentModal}
         dataObj={{
           header: `${startBulkAgent ? startAgentsPopupText : stopAgentsPopupText}`,
-          body: `RISEBOT will be ${startBulkAgent ? startedText : stoppedText}.`,
+          body: `RISEAGENT will be ${startBulkAgent ? startedText : stoppedText}.`,
           button: {
             buttonTwo: { buttonTwoName: "Cancel", buttonBg: "modalButtonWhite" },
             buttonOne: { buttonBg: "modalButtonBlue", buttonOneName: `${startBulkAgent ? startButtonText : stopButtonText}` },
