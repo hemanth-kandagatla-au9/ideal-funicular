@@ -1,0 +1,29 @@
+{{- if .Values.pvc.enabled -}}
+{{- $fullName := .Release.Name -}}
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ $fullName }}-storageclass
+  labels:
+    {{- include "aiops.labels" . | nindent 4 }}
+provisioner: {{ .Values.pvc.provisioner }}
+reclaimPolicy: Retain   # Retain or Delete
+volumeBindingMode: WaitForFirstConsumer   # WaitForFirstConsumer or Immediate
+allowVolumeExpansion: true    # true or false
+parameters:
+  storageaccounttype: Premium_LRS   # Premium or Standard
+  kind: Managed
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $fullName }}-data-pvc
+spec:
+  accessModes:
+  - {{ .Values.pvc.accessMode }}
+  storageClassName: {{ $fullName }}-storageclass
+  resources:
+    requests:
+      storage: {{ .Values.pvc.size }}
+{{- end -}}

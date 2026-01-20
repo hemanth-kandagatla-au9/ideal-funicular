@@ -1,0 +1,46 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "node": "current" // Important for Jest to understand modern JS
+        }
+      }
+    ],
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic" // For new JSX transform
+      }
+    ],
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-runtime",
+    // Add these plugins for better Jest support:
+    "@babel/plugin-transform-modules-commonjs" // Only for test environment
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ],
+      "plugins": [
+        // These plugins are only active during testing
+        "@babel/plugin-transform-modules-commonjs",
+        "dynamic-import-node"
+      ]
+    }
+  }
+}

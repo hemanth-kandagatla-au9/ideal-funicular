@@ -1,0 +1,424 @@
+/* Permissions Component Styles */
+
+/* ============================================ */
+/* CONTAINER                                   */
+/* ============================================ */
+.permissions-container {
+  padding: 16px 32px;
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* ============================================ */
+/* SECTION 1: HEADER WITH BREADCRUMB           */
+/* ============================================ */
+.permissions-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 4px;
+}
+
+.breadcrumb-link {
+  color: #2961f4;
+  cursor: pointer;
+  font-family: "Johnson Display";
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28.8px;
+}
+
+.breadcrumb-link:hover {
+  opacity: 0.8;
+}
+
+.breadcrumb-separator {
+  color: #000000;
+  font-family: "Johnson Display";
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28.8px;
+  margin: 0 4px;
+}
+
+.breadcrumb-current {
+  color: #000000;
+  font-family: "Johnson Display";
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28.8px;
+}
+
+/* ============================================ */
+/* SECTION 2: FILTERS ROW                      */
+/* ============================================ */
+.permissions-filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: #f8f8f8;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.filter-group-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 0 0 auto;
+  padding-top: 22px;
+  /* Align with input fields (label height + gap) */
+}
+
+.filter-label {
+  font-family: "Johnson Display";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.8px;
+  color: #000000;
+  margin: 0;
+}
+
+.filter-select {
+  height: 44px;
+  padding: 10px 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: "Johnson Display";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Custom arrow only for select dropdowns */
+select.filter-select {
+  padding-right: 40px;
+  /* Space for custom arrow */
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%232961F4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  appearance: none;
+  /* Remove default arrow */
+}
+
+/* Placeholder color for select */
+.filter-select option[value=""] {
+  color: #94a3b8;
+}
+
+.filter-select:hover {
+  border-color: #2961f4;
+  background-color: #f8fafc;
+  box-shadow: 0 2px 4px rgba(41, 97, 244, 0.1);
+}
+
+.filter-select:focus {
+  border-color: #2961f4;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(41, 97, 244, 0.1);
+}
+
+
+.filter-select-error {
+  border-color: #ef4444 !important;
+}
+
+.filter-error {
+  font-family: "Johnson Display";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  color: #ef4444;
+  margin-top: -2px;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 43px;
+  padding: 10px 16px;
+  background: #2961f4;
+  border: none;
+  border-radius: 36px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.add-btn:hover {
+  background: #1e4fd1;
+}
+
+.add-btn:active {
+  background: #1840b8;
+  transform: scale(0.96);
+}
+
+.add-btn-text {
+  font-family: "Johnson Display";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  color: #ffffff;
+}
+
+/* ============================================ */
+/* SECTION 3: TABLE HEADER AND DATA ROWS       */
+/* ============================================ */
+.table-header {
+  height: 64px;
+  display: flex;
+  background-color: #f7f7fa;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+}
+
+.table-cell {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  flex: 1;
+}
+
+.table-cell-checkbox {
+  flex: 0 0 60px;
+  justify-content: center;
+}
+
+.table-cell-project {
+  flex: 1;
+}
+
+.table-cell-module {
+  flex: 1;
+}
+
+.table-cell-permissions {
+  flex: 1;
+}
+
+.table-cell-created-at {
+  flex: 1;
+}
+
+.table-cell-created-by {
+  flex: 1;
+}
+
+.table-cell-action {
+  flex: 0 0 60px;
+  justify-content: center;
+}
+
+.table-label {
+  font-family: "Johnson Display";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16.8px;
+  color: #64748B;
+}
+
+/* ============================================ */
+/* TABLE BODY                                  */
+/* ============================================ */
+.table-body {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  border-radius: 16px;
+  margin: 0 8px 10px 8px;
+  height: 47vh;
+  overflow: auto;
+  padding-right: 8px;
+}
+
+.table-row {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 0 12px;
+  margin: 0px 0px 10px 0px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 4px 4px 0px #0000000d;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row:hover {
+  background-color: #f8fafc;
+}
+
+.table-value {
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16.8px;
+  color: #05060F;
+}
+
+/* ============================================ */
+/* TABLE ACTIONS                               */
+/* ============================================ */
+.table-checkbox-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-action-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.table-action-btn:hover {
+  opacity: 0.7;
+}
+
+.table-action-btn:active,
+.table-checkbox-btn:active {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+
+/* ============================================ */
+/* EMPTY STATE                                 */
+/* ============================================ */
+.table-empty {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 60px 20px;
+  margin-top: 16px;
+  height: 47vh;
+  overflow: auto;
+}
+
+.table-empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.table-empty-content img {
+  width: 200px;
+  height: auto;
+}
+
+.table-empty-content p {
+  font-family: "Johnson Display";
+  font-size: 16px;
+  font-weight: 400;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ============================================ */
+/* RESPONSIVE ADJUSTMENTS                      */
+/* ============================================ */
+@media (max-width: 1200px) {
+
+  .permissions-table-cell-project,
+  .permissions-table-cell-module,
+  .permissions-table-cell-permissions {
+    width: 150px;
+  }
+
+  .permissions-table-cell-created-at {
+    width: 200px;
+  }
+
+  .permissions-table-cell-created-by {
+    width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .permissions-container {
+    padding: 16px;
+  }
+
+  .permissions-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .add-permission-btn {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .permissions-table-header,
+  .permissions-table-row {
+    overflow-x: auto;
+  }
+}
+
+/* ============================================ */
+/* CUSTOM SCROLLBAR                            */
+/* ============================================ */
+.table-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table-body::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.table-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

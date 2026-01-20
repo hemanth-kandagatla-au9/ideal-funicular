@@ -1,0 +1,230 @@
+/**
+ * Importing dependencies.
+ */
+import Cookies from "universal-cookie";
+import Config from "../../config/config";
+import { getLocalAccessToken } from "../../utils/TokenUtils";
+import AxiosInstanceClass from "../axiosInstance";
+
+// Safely destructure with defaults to prevent undefined errors
+const authEndpoints = Config.apiEndpoints?.auth || {};
+const baseUrl = authEndpoints.baseUrl || "";
+const getEndpoints = authEndpoints.get || {};
+const patchEndpoints = authEndpoints.patch || {};
+const postEndpoints = authEndpoints.post || {};
+const delEndpoints = authEndpoints.del || {};
+
+// exporting auth service axios instance
+export const AxiosInstance = new AxiosInstanceClass(baseUrl).init();
+
+// Interface for user data (adjust according to your actual data structure)
+interface UserData {
+  id: string;
+  // Add other user properties as needed
+  [key: string]: any;
+}
+
+// Interface for application data
+interface ApplicationData {
+  id?: string;
+  appName?: string;
+  isBlocked?: boolean;
+  // Add other application properties as needed
+  [key: string]: any;
+}
+
+// Interface for list parameters
+interface ListParams {
+  filter?: string;
+  pagination: {
+    limit: number;
+    pageNo: number;
+  };
+}
+
+// Interface for API response
+interface ApiResponse<T = any> {
+  data?: T;
+  message?: string;
+  success?: boolean;
+  // Add other response properties as needed
+}
+
+// Type for error response
+interface ErrorResponse {
+  response?: {
+    data?: any;
+    status?: number;
+    statusText?: string;
+  };
+  message?: string;
+}
+
+/**
+ * Function to fetch user-info by userId
+ */
+const getUserById = async (userId: string): Promise<UserData | ApiResponse> => {
+  try {
+    if (!getEndpoints.users) throw new Error("Users endpoint not configured");
+
+    const cookies = new Cookies();
+    const accessToken = cookies.get("token");
+    const response = await AxiosInstance.get(`${getEndpoints.users}${userId}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    return response?.data?.data || {};
+  } catch (error: unknown) {
+    const err = error as ErrorResponse;
+    return err?.response?.data || { success: false, message: "Failed to fetch user" };
+  }
+};
+
+/**
+ * Function to logout user
+ */
+const logout = async (userId: string | null): Promise<ApiResponse> => {
+  try {
+    if (!patchEndpoints.logout) throw new Error("Logout endpoint not configured");
+
+    const cookies = new Cookies();
+    const accessToken = cookies.get("token");
+    const response = await AxiosInstance.patch(`${patchEndpoints.logout}/${userId}`, null, { headers: { Authorization: `Bearer ${accessToken}` } });
+    return response?.data?.data || { success: true, message: "Logged out successfully" };
+  } catch (error: unknown) {
+    const err = error as ErrorResponse;
+    return err?.response?.data || { success: false, message: "Logout failed" };
+  }
+};
+
+/**
+ * Function to update user info
+ */
+const modifyUser = async (userId: string, body: Partial<UserData>): Promise<UserData | ApiResponse> => {
+  try {
+    if (!patchEndpoints.updateUser) throw new Error("Update user endpoint not configured");
+
+    const cookies = new Cookies();
+    const accessToken = cookies.get("token");
+    const response = await AxiosInstance.patch(`${patchEndpoints.updateUser}/${userId}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
+    return response?.data?.data || {};
+  } catch (error: unknown) {
+    const err = error as ErrorResponse;
+    return err?.response?.data || { success: false, message: "User update failed" };
+  }
+};
+
+/**
+ * Function to add an application
+ */
+const addApplication = async (applicationData: ApplicationData): Promise<ApiResponse> => {
+  try {
+    if (!postEndpoints.addApplication) throw new Error("Add application endpoint not configured");
+
+    const response = await AxiosInstance.post(postEndpoints.addApplication, applicationData, { headers: { Authorization: `Bearer ${getLocalAccessToken()}` } });
+    return response?.data || { success: true, message: "Application added successfully" };
+  } catch (error: unknown) {
+    const err = error as ErrorResponse;
+    return err?.response?.data || { success: false, message: "Failed to add application" };
+  }
+};
+
+/**
+ * Function to update an application
+ */
+const updateApplication = async (id: string, applicationData: Partial<ApplicationData>): Promise<ApiResponse> => {
+  try {
+    if (!patchEndpoints.updateApplication) throw new Error("Update application endpoint not configured");
+
+    const response = await AxiosInstance.patch(`${patchEndpoints.updateApplication}${id}`, applicationData, { headers: { Authorization: `Bearer ${getLocalAccessToken()}` } });
+    return response?.data || { success: true, message: "Application updated successfully" };
+  } catch (error: unknown) {
+    const err = error as ErrorResponse;
+    return err?.response?.data || { success: false, message: "Failed to update application" };
+  }
+};
+
+/**
+ * Function to delete an application by ID
+ */
+const deleteApplication = async (id: string): Promise<ApiResponse> => {
+  try {
+    if (!delEndpoints.deleteApplication) throw new Error("Delete application endpoint not configured");
+
+    const response = await AxiosInstance.delete(`${delEndpoints.deleteApplication}/${id}`, { headers: { Authorization: `Bearer ${getLocalAccessToken()}` } });
+    return response?.data || { success: true, message: "Application deleted successfully" };
+  } catch (error: unknown) {
+    const err = error as ErrorResponse;
+    return err?.response?.data || { success: false, message: "Failed to delete application" };
+  }
+};
+
+/**
+ * Function to block an application by ID
+ */
+const blockApplication = async (id: string, data: { isBlocked: boolean }): Promise<ApiResponse> => {
+  try {
+    if (!patchEndpoints.blockApplication) throw new Error("Block application endpoint not configured");
+
+    const response = await AxiosInstance.patch(`${patchEndpoints.blockApplication}/${id}`, data, { headers: { Authorization: `Bearer ${getLocalAccessToken()}` } });
+    return response?.data || { success: true, message: data.isBlocked ? "Application blocked successfully" : "Application unblocked successfully" };
+  } catch (error: unknown) {
+    const err = error as ErrorResponse;
+    return err?.response?.data || { success: false, message: "Failed to update application block status" };
+  }
+};
+
+/**
+ * Function to list applications
+ */
+const listApplication = async (listParam: ListParams): Promise<ApiResponse> => {
+  try {
+    if (!getEndpoints.applicationList) throw new Error("Application list endpoint not configured");
+
+    const { filter, pagination } = listParam;
+    const { limit, pageNo } = pagination;
+    const url = !filter ? `${getEndpoints.applicationList}?limit=${limit}&pageNo=${pageNo}` : `${getEndpoints.applicationList}?limit=${limit}&pageNo=${pageNo}&appName=${filter}`;
+
+    const response = await AxiosInstance.get(url, {
+      headers: { Authorization: `Bearer ${getLocalAccessToken()}` },
+    });
+    return response?.data || { data: [], success: true };
+  } catch (error: unknown) {
+    const err = error as ErrorResponse;
+    return err?.response?.data || { success: false, message: "Failed to list applications", data: [] };
+  }
+};
+
+/**
+ * Function to get auth audit logs for CSV
+ */
+const getAuthAuditLogForCSV = async (filter: Record<string, any> = {}): Promise<ApiResponse> => {
+  try {
+    if (!getEndpoints.getAuditLogForCSV) throw new Error("Audit log endpoint not configured");
+
+    const filterParams = new URLSearchParams(filter).toString();
+    const response = await AxiosInstance.get(filterParams ? `${getEndpoints.getAuditLogForCSV}?${filterParams}` : getEndpoints.getAuditLogForCSV, {
+      headers: { Authorization: `Bearer ${getLocalAccessToken()}` },
+    });
+    return response?.data || { success: true, data: [] };
+  } catch (error: unknown) {
+    const err = error as ErrorResponse;
+    return err?.response?.data || { success: false, message: "Failed to get audit logs", data: [] };
+  }
+};
+
+/**
+ * Exporting auth service functions.
+ */
+const AuthService = {
+  getUserById,
+  logout,
+  modifyUser,
+  addApplication,
+  listApplication,
+  updateApplication,
+  deleteApplication,
+  blockApplication,
+  getAuthAuditLogForCSV,
+};
+
+export default AuthService;

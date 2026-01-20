@@ -1,0 +1,94 @@
+name: configure environment variables
+description: "Configure the environment variables for the workflow"
+
+inputs:
+  github-token:
+    required: true
+    description: "The GitHub token for authentication"
+
+outputs:
+  cloud:
+    description: "The cloud provider"
+    value: ${{ steps.set-env-vars.outputs.cloud }}
+  region:
+    description: "The region of the cloud provider"
+    value: ${{ steps.set-env-vars.outputs.region }}
+  app-name:
+    description: "The name of the application"
+    value: ${{ steps.set-env-vars.outputs.app-name }}
+  cluster-name:
+    description: "The name of the cluster"
+    value: ${{ steps.set-env-vars.outputs.cluster-name }}
+  namespace:
+    description: "The name of the namespace"
+    value: ${{ steps.set-env-vars.outputs.namespace }}
+  registry-server:
+    description: "The registry server"
+    value: ${{ steps.set-env-vars.outputs.registry-server }}
+  release_tag:
+    description: "The latest release tag"
+    value: ${{ steps.get_latest_release.outputs.release_tag }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up environment variables
+      id: set-env-vars
+      shell: bash
+      env:
+      ##Common Values
+        cloud: aws
+        region: "us-east-1"
+        app-name: aiops-iabot-api
+        registry-server: "aiopscr.azurecr.io"
+      ##Environment Values
+      ##PREDEV
+        PREDEV_CLUSTER_NAME: predev-cluster
+        PREDEV_NAMESPACE: predev-namespace
+      ##DEV
+        DEV_CLUSTER_NAME: aifa-aiops-dev
+        DEV_NAMESPACE: aiops-dev
+      ##QA
+        QA_CLUSTER_NAME: aifa-aiops-qa
+        QA_NAMESPACE: aiops-qa
+      ##PROD
+        PROD_CLUSTER_NAME: aifa-aiops-production
+        PROD_NAMESPACE: aiops-prod
+      run: | 
+        echo "cloud=${{ env.cloud }}" >> $GITHUB_OUTPUT
+        echo "region=${{ env.region }}" >> $GITHUB_OUTPUT
+        echo "app-name=${{ env.app-name }}" >> $GITHUB_OUTPUT
+        echo "registry-server=${{ env.registry-server }}" >> $GITHUB_OUTPUT
+        if [[ $GITHUB_EVENT_NAME = release ]]; then
+          echo "Environment is PROD"
+          echo "cluster-name=${{ env.PROD_CLUSTER_NAME }}" >> $GITHUB_OUTPUT
+          echo "namespace=${{ env.PROD_NAMESPACE }}" >> $GITHUB_OUTPUT
+        elif [[ $GITHUB_REF == refs/heads/predev || $GITHUB_REF == refs/heads/feature/* ]]; then
+          echo "Environment is PREDEV"
+          echo "cluster-name=${{ env.PREDEV_CLUSTER_NAME }}" >> $GITHUB_OUTPUT
+          echo "namespace=${{ env.PREDEV_NAMESPACE }}" >> $GITHUB_OUTPUT
+        elif [[ $GITHUB_REF == refs/heads/qa || $$GITHUB_REF == refs/heads/release ]]; then
+          echo "Environment is QA"
+          echo "cluster-name=${{ env.QA_CLUSTER_NAME }}" >> $GITHUB_OUTPUT
+          echo "namespace=${{ env.QA_NAMESPACE }}" >> $GITHUB_OUTPUT
+        else
+          echo "Environment is DEV"
+          echo "cluster-name=${{ env.DEV_CLUSTER_NAME }}" >> $GITHUB_OUTPUT
+          echo "namespace=${{ env.DEV_NAMESPACE }}" >> $GITHUB_OUTPUT
+        fi
+    - name: Get latest release tag
+      id: get_latest_release
+      shell: bash
+      run: |
+        if [ "$GITHUB_EVENT_NAME" = "release" ]; then
+          LATEST_TAG="${GITHUB_REF_NAME#v}"
+        else
+          RESPONSE=$(curl -s \
+            -H "Authorization: Bearer ${{ inputs.github-token }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/releases/latest)
+          LATEST_TAG=$(echo "$RESPONSE" | python3 -c "import sys, json; t = json.load(sys.stdin).get('tag_name', '0.0.0'); print(t[1:] if t.startswith('v') else t)")
+        fi
+        echo "release_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+        echo "The latest release tag is: ${LATEST_TAG}"
+        

@@ -1,0 +1,82 @@
+{{- $fullName := .Release.Name -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    {{- include "aiops.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "aiops.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "aiops.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- range .Values.imagePullSecrets }}
+      imagePullSecrets:
+        - name: {{ .name }}
+      {{- end }}
+      serviceAccountName: {{ include "aiops.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: helper-vol
+          emptyDir: {}
+        {{- if .Values.pvc.enabled }}
+        - name: {{ $fullName }}-data-pvc
+          persistentVolumeClaim:
+            claimName: {{ $fullName }}-data-pvc
+        {{- end }}
+      containers:
+        - name: {{ .Release.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: {{ .Values.container.name }}
+              containerPort: {{ .Values.container.port }}
+              protocol: TCP
+          env:
+            {{- range .Values.envVariables }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- tpl . $ | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- tpl . $ | nindent 12 }}
+          {{- end }}
+          volumeMounts: 
+            - name: helper-vol
+              mountPath: /helper
+            {{- if .Values.pvc.enabled }}
+            - name: {{ $fullName }}-data-pvc
+              mountPath: {{ .Values.pvc.mountPath }}
+            {{- end }}    
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

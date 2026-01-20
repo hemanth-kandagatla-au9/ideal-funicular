@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx", // Updated to react-jsx
+    "allowSyntheticDefaultImports": true,
+    "types": ["react", "react-dom", "node", "jest"],
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "target": "ES6",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "isolatedModules": true
+  },
+  "allowImportingTsExtensions": true,
+  "include": ["src/**/*", "custom.d.ts"],
+  "exclude": ["node_modules"]
+}

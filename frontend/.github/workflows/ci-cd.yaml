@@ -1,0 +1,82 @@
+name: CI/CD Workflow for AIOPS IABOT Frotend
+description: |
+  This workflow is designed to automate the CI/CD process for the aiops-iabot-web. It includes steps for building Docker images, deploying to Kubernetes, and managing Helm charts.
+  The workflow is triggered on specific branch pushes and release events.
+on:
+  push:
+    branches:
+      - develop
+      - qa
+  release:
+    types: [released]
+  workflow_dispatch:
+
+jobs:
+  process-env:
+    name: Set Environment
+    runs-on: ubuntu-latest
+    outputs:
+      image-repo: ${{ steps.prepare-env.outputs.image-repo }}
+      image-tag: ${{ steps.prepare-env.outputs.image-tag }}
+      build-env: ${{ steps.prepare-env.outputs.build-env }}
+      helm-repo: ${{ steps.prepare-env.outputs.helm-repo }}
+      value-file: ${{ steps.prepare-env.outputs.value-file }}
+      cloud: ${{ steps.pipeline-env.outputs.cloud }}
+      region: ${{ steps.pipeline-env.outputs.region }}
+      cluster-name: ${{ steps.pipeline-env.outputs.cluster-name }}
+      namespace: ${{ steps.pipeline-env.outputs.namespace }}
+      app-name: ${{ steps.pipeline-env.outputs.app-name }}
+      registry-server: ${{ steps.pipeline-env.outputs.registry-server }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Checkout Actions Repository
+        uses: actions/checkout@v4
+        with:
+          repository: aifalabs/aifa-githublib
+          ref: v1
+          ssh-key: ${{ secrets.GITACTIONS_DEPLOY_KEY }}
+          path: .github/aifa-githublib
+      ## Setup Pipeline Environments
+      - name: Set up pipeline environments
+        id: pipeline-env
+        uses: ./.cicdref/pipeline-env
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      ## Prepare Common Environment Variables 
+      - name: Prepare Environment
+        id: prepare-env
+        uses: ./.github/aifa-githublib/actions/prepare-env
+        with:
+          app-name: ${{ steps.pipeline-env.outputs.app-name }}
+          release-version: ${{ steps.pipeline-env.outputs.release_tag }}
+          registry-server: ${{ steps.pipeline-env.outputs.registry-server }}
+  dockerBuild:
+    needs: process-env
+    uses: aifalabs/aifa-githublib/.github/workflows/docker-build.yaml@v1
+    with:
+      image-tag: ${{ needs.process-env.outputs.image-tag }}
+      image-repo: ${{ needs.process-env.outputs.image-repo }}
+      registry-server: ${{ needs.process-env.outputs.registry-server }}
+    secrets:
+      registry-username: ${{ secrets.AIOPS_ACR_USERNAME }}
+      registry-password: ${{ secrets.AIOPS_ACR_PASSWORD }}
+  deployToK8S:
+    needs: [process-env, dockerBuild]
+    uses: aifalabs/aifa-githublib/.github/workflows/deploy-k8s.yaml@v1
+    with:
+      cloud: "aws"
+      application-name: ${{ needs.process-env.outputs.app-name }}
+      aws-region: ${{ needs.process-env.outputs.region }}
+      cluster-name: ${{ needs.process-env.outputs.cluster-name }}
+      registry-server: ${{ needs.process-env.outputs.registry-server }}
+      helm-repo: ${{ needs.process-env.outputs.helm-repo }}
+      namespace: ${{ needs.process-env.outputs.namespace }}
+      image-tag: ${{ needs.process-env.outputs.image-tag }}
+      value-file: ${{ needs.process-env.outputs.value-file }}
+    secrets:
+      registry-username: ${{ secrets.AIOPS_ACR_USERNAME }}
+      registry-password: ${{ secrets.AIOPS_ACR_PASSWORD }}
+      aws-access-key-id: ${{ secrets.AWS_AIOPS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_AIOPS_SECRET_ACCESS_KEY }}
+

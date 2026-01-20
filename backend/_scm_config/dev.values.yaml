@@ -1,0 +1,72 @@
+image:
+  repository: "aiopscr.azurecr.io/docker-dev/aiops-iabot-api"
+  tag: ""
+# imagePullSecrets: 
+#   - name: pocgt-acr
+envVariables: 
+  - name: APP_VERSION
+    value: "1.0.0"  
+  - name: APP_TITLE
+    value: Trigger Service API
+  - name: APP_DESCRIPTION
+    value: Agentic Workflow API built with FastAPI.
+  - name: ALLOWED_ORIGIN
+    value: http://localhost:3000,http://localhost:3003,http://localhost:3005,https://iabot.aiops-dev.aifalabs.com
+  - name: port
+    value: "3001"
+  - name: NODE_ENV
+    value: predev
+  - name: DATABASE
+    value: iabot-agent  
+  - name: RUST_API_USERNAME
+    value: rise-agent-user  
+  - name: RISE_SA_USERNAME
+    value: cyberops-agent 
+  - name: OPENSEARCH_USER
+    value: aopsdevadmin
+  - name: OPENSEARCH_HEALTH_DISCOVERY_INDEX
+    value: risebot_health_discovery_predev
+  - name: OPENSEARCH_APPLICATION_INDEX
+    value: risebot_application_logs_predev
+  - name: OPENSEARCH_AUDIT_LOG_INDEX
+    value: risebot_ui_audit_logs_predev
+  - name: AWS_REGION
+    value: us-east-1
+  - name: NODE_TLS_REJECT_UNAUTHORIZED
+    value: "0"
+  - name: AWS_BUCKET_NAME
+    value: aifa-aiops-bucket
+
+pvc:
+  enabled: false
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  provisioner: kubernetes.io/azure-disk
+  mountPath: /mnt/data
+
+ingress:
+  enabled: false
+  # className: "nginx"
+  # annotations: {
+  #   nginx.ingress.kubernetes.io/add-base-url: "true",
+  #   nginx.ingress.kubernetes.io/client-body-buffer-size: 100m,
+  #   nginx.ingress.kubernetes.io/proxy-body-size: 100m,
+  #   nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600",
+  #   nginx.ingress.kubernetes.io/proxy-read-timeout: "3600",
+  #   nginx.ingress.kubernetes.io/proxy-send-timeout: "3600",
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$1,
+  #   nginx.ingress.kubernetes.io/server-snippet: keepalive_timeout 3600s;client_header_timeout
+  #     3600s;client_body_timeout 3600s;,
+  #   nginx.ingress.kubernetes.io/use-regex: "true"
+  # }
+  #   # kubernetes.io/ingress.class: nginx
+  #   # kubernetes.io/tls-acme: "true"
+  # hosts:
+  #   - host: ""
+  #     paths:
+  #       - path: /(.*)
+  #         pathType: Prefix
+  #         backend: 
+  #           service: sdlc-assist
+  #           port:
+  #             number: 80

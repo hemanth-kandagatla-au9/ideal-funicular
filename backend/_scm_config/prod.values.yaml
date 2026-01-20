@@ -1,0 +1,41 @@
+image:
+  repository: "aiopscr.azurecr.io/docker/aiops-iabot-api"
+  tag: ""
+# imagePullSecrets: 
+#   - name: pocgt-acr
+envVariables: []
+  # - name: "ENV_VAR_NAME"
+  #   value: "ENV_VAR_VALUE"
+pvc:
+  enabled: false
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  provisioner: kubernetes.io/azure-disk
+  mountPath: /mnt/data
+
+ingress:
+  enabled: false
+  # className: "nginx"
+  # annotations: {
+  #   nginx.ingress.kubernetes.io/add-base-url: "true",
+  #   nginx.ingress.kubernetes.io/client-body-buffer-size: 100m,
+  #   nginx.ingress.kubernetes.io/proxy-body-size: 100m,
+  #   nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600",
+  #   nginx.ingress.kubernetes.io/proxy-read-timeout: "3600",
+  #   nginx.ingress.kubernetes.io/proxy-send-timeout: "3600",
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$1,
+  #   nginx.ingress.kubernetes.io/server-snippet: keepalive_timeout 3600s;client_header_timeout
+  #     3600s;client_body_timeout 3600s;,
+  #   nginx.ingress.kubernetes.io/use-regex: "true"
+  # }
+  #   # kubernetes.io/ingress.class: nginx
+  #   # kubernetes.io/tls-acme: "true"
+  # hosts:
+  #   - host: ""
+  #     paths:
+  #       - path: /(.*)
+  #         pathType: Prefix
+  #         backend: 
+  #           service: sdlc-assist
+  #           port:
+  #             number: 80
