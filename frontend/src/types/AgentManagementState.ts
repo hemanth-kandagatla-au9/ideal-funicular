@@ -28,6 +28,8 @@ interface Pagination {
   limit: number;
   pageNo: number;
   totalPage: number;
+  page: number;
+  total: number;
 }
 
 interface AgentManagementState {

@@ -161,12 +161,12 @@ const AgentManagement = () => {
         errortoast("Selected RISEAGENT not found");
         return;
       }
-      const serverPort = selectedAgent.agent_details?.server_port || "";
+      const serverPort = selectedAgent.agent_details?.server_port ?? "";
       updateState({
         selectedAgent,
         openDrawer: !state.openDrawer,
         selectedHostName: selectedAgentHostName,
-        selectedHostPort: serverPort,
+        selectedHostPort: String(serverPort),
       });
       dispatch(agentManagementAction.reloadFetchAgentLogs());
     },
@@ -339,7 +339,7 @@ const AgentManagement = () => {
     }
     return selectedHostnameAgentsData.map(({ hostname, agent_details }) => ({
       hostname,
-      port: get(agent_details, "server_port", ""),
+      port: String(get(agent_details, "server_port", "")),
       osVersion: get(agent_details, "os_version", ""),
     }));
   };
@@ -399,7 +399,7 @@ const AgentManagement = () => {
 
   const fetchDataForDownload = async (pageSize: number): Promise<any[]> => {
     const jsonData = getJsonData();
-    jsonData.pageSize = pageSize;
+    jsonData.pageSize = String(pageSize);
     const agentsRes = await agentManagementService.fetchAgentService(jsonData);
     return get(agentsRes?.data.data, "pagination.totalRows", []);
   };

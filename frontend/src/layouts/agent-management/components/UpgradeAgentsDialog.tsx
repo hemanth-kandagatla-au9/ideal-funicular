@@ -1,7 +1,6 @@
 import moment from "moment";
 import React, { useState } from "react";
 import { get, isEmpty } from "lodash";
-import { toast } from "react-toastify";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Radio, RadioGroup } from "@mui/material";
@@ -13,8 +12,8 @@ import { errortoast } from "../helpers/CustomToast";
 import { buildDateText, cancelButtonText, upgradeAgentText, upgradeJobButtonText } from "../../../constants/strings";
 
 interface AgentDetail {
-  server_port: string;
-  [key: string]: any; // For any additional properties that might exist
+  server_port?: string | number;
+  [key: string]: unknown; // For any additional properties that might exist
 }
 
 interface UpgradeAgentData {
@@ -60,7 +59,7 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
   const upgradeAgents = () => {
     const data = upgradeAgentData.map(({ hostname, agent_details }) => ({
       hostname,
-      port: get(agent_details, "server_port", ""),
+      port: String(get(agent_details, "server_port", "")),
     }));
 
     if (isEmpty(risebotAgentVersion)) {

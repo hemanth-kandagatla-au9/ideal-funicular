@@ -1,5 +1,8 @@
 interface AgentDetails {
   up_time?: string;
+  server_port?: string | number;
+  os_version?: string;
+  [key: string]: unknown;
 }
 
 interface Risebot {

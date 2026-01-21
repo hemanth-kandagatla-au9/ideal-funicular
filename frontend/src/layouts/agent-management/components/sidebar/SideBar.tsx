@@ -260,7 +260,13 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
   };
 
   const upgradeAgent = (agentId: string, type: string) => {
-    setState(prev => ({ ...prev, versionDialogOpen: true, isGlobalConfig: false, selectedSubAgentsID: agentId }));
+    setState(prev => ({
+      ...prev,
+      versionDialogOpen: true,
+      isGlobalConfig: false,
+      selectedSubAgentsID: agentId,
+      selectedAgentVersion: "",
+    }));
     dispatch(agentManagementAction.fetchRepositories({ type }));
   };
 
@@ -276,14 +282,14 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
         // Removed agentpath - only sending version as requested
       };
       dispatch(agentManagementAction.upgradeSelectedAgents(jsonData));
-      setState(prev => ({ ...prev, versionDialogOpen: false, isGlobalConfig: false }));
+      setState(prev => ({ ...prev, versionDialogOpen: false, isGlobalConfig: false, selectedAgentVersion: "" }));
     } else {
       errortoast("Please select the RISEBOT version");
     }
   };
 
   const closeSubModal = () => {
-    setState(prev => ({ ...prev, versionDialogOpen: false, isGlobalConfig: false }));
+    setState(prev => ({ ...prev, versionDialogOpen: false, isGlobalConfig: false, selectedAgentVersion: "" }));
   };
 
   const listScheduledCommands = (port: string, hostname: string) => {

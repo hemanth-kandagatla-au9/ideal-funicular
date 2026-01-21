@@ -341,7 +341,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
               </Modal.Header>
               <Modal.Body>
                 <div className="agentVersionsCover">
-                  <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="agent-task" name="radio-buttons-group">
+                  <RadioGroup aria-labelledby="demo-radio-buttons-group-label" value={selectedAgentVersion} name="radio-buttons-group">
                     {!isEmpty(agentsVersion) &&
                       (agentsVersion as AgentsVersionData)?.risebotVersions.map(({ version, buildDate }) => (
                         <div className="subPopVersionCvr" key={version}>
@@ -358,7 +358,10 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                             }}
                           />
                           <div className="subPopVersionCvrBtn risebotmdlBtn">
-                            <Button className="risebotagentSubVersionBtn" onClick={() => handleSelectAgentVersion(version)}>
+                            <Button
+                              className={`risebotagentSubVersionBtn ${selectedAgentVersion === version ? "versionActiveBtn" : ""}`}
+                              onClick={() => handleSelectAgentVersion(version)}
+                            >
                               v {version}
                             </Button>
                           </div>

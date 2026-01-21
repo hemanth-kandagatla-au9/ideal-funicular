@@ -2272,10 +2272,14 @@ p.pageRwSelection {
 }
 
 .risebotagentSubVersionBtn:hover,
-.risebotagentSubVersionBtn:focus,
 .versionActiveBtn {
   background: #404040;
   color: #fff;
+}
+
+.risebotagentSubVersionBtn:focus {
+  outline: 2px solid #2961F4;
+  outline-offset: 2px;
 }
 
 .risebotagentSubVersionBtn:active {

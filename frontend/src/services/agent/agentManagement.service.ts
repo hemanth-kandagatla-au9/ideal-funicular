@@ -39,17 +39,17 @@ interface AgentActionData {
 }
 
 interface PaginationData {
-  pageSize: number;
+  pageSize: number | string;
   pageNo: number;
   status?: string;
   agentSearch?: string;
-  os?: string;
-  region?: string;
-  environment?: string;
-  platform?: string;
-  sid?: string;
-  agentVersion?: string;
-  serviceName?: string;
+  os?: string | string[];
+  region?: string | string[];
+  environment?: string | string[];
+  platform?: string | string[];
+  sid?: string | string[];
+  agentVersion?: string | string[];
+  serviceName?: string | string[];
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
 }
