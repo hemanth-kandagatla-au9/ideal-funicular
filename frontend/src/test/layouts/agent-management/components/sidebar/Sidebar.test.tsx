@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import "@testing-library/jest-dom";
-import SideBar from "../../../../../../src/layouts/agent-management/components/sidebar/SideBar";
-
-// -------------------- MOCKS --------------------
+import SideBar from "../../../../../layouts/agent-management/components/sidebar/SideBar";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual("react-redux"),
@@ -38,8 +37,6 @@ jest.mock("../../../../../../src/layouts/agent-management/components/DeleteModal
 jest.mock("../../../../../../src/layouts/agent-management/components/JobLogsModal", () => () => <div data-testid="jobLogsModal" />);
 jest.mock("../../../../../../src/layouts/agent-management/components/LocalConfigModal", () => () => <div data-testid="localConfigModal" />);
 jest.mock("../../../../../../src/layouts/agent-management/components/SchedulerDialog", () => () => <div data-testid="schedulerDialog" />);
-
-// -------------------- SELECTOR MOCK --------------------
 const useSelectorMock = require("react-redux").useSelector;
 
 useSelectorMock.mockImplementation((selectorFn: any) => {
@@ -47,11 +44,7 @@ useSelectorMock.mockImplementation((selectorFn: any) => {
     agentManagement: {},
   });
 });
-
-// -------------------- STORE --------------------
 const store = createStore(() => ({}));
-
-// -------------------- PROPS --------------------
 const props = {
   open: true,
   setOpenSidebar: jest.fn(),
@@ -65,8 +58,6 @@ const props = {
   },
   port: "9000",
 };
-
-// -------------------- TESTS --------------------
 describe("SideBar", () => {
   const renderUI = () =>
     render(
@@ -122,8 +113,6 @@ describe("SideBar", () => {
     fireEvent.click(screen.getByTestId("agentSubServiceStopBtn"));
     fireEvent.click(screen.getByTestId("restartAgentStatusId"));
     fireEvent.click(screen.getByTestId("checkAgentStatusId"));
-
-    // Wait for any async state updates to finish
     await waitFor(() => {
       expect(true).toBe(true);
     });
@@ -131,10 +120,9 @@ describe("SideBar", () => {
 
   it("covers async log loading path cleanly", async () => {
     renderUI();
-
-    // Directly invoke async path by triggering logs load if component does
     await waitFor(() => {
       expect(fetchAgentLogsMock).toHaveBeenCalledTimes(0); // still stabilizes async queue
     });
   });
 });
+

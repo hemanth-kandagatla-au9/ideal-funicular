@@ -1,7 +1,5 @@
 import TokenUtils from "../../utils/TokenUtils";
 import { cookies } from "../../utils/utils";
-
-// Mock the cookies module
 jest.mock("../../utils/utils.ts", () => ({
   cookies: {
     get: jest.fn(),
@@ -10,7 +8,6 @@ jest.mock("../../utils/utils.ts", () => ({
 }));
 
 describe('TokenUtils', () => {
-    // Mock window.location for different environments
     const originalWindowLocation = window.location;
     
     beforeAll(() => {
@@ -23,7 +20,6 @@ describe('TokenUtils', () => {
     });
 
     beforeEach(() => {
-        // Clear all mocks and localStorage before each test
         jest.clearAllMocks();
         localStorage.clear();
     });
@@ -51,7 +47,6 @@ describe('TokenUtils', () => {
     });
 
     it('TokenUtils setLocalUser with data on production', async () => {
-        // Change window.location to production URL
         window.location = new URL('https://rise.apps.jnj.com');
         
         const userInfo = { name: "test", id: "123" };
@@ -92,7 +87,6 @@ describe('TokenUtils', () => {
     });
 
     it('TokenUtils updateLocalTokens on localhost', () => {
-      // Ensure we're testing localhost case
       window.location = new URL('http://localhost');
       TokenUtils.updateLocalTokens("access-token", "refresh-token");
       expect(cookies.set).toHaveBeenCalledWith("token", "access-token", { path: "/", domain: "localhost" });
@@ -100,7 +94,6 @@ describe('TokenUtils', () => {
   });
 
     it('TokenUtils updateLocalTokens on production', () => {
-        // Change window.location to production URL
         window.location = new URL('https://rise.apps.jnj.com');
         
         TokenUtils.updateLocalTokens("access-token", "refresh-token");
@@ -109,14 +102,12 @@ describe('TokenUtils', () => {
     });
 
     it('TokenUtils setLocalAccessToken on localhost', () => {
-      // Ensure we're testing localhost case
       window.location = new URL('http://localhost');
       TokenUtils.setLocalAccessToken("test-token");
       expect(cookies.set).toHaveBeenCalledWith("token", "test-token", { path: "/", domain: "localhost" });
   });
 
     it('TokenUtils setLocalAccessToken on production', () => {
-        // Change window.location to production URL
         window.location = new URL('https://rise.apps.jnj.com');
         
         TokenUtils.setLocalAccessToken("test-token");
@@ -162,16 +153,7 @@ describe('TokenUtils', () => {
         const invalidToken = 'invalidToken';
         expect(TokenUtils.isTokenExpired(invalidToken)).toBe(false);
     });
-    //it('TokenUtils setLocalPermissions null case', async () => {
-    //    const result = await TokenUtils.setLocalPermissions();
-    //    expect(result).toBe(false);
-    //});
-    //it('TokenUtils setLocalPermissions with data', async () => {
-    //    const permissions = { read: true, write: false };
-    //    const result = await TokenUtils.setLocalPermissions(permissions);
-    //    expect(result).toBe(undefined); // Since it's not returning anything
-    //    expect(localStorage.getItem("permissions")).toBeDefined();
-    //});
 });
+
 
 

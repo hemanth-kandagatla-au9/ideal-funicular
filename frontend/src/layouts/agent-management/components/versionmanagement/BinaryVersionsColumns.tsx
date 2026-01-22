@@ -5,22 +5,16 @@ import gitBranch from "../../../../images/agent-management/assets/gitBranch.svg"
 import linux from "../../../../images/agent-management/assets/linux.svg";
 import windows from "../../../../images/agent-management/assets/windows.svg";
 import { BinaryVersion } from "./binarytypes";
-
-// Type for OS compatibility items
 interface OSCompatibility {
   agentType?: string;
   osVersion?: string;
 }
-
-// Helper function for version labels
 const getVersionLabel = (version: string) => {
   if (version.includes("beta")) return "Beta";
   if (version === "v2.1.3") return "Latest";
   if (version === "v2.1.2") return "Previous";
   return "";
 };
-
-// Add back the actions props
 interface BinaryVersionsColumnsProps {
   onView?: (version: BinaryVersion) => void;
   onEdit?: (version: BinaryVersion) => void;
@@ -111,7 +105,6 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
         >
           {Array.isArray(row.osCompatibility) &&
             row.osCompatibility.map((os: OSCompatibility | string, index: number) => {
-              // Safely get agentType and osVersion
               let agentType = "";
               let osVersion = "";
               
@@ -124,8 +117,6 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
               }
 
               if (!agentType) return null;
-
-              // Determine the icon based on agentType
               let icon;
               const lowerAgentType = agentType.toLowerCase();
 
@@ -192,12 +183,9 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
       flex: 1,
       sortable: true,
       sortComparator: (v1, v2) => {
-        // Handle N/A values
         if (v1 === "N/A" && v2 === "N/A") return 0;
         if (v1 === "N/A") return 1;
         if (v2 === "N/A") return -1;
-        
-        // Compare dates
         const date1 = new Date(v1).getTime();
         const date2 = new Date(v2).getTime();
         return date1 - date2;
@@ -264,3 +252,4 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
 };
 
 export default BinaryVersionsColumns;
+

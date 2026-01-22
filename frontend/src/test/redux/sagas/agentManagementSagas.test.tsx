@@ -89,8 +89,6 @@ describe('restartJobManagerService saga', () => {
       error: 'Restart failed: Job not found'
     }
   };
-
-  // Success case
   it('should successfully restart jobs', () => {
     return expectSaga(restartJobManagerService, { props: payload })
       .put(agentManagementActions.requestRestartJobService())
@@ -100,8 +98,6 @@ describe('restartJobManagerService saga', () => {
       .put(agentManagementActions.successRestartJobService(successResponse))
       .run();
   });
-
-  // Error flag in response
   it('should handle error flag in restart response', () => {
     return expectSaga(restartJobManagerService, { props: payload })
       .put(agentManagementActions.requestRestartJobService())
@@ -111,8 +107,6 @@ describe('restartJobManagerService saga', () => {
       .put(agentManagementActions.successRestartJobService(errorFlagResponse))
       .run();
   });
-
-  // Service failure case
   it('should handle job restart service failure', () => {
     const error = new Error('Network error during restart');
     return expectSaga(restartJobManagerService, { props: payload })
@@ -123,8 +117,6 @@ describe('restartJobManagerService saga', () => {
       .put(agentManagementActions.failureRestartJobService(error))
       .run();
   });
-
-  // Undefined response case
   it('should handle undefined restart response', () => {
     return expectSaga(restartJobManagerService, { props: payload })
       .put(agentManagementActions.requestRestartJobService())
@@ -134,8 +126,6 @@ describe('restartJobManagerService saga', () => {
       .put(agentManagementActions.successRestartJobService(undefined))
       .run();
   });
-
-  // Malformed response case (no data property)
   it('should handle malformed restart response', () => {
     const malformedResponse = {
       status: 200,
@@ -170,8 +160,6 @@ describe('shutDownAgentManagerService saga', () => {
       error: 'Shutdown failed'
     }
   };
-
-  // Success case
   it('should successfully shutdown agent service', () => {
     return expectSaga(shutDownAgentManagerService, { props: payload })
       .put(agentManagementActions.requestShutDownAgentService())
@@ -181,8 +169,6 @@ describe('shutDownAgentManagerService saga', () => {
       .put(agentManagementActions.successShutDownAgentService(successResponse))
       .run();
   });
-
-  // Error flag in response
   it('should handle error flag in shutdown response', () => {
     return expectSaga(shutDownAgentManagerService, { props: payload })
       .put(agentManagementActions.requestShutDownAgentService())
@@ -192,8 +178,6 @@ describe('shutDownAgentManagerService saga', () => {
       .put(agentManagementActions.successShutDownAgentService(errorResponse))
       .run();
   });
-
-  // Service failure case
   it('should handle shutdown service failure', () => {
     const error = new Error('Network error');
     return expectSaga(shutDownAgentManagerService, { props: payload })
@@ -204,8 +188,6 @@ describe('shutDownAgentManagerService saga', () => {
       .put(agentManagementActions.failureRestartAgentService(error))
       .run();
   });
-
-  // Undefined response case
   it('should handle undefined shutdown response', () => {
     return expectSaga(shutDownAgentManagerService, { props: payload })
       .put(agentManagementActions.requestShutDownAgentService())
@@ -236,8 +218,6 @@ describe('startSSHAgentManagerService saga', () => {
       error: 'Start failed'
     }
   };
-
-  // Success case
   it('should successfully start agent via SSH', () => {
     return expectSaga(startSSHAgentManagerService, { props: payload })
       .put(agentManagementActions.requestStartSSHAgentService())
@@ -247,8 +227,6 @@ describe('startSSHAgentManagerService saga', () => {
       .put(agentManagementActions.successStartSSHAgentService(successResponse))
       .run();
   });
-
-  // Error flag in response
   it('should handle error flag in start response', () => {
     return expectSaga(startSSHAgentManagerService, { props: payload })
       .put(agentManagementActions.requestStartSSHAgentService())
@@ -258,8 +236,6 @@ describe('startSSHAgentManagerService saga', () => {
       .put(agentManagementActions.successStartSSHAgentService(errorResponse))
       .run();
   });
-
-  // Service failure case
   it('should handle start service failure', () => {
     const error = new Error('SSH connection failed');
     return expectSaga(startSSHAgentManagerService, { props: payload })
@@ -270,8 +246,6 @@ describe('startSSHAgentManagerService saga', () => {
       .put(agentManagementActions.failureStartSSHAgentService(error))
       .run();
   });
-
-  // Malformed response case
   it('should handle malformed start response', () => {
     const malformedResponse = {
       status: 200,
@@ -295,8 +269,6 @@ describe('updateAgentManagerProperty saga', () => {
       status: "updated"
     }
   };
-
-  // Success case
   it("should successfully update agent property", () => {
     return expectSaga(updateAgentManagerProperty)
       .put(agentManagementActions.requestUpdateAgentProperty())
@@ -306,8 +278,6 @@ describe('updateAgentManagerProperty saga', () => {
       .put(agentManagementActions.successUpdateAgentProperty(successResponse))
       .run();
   });
-
-  // Error case
   it("should handle update agent property failure", () => {
     const error = new Error("Update failed");
     return expectSaga(updateAgentManagerProperty)
@@ -318,8 +288,6 @@ describe('updateAgentManagerProperty saga', () => {
       .put(agentManagementActions.failureUpdateAgentProperty(error))
       .run();
   });
-
-  // Edge case - undefined response
   it("should handle undefined response when updating agent property", () => {
     return expectSaga(updateAgentManagerProperty)
       .put(agentManagementActions.requestUpdateAgentProperty())
@@ -333,8 +301,6 @@ describe('updateAgentManagerProperty saga', () => {
 describe("agent sagas", () => {
   describe('startAgentManagerService error cases', () => {
     const payload = { hostname: "test", agentId: "10001" };
-  
-    // 1. Service failure case
     it('should handle agent start service failure', () => {
       const error = new Error('Start service unavailable');
       
@@ -346,8 +312,6 @@ describe("agent sagas", () => {
         .put(agentManagementActions.failureStartAgentService(error))
         .run();
     });
-  
-    // 2. Error flag in response
     it('should handle error flag in start response', () => {
       const errorResponse = {
         data: {
@@ -390,14 +354,11 @@ describe("agent sagas", () => {
       return expectSaga(agentHealthCheckupByPort)
         .put(agentManagementActions.requestFetchHealthCheckupByPort())
         .provide([
-          // Single clean mock without redundant matcher
           [call(agentManagementService.healthCheckupByPort), Promise.reject(error)]
         ])
         .put(agentManagementActions.failureFetchHealthCheckupByPort(error))
         .run();
     });
-  
-    // Additional edge case test
     it('should handle network timeout error', () => {
       const timeoutError = new Error('Connection timeout');
       timeoutError.code = 'ETIMEDOUT';
@@ -445,8 +406,6 @@ describe("agent sagas", () => {
         status: "saved"
       }
     };
-  
-    // Success case
     it("should successfully save agent property", () => {
       return expectSaga(saveAgentManagerProperty)
         .put(agentManagementActions.requestSaveAgentProperty())
@@ -456,8 +415,6 @@ describe("agent sagas", () => {
         .put(agentManagementActions.successSaveAgentProperty(successResponse))
         .run();
     });
-  
-    // Error case
     it("should handle save agent property failure", () => {
       const error = new Error("Save failed");
       return expectSaga(saveAgentManagerProperty)
@@ -468,8 +425,6 @@ describe("agent sagas", () => {
         .put(agentManagementActions.failureSaveAgentProperty(error))
         .run();
     });
-  
-    // Edge case - empty response
     it("should handle empty response when saving agent property", () => {
       return expectSaga(saveAgentManagerProperty)
         .put(agentManagementActions.requestSaveAgentProperty())
@@ -735,27 +690,19 @@ describe('saveSchedulerCommands saga', () => {
     schedule: '* * * * *',
     agentId: 'agent123'
   };
-
-  // Success response mock
   const mockSuccessResponse = {
     data: {
       flag: 'success',
       message: 'Schedule saved successfully'
     }
   };
-
-  // Error response mock (flag = "error")
   const mockErrorFlagResponse = {
     data: {
       flag: 'error',
       error: 'Validation failed'
     }
   };
-
-  // Network/service error mock
   const mockError = new Error('Network error');
-
-  // Test case 1: Successful save
   it('should handle successful schedule save', () => {
     return expectSaga(saveSchedulerCommands, { props: payload })
       .put(agentManagementActions.requestSaveSchedulerCommand())
@@ -765,8 +712,6 @@ describe('saveSchedulerCommands saga', () => {
       .put(agentManagementActions.successSaveSchedulerCommand(mockSuccessResponse))
       .run();
   });
-
-  // Test case 2: Error flag in response
   it('should handle error flag in response', () => {
     return expectSaga(saveSchedulerCommands, { props: payload })
       .put(agentManagementActions.requestSaveSchedulerCommand())
@@ -776,8 +721,6 @@ describe('saveSchedulerCommands saga', () => {
       .put(agentManagementActions.failureSaveSchedulerCommand(new Error('')))
       .run();
   });
-
-  // Test case 3: Service failure (Promise.reject)
   it('should handle service failure with Promise.reject', () => {
     return expectSaga(saveSchedulerCommands, { props: payload })
       .put(agentManagementActions.requestSaveSchedulerCommand())
@@ -787,20 +730,15 @@ describe('saveSchedulerCommands saga', () => {
       .put(agentManagementActions.failureSaveSchedulerCommand(mockError))
       .run();
   });
-
-  // Test case 4: Undefined response
   it('should handle undefined response', () => {
     return expectSaga(saveSchedulerCommands, { props: payload })
       .put(agentManagementActions.requestSaveSchedulerCommand())
       .provide([
         [call(agentManagementService.saveSchedulerCommand, payload), undefined]
       ])
-      // The saga will treat this as success (output?.data?.flag !== "error" evaluates to true)
       .put(agentManagementActions.successSaveSchedulerCommand(undefined))
       .run();
   });
-
-  // Test case 5: Malformed response (no data property)
   it('should handle malformed response', () => {
     const malformedResponse = {
       status: 200,
@@ -812,7 +750,6 @@ describe('saveSchedulerCommands saga', () => {
       .provide([
         [call(agentManagementService.saveSchedulerCommand, payload), malformedResponse]
       ])
-      // Will be treated as success since output?.data?.flag check will pass
       .put(agentManagementActions.successSaveSchedulerCommand(malformedResponse))
       .run();
   });
@@ -1184,7 +1121,7 @@ describe('saveSchedulerCommands saga', () => {
     const response = {
       data: {
         flag: 'success',
-        data: { /* response data */ }
+        data: {  }
       }
     };
 
@@ -1245,7 +1182,7 @@ describe('saveSchedulerCommands saga', () => {
     const response = {
       data: {
         flag: 'success',
-        data: { /* response data */ }
+        data: {  }
       }
     };
 
@@ -1290,7 +1227,7 @@ describe('saveSchedulerCommands saga', () => {
     const response = {
       data: {
         flag: 'success',
-        data: { /* response data */ }
+        data: {  }
       }
     };
 
@@ -1334,7 +1271,7 @@ describe('saveSchedulerCommands saga', () => {
     const response = {
       data: {
         flag: 'success',
-        data: { /* response data */ }
+        data: {  }
       }
     };
 
@@ -1923,7 +1860,6 @@ describe('getAgentVersions Saga', () => {
   });
   
   describe('actionWatcher', () => {
-    // 1. First get the actual count of watchers
     const getWatcherCount = () => {
       const gen = actionWatcher();
       let count = 0;
@@ -1946,15 +1882,11 @@ describe('getAgentVersions Saga', () => {
   
     it('should contain critical watchers', () => {
       const gen = actionWatcher();
-      
-      // Convert generator to array of effects
       const effects = [];
       let result;
       while (!(result = gen.next()).done) {
         effects.push(result.value);
       }
-  
-      // Verify critical watchers exist
       const hasStartAgent = effects.some(effect => 
         effect.type === 'FORK' &&
         effect.payload.fn.name === 'takeLatest' &&
@@ -1972,6 +1904,7 @@ describe('getAgentVersions Saga', () => {
   });
   
 });
+
 
 
 

@@ -1,8 +1,5 @@
-// src/test/store/configStore.test.tsx
 import { configureStore } from "@reduxjs/toolkit";
 import store from './../../store/configStore';
-
-// Create a mock reducer that does nothing
 const mockReducer = (state = {}) => state;
 
 describe('Redux Store Configuration', () => {
@@ -11,7 +8,6 @@ describe('Redux Store Configuration', () => {
   beforeEach(() => {
     store = configureStore({
       reducer: {
-        // Add any mock reducers needed for testing
         mock: mockReducer
       }
     });
@@ -38,5 +34,6 @@ describe('Redux Store Configuration', () => {
     expect(typeof store.subscribe).toBe('function');
   });
 });
+
 
 

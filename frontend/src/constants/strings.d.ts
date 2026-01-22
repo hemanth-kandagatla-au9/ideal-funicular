@@ -19,13 +19,9 @@ declare const deleteConfirmationMessage: string;
 declare const deleteConfirmationBinaryMessage: string;
 declare const editJobsText: string;
 declare const scheduleJobText: string;
-
-// placeholder texts
 declare const enterPlaceholderText: string;
 declare const searchPlaceholderText: string;
 declare const searchByHostnamePlaceholderText: string;
-
-// title texts
 declare const allCardTitle: string;
 declare const activeTitle: string;
 declare const inactiveTitle: string;
@@ -50,8 +46,6 @@ declare const deleteBinaryTitle: string;
 declare const healthCheckTitle: string;
 declare const jobLogsTitle: string;
 declare const utilizationMetricsTitle: string;
-
-// button texts
 declare const startAgentButtonText: string;
 declare const stopAgentButtonText: string;
 declare const restartAgentButtonText: string;
@@ -175,3 +169,4 @@ export {
   copyToClipboardButtonText,
   statusButtonText,
 };
+

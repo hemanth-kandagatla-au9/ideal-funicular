@@ -68,7 +68,6 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
       const jsonData = {
         data,
         risebotAgentVersion,
-        // Removed agentpath - only sending version as requested
       };
       dispatch(agentManagementActions.upgradeSelectedAgents(jsonData));
       closeAgentUpgrade();
@@ -103,15 +102,12 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
                 <time dateTime={buildDate} className="buildDate">
                   {(() => {
                     const timestamp = Number(buildDate);
-                    // Try milliseconds first
                     if (moment(timestamp).isValid() && timestamp > 1000000000000) {
                       return moment(timestamp).format("DD-MMMM-YYYY");
                     }
-                    // Try seconds (multiply by 1000)
                     if (moment(timestamp * 1000).isValid()) {
                       return moment(timestamp * 1000).format("DD-MMMM-YYYY");
                     }
-                    // Try as string date
                     if (moment(buildDate).isValid()) {
                       return moment(buildDate).format("DD-MMMM-YYYY");
                     }
@@ -154,3 +150,4 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
 };
 
 export default UpgradeAgentsDialog;
+

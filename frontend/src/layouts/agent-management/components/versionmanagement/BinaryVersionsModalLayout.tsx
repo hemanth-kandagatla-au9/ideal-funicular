@@ -59,3 +59,4 @@ const BinaryVersionsModalLayout: React.FC<BinaryVersionsModalLayoutProps> = ({ o
 };
 
 export default BinaryVersionsModalLayout;
+

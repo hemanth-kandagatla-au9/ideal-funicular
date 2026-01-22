@@ -3,8 +3,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import BinaryVersionsColumns from '../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsColumns';
-
-// Mock MUI components
 jest.mock('@mui/material', () => ({
   Box: ({ children, ...props }: any) => <div data-testid="mui-box" {...props}>{children}</div>,
   IconButton: ({ children, onClick, ...props }: any) => (
@@ -15,15 +13,11 @@ jest.mock('@mui/material', () => ({
   Typography: ({ children, ...props }: any) => <span data-testid="typography" {...props}>{children}</span>,
   Chip: ({ label, ...props }: any) => <div data-testid="chip" {...props}>{label}</div>,
 }));
-
-// Mock react-icons
 jest.mock('react-icons/fa', () => ({
   FaEye: () => <span data-testid="eye-icon">👁</span>,
   FaEdit: () => <span data-testid="edit-icon">✏️</span>,
   FaTrash: () => <span data-testid="trash-icon">🗑</span>,
 }));
-
-// Mock image imports
 jest.mock('../../../../../images/agent-management/assets/gitBranch.svg', () => 'test-file-stub');
 jest.mock('../../../../../images/agent-management/assets/linux.svg', () => 'test-file-stub');
 jest.mock('../../../../../images/agent-management/assets/windows.svg', () => 'test-file-stub');
@@ -118,8 +112,6 @@ describe('BinaryVersionsColumns', () => {
     if (versionColumn?.renderCell) {
       const cellElement = versionColumn.renderCell({ row: mockRow } as any);
       const { container } = render(cellElement as React.ReactElement);
-      
-      // eslint-disable-next-line jest/no-conditional-expect
       expect(container).toBeInTheDocument();
     }
   });
@@ -234,5 +226,6 @@ describe('BinaryVersionsColumns', () => {
     }
   });
 });
+
 
 

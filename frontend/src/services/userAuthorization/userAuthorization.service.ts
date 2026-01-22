@@ -1,7 +1,3 @@
-/**
- * User Authorization Service
- * API service for user management operations
- */
 import Cookies from "universal-cookie"
 import axios from "axios";
 import Config from "../../config/config";
@@ -9,9 +5,7 @@ import { getLocalAccessToken } from "../../utils/TokenUtils";
 import AxiosInstanceClass from "../axiosInstance";
 import { UserFilters } from "../../types/UserAuthorization";
 
-/**
- * Getting Local Access token
- */
+
 const token = getLocalAccessToken();
 
 
@@ -27,12 +21,8 @@ interface UserAuthConfig {
   put: EndpointGroup;
   delete: EndpointGroup;
 }
-
-// API Configuration
 const userAuthConfig = Config.apiEndpoints.userAuthorization as UserAuthConfig;
 const userAuthBaseURL = userAuthConfig?.baseURL || process.env.REACT_APP_USER_AUTH_URL || "http://localhost:3001";
-
-// Initialize Axios instance
 const cookies = new Cookies();
 const accessToken = cookies.get("iasphere_access_token");
 export const AxiosInstance = new AxiosInstanceClass(userAuthBaseURL).init(accessToken);
@@ -44,11 +34,7 @@ function handleAxiosError(error: unknown) {
   return { status: 500, data: { message: "Unexpected error occurred" } };
 }
 
-/**
- * Fetch Users
- * @param {UserFilters} filters - Optional filters (page, limit, search)
- * @returns Promise with user data from API
- */
+
 const fetchUsers = async (filters?: UserFilters) => {
   try {
     const params = {
@@ -66,11 +52,7 @@ const fetchUsers = async (filters?: UserFilters) => {
   }
 };
 
-/**
- * Create User
- * @param {object} userData - User data to create
- * @returns Promise with created user response
- */
+
 const createUser = async (userData: any) => {
   try {
     const response = await AxiosInstance.post(`${userAuthConfig.post.createUser}`, userData);
@@ -80,12 +62,7 @@ const createUser = async (userData: any) => {
   }
 };
 
-/**
- * Update User
- * @param {string} userId - ID of user to update
- * @param {object} userData - Updated user data
- * @returns Promise with updated user response
- */
+
 const updateUser = async (userId: string, userData: any) => {
   try {
     const response = await AxiosInstance.delete(`/api/users/${userId}`, userData);
@@ -96,11 +73,7 @@ const updateUser = async (userId: string, userData: any) => {
 };
 
 
-/**
- * Delete User
- * @param {string} username - Username of user to delete
- * @returns Promise with delete confirmation response
- */
+
 const deleteUser = async (username: any) => {
   try {
     const response = await AxiosInstance.delete(`${userAuthConfig.delete.deleteUser}?username=${username}`);
@@ -111,12 +84,7 @@ const deleteUser = async (username: any) => {
 };
 
 
-/**
- * Fetch User Permission Details
- * @param {string} username - Username to fetch permissions for
- * @param {object} filters - Optional filters (page, limit)
- * @returns Promise with permission details for the user
- */
+
 const fetchUserPermissionDetails = async (username: string, filters?: { page?: number; limit?: number }) => {
   try {
     const params = {
@@ -133,11 +101,7 @@ const fetchUserPermissionDetails = async (username: string, filters?: { page?: n
 };
 
 
-/**
- * Fetch Permissions (Real API)
- * @param {object} filters - Optional filters (page, limit, project, module, permission)
- * @returns Promise with permissions data from backend
- */
+
 const fetchPermissions = async (filters?: {
   page?: number;
   limit?: number;
@@ -162,11 +126,7 @@ const fetchPermissions = async (filters?: {
   }
 };
 
-/**
- * Create Permission (Real API)
- * @param {object} permissionData - Permission data (project, module, permission, description)
- * @returns Promise with created permission response
- */
+
 const createPermission = async (permissionData: {
   project: string;
   module: string;
@@ -182,11 +142,7 @@ const createPermission = async (permissionData: {
   }
 };
 
-/**
- * Delete Permission (Real API)
- * @param {string} permissionId - ID of permission to delete
- * @returns Promise with delete confirmation response
- */
+
 const deletePermission = async (permissionId: string) => {
   try {
     const endpoint = `${userAuthConfig.delete.deletePermission}/${permissionId}`;
@@ -197,12 +153,7 @@ const deletePermission = async (permissionId: string) => {
   }
 };
 
-/**
- * Assign User Permissions (Real API)
- * @param {string} userId - User ID to assign permissions to
- * @param {string[]} permissionCodes - Array of permission codes like ["agent:status:read", ...]
- * @returns Promise with assignment response from API
- */
+
 const assignUserPermissions = async (userId: string, permissionCodes: string[]) => {
   try {
     const endpoint = `${userAuthConfig.put.assignPermissions}/${userId}/permissions`;
@@ -213,11 +164,7 @@ const assignUserPermissions = async (userId: string, permissionCodes: string[]) 
   }
 };
 
-/**
- * Fetch Global Permissions List (Real API)
- * @param {string} userId - User ID to get permission matrix for
- * @returns Promise with global permissions list with user's current selections
- */
+
 const fetchGlobalPermissions = async (userId: string): Promise<any> => {
   try {
     const endpoint = `${userAuthConfig.get.permissionMatrix}/${userId}/user-permissions`;
@@ -227,9 +174,7 @@ const fetchGlobalPermissions = async (userId: string): Promise<any> => {
     return handleAxiosError(error)
   }
 };
-/**
- * Exported service methods
- */
+
 const userAuthorizationService = {
   fetchUsers,
   createUser,
@@ -244,3 +189,4 @@ const userAuthorizationService = {
 };
 
 export default userAuthorizationService;
+

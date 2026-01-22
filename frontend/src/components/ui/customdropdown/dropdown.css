@@ -7,7 +7,7 @@
 }
 .risebot_dropdown-item:focus,
 .risebot_dropdown-item:hover {
-  /*background-color: #519eff !important;*/
+  
   background-color: #3463d1 !important;
   color: #ffffff !important;
   -webkit-animation: 0;
@@ -21,17 +21,15 @@
 .select-option:hover {
   background-color: #faf9f7 !important;
   outline: 0 !important;
-  /* background: transparent !important */
+  
 }
-/* .select-option{
-    background: transparent !important
-}*/
+
 .select-option:focus {
   outline: 0 !important;
   background: transparent !important;
 }
 .dropdown-toggle {
-  /* background-color: #faf9f7 !important; */
+  
   display: none;
 }
 .dropdown-toggle::after {
@@ -72,22 +70,12 @@
 }
 
 .outer-div::after {
-  /* right: 15px !important;
-  position: absolute;
-  top: 17px;
-  display: inline-block;
-  margin-left: 0.255em;
-  vertical-align: 0.255em;
-  content: "";
-  border-top: 0.3em solid #404040;
-  border-right: 0.3em solid transparent;
-  border-bottom: 0;
-  border-left: 0.3em solid transparent; */
+  
 }
 
 .risebot_dropdown-title {
   overflow: hidden;
-  /* width: 85%; */
+  
   position: relative;
   font-family: "Johnson Text";
   color: #344054 !important;
@@ -102,19 +90,15 @@
 .risebot_dropdown-item:last-child {
   border: 0px;
 }
-/* .risebot_dropdown-item:hover{
-    font-weight: bold;
-} */
+
 .selected-option {
   font-weight: bold;
   color: #ffffff !important;
   background-color: #2961F4 !important;
 }
-/* .menuwidth {
-  width: 100%;
-} */
 
-/*multi select dropdown styles*/
+
+
 #platformFilter1 {
   width: 161px;
 }
@@ -182,7 +166,7 @@
   box-sizing: border-box;
   border-radius: 8px;
   padding: 16px 43px;
-  /* background-image: url('/static/media/vector-9-2x.5b330064.svg'); */
+  
 }
 
 #myInput:focus {
@@ -212,16 +196,16 @@
 .dropdown-content {
   min-width: 230px;
   padding: 15px;
-  /* display: none; */
+  
   width: 161px;
   height: 347px;
   left: 4px;
   top: 4px;
 
-  /* White */
+  
 
   background: #ffffff;
-  /* border */
+  
 
   box-sizing: border-box;
   box-shadow: 0px 0px 4px rgba(94, 88, 115, 0.1);
@@ -277,7 +261,7 @@
   font-size: 14px;
   line-height: 16px;
 
-  /* Black */
+  
 
   color: #000000;
 }
@@ -300,7 +284,7 @@ hr.solid {
   height: 165px;
   overflow-y: scroll;
   overflow-x: scroll;
-  /* margin-top: 48px; */
+  
   margin-bottom: 18px;
 }
 .options::-webkit-scrollbar {
@@ -344,23 +328,15 @@ hr.solid {
   font-size: 14px;
   line-height: 16px;
 
-  /* font light */
+  
 
   color: #82807c;
-  /* border-top:thin solid  #e5e5e5;
-    border-right:thin solid #e5e5e5;
-    border-bottom:0;
-    border-left:thin solid  #e5e5e5;
-    box-shadow:0px 1px 1px 1px #e5e5e5;*/
+  
   float: left;
-  /* height:17px;
-    margin:.8em 0 0 .5em; 
-    outline:0;
-    padding:.4em 0 .4em .6em; 
-    width:183px;  */
+  
 }
 
-/* search field close button */
+
 input[type="search"] {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
@@ -375,14 +351,12 @@ input[type="search"]::-webkit-search-cancel-button {
 
 #button-holder {
   background-color: #ffffff;
-  /* border-top:thin solid #e5e5e5;
-    box-shadow:1px 1px 1px 1px #e5e5e5; */
+  
   cursor: pointer;
   float: right;
-  /* height:27px;
-    margin:11px 0 0 0; */
+  
   text-align: center;
-  /* width:50px; */
+  
   position: absolute;
   left: 20px;
   top: 18px;
@@ -424,7 +398,7 @@ input[type="search"]::-webkit-search-cancel-button {
 #statusFilter #search-text-input {
   width: 135px;
 }
-/*multi select dropdown styles*/
+
 #tEdit,
 #tDelete,
 #tDuplicate {
@@ -479,3 +453,4 @@ input[type="search"]::-webkit-search-cancel-button {
 .checkbox-selected:before {
   content: url("../../../images/CirckeCheckSelected.svg");
 }
+

@@ -1,4 +1,3 @@
-// Importing dependencies
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -6,8 +5,6 @@ import "./popup.modal.css";
 import "../../layouts/agent-management/css/agentStyle.css";
 import "../../layouts/agent-management/css/common-style.css";
 import { cancelButtonText, okButtonText } from "../../constants/strings";
-
-// Define types for the button structure
 interface ButtonConfig {
   variant?: string;
   buttonBg?: string;
@@ -15,8 +12,6 @@ interface ButtonConfig {
   buttonTwoName?: string;
   onClick?: () => void;
 }
-
-// Define the structure of the dataObj prop
 interface DataObj {
   header: string;
   body: string | React.ReactNode;
@@ -25,18 +20,13 @@ interface DataObj {
     buttonTwo: ButtonConfig;
   };
 }
-
-// Define props for the PopUp component
 interface PopUpProps {
   show: boolean;
   onHide: () => void;
   dataObj: DataObj;
   handleClick?: () => void;
 }
-
-// PopUp Modal Component
 const PopUp: React.FC<PopUpProps> = ({ show, onHide, dataObj, handleClick }) => {
-  // Render Component
   return (
     <Modal data-testid="popupModalTestId" className="risebothealthCheckModal" show={show} animation={false} onHide={onHide}>
       <Modal.Header id="modalHeader" closeButton>
@@ -46,7 +36,7 @@ const PopUp: React.FC<PopUpProps> = ({ show, onHide, dataObj, handleClick }) => 
         <div className="modal-body-content">{dataObj.body}</div>
       </Modal.Body>
       <Modal.Footer>
-        {/* Cancel Button */}
+        {}
         <Button
           variant={dataObj.button.buttonTwo.variant || "secondary"}
           className="deleteSchedulerCancelBtn"
@@ -56,7 +46,7 @@ const PopUp: React.FC<PopUpProps> = ({ show, onHide, dataObj, handleClick }) => 
         >
           {dataObj.button.buttonTwo.buttonTwoName || cancelButtonText}
         </Button>
-        {/* Ok or Process button */}
+        {}
         <Button
           variant={
             dataObj.button.buttonOne.variant ||
@@ -80,6 +70,5 @@ const PopUp: React.FC<PopUpProps> = ({ show, onHide, dataObj, handleClick }) => 
     </Modal>
   );
 };
-
-// Export Popup Modal Component
 export default PopUp;
+

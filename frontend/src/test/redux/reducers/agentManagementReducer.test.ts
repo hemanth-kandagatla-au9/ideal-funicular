@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-var */
 /* eslint-disable jest/no-identical-title */
 import agentManagementReducer from "../../../redux/reducers/agentManagementReducer";
 import { AGENT_MANAGEMENT } from "../../../config/actions";
@@ -1294,6 +1296,7 @@ describe("fetch agent info", () => {
     expect(res.error).toBe(errorMsg);
   });
 });
+
 
 
 

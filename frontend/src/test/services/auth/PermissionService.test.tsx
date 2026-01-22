@@ -153,7 +153,6 @@ describe("Permission Service", () => {
     };
     mockPost.mockImplementation(() => Promise.resolve(response));
     const dataobj = await PermissionService.addPermission(mockData);
-    // expect(mockPost).toHaveBeenCalledWith(`${post.addRole},${ JSON.stringify(mockData)}`);
     expect(mockPost).toHaveBeenCalled();
     const calls = mockPost.mock.calls.length;
     expect(calls).toEqual(1);
@@ -171,12 +170,12 @@ describe("Permission Service", () => {
     };
     mockPost.mockImplementation(() => Promise.reject(response));
     const dataobj = await PermissionService.addPermission(mockData);
-    // expect(mockPost).toHaveBeenCalledWith(`${post.addRole},${ JSON.stringify(mockData)}`);
     expect(mockPost).toHaveBeenCalled();
     const calls = mockPost.mock.calls.length;
     expect(calls).toEqual(1);
   });
 });
+
 
 
 

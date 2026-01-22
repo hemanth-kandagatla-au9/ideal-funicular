@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Kumbh+Sans:wght@100..900&family=Manrope:wght@200..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @font-face {
-  /* font-weight is 400 */
+  
   font-family: "Kumbh Sans", sans-serif;
   src: url(./fonts/Roboto-Regular.ttf);
 }
@@ -12,7 +12,7 @@
 }
 
 @font-face {
-  /*font-weight is 500 */
+  
   font-family: "Kumbh Sans", sans-serif;
   src: url(./fonts/Roboto-Medium.ttf);
 }
@@ -31,7 +31,7 @@
   animation-direction: reverse;
 }
 
-/* Global Button Border Radius Override */
+
 button,
 .btn,
 button.btn,
@@ -42,7 +42,7 @@ input[type="submit"] {
   transition: all 0.15s ease;
 }
 
-/* Remove black outline on focus for all buttons */
+
 button:focus,
 button:focus-visible,
 .btn:focus,
@@ -67,7 +67,7 @@ input[type="submit"]:not([disabled]):active {
   outline: none !important;
 }
 
-/* Dropdown and Search Input Override */
+
 .risebot-dropdownMenus [class*="control"],
 .risebot-searchfilter .form-control,
 .form-control,
@@ -75,7 +75,7 @@ select.form-control {
   border-radius: 36px !important;
 }
 
-/** HTML ELEMENTS **/
+
 
 body {
   color: #404040;
@@ -117,7 +117,7 @@ h4 {
   margin-top: 1.3em;
 }
 
-/** HELPER CLASSES **/
+
 
 .p1 {
   padding: 1em;
@@ -215,7 +215,7 @@ h4 {
   margin: 3em 0;
 }
 
-/** BOOTSTRAP OVERRIDES **/
+
 
 .form-control {
   border: 1px solid #e4e4e4;
@@ -224,7 +224,7 @@ h4 {
   padding: 0.7em 1em;
 }
 
-/** GLOBAL CLASSES **/
+
 
 .main_content_wrapper {
   padding: 2em;
@@ -237,7 +237,7 @@ h4 {
   padding: 2em;
 }
 
-/* FORMS */
+
 .form_label {
   display: flex;
   align-items: center;
@@ -245,9 +245,9 @@ h4 {
 }
 
 .bg-header {
-  /* background: rgb(41 54 134); */
+  
   background: rgba(34, 111, 174, 0.97);
-  /* #F67690; */
+  
   min-height: 75px;
 }
 
@@ -258,19 +258,19 @@ h4 {
   font-size: 13px;
 }
 
-/* FOR KAPIL:  is this needed with the new sub-header component?  -RCR */
+
 .main_wrapper {
-  /* obsolete? */
+  
   display: block;
   width: 100%;
 }
 
 .page-sidebar {
-  /* obsolete? */
-  /* position: fixed; */
+  
+  
   z-index: 999;
   top: 0;
-  /* width:260px; */
+  
   overflow: hidden;
   height: 100%;
   background: #f7f9fb;
@@ -279,14 +279,14 @@ h4 {
 }
 
 .page_content {
-  /* obsolete? */
-  /* margin-left: 260px; */
+  
+  
   margin-top: 15px;
   margin-right: 25px;
   overflow: hidden;
   padding: 0px 15px 0;
   min-height: 100vh;
-  /* width: calc(100%-260px); */
+  
 }
 
 .top_nav_sec {
@@ -295,8 +295,8 @@ h4 {
   position: sticky;
   top: 0;
   padding: 0px !important;
-  /* margin-left:260px; */
-  /* width: calc(100%-260px); */
+  
+  
 }
 
 a:hover {
@@ -362,7 +362,7 @@ a:hover {
   min-height: 0;
   max-height: 210px;
   border-radius: 0 0 30px 30px;
-  /* width: calc(100% - 16.0%); */
+  
   width: 100%;
   background: #f67690;
   background: -moz-linear-gradient(left, #f67690 0%, rgba(248, 134, 159, 1) 100%);
@@ -370,15 +370,15 @@ a:hover {
   background: -webkit-linear-gradient(left, #f67690 0%, rgba(248, 134, 159, 1) 100%);
   background: -o-linear-gradient(left, #f67690 0%, rgba(248, 134, 159, 1) 100%);
   background: -ms-linear-gradient(left, #f67690 0%, rgba(248, 134, 159, 1) 100%);
-  /* background: linear-gradient(to right, #F67690 0%, rgba(248, 134, 159, 1) 100%); */
+  
   background: linear-gradient(to right, rgb(34, 111, 174) 0%, rgba(34, 111, 174, 0.97) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f15773', endColorstr='#f8869f', GradientType=1);
-  /* background: rgba(34,111,174,0.97); */
+  
 }
 
 .footer {
   padding: 15px;
-  /* margin-left: 260px; */
+  
   -webkit-box-shadow: 0px 0px 12px 0px rgb(55 73 72 / 6%);
   -moz-box-shadow: 0px 0px 12px 0px rgba(55, 73, 72, 0.06);
   box-shadow: 0px 0px 12px 0px rgb(55 73 72 / 6%);
@@ -397,7 +397,7 @@ a:hover {
 .sidebar {
   font-size: 12px;
   background: #f7f9fb !important;
-  /* margin-top: 40px; */
+  
 }
 
 .sidebar .accordian {
@@ -499,7 +499,7 @@ a:hover {
 }
 
 #inputDiv {
-  /* margin: auto; */
+  
   border-radius: 8px;
   width: 40%;
   padding: 10px;
@@ -558,7 +558,7 @@ a:hover {
 }
 
 .MuiCheckbox-root.Mui-checked:hover {
-  background-color: #906aff !important; /* Purple hover background */
+  background-color: #906aff !important; 
 }
 
 .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
@@ -574,19 +574,14 @@ a:hover {
   border-color: #906aff !important;
 }
 
-/* .ant-select-item-option-content:focus {
-  background-color: #906AFF !important;
-  color: white !important;
-} */
+
 
 .ant-select:not(.ant-select-disabled):hover .ant-select-selector:active {
   border-color: #906aff !important;
   color: white !important;
 }
 
-/* .modal-dialog {
-  margin-top: 100px !important;
-} */
+
 
 .modal-content {
   border-radius: 20px;
@@ -640,7 +635,7 @@ a:hover {
   font-weight: 500;
   background-color: white !important;
   color: black !important;
-  /* box-shadow: 0 0 9px rgb(207 70 70 / 71%) */
+  
 }
 
 .rc-tooltip-inner .nav-tabs {
@@ -668,19 +663,19 @@ a:hover {
   width: 8px;
 }
 
-/* Track */
+
 .rc-tooltip-content ::-webkit-scrollbar-track {
-  /* box-shadow: inset 0 0 5px grey;  */
+  
   border-radius: 10px;
 }
 
-/* Handle */
+
 .rc-tooltip-content ::-webkit-scrollbar-thumb {
   background: #c1c1c1;
   border-radius: 10px;
 }
 
-/* Handle on hover */
+
 .rc-tooltip-content ::-webkit-scrollbar-thumb:hover {
   background: gray;
 }
@@ -705,8 +700,7 @@ a:hover {
 }
 
 .sidebar_logo {
-  /* display: flex;
-  margin-left: 8px; */
+  
   text-align: center;
 }
 
@@ -832,7 +826,7 @@ button:not(:disabled),
   border: none !important;
 }
 
-/* navbar css*/
+
 .nav-link {
   color: white !important;
   font-size: 16px;
@@ -840,7 +834,7 @@ button:not(:disabled),
   padding-right: 15px !important;
 }
 
-/*navbar css end*/
+
 .breadcrumb-item + .breadcrumb-item::before {
   position: absolute;
   left: 6px;
@@ -895,8 +889,8 @@ button:not(:disabled),
 .me-auto {
   margin: 0px;
   width: 100%;
-  /* justify-content: space-evenly; */
-  /* margin-left: 10%; */
+  
+  
   margin-left: 10px;
   min-width: 661px;
 }
@@ -907,7 +901,7 @@ button:not(:disabled),
 }
 
 .breadcrumb .form-select {
-  /* width: 133px; */
+  
   height: 31px;
   font-style: normal;
   font-weight: 500;
@@ -942,7 +936,7 @@ select option {
   box-shadow: 0 0 10px 10px #e1358f inset;
 }
 
-/* css taken from styleguide */
+
 .roboto-medium-desert-storm-18px {
   color: #faf9f7;
   font-family:  "Johnson Text";
@@ -1046,16 +1040,9 @@ div.dateTimePicker {
   overflow: scroll;
 }
 
-/* margin-left: 5em;
-    overflow-y: visible;
-    padding: 0;
-} */
 
-/* 
-#risebot_dropdown-autoclose-inside{
-  width: 120px!important;
-    height: 40px!important;
-} */
+
+
 
 .OperationsLandingDD .risebot_dropdown-outer .dropdown-toggle {
   width: 95px !important;
@@ -1160,7 +1147,7 @@ div.dateTimePicker {
 
 #platformFilter .optionListContainer .optionContainer li {
   width: 100%;
-  /* padding-top: 0px; */
+  
 }
 
 #platformFilter .optionListContainer .optionContainer li.selected {
@@ -1241,7 +1228,7 @@ div.dateTimePicker {
   align-items: center;
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
+  
 }
 
 #platformFilter .searchWrapper .searchBox {
@@ -1251,13 +1238,13 @@ div.dateTimePicker {
   bottom: 26.25%;
   font-family:  "Johnson Text";
   font-style: normal;
-  /* font-weight: 500; */
+  
   font-size: 16px;
   line-height: 19px;
-  /* identical to box height */
+  
   display: flex;
   align-items: center;
-  /* font dark */
+  
   color: #404040;
 }
 
@@ -1360,14 +1347,14 @@ div.dateTimePicker {
   position: absolute;
   width: 396px;
   max-width: none;
-  /* right: 100px; */
+  
 }
 
 .NotificationArraw .popover-arrow {
   left: 313px;
 }
 
-/* Pagination custom css starts here */
+
 .page-link {
   border: unset !important;
   background-color: unset !important;
@@ -1394,7 +1381,7 @@ div.dateTimePicker {
   background-color: unset;
 }
 
-/* Pagination custom css ends here */
+
 .rightRailModal .modal-dialog {
   max-width: 750px !important;
   border-radius: 8px;
@@ -1629,3 +1616,4 @@ span.jodit-toolbar-button.jodit-toolbar-button_size_middle.jodit-toolbar-button_
 .dateRangeForPLanner .dateDropdown svg {
   margin-top: -6px !important;
 }
+

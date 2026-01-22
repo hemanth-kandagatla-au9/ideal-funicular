@@ -2,8 +2,6 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import JobLogsModal from "../../../../layouts/agent-management/components/JobLogsModal";
-
-// mock constants
 jest.mock("@/constants/strings", () => ({
   closeButtonText: "Close",
   copyToClipboardButtonText: "Copy",
@@ -12,8 +10,6 @@ jest.mock("@/constants/strings", () => ({
   logDetailsTitle: "Log Details",
   refreshLogsButtonText: "Refresh",
 }));
-
-// mock helper
 jest.mock("@/layouts/agent-management/helpers/agentHelpers", () => ({
   convertDateTime: jest.fn((ts) => `formatted-${ts}`),
 }));

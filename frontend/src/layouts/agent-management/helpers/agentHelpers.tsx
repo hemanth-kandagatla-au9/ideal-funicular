@@ -90,7 +90,6 @@ console.log("risebotProperties",risebotProperties)
     { label: "Memory Utilization", value: get(risebotProperties, "memory", "") },
     { label: "CPU Utilization", value: get(risebotProperties, "cpu_usage", "") },
     { label: "Disk Utilization", value: get(risebotProperties, "disk_usage", "") },
-    // CMDB Information
     { label: "OS Type", value: get(cmdbProperties, "ciOsType", "-") },
     { label: "Region", value: get(cmdbProperties, "slRegion", "-") },
     { label: "Service Name", value: get(cmdbProperties, "slName", "-") },
@@ -120,3 +119,4 @@ const prepareAgentConfigDetails = (agentServer: AgentServer): AgentConfigDetail[
 };
 
 export { convertDate, convertDateTime, prepareAgentDetails, prepareAgentConfigDetails };
+

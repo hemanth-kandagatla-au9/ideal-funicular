@@ -112,13 +112,9 @@ describe("Auth Utils Test", () => {
     it("should remove session and redirect after timeout", () => {
       jest.useFakeTimers();
       AuthUtils.RedirectToUnauthorized();
-      
-      // Verify session is cleared
       expect(cookies.set).toHaveBeenCalled();
       expect(cookies.remove).toHaveBeenCalledTimes(2);
       expect(localStorage.removeItem).toHaveBeenCalledTimes(2);
-      
-      // Verify redirect after timeout
       jest.advanceTimersByTime(500);
       expect(history.push).toHaveBeenCalledWith('/unauthorized');
       jest.useRealTimers();
@@ -145,7 +141,6 @@ describe("Auth Utils Test", () => {
       expect(window.open).toHaveBeenCalled();
     });
   });
-    // Add this to your existing test file:
 
 describe("Logout timeout redirect", () => {
     it("should redirect to logout after timeout", () => {
@@ -154,8 +149,6 @@ describe("Logout timeout redirect", () => {
       TokenUtils.getLocalUserId.mockReturnValue('user123');
       
       AuthUtils.Logout();
-      
-      // Fast-forward until all timers have been executed
       jest.advanceTimersByTime(500);
       
       expect(history.push).toHaveBeenCalledWith(
@@ -165,32 +158,20 @@ describe("Logout timeout redirect", () => {
       jest.useRealTimers();
     });
   });
-  
-  // For LoginWithRedirectURL, since it's not exported in AuthUtils,
-  // we'll need to test it through the default export if it's available
   describe("LoginWithRedirectURL", () => {
     beforeEach(() => {
-      // Clear all mocks
       jest.clearAllMocks();
-      // Mock sessionStorage
       Storage.prototype.setItem = jest.fn();
-      // Mock window.open
       window.open = jest.fn();
     });
   
     it("should set redirectUrl in sessionStorage and open login page", () => {
       const redirectUrl = '/dashboard';
-      
-      // Call the function directly (not through AuthUtils)
       LoginWithRedirectURL(redirectUrl);
-      
-      // Verify sessionStorage was called
       expect(sessionStorage.setItem).toHaveBeenCalledWith(
         'redirectUrl', 
         redirectUrl
       );
-      
-      // Verify window.open was called
       expect(window.open).toHaveBeenCalledWith(
         `/login?redirectUrl=${redirectUrl}`,
         '_self'
@@ -198,5 +179,6 @@ describe("Logout timeout redirect", () => {
     });
   });
 });
+
 
 

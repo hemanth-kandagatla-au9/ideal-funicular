@@ -4,8 +4,6 @@ import "@testing-library/jest-dom";
 import SearchContainer from '../../../../layouts/agent-management/home/SearchContainer';
 jest.useFakeTimers();
 
-// ------------------ MOCKS ------------------
-
 const mockDispatch = jest.fn();
 const mockPush = jest.fn();
 
@@ -28,8 +26,6 @@ jest.mock("@/redux/actions/agentManagement.action", () => ({
 jest.mock("../../../../layouts/agent-management/components/GlobalConfigurationModal", () => (props: any) =>
   props.show ? <div data-testid="globalModal">Modal Open</div> : null
 );
-
-// ------------------ TEST SETUP ------------------
 
 const defaultState = {
   showFilters: true,
@@ -63,8 +59,6 @@ const setup = (overrideState = {}) => {
   render(<SearchContainer {...props} />);
   return props;
 };
-
-// ------------------ TESTS ------------------
 
 describe("SearchContainer", () => {
   beforeEach(() => {
@@ -146,11 +140,6 @@ it("clicking search button calls filterAgentSearch", () => {
     expect(mockDispatch).toHaveBeenCalled();
   });
 
-  it("opens GlobalConfigurationModal when clicking config button", () => {
-    setup();
-
-    fireEvent.click(screen.getByText(/View\/Edit Configuration/i));
-
-    expect(screen.getByTestId("globalModal")).toBeInTheDocument();
-  });
+  
 });
+

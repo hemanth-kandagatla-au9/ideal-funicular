@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import DropdownComponent from "../../../../components/ui/customdropdown/Dropdown.component";
@@ -142,3 +143,4 @@ describe("DropdownComponent", () => {
     expect(screen.queryByTestId("option-10")).not.toBeInTheDocument();
   });
 });
+

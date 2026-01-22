@@ -4,8 +4,6 @@ import { createLogger } from "redux-logger";
 import initializeStore from "../../redux/initializeStore";
 import rootReducer from "../../redux/reducers";
 import sagas from "../../redux/sagas";
-
-// Mock Redux functions
 jest.mock("redux", () => {
   const actualRedux = jest.requireActual("redux");
   return {
@@ -93,6 +91,7 @@ describe("initializeStore", () => {
     );
   });
 });
+
 
 
 

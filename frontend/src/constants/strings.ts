@@ -21,13 +21,9 @@ const deleteConfirmationMessage = "Are you sure you want to delete this";
 const deleteConfirmationBinaryMessage = "Are you sure you want to delete this Binary Version?";
 const editJobsText = "Edit Jobs";
 const scheduleJobText = "Schedule Job";
-
-// placeholder texts
 const enterPlaceholderText = "Enter";
 const searchPlaceholderText = "Search";
 const searchByHostnamePlaceholderText = "Search by Hostname";
-
-// title texts
 const allCardTitle = "All Servers";
 const activeTitle = "Active Servers";
 const inactiveTitle = "Inactive Servers";
@@ -52,8 +48,6 @@ const deleteBinaryTitle = "Delete Binary Version";
 const healthCheckTitle = "health check";
 const jobLogsTitle = "Job Logs";
 const utilizationMetricsTitle = "Utilization Metrics";
-
-// button texts
 const startAgentButtonText = "Start Agent";
 const stopAgentButtonText = "Stop Agent";
 const restartAgentButtonText = "Restart Agent";
@@ -84,7 +78,7 @@ const closeButtonText = "Close";
 const editButtonText = "Edit";
 const updateButtonText = "Update";
 const okButtonText = "Ok";
-const viewEditConfigurationButtonText = "View/Edit Configuration";
+const viewEditConfigurationButtonText = "View / Edit Configuration";
 const getFilterOptionButtonText = "get List of Option";
 const applyClickCallbackButtonText = "Apply click callback";
 const backButtonText = "Back";
@@ -186,3 +180,4 @@ export {
   clearSelectionText,
   
 };
+

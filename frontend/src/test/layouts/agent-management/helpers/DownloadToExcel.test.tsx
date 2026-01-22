@@ -1,10 +1,8 @@
-import DownloadToExcel from "../../../../../src/layouts/agent-management/helpers/DownloadToExcel";
+import DownloadToExcel from "../../../../layouts/agent-management/helpers/DownloadToExcel";
 import ExcelUtils from "@/utils/ExportDataToExcel";
 import Utils from "@/utils/utils";
-import { successtoast, errortoast } from "../../../../../src/layouts/agent-management/helpers/CustomToast";
-import { convertDate } from "../../../../../src/layouts/agent-management/helpers/agentHelpers";
-
-// ---- mocks ----
+import { successtoast, errortoast } from "../../../../layouts/agent-management/helpers/CustomToast";
+import { convertDate } from "../../../../layouts/agent-management/helpers/agentHelpers";
 jest.mock("@/utils/ExportDataToExcel", () => ({
   exportDataToExcel: jest.fn(),
 }));
@@ -53,19 +51,11 @@ describe("DownloadToExcel", () => {
     ]);
 
     await DownloadToExcel(getTotalRowsCount, fetchDataForDownload);
-
-    // called with correct size
     expect(fetchDataForDownload).toHaveBeenCalledWith(2);
-
-    // success toast fired
     expect(successtoast).toHaveBeenCalledWith("download started successfully.");
-
-    // conversion helpers used
     expect(Utils.toPercentage).toHaveBeenCalled();
     expect(Utils.bytesToMB).toHaveBeenCalled();
     expect(convertDate).toHaveBeenCalled();
-
-    // export called with formatted data
     expect(ExcelUtils.exportDataToExcel).toHaveBeenCalledWith(
       expect.arrayContaining([
         expect.objectContaining({
@@ -92,3 +82,4 @@ describe("DownloadToExcel", () => {
     );
   });
 });
+

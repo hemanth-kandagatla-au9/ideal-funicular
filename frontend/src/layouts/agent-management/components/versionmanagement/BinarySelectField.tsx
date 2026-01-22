@@ -39,3 +39,4 @@ const BinarySelectField: React.FC<SelectFieldProps> = ({ name, label, value, opt
 };
 
 export default BinarySelectField;
+

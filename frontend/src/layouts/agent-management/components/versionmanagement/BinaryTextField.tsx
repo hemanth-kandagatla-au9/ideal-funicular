@@ -47,3 +47,4 @@ const BinaryTextField: FC<BinaryTextFieldProps> = ({ name, label, value, onChang
 };
 
 export default BinaryTextField;
+

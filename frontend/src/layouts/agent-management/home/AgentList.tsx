@@ -112,12 +112,10 @@ const AgentList = ({
 
   const toggleSelectOrDeselectAllAgents = (): void => {
     if (areAllAgentsSelected()) {
-      // Deselect all
       const allHostnames = agents.map(agent => agent.hostname);
       const filteredData = selectedHostnameAgentsData.filter(({ hostname }) => !allHostnames.includes(hostname));
       setSelectedHostnameAgentsData(filteredData);
     } else {
-      // Select all
       const clonedAgentsData = clone(selectedHostnameAgentsData);
       const additionalData = agents.map(({ hostname, agent_details }) => ({
         hostname,
@@ -222,3 +220,4 @@ const AgentList = ({
 };
 
 export default AgentList;
+

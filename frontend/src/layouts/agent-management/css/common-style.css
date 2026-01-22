@@ -19,7 +19,7 @@
   border-radius: 4px;
 }
 
-/* side bar */
+
 
 #sidebar {
   max-width: 400px;
@@ -80,7 +80,7 @@ a[aria-expanded="true"] {
   background: #a3a3a3;
 }
 
-/* side bar css */
+
 .drawer {
   width: 570px;
   padding: 20px;
@@ -134,15 +134,15 @@ a[aria-expanded="true"] {
   box-shadow: none;
 }
 
-/* Track */
 
-/* Handle */
+
+
 .risebot_logDetails ul::-webkit-scrollbar-thumb {
   background: #5e5873;
   border-radius: 10px;
 }
 
-/* Handle on hover */
+
 .risebot_logDetails ul::-webkit-scrollbar-thumb:hover {
   background: #5e5873;
 }
@@ -154,8 +154,7 @@ a[aria-expanded="true"] {
   border-radius: 36px;
   height: 40px;
   width: 40px;
-  /* margin-top: 1px;
-  margin-left: 15px; */
+  
 }
 .activeFilter {
   background: #2961F4;
@@ -174,3 +173,4 @@ a[aria-expanded="true"] {
   border-color: none !important;
   box-shadow: none !important;
 }
+

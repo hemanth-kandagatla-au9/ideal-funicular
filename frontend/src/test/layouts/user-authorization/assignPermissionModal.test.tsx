@@ -1,9 +1,8 @@
+/* eslint-disable import/first */
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import AssignPermissionsModal from "@/layouts/user-authorization/AssignPermissionModal";
-
-// ---------------- mocks ----------------
 const mockDispatch = jest.fn();
 
 jest.mock("react-redux", () => ({
@@ -19,8 +18,6 @@ jest.mock("@/redux/actions/userAuthorization.action", () => ({
 }));
 
 import { useSelector } from "react-redux";
-
-// ---------------- test data ----------------
 const user = {
   id: "u1",
   userName: "Hemanth",
@@ -180,3 +177,4 @@ describe("AssignPermissionsModal", () => {
     expect(container.firstChild).toBeNull();
   });
 });
+

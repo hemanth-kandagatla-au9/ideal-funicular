@@ -200,8 +200,6 @@ describe("Auth Service", () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
-  
-    // addApplication tests
     it("AuthService addApplication SUCCESS", async () => {
       const response = {
         data: {
@@ -238,8 +236,6 @@ describe("Auth Service", () => {
       const result = await AuthService.addApplication(appData);
       expect(result).toEqual(errorResponse.response.data);
     });
-  
-    // updateApplication tests
     it("AuthService updateApplication SUCCESS", async () => {
       const response = {
         data: {
@@ -275,8 +271,6 @@ describe("Auth Service", () => {
       expect(result).toEqual(errorResponse.response.data);
     });
   
-    // deleteApplication tests
-  
     it("AuthService deleteApplication FAILURE", async () => {
       const errorResponse = {
         response: {
@@ -291,8 +285,6 @@ describe("Auth Service", () => {
       const result = await AuthService.deleteApplication("invalid-id");
       expect(result).toEqual(errorResponse.response.data);
     });
-  
-    // listApplication tests
     it("AuthService listApplication with filter SUCCESS", async () => {
       const response = {
         data: {
@@ -329,30 +321,6 @@ describe("Auth Service", () => {
         expect.any(Object)
       );
     });
-  
-    //it("AuthService listApplication FAILURE", async () => {
-    //  const errorResponse = {
-    //    response: {
-    //      data: {
-    //        status: false
-    //        // No message provided
-    //      }
-    //    }
-    //  };
-      
-    //  mockGet.mockImplementation(() => Promise.reject(errorResponse));
-      
-    //  const result = await AuthService.listApplication({
-    //    pagination: { limit: 10, pageNo: 1 } // Add required params
-    //  });
-      
-    //  expect(result).toEqual({
-    //    status: false,
-    //    message: "Request failed" // Now matches component's default
-    //  });
-    //});
-  
-    // getAuthAuditLogForCSV failure case
     it("AuthService getAuthAuditLogForCSV FAILURE", async () => {
       const errorResponse = {
         response: {
@@ -377,7 +345,6 @@ describe("Auth Service", () => {
           "data": {
             "audits": [{
               "_id": "6425a663c6c20df6647c9f14",
-              // ... rest of your response data
             }],
             "pagination": {
               "totalRows": 15,
@@ -447,6 +414,7 @@ describe("Auth Service", () => {
     
   });
 });
+
 
 
 

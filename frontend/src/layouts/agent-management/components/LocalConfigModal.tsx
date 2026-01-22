@@ -69,7 +69,6 @@ const LocalConfigModal: React.FC<LocalConfigModalProps> = ({
                       <div className="formLabel">{label}</div>
                       <div>
                         <Form.Control
-                          // size="md"
                           size="sm"
                           id={propertyName}
                           name={propertyName}
@@ -107,3 +106,4 @@ const LocalConfigModal: React.FC<LocalConfigModalProps> = ({
 };
 
 export default LocalConfigModal;
+

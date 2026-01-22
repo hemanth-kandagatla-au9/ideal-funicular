@@ -1,17 +1,10 @@
-/**
- * Service dependencies
- *
- */
 import Cookies from "universal-cookie";
 import axios from "axios";
 import Config from "../../config/config";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
 import AxiosInstanceClass from "../axiosInstance";
 
-/**
- * Getting Local Access data
- *
- */
+
 const token = getLocalAccessToken();
 
 interface EndpointGroup {
@@ -25,14 +18,11 @@ interface RustAgentConfig {
   put: EndpointGroup;
   delete: EndpointGroup;
 }
-// const { post, get, put, baseURL } = Config.apiEndpoints.agentManagement;
 const rustAgent = Config.apiEndpoints.rustagentManagement as RustAgentConfig;
 const rustAgentbaseURL = Config.apiEndpoints.rustagentManagement.baseURL;
 const cookies = new Cookies();
 const accessToken = cookies.get("iasphere_access_token");
 export const AxiosInstace = new AxiosInstanceClass(rustAgentbaseURL).init(accessToken);
-
-// Define interfaces for request and response data
 interface AgentActionData {
   hostname: string;
   agentId: string;
@@ -112,8 +102,6 @@ function handleAxiosError(error: unknown) {
   }
   return { status: 500, data: { message: "Unexpected error occurred" } };
 }
-
-// Starting Agents based on Agent ID's
 const agentStartService = async (data: AgentActionData) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.start}`, data);
@@ -129,8 +117,6 @@ const agentStopService = async (data: AgentActionData) => {
     return handleAxiosError(error);
   }
 };
-
-// Checking agent Health based on Agent ID's
 const agentHealthCheck = async (data: AgentActionData) => {
   try {
     return await AxiosInstace.post(`${rustAgent.get.health}`, data);
@@ -138,8 +124,6 @@ const agentHealthCheck = async (data: AgentActionData) => {
     return handleAxiosError(error);
   }
 };
-
-// Restarting Job service based on Agent ID's
 const jobReStartService = async (data: AgentActionData) => {
   try {
     return await AxiosInstace.put(`${rustAgent.put.restartJobs}`, data);
@@ -147,8 +131,6 @@ const jobReStartService = async (data: AgentActionData) => {
     return handleAxiosError(error);
   }
 };
-
-// Restarting Agent's service based on Agent ID's
 const agentReStartService = async (data: AgentActionData) => {
   try {
     return await AxiosInstace.put(`${rustAgent.put.restartByPort}`, data);
@@ -156,8 +138,6 @@ const agentReStartService = async (data: AgentActionData) => {
     return handleAxiosError(error);
   }
 };
-
-// ShutDown Agent's service based on Agent ID's
 const agentShutDownService = async (data: AgentActionData) => {
   try {
     return await AxiosInstace.put(`${rustAgent.put.shutdown}`, data);
@@ -165,8 +145,6 @@ const agentShutDownService = async (data: AgentActionData) => {
     return handleAxiosError(error);
   }
 };
-
-// Start Agent's service
 const agentStartSSHService = async (data: AgentActionData) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.startAgentviaSSH}`, data);
@@ -174,8 +152,6 @@ const agentStartSSHService = async (data: AgentActionData) => {
     return handleAxiosError(error);
   }
 };
-
-// Checking agent Health based on Agent Port
 const healthCheckupByPort = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.healthByPort}`);
@@ -183,8 +159,6 @@ const healthCheckupByPort = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Saving Agent Manager properties
 const saveAgentManagerProperty = async () => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.propertySetup}`);
@@ -192,8 +166,6 @@ const saveAgentManagerProperty = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Updating Agent Manager Properties
 const updateAgentManagerProperty = async () => {
   try {
     return await AxiosInstace.put(`${rustAgent.put.updateProperty}`);
@@ -201,8 +173,6 @@ const updateAgentManagerProperty = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Fetching agent build info
 const fetchBuildInfo = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.buildInfo}`);
@@ -210,8 +180,6 @@ const fetchBuildInfo = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Saving Global Configuration Data's
 const saveGlobalConfig = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.globalConfiguration}`, data);
@@ -219,8 +187,6 @@ const saveGlobalConfig = async (data: any) => {
     return handleAxiosError(error);
   }
 };
-
-// Getting global configuration Data's
 const fetchGlobalConfig = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.globalConfiguration}`);
@@ -228,8 +194,6 @@ const fetchGlobalConfig = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent Servuces based on PageSize, PageNo, Status, Search
 const fetchAgentService = async (data: PaginationData) => {
   const { pageSize, pageNo, status, agentSearch, os, region, environment, platform, sid, agentVersion, serviceName, sortBy, sortOrder } = data;
   try {
@@ -247,8 +211,6 @@ const fetchAgentService = async (data: PaginationData) => {
     return handleAxiosError(error);
   }
 };
-
-// Filtering Agent Services
 const filterAgentService = async (data: any) => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.filterAgents}`, data);
@@ -256,8 +218,6 @@ const filterAgentService = async (data: any) => {
     return handleAxiosError(error);
   }
 };
-
-// Filtering Agent Repository Service
 const filterAgentRepoService = async (data: any) => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.getRepos}`, data);
@@ -265,8 +225,6 @@ const filterAgentRepoService = async (data: any) => {
     return handleAxiosError(error);
   }
 };
-
-// Adding Agents
 const addAgentService = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.addAgent}`, data);
@@ -274,8 +232,6 @@ const addAgentService = async (data: any) => {
     return handleAxiosError(error);
   }
 };
-
-// Fetching Agent Logs
 const fetchAgentLogs = async (data: AgentLogsData) => {
   const { jobname } = data;
   if (!data.limit) {
@@ -291,8 +247,6 @@ const fetchAgentLogs = async (data: AgentLogsData) => {
     return handleAxiosError(error);
   }
 };
-
-// Saving Local Configs Data
 const saveLocalConfigs = async (data: any) => {
   try {
     return await AxiosInstace.put(`${rustAgent.put.localConfigurations}`, data);
@@ -300,8 +254,6 @@ const saveLocalConfigs = async (data: any) => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Local Configs Data
 const fetchLocalConfigs = async (data: { hostname: string }) => {
   const { hostname } = data;
   try {
@@ -310,8 +262,6 @@ const fetchLocalConfigs = async (data: { hostname: string }) => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent Repository Service
 const getAgentRepoService = async (data: { type?: string }) => {
   const type = "rustlinux";
   try {
@@ -320,8 +270,6 @@ const getAgentRepoService = async (data: { type?: string }) => {
     return handleAxiosError(error);
   }
 };
-
-// Downloading Agent Repositories
 const downloadRepositories = async (data: DownloadRepositoriesData) => {
   try {
     return await AxiosInstace.put(`${rustAgent.put.download}`, data);
@@ -329,8 +277,6 @@ const downloadRepositories = async (data: DownloadRepositoriesData) => {
     return handleAxiosError(error);
   }
 };
-
-// Save Scheduler Command Data
 const saveSchedulerCommand = async (data: SchedulerCommandData) => {
   const { hostname, agentId, cronExpression, command, opensearchEnabled, opensearchIndex } = data;
   const requestBody = {
@@ -351,8 +297,6 @@ const saveSchedulerCommand = async (data: SchedulerCommandData) => {
     return handleAxiosError(error);
   }
 };
-
-// Update Scheduler Command Data
 const updateSchedulerCommand = async (data: SchedulerCommandData) => {
   const { agentId, hostname, scheduledJobId, cronExpression, command, opensearchEnabled, opensearchIndex } = data;
   const requestBody = {
@@ -383,8 +327,6 @@ const deleteSchedulerCommand = async (data: { port: string; hostname: string; sc
     return handleAxiosError(error);
   }
 };
-
-// Listing Scheduler Command Data
 const listSchedulerCommand = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.scheduler}`, data);
@@ -392,8 +334,6 @@ const listSchedulerCommand = async (data: any) => {
     return handleAxiosError(error);
   }
 };
-
-// Get Scheduler By ID
 const getSchdulerById = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.jobDetails}`, data);
@@ -401,8 +341,6 @@ const getSchdulerById = async (data: any) => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent Discovery Data
 const adSyncup = async () => {
   try {
     return await AxiosInstace.put(`${rustAgent.put.adSyncUp}`);
@@ -410,8 +348,6 @@ const adSyncup = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent Metrics Data
 const getAgentMetrics = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.metrics}`);
@@ -419,8 +355,6 @@ const getAgentMetrics = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Sync Scripts
 const agentSyncScripts = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.syncScripts}`, data);
@@ -428,8 +362,6 @@ const agentSyncScripts = async (data: any) => {
     return handleAxiosError(error);
   }
 };
-
-// Listing Scheduler Command Data
 const getAgentInfo = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.info}`, data);
@@ -438,11 +370,7 @@ const getAgentInfo = async (data: any) => {
   }
 };
 
-/**
- * Start Selected Agents
- * @param {*} data
- * @returns
- */
+
 const startSelectedAgents = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.bulkStartAgents}`, data);
@@ -451,11 +379,7 @@ const startSelectedAgents = async (data: any) => {
   }
 };
 
-/**
- * Stop Selected Agents
- * @param {*} data
- * @returns
- */
+
 const stopSelectedAgents = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.bulkStopAgents}`, data);
@@ -464,11 +388,7 @@ const stopSelectedAgents = async (data: any) => {
   }
 };
 
-/**
- * Restart Selected Agents
- * @param {*} data
- * @returns
- */
+
 const restartSelectedAgents = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.bulkReStartAgents}`, data);
@@ -477,11 +397,7 @@ const restartSelectedAgents = async (data: any) => {
   }
 };
 
-/**
- * Health Check Selected Agents
- * @param {*} data
- * @returns
- */
+
 const healthCheckSelectedAgents = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.bulkHealthCheckup}`, data);
@@ -490,10 +406,7 @@ const healthCheckSelectedAgents = async (data: any) => {
   }
 };
 
-/**
- * To get agent upgrade versions
- * @returns
- */
+
 const upgradeAgents = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.repositories}`);
@@ -502,11 +415,7 @@ const upgradeAgents = async () => {
   }
 };
 
-/**
- * Upgrade Bulk selected Agents
- * @param {*} jsonData
- * @returns
- */
+
 const upgradeBulkAgents = async (jsonData: BulkAgentsData) => {
   try {
     const { risebotAgentVersion, data } = jsonData;
@@ -515,8 +424,6 @@ const upgradeBulkAgents = async (jsonData: BulkAgentsData) => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent regions Data
 const getAgentRegions = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.regions}`);
@@ -524,8 +431,6 @@ const getAgentRegions = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent platforms Data
 const getAgentPlatforms = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.platforms}`);
@@ -533,8 +438,6 @@ const getAgentPlatforms = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent Environment Data
 const getAgentEnvironments = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.environments}`);
@@ -542,8 +445,6 @@ const getAgentEnvironments = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent Sids Data
 const getAgentSids = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.sids}`);
@@ -551,8 +452,6 @@ const getAgentSids = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent osTypes Data
 const getAgentOsTypes = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.osTypes}`);
@@ -560,8 +459,6 @@ const getAgentOsTypes = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent service names Data
 const getAgentServiceNames = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.serviceNames}`);
@@ -569,8 +466,6 @@ const getAgentServiceNames = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Agent versions Data
 const getAgentVersions = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.versions}`);
@@ -578,8 +473,6 @@ const getAgentVersions = async () => {
     return handleAxiosError(error);
   }
 };
-
-// Getting Force Upadate Data Agent
 const getSyncAgentHealthConfigs = async () => {
   try {
     return await AxiosInstace.put(`${rustAgent.put.syncHealthConfigs}`);
@@ -722,3 +615,4 @@ const agentManagementService = {
 };
 
 export default agentManagementService;
+

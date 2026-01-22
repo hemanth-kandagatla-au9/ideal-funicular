@@ -3,9 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Permissions from "../../../../src/layouts/user-authorization/Permissions";
-
-// ----- mocks -----
+import Permissions from "../../../layouts/user-authorization/Permissions";
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
@@ -14,8 +12,6 @@ jest.mock("react-redux", () => ({
 jest.mock("react-router-dom", () => ({
   useHistory: jest.fn(),
 }));
-
-// IMPORTANT: must match EXACT import path from component
 jest.mock("../../../../src/redux/actions/userAuthorization.action", () => ({
   fetchPermissions: jest.fn((payload) => ({ type: "FETCH", payload })),
   createPermission: jest.fn((payload) => ({ type: "CREATE", payload })),
@@ -35,8 +31,6 @@ jest.mock("@/components/popup/popUp.component", () => (props: any) =>
     </div>
   ) : null
 );
-
-// ----- setup -----
 const mockDispatch = jest.fn();
 const mockPush = jest.fn();
 
@@ -98,14 +92,10 @@ describe("Permissions", () => {
   it("dispatches createPermission on valid submit", () => {
   setupSelectors();
   render(<Permissions />);
-
-  // select project (first combobox)
   const projectSelect = screen.getAllByRole("combobox")[0];
   fireEvent.change(projectSelect, {
     target: { value: "agent" },
   });
-
-  // fill inputs
   fireEvent.change(screen.getByPlaceholderText("Enter Module"), {
     target: { value: "status" },
   });
@@ -113,8 +103,6 @@ describe("Permissions", () => {
   fireEvent.change(screen.getByPlaceholderText("Enter Permission"), {
     target: { value: "read" },
   });
-
-  // submit
   fireEvent.click(screen.getByText("Add"));
 
   expect(mockDispatch).toHaveBeenCalledWith(
@@ -173,3 +161,4 @@ describe("Permissions", () => {
     expect(mockPush).toHaveBeenCalledWith("/userAuthorization");
   });
 });
+

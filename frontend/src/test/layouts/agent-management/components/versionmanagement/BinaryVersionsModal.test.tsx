@@ -2,8 +2,6 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import BinaryVersionsModal from "../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsModal";
-
-// ---- Mocks ----
 jest.mock("../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsModalLayout", () => (props: any) => (
   <div>
     <h1>{props.title}</h1>
@@ -93,3 +91,4 @@ describe("BinaryVersionsModal", () => {
     expect(screen.getByText("Submit")).toBeDisabled();
   });
 });
+

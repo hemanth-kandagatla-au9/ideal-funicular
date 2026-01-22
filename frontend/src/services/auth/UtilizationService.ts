@@ -1,12 +1,6 @@
-/**
- * Importing dependencies.
- */
 import Config from "../../config/config";
 import AxiosInstanceClass from "../axiosInstance";
-// Importing required function from tokenUtils
 import { getLocalAccessToken, getUserInfo } from "../../utils/TokenUtils";
-
-// Define types and interfaces
 interface UtilizationMetricsPayload {
   userID?: string;
   [key: string]: any;
@@ -25,12 +19,8 @@ interface GetUtilizationMetricDataPayload {
   sectors?: string;
   pageNo?: number;
 }
-
-// endpoints for auth service
 const { baseUrl } = Config.apiEndpoints.utilities;
 export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init(getLocalAccessToken());
-
-// function to fetch all users
 const utilizationMetrics = async (type: string, payload: UtilizationMetricsPayload): Promise<string | any> => {
   try {
     const today = new Date();
@@ -53,8 +43,6 @@ const utilizationMetrics = async (type: string, payload: UtilizationMetricsPaylo
     return error.response;
   }
 };
-
-// function to fetch utilization metrics
 const getUtilizationMetrics = async (): Promise<any> => {
   try {
     const d = new Date();
@@ -65,8 +53,6 @@ const getUtilizationMetrics = async (): Promise<any> => {
     return error.response;
   }
 };
-
-// function to activity utilization metrics
 const getUtilizationMetricDetail = async (activity: string): Promise<any> => {
   try {
     const res = await AxiosInstance.get(`${baseUrl}/v1/utilities/activity-log/metricedata?activity=${activity}`);
@@ -75,8 +61,6 @@ const getUtilizationMetricDetail = async (activity: string): Promise<any> => {
     return error.response;
   }
 };
-
-// function to fetch utilization metrics
 const getUtilizationMetricData = async (payload: GetUtilizationMetricDataPayload): Promise<any> => {
   try {
     const url = payload.exportData
@@ -92,8 +76,6 @@ const getUtilizationMetricData = async (payload: GetUtilizationMetricDataPayload
 const getMetricsData = async (): Promise<any> => AxiosInstance.get(`${Config.apiEndpoints.utilities.baseUrl}${Config.apiEndpoints.utilities.get.getMetricsData}`);
 
 const getDownloadMetricsData = async (): Promise<any> => AxiosInstance.get(`${Config.apiEndpoints.utilities.baseUrl}${Config.apiEndpoints.utilities.get.getDownloadMetricsData}`);
-
-// Utilization service function object
 const UtilizationService = {
   utilizationMetrics,
   getUtilizationMetrics,
@@ -102,6 +84,5 @@ const UtilizationService = {
   getMetricsData,
   getDownloadMetricsData,
 };
-
-// Exporting utilization service
 export default UtilizationService;
+

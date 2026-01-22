@@ -1,4 +1,3 @@
-/* eslint-diable */
 import { cookies } from "./utils";
 
 interface UserInfo {
@@ -14,18 +13,14 @@ interface TokenPayload {
   [key: string]: unknown;
 }
 
-/**
- * Update user session tokens.
- */
+
 export const updateLocalTokens = (accessToken: string, refreshToken: string): void => {
   const domain = window.location.hostname.includes("localhost") ? "localhost" : ".rise.apps.jnj.com";
   cookies.set("token", accessToken, { path: "/", domain });
   cookies.set("refreshToken", refreshToken, { path: "/", domain });
 };
 
-/**
- * Set access token only.
- */
+
 export const setLocalAccessToken = (accessToken: string): void => {
   const domain = window.location.hostname.includes("localhost") ? "localhost" : ".rise.apps.jnj.com";
   cookies.set("token", accessToken, { path: "/", domain });
@@ -34,9 +29,7 @@ export const setLocalAccessToken = (accessToken: string): void => {
 export const getLocalRefreshToken = (): string | undefined => cookies.get("refreshToken");
 export const getLocalAccessToken = (): string | undefined => cookies.get("token");
 
-/**
- * Store user info in cookies and localStorage.
- */
+
 export const setLocalUser = async (userInfo: UserInfo): Promise<true | false> => {
   if (userInfo) {
     const baseEncodedUser = btoa(JSON.stringify(userInfo));
@@ -48,9 +41,7 @@ export const setLocalUser = async (userInfo: UserInfo): Promise<true | false> =>
   return false;
 };
 
-/**
- * Store user permissions.
- */
+
 export const setLocalPermissions = async (permissions: Record<string, unknown>): Promise<true | false> => {
   if (permissions) {
     const baseEncodedPermission = btoa(JSON.stringify(permissions));
@@ -60,9 +51,7 @@ export const setLocalPermissions = async (permissions: Record<string, unknown>):
   return false;
 };
 
-/**
- * Get decoded user info from localStorage.
- */
+
 export const getUserInfo = (): UserInfo => {
   try {
     const userCookieInfo = localStorage.getItem("user");
@@ -75,9 +64,7 @@ export const getUserInfo = (): UserInfo => {
   return {};
 };
 
-/**
- * Get user groups from stored user info.
- */
+
 export const getUserGroups = (): string[] => {
   const userInfo = getUserInfo();
   const groupInfo: string[] = [];
@@ -89,9 +76,7 @@ export const getUserGroups = (): string[] => {
   return groupInfo;
 };
 
-/**
- * Get local user ID.
- */
+
 export const getLocalUserId = (): string | null => {
   try {
     const userCookieInfo = localStorage.getItem("user");
@@ -102,9 +87,7 @@ export const getLocalUserId = (): string | null => {
   }
 };
 
-/**
- * Check if current user is an admin.
- */
+
 export const isAdmin = (): boolean => {
   try {
     const userCookieInfo = localStorage.getItem("user");
@@ -115,9 +98,7 @@ export const isAdmin = (): boolean => {
   }
 };
 
-/**
- * Check if break glass mode is enabled.
- */
+
 export const isBreakGlassEnabled = (): boolean => {
   const token = getLocalAccessToken();
   if (token && token.includes(".")) {
@@ -131,9 +112,7 @@ export const isBreakGlassEnabled = (): boolean => {
   return false;
 };
 
-/**
- * Check if a token is expired.
- */
+
 export const isTokenExpired = (token: string): boolean => {
   try {
     const decoded: TokenPayload = JSON.parse(atob(token.split(".")[1]));
@@ -160,3 +139,4 @@ const TokenUtils = {
 };
 
 export default TokenUtils;
+

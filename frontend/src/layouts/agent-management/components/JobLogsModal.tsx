@@ -24,7 +24,7 @@ const JobLogsModal: React.FC<JobLogsModalProps> = ({ open, onClose, onCancelButt
     <Modal show={open} backdrop="static" onHide={onClose} className="risebothealthCheckModal">
       <Modal.Header closeButton>
         <Modal.Title className="upgradeHeader">
-          {/* {jobLogsTitle}- {state.schedulerJobId} */}
+          {}
           {jobLogsTitle}
         </Modal.Title>
       </Modal.Header>
@@ -123,3 +123,4 @@ const JobLogsModal: React.FC<JobLogsModalProps> = ({ open, onClose, onCancelButt
 };
 
 export default JobLogsModal;
+

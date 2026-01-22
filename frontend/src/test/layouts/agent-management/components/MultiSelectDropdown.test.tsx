@@ -57,7 +57,6 @@ describe('MultiSelectDropdown', () => {
 
   test('renders Select component when open is true', () => {
     const { container } = render(<MultiSelectDropdown {...defaultProps} open={true} />);
-    // Verify the dropdown menu appears
     expect(container.querySelector('.risebot-dropdownMenu')).toBeInTheDocument();
   });
 
@@ -83,8 +82,6 @@ describe('MultiSelectDropdown', () => {
     render(<MultiSelectDropdown {...defaultProps} />);
     expect(screen.getByTestId('toggle-button')).toBeInTheDocument();
   });
-
-  // Testing the sub-components through integration
   test('dropdown menu has correct styles when open', () => {
     const { container } = render(<MultiSelectDropdown {...defaultProps} open={true} />);
     const menu = container.querySelector('.risebot-dropdownMenu');
@@ -104,8 +101,6 @@ describe('MultiSelectDropdown', () => {
 
   test('dropdown wrapper has correct structure', () => {
     const { container } = render(<MultiSelectDropdown {...defaultProps} />);
-    
-    // Get all divs and find the one with position: relative
     const divs = container.querySelectorAll('div');
     const wrapper = Array.from(divs).find(div => 
       window.getComputedStyle(div).position === 'relative'
@@ -114,5 +109,6 @@ describe('MultiSelectDropdown', () => {
     expect(wrapper).toBeTruthy();
   });
 });
+
 
 

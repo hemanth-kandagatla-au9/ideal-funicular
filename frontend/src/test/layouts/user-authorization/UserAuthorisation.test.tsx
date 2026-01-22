@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import UserAuthorization from "../../../../src/layouts/user-authorization/UserAuthorization";
+import UserAuthorization from "../../../layouts/user-authorization/UserAuthorization";
 
 import {
   getUsers,
@@ -13,8 +13,6 @@ import {
   getUsersPagination,
   getSelectedUsers,
 } from "@/redux/selectors/userAuthorization.selectors";
-
-// ---------------- mocks ----------------
 
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
@@ -75,8 +73,6 @@ jest.mock("@/components/popup/popUp.component", () => (props: any) =>
   ) : null
 );
 
-// ---------------- setup ----------------
-
 const mockDispatch = jest.fn();
 const mockPush = jest.fn();
 
@@ -105,13 +101,6 @@ describe("UserAuthorization", () => {
       expect.objectContaining({ type: "FETCH_USERS" })
     );
   });
-
-  it.skip("renders dummy users when no users from store", () => {
-  render(<UserAuthorization />);
-
-  // Dummy users include "Test User 1"
-  expect(screen.getByText("Test User 1")).toBeInTheDocument();
-});
 
 
   it("renders users list", () => {
@@ -195,3 +184,4 @@ describe("UserAuthorization", () => {
     );
   });
 });
+

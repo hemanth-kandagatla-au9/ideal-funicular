@@ -197,7 +197,7 @@ const apiEndpoints: ApiEndpoints = {
     },
   },
   userAuthorization: {
-    baseURL: process.env.REACT_APP_USER_AUTH_URL || "https://predev.agent.ias.apps.jnj.com/api/agent",
+    baseURL: process.env.REACT_APP_USER_AUTH_URL || "http://localhost:3001",
     get: {
       users: "/auth/user-details",
       PermissionsList:"auth/permissionsList",
@@ -225,3 +225,4 @@ const apiEndpoints: ApiEndpoints = {
 };
 
 export default apiEndpoints;
+

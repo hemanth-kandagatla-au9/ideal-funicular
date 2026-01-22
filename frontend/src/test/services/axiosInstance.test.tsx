@@ -100,8 +100,6 @@ describe("AxiosInstance", () => {
     mockedAxios.patch.mockResolvedValue({
       data: { data: { accessToken: "new-access", refreshToken: "new-refresh" } },
     });
-  
-    // 👇 Mock the instance as a callable function
     const mockInstance = jest.fn().mockResolvedValue("retried");
     Object.assign(mockInstance, mockedAxios); // copy interceptors, patch, defaults, etc.
   
@@ -174,6 +172,7 @@ describe("AxiosInstance", () => {
   });
    
 });
+
 
 
 

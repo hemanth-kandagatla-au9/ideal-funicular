@@ -1,8 +1,3 @@
-/**
- * User Authorization Sagas Tests
- * Comprehensive functional tests for all saga generators
- */
-
 import { runSaga } from 'redux-saga';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AUTH } from '../../../config/actions';
@@ -10,8 +5,6 @@ import userAuthorizationActions from '../../../redux/actions/userAuthorization.a
 import userAuthorizationService from '../../../services/userAuthorization/userAuthorization.service';
 import * as sagas from '../../../redux/sagas/userAuthorizationSagas';
 import * as Toast from '../../../layouts/agent-management/helpers/CustomToast';
-
-// Mock external dependencies
 jest.mock('../../../services/userAuthorization/userAuthorization.service');
 jest.mock('../../../layouts/agent-management/helpers/CustomToast', () => ({
   successtoast: jest.fn(),
@@ -22,8 +15,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-
-  // Test fetchUsersSaga
   describe('fetchUsersSaga', () => {
     it.skip('handles fetchUsersSaga with dummy data bypass', () => {
       const generator = sagas.fetchUsersSaga({
@@ -35,8 +26,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(result.done).toBe(true);
     });
   });
-
-  // Test createUserSaga
   describe('createUserSaga', () => {
     it('creates user successfully', () => {
       const userData = { username: 'newuser', email: 'user@test.com' };
@@ -53,16 +42,10 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
         type: AUTH.USER.CREATE_USER_REQUEST,
         props: userData,
       });
-
-      // First call: userAuthorizationService.createUser
       const step1 = generator.next();
       expect(step1.value).toEqual(call(userAuthorizationService.createUser, userData));
-
-      // Second call: put success action
       const step2 = generator.next(mockResponse);
       expect(step2.value).toEqual(put(userAuthorizationActions.successCreateUser(mockResponse)));
-
-      // Third call: show toast
       const step3 = generator.next();
       expect(step3.value).toEqual(
         put(userAuthorizationActions.fetchUsers({ page: 1, limit: 10, search: '' }))
@@ -87,7 +70,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(step1.value).toEqual(call(userAuthorizationService.createUser, userData));
 
       const step2 = generator.next(mockError);
-      // Should trigger error handling
       expect(step2.done).toBe(false);
     });
 
@@ -117,8 +99,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(result.done).toBe(true);
     });
   });
-
-  // Test updateUserSaga
   describe('updateUserSaga', () => {
     it('updates user successfully', () => {
       const updateData = { id: 'user123', username: 'updateduser', email: 'updated@test.com' };
@@ -162,8 +142,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(step1.done).toBe(false);
     });
   });
-
-  // Test deleteUserSaga
   describe('deleteUserSaga', () => {
     it('deletes user successfully', () => {
       const mockResponse = {
@@ -209,8 +187,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(step1.done).toBe(false);
     });
   });
-
-  // Test fetchPermissionsSaga
   describe('fetchPermissionsSaga', () => {
     it.skip('handles fetchPermissionsSaga with dummy data bypass', () => {
       const generator = sagas.fetchPermissionsSaga({
@@ -222,8 +198,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(result.done).toBe(true);
     });
   });
-
-  // Test createPermissionSaga
   describe('createPermissionSaga', () => {
     it('creates permission successfully', () => {
       const permissionData = {
@@ -250,8 +224,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
 
       const step2 = generator.next(mockResponse);
       expect(step2.value).toEqual(put(userAuthorizationActions.successCreatePermission(mockResponse)));
-
-      // Fetch permissions after success
       const step3 = generator.next();
       expect(step3.value).toEqual(
         put(userAuthorizationActions.fetchPermissions({ page: 1, limit: 10 }))
@@ -302,8 +274,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(step1.done).toBe(false);
     });
   });
-
-  // Test deletePermissionSaga
   describe('deletePermissionSaga', () => {
     it('deletes permission successfully', () => {
       const mockResponse = {
@@ -325,8 +295,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
 
       const step2 = generator.next(mockResponse);
       expect(step2.value).toEqual(put(userAuthorizationActions.successDeletePermission(mockResponse)));
-
-      // Fetch permissions after success
       const step3 = generator.next();
       expect(step3.value).toEqual(
         put(userAuthorizationActions.fetchPermissions({ page: 1, limit: 10 }))
@@ -362,8 +330,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(result.done).toBe(true);
     });
   });
-
-  // Test assignUserPermissionsSaga
   describe('assignUserPermissionsSaga', () => {
     it('assigns permissions to user successfully', () => {
       const userId = 'user123';
@@ -446,8 +412,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(step1.done).toBe(false);
     });
   });
-
-  // Test fetchGlobalPermissionsSaga
   describe('fetchGlobalPermissionsSaga', () => {
     it('fetches global permissions for user successfully', () => {
       const userId = 'user123';
@@ -531,53 +495,33 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(result.done).toBe(true);
     });
   });
-
-  // Test userAuthorizationSagaWatcher
   describe('userAuthorizationSagaWatcher', () => {
     it('watches all action types and triggers correct sagas', () => {
       const generator = sagas.default();
-
-      // Should watch GET_USERS_REQUEST
       let step = generator.next();
       expect(step.value).toEqual(takeLatest(AUTH.USER.GET_USERS_REQUEST, sagas.fetchUsersSaga));
-
-      // Should watch CREATE_USER_REQUEST
       step = generator.next();
       expect(step.value).toEqual(takeLatest(AUTH.USER.CREATE_USER_REQUEST, sagas.createUserSaga));
-
-      // Should watch UPDATE_USER_REQUEST
       step = generator.next();
       expect(step.value).toEqual(takeLatest(AUTH.USER.UPDATE_USER_REQUEST, sagas.updateUserSaga));
-
-      // Should watch DELETE_USER_REQUEST
       step = generator.next();
       expect(step.value).toEqual(takeLatest(AUTH.USER.DELETE_USER_REQUEST, sagas.deleteUserSaga));
-
-      // Should watch ASSIGN_USER_PERMISSIONS_REQUEST
       step = generator.next();
       expect(step.value).toEqual(
         takeLatest(AUTH.USER.ASSIGN_USER_PERMISSIONS_REQUEST, sagas.assignUserPermissionsSaga)
       );
-
-      // Should watch FETCH_GLOBAL_PERMISSIONS_REQUEST
       step = generator.next();
       expect(step.value).toEqual(
         takeLatest(AUTH.USER.FETCH_GLOBAL_PERMISSIONS_REQUEST, sagas.fetchGlobalPermissionsSaga)
       );
-
-      // Should watch GET_PERMISSIONS_REQUEST
       step = generator.next();
       expect(step.value).toEqual(
         takeLatest(AUTH.PERMISSION.GET_PERMISSIONS_REQUEST, sagas.fetchPermissionsSaga)
       );
-
-      // Should watch CREATE_PERMISSION_REQUEST
       step = generator.next();
       expect(step.value).toEqual(
         takeLatest(AUTH.PERMISSION.CREATE_PERMISSION_REQUEST, sagas.createPermissionSaga)
       );
-
-      // Should watch DELETE_PERMISSION_REQUEST
       step = generator.next();
       expect(step.value).toEqual(
         takeLatest(AUTH.PERMISSION.DELETE_PERMISSION_REQUEST, sagas.deletePermissionSaga)
@@ -587,8 +531,6 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
       expect(result.done).toBe(true);
     });
   });
-
-  // Integration tests - test complete saga flows with multiple steps
   describe('Saga Integration Tests', () => {
     it('create user saga calls all expected sagas in sequence', () => {
       const userData = { username: 'testuser', email: 'test@test.com' };
@@ -605,24 +547,17 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
         type: AUTH.USER.CREATE_USER_REQUEST,
         props: userData,
       });
-
-      // Step 1: Call service
       let step = generator.next();
       expect(step.value).toEqual(call(userAuthorizationService.createUser, userData));
-
-      // Step 2: Dispatch success action
       step = generator.next(mockResponse);
       expect(step.value).toEqual(put(userAuthorizationActions.successCreateUser(mockResponse)));
-
-      // Step 3: Dispatch refresh action
       step = generator.next();
       expect(step.value).toEqual(
         put(userAuthorizationActions.fetchUsers({ page: 1, limit: 10, search: '' }))
       );
-
-      // Saga should complete
       step = generator.next();
       expect(step.done).toBe(true);
     });
   });
 });
+

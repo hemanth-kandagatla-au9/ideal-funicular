@@ -31,3 +31,4 @@ const BinaryVersionsHeader = ({ versionsCount, onSync, isLoading }: BinaryVersio
 };
 
 export default BinaryVersionsHeader;
+

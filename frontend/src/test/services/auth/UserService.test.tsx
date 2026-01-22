@@ -1,4 +1,5 @@
 /* eslint-disable jest/no-identical-title */
+
 import apiEndpoints from "../../../config/apiEndpoints";
 import AuthService from "../../../services/auth/AuthService";
 import UserService,{AxiosInstance} from "./../../../services/auth/UserService";
@@ -529,14 +530,10 @@ describe("UserService", () => {
         }
       }
     };
-  
-    // Mock the Axios response
     mockGet.mockImplementation(() => Promise.resolve(mockResponse));
   
     const filter = { name: 'mock' };
     const result = await UserService.getUsersActivityLogExport(filter);
-  
-    // Verify the response structure and transformation
     expect(result).toEqual({
       status: true,
       statusCode: 200,
@@ -555,8 +552,6 @@ describe("UserService", () => {
         }]
       }
     });
-    
-    // Verify the API was called correctly
     expect(mockGet).toHaveBeenCalledWith(`${get.usersActivityLog}/export?name=mock`);
   });
 
@@ -645,6 +640,7 @@ describe("UserService", () => {
   });
 
 });
+
 
 
 

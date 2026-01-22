@@ -1,7 +1,3 @@
-/**
- * Assign Permissions Modal Component
- * Modal dialog for assigning permissions to a specific user with hierarchical permission structure
- */
 import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
@@ -24,19 +20,14 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
 
   const [localPermissions, setLocalPermissions] = useState<ProjectPermissions[]>([]);
   const [originalPermissions, setOriginalPermissions] = useState<ProjectPermissions[]>([]);
-
-  // Fetch global permissions when modal opens
   useEffect(() => {
     if (show && selectedUser) {
       console.log("Fetching permissions for user:", selectedUser.id);
       dispatch(userAuthorizationActions.fetchGlobalPermissions(selectedUser.id));
     }
   }, [show, selectedUser, dispatch]);
-
-  // Update local permissions when global permissions are loaded
   useEffect(() => {
     if (globalPermissions?.projects) {
-      // Map backend response to local state with UI helpers
       const mappedProjects = globalPermissions.projects.map((project: any) => ({
         ...project,
         id: project.project,
@@ -50,8 +41,6 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
       setOriginalPermissions(mappedProjects);
     }
   }, [globalPermissions]);
-
-  // Helper function to extract granted permission codes
   const getGrantedPermissions = (permissions: ProjectPermissions[]) => {
     const granted: string[] = [];
     permissions.forEach(project => {
@@ -65,22 +54,16 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
     });
     return granted.sort();
   };
-
-  // Compute whether permissions have changed
   const hasChanges = useMemo(() => {
     if (originalPermissions.length === 0) return false;
     
     const currentGranted = getGrantedPermissions(localPermissions);
     const originalGranted = getGrantedPermissions(originalPermissions);
-    
-    // Compare arrays
     if (currentGranted.length !== originalGranted.length) return true;
     const changed = !currentGranted.every((code, index) => code === originalGranted[index]);
     
     return changed;
   }, [localPermissions, originalPermissions]);
-
-  // Handle permission toggle
   const handlePermissionToggle = (projectId: string, moduleId: string, permissionCode: string) => {
     setLocalPermissions(prevProjects =>
       prevProjects.map(project => {
@@ -92,8 +75,6 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
                 const updatedPermissions = module.permissions.map(permission =>
                   permission.code === permissionCode ? { ...permission, granted: !permission.granted } : permission,
                 );
-
-                // Update module allSelected based on permissions
                 const allSelected = updatedPermissions.every(p => p.granted);
 
                 return {
@@ -110,8 +91,6 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
       }),
     );
   };
-
-  // Handle module select all toggle
   const handleModuleSelectAll = (projectId: string, moduleId: string) => {
     setLocalPermissions(prevProjects =>
       prevProjects.map(project => {
@@ -138,18 +117,13 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
       }),
     );
   };
-
-  // Handle form submission
   const handleSubmit = () => {
     if (!selectedUser) return;
-
-    // Collect all selected permission codes (not IDs)
     const selectedPermissionCodes: string[] = [];
     localPermissions.forEach(project => {
       project.modules.forEach(module => {
         module.permissions.forEach(permission => {
           if (permission.granted) {
-            // Use the code field (e.g., "agent:status:read")
             selectedPermissionCodes.push(permission.code);
           }
         });
@@ -159,8 +133,6 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
     console.log("Submitting permissions:", selectedPermissionCodes);
     onAssign(selectedUser.id, selectedPermissionCodes);
   };
-
-  // Handle cancel
   const handleCancel = () => {
     if (!loading) {
       onHide();
@@ -249,3 +221,4 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
 };
 
 export default AssignPermissionsModal;
+

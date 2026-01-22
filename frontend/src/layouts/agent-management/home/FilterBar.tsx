@@ -21,7 +21,7 @@ import { DropdownOption, FilteredData } from "@/types/AgentManagementState";
 
 interface FilterOption {
   name: string;
-  [key: string]: any; // Allow for additional properties
+  [key: string]: any; 
 }
 
 interface SelectedOption {
@@ -100,7 +100,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
     const handleSortClick = (field: string) => {
     
     if (sortBy === field) {
-      // Cycle through: asc -> desc -> null
       if (sortOrder === 'asc') {
         onSortChange(field, 'desc');
       } else if (sortOrder === 'desc') {
@@ -109,7 +108,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
         onSortChange(field, 'asc');
       }
     } else {
-      // New field, start with asc
       onSortChange(field, 'asc');
     }
     setSortDropdownOpen(false);
@@ -121,15 +119,10 @@ const FilterBar: React.FC<FilterBarProps> = ({
       value: opt.name,
       name: opt.name,
     }));
-
-    // Check if "Select All" was clicked
     const isSelectAllClicked = selectedOptions.some(opt => opt.value === "select-all");
 
     if (isSelectAllClicked) {
-      // Check if all regular options are already selected
       const allSelected = selectedOptions.length - 1 === allRegularOptions.length;
-
-      // Toggle between all and none (excluding "Select All")
       const newValue = allSelected ? [] : allRegularOptions;
 
       setFilters(prev => ({
@@ -138,7 +131,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
       }));
       handleCustomFilterCallback(newValue, key, key);
     } else {
-      // Regular selection - filter out "select-all" option before saving
       const filteredOptions = selectedOptions.filter(opt => opt.value !== "select-all");
       setFilters(prev => ({
         ...prev,
@@ -226,7 +218,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           </div>
         </div>
 
-        {/* Right Section: hostAgentColoumn */}
+        {}
         <div className="hostAgentColoumn">
           <div className="btnsWrapper d-flex flex-wrap justify-content-end" style={{ gap: "8px" }}>
             {isStartAgentEnabled && (
@@ -250,13 +242,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                 </Button>
               </div>
             )}
-            {/* {isCheckStatusAgentEnabled && (
-              <div className="executionBtnsSection">
-                <Button variant="outline" data-testid="agentHealthChecktBtn" title={checkStatusAgentButtonText} onClick={healthCheckAgents} style={{ padding: "5px" }}>
-                  <img src={CalendarSearch} alt="healthCheckup" />
-                </Button>
-              </div>
-            )} */}
+            
             {isForceUpgradeAgentEnabled && (
               <div className="executionBtnsSection">
                 <Button variant="outline" className="updateAllBtn" data-testid="agentUpdateBtn" title={upgradeAgentText} onClick={openAgentUpgradeModal} style={{ padding: "5px" }}>
@@ -409,14 +395,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           <Button onClick={clearFilters} style={{ background: "none", border: "none", color: "#2961F4", fontFamily: "Johnson Text", cursor: "pointer" }}>
             {clearAllButtonText}
           </Button>
-          {/* <Button
-            onClick={() => {
-              Object.keys(filterOptions).forEach(key => selectAll(key));
-            }}
-            style={{ background: "none", border: "none", color: "#2961F4", cursor: "pointer" }}
-          >
-            Select All
-          </Button> */}
+          
         </div>
       )}
     </div>
@@ -424,3 +403,4 @@ const FilterBar: React.FC<FilterBarProps> = ({
 };
 
 export default FilterBar;
+

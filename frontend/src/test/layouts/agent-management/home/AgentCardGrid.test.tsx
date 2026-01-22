@@ -2,8 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import AgentCardGrid, { AgentMetricsTile } from '../../../../layouts/agent-management/home/AgentCardGrid';
-
-// Mock the Skeleton component to have a test-id
 jest.mock('@mui/material', () => ({
   ...jest.requireActual('@mui/material'),
   Skeleton: (props: any) => <div data-testid="skeleton" {...props} />,
@@ -33,11 +31,7 @@ describe('AgentCardGrid Component', () => {
         onSelectStatus={mockOnSelectStatus} 
       />
     );
-
-    // Advance timers to complete loading
     jest.advanceTimersByTime(1000);
-
-    // Should show 4 cards with proper labels
     expect(screen.getByText('All Servers')).toBeInTheDocument();
     expect(screen.getByText('Active Servers')).toBeInTheDocument();
     expect(screen.getByText('Inactive Servers')).toBeInTheDocument();
@@ -53,12 +47,8 @@ describe('AgentCardGrid Component', () => {
     );
 
     jest.advanceTimersByTime(1000);
-
-    // All count should be sum of all (5 + 3 + 2 = 10)
     const allCard = screen.getByText('All Servers').closest('.card-container');
     expect(allCard).toHaveTextContent('10');
-    
-    // Other counts
     expect(screen.getByText('Active Servers').closest('.card-container')).toHaveTextContent('5');
     expect(screen.getByText('Inactive Servers').closest('.card-container')).toHaveTextContent('3');
     expect(screen.getByText('Failed Servers').closest('.card-container')).toHaveTextContent('2');
@@ -73,8 +63,6 @@ describe('AgentCardGrid Component', () => {
     );
 
     jest.advanceTimersByTime(1000);
-
-    // Click on each card and verify the callback
     fireEvent.click(screen.getByText('Active Servers').closest('.card-container')!);
     expect(mockOnSelectStatus).toHaveBeenCalledWith('Active');
 
@@ -106,10 +94,7 @@ describe('AgentCardGrid Component', () => {
 
     const activeCard = screen.getByText('Active Servers').closest('.card-container');
     fireEvent.click(activeCard!);
-
-    // Verify the selected card has the active class
     expect(activeCard).toHaveClass('selected');
-    // Verify selected styles are applied
     expect(activeCard).toHaveStyle('border: 1px solid #2961F4');
   });
 
@@ -140,5 +125,6 @@ describe('AgentCardGrid Component', () => {
     expect(screen.queryAllByTestId('skeleton').length).toBe(0);
   });
 });
+
 
 

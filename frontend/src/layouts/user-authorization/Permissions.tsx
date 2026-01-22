@@ -1,7 +1,3 @@
-/**
- * Permissions Component
- * Displays a list of permissions with project, module, and permission filters
- */
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,13 +26,9 @@ interface Permission {
 const Permissions: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-
-  // Redux state
   const permissions = useSelector(getPermissions);
   const loading = useSelector(isUsersLoading);
   const permissionsPagination = useSelector(getPermissionsPagination);
-
-  // Local state
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
   const [projectInput, setProjectInput] = useState("");
   const [moduleInput, setModuleInput] = useState("");
@@ -46,8 +38,6 @@ const Permissions: React.FC = () => {
   const [permissionError, setPermissionError] = useState("");
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [permissionToDelete, setPermissionToDelete] = useState<{ id: string; name: string } | null>(null);
-
-  // Fetch permissions on component mount
   useEffect(() => {
     dispatch(
       userAuthorizationActions.fetchPermissions({
@@ -59,18 +49,12 @@ const Permissions: React.FC = () => {
       }),
     );
   }, [dispatch]);
-
-  // Handle back navigation
   const handleBack = () => {
     history.push("/userAuthorization");
   };
-
-  // Handle row selection
   const handleRowSelect = (permissionId: string) => {
     setSelectedPermissions(prev => (prev.includes(permissionId) ? prev.filter(id => id !== permissionId) : [...prev, permissionId]));
   };
-
-  // Handle select all
   const handleSelectAll = () => {
     if (selectedPermissions.length === permissions.length && permissions.length > 0) {
       setSelectedPermissions([]);
@@ -78,8 +62,6 @@ const Permissions: React.FC = () => {
       setSelectedPermissions(permissions.map((p: Permission) => p.id));
     }
   };
-
-  // Format date for display
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const month = date.toLocaleString("en-US", { month: "short" });
@@ -92,15 +74,10 @@ const Permissions: React.FC = () => {
     });
     return `${month} ${day}, ${year} | ${time}`;
   };
-
-  // Handle add permission
   const handleAddPermission = () => {
-    // Reset errors
     setProjectError("")
     setModuleError("");
     setPermissionError("");
-
-    // Validate inputs
     let hasError = false;
     if (!projectInput.trim()) {
       setProjectError("Project is required");
@@ -126,14 +103,10 @@ const Permissions: React.FC = () => {
         permission: permissionInput.trim().toLowerCase(),
       }),
     );
-
-    // Clear inputs after adding
     setProjectInput("");
     setModuleInput("");
     setPermissionInput("");
   };
-
-  // Handle delete permission
   const handleDeletePermission = (id: string, permissionName: string) => {
     setPermissionToDelete({ id, name: permissionName });
     setShowDeleteConfirmation(true);
@@ -156,9 +129,9 @@ const Permissions: React.FC = () => {
 
   return (
     <div className="permissions-container">
-      {/* ============================================ */}
-      {/* SECTION 1: HEADER WITH BREADCRUMB           */}
-      {/* ============================================ */}
+      
+      
+      
       <div className="permissions-header">
         <IoIosArrowBack 
           color="#000" 
@@ -173,11 +146,11 @@ const Permissions: React.FC = () => {
         <span className="breadcrumb-current">Permissions</span>
       </div>
 
-      {/* ============================================ */}
-      {/* SECTION 2: INPUT ROW                        */}
-      {/* ============================================ */}
+      
+      
+      
       <div className="permissions-filters">
-        {/* Project Dropdown */}
+        
         <div className="filter-group">
           <label className="filter-label">Project</label>
           <select
@@ -196,7 +169,7 @@ const Permissions: React.FC = () => {
           </select>
           {projectError && <span className="filter-error">{projectError}</span>}
         </div>
-        {/* Module Input */}
+        
         <div className="filter-group">
           <label className="filter-label">Module</label>
           <input
@@ -212,7 +185,7 @@ const Permissions: React.FC = () => {
           {moduleError && <span className="filter-error">{moduleError}</span>}
         </div>
 
-        {/* Permission Input */}
+        
         <div className="filter-group">
           <label className="filter-label">Permissions</label>
           <input
@@ -228,7 +201,7 @@ const Permissions: React.FC = () => {
           {permissionError && <span className="filter-error">{permissionError}</span>}
         </div>
 
-        {/* Add Button */}
+        
         <div className="filter-group-btn">
           <button type="button" className="add-btn" onClick={handleAddPermission}>
             <AiOutlinePlus size={20} color="#ffffff" />
@@ -237,19 +210,11 @@ const Permissions: React.FC = () => {
         </div>
       </div>
 
-      {/* ============================================ */}
-      {/* SECTION 3: TABLE HEADER                     */}
-      {/* ============================================ */}
+      
+      
+      
       <div className="table-header">
-        {/* <div className="table-cell table-cell-checkbox">
-          <button type="button" className="table-checkbox-btn" onClick={handleSelectAll}>
-            {selectedPermissions.length === permissions.length && permissions.length > 0 ? (
-              <MdCheckBox size={20} color="#2961f4" />
-            ) : (
-              <MdCheckBoxOutlineBlank size={20} color="#64748B" />
-            )}
-          </button>
-        </div> */}
+        
         <div className="table-cell table-cell-project">
           <span className="table-label">{permissionLabels[0]}</span>
         </div>
@@ -270,16 +235,14 @@ const Permissions: React.FC = () => {
         </div>
       </div>
 
-      {/* ============================================ */}
-      {/* SECTION 3: TABLE ROWS                       */}
-      {/* ============================================ */}
+      
+      
+      
       {loading && (
         <div className="table-body">
           {Array.from({ length: permissionsPagination.limit }).map((_, i) => (
             <div className="table-row" key={i}>
-              {/* <div className="table-cell table-cell-checkbox">
-                <Skeleton animation="wave" variant="circular" width={18} height={18} />
-              </div> */}
+              
               <div className="table-cell table-cell-project">
                 <Skeleton animation="wave" variant="text" width="120px" height={25} />
               </div>
@@ -314,15 +277,7 @@ const Permissions: React.FC = () => {
         <div className="table-body">
           {permissions.map((permission: Permission) => (
             <div className="table-row" key={permission.id}>
-              {/* <div className="table-cell table-cell-checkbox">
-                <button type="button" className="table-checkbox-btn" onClick={() => handleRowSelect(permission.id)}>
-                  {selectedPermissions.includes(permission.id) ? (
-                    <MdCheckBox size={20} color="#2961f4" />
-                  ) : (
-                    <MdCheckBoxOutlineBlank size={20} color="#64748B" />
-                  )}
-                </button>
-              </div> */}
+              
               <div className="table-cell table-cell-project">
                 <span className="table-value">{permission.project}</span>
               </div>
@@ -352,9 +307,9 @@ const Permissions: React.FC = () => {
         </div>
       )}
 
-      {/* ============================================ */}
-      {/* SECTION 4: PAGINATION                       */}
-      {/* ============================================ */}
+      
+      
+      
       {permissionsPagination.total > 0 && (
         <div style={{ marginTop: "20px" }}>
           <Pagination
@@ -376,7 +331,7 @@ const Permissions: React.FC = () => {
         </div>
       )}
 
-      {/* Delete Permission Confirmation Modal */}
+      
       <PopUp
         show={showDeleteConfirmation}
         onHide={cancelDeletePermission}
@@ -407,3 +362,4 @@ const Permissions: React.FC = () => {
 };
 
 export default Permissions;
+

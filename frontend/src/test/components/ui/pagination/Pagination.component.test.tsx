@@ -2,8 +2,6 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import Pagination from "../../../../components/ui/pagination/Pagination.component";
 import "@testing-library/jest-dom/extend-expect";
-
-// Mock Dropdown
 jest.mock("../../../../components/ui/customdropdown/Dropdown.component", () => {
   return ({ handleChange }: any) => (
     <button data-testid="mock-dropdown" onClick={() => handleChange("20")}>
@@ -11,8 +9,6 @@ jest.mock("../../../../components/ui/customdropdown/Dropdown.component", () => {
     </button>
   );
 });
-
-// Mock ReactPaginate
 jest.mock("react-paginate", () => {
   return ({ onPageChange }: any) => (
     <button data-testid="mock-paginate" onClick={() => onPageChange({ selected: 1 })}>
@@ -116,3 +112,4 @@ describe("Pagination Component", () => {
     expect(baseProps.handlePagination).toHaveBeenCalledWith(10, 5);
   });
 });
+

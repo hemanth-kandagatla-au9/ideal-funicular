@@ -1,11 +1,3 @@
-/**
- * User Authorization Types and Interfaces
- * Defines types for user management and authorization features
- */
-
-/**
- * User interface - represents a single user in the system
- */
 export interface User {
   id: string;
   userName: string;
@@ -17,27 +9,21 @@ export interface User {
   rolesCount?: number;
 }
 
-/**
- * Pagination interface for user list
- */
+
 export interface UserPagination {
   page: number;
   limit: number;
   total: number;
 }
 
-/**
- * Filter options for user list
- */
+
 export interface UserFilters {
   search?: string;
   page?: number;
   limit?: number;
 }
 
-/**
- * User Authorization Redux State
- */
+
 export interface UserAuthorizationState {
   users: User[];
   loading: boolean;
@@ -50,9 +36,7 @@ export interface UserAuthorizationState {
   permissionsPagination: PermissionPagination; // Pagination for permissions list
 }
 
-/**
- * API Response shape for user operations
- */
+
 export interface UserApiResponse {
   data: {
     flag: "success" | "error";
@@ -64,16 +48,7 @@ export interface UserApiResponse {
   };
 }
 
-/**
- * Props for User Authorization component
- */
-// export interface UserAuthorizationProps {
-//   // Add component specific props as needed
-// }
 
-/**
- * Permission interface - represents a single permission in the system
- */
 export interface Permission {
   id: string;
   project: string;
@@ -84,18 +59,14 @@ export interface Permission {
   createdBy: string;
 }
 
-/**
- * Permission Pagination interface
- */
+
 export interface PermissionPagination {
   page: number;
   limit: number;
   total: number;
 }
 
-/**
- * Permission Filters
- */
+
 export interface PermissionFilters {
   project?: string;
   module?: string;
@@ -104,9 +75,7 @@ export interface PermissionFilters {
   limit?: number;
 }
 
-/**
- * Permission Matrix Types (for assign permissions modal)
- */
+
 export interface PermissionItem {
   id: string; // Using code as id
   code: string;
@@ -128,3 +97,4 @@ export interface ProjectPermissions {
   project: string;
   modules: ModulePermissions[];
 }
+

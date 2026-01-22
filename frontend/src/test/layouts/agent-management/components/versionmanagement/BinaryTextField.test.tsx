@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import BinaryTextField from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinaryTextField";
+import BinaryTextField from "../../../../../layouts/agent-management/components/versionmanagement/BinaryTextField";
 
 describe("BinaryTextField", () => {
   const baseProps = {
@@ -86,3 +86,4 @@ describe("BinaryTextField", () => {
     expect(screen.getByRole("textbox")).toBeDisabled();
   });
 });
+

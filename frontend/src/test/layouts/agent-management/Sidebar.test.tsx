@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import SideBar from "../../../../src/layouts/agent-management/components/sidebar/SideBar";
+import SideBar from "../../../layouts/agent-management/components/sidebar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 
-/* ------------------ Mocks ------------------ */
+
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
@@ -65,7 +65,7 @@ jest.mock("../../../../src/layouts/agent-management/helpers/agentHelpers", () =>
   prepareAgentConfigDetails: jest.fn(() => ({})),
 }));
 
-/* ------------------ Setup ------------------ */
+
 const mockDispatch = jest.fn();
 
 const defaultSelectors = {
@@ -87,7 +87,7 @@ const defaultSelectors = {
 
 (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
 
-/* ------------------ Tests ------------------ */
+
 describe("SideBar", () => {
   const baseProps = {
     open: true,
@@ -139,3 +139,4 @@ describe("SideBar", () => {
     expect(screen.getByText("SchedulerDialog")).toBeInTheDocument();
   });
 });
+

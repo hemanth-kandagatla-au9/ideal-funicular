@@ -1,9 +1,3 @@
-/**
- * User Authorization Sagas
- * Handles async operations for user management
- * Uses AUTH.USER action types for consistency
- */
-
 import { call, put, takeLatest } from "redux-saga/effects";
 import { get } from "lodash";
 import { AUTH } from "../../config/actions";
@@ -18,10 +12,7 @@ interface ActionProps {
   username?:string;
 }
 
-/**
- * Fetch Users Saga
- * Handles fetching user list with optional filters
- */
+
 export function* fetchUsersSaga({ props }: ActionProps): Generator<any, void, any> {
   try {
     const output = yield call(userAuthorizationService.fetchUsers, props);
@@ -36,10 +27,7 @@ export function* fetchUsersSaga({ props }: ActionProps): Generator<any, void, an
   }
 }
 
-/**
- * Create User Saga
- * Handles creating a new user
- */
+
 export function* createUserSaga({ props }: ActionProps): Generator<any, void, any> {
   try {
     const output = yield call(userAuthorizationService.createUser, props);
@@ -47,7 +35,6 @@ export function* createUserSaga({ props }: ActionProps): Generator<any, void, an
 
     if (get(output, "data.flag") === "success") {
       successtoast("User created successfully");
-      // Refresh the user list with default pagination
       yield put(userAuthorizationActions.fetchUsers({ page: 1, limit: 10, search: "" }));
     } else {
       errortoast(`Failed to create user: ${output.data.error}`);
@@ -58,10 +45,7 @@ export function* createUserSaga({ props }: ActionProps): Generator<any, void, an
   }
 }
 
-/**
- * Update User Saga
- * Handles updating an existing user
- */
+
 export function* updateUserSaga({ props }: ActionProps): Generator<any, void, any> {
   try {
     const { id, ...userData } = props;
@@ -79,10 +63,7 @@ export function* updateUserSaga({ props }: ActionProps): Generator<any, void, an
   }
 }
 
-/**
- * Delete User Saga
- * Handles deleting a user (hard delete)
- */
+
 export function* deleteUserSaga({ username }: ActionProps): Generator<any, void, any> {
   try {
     const output = yield call(userAuthorizationService.deleteUser, username);
@@ -90,7 +71,6 @@ export function* deleteUserSaga({ username }: ActionProps): Generator<any, void,
 
     if (get(output, "data.flag") === "success") {
       successtoast("User deleted successfully");
-      // Refresh the user list with default pagination
       yield put(userAuthorizationActions.fetchUsers({ page: 1, limit: 10, search: "" }));
     } else {
       errortoast(`Failed to delete user: ${output.data.error || 'Unknown error'}`);
@@ -103,10 +83,7 @@ export function* deleteUserSaga({ username }: ActionProps): Generator<any, void,
 }
 
 
-/**
- * Fetch Permissions List Saga
- * Handles fetching permissions with filters
- */
+
 export function* fetchPermissionsSaga(action: any): Generator<any, void, any> {
   try {
     console.log("Fetch Permissions Saga - Filters:", action.filters);
@@ -124,10 +101,7 @@ export function* fetchPermissionsSaga(action: any): Generator<any, void, any> {
   }
 }
 
-/**
- * Create Permission Saga
- * Handles creating a new permission
- */
+
 export function* createPermissionSaga({ permissionData }: any): Generator<any, void, any> {
   try {
     const output = yield call(userAuthorizationService.createPermission, permissionData);
@@ -135,7 +109,6 @@ export function* createPermissionSaga({ permissionData }: any): Generator<any, v
     if (output.data.flag === "success") {
       successtoast("Permission created successfully!");
       yield put(userAuthorizationActions.successCreatePermission(output));
-      // Refresh permissions list
       yield put(userAuthorizationActions.fetchPermissions({ page: 1, limit: 10 }));
     } else {
       errortoast(`Failed to create permission: ${output.data.error}`);
@@ -147,10 +120,7 @@ export function* createPermissionSaga({ permissionData }: any): Generator<any, v
   }
 }
 
-/**
- * Delete Permission Saga
- * Handles deleting a permission
- */
+
 export function* deletePermissionSaga({ permissionId }: any): Generator<any, void, any> {
   try {
     const output = yield call(userAuthorizationService.deletePermission, permissionId);
@@ -158,7 +128,6 @@ export function* deletePermissionSaga({ permissionId }: any): Generator<any, voi
     if (output.data.flag === "success") {
       successtoast("Permission deleted successfully!");
       yield put(userAuthorizationActions.successDeletePermission(output));
-      // Refresh permissions list
       yield put(userAuthorizationActions.fetchPermissions({ page: 1, limit: 10 }));
     } else {
       errortoast(`Failed to delete permission: ${output.data.error || 'Unknown error'}`);
@@ -170,10 +139,7 @@ export function* deletePermissionSaga({ permissionId }: any): Generator<any, voi
   }
 }
 
-/**
- * Assign User Permissions Saga
- * Handles assigning permissions to a specific user
- */
+
 export function* assignUserPermissionsSaga({ userId, permissionCodes }: any): Generator<any, void, any> {
   try {
     console.log("Assign Permissions Saga - userId:", userId, "codes:", permissionCodes);
@@ -184,7 +150,6 @@ export function* assignUserPermissionsSaga({ userId, permissionCodes }: any): Ge
 
     if (get(output, "data.flag") === "success") {
       successtoast("Permissions assigned successfully!");
-      // Refresh the user list to show updated role count
       yield put(userAuthorizationActions.fetchUsers({ page: 1, limit: 10, search: "" }));
     } else {
       errortoast(`Failed to assign permissions: ${output.data.error}`);
@@ -196,10 +161,7 @@ export function* assignUserPermissionsSaga({ userId, permissionCodes }: any): Ge
   }
 }
 
-/**
- * Fetch Global Permissions Saga
- * Handles fetching permission matrix for user
- */
+
 export function* fetchGlobalPermissionsSaga({ userId }: any): Generator<any, void, any> {
   try {
     console.log("Fetch Global Permissions Saga - userId:", userId);
@@ -218,10 +180,7 @@ export function* fetchGlobalPermissionsSaga({ userId }: any): Generator<any, voi
   }
 }
 
-/**
- * Action Watcher
- * Watches for dispatched actions and triggers corresponding sagas
- */
+
 export default function* userAuthorizationSagaWatcher(): Generator<any, void, any> {
   yield takeLatest(AUTH.USER.GET_USERS_REQUEST, fetchUsersSaga);
   yield takeLatest(AUTH.USER.CREATE_USER_REQUEST, createUserSaga);
@@ -229,8 +188,8 @@ export default function* userAuthorizationSagaWatcher(): Generator<any, void, an
   yield takeLatest(AUTH.USER.DELETE_USER_REQUEST, deleteUserSaga);
   yield takeLatest(AUTH.USER.ASSIGN_USER_PERMISSIONS_REQUEST, assignUserPermissionsSaga);
   yield takeLatest(AUTH.USER.FETCH_GLOBAL_PERMISSIONS_REQUEST, fetchGlobalPermissionsSaga);
-  // Permission List Management
   yield takeLatest(AUTH.PERMISSION.GET_PERMISSIONS_REQUEST, fetchPermissionsSaga);
   yield takeLatest(AUTH.PERMISSION.CREATE_PERMISSION_REQUEST, createPermissionSaga);
   yield takeLatest(AUTH.PERMISSION.DELETE_PERMISSION_REQUEST, deletePermissionSaga);
 }
+

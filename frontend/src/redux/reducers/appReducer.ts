@@ -1,14 +1,8 @@
-// src/reducers/appReducer.tsx
-
 import { UPDATE_APP_READY } from "../../config/actions";
 import INITIAL_STATE from "../initialState";
-
-// Define the shape of the app state
 interface AppState {
   appReady: boolean;
 }
-
-// Define the shape of the action
 interface Action {
   type: string;
   payload?: {
@@ -31,3 +25,4 @@ export default function appReducer(state: AppState = INITIAL_STATE.app, action: 
       return state;
   }
 }
+

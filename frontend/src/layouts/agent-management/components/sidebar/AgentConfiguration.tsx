@@ -65,3 +65,4 @@ const AgentConfiguration: React.FC<AgentConfigurationProps> = ({ applicationProp
 };
 
 export default AgentConfiguration;
+

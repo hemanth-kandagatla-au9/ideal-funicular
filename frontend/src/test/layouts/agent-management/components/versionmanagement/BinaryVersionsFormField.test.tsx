@@ -2,8 +2,6 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import BinaryVersionsFormField from "../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsFormField";
-
-// mock child components to isolate logic
 jest.mock("../../../../../layouts/agent-management/components/versionmanagement/BinaryTextField", () => (props: any) => (
   <input
     data-testid={props.name}
@@ -146,3 +144,4 @@ describe("BinaryVersionsFormField", () => {
     expect(screen.getByText("Add")).toBeDisabled();
   });
 });
+

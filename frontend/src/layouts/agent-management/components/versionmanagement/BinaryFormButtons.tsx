@@ -76,3 +76,4 @@ const BinaryFormButtons: React.FC<FormButtonsProps> = ({
 };
 
 export default BinaryFormButtons;
+

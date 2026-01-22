@@ -10,7 +10,7 @@ button.saveButtonAgent#modalButtonDanger:hover {
 
 .modal-dialog.popupModal {
   margin-top: 185px !important;
-  /* width: 471px !important; */
+  
   height: 192px !important;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 1%);
 }
@@ -106,3 +106,4 @@ button#modalButtonDanger:active {
   border-color: #b02a37 !important;
   transform: scale(0.97) !important;
 }
+

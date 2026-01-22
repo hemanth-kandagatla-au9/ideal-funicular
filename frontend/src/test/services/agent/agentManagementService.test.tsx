@@ -704,8 +704,6 @@ describe("Error scenarios for service", () => {
 
       const result = await agentManagementService.agentShutDownService(request);
       expect(result).toEqual(response);
-
-      // Test error case
       const errorResponse = { response: { status: 500, data: "error" } };
       mockPut.mockRejectedValue(errorResponse);
       const errorResult = await agentManagementService.agentShutDownService(request);
@@ -722,8 +720,6 @@ describe("Error scenarios for service", () => {
 
       const result = await agentManagementService.agentStartSSHService(request);
       expect(result).toEqual(response);
-
-      // Test error case
       const errorResponse = { response: { status: 500, data: "error" } };
       mockPost.mockRejectedValue(errorResponse);
       const errorResult = await agentManagementService.agentStartSSHService(request);
@@ -740,8 +736,6 @@ describe("Error scenarios for service", () => {
 
       const result = await agentManagementService.jobReStartService(request);
       expect(result).toEqual(response);
-
-      // Test error case
       const errorResponse = { response: { status: 500, data: "error" } };
       mockPut.mockRejectedValue(errorResponse);
       const errorResult = await agentManagementService.jobReStartService(request);
@@ -766,8 +760,6 @@ describe("Error scenarios for service", () => {
 
       const result = await agentManagementService.getAgentInfo(request);
       expect(result).toEqual(response);
-
-      // Test error case
       const errorResponse = { response: { status: 500, data: "error" } };
       mockPost.mockRejectedValue(errorResponse);
       const errorResult = await agentManagementService.getAgentInfo(request);
@@ -1228,8 +1220,6 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // 2. Job and Restart Operations
     describe("Job and Restart Operations", () => {
       it("should cover jobReStartService error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1261,8 +1251,6 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // 3. SSH and Health Checks
     describe("SSH and Health Checks", () => {
       it("should cover agentStartSSHService error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1284,8 +1272,6 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // 4. Configuration Management
     describe("Configuration Management", () => {
       it("should cover saveAgentManagerProperty error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1317,35 +1303,27 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // 5. Global and Local Configs
     describe("Global and Local Configs", () => {
       it("should cover saveGlobalConfig error path", async () => {
-        // Service uses mock data by default, returns 500 with mock response
         const result = await agentManagementService.saveGlobalConfig({});
         expect(result.data).toBeDefined();
       });
 
       it("should cover fetchGlobalConfig error path", async () => {
-        // Service uses mock data by default, returns 500 with mock response
         const result = await agentManagementService.fetchGlobalConfig();
         expect(result.data).toBeDefined();
       });
 
       it("should cover saveLocalConfigs error path", async () => {
-        // Service uses mock data by default
         const result = await agentManagementService.saveLocalConfigs({});
         expect(result).toBeDefined();
       });
 
       it("should cover fetchLocalConfigs error path", async () => {
-        // Service uses mock data by default
         const result = await agentManagementService.fetchLocalConfigs({ hostname: "test" });
         expect(result).toBeDefined();
       });
     });
-
-    // 6. Agent Repository Operations
     describe("Agent Repository Operations", () => {
       it("should cover getAgentRepoService error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1367,8 +1345,6 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // 7. Scheduler Operations
     describe("Scheduler Operations", () => {
       it("should cover saveSchedulerCommand error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1442,8 +1418,6 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // 8. Bulk Operations
     describe("Bulk Operations", () => {
       it("should cover startSelectedAgents error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1497,8 +1471,6 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // 9. Upgrade Operations
     describe("Upgrade Operations", () => {
       it("should cover upgradeAgents error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1523,8 +1495,6 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // 10. Master Data Operations
     describe("Master Data Operations", () => {
       it("should cover getAgentMasterdata error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1559,8 +1529,6 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // 11. Miscellaneous Operations
     describe("Miscellaneous Operations", () => {
       it("should cover adSyncup error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1610,7 +1578,6 @@ describe("Error scenarios for service", () => {
     });
 
     describe("Final Coverage Tests", () => {
-      // 1. Cover fetchAgentService with all parameters
       it("should test fetchAgentService with all filter parameters", async () => {
         const request = {
           pageSize: 10,
@@ -1630,19 +1597,13 @@ describe("Error scenarios for service", () => {
 
         const result = await agentManagementService.fetchAgentService(request);
         expect(result).toEqual(response);
-
-        // Verify the URL contains all expected parameters
         const expectedUrl = expect.stringContaining(
           "pageSize=10&pageNo=1&status=running&search=test&osTypes=linux" +
           "&regions=us-west&environments=prod&platforms=aws&sids=123" +
           "&agentVersions=1.0.0&serviceNames=web"
         );
-
-        // Verify the call was made with the expected URL and options
         expect(mockGet).toHaveBeenCalledWith(expectedUrl, { timeout: 30000 });
       });
-
-      // 2. Cover filterAgentService with parameters
       it("should test filterAgentService with parameters", async () => {
         const request = { filter: "test" };
         const response = { data: "success" };
@@ -1651,8 +1612,6 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.filterAgentService(request);
         expect(result).toEqual(response);
       });
-
-      // 3. Cover filterAgentRepoService with parameters
       it("should test filterAgentRepoService with parameters", async () => {
         const request = { filter: "test" };
         const response = { data: "success" };
@@ -1661,8 +1620,6 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.filterAgentRepoService(request);
         expect(result).toEqual(response);
       });
-
-      // 4. Cover addAgentService with full data
       it("should test addAgentService with complete data", async () => {
         const request = {
           hostname: "test-host",
@@ -1681,8 +1638,6 @@ describe("Error scenarios for service", () => {
       });
     });
   });
-
-  // Covers line 178 - updateSchedulerCommand's request body construction
   it('should cover the complete request body construction in updateSchedulerCommand', async () => {
     const request = {
       agentId: '10001',
@@ -1724,8 +1679,6 @@ describe("Error scenarios for service", () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
-
-    // Test for fetchAgentService (line 169)
     it('should cover fetchAgentService with all parameters', async () => {
       const request = {
         pageSize: 10,
@@ -1756,8 +1709,6 @@ describe("Error scenarios for service", () => {
         { timeout: 30000 }
       );
     });
-
-    // Test for filterAgentService (line 178)
     it('should cover filterAgentService with parameters', async () => {
       const request = {
         filter: 'status:active',
@@ -1775,8 +1726,6 @@ describe("Error scenarios for service", () => {
         request
       );
     });
-
-    // Error case for fetchAgentService
     it('should cover fetchAgentService error case', async () => {
       const errorResponse = { response: { status: 500 } };
       mockGet.mockRejectedValue(errorResponse);
@@ -1787,8 +1736,6 @@ describe("Error scenarios for service", () => {
         data: { message: "Unexpected error occurred" }
       });
     });
-
-    // Error case for filterAgentService
     it('should cover filterAgentService error case', async () => {
       const errorResponse = { response: { status: 500 } };
       mockGet.mockRejectedValue(errorResponse);
@@ -1813,8 +1760,6 @@ describe("Error scenarios for service", () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
-
-    // Test for filterAgentRepoService (line 187)
     describe('filterAgentRepoService', () => {
       it('should call GET with correct endpoint and data', async () => {
         const mockData = { type: 'rust', status: 'active' };
@@ -1842,8 +1787,6 @@ describe("Error scenarios for service", () => {
         });
       });
     });
-
-    // Test for addAgentService (line 196)
     describe('addAgentService', () => {
       it('should call POST with correct endpoint and data', async () => {
         const mockAgentData = {
@@ -1878,6 +1821,7 @@ describe("Error scenarios for service", () => {
   });
 
 });
+
 
 
 

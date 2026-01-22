@@ -63,8 +63,6 @@ const VARIANT_CONFIG: Record<
       "linear-gradient(90deg, #CFE6FF 0%, rgba(207, 230, 255, 0) 91.17%), #FFFFFF",
   },
 };
-
-// split "Title: Subtitle"
 const parseMessage = (message: string) => {
   const idx = message.indexOf(":");
   if (idx === -1) return { main: message, sub: "" };
@@ -74,7 +72,7 @@ const parseMessage = (message: string) => {
   };
 };
 
-/* -------- Close button (hover scale + color, no focus outline) -------- */
+
 
 type CloseButtonProps = {
   onClick?: () => void;
@@ -126,7 +124,7 @@ const CloseButton: React.FC<CloseButtonProps> = ({ onClick }) => {
   );
 };
 
-/* -------- Layout -------- */
+
 
 type LayoutProps = {
   message: string;
@@ -145,7 +143,6 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
   const { main, sub } = parseMessage(message);
 
   return (
-    // outer: gradient border + radius + shadow
     <div
       style={{
         boxSizing: "border-box",
@@ -156,7 +153,7 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
       }}
     >
-      {/* inner: actual card */}
+      
       <div
         style={{
           borderRadius: CARD_RADIUS,
@@ -176,7 +173,7 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
             gap: 14,
           }}
         >
-          {/* icon + text */}
+          
           <div
             style={{
               display: "flex",
@@ -185,7 +182,7 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
               flex: 1,
             }}
           >
-            {/* icon 40x40 */}
+            
             <div
               style={{
                 width: 40,
@@ -199,7 +196,7 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
               {icon}
             </div>
 
-            {/* text */}
+            
             <div
               style={{
                 display: "flex",
@@ -240,7 +237,7 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
             </div>
           </div>
 
-          {/* close button inside */}
+          
           <CloseButton onClick={() => closeToast?.()} />
         </div>
       </div>
@@ -248,7 +245,7 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
   );
 };
 
-/* ---------- ICONS (40x40) ---------- */
+
 
 const successIcon = (
   <svg
@@ -375,7 +372,7 @@ const infoIcon = (
   </svg>
 );
 
-/* ---------- exported helpers ---------- */
+
 
 const successtoast = (message: string): ReactNode =>
   toast.success(
@@ -430,3 +427,4 @@ const infotoast = (message: string): ReactNode =>
   );
 
 export { successtoast, errortoast, warningtoast, infotoast };
+

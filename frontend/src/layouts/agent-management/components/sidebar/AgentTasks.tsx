@@ -120,7 +120,6 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
   };
 
   useEffect(() => {
-    // Cleanup function when component unmounts
     return () => {
       setAllButtonsDisabled(false);
       setClickedButton(null);
@@ -133,8 +132,6 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
     setAllButtonsDisabled(true);
     setClickedButton(buttonKey);
     action();
-    
-    // Re-enable all buttons after 4 seconds
     setTimeout(() => {
       setAllButtonsDisabled(false);
       setClickedButton(null);
@@ -251,93 +248,12 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                 {restartAgentButtonText}
               </Button>
           )}
-          {/* {isAgentTaskScheduleCmdBtnEnabled && (
-              <Button className="agentTriggerBtn" onMouseDown={(e) => e.preventDefault()} onClick={() => openScheduler(port)} data-testid="agentSubServiceSchedulerBtn">
-                {scheduleJobButtonText}
-              </Button>
-          )} */}
-          {/* {!isEmpty(scheduledJobs) && (
-            <div className="taskButtonWrapper globConfigsDetails">
-              <div className="schduledJobHead">
-                <p className="agentSubLogTitle">{scheduleJobsButtonText}</p>
-              </div>
-              {scheduledJobs.map(el => (
-                <div className="scheduledJobsWrapper" key={el}>
-                  <div className="scheduledJobsName">{el}</div>
-                  <div className="scheduledJobsBtns">
-                    {isAgentTaskEditBtnEnabled && (
-                        <Button className="editConfigButton" onClick={() => editSchedulerCommands(hostname, port, el)}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-                            <path d="M3.33203 18.8721H16.6654" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
-                            <path
-                              d="M11.5721 3.59183L12.19 2.97391C13.2138 1.9501 14.8737 1.9501 15.8975 2.97391C16.9213 3.99771 16.9213 5.65762 15.8975 6.68142L15.2796 7.29934M11.5721 3.59183C11.5721 3.59183 11.6493 4.90491 12.8079 6.06351C13.9665 7.2221 15.2796 7.29934 15.2796 7.29934M11.5721 3.59183L5.89125 9.27265C5.50647 9.65743 5.31409 9.84982 5.14863 10.0619C4.95345 10.3122 4.78612 10.5829 4.64959 10.8694C4.53385 11.1123 4.44782 11.3704 4.27574 11.8866L3.54657 14.0741M15.2796 7.29934L9.59877 12.9802C9.21399 13.3649 9.0216 13.5573 8.80947 13.7228C8.55924 13.918 8.28849 14.0853 8.00202 14.2218C7.75916 14.3376 7.50105 14.4236 6.98482 14.5957L4.79731 15.3248M4.79731 15.3248L4.26259 15.5031C4.00855 15.5878 3.72847 15.5217 3.53912 15.3323C3.34977 15.1429 3.28365 14.8629 3.36833 14.6088L3.54657 14.0741M4.79731 15.3248L3.54657 14.0741"
-                              stroke="#1C274C"
-                              strokeWidth="1.5"
-                            />
-                          </svg>
-                        </Button>
-                    )}
-                    {isAgentTaskDeleteBtnEnabled && (
-                        <IconButton className="deleteScheduledJobBtn" onClick={() => deleteSchedulerJob(hostname, port, el)}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-                            <path d="M2.5 5.53906H17.5" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path
-                              d="M15.8332 5.53906V17.2057C15.8332 18.0391 14.9998 18.8724 14.1665 18.8724H5.83317C4.99984 18.8724 4.1665 18.0391 4.1665 17.2057V5.53906"
-                              stroke="#1C274C"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M6.6665 5.53939V3.87272C6.6665 3.03939 7.49984 2.20605 8.33317 2.20605H11.6665C12.4998 2.20605 13.3332 3.03939 13.3332 3.87272V5.53939"
-                              stroke="#1C274C"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </IconButton>
-                    )}
-                    {isAgentTaskEditBtnEnabled && (
-                        <IconButton
-                          className="editConfigButton"
-                          onClick={() => {
-                            setJobName(el);
-                            loadAgentLogs(hostname, agentId, el);
-                            setJobLogModal(true);
-                          }}
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-                            <path d="M10.8335 10.5391H17.5002" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M10.8335 15.5391H17.5002" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M10.8335 5.53906H17.5002" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M2.5 10.5391H3.33333" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M2.5 15.5391H3.33333" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M2.5 5.53906H3.33333" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M6.6665 10.5391H7.49984" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M6.6665 15.5391H7.49984" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M6.6665 5.53906H7.49984" stroke="#1C274C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </IconButton>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )} */}
         </>
         <div className="coverAlertModal">
           {versionDialogOpen && (
             <Modal show={versionDialogOpen} onHide={closeSubModal} backdrop="static" className="risebothealthCheckModal">
               <Modal.Header closeButton>
-                {/* <div className="agentVersionsHeader"> */}
                 <Modal.Title className="upgradeHeader">{upgradeVersionText}</Modal.Title>
-                {/* <Button variant="outline" onClick={closeSubModal} className="closeIconBtn">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                    <path d="M13.3346 14.1032L2.66797 3.43652M13.3346 3.43652L2.66797 14.1032" stroke="#667085" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
-                </Button> */}
-                {/* </div> */}
               </Modal.Header>
               <Modal.Body>
                 <div className="agentVersionsCover">
@@ -346,7 +262,6 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                       (agentsVersion as AgentsVersionData)?.risebotVersions.map(({ version, buildDate }) => (
                         <div className="subPopVersionCvr" key={version}>
                           <Radio
-                            // type="radio"
                             name="agentVersion"
                             value={version}
                             checked={selectedAgentVersion === version}
@@ -371,15 +286,12 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                               <time dateTime={buildDate} className="buildDate">
                                 {(() => {
                                   const timestamp = Number(buildDate);
-                                  // Try milliseconds first
                                   if (moment(timestamp).isValid() && timestamp > 1000000000000) {
                                     return moment(timestamp).format("DD-MMMM-YYYY");
                                   }
-                                  // Try seconds (multiply by 1000)
                                   if (moment(timestamp * 1000).isValid()) {
                                     return moment(timestamp * 1000).format("DD-MMMM-YYYY");
                                   }
-                                  // Try as string date
                                   if (moment(buildDate).isValid()) {
                                     return moment(buildDate).format("DD-MMMM-YYYY");
                                   }
@@ -400,16 +312,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
               </Modal.Footer>
             </Modal>
           )}
-        </div>
-        {/* {(serviceLoad || schedulerLoading) && (
-          <div className="risebot_spinnerLoader">
-            <div className="risebot_innerSpinner">
-              <div className="spinner-border" role="status">
-                <span className="sr-only">{loadingText}</span>
-              </div>
-            </div>
-          </div>
-        )} */}
+        </div>  
       </Accordion.Body>
     </Accordion.Item>
   );

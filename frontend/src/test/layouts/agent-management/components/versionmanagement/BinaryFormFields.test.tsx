@@ -101,3 +101,4 @@ describe('BinaryTextField Component', () => {
     expect(container).toBeTruthy();
   });
 });
+

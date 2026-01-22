@@ -1,6 +1,3 @@
-/**
- * Cron Tab Module
- */
 import React from "react";
 import { Input as AntdInput } from "antd";
 import Cron from "react-js-cron";
@@ -10,11 +7,7 @@ import "../css/agentStyle.css";
 import "./CronTab.css";
 import { clearAllButtonText, cronExpressionText } from "../../../constants/strings";
 
-/**
- * This the module which is helped to create Job Scheduling
- * @param {*} props
- * @returns
- */
+
 
 interface CronTabProps {
   value: string;
@@ -42,3 +35,4 @@ const CronTab = (props: CronTabProps) => {
 };
 
 export default CronTab;
+

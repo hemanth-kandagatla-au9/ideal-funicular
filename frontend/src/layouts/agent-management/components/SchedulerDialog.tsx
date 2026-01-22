@@ -1,10 +1,4 @@
-/**
- * Scheduler Dialog Component (Module)
- * This is the Component which is used to schedule jobs based on time selection
- * We can able to add, delete, update jobs here
- */
 /* eslint-disable */
-
 import { isEmpty, merge } from "lodash";
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
@@ -144,7 +138,6 @@ const SchedulerDialog: React.FC<SchedulerDialogProps> = ({
                         <Form.Control
                           data-testid="scheduleCommandInput"
                           as="textarea"
-                          // rows="1"
                           rows={1}
                           id="command"
                           name="command"
@@ -165,7 +158,6 @@ const SchedulerDialog: React.FC<SchedulerDialogProps> = ({
                     <Form.Control
                       data-testid="sourceDirTestid"
                       size="sm"
-                      // size="md"
                       type="text"
                       id="sourceDir"
                       name="sourceDir"
@@ -209,3 +201,4 @@ const SchedulerDialog: React.FC<SchedulerDialogProps> = ({
 };
 
 export default SchedulerDialog;
+

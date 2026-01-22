@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable jest/no-identical-title */
 import {AxiosInstance} from "../../services/auth/UserService";
 
@@ -29,11 +30,6 @@ describe('PermissionUtils', () => {
         const allowedRoutes=PermissionUtils.getAllowedPages();
         expect(allowedRoutes.length).toBe(0);
     });
-
-    // it("PermissionUtils canAccess false case", async () => {
-    //     const allowedRoutes=PermissionUtils.canAccess();
-    //      expect(allowedRoutes).toBe(false);
-    //  });
 
     it("PermissionUtils getAllowedRoutes", async () => {
         const allowedRoutes=PermissionUtils.getAllowedRoutes();
@@ -140,8 +136,6 @@ describe('PermissionUtils', () => {
       
         expect(console.log).toHaveBeenCalled();  
         expect(permissions).toEqual({});       
-      
-        // Restore mocks
         global.atob = originalAtob;
         console.log = originalConsoleLog;
       });
@@ -149,27 +143,18 @@ describe('PermissionUtils', () => {
       it("PermissionUtils canAccess false case (component always returns true)", () => {
         localStorage.setItem('permissions', mockPermission);
         const canAccessPage = PermissionUtils.canAccess("Non-existent Page");
-      
-        // Adjusted to match actual component behavior
         expect(canAccessPage).toBe(true);
       });
     
     it("refreshUserPermissions with missing userId or token", async () => {
-        // Clear localStorage completely
         localStorage.clear();
-        
-        // Mock TokenUtils to return null
         jest.spyOn(TokenUtils, 'getLocalUserId').mockReturnValue(null);
         jest.spyOn(TokenUtils, 'getLocalAccessToken').mockReturnValue(null);
-        
-        // Also mock getUserPermissions to return empty object
         jest.spyOn(PermissionUtils, 'getUserPermissions').mockReturnValue({});
         
         const result = await PermissionUtils.refreshUserPermissions();
         expect(result).toEqual([]);
         expect(mockGet).not.toHaveBeenCalled();
-        
-        // Verify our mocks were called
         expect(TokenUtils.getLocalUserId).toHaveBeenCalled();
         expect(TokenUtils.getLocalAccessToken).toHaveBeenCalled();
       });
@@ -196,5 +181,6 @@ describe('PermissionUtils', () => {
     });
 
 })
+
 
 

@@ -1,15 +1,7 @@
-/**
- * AGENT MANAGEMENT ACTIONS
- */
-
 import { BinaryVersionPayload } from "@/services/agent/agentManagement.service";
 import { AGENT_MANAGEMENT } from "../../config/actions";
 
-/**
- * Start Agent Management Service
- * @param {*} props
- * @returns
- */
+
 
 interface AgentManagementProps {
   port?: string | number;
@@ -39,7 +31,13 @@ interface ConfigProperty {
   error?: boolean;
 }
 
-// Add to your existing interfaces
+
+interface GlobalConfigItemPayload {
+  propertyName: string;
+  propertyValue: string;
+  canModify?: boolean;
+  isVisible?: boolean;
+}
 interface VersionManagementProps {
   versionStatus?: string;
   operatingSystem?: string;
@@ -67,11 +65,7 @@ const failureStartAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Health Check Service
- * @param {*} props
- * @returns
- */
+
 const fetchHealthCheckup = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_HEALTH_CHECKUP,
   props,
@@ -88,11 +82,7 @@ const failureFetchHealthCheckup = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Health Check Run Service
- * @param {*} props
- * @returns
- */
+
 const fetchHealthCheckRun = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.FETCH_HEALTH_CHECK_RUN,
   props,
@@ -109,11 +99,7 @@ const failureFetchHealthCheckRun = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Health Check by Port Service
- * @param {*} props
- * @returns
- */
+
 const fetchHealthCheckupByPort = () => ({
   type: AGENT_MANAGEMENT.FETCH_HEALTH_CHECKUP_BY_PORT,
 });
@@ -128,11 +114,7 @@ const failureFetchHealthCheckupByPort = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Stop Agent Management Service
- * @param {*} props
- * @returns
- */
+
 const stopAgentServices = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.STOP_AGENT_SERVICE,
   props,
@@ -149,11 +131,7 @@ const failureStopAgentServices = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Restart Agent Management Service
- * @param {*} props
- * @returns
- */
+
 const restartAgentService = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.RESTART_AGENT_SERVICE,
   props,
@@ -170,11 +148,7 @@ const failureRestartAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Restart Job Service
- * @param {*} props
- * @returns
- */
+
 const restartJobService = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.RESTART_JOB_SERVICE,
   props,
@@ -191,11 +165,7 @@ const failureRestartJobService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Shut Down Agent Service
- * @param {*} props
- * @returns
- */
+
 const shutDownAgentService = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.SHUTDOWN_AGENT_SERVICE,
   props,
@@ -212,11 +182,7 @@ const failureShutDownAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Start Agent via ssh Agent Service
- * @param {*} props
- * @returns
- */
+
 const startSSHAgentService = (props: { hostname: string; port: string; osVersion: string }) => ({
   type: AGENT_MANAGEMENT.STARTSSH_AGENT_SERVICE,
   props,
@@ -233,11 +199,7 @@ const failureStartSSHAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Save Agent Property Service
- * @param {*} props
- * @returns
- */
+
 const saveAgentProperty = () => ({
   type: AGENT_MANAGEMENT.SAVE_AGENT_PROPERTY,
 });
@@ -253,11 +215,7 @@ const failureSaveAgentProperty = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Update Agent Property Service
- * @param {*} props
- * @returns
- */
+
 const updateAgentProperty = () => ({
   type: AGENT_MANAGEMENT.UPDATE_AGENT_PROPERTY,
 });
@@ -272,11 +230,7 @@ const failureUpdateAgentProperty = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Build info Service
- * @param {*} props
- * @returns
- */
+
 const fetchAgentBuildInfo = () => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_BUILD_INFO,
 });
@@ -291,11 +245,7 @@ const failureFetchAgentBuildInfo = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Build info Service
- * @param {*} props
- * @returns
- */
+
 const fetchAgentInfo = (props: { hostname: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_INFO,
   props,
@@ -312,12 +262,8 @@ const failureFetchAgentInfo = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Save Global config Service
- * @param {*} props
- * @returns
- */
-const saveGlobalConfig = (props: { riseBot: Omit<ConfigProperty, "label" | "error" | "propertyType">[] }) => ({
+
+const saveGlobalConfig = (props: {data: GlobalConfigItemPayload[] }) => ({
   type: AGENT_MANAGEMENT.SAVE_GLOBAL_CONFIG,
   props,
 });
@@ -333,11 +279,7 @@ const failureSaveGlobalConfig = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Global config Service
- * @param {*} props
- * @returns
- */
+
 const fetchGlobalConfig = () => ({
   type: AGENT_MANAGEMENT.FETCH_GLOBAL_CONFIG,
 });
@@ -393,11 +335,7 @@ const failureFetchAgentManagementServices = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent filter Service
- * @param {*} props
- * @returns
- */
+
 const fetchAgentFilters = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_FILTER,
   props,
@@ -414,11 +352,7 @@ const failureFetchAgentFilters = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Repositories Service
- * @param {*} props
- * @returns
- */
+
 const fetchAgentRepositories = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_REPOSITORIES,
   props,
@@ -435,11 +369,7 @@ const failureFetchAgentRepositories = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Add Agent Service
- * @param {*} props
- * @returns
- */
+
 const addAgent = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.ADD_AGENT,
   props,
@@ -456,11 +386,7 @@ const failureAddAgent = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Logs Service
- * @param {*} props
- * @returns
- */
+
 const fetchAgentLogs = (props: { hostname: string; agentId: string | null; limit: number; skip: number; jobname: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_LOGS,
   props,
@@ -477,20 +403,12 @@ const failureFetchAgentLogs = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * reload Fetch Agent Logs Service
- * @param {*} props
- * @returns
- */
+
 const reloadFetchAgentLogs = () => ({
   type: AGENT_MANAGEMENT.RELOAD_FETCH_AGENT_LOGS,
 });
 
-/**
- * Save Local Configs Service
- * @param {*} props
- * @returns
- */
+
 const saveLocalConfigs = (props: { hostname: string; port: string; propertiesSchemas: any[] }) => ({
   type: AGENT_MANAGEMENT.SAVE_LOCAL_CONFIGS,
   props,
@@ -507,11 +425,7 @@ const failureSaveLocalConfigs = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Local Configs Service
- * @param {*} props
- * @returns
- */
+
 const fetchLocalConfigs = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.FETCH_LOCAL_CONFIGS,
   props,
@@ -528,11 +442,7 @@ const failureFetchLocalConfigs = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Repositories Service
- * @param {*} props
- * @returns
- */
+
 const fetchRepositories = (props: { type: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_REPOSITORIES,
   props,
@@ -549,11 +459,7 @@ const failureFetchRepositories = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Download Agent Repositories Service
- * @param {*} props
- * @returns
- */
+
 const downloadRepositories = (props: { agentpath: any; version: string; port: string; hostname: string }) => ({
   type: AGENT_MANAGEMENT.DOWNLOAD_REPOSITORIES,
   props,
@@ -570,11 +476,7 @@ const failureDownloadRepositories = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Save Scheduler Command Data Service
- * @param {*} props
- * @returns
- */
+
 const saveSchedulerCommand = (props: {
   hostname: string;
   agentId: string;
@@ -602,11 +504,7 @@ const failureSaveSchedulerCommand = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Update Scheduler Command Data Service
- * @param {*} props
- * @returns
- */
+
 const updateSchedulerCommand = (props: {
   hostname: string;
   agentId: string;
@@ -634,11 +532,7 @@ const failureUpdateSchedulerCommand = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Delete Scheduler Command Data Service
- * @param {*} props
- * @returns
- */
+
 const deleteSchedulerCommand = (props: { hostname: string; port: string; scheduledJobId: string }) => ({
   type: AGENT_MANAGEMENT.DELETE_SCHEDULER_COMMAND,
   props,
@@ -655,11 +549,7 @@ const failureDeleteSchedulerCommand = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * List Scheduler Command Data Service
- * @param {*} props
- * @returns
- */
+
 const listSchedulerCommand = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.LIST_SCHEDULER_COMMAND,
   props,
@@ -683,11 +573,7 @@ const failureListSchedulerCommand = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Scheduler Command Data by ID Service
- * @param {*} props
- * @returns
- */
+
 const fetchScheduledJobsByCommandId = (props: { hostname: string; port: string; scheduledJobId: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_SCHEDULED_JOBS_BY_COMMAND_ID,
   props,
@@ -709,11 +595,7 @@ const failureFetchScheduledJobsByCommandId = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Syncup Agent Discvoery Data Service
- * @param {*} props
- * @returns
- */
+
 const syncUpAgentDiscovery = () => ({
   type: AGENT_MANAGEMENT.SYNCUP_AGENT_DISCOVERY,
 });
@@ -728,11 +610,7 @@ const failureSyncUpAgentDiscovery = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Metrics Data Service
- * @param {*} props
- * @returns
- */
+
 const fetchAgentMetrics = () => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_METRICS,
 });
@@ -900,11 +778,7 @@ const failureSyncAgentHealthConfigs = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Start Selected Agent Actions
- * @param {*} props
- * @returns
- */
+
 const startSelectedAgentService = (
   props: {
     hostname: string;
@@ -933,11 +807,7 @@ const failureStartSelectedAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Stop Selected Agent Actions
- * @param {*} props
- * @returns
- */
+
 const stoptSelectedAgentService = (
   props: {
     hostname: string;
@@ -966,11 +836,7 @@ const failureStopSelectedAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Restart Selected Agent Actions
- * @param {*} props
- * @returns
- */
+
 const restartSelectedAgentService = (
   props: {
     hostname: string;
@@ -999,11 +865,7 @@ const failureRestartSelectedAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * HealthCheckup Selected Agent Actions
- * @param {*} props
- * @returns
- */
+
 const healthCheckupSelectedAgentService = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.HEALTHCHECKUP_SELECTED_AGENT_SERVICE,
   props,
@@ -1024,10 +886,7 @@ const failureHealthCheckupSelectedAgentService = (error: { message: string }) =>
   error: error.message || "",
 });
 
-/**
- * This Action Refers Getting Agent Upgrade Versions
- * @returns
- */
+
 const fetchUpgradeAgents = () => ({
   type: AGENT_MANAGEMENT.FETCH_UPGRADE_AGENTS,
 });
@@ -1043,11 +902,7 @@ const failureFetchUpgradeAgents = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Agent upgrade actions
- * @param {*} props
- * @returns
- */
+
 const upgradeSelectedAgents = (props: {
   data: {
     hostname: string;
@@ -1071,11 +926,7 @@ const failureUpgradeSelectedAgents = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Fetch Agent Masterdata
- * @param {*} props
- * @returns
- */
+
 const fetchAgentMasterdata = (props: { limit: string; pageNo: number; search: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_MASTERDATA,
   props,
@@ -1092,11 +943,7 @@ const failureFetchAgentMasterdata = (error: { message: string }) => ({
   error: error?.message || "",
 });
 
-/**
- * Add Agent Masterdata
- * @param {*} props
- * @returns
- */
+
 const addAgentMasterdata = (props: string) => ({
   type: AGENT_MANAGEMENT.ADD_AGENT_MASTERDATA,
   props,
@@ -1112,11 +959,7 @@ const failureAddAgentMasterdata = (error: { message: string }) => ({
   error: error?.message || "",
 });
 
-/**
- * Delete Hostname
- * @param {*} props
- * @returns
- */
+
 const deleteHostname = (props: string) => ({
   type: AGENT_MANAGEMENT.DELETE_HOSTNAME,
   props,
@@ -1131,8 +974,6 @@ const failureDeleteHostname = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_DELETE_HOSTNAME,
   error: error?.message || "",
 });
-
-// Add to your existing action creators
 const fetchVersions = (props: VersionManagementProps) => ({
   type: AGENT_MANAGEMENT.FETCH_VERSIONS,
   props,
@@ -1151,8 +992,6 @@ const failureFetchVersions = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_FETCH_VERSIONS,
   error: error.message || "",
 });
-
-// Add to your existing action creators
 const createVersion = (versionData: BinaryVersionPayload) => ({
   type: AGENT_MANAGEMENT.CREATE_VERSION,
   versionData,
@@ -1171,8 +1010,6 @@ const failureCreateVersion = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_CREATE_VERSION,
   error: error.message || "",
 });
-
-// Update your existing action creators
 const updateVersion = (versionData: BinaryVersionPayload, id: string) => ({
   type: AGENT_MANAGEMENT.UPDATE_VERSION,
   versionData,
@@ -1192,8 +1029,6 @@ const failureUpdateVersion = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_UPDATE_VERSION,
   error: error.message || "",
 });
-
-// Delete your existing action creators
 const deleteVersion = (id: string) => ({
   type: AGENT_MANAGEMENT.DELETE_VERSION,
   id,
@@ -1212,8 +1047,6 @@ const failureDeleteVersion = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_DELETE_VERSION,
   error: error.message || "",
 });
-
-// Manual sync version actions
 const manualSyncVersions = () => ({
   type: AGENT_MANAGEMENT.MANUAL_SYNC_VERSIONS,
 });
@@ -1232,11 +1065,7 @@ const failureManualSyncVersions = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-/**
- * Exported All Agent Actions Functions
- * @param {*} props
- * @returns
- */
+
 const agentManagementActions = {
   startAgentService,
   requestStartAgentService,
@@ -1517,3 +1346,4 @@ const agentManagementActions = {
 };
 
 export default agentManagementActions;
+

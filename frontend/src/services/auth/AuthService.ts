@@ -1,41 +1,26 @@
-/**
- * Importing dependencies.
- */
 import Cookies from "universal-cookie";
 import Config from "../../config/config";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
 import AxiosInstanceClass from "../axiosInstance";
-
-// Safely destructure with defaults to prevent undefined errors
 const authEndpoints = Config.apiEndpoints?.auth || {};
 const baseUrl = authEndpoints.baseUrl || "";
 const getEndpoints = authEndpoints.get || {};
 const patchEndpoints = authEndpoints.patch || {};
 const postEndpoints = authEndpoints.post || {};
 const delEndpoints = authEndpoints.del || {};
-
-// exporting auth service axios instance
 const cookies = new Cookies();
 const accessToken = cookies.get("iasphere_access_token");
 export const AxiosInstance = new AxiosInstanceClass(baseUrl).init(accessToken);
-
-// Interface for user data (adjust according to your actual data structure)
 interface UserData {
   id: string;
-  // Add other user properties as needed
   [key: string]: any;
 }
-
-// Interface for application data
 interface ApplicationData {
   id?: string;
   appName?: string;
   isBlocked?: boolean;
-  // Add other application properties as needed
   [key: string]: any;
 }
-
-// Interface for list parameters
 interface ListParams {
   filter?: string;
   pagination: {
@@ -43,16 +28,11 @@ interface ListParams {
     pageNo: number;
   };
 }
-
-// Interface for API response
 interface ApiResponse<T = any> {
   data?: T;
   message?: string;
   success?: boolean;
-  // Add other response properties as needed
 }
-
-// Type for error response
 interface ErrorResponse {
   response?: {
     data?: any;
@@ -62,9 +42,7 @@ interface ErrorResponse {
   message?: string;
 }
 
-/**
- * Function to fetch user-info by userId
- */
+
 const getUserById = async (userId: string): Promise<UserData | ApiResponse> => {
   try {
     if (!getEndpoints.users) throw new Error("Users endpoint not configured");
@@ -81,9 +59,7 @@ const getUserById = async (userId: string): Promise<UserData | ApiResponse> => {
   }
 };
 
-/**
- * Function to logout user
- */
+
 const logout = async (userId: string | null): Promise<ApiResponse> => {
   try {
     if (!patchEndpoints.logout) throw new Error("Logout endpoint not configured");
@@ -98,9 +74,7 @@ const logout = async (userId: string | null): Promise<ApiResponse> => {
   }
 };
 
-/**
- * Function to update user info
- */
+
 const modifyUser = async (userId: string, body: Partial<UserData>): Promise<UserData | ApiResponse> => {
   try {
     if (!patchEndpoints.updateUser) throw new Error("Update user endpoint not configured");
@@ -115,9 +89,7 @@ const modifyUser = async (userId: string, body: Partial<UserData>): Promise<User
   }
 };
 
-/**
- * Function to add an application
- */
+
 const addApplication = async (applicationData: ApplicationData): Promise<ApiResponse> => {
   try {
     if (!postEndpoints.addApplication) throw new Error("Add application endpoint not configured");
@@ -130,9 +102,7 @@ const addApplication = async (applicationData: ApplicationData): Promise<ApiResp
   }
 };
 
-/**
- * Function to update an application
- */
+
 const updateApplication = async (id: string, applicationData: Partial<ApplicationData>): Promise<ApiResponse> => {
   try {
     if (!patchEndpoints.updateApplication) throw new Error("Update application endpoint not configured");
@@ -145,9 +115,7 @@ const updateApplication = async (id: string, applicationData: Partial<Applicatio
   }
 };
 
-/**
- * Function to delete an application by ID
- */
+
 const deleteApplication = async (id: string): Promise<ApiResponse> => {
   try {
     if (!delEndpoints.deleteApplication) throw new Error("Delete application endpoint not configured");
@@ -160,9 +128,7 @@ const deleteApplication = async (id: string): Promise<ApiResponse> => {
   }
 };
 
-/**
- * Function to block an application by ID
- */
+
 const blockApplication = async (id: string, data: { isBlocked: boolean }): Promise<ApiResponse> => {
   try {
     if (!patchEndpoints.blockApplication) throw new Error("Block application endpoint not configured");
@@ -175,9 +141,7 @@ const blockApplication = async (id: string, data: { isBlocked: boolean }): Promi
   }
 };
 
-/**
- * Function to list applications
- */
+
 const listApplication = async (listParam: ListParams): Promise<ApiResponse> => {
   try {
     if (!getEndpoints.applicationList) throw new Error("Application list endpoint not configured");
@@ -196,9 +160,7 @@ const listApplication = async (listParam: ListParams): Promise<ApiResponse> => {
   }
 };
 
-/**
- * Function to get auth audit logs for CSV
- */
+
 const getAuthAuditLogForCSV = async (filter: Record<string, any> = {}): Promise<ApiResponse> => {
   try {
     if (!getEndpoints.getAuditLogForCSV) throw new Error("Audit log endpoint not configured");
@@ -214,9 +176,7 @@ const getAuthAuditLogForCSV = async (filter: Record<string, any> = {}): Promise<
   }
 };
 
-/**
- * Exporting auth service functions.
- */
+
 const AuthService = {
   getUserById,
   logout,
@@ -230,3 +190,4 @@ const AuthService = {
 };
 
 export default AuthService;
+

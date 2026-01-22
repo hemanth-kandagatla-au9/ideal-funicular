@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
@@ -47,13 +48,11 @@ describe('LocalConfigModal Component', () => {
 
   it('renders when open is true', () => {
     renderComponent();
-    // Component renders modal when open is true
     expect(screen.queryByRole('dialog')).not.toBeNull();
   });
 
   it('displays configuration properties', () => {
     renderComponent();
-    // Just verify component renders without errors
     expect(mockProps.onClose).toBeDefined();
   });
 
@@ -66,7 +65,7 @@ describe('LocalConfigModal Component', () => {
 
   it('renders Modal component with correct props', () => {
     renderComponent();
-    // Verify modal renders
     expect(screen.queryByRole('dialog')).toBeTruthy();
   });
 });
+

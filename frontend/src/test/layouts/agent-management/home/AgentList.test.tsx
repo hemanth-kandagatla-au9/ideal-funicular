@@ -73,8 +73,6 @@ describe('AgentList Component', () => {
 
   test('renders agent list correctly when not loading and has data', () => {
     render(<AgentList {...defaultProps} />);
-    
-    // Check header row
     expect(screen.getByText('Hostname')).toBeInTheDocument();
     expect(screen.getByText('PID')).toBeInTheDocument();
     expect(screen.getByText('OS')).toBeInTheDocument();
@@ -82,8 +80,6 @@ describe('AgentList Component', () => {
     expect(screen.getByText('Version')).toBeInTheDocument();
     expect(screen.getByText('Status')).toBeInTheDocument();
     expect(screen.getByText('Action')).toBeInTheDocument();
-    
-    // Check agent data
     expect(screen.getByText('agent1')).toBeInTheDocument();
     expect(screen.getByText('1234')).toBeInTheDocument();
     expect(screen.getByText('Linux')).toBeInTheDocument();
@@ -147,7 +143,6 @@ describe('AgentList Component', () => {
     render(<AgentList {...defaultProps} />);
     
     const agentSelectButtons = screen.getAllByTestId('agentTickBtn');
-    // First button is select all, second is for first agent
     fireEvent.click(agentSelectButtons[1]);
     
     expect(defaultProps.handleSelectHostAgent).toHaveBeenCalledWith('agent1');
@@ -160,9 +155,6 @@ describe('AgentList Component', () => {
     };
     
     render(<AgentList {...propsWithSelectedAgent} />);
-    
-    // Verify that handleSelectHostAgent was called with the right hostname
-    // when clicking the tick button
     const agentSelectButtons = screen.getAllByTestId('agentTickBtn');
     fireEvent.click(agentSelectButtons[1]);
     
@@ -176,14 +168,10 @@ describe('AgentList Component', () => {
     
     const healthCheckButtons = screen.getAllByTestId('agentHealthChecktBtn');
     fireEvent.click(healthCheckButtons[0]);
-    
-    // Verify the correct payload was sent
     expect(fetchHealthCheckup).toHaveBeenCalledWith({
       hostname: 'agent1',
       port: 8080
     });
-    
-    // Verify dispatch was called
     expect(defaultProps.dispatch).toHaveBeenCalled();
   });
 
@@ -221,22 +209,13 @@ describe('AgentList Component', () => {
     
   test('renders loading skeleton correctly', () => {
     render(<AgentList {...defaultProps} loading={true} />);
-    
-    // In loading state, we should have:
-    // - 1 agentTickBtn in the header (select all button)
-    // - No additional tick buttons since skeletons are rendered instead of actual agent rows
-    
-    // Verify skeleton elements are rendered by checking for MUI Skeleton classes
     const circularSkeletons = document.querySelectorAll('.MuiSkeleton-circular');
     const textSkeletons = document.querySelectorAll('.MuiSkeleton-text');
-    
-    // Verify we have the expected skeleton counts
     expect(circularSkeletons.length).toBeGreaterThan(0);
     expect(textSkeletons.length).toBeGreaterThan(0);
-    
-    // Verify only the header tick button exists in loading state
     expect(screen.getAllByTestId('agentTickBtn')).toHaveLength(1);
   });
 });
+
 
 

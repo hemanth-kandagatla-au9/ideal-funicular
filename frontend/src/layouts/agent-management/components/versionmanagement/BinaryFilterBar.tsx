@@ -1,4 +1,3 @@
-// BinaryFilterBar.tsx
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import crossBlack from "../../../../images/agent-management/assets/crossBlack.svg";
@@ -82,7 +81,7 @@ const BinaryFilterBar: React.FC<BinaryFilterBarProps> = ({ osOptions, versionOpt
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
         <div style={{ flex: "1", display: "flex", flexDirection: "column", gap: "12px" }}>
           <div style={{ display: "flex", gap: "12px" }}>
-            {/* OS Dropdown */}
+            {}
             <MultiSelectDropdown
               key="os"
               dropDownName="All OS"
@@ -103,7 +102,7 @@ const BinaryFilterBar: React.FC<BinaryFilterBarProps> = ({ osOptions, versionOpt
               toggleOpen={() => toggleDropdown("os")}
             />
 
-            {/* Versions Dropdown */}
+            
             <MultiSelectDropdown
               key="versions"
               dropDownName="All Versions"
@@ -124,7 +123,7 @@ const BinaryFilterBar: React.FC<BinaryFilterBarProps> = ({ osOptions, versionOpt
               toggleOpen={() => toggleDropdown("versions")}
             />
 
-            {/* Types Dropdown */}
+            
             <MultiSelectDropdown
               key="types"
               dropDownName="All Types"
@@ -223,3 +222,4 @@ const BinaryFilterBar: React.FC<BinaryFilterBarProps> = ({ osOptions, versionOpt
 };
 
 export default BinaryFilterBar;
+

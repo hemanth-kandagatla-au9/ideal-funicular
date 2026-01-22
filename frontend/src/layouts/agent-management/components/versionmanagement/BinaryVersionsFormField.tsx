@@ -116,7 +116,6 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
       formik.setFieldValue("osEntries", [...formik.values.osEntries, newEntry]);
       formik.setFieldValue("osCompatibility", "");
       formik.setFieldValue("osVersion", "");
-      // Reset touched state
       formik.setTouched({
         ...formik.touched,
         osCompatibility: false,
@@ -132,7 +131,7 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-      {/* Agent Version */}
+      
       <BinaryTextField
         name="version"
         label="Agent Version"
@@ -145,7 +144,7 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
         disabled={isViewMode || isEditing}
       />
 
-      {/* OS Compatibility */}
+      
       <Box sx={{ backgroundColor: "#f7f7fa", marginTop: "-25px", padding: "16px" }}>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 1, fontFamily: "Johnson Text" }}>
@@ -272,10 +271,10 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
         )}
       </Box>
 
-      {/* Status - Hidden when editing */}
+      
       {!isEditing && <BinarySelectField label="Version Status" options={["Current", "Previous", "Beta"]} {...commonSelectProps("status")} />}
 
-      {/* Switch Controls */}
+      
       <Box
         sx={{
           display: "flex",
@@ -309,7 +308,7 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
         />
       </Box>
 
-      {/* Release Date and Rust Version - Hidden when editing */}
+      
       {!isEditing && (
         <Box sx={{ display: "flex", gap: 2 }}>
           <Box sx={{ flex: 1 }}>
@@ -331,7 +330,7 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
         </Box>
       )}
 
-      {/* Download URL - Hidden when editing */}
+      
       {!isEditing && (
         <BinaryTextField
           name="s3Url"
@@ -350,3 +349,4 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
 };
 
 export default BinaryVersionsFormField;
+

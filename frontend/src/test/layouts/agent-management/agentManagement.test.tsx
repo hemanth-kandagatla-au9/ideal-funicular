@@ -19,8 +19,6 @@ jest.mock("../../../utils/PermissionUtils", () => ({
 jest.mock("../../../services/agent/agentManagement.service", () => ({
   fetchAgentService: jest.fn(),
 }));
-
-// ---- MOCK CHILD COMPONENTS SO WE CONTROL INTERACTIONS ----
 jest.mock("../../../layouts/agent-management/home/AgentList", () => (props: any) => (
   <div>
     <button data-testid="select" onClick={() => props.handleSelectHostAgent("AWS1")} />
@@ -56,8 +54,6 @@ jest.mock("../../../layouts/agent-management/home/AgentCardGrid", () => () => <d
 jest.mock("../../../layouts/agent-management/components/sidebar/SideBar", () => () => <div />);
 jest.mock("../../../layouts/agent-management/components/UpgradeAgentsDialog", () => () => <div />);
 jest.mock("../../../components/popup/popUp.component", () => () => <div />);
-
-// ---- SELECTOR DATA ----
 const baseState = {
   isReload: false,
   isLoading: false,
@@ -172,3 +168,4 @@ describe("AgentManagement REAL coverage", () => {
     render(<AgentManagement />);
   });
 });
+

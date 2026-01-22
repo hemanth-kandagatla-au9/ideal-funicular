@@ -1,8 +1,3 @@
-/* Assign Permissions Modal Styles - Enhanced Design */
-
-/* ============================================ */
-/* CSS VARIABLES & THEMING                     */
-/* ============================================ */
 :root {
   --modal-bg: #FFFFFF;
   --modal-border: #E2E8F0;
@@ -24,9 +19,9 @@
   --spacing-xl: 32px;
 }
 
-/* ============================================ */
-/* MODAL CONTAINER                             */
-/* ============================================ */
+
+
+
 .assign-permissions-modal .modal-dialog {
   max-width: 1216px;
 }
@@ -37,9 +32,9 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* ============================================ */
-/* MODAL HEADER                                */
-/* ============================================ */
+
+
+
 .assign-permissions-modal-header {
   background-color: var(--modal-bg);
   border-bottom: 0.77px solid var(--modal-border);
@@ -87,9 +82,9 @@
   opacity: 0.3;
 }
 
-/* ============================================ */
-/* MODAL BODY                                  */
-/* ============================================ */
+
+
+
 .assign-permissions-modal-body {
   padding: 30px;
   max-height: 70vh;
@@ -114,9 +109,9 @@
   gap: var(--spacing-xl);
 }
 
-/* ============================================ */
-/* PROJECT SECTIONS                            */
-/* ============================================ */
+
+
+
 .project-section {
   margin-bottom: var(--spacing-lg);
 }
@@ -131,9 +126,9 @@
   text-transform: capitalize;
 }
 
-/* ============================================ */
-/* MODULES GRID                                */
-/* ============================================ */
+
+
+
 .modules-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -147,9 +142,9 @@
   }
 }
 
-/* ============================================ */
-/* MODULE CARDS                                */
-/* ============================================ */
+
+
+
 .module-card {
   background: var(--modal-bg);
   border: 1px solid var(--modal-border);
@@ -178,9 +173,9 @@
   text-transform: capitalize;
 }
 
-/* ============================================ */
-/* PERMISSIONS                                 */
-/* ============================================ */
+
+
+
 .module-permissions {
   display: flex;
   flex-direction: column;
@@ -215,7 +210,7 @@
   display: none;
 }
 
-/* Toggle Switch Styles - Design Specifications */
+
 .toggle-switch {
   width: 32px;
   height: 16px;
@@ -263,9 +258,9 @@
   font-size: 14px !important;
 }
 
-/* ============================================ */
-/* MODAL FOOTER                                */
-/* ============================================ */
+
+
+
 .assign-permissions-modal-footer {
   background-color: var(--modal-bg);
   border-top: 0.77px solid var(--modal-border);
@@ -336,9 +331,9 @@
   opacity: 0.65;
 }
 
-/* ============================================ */
-/* RESPONSIVE DESIGN                           */
-/* ============================================ */
+
+
+
 @media (max-width: 1024px) {
   .assign-permissions-modal .modal-dialog {
     max-width: 95%;

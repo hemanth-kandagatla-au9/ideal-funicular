@@ -21,13 +21,9 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
   const [selectedCloneUser, setSelectedCloneUser] = useState<User | null>(null);
   const [showCloneDropdown, setShowCloneDropdown] = useState(false);
   const [cloneUserSearch, setCloneUserSearch] = useState("");
-
-  // Validation state (kept for display)
   const [touched, setTouched] = useState({ username: false, password: false });
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
-  // Validation functions
   const validateUsername = (value: string): string => {
     if (!value.trim()) return "Username is required";
     if (value.length < 3) return "Username must be at least 3 characters";
@@ -42,12 +38,9 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
     if (!/[@$!%*?&]/.test(value)) return "Password must contain at least one special character (@$!%*?&)";
     return "";
   };
-
-  // Live change handlers â update value + error immediately
  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   const value = e.target.value;
   setUsername(value);
-  // only validate live after user has blurred once
   if (touched.username) {
     setUsernameError(validateUsername(value));
   }
@@ -85,14 +78,10 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   const toggleShowPassword = () => {
     setShowPassword(prev => !prev);
   };
-
-  // Filter users for clone dropdown
   const filteredUsers = users.filter(user => 
     user.userName.toLowerCase().includes(cloneUserSearch.toLowerCase()) && 
     (user.rolesCount || 0) > 0 // Only show users with permissions
   );
-
-  // Handle clone user selection
   const handleSelectCloneUser = (user: User) => {
     setSelectedCloneUser(user);
     setShowCloneDropdown(false);
@@ -103,10 +92,7 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCloneUser(null);
     setCloneUserSearch("");
   };
-
-  // Handle Add
   const handleAdd = () => {
-    // run validation one more time before submit
     const usernameErr = validateUsername(username);
     const passwordErr = validatePassword(password);
 
@@ -117,13 +103,11 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (usernameErr || passwordErr) return;
 
   onAdd({
-      username: username.trim().toLowerCase(),
+      username: username.trim(),
       password,
       isActive,
       cloneFromUserId: selectedCloneUser?.userName
     });
-
-    // clear form
     setUsername("");
     setPassword("");
     setIsActive(true);
@@ -145,15 +129,11 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordError("");
     onHide();
   };
-
-  // use onKeyDown for Enter
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !loading) {
       handleAdd();
     }
   };
-
-  // Compute validity from validators (avoids stale state)
   const isFormValid =
     !validateUsername(username) &&
     !validatePassword(password);
@@ -202,7 +182,7 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             )}
           </div>
 
-          {/* Clone Permissions Section */}
+          
           <div className="add-user-form-group">
             <label className="add-user-label">
               Clone Permissions from :
@@ -212,7 +192,7 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               <div className="clone-user-selected">
                 <div>
                   <span className="clone-user-name">{selectedCloneUser.userName}</span>
-                  {/* <span className="clone-user-count">{selectedCloneUser.rolesCount} permissions</span> */}
+                  
                 </div>
                 <button
                   type="button"
@@ -260,7 +240,7 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                               <span className="clone-user-item-name">{user.userName}</span>
                               {!user.isActive && <span className="clone-user-inactive-badge">Inactive</span>}
                             </div>
-                            {/* <span className="clone-user-item-count">{user.rolesCount} permissions</span> */}
+                            
                           </div>
                         ))
                       ) : (
@@ -349,3 +329,4 @@ const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 };
 
 export default AddUserModal;
+

@@ -1,11 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import BinaryFilterBar from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinaryFilterBar";
+import BinaryFilterBar from "../../../../../layouts/agent-management/components/versionmanagement/BinaryFilterBar";
 import "@testing-library/jest-dom";
-
-// Mock image
 jest.mock("../../../../images/agent-management/assets/crossBlack.svg", () => "mock-image");
-
-// Mock MultiSelectDropdown completely
 jest.mock("../../../../../../src/layouts/agent-management/components/MultiSelectDropdown", () => (props: any) => {
   return (
     <div data-testid={`mock-dropdown-${props.id}`}>
@@ -143,8 +139,7 @@ describe("BinaryFilterBar", () => {
     render(<BinaryFilterBar {...props} />);
 
     fireEvent.click(screen.getByText("Windows"));
-
-    // toggleOpen is mocked through button, so we just verify no crash
     expect(screen.getByText("Windows")).toBeInTheDocument();
   });
 });
+

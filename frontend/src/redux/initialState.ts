@@ -1,6 +1,3 @@
-// update documentation here:
-// https://confluence.jnj.com/display/JAVZ/Redux+Initial+State+Object
-
 interface ResponseState<T> {
   error: boolean;
   message: string;
@@ -216,3 +213,4 @@ const INITIAL_STATE: InitialState = {
 };
 
 export default INITIAL_STATE;
+

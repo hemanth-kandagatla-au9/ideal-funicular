@@ -9,9 +9,7 @@ interface ScheduleTypeOption {
   value: string;
 }
 
-/**
- * AGENT VERSIONS Option Values
- */
+
 export const AGENT_VERSIONS: Option[] = [
   {
     label: "0.0.1",
@@ -31,9 +29,7 @@ export const AGENT_VERSIONS: Option[] = [
   },
 ];
 
-/**
- * PLATFORM Option values
- */
+
 export const PLATFORMS: Option[] = [
   {
     label: "Platform 1",
@@ -57,9 +53,7 @@ export const PLATFORMS: Option[] = [
   },
 ];
 
-/**
- * ENVIRONMENTS Option Values
- */
+
 export const ENVIRONMENTS: Option[] = [
   {
     label: "Environment 1",
@@ -79,9 +73,7 @@ export const ENVIRONMENTS: Option[] = [
   },
 ];
 
-/**
- * SIDS Option Values
- */
+
 export const SIDS: Option[] = [
   {
     label: "SID 1",
@@ -93,9 +85,7 @@ export const SIDS: Option[] = [
   },
 ];
 
-/**
- * STATE OPTIONS Values
- */
+
 export const stateOptions: Option[] = [
   { value: "ocean1", label: "Ocean", color: "#00B8D9" },
   { value: "blue", label: "Blue", color: "#0052CC" },
@@ -109,9 +99,7 @@ export const stateOptions: Option[] = [
   { value: "silver", label: "Silver", color: "#666666" },
 ];
 
-/**
- * AGENT TYPES Option Values
- */
+
 export const AGENT_TYPES = {
   OS_AGENT_PRIMARY: "os_agent",
   SCHEDULER_AGENT_PRIMARY: "scheduler_agent",
@@ -131,9 +119,7 @@ export const AGENT_ACTIONS = {
   RESTART: "restart",
 } as const;
 
-/**
- * SCHEDULE RADIO TYPES
- */
+
 export const SCHEDULE_TYPES: ScheduleTypeOption[] = [
   { label: "Command", value: "command" },
   { label: "Download files", value: "download_files" },
@@ -146,3 +132,4 @@ export const NUMERICS = {
 export const ERROR_MESSAGE = {
   AGENT_SELECTION_LIMIT: "The status for selected RISEBOTs will not be auto updated. Please click on Health Check to get the status of RISEBOTs.",
 } as const;
+

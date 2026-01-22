@@ -1,5 +1,5 @@
 body {
-  /* background: #faf9f7; */
+  
   background: #ffffff !important;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
@@ -20,11 +20,11 @@ body {
   position: relative;
   padding: 20px 30px 10px;
   border-bottom: 1px solid #c1bbb3;
-  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  
 }
 
 .agentTopInfo {
-  /* padding-left: 20px; */
+  
   display: flex;
 }
 
@@ -34,7 +34,7 @@ body {
   font-size: 20.356px;
   font-style: normal;
   font-weight: 700;
-  line-height: 34.896px; /* 171.429% */
+  line-height: 34.896px; 
   letter-spacing: -0.727px;
   display: flex;
   gap: 6px;
@@ -46,7 +46,7 @@ body {
   font-size: 20.356px;
   font-style: normal;
   font-weight: 700;
-  line-height: 34.896px; /* 171.429% */
+  line-height: 34.896px; 
   letter-spacing: -0.727px;
 }
 
@@ -70,7 +70,7 @@ body {
   z-index: 1;
   transform: translateX(-8px);
   z-index: 10;
-  /*border: 1px solid rgba(0, 0, 0, 0.25);*/
+  
   border: 1px solid rgba(237, 230, 255, 1);
 }
 
@@ -84,7 +84,7 @@ body {
 }
 
 .card-container.selected {
-  /*box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.3);*/
+  
   transform: translateX(-8px);
   z-index: 10;
   border: 1px solid rgba(0, 0, 0, 0.25);
@@ -188,7 +188,7 @@ body {
   text-align: right;
 }
 
-/* Hover effect for topbar buttons */
+
 .topbar-hover-btn {
   font-family: "Johnson Text";
   font-weight: 500;
@@ -222,7 +222,7 @@ body {
   color: #101828;
   font-weight: 500;
   margin-top: 5px;
-  /* margin-bottom: 25px; */
+  
 }
 
 .agentTextContent {
@@ -268,23 +268,19 @@ body {
 .risebot-syncUpStatusBtn {
   border-radius: 36px;
   background: #ffffff;
-  color: #344054;
+  color: #39465f;
   font-size: 14px;
   font-family: "Johnson Text";
-  font-weight: 500;
-  font-style: normal;
   line-height: 20px;
-  letter-spacing: 0%;
   position: relative;
   height: 40px;
   padding: 6px 10px !important;
   white-space: nowrap;
   min-width: auto;
-  border: 1px solid #eeeeee;
-  cursor: pointer;
+  border: 1px solid #eeeeee;  cursor: pointer;
 }
 
-/* Neutralize nested button - prevent it from triggering its own active states */
+
 .risebot-syncUpStatusBtn button,
 .risebot-syncUpStatusBtn button:hover,
 .risebot-syncUpStatusBtn button:focus,
@@ -324,6 +320,7 @@ body {
   transform: scale(0.96);
 }
 
+
 .editBtn {
   border-radius: 36px;
   background: #6951be;
@@ -349,10 +346,23 @@ body {
   background-color: #338bf3;
 }
 
+.risebot-syncUpStatusBtn:hover {
+  
+  cursor: pointer;
+}
+
 .syncUpBtn:active,
 .syncUpBtn:focus {
   border: 1px solid #f0efed;
   background: #f0efed;
+  color: #404040;
+  box-shadow: none;
+}
+
+.risebot-syncUpStatusBtn:active,
+.risebot-syncUpStatusBtn:focus {
+  
+  
   color: #404040;
   box-shadow: none;
 }
@@ -366,7 +376,7 @@ body {
   font-size: 15px;
   line-height: 20px;
   position: relative;
-  /* height: 40px; */
+  
 }
 
 .addAgentsBtn:hover,
@@ -381,11 +391,7 @@ body {
   padding-left: 8px;
 }
 
-/* .agentActions {
-  display: inline-flex;
-  margin: 0px 5px;
-  vertical-align: middle;
-} */
+
 
 .agentHeaderRow {
   height: 48px;
@@ -511,9 +517,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid #eaecf0; */
-  /* border-radius: 8px; */
-  /* background: #ffffff; */
+  
+  
+  
 }
 
 .filtersection {
@@ -704,7 +710,7 @@ body {
 
 .statusCircle.risebot-btn-primary,
 .recentButton {
-  /* color: unset; */
+  
   background-color: unset;
   border-color: unset;
   border-top: none;
@@ -786,6 +792,16 @@ body {
   pointer-events: none !important;
 }
 
+
+.agentTriggerBtn.button-clicked {
+  background: #2961F4 !important;
+  color: #fff !important;
+  border-color: #2961F4 !important;
+  box-shadow: 0 0 0 3px rgba(41, 97, 244, 0.2) !important;
+  transform: scale(0.96);
+}
+
+
 .agentTriggerBtn:disabled:hover {
   background: #f5f5f5 !important;
   color: #9ca3af !important;
@@ -808,10 +824,10 @@ body {
   background: #e4a951;
 }
 
-/* Selection Counter Badge */
+
 .selectionCounterBadge {
   position: fixed;
-  bottom: 80px;
+  bottom: 55px;
   right: 30px;
   z-index: 999;
   animation: slideInUp 0.3s ease-out;
@@ -1360,10 +1376,7 @@ p.pageRwSelection {
   color: #101828 !important;
 }
 
-/* .popupSubHeaders {
-  display: inline-block;
-  width: 50%;
-} */
+
 
 .popupSubHeaders p {
   font-family: "Johnson Text";
@@ -1403,7 +1416,7 @@ p.pageRwSelection {
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px; 
 }
 
 .localGlobView p,
@@ -1530,7 +1543,7 @@ p.pageRwSelection {
   vertical-align: middle;
 }
 
-/* sidebar styles */
+
 
 .risebot-agentDrawer {
   min-width: 565px !important;
@@ -1802,15 +1815,15 @@ p.pageRwSelection {
   width: 10px;
 }
 
-/* Track */
 
-/* Handle */
+
+
 .risebot_logDetails ul::-webkit-scrollbar-thumb {
   background: #5e5873;
   border-radius: 10px;
 }
 
-/* Handle on hover */
+
 .risebot_logDetails ul::-webkit-scrollbar-thumb:hover {
   background: #5e5873;
 }
@@ -1866,14 +1879,9 @@ p.pageRwSelection {
   transform: scale(0.92);
 }
 
-/* .deleteScheduler .modal-header,
-.deleteScheduler .modal-footer {
-  border: 0px;
-} */
 
-/* .risebot-globalLocalConfig .modal-dialog {
-  max-width: 90%;
-} */
+
+
 
 .risebothealthCheckModal {
   display: flex !important;
@@ -1914,7 +1922,7 @@ p.pageRwSelection {
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px; 
   padding: 16px 0px;
 }
 
@@ -1948,7 +1956,7 @@ p.pageRwSelection {
 
 .risebot-agentDrawer .offcanvas-header {
   border-bottom: 1px solid #c1bbb3;
-  /* margin-bottom: 16px; */
+  
 }
 
 .risebot-globeLocalConfigs {
@@ -2180,7 +2188,7 @@ p.pageRwSelection {
 .subPopVersionCvr {
   display: flex;
   align-items: center;
-  /* margin-bottom: 10px; */
+  
 }
 
 .risebotmdlBtn {
@@ -2216,7 +2224,7 @@ p.pageRwSelection {
   margin-bottom: 10px;
 }
 
-/* .coverAlertModal .risebot_agentVersionsTitle { */
+
 .risebot_agentLogsHeader {
   display: flex;
   justify-content: space-between;
@@ -2276,7 +2284,6 @@ p.pageRwSelection {
   background: #404040;
   color: #fff;
 }
-
 .risebotagentSubVersionBtn:focus {
   outline: 2px solid #2961F4;
   outline-offset: 2px;
@@ -2563,14 +2570,14 @@ p.pageRwSelection {
   }
 }
 
-/* Chrome, Safari, Edge, Opera */
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
+
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -2592,15 +2599,15 @@ input[type="number"] {
   width: 4px;
 }
 
-/* Track */
 
-/* Handle */
+
+
 .agentVersionsCover::-webkit-scrollbar-thumb {
   background: #5e5873;
   border-radius: 10px;
 }
 
-/* Handle on hover */
+
 .agentVersionsCover::-webkit-scrollbar-thumb:hover {
   background: #5e5873;
 }
@@ -2751,7 +2758,7 @@ input[type="number"] {
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  line-height: 20px; /* 125% */
+  line-height: 20px; 
   border-bottom: 1px solid #c1bbb3;
   width: 100%;
 }
@@ -2767,7 +2774,7 @@ input[type="number"] {
   background: #fff;
   margin-bottom: 60px !important;
   margin-right: 30px !important;
-  /* border-bottom: 1px solid #BCBCBC; */
+  
 }
 
 .deleteScheduler .modal-body {
@@ -2776,7 +2783,7 @@ input[type="number"] {
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px; 
 }
 
 .deleteScheduler .modal-body span {
@@ -2795,7 +2802,7 @@ input[type="number"] {
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px; 
 }
 
 .deleteSchedulerBtn {
@@ -2804,7 +2811,7 @@ input[type="number"] {
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px; 
   padding: 10px 16px;
   gap: 8px;
   border-radius: 8px;
@@ -2813,9 +2820,7 @@ input[type="number"] {
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 }
 
-/* .deleteScheduler .modal-body span {
-  font-weight: 600;
-} */
+
 
 .adSyncupFooter button {
   width: 70px;
@@ -2849,8 +2854,8 @@ input[type="number"] {
 .weeklyDayCheckBox .form-check .form-check-input {
   width: 1.3em;
   height: 1.3em;
-  /* background: #F0EFED; */
-  /* border: none; */
+  
+  
 }
 
 .weeklyDayCheckBox .form-check-input:checked {
@@ -2921,7 +2926,7 @@ input[type="number"] {
 }
 
 .risebotschedularDialog .leftSwitchSection {
-  /* padding-right: 10px; */
+  
 }
 
 .risebotschedularDialog.modal {
@@ -2929,15 +2934,13 @@ input[type="number"] {
 }
 
 .scheduledJobsWrapper {
-  /* margin-bottom: 10px; */
+  
   display: flex;
   justify-content: space-between;
 }
 
 .scheduledJobsName {
-  /* display: inline-block;
-  width: 80%;
-  vertical-align: middle; */
+  
   color: #44424c;
   font-family: "Johnson Text";
   font-size: 16px;
@@ -3006,7 +3009,7 @@ input[type="number"] {
   height: 20px;
 }
 
-/*CRON UI*/
+
 .risebotcronInput {
   background: #f0efed !important;
   border-radius: 8px !important;
@@ -3023,17 +3026,12 @@ input[type="number"] {
 }
 
 .react-js-cron {
-  /* margin-top: 16px;
-  padding: 8px 16px;
-  border-radius: 8px;
-  background: #F7F7FA; */
+  
   background: #f7f7fa;
-  /* display: flex; */
-  /* justify-content: flex-end;
-  align-items: flex-start;
-  align-content: flex-start; */
-  /* gap: 16px; */
-  /* flex-wrap: wrap; */
+  
+  
+  
+  
 }
 
 .react-js-cron-clear-button {
@@ -3059,17 +3057,9 @@ input[type="number"] {
   width: 100%;
 }
 
-/* .react-js-cron > div, .react-js-cron-field {
-    display: flex;
-    align-items: center;
-    width: 100%;
-} */
 
-/* .react-js-cron > div {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-} */
+
+
 
 .react-js-cron-period {
   width: 100% !important;
@@ -3137,9 +3127,7 @@ input[type="number"] {
   margin-left: 13px;
 }
 
-/* .react-js-cron-clear-button {
-  display: none !important;
-} */
+
 
 .react-js-cron .ant-select-selector {
   display: flex;
@@ -3191,10 +3179,8 @@ input[type="number"] {
   margin-top: 20%;
 }
 
-/*Agent Management*/
-/* .agentWOselect .modal-dialog {
-  max-width: 450px;
-} */
+
+
 
 .agentWOselectBody p {
   font-size: 16px;
@@ -3204,7 +3190,7 @@ input[type="number"] {
   padding: 5px 0px;
 }
 
-/* Upgrade Agents*/
+
 .upgradeHeader {
   font-size: 18px !important;
 }
@@ -3295,7 +3281,7 @@ input[type="number"] {
   margin-left: 7px;
 }
 
-/* Sort Button Styles */
+
 .sortBtn {
   outline: none !important;
   border-color: #eeeeee !important;
@@ -3319,7 +3305,7 @@ input[type="number"] {
   display: block;
 }
 
-/* Sort Dropdown Header */
+
 .sortDropdownHeader {
   padding: 10px 16px;
   font-family: "Johnson Text", sans-serif;
@@ -3371,7 +3357,7 @@ input[type="number"] {
   margin-top: 10px;
 }
 
-/* Abab functions */
+
 
 .ababHeaderBtn {
   text-align: right;
@@ -3546,7 +3532,7 @@ input[type="number"] {
   display: block;
 }
 
-/* Customize scrollbar */
+
 .cctooltip::-webkit-scrollbar {
   width: 6px;
   height: 10px;
@@ -3581,13 +3567,13 @@ input[type="number"] {
 .globalConfigCustomModalDialog .modal-footer .btn {
   min-width: 80px;
   height: 40px;
-  border-radius: 32px;
+  border-radius: 8px;
   font-family: 'Johnson Text', Arial, sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0;
-  padding: 10px 20px;
+  padding: 8px 16px;
   opacity: 1;
   box-shadow: none;
   display: inline-flex;
@@ -3595,6 +3581,39 @@ input[type="number"] {
   justify-content: center;
   white-space: nowrap;
 }
+
+
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper {
+  border: 1px solid #D0D5DD;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper .cm-editor {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper .cm-content {
+  padding: 10px 14px;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper .cm-gutters {
+  background: #F9FAFB;
+  border-right: 1px solid #EAECF0;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper .cm-focused {
+  outline: none;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper:focus-within {
+  border-color: #2961F4;
+  box-shadow: 0 0 0 3px rgba(41, 97, 244, 0.1);
+}
+
 .globalConfigCustomModalDialog .modal-footer .btn-primary {
   background: #2961F4;
   color: #fff;
@@ -3615,17 +3634,17 @@ input[type="number"] {
   letter-spacing: 0%;
   margin-bottom: 0;
 }
-/* Custom Global Configuration Modal Sizing */
-/* Stronger selector for modal dialog sizing */
+
+
 .modal-dialog.globalConfigCustomModalDialog {
-  max-width: 1100px !important;
-  width: 90vw !important;
-  min-height: 60vh !important;
+  max-width: 1400px !important;
+  width: 96vw !important;
 }
 .globalConfigCustomModalDialog .modal-content {
-  min-height: 60vh;
-  padding: 32px 32px;
-  border-radius: 18px !important;
+  height: 900px;
+  max-height: 90vh;
+  padding: 24px 24px;
+  border-radius: 8px !important;
   box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);
   border: none;
 }
@@ -3644,15 +3663,15 @@ input[type="number"] {
   opacity: 1;
 }
 .globalConfigCustomModalDialog .modal-footer {
-  padding: 20px 0 0 0 !important;
+  padding: 12px 0 0 0 !important;
   border-top: 1px solid #EAECF0;
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  margin-top: 4px;
+  margin-top: 0px;
 }
 
-/* Global Configuration Form Styling */
+
 .globalConfigCustomModalDialog .form-label {
   font-family: 'Johnson Text', Arial, sans-serif;
   font-weight: 500;
@@ -3666,8 +3685,8 @@ input[type="number"] {
 }
 
 .globalConfigCustomModalDialog .form-control {
-  height: 56px;
-  padding: 12px 16px;
+  height: 50px !important;
+  padding: 10px 14px !important;
   font-family: 'Johnson Text', Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -3675,8 +3694,25 @@ input[type="number"] {
   color: #101828;
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
-  border-radius: 16px;
+  border-radius: 8px !important;
   transition: border-color 0.2s ease;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: #F9FAFB;
+  border-color: #EAECF0;
+  min-height: 220px;
+  line-height: 20px;
+}
+
+
+
+.globalConfigCustomModalDialog textarea.form-control {
+  height: auto !important;
+  min-height: 84px;
+  resize: vertical;
+  line-height: 20px;
 }
 
 .globalConfigCustomModalDialog .form-control:focus {
@@ -3714,6 +3750,30 @@ input[type="number"] {
 
 .globalConfigCustomModalDialog .config-fields-container {
   padding-right: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 24px;
+}
+
+.globalConfigCustomModalDialog .config-field {
+  margin-bottom: 0 !important;
+}
+
+.globalConfigCustomModalDialog .config-field--full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 992px) {
+  .globalConfigCustomModalDialog .config-fields-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .globalConfigCustomModalDialog .config-fields-container {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }
 
 .globalConfigCustomModalDialog .modal-body > div {
@@ -3729,6 +3789,7 @@ input[type="number"] {
   font-family: 'Johnson Text', Arial, sans-serif;
   font-weight: 500;
   font-size: 14px;
+  color: #2961F4;
   text-decoration: none;
   background: transparent;
   border: none;
@@ -3744,3 +3805,4 @@ input[type="number"] {
   box-shadow: none;
   outline: none;
 }
+

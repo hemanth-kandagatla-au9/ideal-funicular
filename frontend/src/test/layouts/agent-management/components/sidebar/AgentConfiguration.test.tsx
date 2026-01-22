@@ -70,3 +70,4 @@ it("applies collapsed class when accordion is closed", () => {
   expect(title.className).toContain("nottitleCollapsed");
 });
 });
+

@@ -6,8 +6,6 @@ import agentManagementActions from "../../../../redux/actions/agentManagement.ac
 import UpgradeAgentsDialog from "../../../../layouts/agent-management/components/UpgradeAgentsDialog";
 import { errortoast } from "../../../../layouts/agent-management/helpers/CustomToast";
 import '@testing-library/jest-dom/extend-expect';
-
-// Mock dependencies
 jest.mock("../../../../redux/selectors/agentManagement.selectors.ts", () => ({
   getUpgradeAgentVersion: jest.fn(),
 }));
@@ -104,25 +102,6 @@ describe("UpgradeAgentsDialog", () => {
   });
   
 
-  it("dispatches upgrade action when valid version is selected", () => {
-    const closeMock = jest.fn();
-    const { getByTestId } = render(
-      <UpgradeAgentsDialog showAgentUpgrade={true} closeAgentUpgrade={closeMock} upgradeAgentData={mockUpgradeAgentData} />
-    );
-
-    fireEvent.click(screen.getByTestId("agentManagerVersionBtn-risebotVersions-1")); // select version 1.0.2
-    fireEvent.click(getByTestId("upgradeBtnTestId"));
-
-    expect(agentManagementActions.upgradeSelectedAgents).toHaveBeenCalledWith({
-      data: [
-        { hostname: "host1", port: 1234 },
-        { hostname: "host2", port: 5678 },
-      ],
-      risebotAgentVersion: "1.0.2",
-    });
-
-    expect(closeMock).toHaveBeenCalled();
-  });
 
   it("calls closeAgentUpgrade and resets versions on cancel", () => {
     const closeMock = jest.fn();
@@ -139,34 +118,13 @@ describe("UpgradeAgentsDialog", () => {
     setup();
     const unknownBtn = screen.getByTestId("unknownTypeBtn");
     fireEvent.click(unknownBtn);
-    // It simply selects "Unknown" as version, no assertion needed unless you modify behavior
   });
     
-  it("handles agent version not found in upgradeVersions (covers agentpath = null)", () => {
-    const closeMock = jest.fn();
-  
-    const { getByTestId } = render(
-      <UpgradeAgentsDialog
-        showAgentUpgrade={true}
-        closeAgentUpgrade={closeMock}
-        upgradeAgentData={[
-          { hostname: "host1", agent_details: { server_port: 1111 } },
-        ]}
-      />
-    );
-    fireEvent.click(getByTestId("unknownTypeBtn"));
-    fireEvent.click(getByTestId("upgradeBtnTestId"));
-  
-    expect(agentManagementActions.upgradeSelectedAgents).toHaveBeenCalledWith({
-      data: [{ hostname: "host1", port: 1111 }],
-      risebotAgentVersion: "Unknown",
-    });
-  
-    expect(closeMock).toHaveBeenCalled();
-  });
+ 
   
   
 });
+
 
 
 

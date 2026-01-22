@@ -1,8 +1,6 @@
 import React from "react";
-import { successtoast, errortoast, warningtoast, infotoast } from "../../../../../src/layouts/agent-management/helpers/CustomToast";
+import { successtoast, errortoast, warningtoast, infotoast } from "../../../../layouts/agent-management/helpers/CustomToast";
 import { toast } from "react-toastify";
-
-// --- mock react-toastify ---
 jest.mock("react-toastify", () => ({
   toast: {
     success: jest.fn(),
@@ -44,8 +42,6 @@ describe("CustomToast helpers", () => {
     successtoast("Title: Subtitle");
 
     const renderer = (toast.success as jest.Mock).mock.calls[0][0];
-
-    // simulate react-toastify calling render function
     const element = renderer({ closeToast: jest.fn() });
 
     expect(React.isValidElement(element)).toBe(true);
@@ -60,3 +56,4 @@ describe("CustomToast helpers", () => {
     expect(React.isValidElement(element)).toBe(true);
   });
 });
+

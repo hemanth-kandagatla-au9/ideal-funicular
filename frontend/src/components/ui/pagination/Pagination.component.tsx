@@ -55,9 +55,7 @@ interface DropdownItem {
   value: string;
 }
 
-/**
- * Pagination component for pagination.
- */
+
 function PaginatedItems({ itemsPerPage, propsPagination, gotoPage, totalPage, rowSizeData, marginPages = 2 }: PaginatedItemsProps) {
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -291,3 +289,4 @@ function Pagination(props: PaginationProps) {
 }
 
 export default Pagination;
+

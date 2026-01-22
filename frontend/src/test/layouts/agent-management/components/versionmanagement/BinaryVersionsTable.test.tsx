@@ -2,8 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import BinaryVersionsTable from '../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsTable';
-
-// Mock MUI DataGrid
 jest.mock('@mui/x-data-grid', () => ({
   DataGrid: ({ rows, columns, ...props }: any) => (
     <div data-testid="data-grid" {...props}>
@@ -12,13 +10,9 @@ jest.mock('@mui/x-data-grid', () => ({
     </div>
   ),
 }));
-
-// Mock MUI Box
 jest.mock('@mui/material', () => ({
   Box: ({ children, ...props }: any) => <div data-testid="mui-box" {...props}>{children}</div>,
 }));
-
-// Mock Pagination component
 jest.mock('../../../../../components/ui/pagination/Pagination.component', () => {
   return function MockPagination({ handlePagination, handlePageClick, ...props }: any) {
     return (
@@ -30,8 +24,6 @@ jest.mock('../../../../../components/ui/pagination/Pagination.component', () => 
     );
   };
 });
-
-// Mock BinaryVersionsColumns
 jest.mock('../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsColumns', () => {
   return function MockBinaryVersionsColumns({ onEdit, onView, onDelete }: any) {
     return [
@@ -197,5 +189,6 @@ describe('BinaryVersionsTable Component', () => {
     expect(container).toBeInTheDocument();
   });
 });
+
 
 

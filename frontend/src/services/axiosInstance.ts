@@ -1,6 +1,3 @@
-/**
- * Component dependencies.
- */
 import axios, { AxiosInstance as AxiosInstanceType, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import Config from "../config/config";
 import { getLocalAccessToken, getLocalRefreshToken, getLocalUserId, updateLocalTokens } from "../utils/TokenUtils";
@@ -10,9 +7,7 @@ type FailedQueueItem = {
   reject: (reason?: any) => void;
 };
 
-/**
- * Helper class for handling Axios api instance & calls.
- */
+
 class AxiosInstance {
   private baseURL: string;
 
@@ -32,14 +27,11 @@ class AxiosInstance {
   private processQueue(error: AxiosError | null, token: string | null = null): boolean {
     this.failedQueue.forEach(prom => {
       if (error) {
-        // Handle error case
         if (prom instanceof Promise && typeof prom.reject === "function") {
           prom.reject(error);
         }
         return error;
       }
-
-      // Handle success case
       if (prom instanceof Promise && !error) {
         if (typeof prom.resolve === "function") {
           prom.resolve(token);
@@ -56,9 +48,7 @@ class AxiosInstance {
     return false;
   }
 
-  /**
-   * Method for creating axios instance.
-   */
+  
   public init(token?: string): AxiosInstanceType {
     const options: AxiosRequestConfig = {
       baseURL: this.baseURL,
@@ -84,9 +74,7 @@ class AxiosInstance {
     return this.instance;
   }
 
-  /**
-   * Method for sending token in headers of every api call.
-   */
+  
   private updateHeaderToken(): void {
     this.instance.interceptors.request.use(
       (config: AxiosRequestConfig) => {
@@ -105,9 +93,7 @@ class AxiosInstance {
     );
   }
 
-  /**
-   * Method for refreshing accessToken once expired.
-   */
+  
   private refreshToken(returnError = true): void {
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => response,
@@ -136,15 +122,12 @@ class AxiosInstance {
           try {
             const localRefreshToken = getLocalRefreshToken();
             if (localRefreshToken) {
-              // helper function called to fetch userId
               const userId = getLocalUserId();
               if (userId) {
-                // Below api will generate new access token & refresh token
                 const rs = await this.instance.patch(`${Config.apiEndpoints.auth.baseUrl}${Config.apiEndpoints.auth.patch.refreshToken}/${userId}`, {
                   refreshToken: localRefreshToken,
                 });
                 const { accessToken, refreshToken } = rs.data.data;
-                // helper function for updating user session
                 updateLocalTokens(accessToken, refreshToken);
 
                 if (this && this.instance && this.instance.defaults && this.instance.defaults.headers && this.instance.defaults.headers.common) {
@@ -174,3 +157,4 @@ class AxiosInstance {
 }
 
 export default AxiosInstance;
+

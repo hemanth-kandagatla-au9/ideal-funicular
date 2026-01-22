@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import FilterBar from "../../../../../src/layouts/agent-management/home/FilterBar";
+import FilterBar from "../../../../layouts/agent-management/home/FilterBar";
 
 jest.mock("../../../../../src/layouts/agent-management/components/MultiSelectDropdown", () => {
   return ({ toggleTestId, onSelectChange, clearAll, selectAllOption }: any) => (
@@ -121,3 +121,4 @@ describe("FilterBar", () => {
     fireEvent.click(screen.getByText("Clear All"));
   });
 });
+

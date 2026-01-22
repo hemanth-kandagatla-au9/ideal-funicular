@@ -2,8 +2,6 @@
 import Config from "../../../config/config";
 import AxiosInstanceClass from "../../../services/axiosInstance";
 import { getLocalAccessToken, getUserInfo } from "../../../utils/TokenUtils";
-
-// Mock dependencies
 jest.mock("../../../config/config");
 jest.mock("../../../services/axiosInstance");
 jest.mock("../../../utils/TokenUtils");
@@ -14,7 +12,6 @@ describe('UtilizationService', () => {
   let mockAxiosInstanceClass;
 
   beforeAll(() => {
-    // Create fresh mocks once before all tests
     mockAxiosInstance = {
       post: jest.fn(),
       get: jest.fn()
@@ -23,8 +20,6 @@ describe('UtilizationService', () => {
     mockAxiosInstanceClass = {
       init: jest.fn(() => mockAxiosInstance)
     };
-
-    // Setup mock implementations
     AxiosInstanceClass.mockImplementation(() => mockAxiosInstanceClass);
     getLocalAccessToken.mockReturnValue('mock-token');
     getUserInfo.mockReturnValue({ email: 'test@example.com' });
@@ -38,13 +33,10 @@ describe('UtilizationService', () => {
         }
       }
     };
-
-    // Import the service after setting up mocks
     UtilizationService = require("../../../services/auth/UtilizationService").default;
   });
 
   beforeEach(() => {
-    // Reset mock calls before each test
     jest.clearAllMocks();
   });
 
@@ -220,5 +212,6 @@ describe('UtilizationService', () => {
   });
  
 });
+
 
 

@@ -145,3 +145,4 @@ const DropdownComponent: React.FC<DropdownComponentProps> = props => {
 };
 
 export default DropdownComponent;
+

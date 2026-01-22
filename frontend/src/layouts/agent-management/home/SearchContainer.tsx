@@ -52,8 +52,6 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
     },
     [updateState],
   );
-
-  // Debounced API fetch for agentSearch
   const debouncedFetch = useRef(
     debounce((searchValue: string) => {
       dispatch(
@@ -67,7 +65,6 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
 
   useEffect(() => {
     if (isEmpty(agentSearch)) {
-      // Clear results when input is cleared
       debouncedFetch.cancel();
       dispatch(
         agentManagementAction.fetchAgentManagementServices({
@@ -89,7 +86,6 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
   }, []);
 
   const handleClick = useCallback((type: 'refreshspin' | 'syncspin') => {
-    // clear any existing timeout first
     if (timeoutRef.current !== null) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
@@ -280,3 +276,4 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
 };
 
 export default SearchContainer;
+

@@ -6,8 +6,6 @@ import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import PopUp from "../../../components/popup/popUp.component";
 import "@testing-library/jest-dom/extend-expect";
 import { cancelButtonText, okButtonText } from "../../../constants/strings";
-
-// Configure Enzyme adapter
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Modal test", () => {
@@ -154,3 +152,4 @@ describe("Modal test", () => {
     expect(okButton.className).toContain("btn-success");
   });
 });
+

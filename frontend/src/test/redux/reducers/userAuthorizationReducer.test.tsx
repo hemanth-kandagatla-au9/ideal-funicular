@@ -254,3 +254,4 @@ describe('userAuthorizationReducer - REAL FUNCTIONAL TESTS', () => {
     expect(state.users.length).toBe(0);
   });
 });
+

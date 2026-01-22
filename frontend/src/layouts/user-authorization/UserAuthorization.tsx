@@ -13,14 +13,15 @@ import { MdCheckBox, MdCheckBoxOutlineBlank, MdDelete } from "react-icons/md";
 import userAuthorizationActions from "@/redux/actions/userAuthorization.action";
 import { getUsers, isUsersLoading, getUsersError, getUsersPagination, getSelectedUsers } from "@/redux/selectors/userAuthorization.selectors";
 import { User } from "@/types/UserAuthorization";
-import AssignPermissionsModal from "../user-authorization/AssignPermissionModal";
+import AssignPermissionsModal from "./AssignPermissionModal";
 import Pagination from "@/components/ui/pagination/Pagination.component";
-import AddUserModal from "../user-authorization/AddUserModal";
+import AddUserModal from "./AddUserModal";
 import NoDataFoundImg from "../../images/agent-management/NoDATA.png";
 import buttonBaseIcon from "../../images/agent-management/assets/Button_base.png";
 import actionIcon from "../../images/agent-management/assets/action_icon.png";
 import PopUp from "@/components/popup/popUp.component";
 import searchIcon from "../../images/agent-management/assets/searchIcon.svg";
+import { formatNameByFirstLetterCase } from "@/utils/utils";
 import "./UserAuthorization.css";
 import "../user-authorization/AssignPermissionsModal.css";
 
@@ -79,13 +80,19 @@ const UserAuthorization: React.FC = () => {
   };
 
   // Handle Add User modal submit
-  const handleAddUser = (userData: { username: string; password: string; isActive: boolean; cloneFromUser?: string }) => {
-    dispatch(userAuthorizationActions.createUser(userData));
+  const handleAddUser = (userData: { username: string; password: string; isActive: boolean; cloneFromUserId?: string }) => {
+    const payload = {
+      ...userData,
+      username: formatNameByFirstLetterCase(userData.username),
+      cloneFromUserId: userData.cloneFromUserId ? formatNameByFirstLetterCase(userData.cloneFromUserId) : undefined,
+    };
+
+    dispatch(userAuthorizationActions.createUser(payload));
     setShowAddUserModal(false);
 
     // If cloneFromUser is provided, show a message about cloning permissions
-    if (userData.cloneFromUser) {
-      const clonedFromUser = usersList.find(u => u.id === userData.cloneFromUser);
+    if (userData.cloneFromUserId) {
+      const clonedFromUser = usersList.find(u => u.userName === userData.cloneFromUserId);
       if (clonedFromUser) {
         console.log(`Cloning permissions from ${clonedFromUser.userName} to new user ${userData.username}`);
       }
@@ -296,7 +303,7 @@ const UserAuthorization: React.FC = () => {
                 </button>
               </div> */}
               <div className="user-table-cell user-table-cell-name">
-                <span className="user-table-value">{user.userName}</span>
+                <span className="user-table-value">{formatNameByFirstLetterCase(user.userName)}</span>
               </div>
               <div className="user-table-cell user-table-cell-created-by">
                 <span className="user-table-value">{user.createdBy}</span>

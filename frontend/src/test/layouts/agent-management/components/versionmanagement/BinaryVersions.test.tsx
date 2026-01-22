@@ -5,8 +5,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import '@testing-library/jest-dom';
 import BinaryVersions from '../../../../../layouts/agent-management/components/versionmanagement/BinaryVersions';
-
-// Mock the Redux selectors
 jest.mock('../../../../../redux/selectors/agentManagement.selectors', () => ({
   getVersions: jest.fn(),
   isVersionManagementLoading: jest.fn(),
@@ -15,8 +13,6 @@ jest.mock('../../../../../redux/selectors/agentManagement.selectors', () => ({
   getCreateVersionError: jest.fn(),
   isManualSyncVersionsLoading: jest.fn(),
 }));
-
-// Mock the redux actions
 jest.mock('../../../../../redux/actions/agentManagement.action', () => ({
   __esModule: true,
   default: {
@@ -24,8 +20,6 @@ jest.mock('../../../../../redux/actions/agentManagement.action', () => ({
     downloadFileExcel: jest.fn(() => ({ type: 'DOWNLOAD_FILE_EXCEL' })),
   },
 }));
-
-// Mock XLSX library
 jest.mock('xlsx', () => ({
   utils: {
     json_to_sheet: jest.fn(),
@@ -34,8 +28,6 @@ jest.mock('xlsx', () => ({
   },
   writeFile: jest.fn(),
 }));
-
-// Mock antd components
 jest.mock('antd', () => ({
   message: {
     success: jest.fn(),
@@ -43,8 +35,6 @@ jest.mock('antd', () => ({
   },
   Spin: ({ children }: { children: React.ReactNode }) => <div data-testid="loading-spinner">{children}</div>,
 }));
-
-// Mock child components
 jest.mock('../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsModal', () => {
   return function MockBinaryVersionsModal() {
     return <div data-testid="binary-versions-modal">Mock Modal</div>;
@@ -143,5 +133,6 @@ describe('BinaryVersions Component', () => {
     expect(screen.getByTestId('binary-versions-table')).toBeInTheDocument();
   });
 });
+
 
 

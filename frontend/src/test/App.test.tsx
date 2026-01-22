@@ -4,14 +4,10 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import initializeStore from "../redux/initializeStore";
 import App from "../App";
-
-// Mock child components to isolate App component tests
 jest.mock("../layouts/agent-management/AgentManagement.tsx", () => () => <div data-testid="agent-management">AgentManagement</div>);
 jest.mock("react-toastify", () => ({
   ToastContainer: () => <div data-testid="toast-container">ToastContainer</div>,
 }));
-
-// Mock the store initialization
 jest.mock("../redux/initializeStore.ts", () => ({
   __esModule: true,
   default: jest.fn(() => ({

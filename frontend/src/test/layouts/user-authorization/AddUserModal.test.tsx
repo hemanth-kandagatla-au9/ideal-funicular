@@ -105,7 +105,6 @@ describe("AddUserModal", () => {
     fireEvent.click(screen.getByText("admin"));
 
     expect(screen.getByText("admin")).toBeInTheDocument();
-    // Skip checking permission text as layout may vary
   });
 
   test("filters clone users by search", () => {
@@ -153,3 +152,4 @@ describe("AddUserModal", () => {
     expect(screen.getByText("Cancel")).toBeDisabled();
   });
 });
+

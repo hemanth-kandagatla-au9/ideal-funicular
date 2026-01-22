@@ -138,25 +138,8 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = props => {
           value={value}
           className="risebot-dropdownMenus"
         />
-        {/* <div className="btnOptions">
-          <div className="filterBtns commonLeft">
-            {!isEmpty(value) ? (
-              <Button onClick={clearAll} data-testid={clearTestId}>
-                Clear All
-              </Button>
-            ) : (
-              <Button onClick={selectAllOption} data-testid={selectTestId}>
-                Select All
-              </Button>
-            )}
-          </div>
-          <div className="filterBtns btnRight">
-            <Button onClick={onApplyClick} data-testid={applyTestId} disabled={applyDisabled}>
-              Apply
-            </Button>
-          </div>
-        </div> */}
-        {/* <div className="badgeOption">{!isEmpty(value) && <Badge>{size(value)}</Badge>}</div> */}
+        {}
+        {}
       </Dropdown>
     </div>
   );
@@ -270,3 +253,4 @@ const Option: React.FC<OptionProps<OptionType, true>> = props => {
 };
 
 export default MultiSelectDropdown;
+

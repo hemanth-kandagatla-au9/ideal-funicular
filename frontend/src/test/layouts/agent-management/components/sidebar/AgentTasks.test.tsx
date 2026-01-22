@@ -3,8 +3,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { Accordion } from "react-bootstrap";
 import AgentTasks from "../../../../../layouts/agent-management/components/sidebar/AgentTasks";
 import '@testing-library/jest-dom';
-
-// ---------- MOCKS ----------
 jest.mock("react-redux", () => ({
   useDispatch: () => jest.fn(),
 }));
@@ -23,8 +21,6 @@ jest.mock("../../../../../redux/actions/agentManagement.action", () => ({
     listSchedulerCommand: jest.fn(() => ({ type: "LIST" })),
   },
 }));
-
-// ---------- BASE PROPS ----------
 const baseProps = {
   hostname: "host1",
   port: "8080",
@@ -62,8 +58,6 @@ const renderUI = (activeKey = "0", props = {}) =>
       <AgentTasks {...baseProps} {...props} />
     </Accordion>
   );
-
-// ---------- TESTS ----------
 describe("AgentTasks", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -149,12 +143,8 @@ describe("AgentTasks", () => {
       ],
     },
   });
-
-  // Modal confirm button must exist if modal rendered
   const confirmBtn = await screen.findByTestId("agentSubServiceVersionControlBtn");
   expect(confirmBtn).toBeInTheDocument();
-
-  // Also verify version button exists
   expect(screen.getByText(/v 1.0.0/i)).toBeInTheDocument();
 });
 
@@ -185,3 +175,4 @@ describe("AgentTasks", () => {
     expect(baseProps.agentVersionUpgrade).toHaveBeenCalled();
   });
 });
+

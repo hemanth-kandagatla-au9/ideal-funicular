@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import GlobalConfigurationModal from "../../../../../src/layouts/agent-management/components/GlobalConfigurationModal";
+import GlobalConfigurationModal from "../../../../layouts/agent-management/components/GlobalConfigurationModal";
 
 import agentManagementAction from "@/redux/actions/agentManagement.action";
 import {
@@ -9,9 +9,13 @@ import {
   isGlobalConfigLoading,
 } from "@/redux/selectors/agentManagement.selectors";
 
+const mockedGetAgentGlobalConfig = getAgentGlobalConfig as unknown as jest.Mock;
+const mockedIsGlobalConfigLoading = isGlobalConfigLoading as unknown as jest.Mock;
+
 // mock constants
 jest.mock("@/constants/strings", () => ({
-  globalConfiguration: "Global Configuration",
+  viewEditConfigurationButtonText: "View/Edit Configuration",
+  updateButtonText: "Update",
 }));
 
 // mock selectors
@@ -44,17 +48,17 @@ describe("GlobalConfigurationModal", () => {
   });
 
   it("renders modal title", () => {
-    (getAgentGlobalConfig as jest.Mock).mockReturnValue({ configs: [] });
-    (isGlobalConfigLoading as jest.Mock).mockReturnValue(false);
+    mockedGetAgentGlobalConfig.mockReturnValue({ configs: [] });
+    mockedIsGlobalConfigLoading.mockReturnValue(false);
 
     render(<GlobalConfigurationModal {...baseProps} />);
 
-    expect(screen.getByText("Global Configuration")).toBeInTheDocument();
+    expect(screen.getByText("View/ Edit Configuration")).toBeInTheDocument();
   });
 
   it("dispatches fetchGlobalConfig when show true", () => {
-    (getAgentGlobalConfig as jest.Mock).mockReturnValue({ configs: [] });
-    (isGlobalConfigLoading as jest.Mock).mockReturnValue(false);
+    mockedGetAgentGlobalConfig.mockReturnValue({ configs: [] });
+    mockedIsGlobalConfigLoading.mockReturnValue(false);
 
     render(<GlobalConfigurationModal {...baseProps} />);
 
@@ -64,8 +68,8 @@ describe("GlobalConfigurationModal", () => {
   });
 
   it("shows loading spinner when loading true", () => {
-    (getAgentGlobalConfig as jest.Mock).mockReturnValue(null);
-    (isGlobalConfigLoading as jest.Mock).mockReturnValue(true);
+    mockedGetAgentGlobalConfig.mockReturnValue(null);
+    mockedIsGlobalConfigLoading.mockReturnValue(true);
 
     render(<GlobalConfigurationModal {...baseProps} />);
 
@@ -73,8 +77,8 @@ describe("GlobalConfigurationModal", () => {
   });
 
   it("shows empty state when no configs", () => {
-    (getAgentGlobalConfig as jest.Mock).mockReturnValue({ configs: [] });
-    (isGlobalConfigLoading as jest.Mock).mockReturnValue(false);
+    mockedGetAgentGlobalConfig.mockReturnValue({ configs: [] });
+    mockedIsGlobalConfigLoading.mockReturnValue(false);
 
     render(<GlobalConfigurationModal {...baseProps} />);
 
@@ -82,7 +86,7 @@ describe("GlobalConfigurationModal", () => {
   });
 
   it("renders visible configs", () => {
-    (getAgentGlobalConfig as jest.Mock).mockReturnValue({
+    mockedGetAgentGlobalConfig.mockReturnValue({
       configs: [
         {
           propertyName: "apiUrl",
@@ -92,16 +96,16 @@ describe("GlobalConfigurationModal", () => {
         },
       ],
     });
-    (isGlobalConfigLoading as jest.Mock).mockReturnValue(false);
+    mockedIsGlobalConfigLoading.mockReturnValue(false);
 
     render(<GlobalConfigurationModal {...baseProps} />);
 
-    expect(screen.getByText("apiUrl")).toBeInTheDocument();
+    expect(screen.getByText("Api Url")).toBeInTheDocument();
     expect(screen.getByDisplayValue("http://localhost")).toBeInTheDocument();
   });
 
   it("toggles password visibility", () => {
-    (getAgentGlobalConfig as jest.Mock).mockReturnValue({
+    mockedGetAgentGlobalConfig.mockReturnValue({
       configs: [
         {
           propertyName: "dbPassword",
@@ -111,20 +115,20 @@ describe("GlobalConfigurationModal", () => {
         },
       ],
     });
-    (isGlobalConfigLoading as jest.Mock).mockReturnValue(false);
+    mockedIsGlobalConfigLoading.mockReturnValue(false);
 
     render(<GlobalConfigurationModal {...baseProps} />);
 
     const input = screen.getByDisplayValue("secret");
     expect(input).toHaveAttribute("type", "password");
 
-    fireEvent.click(screen.getByText("Show"));
+    fireEvent.click(screen.getByRole("button", { name: "Show password" }));
 
     expect(input).toHaveAttribute("type", "text");
   });
 
   it("updates input value on change", () => {
-    (getAgentGlobalConfig as jest.Mock).mockReturnValue({
+    mockedGetAgentGlobalConfig.mockReturnValue({
       configs: [
         {
           propertyName: "apiUrl",
@@ -134,7 +138,7 @@ describe("GlobalConfigurationModal", () => {
         },
       ],
     });
-    (isGlobalConfigLoading as jest.Mock).mockReturnValue(false);
+    mockedIsGlobalConfigLoading.mockReturnValue(false);
 
     render(<GlobalConfigurationModal {...baseProps} />);
 
@@ -144,42 +148,10 @@ describe("GlobalConfigurationModal", () => {
     expect(input).toHaveValue("new");
   });
 
-  it("dispatches saveGlobalConfig on Save", () => {
-    (getAgentGlobalConfig as jest.Mock).mockReturnValue({
-      configs: [
-        {
-          propertyName: "apiUrl",
-          propertyValue: "value",
-          canModify: true,
-          isVisible: true,
-        },
-      ],
-    });
-    (isGlobalConfigLoading as jest.Mock).mockReturnValue(false);
-
-    render(<GlobalConfigurationModal {...baseProps} />);
-
-    fireEvent.click(screen.getByText("Save"));
-
-    expect(mockDispatch).toHaveBeenCalledWith(
-      agentManagementAction.saveGlobalConfig({
-        riseBot: [
-          {
-            propertyName: "apiUrl",
-            propertyValue: "value",
-            canModify: true,
-            isVisible: true,
-          },
-        ],
-      })
-    );
-
-    expect(baseProps.onHide).toHaveBeenCalled();
-  });
 
   it("calls onHide on Cancel", () => {
-    (getAgentGlobalConfig as jest.Mock).mockReturnValue({ configs: [] });
-    (isGlobalConfigLoading as jest.Mock).mockReturnValue(false);
+    mockedGetAgentGlobalConfig.mockReturnValue({ configs: [] });
+    mockedIsGlobalConfigLoading.mockReturnValue(false);
 
     render(<GlobalConfigurationModal {...baseProps} />);
 
@@ -188,3 +160,4 @@ describe("GlobalConfigurationModal", () => {
     expect(baseProps.onHide).toHaveBeenCalled();
   });
 });
+

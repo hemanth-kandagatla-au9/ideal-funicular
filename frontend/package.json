@@ -4,6 +4,7 @@
   "private": true,
   "main": "index.js",
   "dependencies": {
+    "@codemirror/lang-python": "^6.2.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -23,6 +24,7 @@
     "@types/jest": "^29.5.0",
     "@types/lodash": "^4.14.191",
     "@types/yup": "^0.29.13",
+    "@uiw/react-codemirror": "^4.25.4",
     "antd": "^4.21.4",
     "apexcharts": "^3.28.1",
     "axios": "^0.21.4",

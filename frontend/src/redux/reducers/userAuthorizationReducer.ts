@@ -1,15 +1,7 @@
-/**
- * User Authorization Reducer
- * Manages user authorization state in Redux store
- * Uses AUTH.USER action types for consistency
- */
-
 import { AUTH } from "../../config/actions";
 import { UserAuthorizationState } from "../../types/UserAuthorization";
 
-/**
- * Initial State
- */
+
 const initialState: UserAuthorizationState = {
   users: [],
   loading: false,
@@ -29,12 +21,7 @@ const initialState: UserAuthorizationState = {
   },
 };
 
-/**
- * User Authorization Reducer
- * @param state Current state
- * @param action Dispatched action
- * @returns Updated state
- */
+
 export default function userAuthorizationReducer(
   state = initialState,
   action: {
@@ -43,12 +30,8 @@ export default function userAuthorizationReducer(
   },
 ) {
   switch (action.type) {
-    // FETCH USERS
     case AUTH.USER.GET_USERS_REQUEST:
       return { ...state, loading: true, error: null };
-
-    // FETCH USERS SUCCESS - Updates state with user list from backend
-    // Transforms backend response format to frontend state format
     case AUTH.USER.GET_USERS_SUCCESS: {
       const backendData = action.data?.data?.data || {};
       const rawUsers = backendData.users || [];
@@ -81,8 +64,6 @@ export default function userAuthorizationReducer(
 
     case AUTH.USER.GET_USERS_FAILURE:
       return { ...state, loading: false, error: action.error };
-
-    // CREATE USER REQUEST - Sets loading state
     case AUTH.USER.CREATE_USER_REQUEST:
       return { ...state, loading: true, error: null };
 
@@ -91,8 +72,6 @@ export default function userAuthorizationReducer(
 
     case AUTH.USER.CREATE_USER_FAILURE:
       return { ...state, loading: false, error: action.error };
-
-    // UPDATE USER
     case AUTH.USER.UPDATE_USER_REQUEST:
       return { ...state, loading: true, error: null };
 
@@ -101,8 +80,6 @@ export default function userAuthorizationReducer(
 
     case AUTH.USER.UPDATE_USER_FAILURE:
       return { ...state, loading: false, error: action.error };
-
-    // DELETE USER REQUEST
     case AUTH.USER.DELETE_USER_REQUEST:
       return { ...state, loading: true, error: null };
 
@@ -111,8 +88,6 @@ export default function userAuthorizationReducer(
 
     case AUTH.USER.DELETE_USER_FAILURE:
       return { ...state, loading: false, error: action.error };
-
-    // USER SELECTION
     case AUTH.USER.SELECT_USER: {
       const { userId } = action;
       const isSelected = state.selectedUsers.includes(userId);
@@ -172,8 +147,6 @@ export default function userAuthorizationReducer(
 
     case AUTH.PERMISSION.DELETE_PERMISSION_FAILURE:
       return { ...state, loading: false, error: action.error };
-
-     // FETCH GLOBAL PERMISSIONS
     case AUTH.USER.FETCH_GLOBAL_PERMISSIONS_REQUEST:
       return { ...state, loading: true, error: null };
 
@@ -192,3 +165,4 @@ export default function userAuthorizationReducer(
       return state;
   }
 }
+

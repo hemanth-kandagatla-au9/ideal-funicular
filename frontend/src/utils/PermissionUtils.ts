@@ -8,9 +8,7 @@ type PermissionsData = {
   };
 };
 
-/**
- * Helper function to fetch user permssions for rise application.
- */
+
 export const getUserPermissions = (): PermissionsData => {
   let userPermissions: PermissionsData = {};
   try {
@@ -27,9 +25,7 @@ export const getUserPermissions = (): PermissionsData => {
   return userPermissions;
 };
 
-/**
- * Helper function to fetch allowed pages routes for a user.
- */
+
 export const getAllowedRoutes = (): string[] => {
   const allowedRoutes: string[] = [];
   const permissionsData = getUserPermissions();
@@ -52,9 +48,7 @@ export const getAllowedPages = (): string[] => {
   return allowedPages;
 };
 
-/**
- * Helper function to check user can access
- */
+
 export const canAccess = (pageTitle: string): boolean => {
   let canAccessPage = false;
   const permissionsData = getUserPermissions();
@@ -87,7 +81,6 @@ const PermissionUtils = {
   refreshUserPermissions,
 };
 
-/**
- * Exporting Permission Utils
- */
+
 export default PermissionUtils;
+

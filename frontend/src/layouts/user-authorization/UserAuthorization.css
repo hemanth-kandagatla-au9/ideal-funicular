@@ -1,17 +1,12 @@
-/* User Authorization Component Styles */
-
-/* ============================================ */
-/* CONTAINER                                   */
-/* ============================================ */
 .user-authorization-container {
   padding: 32px;
   background-color: #ffffff;
   min-height: 100vh;
 }
 
-/* ============================================ */
-/* HEADER SECTION                              */
-/* ============================================ */
+
+
+
 .user-authorization-header {
   display: flex;
   justify-content: space-between;
@@ -36,9 +31,9 @@
   color: #000;
 }
 
-/* ============================================ */
-/* USERS COUNT + PERMISSION LIST SECTION       */
-/* ============================================ */
+
+
+
 .users-section {
   display: flex;
   justify-content: space-between;
@@ -150,9 +145,9 @@
   color: #ffffff;
 }
 
-/* ============================================ */
-/* TABLE STRUCTURE                             */
-/* ============================================ */
+
+
+
 .user-table-header {
   height: 64px;
   display: flex;
@@ -168,13 +163,11 @@
 
 .user-table-body {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-self: center;
+  flex-direction: column;
   border-radius: 16px;
   margin: 0 8px 10px 8px;
-  height: 47vh;
-  overflow: auto;
+  height: 70vh;
+  overflow-x: auto;
   padding-right: 8px;
 }
 
@@ -183,7 +176,6 @@
   height: 64px;
   display: flex;
   flex-wrap: wrap;
-  align-self: center;
   background: #ffffff;
   border-radius: 16px;
   padding: 0 12px;
@@ -196,9 +188,9 @@
   background: #f8fafc;
 }
 
-/* ============================================ */
-/* TABLE CELLS                                 */
-/* ============================================ */
+
+
+
 .user-table-cell {
   display: flex;
   align-items: center;
@@ -247,9 +239,9 @@
   justify-content: center;
 }
 
-/* ============================================ */
-/* TABLE TEXT                                  */
-/* ============================================ */
+
+
+
 .user-table-label {
   font-family: "Johnson Display";
   font-size: 14px;
@@ -270,9 +262,9 @@
   text-overflow: ellipsis;
 }
 
-/* ============================================ */
-/* BUTTONS                                     */
-/* ============================================ */
+
+
+
 .user-checkbox-btn,
 .user-action-btn {
   background: transparent;
@@ -302,9 +294,9 @@
   outline: none;
 }
 
-/* ============================================ */
-/* EMPTY STATE                                 */
-/* ============================================ */
+
+
+
 .user-table-empty {
   display: flex;
   justify-content: center;
@@ -383,3 +375,4 @@
 .risebot-btnSearchIcon:hover {
   background: #e6edfa;
 }
+

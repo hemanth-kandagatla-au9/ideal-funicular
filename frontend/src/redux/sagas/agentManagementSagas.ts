@@ -12,11 +12,7 @@ interface ActionProps {
   [key: string]: any;
 }
 
-/**
- * This saga hit the agentStartService
- * To execute the agent start service
- * @param {*} param0
- */
+
 export function* startAgentManagerService({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestStartAgentService());
@@ -29,11 +25,7 @@ export function* startAgentManagerService({ props }: ActionProps): Generator<any
   }
 }
 
-/**
- * This saga hit the agentHealthCheck
- * To execute the agent healthcheck service
- * @param {*} param0
- */
+
 export function* agentHealthCheckup({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchHealthCheckup());
@@ -47,11 +39,7 @@ export function* agentHealthCheckup({ props }: ActionProps): Generator<any, void
   }
 }
 
-/**
- * This saga hit the healthCheckupByPort
- * To execute the agent healthcheck by port service
- * @param {*} param0
- */
+
 export function* agentHealthCheckupByPort(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchHealthCheckupByPort());
@@ -62,11 +50,7 @@ export function* agentHealthCheckupByPort(): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the agentStopService
- * To execute the agent stop service
- * @param {*} param0
- */
+
 export function* stopAgentManagerServices({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestStopAgentServices());
@@ -80,11 +64,7 @@ export function* stopAgentManagerServices({ props }: ActionProps): Generator<any
   }
 }
 
-/**
- * This saga hit the jobReStartService
- * To execute the job restart service
- * @param {*} param0
- */
+
 export function* restartJobManagerService({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestRestartJobService());
@@ -98,11 +78,7 @@ export function* restartJobManagerService({ props }: ActionProps): Generator<any
   }
 }
 
-/**
- * This saga hit the agentReStartService
- * To execute the agent restart service
- * @param {*} param0
- */
+
 export function* restartAgentManagerService({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestRestartAgentService());
@@ -116,11 +92,7 @@ export function* restartAgentManagerService({ props }: ActionProps): Generator<a
   }
 }
 
-/**
- * This saga hit the agentShutDownService
- * To execute the agent shutDown service
- * @param {*} param0
- */
+
 export function* shutDownAgentManagerService({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestShutDownAgentService());
@@ -134,11 +106,7 @@ export function* shutDownAgentManagerService({ props }: ActionProps): Generator<
   }
 }
 
-/**
- * This saga hit the agentStartService via ssh
- * To execute the agent start service
- * @param {*} param0
- */
+
 export function* startSSHAgentManagerService({ props }: ActionProps): Generator<any, void, any> {
   console.log("entered into ");
   try {
@@ -153,11 +121,7 @@ export function* startSSHAgentManagerService({ props }: ActionProps): Generator<
   }
 }
 
-/**
- * This saga hit the saveAgentManagerProperty
- * To execute the agent saveagentproperty service
- * @param {*} param0
- */
+
 export function* saveAgentManagerProperty(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestSaveAgentProperty());
@@ -168,11 +132,7 @@ export function* saveAgentManagerProperty(): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the updateAgentManagerProperty
- * To execute the agent updateAgentManagerProperty service
- * @param {*} param0
- */
+
 export function* updateAgentManagerProperty(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestUpdateAgentProperty());
@@ -183,11 +143,7 @@ export function* updateAgentManagerProperty(): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the fetchBuildInfo service
- * To execute the agent fetchBuildInfo service
- * @param {*} param0
- */
+
 export function* fetchAgentBuildInfo(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentBuildInfo());
@@ -198,11 +154,7 @@ export function* fetchAgentBuildInfo(): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the saveGlobalConfig service
- * To execute the agent saveGlobalConfig service
- * @param {*} param0
- */
+
 export function* saveAgentGlobalConfig({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestSaveGlobalConfig());
@@ -215,11 +167,7 @@ export function* saveAgentGlobalConfig({ props }: ActionProps): Generator<any, v
   }
 }
 
-/**
- * This saga hit the fetchGlobalConfig service
- * To execute the agent fetchGlobalConfig service
- * @param {*} param0
- */
+
 export function* fetchAgentGlobalConfig(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchGlobalConfig());
@@ -230,11 +178,7 @@ export function* fetchAgentGlobalConfig(): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the fetchAgentService service
- * To execute the agent fetchAgentService service
- * @param {*} param0
- */
+
 export function* fetchAgentServices({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentManagementServices());
@@ -245,11 +189,7 @@ export function* fetchAgentServices({ props }: ActionProps): Generator<any, void
   }
 }
 
-/**
- * This saga hit the filterAgentService service
- * To execute the agent filterAgentService service
- * @param {*} param0
- */
+
 export function* fetchAgentFilterService({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentFilters());
@@ -260,11 +200,7 @@ export function* fetchAgentFilterService({ props }: ActionProps): Generator<any,
   }
 }
 
-/**
- * This saga hit the filterAgentRepoService service
- * To execute the agent filterAgentRepoService service
- * @param {*} param0
- */
+
 export function* fetchFilterAgentRepos({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentRepositories());
@@ -275,11 +211,7 @@ export function* fetchFilterAgentRepos({ props }: ActionProps): Generator<any, v
   }
 }
 
-/**
- * This saga hit the addAgentService service
- * To execute the agent addAgents service
- * @param {*} param0
- */
+
 export function* addAgents({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestAddAgent());
@@ -292,11 +224,7 @@ export function* addAgents({ props }: ActionProps): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the fetchAgentLogs service
- * To execute the agent fetchAgentLogs service
- * @param {*} param0
- */
+
 export function* fetchAgentLogs({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentLogs());
@@ -307,11 +235,7 @@ export function* fetchAgentLogs({ props }: ActionProps): Generator<any, void, an
   }
 }
 
-/**
- * This saga hit the saveLocalConfigs service
- * To execute the agent saveLocalConfigs service
- * @param {*} param0
- */
+
 export function* saveAgentLocalConfigs({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestSaveLocalConfigs());
@@ -324,11 +248,7 @@ export function* saveAgentLocalConfigs({ props }: ActionProps): Generator<any, v
   }
 }
 
-/**
- * This saga hit the fetchLocalConfigs service
- * To execute the agent fetchLocalConfigs service
- * @param {*} param0
- */
+
 export function* fetchAgentLocalConfigs({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchLocalConfigs());
@@ -339,11 +259,7 @@ export function* fetchAgentLocalConfigs({ props }: ActionProps): Generator<any, 
   }
 }
 
-/**
- * This saga hit the getAgentRepoService service
- * To execute the agent getAgentRepoService service
- * @param {*} param0
- */
+
 export function* fetchAgentRepo({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchRepositories());
@@ -354,11 +270,7 @@ export function* fetchAgentRepo({ props }: ActionProps): Generator<any, void, an
   }
 }
 
-/**
- * This saga hit the downloadRepositories service
- * To execute the agent downloadRepositories service
- * @param {*} param0
- */
+
 export function* downloadRepo({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestDownloadRepositories());
@@ -371,11 +283,7 @@ export function* downloadRepo({ props }: ActionProps): Generator<any, void, any>
   }
 }
 
-/**
- * This saga hit the saveSchedulerCommand service
- * To execute the agent saveSchedulerCommand service
- * @param {*} param0
- */
+
 export function* saveSchedulerCommands({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestSaveSchedulerCommand());
@@ -392,11 +300,7 @@ export function* saveSchedulerCommands({ props }: ActionProps): Generator<any, v
   }
 }
 
-/**
- * This saga hit the updateSchedulerCommand service
- * To execute the agent updateSchedulerCommand service
- * @param {*} param0
- */
+
 export function* updateSchedulerCommands({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestUpdateSchedulerCommand());
@@ -413,11 +317,7 @@ export function* updateSchedulerCommands({ props }: ActionProps): Generator<any,
   }
 }
 
-/**
- * This saga hit the deleteSchedulerCommand service
- * To execute the agent deleteSchedulerCommand service
- * @param {*} param0
- */
+
 export function* deleteSchedulerCommands({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestDeleteSchedulerCommand());
@@ -430,11 +330,7 @@ export function* deleteSchedulerCommands({ props }: ActionProps): Generator<any,
   }
 }
 
-/**
- * This saga hit the listSchedulerCommand service
- * To execute the agent listSchedulerCommand service
- * @param {*} param0
- */
+
 export function* listSchedulerCommands({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestListSchedulerCommand());
@@ -446,11 +342,7 @@ export function* listSchedulerCommands({ props }: ActionProps): Generator<any, v
   }
 }
 
-/**
- * This saga hit the getSchdulerById service
- * To execute the agent getSchdulerById service
- * @param {*} param0
- */
+
 export function* fetchScheduledJobsByCommandId({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.RequestFetchScheduledJobsByCommandId());
@@ -462,11 +354,7 @@ export function* fetchScheduledJobsByCommandId({ props }: ActionProps): Generato
   }
 }
 
-/**
- * This saga hit the listSchedulerCommand service
- * To execute the agent listSchedulerCommand service
- * @param {*} param0
- */
+
 export function* fetchAgentInfo({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentInfo());
@@ -478,11 +366,7 @@ export function* fetchAgentInfo({ props }: ActionProps): Generator<any, void, an
   }
 }
 
-/**
- * This saga hit the agentSyncScripts service
- * To execute the agent agentSyncScripts service
- * @param {*} param0
- */
+
 export function* syncScript({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestSyncScripts());
@@ -496,11 +380,7 @@ export function* syncScript({ props }: ActionProps): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the adSyncup service
- * To execute the agent adSyncup service
- * @param {*} param0
- */
+
 export function* agentDiscoverySyncup(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestSyncUpAgentDiscovery());
@@ -513,11 +393,7 @@ export function* agentDiscoverySyncup(): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the getAgentMetrics service
- * To execute the agent getAgentMetrics service
- * @param {*} param0
- */
+
 export function* getAgentMetrics(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentMetrics());
@@ -529,11 +405,7 @@ export function* getAgentMetrics(): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the startSelectedAgents service
- * To execute the agent startSelectedAgents service
- * @param {*} param0
- */
+
 export function* startsSelectedAgent({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestStartSelectedAgentService());
@@ -546,11 +418,7 @@ export function* startsSelectedAgent({ props }: ActionProps): Generator<any, voi
   }
 }
 
-/**
- * This saga hit the stopSelectedAgents service
- * To execute the agent stopSelectedAgents service
- * @param {*} param0
- */
+
 export function* stopsSelectedAgent({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestStopSelectedAgentService());
@@ -563,11 +431,7 @@ export function* stopsSelectedAgent({ props }: ActionProps): Generator<any, void
   }
 }
 
-/**
- * This saga hit the restartSelectedAgents service
- * To execute the agent restartSelectedAgents service
- * @param {*} param0
- */
+
 export function* restartsSelectedAgent({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestRestartSelectedAgentService());
@@ -580,11 +444,7 @@ export function* restartsSelectedAgent({ props }: ActionProps): Generator<any, v
   }
 }
 
-/**
- * This saga hit the healthCheckSelectedAgents service
- * To execute the agent healthCheckSelectedAgents service
- * @param {*} param0
- */
+
 export function* healthChecksSelectedAgent({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestHealthCheckupSelectedAgentService());
@@ -597,10 +457,7 @@ export function* healthChecksSelectedAgent({ props }: ActionProps): Generator<an
   }
 }
 
-/**
- * This Saga hits the upgrade agent service
- * @param {*} param0
- */
+
 export function* upgradeAgents({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestUpgradeSelectedAgents());
@@ -613,10 +470,7 @@ export function* upgradeAgents({ props }: ActionProps): Generator<any, void, any
   }
 }
 
-/**
- * Upgrade Agent Saga
- * This Saga Used to call upgrade Agent Service
- */
+
 export function* getAgentUpgrade(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchUpgradeAgents());
@@ -627,11 +481,6 @@ export function* getAgentUpgrade(): Generator<any, void, any> {
     yield put(agentManagementAction.failureFetchUpgradeAgents(error));
   }
 }
-
-/**
- * Saga Action Watcher
- */
-// get agent Regions
 export function* getAgentRegions(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentRegions());
@@ -641,8 +490,6 @@ export function* getAgentRegions(): Generator<any, void, any> {
     yield put(agentManagementAction.failureFetchAgentRegions(error));
   }
 }
-
-// get agent platform
 export function* getAgentPlatforms(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentPlatforms());
@@ -652,8 +499,6 @@ export function* getAgentPlatforms(): Generator<any, void, any> {
     yield put(agentManagementAction.failureFetchAgentPlatforms(error));
   }
 }
-
-// get agent environment
 export function* getAgentEnvironments(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentEnvironments());
@@ -663,8 +508,6 @@ export function* getAgentEnvironments(): Generator<any, void, any> {
     yield put(agentManagementAction.failureFetchAgentEnvironments(error));
   }
 }
-
-// get metrics tiles data
 export function* getMetricsTilesData(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchMetricsTilesData());
@@ -674,8 +517,6 @@ export function* getMetricsTilesData(): Generator<any, void, any> {
     yield put(agentManagementAction.failureFetchMetricsTilesData(error));
   }
 }
-
-// get agent sid
 export function* getAgentSids(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentSids());
@@ -685,8 +526,6 @@ export function* getAgentSids(): Generator<any, void, any> {
     yield put(agentManagementAction.failureFetchAgentSids(error));
   }
 }
-
-// get agent os types
 export function* getAgentOsTypes(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentOsTypes());
@@ -697,9 +536,7 @@ export function* getAgentOsTypes(): Generator<any, void, any> {
   }
 }
 
-/**
- * get agent service names
- */
+
 export function* getAgentServiceNames(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentServiceNames());
@@ -710,9 +547,7 @@ export function* getAgentServiceNames(): Generator<any, void, any> {
   }
 }
 
-/**
- * get agent versions
- */
+
 export function* getAgentVersions(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentVersions());
@@ -723,9 +558,7 @@ export function* getAgentVersions(): Generator<any, void, any> {
   }
 }
 
-/**
- * get fore update data agent
- */
+
 export function* getSyncAgentHealthConfigs(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestSyncAgentHealthConfigs());
@@ -738,11 +571,7 @@ export function* getSyncAgentHealthConfigs(): Generator<any, void, any> {
   }
 }
 
-/**
- * This saga hit the getAgentMasterdata service
- * To execute the agent getAgentMasterdata service
- * @param {*} param0
- */
+
 export function* getAgentMasterdata({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchAgentMasterdata());
@@ -754,11 +583,7 @@ export function* getAgentMasterdata({ props }: ActionProps): Generator<any, void
   }
 }
 
-/**
- * This saga hit the getAgentMasterdata service
- * To execute the agent getAgentMasterdata service
- * @param {*} param0
- */
+
 export function* addAgentMasterdata({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestAddAgentMasterdata());
@@ -774,11 +599,7 @@ export function* addAgentMasterdata({ props }: ActionProps): Generator<any, void
   }
 }
 
-/**
- * This saga hit the getAgentMasterdata service
- * To execute the agent getAgentMasterdata service
- * @param {*} param0
- */
+
 export function* deleteHostname({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestDeleteHostname());
@@ -812,7 +633,6 @@ export function* createVersionSaga({ versionData }: { versionData: BinaryVersion
 
     if (get(response, "data.status") === true) successtoast("Added Binary");
     else errortoast(get(response, "data.error", "Failed to Add Binary"));
-    // Refresh the versions list after successful creation
     yield put(agentManagementAction.fetchVersions({}));
   } catch (error: any) {
     yield put(agentManagementAction.failureCreateVersion(error));
@@ -840,7 +660,6 @@ export function* deleteteVersionSaga({ id }: { id: string }): Generator<any, voi
     yield put(agentManagementAction.successDeleteVersion(response));
 
     if (get(response, "data.status") === true) successtoast("Deleted Binary");
-    //else errortoast(get(response, "data.error", "Failed to Delete Binary"));
 
   } catch (error: any) {
     yield put(agentManagementAction.failureDeleteVersion(error));
@@ -855,7 +674,6 @@ export function* manualSyncVersionsSaga(): Generator<any, void, any> {
 
     if (get(response, "data.status") === true) {
       successtoast("Version sync completed successfully");
-    // Refresh the versions list after successful sync
     yield put(agentManagementAction.fetchVersions({}));
     } else {
       errortoast(get(response, "data.error", "Failed to sync versions"));
@@ -866,9 +684,7 @@ export function* manualSyncVersionsSaga(): Generator<any, void, any> {
   }
 }
 
-/**
- * export default action watcher
- */
+
 export default function* actionWatcher(): Generator<any, void, any> {
   yield all([
     yield takeLatest(AGENT_MANAGEMENT.START_AGENT_SERVICE, startAgentManagerService),
@@ -937,3 +753,4 @@ export default function* actionWatcher(): Generator<any, void, any> {
     yield takeLatest(AGENT_MANAGEMENT.MANUAL_SYNC_VERSIONS, manualSyncVersionsSaga),
   ]);
 }
+

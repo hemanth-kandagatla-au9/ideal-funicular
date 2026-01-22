@@ -1,8 +1,3 @@
-/**
- * User Authorization Service Tests
- * Comprehensive functional tests for all API service methods
- */
-
 import userAuthorizationService from '../../services/userAuthorization/userAuthorization.service';
 
 describe('User Authorization Service - REAL FUNCTIONAL TESTS', () => {
@@ -26,7 +21,6 @@ describe('User Authorization Service - REAL FUNCTIONAL TESTS', () => {
     });
 
     it('all methods are async functions or promises', () => {
-      // Verify each method returns a promise (async)
       const methods = [
         'fetchUsers',
         'createUser',
@@ -53,7 +47,6 @@ describe('User Authorization Service - REAL FUNCTIONAL TESTS', () => {
     });
 
     it('accepts optional filters parameter', () => {
-      // Test that function accepts filters without error
       expect(() => {
         userAuthorizationService.fetchUsers();
         userAuthorizationService.fetchUsers({ page: 1 });
@@ -258,8 +251,6 @@ describe('User Authorization Service - REAL FUNCTIONAL TESTS', () => {
 
   describe('Error Handling Capability', () => {
     it('all service methods handle errors', () => {
-      // Test that methods don't throw synchronously when called
-      // (they return promises which handle errors internally)
       const methods = [
         () => userAuthorizationService.fetchUsers(),
         () => userAuthorizationService.createUser({}),
@@ -283,7 +274,6 @@ describe('User Authorization Service - REAL FUNCTIONAL TESTS', () => {
 
   describe('Service Integration Coverage', () => {
     it('covers user management operations', () => {
-      // Verify all user-related methods exist
       expect(userAuthorizationService.fetchUsers).toBeDefined();
       expect(userAuthorizationService.createUser).toBeDefined();
       expect(userAuthorizationService.updateUser).toBeDefined();
@@ -292,14 +282,12 @@ describe('User Authorization Service - REAL FUNCTIONAL TESTS', () => {
     });
 
     it('covers permission management operations', () => {
-      // Verify all permission-related methods exist
       expect(userAuthorizationService.fetchPermissions).toBeDefined();
       expect(userAuthorizationService.createPermission).toBeDefined();
       expect(userAuthorizationService.deletePermission).toBeDefined();
     });
 
     it('covers permission assignment operations', () => {
-      // Verify assignment and global permission methods exist
       expect(userAuthorizationService.assignUserPermissions).toBeDefined();
       expect(userAuthorizationService.fetchGlobalPermissions).toBeDefined();
     });
@@ -307,24 +295,17 @@ describe('User Authorization Service - REAL FUNCTIONAL TESTS', () => {
 
   describe('Method Completeness', () => {
     it('service has all expected CRUD operations for users', () => {
-      // Create
       expect(userAuthorizationService.createUser).toBeDefined();
-      // Read
       expect(userAuthorizationService.fetchUsers).toBeDefined();
       expect(userAuthorizationService.fetchUserPermissionDetails).toBeDefined();
-      // Update
       expect(userAuthorizationService.updateUser).toBeDefined();
-      // Delete
       expect(userAuthorizationService.deleteUser).toBeDefined();
     });
 
     it('service has all expected CRUD operations for permissions', () => {
-      // Create
       expect(userAuthorizationService.createPermission).toBeDefined();
-      // Read
       expect(userAuthorizationService.fetchPermissions).toBeDefined();
       expect(userAuthorizationService.fetchGlobalPermissions).toBeDefined();
-      // Delete
       expect(userAuthorizationService.deletePermission).toBeDefined();
     });
 
@@ -333,3 +314,4 @@ describe('User Authorization Service - REAL FUNCTIONAL TESTS', () => {
     });
   });
 });
+

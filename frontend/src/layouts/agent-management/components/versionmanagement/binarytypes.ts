@@ -5,13 +5,13 @@ export interface BinaryVersion {
   status: "Current" | "Previous" | "Beta";
   upgradeType: "Mandatory" | "Optional";
   s3Url: string;
-  buildDate: string; // Raw date value for sorting
-  buildDateDisplay?: string; // Formatted date for display
-  releaseDate: string; // Keep for backward compatibility
-  // New fields from synced data
+  buildDate: string; 
+  buildDateDisplay?: string; 
+  releaseDate: string; 
   agentpath?: string;
   rustcversion?: string;
   checksum?: string;
   createdAt?: string;
   updatedAt?: string;
 }
+

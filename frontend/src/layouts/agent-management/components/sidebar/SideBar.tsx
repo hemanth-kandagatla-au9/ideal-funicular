@@ -279,7 +279,6 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
       const jsonData = {
         data: [{ hostname, port }],
         risebotAgentVersion: state.selectedAgentVersion,
-        // Removed agentpath - only sending version as requested
       };
       dispatch(agentManagementAction.upgradeSelectedAgents(jsonData));
       setState(prev => ({ ...prev, versionDialogOpen: false, isGlobalConfig: false, selectedAgentVersion: "" }));

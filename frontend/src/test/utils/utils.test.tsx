@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import Utils, { ExcelDateToJSDateOnly, formatTimestamp, bytesToMB, toPercentage, getDateFormatByRegion } from "../../utils/utils";
 
 describe("Utils", () => {
@@ -35,14 +36,12 @@ describe("Utils", () => {
     it("should test getDateFormatByRegion with date only", () => {
         const date = "2022-08-08T14:28:23Z";
         const formattedDate = getDateFormatByRegion(date, true);
-        // We can't predict the exact format as it depends on the browser's locale
         expect(formattedDate).toMatch(/\d+/); // Should contain numbers
     })
 
     it("should test getDateFormatByRegion with date and time", () => {
         const date = "2022-08-08T14:28:23Z";
         const formattedDate = getDateFormatByRegion(date);
-        // We can't predict the exact format as it depends on the browser's locale
         expect(formattedDate).toMatch(/\d+/); // Should contain numbers
     })
 
@@ -56,5 +55,3 @@ describe("Utils", () => {
         expect(Utils.toPercentage).toBeDefined();
     })
 });
-
-

@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React from "react";
 import { render, fireEvent, screen, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import * as ReactRedux from "react-redux";
-import * as PermissionUtils from "../../../../../../src/utils/PermissionUtils";
-import SideBar from "../../../../../../src/layouts/agent-management/components/sidebar/SideBar";
+import * as PermissionUtils from "../../../../../utils/PermissionUtils";
+import SideBar from "../../../../../layouts/agent-management/components/sidebar/SideBar";
 
 const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
 
@@ -26,7 +28,7 @@ const setScrollGeometry = (
   });
 };
 
-/* ---------------- REDUX ---------------- */
+
 jest.mock("react-redux", () => {
   const actual = jest.requireActual("react-redux");
   return {
@@ -41,7 +43,7 @@ const mockUseDispatch = ReactRedux.useDispatch as unknown as jest.Mock;
 const mockUseSelector = ReactRedux.useSelector as unknown as jest.Mock;
 const mockDispatch = jest.fn();
 
-/* ---------------- PERMISSIONS ---------------- */
+
 jest.mock("../../../../../../src/utils/PermissionUtils", () => ({
   __esModule: true,
   canAccess: jest.fn(),
@@ -49,20 +51,20 @@ jest.mock("../../../../../../src/utils/PermissionUtils", () => ({
 
 const mockCanAccess = PermissionUtils.canAccess as unknown as jest.Mock;
 
-/* ---------------- TOAST ---------------- */
+
 jest.mock("../../../../../../src/layouts/agent-management/helpers/CustomToast", () => ({
   successtoast: jest.fn(),
   errortoast: jest.fn(),
 }));
 
-/* ---------------- SERVICE ---------------- */
+
 jest.mock("../../../../../../src/services/agent/agentManagement.service", () => ({
   fetchAgentLogs: jest.fn(() =>
     Promise.resolve({ data: { data: [{ log: "x" }] } })
   ),
 }));
 
-/* ---------------- CHILD MOCKS ---------------- */
+
 
 jest.mock("../../../../../../src/layouts/agent-management/components/sidebar/AgentTasks", () => (props: any) => (
   <div>
@@ -130,7 +132,7 @@ jest.mock("../../../../../../src/layouts/agent-management/components/SchedulerDi
   <div data-testid="schedulerDialog" />
 ));
 
-/* ---------------- SELECTOR MOCK ---------------- */
+
 const defaultSelectorMock = (fn: any) => {
   switch (fn.name) {
     case "getAgentGlobalConfig": return { riseBot: [{ propertyName: "x", propertyValue: "y" }] };
@@ -147,7 +149,7 @@ const defaultSelectorMock = (fn: any) => {
   }
 };
 
-/* ---------------- TEST ---------------- */
+
 describe("SideBar coverage", () => {
   const props = {
     open: true,
@@ -342,3 +344,4 @@ expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
     expect(props.setOpenSidebar).toHaveBeenCalledWith(false);
   });
 });
+

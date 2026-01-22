@@ -1,19 +1,11 @@
-/**
- * Importing dependencies.
- */
 import Cookies from "universal-cookie";
 import Config from "../../config/config";
 import AxiosInstanceClass from "../axiosInstance";
-// Importing required function from tokenUtils
 import { getLocalAccessToken } from "../../utils/TokenUtils";
-
-// endpoints for auth service
 const { patch, get, baseUrl } = Config.apiEndpoints.auth;
 const cookies = new Cookies();
 const accessToken = cookies.get("iasphere_access_token");
 export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init(accessToken);
-
-// Define interfaces for the payloads and responses
 interface Pagination {
   limit: number;
   pageNo: number;
@@ -48,8 +40,6 @@ interface ApiResponse {
   data: any; // Replace 'any' with specific response structure if known
   [key: string]: any;
 }
-
-// function to fetch all users
 const getUsers = async (payload: GetUsersPayload): Promise<ApiResponse> => {
   try {
     const { filter, pagination } = payload;
@@ -70,8 +60,6 @@ const getUsers = async (payload: GetUsersPayload): Promise<ApiResponse> => {
     return error.response;
   }
 };
-
-// function to fetch userInfo
 const getUser = async (userId: string, accessToken?: string): Promise<UserData> => {
   try {
     let response: any;
@@ -87,8 +75,6 @@ const getUser = async (userId: string, accessToken?: string): Promise<UserData> 
     return error;
   }
 };
-
-// function to update user
 const updateUser = async (id: string, data: any): Promise<ApiResponse> => {
   try {
     const response = await AxiosInstance.patch(`${patch.updateUser}/${id}`, data);
@@ -97,8 +83,6 @@ const updateUser = async (id: string, data: any): Promise<ApiResponse> => {
     return updateUserErr.response.data;
   }
 };
-
-// function to fetch all users
 const exportUsers = async (payload: ExportUsersPayload): Promise<ApiResponse> => {
   try {
     const { filter } = payload;
@@ -118,8 +102,6 @@ const exportUsers = async (payload: ExportUsersPayload): Promise<ApiResponse> =>
     return error.response;
   }
 };
-
-// function to fetch all users
 const getUsersActivityLog = async (payload: UsersActivityLogPayload): Promise<ApiResponse> => {
   try {
     const { filter, pagination } = payload;
@@ -130,8 +112,6 @@ const getUsersActivityLog = async (payload: UsersActivityLogPayload): Promise<Ap
     return error.response;
   }
 };
-
-// function to fetch all users activity log cs
 const getUsersActivityLogExport = async (filter: Record<string, any>): Promise<ApiResponse> => {
   try {
     const filterParams = new URLSearchParams(filter).toString();
@@ -149,8 +129,6 @@ const getUsersActivityLogExport = async (filter: Record<string, any>): Promise<A
     return error.response;
   }
 };
-
-// user service function object
 const UserService = {
   getUsers,
   getUser,
@@ -159,6 +137,5 @@ const UserService = {
   getUsersActivityLog,
   getUsersActivityLogExport,
 };
-
-// Exporting user service
 export default UserService;
+

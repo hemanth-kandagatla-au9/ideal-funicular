@@ -13,32 +13,22 @@ import BinaryFilterBar from "./BinaryFilterBar";
 
 
 const BinaryVersions = () => {
-  // State for UI controls
   const [openModal, setOpenModal] = useState(false);
   const [editingVersion, setEditingVersion] = useState<BinaryVersion | null>(null);
   const [isViewMode, setIsViewMode] = useState(false);
   const [versions, setVersions] = useState<BinaryVersion[]>([]);
   const [filteredVersions, setFilteredVersions] = useState<BinaryVersion[]>([]);
-
-
-  // Filter state
   const [filters, setFilters] = useState({
     os: [] as string[],
     versions: [] as string[],
     types: [] as string[],
   });
-
-  // Define filter options
   const osOptions = ["windows", "linux"];
   const typeOptions = ["Mandatory", "Optional"];
-
-  // Dynamic version options from actual data
   const versionOptions = useMemo(() => {
     const uniqueVersions = [...new Set(versions.map(version => version.version))];
     return uniqueVersions.sort();
   }, [versions]);
-
-  // Redux state
   const dispatch = useDispatch();
   const reduxResponse = useSelector(getVersions);
   const loading = useSelector(isVersionManagementLoading);
@@ -46,15 +36,11 @@ const BinaryVersions = () => {
   const createVersionLoading = useSelector(isCreateVersionLoading);
   const createVersionError = useSelector(getCreateVersionError);
   const manualSyncLoading = useSelector(isManualSyncVersionsLoading);
-
-  // Filter state
   const [paginationFilters, setPaginationFilters] = useState({
     versionStatus: [""],
     page: 1,
     limit: 10,
   });
-
-  // Reset to page 1 when filters change (for global server-side filtering)
   useEffect(() => {
     if (filters.os.length > 0 || filters.types.length > 0 || filters.versions.length > 0) {
       setPaginationFilters(prev => ({
@@ -63,32 +49,22 @@ const BinaryVersions = () => {
       }));
     }
   }, [filters]);
-
-  // Fetch versions with server-side filtering
   useEffect(() => {
     const apiParams: any = {
       ...paginationFilters,
     };
-
-    // Send OS filter to backend (global filtering)
     if (filters.os.length > 0) {
       apiParams.operatingSystem = filters.os.join(',');
     }
-
-    // Send Type filter to backend (global filtering)
     if (filters.types.length > 0) {
       apiParams.upgradeType = filters.types.join(',');
     }
-
-    // Send Version filter to backend (global filtering)
     if (filters.versions.length > 0) {
       apiParams.agentVersion = filters.versions.join(',');
     }
 
     dispatch(agentManagementActions.fetchVersions(apiParams));
   }, [dispatch, paginationFilters, filters]);
-
-  // Update versions when Redux data changes
   useEffect(() => {
     if (reduxResponse?.data?.data?.versionData) {
       const formattedVersions = reduxResponse.data.data.versionData.map((version: any) => {
@@ -96,7 +72,6 @@ const BinaryVersions = () => {
           ? version.compatibleOS.map(os => (typeof os === "string" ? os : `${os.agentType || ""} ${os.osVersion || ""}`))
           : [];
         return {
-          // Use MongoDB _id as unique id for editing/updating
           id: version._id,
           version: version.agentVersion,
           buildDate: version.buildDate || "N/A",
@@ -113,14 +88,9 @@ const BinaryVersions = () => {
       setVersions([]);
     }
   }, [reduxResponse]);
-
-  // Server-side filtering - no client-side filtering needed
-  // Backend returns filtered results, so we just use versions directly
   useEffect(() => {
     setFilteredVersions(versions);
   }, [versions]);
-
-  // Show error messages
   useEffect(() => {
     if (error) {
       message.error(error);
@@ -135,7 +105,6 @@ const BinaryVersions = () => {
 
   const handleAddBinaryVersion = async (newVersion: Omit<BinaryVersion, "id">) => {
     try {
-      // Prepare payload to match API expectations
       const payload = {
         agentVersion: newVersion.version,
         compatibleOS: newVersion.osEntries.map(entry => ({
@@ -151,17 +120,10 @@ const BinaryVersions = () => {
         s3Url: newVersion.s3Url,
         createdBy: "userName",
       };
-
-      // Dispatch the create version action
       const result = await dispatch(agentManagementActions.createVersion(payload));
-
-      // Check if the action was successful
       if (result && !createVersionError) {
-        // Success toast is shown by the saga
         setOpenModal(false);
         setEditingVersion(null);
-
-        // Refresh the data
         dispatch(
           agentManagementActions.fetchVersions({
             ...paginationFilters,
@@ -194,17 +156,10 @@ const BinaryVersions = () => {
         upgradeType: updatedVersion.upgradeType,
         createdBy: "userName",
       };
-
-      // Dispatch the update version action
       const result = await dispatch(agentManagementActions.updateVersion(payload, updatedVersion.id));
-
-      // Check if update was successful
       if (result) {
-        // Success toast is shown by the saga, so we don't show it here
         setOpenModal(false);
         setEditingVersion(null);
-
-        // Refresh the data
         dispatch(
           agentManagementActions.fetchVersions({
             ...paginationFilters,
@@ -218,7 +173,6 @@ const BinaryVersions = () => {
       }
     } catch (error) {
       console.error("Failed to update version:", error);
-      // Error toast is shown by the saga
       throw error; // Re-throw to let modal know update failed
     }
   };
@@ -286,3 +240,4 @@ const BinaryVersions = () => {
 };
 
 export default BinaryVersions;
+

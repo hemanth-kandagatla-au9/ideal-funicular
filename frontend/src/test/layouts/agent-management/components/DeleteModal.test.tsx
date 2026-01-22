@@ -1,9 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import DeleteModal from "../../../../../src/layouts/agent-management/components/DeleteModal";
-
-// Mock constants
+import DeleteModal from "../../../../layouts/agent-management/components/DeleteModal";
 jest.mock("@/constants/strings", () => ({
   cancelButtonText: "Cancel",
   deleteButtonText: "Delete",
@@ -74,3 +72,4 @@ describe("DeleteModal", () => {
     expect(screen.queryByText("Delete Jobs")).not.toBeInTheDocument();
   });
 });
+

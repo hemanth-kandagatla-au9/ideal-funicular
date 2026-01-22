@@ -3,8 +3,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { Accordion } from "react-bootstrap";
 import AgentLogs from "../../../../../layouts/agent-management/components/sidebar/AgentLogs";
 import '@testing-library/jest-dom/extend-expect';
-
-// Mock helper
 jest.mock("../../../../../layouts/agent-management/helpers/agentHelpers", () => ({
   convertDateTime: jest.fn(() => "Formatted Time"),
 }));
@@ -95,3 +93,4 @@ describe("AgentLogs Component", () => {
     expect(baseProps.copyToClipboard).toHaveBeenCalledWith(baseProps.agentLog);
   });
 });
+

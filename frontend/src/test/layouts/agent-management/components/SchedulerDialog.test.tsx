@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { render, screen, fireEvent } from '@testing-library/react';
 import SchedulerDialog from '../../../../layouts/agent-management/components/SchedulerDialog';
 import '@testing-library/jest-dom/extend-expect';
-
-// Mock the useDispatch hook
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
   useDispatch: jest.fn(),
@@ -25,8 +24,6 @@ describe('SchedulerDialog', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    // Mock the useDispatch implementation
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     require('react-redux').useDispatch.mockImplementation(() => mockDispatch);
   });
 
@@ -131,8 +128,6 @@ describe('SchedulerDialog', () => {
     render(<SchedulerDialog {...defaultProps} />);
     expect(screen.queryByText('Update')).not.toBeInTheDocument();
   });
-
-  // Test that dispatch is called when saving/updating
   test('dispatches save action when schedule button is clicked', () => {
     render(<SchedulerDialog {...defaultProps} />);
     const input = screen.getByTestId('scheduleCommandInput');
@@ -149,5 +144,6 @@ describe('SchedulerDialog', () => {
     expect(mockDispatch).toHaveBeenCalled();
   });
 });
+
 
 

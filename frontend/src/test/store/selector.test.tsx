@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 jest.mock('../../store/selector', () => ({
   __esModule: true,
   dataSelector: jest.fn((state) => state),
@@ -28,5 +29,6 @@ describe("dataSelector", () => {
     expect(result).toEqual({});
   });
 });
+
 
 
