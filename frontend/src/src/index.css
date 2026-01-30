@@ -1,0 +1,98 @@
+body {
+  background-color: #e4e4e4 !important;
+  font-family: "Johnson Text";
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.8;
+  padding: 0;
+  margin: 0;
+  color: #777d74;
+  
+}
+
+
+
+
+
+
+a,
+button,
+input {
+  outline: medium none !important;
+}
+a {
+  color: #4f6272;
+}
+a.bg-primary:focus,
+a.bg-primary:hover,
+button.bg-primary:focus,
+button.bg-primary:hover {
+  background-color: #104f8e !important;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: inherit;
+}
+label {
+  font-weight: normal;
+}
+h1 {
+  font-size: 3.052em;
+}
+h2 {
+  font-size: 2.3em;
+}
+h3 {
+  font-size: 1.953em;
+}
+h4 {
+  font-size: 1.4em;
+}
+h5 {
+  font-size: 1.2em;
+}
+h6 {
+  font-size: 1em;
+}
+
+code {
+  font-family: "Johnson Text";
+}
+
+.rd3t-label__attributes {
+  display: none;
+}
+
+.node__branch:hover .rd3t-label__attributes {
+  display: block;
+}
+
+.page_contentDiscovery {
+  overflow: hidden;
+  padding: 0px 15px 0;
+  min-height: 100vh;
+  
+}
+
+.list-group-item a {
+  text-decoration: none !important;
+  color: #374948 !important;
+}
+
+.NoPadding {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+.btn-warning a {
+  color: white !important;
+  text-decoration: none;
+}

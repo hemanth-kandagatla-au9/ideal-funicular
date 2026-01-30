@@ -1,0 +1,3931 @@
+body {
+  
+  background: #ffffff !important;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border: 0px solid #dbdada;
+}
+
+.overallContainer {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.agentSubServicesWrapper {
+  display: inline-block;
+}
+
+.topwrapper {
+  background: #ffffff;
+  position: relative;
+  padding: 20px 30px 10px;
+  border-bottom: 1px solid #c1bbb3;
+  
+}
+
+.agentTopInfo {
+  
+  display: flex;
+}
+
+.appname {
+  color: #2c2c2c;
+  font-family: "Johnson Text";
+  font-size: 20.356px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 34.896px; 
+  letter-spacing: -0.727px;
+  display: flex;
+  gap: 6px;
+}
+
+.appname1 {
+  color: #6941c6;
+  font-family: "Johnson Text";
+  font-size: 20.356px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 34.896px; 
+  letter-spacing: -0.727px;
+}
+
+.card-grid {
+  width: 100%;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Johnson Display";
+  position: relative;
+}
+
+.card-container {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 0.1px solid transparent;
+  transition: all 0.3s ease;
+  z-index: 1;
+  transform: translateX(-8px);
+  z-index: 10;
+  
+  border: 1px solid rgba(237, 230, 255, 1);
+}
+
+.card-container:hover {
+  box-shadow: 0px 4px 13.5px 0px #b69eef;
+  border: none;
+}
+
+.card-container:hover:not(.selected) {
+  border-color: currentColor;
+}
+
+.card-container.selected {
+  
+  transform: translateX(-8px);
+  z-index: 10;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.card-vector {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  height: 98%;
+  width: 50%;
+  z-index: 10;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.card-inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 30px;
+}
+
+.card-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 80px;
+}
+
+.card-icon-wrapper {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-label {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.card-label p {
+  color: #39465f;
+  font-size: 20px;
+  margin: auto;
+}
+
+.card-right {
+  margin-top: auto;
+  z-index: 20;
+}
+
+.card-right p {
+  font-size: 32px;
+  margin-top: 15px;
+  font-weight: "bold";
+}
+
+.appcreate {
+  font-size: 18px;
+  line-height: 21px;
+  color: #82807c;
+  font-family: "Johnson Text";
+}
+
+.arrowButton {
+  border-radius: 25px;
+  border: 1px solid #e4e4e4;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  padding: 0px;
+  width: 32px;
+  height: 32px;
+}
+
+.agentDetailsSection {
+  margin: 20px 0px;
+}
+
+.overallWrapper {
+  width: 100%;
+  background: #ffffff;
+}
+
+.innerWrapper {
+  background: #ffffff;
+  padding: 25px 0px;
+}
+
+.topBtnsWrapper {
+  text-align: right;
+}
+
+
+.topbar-hover-btn {
+  font-family: "Johnson Text";
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #344054;
+  transition: background-color 0.3s ease;
+}
+
+.topbar-hover-btn:hover {
+  background-color: #2961F4 !important;
+  color: #FFFFFF !important;
+}
+
+.topbar-hover-btn:active {
+  background-color: #1840b8 !important;
+  transform: scale(0.95);
+  outline: none !important;
+}
+
+.topbar-hover-btn:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.agentTitle {
+  font-family: "Johnson Display";
+  font-size: 20px;
+  line-height: 28px;
+  color: #101828;
+  font-weight: 500;
+  margin-top: 5px;
+  
+}
+
+.agentTextContent {
+  font-family: "Johnson Text";
+  font-size: 14px;
+  line-height: 16px;
+  color: #82807c;
+}
+
+.agentCardContainer {
+  border: 1px solid #e4e4e4;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.addAgentsBtn {
+  border: 1px dashed #338bf3;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #2b87e3;
+  font-size: 18px;
+  line-height: 21px;
+  width: 140px;
+  text-align: center;
+  padding: 9px 0px;
+}
+
+.syncUpBtn {
+  border: 1px solid #f0efed;
+  border-radius: 8px;
+  background: #f0efed;
+  color: #404040;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding-left: 30px;
+  height: 40px;
+}
+
+.risebot-syncUpStatusBtn {
+  border-radius: 36px;
+  background: #ffffff;
+  color: #39465f;
+  font-size: 14px;
+  font-family: "Johnson Text";
+  line-height: 20px;
+  position: relative;
+  height: 40px;
+  padding: 6px 10px !important;
+  white-space: nowrap;
+  min-width: auto;
+  border: 1px solid #eeeeee;  cursor: pointer;
+}
+
+
+.risebot-syncUpStatusBtn button,
+.risebot-syncUpStatusBtn button:hover,
+.risebot-syncUpStatusBtn button:focus,
+.risebot-syncUpStatusBtn button:focus-visible,
+.risebot-syncUpStatusBtn button:active {
+  all: unset !important;
+  pointer-events: none !important;
+  background: transparent !important;
+  color: inherit !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.risebot-syncUpStatusBtn:hover {
+  background-color: #2961F4 !important;
+  color: #ffffff !important;
+  border-color: #2961F4 !important;
+}
+
+.risebot-syncUpStatusBtn:focus,
+.risebot-syncUpStatusBtn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid #eeeeee !important;
+}
+
+.risebot-syncUpStatusBtn:active {
+  background: #f5f5f5 !important;
+  border: 1px solid #e0e0e0 !important;
+  color: #39465f !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: scale(0.96);
+}
+
+
+.editBtn {
+  border-radius: 36px;
+  background: #6951be;
+  font-size: 14px;
+  font-family: "Johnson Text";
+  line-height: 20px;
+  position: relative;
+  height: 40px;
+  padding: 6px 10px !important;
+  white-space: nowrap;
+  min-width: auto;
+  border: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+}
+
+.syncUpBtn img {
+  position: absolute;
+  left: 8px;
+}
+
+.syncUpBtn:hover {
+  background-color: #338bf3;
+}
+
+.risebot-syncUpStatusBtn:hover {
+  
+  cursor: pointer;
+}
+
+.syncUpBtn:active,
+.syncUpBtn:focus {
+  border: 1px solid #f0efed;
+  background: #f0efed;
+  color: #404040;
+  box-shadow: none;
+}
+
+.risebot-syncUpStatusBtn:active,
+.risebot-syncUpStatusBtn:focus {
+  
+  
+  color: #404040;
+  box-shadow: none;
+}
+
+.ResetBtn {
+  display: none;
+  border: 1px solid #f0efed;
+  border-radius: 8px;
+  background: #c4321d;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  
+}
+
+.addAgentsBtn:hover,
+.addAgentsBtn:active,
+.addAgentsBtn:focus {
+  background: #ffffff;
+  color: #2b87e3;
+  box-shadow: none;
+}
+
+.addAgentsBtn span {
+  padding-left: 8px;
+}
+
+
+
+.agentHeaderRow {
+  height: 48px;
+  font-family: "Johnson Text";
+  background-color: #f7f7fa;
+  font-size: 16px;
+  color: #7b7b7b;
+  font-weight: 500;
+  border: 1px solid #eeeeee;
+  border-radius: 8px;
+  margin: 0 8px 10px 8px !important;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 35px;
+}
+
+.agentContainer {
+  height: 47vh;
+  overflow: auto;
+}
+
+.agentRowFirst {
+  min-width: 3%;
+}
+
+.agentRowSecond {
+  min-width: 20%;
+}
+.agentRow {
+  min-width: 11.8%;
+}
+
+.agentRowWrapper {
+  height: 64px;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 0 12px;
+  margin: 0 8px 10px 8px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 4px 4px 0px #0000000d;
+}
+
+.cardsAgent {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 35px;
+  font-family: "Johnson Text";
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.fieldLabel {
+  font-size: 16px;
+  color: #7b7b7b;
+  font-weight: 500;
+}
+
+.fieldValue {
+  color: #102459;
+  font-size: 16px;
+}
+
+.fontWeightEven {
+  font-weight: 600;
+}
+
+.fontWeightOdd {
+  font-weight: 600;
+}
+
+.versionBadge {
+  background-color: #dbdbdb;
+  font-family: "Johnson Text";
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #102459;
+  align-self: flex-start;
+}
+
+.statusBadge {
+  font-family: "Johnson Text";
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #323e52;
+  align-self: flex-start;
+  background-color: #c2f7b0;
+}
+
+.statusBadge.inactive {
+  background-color: #98a2b3;
+  color: #ffffff;
+}
+
+.statusBadge.failed {
+  background-color: #c4321d;
+  color: #ffffff;
+}
+
+.agentActions {
+  display: flex;
+  gap: 16px;
+}
+
+.accordionToggleBtn {
+  margin-left: auto;
+}
+
+.hostnameAccordionChevron {
+  width: 14px;
+  height: 14px;
+  transform: rotate(-90deg);
+  transition: transform 150ms ease-in-out;
+}
+
+.hostnameAccordionChevron.expanded {
+  transform: rotate(0deg);
+}
+
+.agentAccordionPanel {
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 4px 4px 0px #0000000d;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: -6px 8px 10px 8px;
+}
+
+.agentAccordionPanelInner {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.agentAccordionSection {
+  background: #f7f7fa;
+  border: 1px solid #eeeeee;
+  border-radius: 12px;
+  padding: 10px 12px;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.agentAccordionSectionTitle {
+  font-family: "Johnson Text";
+  color: #102459;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.agentAccordionGrid {
+  display: grid;
+  gap: 6px;
+}
+
+.agentAccordionRow {
+  display: grid;
+  grid-template-columns: minmax(110px, 42%) minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.agentAccordionLabel {
+  font-family: "Johnson Text";
+  color: #7b7b7b;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agentAccordionValue {
+  font-family: "Johnson Text";
+  color: #102459;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 0;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.agentAccordionEmpty {
+  font-family: "Johnson Text";
+  color: #7b7b7b;
+  font-size: 12px;
+}
+
+.agentAccordionMore {
+  font-family: "Johnson Text";
+  color: #2b87e3;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  padding-top: 4px;
+}
+
+.agentAccordionInlineMore {
+  color: #2b87e3;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.btnFocusActive {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+  
+}
+
+.filtersection {
+  width: 42px;
+  height: 40px;
+  position: relative;
+  background: #f0efed;
+  border-radius: 8px;
+  border-color: transparent;
+}
+
+.filtersection:hover,
+.filtersection:focus,
+.filtersection:active {
+  background: #f0efed;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.filtersection img {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  margin: auto;
+}
+
+.forceUpdate {
+  width: auto;
+  position: relative;
+  background: #f0efed;
+  border-radius: 4px;
+  border-color: transparent;
+}
+
+.sortOptions {
+  background: #f0efed;
+  border-radius: 4px;
+  height: 40px;
+  width: 92px;
+}
+
+.dropDownRelative {
+  position: relative;
+  z-index: 10;
+}
+
+.dropdwnArrw {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  height: 0;
+}
+
+.errorMessage {
+  color: #ff0000;
+  display: block;
+}
+
+.dropdwnArrw img {
+  z-index: -10;
+}
+
+.topBtnsWrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.risebot-searchfilter {
+  min-width: 30% !important;
+  position: relative !important;
+}
+
+.risebot-searchfilter .form-control {
+  padding-left: 2.7em;
+  background-color: #f7f7fa !important;
+  border-radius: 36px;
+  border: 1px solid #eeeeee;
+}
+
+.searchImage {
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.multifilters p {
+  color: #82807c;
+  font-size: 14px;
+  line-height: 16px;
+  font-family: "Johnson Text";
+  font-weight: 400;
+}
+
+.filterDropdowns {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin-right: 14px;
+}
+
+.filterdropdownOptions {
+  background: #faf9f7;
+  height: 40px;
+  padding-right: 15px;
+}
+
+.multifilterDropdwn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 0px;
+  z-index: 0;
+}
+
+.risebot-btnSearchIcon {
+  background: none !important;
+  border-color: #faf9f7 !important;
+  padding: 0px !important;
+  position: absolute !important;
+  left: 5px !important;
+  top: 0px !important;
+  bottom: 0px !important;
+  height: 30px !important;
+  margin: auto !important;
+}
+
+.risebot-btnSearchIcon:focus,
+.risebot-btnSearchIcon:active,
+.risebot-btnSearchIcon:hover {
+  background: none !important;
+  border-color: #faf9f7 !important;
+  box-shadow: none !important;
+}
+
+.sortOptions option:first-child,
+.sortOptions {
+  font-size: 16px;
+  line-height: 19px;
+  color: #404040;
+  font-weight: 500;
+  font-family: "Johnson Text";
+}
+
+.filterdropdownOptions option:first-child,
+.filterdropdownOptions {
+  font-size: 15px;
+  line-height: 19px;
+  color: #404040;
+  font-weight: 500;
+  font-family: "Johnson Text";
+  padding-left: 7px;
+  padding-right: 22px;
+}
+
+.statusBarRow {
+  padding: 25px 0px 15px;
+}
+
+.statusBar {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 10px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.tabBtn {
+  border-bottom: 1px solid #e4e4e4 !important;
+}
+
+.tabBtn:focus {
+  box-shadow: none;
+}
+
+.statusCircle::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.statusCircle.risebot-btn-primary,
+.recentButton {
+  
+  background-color: unset;
+  border-color: unset;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 0.375rem 8px;
+  color: #404040;
+  border-radius: inherit;
+  font-family: "Johnson Text";
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.recentButton:hover {
+  background: none;
+  color: #404040;
+}
+
+.recentButton:focus {
+  background-color: unset;
+  border-color: unset;
+  box-shadow: none;
+  color: #404040;
+}
+
+.recentButton:active {
+  background-color: #f5f5f5;
+  border-color: #e0e0e0;
+  box-shadow: none;
+  color: #404040;
+  transform: scale(0.95);
+  outline: none !important;
+}
+
+.agentTriggerBtn {
+  color: #39465f !important;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  border: 1px solid #eee !important;
+  background: #fff !important;
+  border-radius: 36px !important;
+}
+
+.agentTriggerBtn:hover {
+  background: #2961F4 !important;
+  color: #fff !important;
+  border-color: unset !important;
+  box-shadow: none !important;
+  border-radius: 36px !important;
+}
+
+.agentTriggerBtn:focus,
+.agentTriggerBtn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  background: #fff !important;
+  color: #39465f !important;
+  border: 1px solid #eee !important;
+}
+
+.agentTriggerBtn:active {
+  outline: none !important;
+  box-shadow: none !important;
+  background: #f5f5f5 !important;
+  color: #39465f !important;
+  border: 1px solid #e0e0e0 !important;
+  transform: scale(0.94);
+}
+
+.agentTriggerBtn:disabled {
+  background: #f5f5f5 !important;
+  color: #9ca3af !important;
+  border: 1px solid #e5e7eb !important;
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+  pointer-events: none !important;
+}
+
+
+.agentTriggerBtn.button-clicked {
+  background: #2961F4 !important;
+  color: #fff !important;
+  border-color: #2961F4 !important;
+  box-shadow: 0 0 0 3px rgba(41, 97, 244, 0.2) !important;
+  transform: scale(0.96);
+}
+
+
+.agentTriggerBtn:disabled:hover {
+  background: #f5f5f5 !important;
+  color: #9ca3af !important;
+  transform: none !important;
+}
+
+.statusCircle.inactiveStatus::before {
+  background: #82807c;
+}
+
+.statusCircle.activeStatus::before {
+  background: #0ca85d;
+}
+
+.statusCircle.failedStatus::before {
+  background: #c4321d;
+}
+
+.statusCircle.warningCircle::before {
+  background: #e4a951;
+}
+
+
+.selectionCounterBadge {
+  position: fixed;
+  bottom: 55px;
+  right: 30px;
+  z-index: 999;
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.selectionCounterContent {
+  background: linear-gradient(135deg, #2961F4 0%, #1e4abd 100%);
+  border-radius: 50px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(41, 97, 244, 0.4), 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.selectionCounterContent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(41, 97, 244, 0.5), 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.selectionCounterText {
+  color: #ffffff;
+  font-family: 'Johnson Text', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.selectionCounterText strong {
+  font-weight: 700;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 20px;
+  min-width: 28px;
+  text-align: center;
+}
+
+.clearSelectionButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin-left: 4px;
+}
+
+.clearSelectionButton:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(90deg);
+}
+
+.clearSelectionButton:active {
+  transform: scale(0.9) rotate(90deg);
+}
+
+.executionBtnsSection {
+  display: inline-block;
+  vertical-align: middle;
+  height: 40px;
+  width: 40px;
+  background-color: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 36px;
+  margin-left: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.executionBtns {
+  margin-right: 10px;
+}
+
+.executionBtnsSection button {
+  padding: 0.375rem 0.35rem;
+  transition: all 0.15s ease;
+  border: none !important;
+  background: transparent !important;
+}
+
+.executionBtnsSection button:hover {
+  background: transparent !important;
+}
+
+.executionBtnsSection button:focus {
+  box-shadow: none;
+  outline: none !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.executionBtnsSection button:active {
+  transform: scale(0.95);
+  background: transparent !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.executionBtnsSection:active {
+  background-color: #f5f5f5;
+  border-color: #e0e0e0;
+}
+
+.btnsWrapper {
+  text-align: right;
+}
+
+.innerSecondWrapper {
+  padding: 20px 25px;
+  background: #ffffff;
+  border: 1px solid #d8d8d8;
+  border-radius: 4px;
+  position: relative;
+}
+
+.questnBtns {
+  background: #aa4644;
+  border-radius: 20px 20px 0px 20px;
+  width: 60px;
+  height: 60px;
+  border-color: transparent;
+}
+
+.questnBtns:hover,
+.questnBtns:active,
+.questnBtns:focus {
+  background: #aa4644;
+  border-color: transparent;
+}
+
+.generalBtn {
+  position: absolute;
+  right: 0;
+  bottom: 80px;
+}
+
+.viewEditBox {
+  background: #ffffff;
+  border: 1px solid #d8d8d8;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: center;
+  padding: 15px 5px;
+  font-family: "Johnson Text";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  color: #404040;
+  width: 100%;
+}
+
+.viewEditBox span:first-child {
+  margin-right: 5px;
+}
+
+.viewEditBox span {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+.utilzeWrapper h3 {
+  font-size: 24px;
+  line-height: 30px;
+  font-family: "Johnson Text";
+  font-weight: 500;
+  text-align: center;
+  margin: 20px 0px;
+}
+
+.overallStatus {
+  background: #ffffff;
+  border: 1px solid #d8d8d8;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.globRefresh {
+  background: #404040;
+  border-radius: 4px;
+  border: none;
+  padding-bottom: 10px;
+}
+
+.globRefresh:active,
+.globRefresh:focus,
+.globRefresh:hover {
+  background: #404040;
+  box-shadow: none;
+}
+
+.statusStats {
+  text-align: right;
+  margin: 15px 15px 0px;
+}
+
+.statusRange {
+  display: inline-block;
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  border-radius: 4px;
+  text-align: center;
+  padding: 6px 18px;
+}
+
+.activeColor {
+  background: rgba(40, 199, 111, 0.12);
+  color: #0ca85d;
+}
+
+.warningColor {
+  background: #ffe1b0;
+  color: #f49e20;
+}
+
+.failedColor {
+  background: rgba(240, 80, 110, 0.2);
+  color: #c4321d;
+}
+
+.activeColor span:first-child,
+.statusSection span:first-child {
+  margin-right: 5px;
+}
+
+.activeColor span,
+.statusSection span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.totalNumber {
+  color: #404040;
+  font-family: "Johnson Text";
+  font-weight: 500;
+  font-size: 54px;
+  line-height: 63px;
+  margin-bottom: 5px;
+}
+
+.machineStatus {
+  color: #404040;
+  font-family: "Johnson Text";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.statusDetailsCover {
+  padding: 0px 25px;
+}
+
+.agentWrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.agentDetailsWrapper {
+  padding: 10px 0px;
+}
+
+.commonAgentDetails {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.commonAgentDetails p {
+  margin-bottom: 5px;
+}
+
+.agentTick {
+  margin-right: 3px;
+}
+
+.agentDetailWrapperOne {
+  width: 60%;
+}
+
+.agentDetailWrapperTwo {
+  width: 20%;
+}
+
+.agentDetailWrapperThree {
+  width: 20%;
+}
+
+.agentDetailWrapperTwo p,
+.agentDetailWrapperThree p {
+  margin-bottom: 0px;
+  color: #aaaaaa;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.agetNames {
+  font-family: "Johnson Text";
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  color: #404040;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-items: start;
+  text-align: start;
+}
+
+.agentVersion span {
+  background: #f0efed;
+  border-radius: 12px;
+  display: inline-block;
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  color: #82807c;
+  padding: 1px 7px;
+}
+
+.commonAgentNumbers {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.upTimeDetails,
+.activeCountDetails {
+  border-right: 2px solid #d8d8d8;
+  text-align: center;
+  padding: 0px !important;
+}
+
+.upTimeDetails {
+  width: 30%;
+  border-left: 1px solid #d8d8d8;
+}
+
+.activeCountDetails {
+  width: 35%;
+}
+
+.upTimeDetails p {
+  margin-top: 5px;
+  font-family: "Johnson Text";
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 42px;
+  color: #404040;
+  margin-bottom: 0px;
+}
+
+.activeCountDetails p {
+  font-family: "Johnson Text";
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 42px;
+  color: #404040;
+  margin-bottom: 0px;
+}
+
+.hostnamebold p {
+  font-family: "Johnson Text";
+  font-weight: bold;
+  font-size: 36px;
+  color: #404040;
+}
+
+.viewAgentSection {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.paddingZero {
+  padding: 0px;
+}
+
+.viewAgentSection p {
+  text-align: center;
+}
+
+.machinesRow {
+  margin-bottom: 20px;
+  transition: 0.3s ease-in-out;
+  padding: 0px;
+  position: relative;
+}
+
+.machinesRow .accordion-body {
+  background: #ffffff;
+}
+
+.machinesRow .accordion-button:not(.collapsed) {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.machinesRow button {
+  padding: 0px;
+}
+
+.machinesRow .accordion-button:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.machinesRow .accordion-header {
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-top: 0px;
+}
+
+.machineAccordion {
+  transition: 0.3s ease-in-out;
+  border-radius: 4px;
+}
+
+.machineAccordion:hover {
+  box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
+}
+
+.agentCardContainer {
+  height: 50px;
+  margin-bottom: 0px;
+}
+
+.agentCardContainer.Active {
+  border-left: 8px solid #0ca85d;
+}
+
+.agentCardContainer.Warning {
+  border-left: 8px solid #efc864;
+}
+
+.agentCardContainer.Inactive {
+  border-left: 8px solid #82807c;
+}
+
+.agentCardContainer.Failed,
+.agentCardContainer.Not_Available {
+  border-left: 8px solid #c4321d;
+}
+
+.paginationWrapper {
+  margin-top: 30px;
+}
+
+.paginateInnerSection {
+  display: inline-block;
+}
+
+.subservices {
+  background: #faf9f7;
+  border: 1.2px solid #82807c;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  vertical-align: middle;
+  padding: 15px 20px;
+  width: 222px;
+  cursor: pointer;
+}
+
+.subservices p {
+  margin-bottom: 5px;
+}
+
+.subserviceName {
+  font-size: 16px;
+  line-height: 19px;
+  color: #404040;
+  font-weight: 500;
+}
+
+.agentSubServicesWrapper.Active .subservices {
+  border: 1.2px solid #0ca85d;
+}
+
+.agentSubServicesWrapper.Failed .subservices {
+  border: 1.2px solid #c4321d;
+}
+
+.status_fulfilled .subservices {
+  border: 1.2px solid #0ca85d !important;
+}
+
+.status_rejected .subservices {
+  border: 1.2px solid #c4321d !important;
+}
+
+.subservicePort {
+  font-size: 13px;
+  line-height: 16px;
+  color: #82807c;
+}
+
+.pageRwSelection {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+p.pageRwSelection {
+  margin-bottom: 0px;
+  margin-right: 8px;
+}
+
+.risebot-ModalTitle {
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px !important;
+  line-height: 28px;
+  color: #101828 !important;
+}
+
+
+
+.popupSubHeaders p {
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #404040;
+}
+
+.editButtonDiv {
+  text-align: right;
+}
+
+.configurationDetails {
+  font-family: "Johnson Text";
+}
+
+.fieldDetails {
+  margin-bottom: 10px;
+}
+
+.localGlobView .formLabel,
+.localConfigView .formLabel {
+  color: #44424c;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  width: 200px;
+}
+
+.localConfigForm .formLabel {
+  color: #102459;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; 
+}
+
+.localGlobView p,
+.localConfigView p {
+  color: #44424c;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.localConfigForm .formLabel {
+  margin-bottom: 6px;
+}
+
+.saveMode.fieldDetails {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.localConfigView:not(:first-child) p {
+  color: #e4a951;
+}
+
+.configFilledDetails .fieldDetails p {
+  font-weight: 700;
+  color: #404040;
+}
+
+.saveButtonsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.saveButtonsWrapper button,
+.editButtonDiv button {
+  width: auto;
+}
+
+.saveBtn {
+  text-align: right;
+}
+
+.cancenBtn Button {
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 36px;
+  color: #39465f;
+  font-size: 16px;
+  line-height: 19px;
+  font-family: "Johnson Text";
+  height: 40px;
+}
+
+.saveBtn Button {
+  background: #2961F4;
+  border-radius: 36px;
+  color: #ffffff;
+  font-weight: 500;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  line-height: 19px;
+  height: 40px;
+}
+
+.saveBtnAgent {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+
+.saveButtonAgent {
+  color: #fff;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #2961F4;
+}
+
+.cancelButtonAgent {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #fff;
+  color: #39465f;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.saveBtn Button:hover {
+  color: #ffffff;
+}
+.saveButtonAgent:hover {
+  color: #ffffff;
+  background-color: #2961F4;
+}
+
+.agentSelectImg {
+  display: inline-block;
+  margin-left: 10px;
+  width: 14%;
+  vertical-align: middle;
+}
+
+.agentNames {
+  display: inline-block;
+  width: 80%;
+  vertical-align: middle;
+}
+
+
+
+.risebot-agentDrawer {
+  min-width: 565px !important;
+  padding: 30px;
+  gap: 16px;
+  border-radius: 16px 0px 0px 16px;
+  background: #fff;
+}
+
+.risebot-offcanvas-title {
+  color: #101828;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.innerDetailBody {
+  text-align: center;
+}
+
+.innerDetailBody p {
+  margin-bottom: 0px;
+}
+
+.agentKey {
+  color: #44424c;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: left;
+  padding-bottom: 10px;
+  word-break: break-all;
+}
+
+.agentValue {
+  color: #44424c;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  cursor: pointer;
+  padding-left: 6px;
+  padding-bottom: 10px;
+}
+
+.risebot-sidebarAccodions .accordion-item {
+  border: none;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.risebot-sidebarAccodions .accordion-button:not(.collapsed) {
+  background-color: transparent;
+  color: #404040;
+  box-shadow: none;
+  padding-bottom: 0px;
+}
+
+.accordionHead .agentDetailsArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  width: 30px;
+  background-color: #fff;
+}
+
+.accordionHead .accordionTitle {
+  color: #140f25;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  z-index: 1;
+  padding: 16px;
+  width: 100%;
+}
+
+.accordionHead button {
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100px;
+  color: red;
+  padding: 0px;
+  margin: 0px;
+}
+
+.collapsedSvg {
+  transform: rotateZ(0deg) !important;
+}
+
+.notcollapsedSvg {
+  transform: rotateZ(180deg) !important;
+}
+
+.titleCollapsed {
+  background-color: #F4F6FF;
+  border-radius: 16px 16px 0px 0px;
+}
+
+.nottitleCollapsed {
+  background-color: #f7f7fa;
+  border-radius: 16px;
+}
+
+.accordionHead .accordion-button:focus {
+  border-color: unset;
+  box-shadow: none;
+}
+
+.risebot_configDetails {
+  background: white;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 16px;
+  padding-bottom: 6px;
+  position: relative;
+  border-radius: 16px;
+  border-top: none;
+}
+
+.risebot_configTitle p {
+  color: #101828;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  padding-top: 15px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #c1bbb3;
+}
+
+.dataDetails {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.globConfigDetails,
+.colon {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.colon {
+  line-height: 15px;
+}
+
+.globalConfigDetails {
+  width: 55%;
+}
+
+.localConfigDetails {
+  width: 40%;
+  margin-left: 15px;
+}
+
+.globConfigDetails.globConfigValues p {
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 15px;
+  color: #82807c;
+  text-align: left;
+  word-break: break-all;
+}
+
+.globConfigDetails.globConfigKeys {
+  width: 40%;
+}
+
+.globConfigDetails.globConfigValues {
+  width: 55%;
+  padding-left: 20px;
+}
+
+.globConfigDetails.contentPadding {
+  padding-top: 30px;
+}
+
+.globConfigKeys p {
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 15px;
+  text-align: left;
+  color: #82807c;
+}
+
+.localConfigDetails p {
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 15px;
+
+  color: #82807c;
+}
+
+.localConfigDetails p:not(:first-child) {
+  color: #e4a951;
+}
+
+.buttonBody button {
+  background-color: #404040;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  margin-right: 8px;
+  padding: 15px;
+  border-color: transparent;
+  margin-bottom: 10px;
+  line-height: 0px;
+}
+
+.risebot_logDetails {
+  background: white;
+  border: 1px solid #eee;
+  border-top: none;
+  box-sizing: border-box;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.risebot_logDetails ul {
+  height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 8px !important;
+  padding-top: 0px !important;
+}
+
+.risebot_logDetails ul li {
+  font-family: "Johnson Text";
+  color: #44424c;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin-bottom: 10px;
+  word-break: break-word;
+}
+
+.agentSubserviceBody div {
+  background: #f0efed;
+  border: 1px solid #e4e4e4;
+  box-sizing: border-box;
+  border-radius: 4px;
+  color: #404040;
+  padding: 20px 25px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.risebot_logDetails ul::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+
+
+.risebot_logDetails ul::-webkit-scrollbar-thumb {
+  background: #5e5873;
+  border-radius: 10px;
+}
+
+
+.risebot_logDetails ul::-webkit-scrollbar-thumb:hover {
+  background: #5e5873;
+}
+
+.agentdetailsBody {
+  padding: 16px;
+  border-radius: 0px 0px 16px 16px;
+  border: 1px solid #eee;
+  border-top: 14px;
+}
+
+.risebot_agentdetailsBodyConfig {
+  padding-left: 10px;
+  background-color: white;
+}
+
+.editConfigButton,
+.deleteScheduledJobBtn {
+  background: none;
+  border: none;
+  padding: 0px;
+  position: absolute;
+  right: 20px;
+  top: 28px;
+  z-index: 10;
+}
+
+.scheduledJobsBtns .editConfigButton,
+.scheduledJobsBtns .deleteScheduledJobBtn {
+  background: none;
+  border: none;
+  padding: 0px;
+  position: unset;
+  right: 20px;
+  top: 15px;
+  z-index: 10;
+}
+
+.scheduledJobsBtns .editConfigButton:hover,
+.scheduledJobsBtns .deleteScheduledJobBtn:hover {
+  background: none;
+}
+
+.editConfigButton:hover,
+.deleteScheduledJobBtn {
+  background: none;
+}
+
+.editConfigButton:active,
+.deleteScheduledJobBtn:active {
+  background: none;
+  opacity: 0.6;
+  transform: scale(0.92);
+}
+
+
+
+
+
+.risebothealthCheckModal {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.risebothealthCheckModal .modal-content {
+  width: 676px;
+  padding: 30px;
+  border-radius: 16px !important;
+  background: #fff;
+}
+
+.risebothealthCheckModal .modal-header {
+  color: #101828;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  padding: 0px !important;
+  padding-bottom: 14px !important;
+  border-bottom: 1px solid #c1bbb3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.risebothealthCheckModal .modal-body {
+  padding: 16px 0px;
+  border-bottom: 1px solid #bcbcbc;
+}
+
+.risebothealthCheckModal .modal-body > .modal-body-content {
+  color: #102459;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; 
+  padding: 16px 0px;
+}
+
+.risebothealthCheckModal .modal-footer {
+  padding: 16px 0px 0px 0px !important;
+  margin: 0px !important;
+}
+
+.risebothealthCheckModal .btn-close {
+  padding: 0px !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin: 0px !important;
+}
+
+.risebot-agentDrawer.show {
+  display: flex;
+}
+
+.risebot-agentDrawer .offcanvas-body {
+  padding: 0px !important;
+}
+
+.offcanvas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px;
+  padding-bottom: 14px;
+}
+
+.risebot-agentDrawer .offcanvas-header {
+  border-bottom: 1px solid #c1bbb3;
+  
+}
+
+.risebot-globeLocalConfigs {
+  padding: 20px 80px;
+}
+
+.configsColoumns {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+}
+
+.risebot-globalLocalConfig .modal-content {
+  border-radius: 0px;
+}
+
+.globalConfigColoumn .fieldDetails p {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.configFilledDetails {
+  margin-top: 30px;
+}
+
+.configFilledDetails .fieldDetails .formLabel,
+.configurationDetails .fieldDetails .formLabel {
+  color: #102459;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.risebot-globeLocalConfigs .saveButtonsWrapper button {
+  width: 160px;
+  height: 50px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #e4e4e4;
+}
+
+.localConfigsColoumn .editButtonDiv button {
+  width: 160px;
+}
+
+.localConfigInputs p {
+  color: #e4a951;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.localConfigsColoumn .configFilledDetails p {
+  font-weight: 700;
+}
+
+.risebot-sidebarAccodions .agentSubServices .accordion-item {
+  background: #f0efed !important;
+  border: 1px solid #e4e4e4 !important;
+  border-radius: 4px;
+  position: relative;
+}
+
+.risebot-sidebarAccodions .agentSubServices .accordion-button {
+  background: #201b11 !important;
+}
+
+.risebot-sidebarAccodions .agentSubServices .accordion {
+  margin-bottom: 15px;
+}
+
+.risebot-sidebarAccodions .agentSubServices .accordion-header .accordion-button,
+.risebot-sidebarAccodions .agentSubServices .accordion-body {
+  padding-left: 16px !important;
+  padding-right: 16px;
+}
+
+.risebot-sidebarAccodions .agentSubServices .accordion-button:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
+.agentSubInnerDetails {
+  padding-left: 50px;
+  border-bottom: 1px solid #d8d8d8;
+  padding-bottom: 20px;
+}
+
+.taskButtonWrapper p {
+  padding-top: 15px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  font-weight: 700;
+}
+
+.agentSubServices .accordion-button {
+  font-size: 16px;
+  line-height: 20px;
+  color: #404040;
+  font-weight: 500;
+}
+
+.paginationDrpDwn {
+  height: 33px;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  color: #2b87e3;
+}
+
+.agentManagerPropertiesTable .agentKey {
+  display: inline-block;
+  vertical-align: top;
+  width: 40%;
+}
+
+.agentManagerPropertiesTable .coloumnColon {
+  display: inline-block;
+  vertical-align: top;
+  width: 5px;
+  line-height: 15px;
+}
+
+.agentManagerPropertiesTable .agentValue {
+  display: inline-block;
+  vertical-align: top;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.upTimeDetailWrapper {
+  padding: 5px 0px;
+  display: inline-block;
+  vertical-align: middle;
+  border: none;
+}
+
+.upTimeDetailWrapper p {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.rowHeaderAgent {
+  border: 1px solid #e4e4e4;
+  border-bottom: none;
+  border-radius: 4px;
+}
+
+.tabActive {
+  border-bottom: 2px solid #82807c !important;
+}
+
+.sapDbName {
+  visibility: hidden;
+}
+
+.enterGo {
+  color: #fff;
+  background-color: #2961F4;
+  border-color: #2961F4;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 36px !important;
+  margin-left: -20px !important;
+  z-index: 98 !important;
+}
+
+.enterGo:hover,
+.enterGo:active,
+.enterGo:focus {
+  background-color: #2961F4;
+  border-color: #2961F4;
+  color: #fff;
+}
+
+.goToPageWrapper {
+  width: 200px;
+}
+
+.goToPage {
+  display: inline-block;
+}
+
+.enterPageInput {
+  width: 50%;
+  margin-left: 10px;
+}
+
+.pageNoInput {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 10px;
+  padding-right: 30px;
+}
+
+.accordionSubBody {
+  position: relative;
+}
+
+.modalPopover {
+  max-width: 92%;
+  margin: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  height: 340px;
+  background: #faf9f7;
+  border: none;
+  border-radius: 5px;
+  z-index: 20;
+}
+
+.modalPopover .btn-close {
+  background-color: unset;
+}
+
+.modalPopover button {
+  background-color: #8f8e8c;
+  color: #000000;
+}
+
+.subPopVersionCvr {
+  display: flex;
+  align-items: center;
+  
+}
+
+.risebotmdlBtn {
+  width: 22%;
+}
+
+.verBtn {
+  width: 18%;
+}
+
+.risebotmdlCont {
+  width: 80%;
+  text-align: left;
+  border-radius: 4px;
+  margin-left: 5px;
+  padding-top: 4px;
+  height: 39px;
+}
+
+.risebotmdlCont p {
+  color: #82807c;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 0px;
+  margin-top: 6px;
+}
+
+.agentVersionsHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c1bbb3;
+  margin-bottom: 10px;
+}
+
+
+.risebot_agentLogsHeader {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c1bbb3;
+}
+
+.risebot_agentVersionsTitle {
+  color: #101828;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.closeIconBtn {
+  background-color: white !important;
+  padding: 0px !important;
+}
+
+.risebotagentSubVersionBtn {
+  border-radius: 16px !important;
+  background: #dbdbdb !important;
+  padding: 2px 8px !important;
+  color: #102459 !important;
+  text-align: center !important;
+  font-family: "Johnson Text" !important;
+  font-size: 16px !important;
+  font-style: normal;
+  font-weight: 500 !important;
+  line-height: 18px !important;
+  margin-left: 12px;
+  border: none !important;
+}
+
+/* Env upgrade pill overrides remove the default grey fill */
+.envUpgradeOptionBtn {
+  background: #ffffff !important;
+  border: 1px solid #dfe3eb !important;
+  box-shadow: 0px 2px 6px rgba(16, 36, 89, 0.08) !important;
+  margin-left: 0 !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  padding: 4px 10px !important;
+}
+
+.envUpgradeOptionBtn.versionActiveBtn {
+  background: #2961f4 !important;
+  border-color: #2961f4 !important;
+  color: #ffffff !important;
+}
+
+.buildDateLabel {
+  color: #39465f;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.buildDate {
+  color: #39465f;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.risebotagentSubVersionBtn:hover,
+.versionActiveBtn {
+  background: #404040;
+  color: #fff;
+}
+.risebotagentSubVersionBtn:focus {
+  outline: 2px solid #2961F4;
+  outline-offset: 2px;
+}
+
+.risebotagentSubVersionBtn:active {
+  background: #404040 !important;
+  color: #fff !important;
+  transform: scale(0.95) !important;
+  opacity: 0.9 !important;
+}
+
+.modalBackground {
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalTabs .nav-link {
+  color: #c4c4c4 !important;
+  font-size: 16px;
+  border: 1px solid #c4c4c4;
+  width: 100%;
+  border-radius: 8px;
+  padding: 12px 10px;
+}
+
+.modalTabs .nav-tabs .nav-link.active {
+  background: #338bf3;
+  color: #fff !important;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.modalTabs li.nav-item {
+  width: 31%;
+}
+
+.modalTabs li.nav-item:first-child {
+  margin-right: 20px;
+}
+
+.modalTabs li.nav-item:last-child {
+  margin-left: 20px;
+}
+
+.modalTabs .nav-tabs {
+  border-bottom: none;
+}
+
+.modalTabs .nav-tabs .nav-link:focus,
+.modalTabs .nav-tabs .nav-link:hover {
+  border: 1px solid #c4c4c4;
+}
+
+.modalTabs .tab-content {
+  max-height: none;
+}
+
+.editButtons {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
+  width: 100px !important;
+  height: 50px;
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+
+.configureModalPopup .modal-body {
+  padding: 30px 35px 45px;
+}
+
+.configureModalPopup .modal-content {
+  border-radius: 0px;
+}
+
+.noDataFound {
+  text-align: center;
+}
+
+.noDataInnerSection p {
+  font-size: 18px;
+  line-height: 21px;
+  color: #404040;
+  font-weight: 700;
+  margin-top: 15px;
+}
+
+.servicestatus {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.hostnameHeader p {
+  margin-bottom: 0px;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.servicestatus.Active {
+  background: url("../../../images/agent-management/successSubStatus.png");
+}
+
+.servicestatus.Failed,
+.servicestatus.Inactive {
+  background: url("../../../images/agent-management/failedstatus.png");
+}
+
+.confirmBtnModal {
+  text-align: right;
+  padding-top: 16px;
+  border-top: 1px solid #bcbcbc;
+  margin-top: 10px;
+}
+
+.confirmBtnModal Button {
+  margin-bottom: 0px !important;
+  color: #fff;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #2961F4;
+}
+
+.confirmBtn,
+.confirmBtn:hover,
+.confirmBtn:active,
+.confirmBtn:focus {
+  background: #2961F4;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.filterDropdowns .dropdown-content {
+  z-index: 20;
+}
+
+.subServiceHeader .editConfigButton {
+  top: 12px;
+}
+
+.subServiceHeader .editConfigButton:hover,
+.deleteScheduledJobBtn:hover,
+.subServiceHeader .editConfigButton:focus,
+.deleteScheduledJobBtn:focus,
+.subServiceHeader .editConfigButton:active,
+.deleteScheduledJobBtn:active {
+  background: transparent;
+  background-color: transparent;
+}
+
+.subAccordionWrapper .editConfigButton:hover,
+.deleteScheduledJobBtn:hover,
+.subAccordionWrapper .editConfigButton:focus,
+.deleteScheduledJobBtn:focus,
+.subAccordionWrapper .editConfigButton:active,
+.deleteScheduledJobBtn:active {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.globConfigsDetails {
+  padding-top: 15px;
+}
+
+.accordionSubServiceBody {
+  margin-top: 0px !important;
+}
+
+.buttonBody {
+  border-bottom: 1px solid #d8d8d8;
+  padding-bottom: 20px;
+}
+
+.subserviceLogs {
+  background: #f4f4f4;
+}
+
+.agentSubLogs {
+  border-bottom: none;
+}
+
+.radioBtnGroup {
+  margin-bottom: 10px;
+}
+
+.radioBtnGroup .form-check label {
+  font-size: 16px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.radioBtnGroup .form-check .form-check-input {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.risebotagentHealCheck {
+  border-bottom: none;
+  margin: 0px;
+  border-radius: 0px 0px 16px 16px;
+  border: 1px solid #eee;
+  border-top: none;
+  padding: 16px !important;
+}
+
+.hostWrapper {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.hostLabel {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.hostNameVal {
+  font-size: 15px;
+  line-height: 20px;
+  color: #82807c;
+  font-weight: 600;
+}
+
+.formCheckbox .form-check-label {
+  margin-left: 5px;
+  color: #102459;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.196px;
+}
+
+.interchangeSwitchField .form-check-label {
+  margin-left: 0px;
+}
+
+.formCheckbox .form-switch .form-check-input {
+  width: 2.5em;
+  height: 1.3em;
+}
+
+.risebotschedularDialog .modal-content {
+  padding: 30px;
+  border-radius: 16px !important;
+  background: #fff;
+  width: 676px !important;
+}
+
+.subAccordionWrapper {
+  position: relative;
+}
+
+.localConfigSubHead {
+  display: inline-block;
+  width: 50%;
+}
+
+@media (min-width: 576px) {
+  .configureModalPopup .modal-dialog {
+    max-width: 70%;
+  }
+
+  .modal-dialog:not(.assign-permissions-modal .modal-dialog) {
+    max-width: 700px !important;
+  }
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.agentVersionsCover {
+  max-height: 220px;
+  height: auto;
+  overflow-y: auto;
+}
+
+.agentCover {
+  padding: 0px !important;
+}
+
+.accordionSpacing {
+  padding: 0px 0px !important;
+}
+
+.agentVersionsCover::-webkit-scrollbar {
+  width: 4px;
+}
+
+
+
+
+.agentVersionsCover::-webkit-scrollbar-thumb {
+  background: #5e5873;
+  border-radius: 10px;
+}
+
+
+.agentVersionsCover::-webkit-scrollbar-thumb:hover {
+  background: #5e5873;
+}
+
+.encryptedPasswordField {
+  background-color: transparent !important;
+  border: 0px;
+  padding: 0px !important;
+  font-weight: 700;
+  color: #404040;
+}
+
+.interchangeSwitchField .form-switch {
+  padding-left: 0px;
+  display: flex;
+}
+
+.interchangeSwitchField label {
+  order: 1;
+  padding-right: 35px;
+  margin-left: 0px;
+}
+
+.interchangeSwitchField .form-check-input {
+  order: 2;
+}
+
+.btnFocusActive:hover,
+.btnFocusActive:focus {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.btnFocusActive:active {
+  background-color: transparent;
+  box-shadow: none;
+  transform: scale(0.92);
+  opacity: 0.7;
+}
+
+.selectBtn {
+  background: #fff;
+  color: #2b87e3;
+  border: none;
+  border-bottom: 1px solid #2b87e3;
+  border-radius: 8px;
+  padding-bottom: 0px !important;
+}
+
+.selectBtn:focus,
+.selectBtn:hover,
+.selectBtn:active {
+  background: #fff;
+  color: #2b87e3;
+  box-shadow: none;
+}
+
+.risebotschedularDialog .modal-header {
+  border-radius: 0;
+  padding: 0px !important;
+  padding-bottom: 14px !important;
+  border-bottom: 1px solid #c1bbb3;
+}
+
+.risebotschedularDialog .modal-header .risebot-ModalTitle {
+  color: #101828;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.scheduleForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldDetails .form-control {
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #fff;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  padding: 12px 16px;
+}
+
+.timeSelectionDivs {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.hourOptions {
+  background: #f0efed;
+  border-radius: 8px;
+  height: 40px;
+  width: 80px;
+}
+
+.selectDrpDwn {
+  background: #f0efed;
+  border-radius: 8px;
+  height: 40px;
+}
+
+.scheduleLabel {
+  color: #102459;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin-bottom: 2px;
+}
+
+.risebotschedulerdCover {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  border-top: 1px solid #bcbcbc;
+  padding-top: 16px;
+}
+
+.scheduleBtn {
+  background: #2961F4;
+  border-radius: 36px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.deleteScheduler {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.deleteScheduler .modal-footer {
+  display: flex;
+  align-items: flex-end;
+  border-top: 1px solid #bcbcbc;
+  width: 100%;
+}
+
+.deleteScheduler .modal-header {
+  color: #101828;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; 
+  border-bottom: 1px solid #c1bbb3;
+  width: 100%;
+}
+
+.deleteScheduler .modal-content {
+  display: flex;
+  width: 676px;
+  padding: 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  border-radius: 16px;
+  background: #fff;
+  margin-bottom: 60px !important;
+  margin-right: 30px !important;
+  
+}
+
+.deleteScheduler .modal-body {
+  color: #102459;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; 
+}
+
+.deleteScheduler .modal-body span {
+  font-weight: 600;
+}
+
+.deleteSchedulerCancelBtn {
+  padding: 8px 14px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #fff;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  color: #39465f;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; 
+}
+
+.deleteSchedulerBtn {
+  color: #fff;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; 
+  padding: 10px 16px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #2961F4;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+
+
+
+.adSyncupFooter button {
+  width: 70px;
+}
+
+.weeklySection {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.weeklySection .form-control {
+  width: 60px;
+}
+
+.weeklyLabel {
+  color: #2d3748;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.weeklyDayCheckBox .form-check {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.weeklyRowSection {
+  margin-bottom: 10px;
+}
+
+.weeklyDayCheckBox .form-check .form-check-input {
+  width: 1.3em;
+  height: 1.3em;
+  
+  
+}
+
+.weeklyDayCheckBox .form-check-input:checked {
+  background-color: #2961F4;
+}
+
+.weeklyDayCheckBox .form-check .form-check-label {
+  color: #2d3748;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.weeklyDayCheckBox .form-check-input:focus {
+  box-shadow: none;
+}
+
+.radioBtnSec .form-check .form-check-input {
+  width: 16px;
+  height: 16px;
+}
+
+.radioBtnSec .form-check-input:checked {
+  background-color: #2961F4;
+  border: 1px solid #2961F4;
+}
+
+.radioBtnSec .form-check .form-check-label {
+  color: #2d3748;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.scheduleBtn:focus,
+.scheduleBtn:hover,
+.scheduleBtn:active {
+  background: #2961F4;
+  color: #fff;
+  box-shadow: none;
+}
+
+.risebotschedularDialog .modalBody {
+  padding: 0px !important;
+  padding-top: 32px !important;
+}
+
+.risebotschedularDialog .modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.risebotschedularDialog .sideAlign {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.risebotschedularDialog .sideAlign.leftAlignBox {
+  width: 300px;
+}
+
+.risebotschedularDialog .flexProperty {
+  display: flex;
+  flex-direction: column;
+}
+
+.risebotschedularDialog .flexPadding {
+  width: 100%;
+}
+
+.risebotschedularDialog .leftSwitchSection {
+  
+}
+
+.risebotschedularDialog.modal {
+  z-index: 1050;
+}
+
+.scheduledJobsWrapper {
+  
+  display: flex;
+  justify-content: space-between;
+}
+
+.scheduledJobsName {
+  
+  color: #44424c;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.scheduledJobsBtns {
+  display: flex;
+  gap: 8px;
+}
+
+.scheduledJobsBtns .editConfigButton,
+.deleteScheduledJobBtn {
+  position: unset;
+}
+
+.deleteScheduledJobBtn {
+  margin-left: 10px;
+}
+
+.schduledJobHead .agentSubLogTitle,
+.schduledJobHead .scheduleRefresh {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.schduledJobHead .agentSubLogTitle {
+  color: #101828;
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #c1bbb3;
+}
+
+.schduledJobHead .scheduleRefresh {
+  width: 10%;
+}
+
+.scheduleRefresh {
+  padding: 6px 15px !important;
+}
+
+.scheduleCmdRadio .form-check {
+  display: inline-block;
+  margin-right: 30px;
+  margin-bottom: 0px !important;
+}
+
+.scheduleCmdRadio .form-check .form-check-label {
+  color: #102459;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 3px 0px 0px 10px;
+}
+
+.scheduleCmdRadio .form-check .form-check-input {
+  width: 20px;
+  height: 20px;
+}
+
+
+.risebotcronInput {
+  background: #f0efed !important;
+  border-radius: 8px !important;
+  padding: 0.5em 1em !important;
+  color: #2d3748 !important;
+  font-weight: bold;
+  font-size: 14px !important;
+  width: 100% !important;
+}
+
+.risebotcronInput:hover,
+.risebotcronInput:focus {
+  border-color: #2961F4 !important;
+}
+
+.react-js-cron {
+  
+  background: #f7f7fa;
+  
+  
+  
+  
+}
+
+.react-js-cron-clear-button {
+  background: inherit !important;
+  border: none !important;
+  color: #2961F4 !important;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  display: none !important;
+}
+
+.react-js-cron-field {
+  display: flex;
+  gap: 9px;
+}
+
+.react-js-cron > div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+
+
+.react-js-cron-period {
+  width: 100% !important;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.react-js-cron-period > .react-js-cron-select {
+  width: 98% !important;
+  border-radius: 8px;
+}
+
+.react-js-cron-months {
+  width: 49% !important;
+}
+
+.react-js-cron-months > span {
+  margin-right: 12px;
+}
+
+.react-js-cron-months > .react-js-cron-select {
+  width: 81% !important;
+  border-radius: 8px;
+}
+
+.react-js-cron-week-days {
+  width: 100% !important;
+}
+
+.react-js-cron-week-days > .react-js-cron-select {
+  width: 92% !important;
+  border-radius: 8px;
+}
+
+.react-js-cron-month-days > .react-js-cron-select {
+  width: 100% !important;
+  border-radius: 8px;
+}
+
+.react-js-cron-month-days {
+  width: 50% !important;
+}
+
+.react-js-cron-hours {
+  width: 47% !important;
+  margin-right: 13px;
+}
+
+.react-js-cron-hours > span {
+  margin-right: 13px;
+}
+
+.react-js-cron-hours > .react-js-cron-select {
+  width: 100% !important;
+  border-radius: 8px;
+}
+
+.react-js-cron-minutes {
+  width: 50% !important;
+}
+
+.react-js-cron-minutes > .react-js-cron-select {
+  width: 100% !important;
+  border-radius: 8px;
+  margin-left: 13px;
+}
+
+
+
+.react-js-cron .ant-select-selector {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px !important;
+  border: 1px solid #eee !important;
+  background: #fff;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  color: #39465f;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.react-js-cron-field > span {
+  color: #39465f;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.risebot_spinnerLoader .spinner-border {
+  width: 1.5em;
+  height: 1.5em;
+  margin-top: 8px;
+}
+
+.risebot_logRelative {
+  position: relative;
+}
+
+.risebot_logRelative .risebot_spinnerLoader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 35px;
+  margin: auto;
+  text-align: center;
+}
+
+.loaderPos {
+  margin-top: 20%;
+}
+
+
+
+
+.agentWOselectBody p {
+  font-size: 16px;
+  line-height: 23px;
+  color: #404040;
+  margin-bottom: 0px;
+  padding: 5px 0px;
+}
+
+
+.upgradeHeader {
+  font-size: 18px !important;
+}
+
+.upgradeBtn {
+  background: #2961F4;
+  color: #fff;
+  border-color: #2961F4;
+}
+
+.upgradeCancel {
+  background: #e5e5e5;
+  color: #2c2929;
+  border-color: #e5e5e5;
+}
+
+.upgradeBtn:hover,
+.upgradeBtn:active,
+.upgradeBtn:focus {
+  background: #2961F4;
+  color: #fff;
+  box-shadow: none;
+  border-color: #2961F4;
+}
+
+.upgradeCancel:hover,
+.upgradeCancel:active,
+.upgradeCancel:focus {
+  background: #e5e5e5;
+  color: #2c2929;
+  box-shadow: none;
+  border-color: #e5e5e5;
+}
+
+.upgradeVersionBtns {
+  background: #e5e5e5;
+  color: #82807c;
+  font-weight: 500;
+  border-color: #e5e5e5;
+  margin-right: 5px;
+  font-size: 14px;
+  line-height: 20px;
+  outline: none;
+  box-shadow: none;
+  height: 39px;
+  width: 80px;
+}
+
+.upgradeVersionBtns:hover,
+.upgradeVersionBtns:active,
+.upgradeVersionBtns:focus {
+  background: #e5e5e5;
+  color: #82807c;
+  box-shadow: none;
+  border-color: #e5e5e5;
+}
+
+.agentVersionWrapper {
+  font-size: 14px;
+}
+
+.upgradeVersionBtns.active {
+  background: #404040;
+  color: #fff;
+  border-color: transparent;
+}
+
+.upgradeVersionBtns.active:focus {
+  box-shadow: none;
+}
+
+.restartAllBtn img {
+  width: 21px;
+}
+
+.updateAllBtn img {
+  width: 23px;
+}
+
+.downloadBtn img {
+  width: 25px;
+  height: 25px;
+}
+
+.agentSortByForm {
+  width: 70px;
+  height: 40px;
+  margin-left: 7px;
+}
+
+
+.sortBtn {
+  outline: none !important;
+  border-color: #eeeeee !important;
+}
+
+.sortBtn:focus,
+.sortBtn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #eeeeee !important;
+}
+
+.sortBtn:active {
+  background-color: #f5f5f5 !important;
+  border-color: #e0e0e0 !important;
+  outline: none !important;
+  transform: scale(0.95);
+}
+
+.sortBtn svg {
+  display: block;
+}
+
+
+.sortDropdownHeader {
+  padding: 10px 16px;
+  font-family: "Johnson Text", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #82807c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #fafafa;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  text-align: left;
+}
+
+.hostAgentColoumn {
+  width: 54.333333% !important;
+}
+
+.agentStatusColumn {
+  width: 45.666667% !important;
+  padding: 0px;
+}
+
+.agentStatusBar {
+  margin: 0px;
+}
+
+.javaAgentFilter {
+  position: relative;
+  margin: 10px 0 10px 0;
+  width: 40%;
+}
+
+.javaAgentFilter .form-control {
+  padding-left: 2em;
+  border-radius: 0.6rem;
+}
+
+.javaRefresh {
+  width: 7% !important;
+  margin-left: 47%;
+  margin-top: 10px;
+}
+
+.javaSave {
+  width: 5% !important;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+
+
+.ababHeaderBtn {
+  text-align: right;
+  display: flex;
+  justify-content: end;
+}
+
+.ababHeaderBtn .refreshAbpBtn {
+  margin-right: 10px;
+}
+
+.resetAllFilterBtn {
+  margin: 8px 0px 0px 8px;
+  border-radius: 36px;
+  padding: 10px 14px;
+  background-color: #eef1ff;
+  cursor: pointer;
+  white-space: nowrap;
+  color: #2961F4;
+  border: none;
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.filter-wrapper {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: max-content;
+  font-family: "Johnson Text";
+  font-size: 15px;
+}
+
+.tagWrapperContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#darkFiltersButtons {
+  margin-top: 8px;
+}
+
+#darkFiltersButtons > svg {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.clearFilterCloseIcon {
+  border: none;
+  background-color: transparent;
+  margin-left: 5px;
+  font-weight: 900;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+}
+
+.filter-wrapper .dropdown-content:before,
+.db-filter-list:before,
+#select-columnId:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #fff;
+  position: absolute;
+  left: 15px;
+  top: -12px;
+}
+
+.dark-Theme .dropdown-content:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #f0efed;
+  position: absolute;
+  left: 15px;
+  top: -12px;
+}
+
+.filter-wrapper .dropdown-content {
+  width: 260px;
+  font-size: 16px;
+  height: fit-content !important;
+  top: 50px;
+  left: 0;
+  overflow: visible;
+  margin-left: -58px;
+}
+
+.filter-wrapper #slPlatform.dropdown-content {
+  width: 290px;
+}
+
+.filter-wrapper .options li div {
+  display: flex;
+  align-items: center;
+}
+
+.filter-wrapper .options li {
+  width: auto;
+  text-align: left;
+  justify-content: flex-start;
+  padding: 6px 0;
+}
+
+.filter-wrapper .options li div input[type="checkbox"] {
+  margin-right: 3px;
+  height: 18px !important;
+  margin-top: 0px;
+}
+
+.filter-wrapper .options li span {
+  padding-top: 2px;
+}
+
+.filter-wrapper #search-text-input {
+  width: 230px;
+  padding: 6px 12px 6px 36px;
+  border: 1px solid #ddd;
+}
+
+.filter-wrapper #button-holder,
+#select-columnId #button-holder {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  margin: 0 !important;
+}
+
+.filter-wrapper #slPlatform.dropdown-content #search-text-input {
+  width: 260px;
+}
+
+.filter-wrapper .options {
+  max-height: 155px;
+  height: auto;
+  min-height: 50px;
+}
+
+.tagWrapper {
+  position: relative;
+}
+
+.cctooltip {
+  position: absolute;
+  bottom: 100%;
+  max-width: 100%;
+  background-color: #eef1ff;
+  padding: 8px;
+  border-radius: 5px;
+  display: none;
+  color: #2961F4;
+  font-size: 12px;
+  border: 1px solid #dadde9;
+  overflow-x: hidden;
+  max-height: 100px;
+}
+
+.tagWrapper:hover .cctooltip {
+  display: block;
+}
+
+
+.cctooltip::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+}
+
+.cctooltip::-webkit-scrollbar-track {
+  background: #eef1ff;
+}
+
+.cctooltip::-webkit-scrollbar-thumb {
+  background: #82807c;
+  border-radius: 6px;
+}
+
+
+.sidebar-action-btn {
+  height: 44px;
+  min-width: 189px;
+  border-radius: 36px;
+  font-size: 14px;
+  color: #fff;
+  background: #2961F4;
+  border: 1px solid #2961F4;
+  padding: 10px 16px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Johnson Text', Arial, sans-serif;
+}
+.globalConfigCustomModalDialog .modal-footer .btn {
+  min-width: 80px;
+  height: 40px;
+  border-radius: 8px;
+  font-family: 'Johnson Text', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  padding: 8px 16px;
+  opacity: 1;
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper {
+  border: 1px solid #D0D5DD;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper .cm-editor {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper .cm-content {
+  padding: 10px 14px;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper .cm-gutters {
+  background: #F9FAFB;
+  border-right: 1px solid #EAECF0;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper .cm-focused {
+  outline: none;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor-wrapper:focus-within {
+  border-color: #2961F4;
+  box-shadow: 0 0 0 3px rgba(41, 97, 244, 0.1);
+}
+
+.globalConfigCustomModalDialog .modal-footer .btn-primary {
+  background: #2961F4;
+  color: #fff;
+  border: 1px solid #2961F4;
+}
+.globalConfigCustomModalDialog .modal-footer .btn-secondary {
+  background: #fff;
+  color: #101828;
+  border: 1px solid #D0D5DD;
+}
+.globalConfigCustomModalDialog .modal-title {
+  font-family: 'Johnson Text', Arial, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+  color: #101828;
+  line-height: 20px;
+  letter-spacing: 0%;
+  margin-bottom: 0;
+}
+
+
+.modal-dialog.globalConfigCustomModalDialog {
+  max-width: 1400px !important;
+  width: 96vw !important;
+}
+.globalConfigCustomModalDialog .modal-content {
+  height: 900px;
+  max-height: 90vh;
+  padding: 24px 24px;
+  border-radius: 8px !important;
+  box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+  border: none;
+}
+.globalConfigCustomModalDialog .modal-header {
+  border-bottom: 1px solid #EAECF0;
+  padding: 0 0 16px 0 !important;
+  margin-bottom: 20px;
+}
+.globalConfigCustomModalDialog .modal-header .btn-close {
+  font-size: 20px;
+  opacity: 0.5;
+  padding: 0;
+  margin: 0;
+}
+.globalConfigCustomModalDialog .modal-header .btn-close:hover {
+  opacity: 1;
+}
+.globalConfigCustomModalDialog .modal-footer {
+  padding: 12px 0 0 0 !important;
+  border-top: 1px solid #EAECF0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 0px;
+}
+
+
+.globalConfigCustomModalDialog .form-label {
+  font-family: 'Johnson Text', Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #102459;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.globalConfigCustomModalDialog .form-control {
+  height: 50px !important;
+  padding: 10px 14px !important;
+  font-family: 'Johnson Text', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #101828;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 8px !important;
+  transition: border-color 0.2s ease;
+}
+
+.globalConfigCustomModalDialog .global-config-code-editor {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: #F9FAFB;
+  border-color: #EAECF0;
+  min-height: 220px;
+  line-height: 20px;
+}
+
+
+
+.globalConfigCustomModalDialog textarea.form-control {
+  height: auto !important;
+  min-height: 84px;
+  resize: vertical;
+  line-height: 20px;
+}
+
+.globalConfigCustomModalDialog .form-control:focus {
+  border-color: #2961F4;
+  box-shadow: 0 0 0 3px rgba(41, 97, 244, 0.1);
+  outline: none;
+}
+
+.globalConfigCustomModalDialog .form-control:disabled {
+  background-color: #F9FAFB;
+  color: #667085;
+  cursor: not-allowed;
+  border-color: #EEEEEE;
+}
+
+.globalConfigCustomModalDialog .form-control::placeholder {
+  color: #98A2B3;
+  opacity: 1;
+}
+
+.globalConfigCustomModalDialog .mb-3 {
+  margin-bottom: 12px !important;
+}
+
+.globalConfigCustomModalDialog .form-group {
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.globalConfigCustomModalDialog .modal-body {
+  padding: 0 !important;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.globalConfigCustomModalDialog .config-fields-container {
+  padding-right: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 24px;
+}
+
+.globalConfigCustomModalDialog .config-field {
+  margin-bottom: 0 !important;
+}
+
+.globalConfigCustomModalDialog .config-field--full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 992px) {
+  .globalConfigCustomModalDialog .config-fields-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .globalConfigCustomModalDialog .config-fields-container {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.globalConfigCustomModalDialog .modal-body > div {
+  padding-right: 8px;
+}
+
+.globalConfigCustomModalDialog .btn-link {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  font-family: 'Johnson Text', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #2961F4;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.globalConfigCustomModalDialog .btn-link:hover {
+  color: #1E4EC8;
+  text-decoration: none;
+}
+
+.globalConfigCustomModalDialog .btn-link:focus {
+  box-shadow: none;
+  outline: none;
+}
+

@@ -1,0 +1,382 @@
+
+
+
+
+
+.user-authorization-container {
+  padding: 32px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+
+
+
+.user-authorization-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-title {
+  font-family: "Johnson Display";
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  margin: 0;
+  color: #000;
+}
+
+
+
+
+.users-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.users-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.users-label {
+  font-family: "Johnson Display";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #000;
+}
+
+.users-number {
+  font-family: "Johnson Display";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  color: #000;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 16px;
+}
+
+.users-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.permission-list-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 10px 16px;
+  background: #ffffff;
+  border: 1px solid #2961f4;
+  border-radius: 36px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.permission-list-btn:hover {
+  background: #f8fafc;
+  border-color: #1e4fd1;
+}
+
+.permission-list-btn:active {
+  background: #e8f0ff;
+  border-color: #1840b8;
+  transform: scale(0.97);
+}
+
+.permission-icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(26%) sepia(94%) saturate(2477%) hue-rotate(218deg) brightness(96%) contrast(93%);
+}
+
+
+.add-user-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 10px 20px;
+  background: #2961f4;
+  border: 1px solid #2961f4;
+  border-radius: 36px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(41, 97, 244, 0.2);
+}
+
+.add-user-btn:hover {
+  background: #1e4fd1;
+  box-shadow: 0 4px 8px rgba(41, 97, 244, 0.3);
+  transform: translateY(-1px);
+}
+
+.add-user-btn:active {
+  background: #1840b8;
+  transform: translateY(0);
+}
+
+.add-user-btn-icon {
+  font-family: "Johnson Display";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.add-user-btn-text {
+  font-family: "Johnson Display";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  color: #ffffff;
+}
+
+
+
+
+.user-table-header {
+  height: 64px;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  background: #f7f7fa;
+  border-radius: 16px;
+  padding: 0 12px;
+  margin: 0 8px 10px 8px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 4px 4px 0px #0000000d;
+}
+
+.user-table-body {
+  width: 100%;
+  flex-direction: column;
+  border-radius: 16px;
+  margin: 0 8px 10px 8px;
+  height: 70vh;
+  overflow-x: auto;
+  padding-right: 8px;
+}
+
+.user-table-row {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-wrap: wrap;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 0 12px;
+  margin: 0px 0px 10px 0px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 4px 4px 0px #0000000d;
+}
+
+.user-table-row:hover {
+  background: #f8fafc;
+}
+
+
+
+
+.user-table-cell {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.user-table-cell-checkbox {
+  flex: 0 0 60px;
+  min-width: 60px;
+  max-width: 60px;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.user-table-cell-name {
+  flex: 1;
+  min-width: 180px;
+  padding: 0 12px;
+}
+
+.user-table-cell-created-by {
+  flex: 1;
+  min-width: 150px;
+  padding: 0 12px;
+}
+
+.user-table-cell-updated-by {
+  flex: 1;
+  min-width: 150px;
+  padding: 0 12px;
+}
+
+.user-table-cell-date {
+  flex: 1;
+  min-width: 180px;
+  padding: 0 12px;
+}
+
+.user-table-cell-actions {
+  flex: 0 0 120px;
+  min-width: 120px;
+  max-width: 120px;
+  padding: 0 12px;
+  justify-content: center;
+}
+
+
+
+
+.user-table-label {
+  font-family: "Johnson Display";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #64748B;
+  letter-spacing: 0.5px;
+}
+
+.user-table-value {
+  font-family: "Johnson Text";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #05060F;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+.user-checkbox-btn,
+.user-action-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.user-checkbox-btn:hover,
+.user-action-btn:hover {
+  opacity: 0.7;
+}
+
+.user-checkbox-btn:active,
+.user-action-btn:active {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+
+.user-checkbox-btn:focus,
+.user-action-btn:focus {
+  outline: none;
+}
+
+
+
+
+.user-table-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+  background: #fff;
+  height: 47vh;
+  overflow: auto;
+  margin: 0 8px 10px 8px;
+}
+
+.user-table-empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-table-empty-content img {
+  width: 200px;
+  height: auto;
+  opacity: 0.6;
+}
+
+.user-table-empty-content p {
+  font-family: "Johnson Display";
+  font-size: 16px;
+  font-weight: 400;
+  color: #64748b;
+  margin: 0;
+}
+
+.risebot-searchfilter-user {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 36px;
+  padding: 0 12px;
+  height: 40px;
+  width: 320px;
+  margin-right: 16px;
+}
+
+.user-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: "Johnson Display";
+  font-size: 15px;
+  color: #1e293b;
+  flex: 1;
+  height: 38px;
+  padding: 0 8px;
+}
+
+.user-search-input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.risebot-btnSearchIcon {
+  background: none;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  transition: background 0.2s;
+}
+
+.risebot-btnSearchIcon:hover {
+  background: #e6edfa;
+}

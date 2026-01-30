@@ -1,0 +1,236 @@
+interface HttpMethods {
+  [method: string]: string | { [endpoint: string]: string };
+}
+
+interface ServiceEndpoint {
+  baseUrl?: string;
+  baseURL?: string;
+  healthCheckId?: string;
+  get?: HttpMethods;
+  post?: HttpMethods;
+  put?: HttpMethods;
+  patch?: HttpMethods;
+  del?: HttpMethods;
+  delete?: HttpMethods;
+}
+
+interface ApiEndpoints {
+  [serviceName: string]: ServiceEndpoint;
+}
+
+const apiEndpoints: ApiEndpoints = {
+  auth: {
+    baseUrl: process.env.REACT_APP_AUTH_URL ||"http://localhost:3000" || "https://predev.auth.rise.apps.jnj.com",
+    post: {
+      addGroup: "/v1/auth/groups/",
+      addPermission: "/v1/auth/permissions/",
+      addTask: "/v1/auth/tasks/",
+      addApplication: "/v1/auth/rise-app/",
+      createUserAuthorization: "/v1/auth/user-authorization/",
+    },
+    get: {
+      applicationList: "/v1/auth/rise-app/",
+      taskList: "/v1/auth/tasks/",
+      taskListByCategory: "/v1/auth/tasks/categories/",
+      taskListBySubCategory: "/v1/auth/tasks/categories/subCategories",
+      groupList: "/v1/auth/groups",
+      permissionsByGroup: "/v1/auth/permissions/groups",
+      users: "/v1/auth/users/",
+      usersActivityLog: "/v1/auth/users/activity-log",
+      groupExport: "/v1/auth/groups/export-csv",
+      usersExport: "/v1/auth/users/export-csv",
+      auditLog: "/v1/auth/audit",
+      getSubCategory: "/v1/auth/subCategory",
+      getAuditLogForCSV: "/v1/auth/audit/export",
+      userAuthorization: "/auth/user-details/",
+    },
+    del: {
+      deletePermission: "/v1/auth/permissions/",
+      deleteGroup: "/v1/auth/groups/",
+      deleteTask: "/v1/auth/tasks/",
+      deleteApplication: "/v1/auth/rise-app/",
+      deleteUserAuthorization: "/v1/auth/user-authorization/",
+    },
+    patch: {
+      updateGroup: "/v1/auth/groups",
+      updatePermission: "/v1/auth/permissions",
+      updateTask: "/v1/auth/tasks",
+      updateUser: "/v1/auth/users",
+      refreshToken: "/v1/auth/refresh-token",
+      logout: "/v1/auth/logout",
+      updateApplication: "/v1/auth/rise-app/",
+      blockApplication: "/v1/auth/rise-app/block",
+      updateHelpContent: "/v1/auth/helpcontent",
+      updateUserAuthorization: "/v1/auth/user-authorization",
+    },
+  },
+  agentManagement: {
+    baseURL: process.env.REACT_APP_AGENT_URL || "https://dev.smartops.rise.apps.jnj.com",
+    healthCheckId: process.env.REACT_APP_HEALTHCHECK_TEMPLATE_ID,
+    get: {
+      health: "/agents/health",
+      getAgents: "/agents",
+      healthByPort: "/agents/health/port",
+      buildInfo: "/agents/build-info",
+      globalConfiguration: "/agents/agent-config-details",
+      filterAgents: "/agents/filters",
+      getRepos: "/agents/repositories",
+      getAgentLogs: "/agents/logs",
+      getMetricsData: "/agents/metrics",
+      localConfigurations: "/agents/local-configuration",
+      repositories: "/agents/versionlist",
+      healthCHeck: "",
+      scheduler: "/agents/scheduler",
+      fetchScheduler: "/agents/scheduler/commandid",
+      metrics: "/agents/metrics",
+      regions: "/agents/regions",
+      platforms: "/agents/platforms",
+      environments: "/agents/environments",
+      sids: "/agents/sids",
+      osTypes: "/agents/os-types",
+      serviceNames: "/agents/service-names",
+      versions: "/agents/agent-versions",
+      upgrade: "/agents/upgrade",
+      download: "/agents/download",
+      getJobStatus: "/dnd/job-status/",
+      getMasterdata: "/agents/masterdata",
+    },
+    post: {
+      start: "/agents/start",
+      propertySetup: "/agents/property-setup",
+      globalConfiguration: "/agents/update-agentconfig",
+      addAgent: "/agents",
+      scheduler: "/agents/scheduler",
+      healthCheck: "dnd/executejob/100009",
+      syncScripts: "/agents/sync-scripts",
+      syncAgentConfig: "/agents/sync-agentConfig",
+      bulkSyncAgentConfig: "/agents/bulk/sync-agentConfig",
+      updateEnv: "/agents/update-env",
+      bulkStartAgents: "/agents/bulk/start",
+      bulkStopAgents: "/agents/bulk/stop",
+      bulkReStartAgents: "/agents/bulk/restart",
+      bulkHealthCheckup: "/agents/bulk/health",
+      addMasterdata: "/agents/masterdata/:hostname",
+    },
+    put: {
+      restartByPort: "/agents/restart",
+      updateProperty: "/agents/property-setup",
+      localConfigurations: "/agents/local-configuration",
+      scheduler: "/agents/scheduler",
+      adSyncUp: "/agents/servers/configurations",
+      syncHealthConfigs: "/agents/sync-agent-discovery",
+      upgrade: "/agents/bulk/upgrade",
+      download: "/agents/download",
+      envUpgrade: "/agents/bulk/update-env",
+    },
+    delete: {
+      stopByPort: "/agents/stop",
+      scheduler: "/agents/scheduler",
+      deleteMasterdata: "/agents/masterdata/:hostname",
+    },
+  },
+  rustagentManagement: {
+    baseURL: process.env.RUST_AGENT_URL || "https://dev.agentlogic.rise.apps.jnj.com",
+    get: {
+      health: "/agents/health",
+      getAgents: "/agents",
+      healthByPort: "/agents/health/port",
+      buildInfo: "/agents/build-info",
+      globalConfiguration: "/agents/agent-config-details",
+      filterAgents: "/agents/filters",
+      getRepos: "/agents/repositories",
+      getAgentLogs: "/agents/logs",
+      getMetricsData: "/agents/metrics",
+      localConfigurations: "/agents/local-configuration",
+      repositories: "/agents/versionlist",
+      healthCHeck: "",
+      scheduler: "/agents/scheduler",
+      fetchScheduler: "/agents/scheduler/commandid",
+      metrics: "/agents/metrics",
+      regions: "/agents/regions",
+      platforms: "/agents/platforms",
+      environments: "/agents/environments",
+      sids: "/agents/sids",
+      osTypes: "/agents/os-types",
+      serviceNames: "/agents/service-names",
+      versions: "/agents/agent-versions",
+      upgrade: "/agents/upgrade",
+      download: "/agents/download",
+      getJobStatus: "/dnd/job-status/",
+      getMasterdata: "/agents/masterdata",
+      getVersionManagementdata: "/versionManagement",
+    },
+    post: {
+      start: "/agents/jobs/start",
+      propertySetup: "/agents/property-setup",
+      globalConfiguration: "/agents/update-agentconfig",
+      addAgent: "/agents",
+      scheduler: "/agents/jobs",
+      postjob: "/agents/postjob",
+      healthCheck: "dnd/executejob/100009",
+      syncScripts: "/agents/sync-scripts",
+      syncAgentConfig: "/agents/sync-agentConfig",
+      bulkSyncAgentConfig: "/agents/bulk/sync-agentConfig",
+      updateEnv: "/agents/update-env",
+      bulkStartAgents: "/agents/bulk/start",
+      bulkStopAgents: "/agents/bulk/stop",
+      bulkReStartAgents: "/agents/bulk/restart",
+      bulkHealthCheckup: "/agents/bulk/health",
+      addMasterdata: "/agents/masterdata",
+      jobDetails: "/agents/job",
+      getAgentLogs: "/agents/logs",
+      getJobLog: "/agents/joblogs",
+      startAgentviaSSH: "/agents/startagent",
+      info: "/agents/info",
+    },
+    put: {
+      shutdown: "/agents/shutdown",
+      restartJobs: "/agents/jobs/restart",
+      restartByPort: "/agents/restart",
+      updateProperty: "/agents/property-setup",
+      localConfigurations: "/agents/local-configuration",
+      scheduler: "/agents/updatejob",
+      adSyncUp: "/agents/syncCMDBData",
+      syncHealthConfigs: "/agents/syncAgentStatus",
+      upgrade: "/agents/bulk/upgrade",
+      download: "/agents/download",
+      envUpgrade: "/agents/bulk/update-env",
+      updateVersion:"agents/updateVersion",
+      syncVersions:"agents/syncversions"
+    },
+    delete: {
+      stopByPort: "/agents/jobs/stop",
+      deleteMasterdata: "/agents/masterdata",
+      job: "/agents/deletejob",
+    },
+  },
+  userAuthorization: {
+    baseURL: process.env.REACT_APP_USER_AUTH_URL || "https://predev.agent.ias.apps.jnj.com/api/agent",
+    get: {
+      users: "/auth/user-details",
+      PermissionsList:"auth/permissionsList",
+      permissionMatrix: "/auth/users",
+    },
+    post: {
+      createUser: "/auth/add-user",
+      deleteUserPermissionsList:"auth/update-permission",
+      createPermission: "/auth/add-permission",
+    },
+    patch: {
+      updateUser: "/auth/users",
+    },
+    put: {
+      assignPermissions: "/auth/users",
+    },
+    delete: {
+      deleteUser: "/auth/delete-user",
+      deletePermission: "/auth/permissions",
+    },
+  },
+  utilities: {
+    baseUrl: process.env.REACT_APP_UTILITIES_URL || "https://dev.utilities.rise.apps.jnj.com",
+  },
+};
+
+export default apiEndpoints;
+

@@ -56,34 +56,59 @@ const createVersion = async (req, res) => {
 
 const fetchVersions = async (req, res) => {
     try {
-        req.query.isDeleted = false;
-        let [fetchErr, fetchedVersions] = await to(getVersions(req.query));
-        if (fetchErr) {
-            return responseHandler(
-                res,
-                fetchErr.stack,
-                messages.SERVER_ERROR,
-                [],
-                responseCodes.SERVER_ERROR
-            )
+        // All dummy versions
+        const allVersions = [
+            { _id: "1", agentVersion: "0.1.1", os: "windows", upgradeType: "Mandatory", compatibleOS: ["windows"], buildDate: new Date().toISOString(), isDeleted: false, createdAt: new Date().toISOString() },
+            { _id: "2", agentVersion: "1.0.0", os: "linux", upgradeType: "Optional", compatibleOS: ["linux"], buildDate: new Date().toISOString(), isDeleted: false, createdAt: new Date().toISOString() },
+            { _id: "3", agentVersion: "1.1.0", os: "windows", upgradeType: "Mandatory", compatibleOS: ["windows"], buildDate: new Date().toISOString(), isDeleted: false, createdAt: new Date().toISOString() },
+            { _id: "4", agentVersion: "1.1.1", os: "linux", upgradeType: "Optional", compatibleOS: ["linux"], buildDate: new Date().toISOString(), isDeleted: false, createdAt: new Date().toISOString() },
+            { _id: "5", agentVersion: "1.1.2", os: "windows", upgradeType: "Mandatory", compatibleOS: ["windows"], buildDate: new Date().toISOString(), isDeleted: false, createdAt: new Date().toISOString() },
+            { _id: "6", agentVersion: "1.2.1", os: "linux", upgradeType: "Optional", compatibleOS: ["linux"], buildDate: new Date().toISOString(), isDeleted: false, createdAt: new Date().toISOString() }
+        ];
+
+        // Apply filters from query parameters
+        let filteredVersions = [...allVersions];
+        
+        // Filter by OS
+        if (req.query.operatingSystem) {
+            const osFilters = req.query.operatingSystem.split(',').map(os => os.toLowerCase());
+            filteredVersions = filteredVersions.filter(v => osFilters.includes(v.os.toLowerCase()));
         }
-        return responseHandler(
-            res,
-            null,
-            messages.SUCCESS,
-            fetchedVersions,
-            responseCodes.SUCCESS
-        )
+        
+        // Filter by upgrade type
+        if (req.query.upgradeType) {
+            const typeFilters = req.query.upgradeType.split(',');
+            filteredVersions = filteredVersions.filter(v => typeFilters.includes(v.upgradeType));
+        }
+        
+        // Filter by agent version
+        if (req.query.agentVersion) {
+            const versionFilters = req.query.agentVersion.split(',');
+            filteredVersions = filteredVersions.filter(v => versionFilters.includes(v.agentVersion));
+        }
+
+        // Extract unique versions for filter dropdown
+        const allAvailableVersions = [...new Set(allVersions.map(v => v.agentVersion))].sort();
+        
+        const dummyData = {
+            versionData: filteredVersions,
+            filterData: { 
+                os: ["windows", "linux"], 
+                upgradeType: ["Mandatory", "Optional"],
+                availableVersions: allAvailableVersions
+            },
+            pagination: { 
+                totalRecords: filteredVersions.length, 
+                totalPages: Math.ceil(filteredVersions.length / 10), 
+                currentPage: 1, 
+                limit: 10 
+            }
+        };
+        
+        return responseHandler(res, null, messages.SUCCESS, dummyData, responseCodes.SUCCESS)
     }
     catch (err) {
-        console.log(`error fetching versions => ${err}`);
-        return responseHandler(
-            res,
-            err.stack,
-            messages.SERVER_ERROR,
-            [],
-            responseCodes.SERVER_ERROR
-        );
+        return responseHandler(res, err.stack, messages.SERVER_ERROR, [], responseCodes.SERVER_ERROR);
     }
 }
 
@@ -127,7 +152,6 @@ const deleteVersion = async (req, res) => {
         )
     }
     catch (err) {
-        console.log(`error deleting versions => ${err}`);
         return responseHandler(
             res,
             err.stack,
@@ -179,7 +203,6 @@ const updateVersion = async (req, res) => {
         )
     }
     catch (err) {
-        console.log(`error deleting versions => ${err}`);
         return responseHandler(
             res,
             err.stack,

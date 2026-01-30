@@ -1,0 +1,186 @@
+.risebot_label {
+  color: #344054 !important;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  font-family: "Johnson Text";
+}
+.risebot_label1_div {
+  height: 30px;
+}
+.risebot_label1 {
+  color: #344054 !important;
+  font-family: "Johnson Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  height: 30px;
+}
+
+.label2 {
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #404040;
+  padding: 10px;
+  display: inline-block;
+  padding-left: 0px;
+}
+
+.risebot_textBox {
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  width: 60px;
+  height: 30px;
+  color: #82807c;
+  display: inline-block;
+  background: transparent;
+  border-radius: 8px !important;
+  border: 1px solid #d8dae5 !important;
+  padding: 0px 8px;
+}
+.risebot_textBox::placeholder {
+  font-family: "Johnson Text";
+  color: #7b7b7b !important;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.risebot_buttonBox {
+  cursor: pointer !important;
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 15px;
+  text-align: center;
+  height: 30px;
+  width: 42px;
+  color: #ffffff;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #2961F4;
+  background: #2961F4;
+}
+
+.risebot_showingOutOfCol {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.risebot_paginationCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px !important;
+  height: 40px;
+  padding-top: 15px !important;
+}
+
+.risebot_goToPageCol {
+  display: flex;
+  justify-content: right;
+}
+
+.risebot_recordsPerPageCol {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.risebot_customDropdownTitle {
+  font-family: "Johnson Text";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #2961F4;
+  border: none !important;
+}
+
+.risebot_pipeSeparator {
+  display: inline-block;
+  width: 30px;
+  height: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transform: rotate(90deg);
+  line-height: 15px;
+  margin-top: 8px;
+}
+
+.risebot_navLink {
+  border-radius: 36px !important;
+  border: 1px solid #d8dae5 !important;
+  background: #fff;
+  display: flex;
+  width: 72px !important;
+  height: 32px;
+  padding: 0px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #344054 !important;
+}
+
+.risebot_navItem {
+  color: #344054 !important;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 8px !important;
+}
+
+
+.risebot_paginationLink {
+  border: unset !important;
+  background-color: unset !important;
+  border-radius: 36px !important;
+  font-family: "Johnson Text";
+  color: #102459 !important;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  cursor: pointer !important;
+}
+
+.risebot_paginationItem .risebot_paginationLink {
+  border-radius: 36px !important;
+  border: 1px solid #d8dae5 !important;
+  background: #fff;
+  display: flex;
+  width: 32px;
+  height: 32px;
+  padding: 0px 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-left: 8px !important;
+}
+
+.risebot_paginationItem.active .risebot_paginationLink {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  padding: 0px 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 36px !important;
+  background: #ebebeb !important;
+}
+
+.break {
+  margin-left: 8px !important;
+}
