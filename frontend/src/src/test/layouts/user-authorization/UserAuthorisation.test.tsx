@@ -4,15 +4,8 @@ import "@testing-library/jest-dom";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import UserAuthorization from "../../../../src/layouts/user-authorization/UserAuthorization";
-
-import {
-  getUsers,
-  isUsersLoading,
-  getUsersError,
-  getUsersPagination,
-  getSelectedUsers,
-} from "@/redux/selectors/userAuthorization.selectors";
+import { getUsers, isUsersLoading, getUsersError, getUsersPagination, getSelectedUsers } from "@/redux/selectors/userAuthorization.selectors";
+import UserAuthorization from "../../../layouts/user-authorization/UserAuthorization";
 
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
@@ -32,22 +25,22 @@ jest.mock("@/redux/selectors/userAuthorization.selectors", () => ({
 }));
 
 jest.mock("../../../../src/redux/actions/userAuthorization.action", () => ({
-  fetchUsers: jest.fn((payload) => ({ type: "FETCH_USERS", payload })),
-  createUser: jest.fn((payload) => ({ type: "CREATE_USER", payload })),
-  deleteUser: jest.fn((payload) => ({ type: "DELETE_USER", payload })),
+  fetchUsers: jest.fn(payload => ({ type: "FETCH_USERS", payload })),
+  createUser: jest.fn(payload => ({ type: "CREATE_USER", payload })),
+  deleteUser: jest.fn(payload => ({ type: "DELETE_USER", payload })),
   assignUserPermissions: jest.fn((id, perms) => ({ type: "ASSIGN", payload: { id, perms } })),
 }));
 
-jest.mock("@/components/ui/pagination/Pagination.component", () => (props: any) => (
-  <button onClick={() => props.handlePagination(10, 2)}>Mock Pagination</button>
-));
+jest.mock("@/components/ui/pagination/Pagination.component", () => (props: any) => <button onClick={() => props.handlePagination(10, 2)}>Mock Pagination</button>);
 
-jest.mock("../../../layouts/user-authorization/Permissions", () => (props: any) =>
-  props.show ? <button onClick={() => props.onAdd({ username: "test", password: "pass", isActive: true })}>Mock Add User</button> : null
+jest.mock(
+  "../../../layouts/user-authorization/Permissions",
+  () => (props: any) => props.show ? <button onClick={() => props.onAdd({ username: "test", password: "pass", isActive: true })}>Mock Add User</button> : null,
 );
 
-jest.mock("../../../layouts/user-authorization/AssignPermissionModal", () => (props: any) =>
-  props.show ? <button onClick={() => props.onAssign("1", ["p1"])}>Mock Assign</button> : null
+jest.mock(
+  "../../../layouts/user-authorization/AssignPermissionModal",
+  () => (props: any) => props.show ? <button onClick={() => props.onAssign("1", ["p1"])}>Mock Assign</button> : null,
 );
 
 jest.mock("../../../layouts/user-authorization/AddUserModal", () => (props: any) => {
@@ -56,21 +49,21 @@ jest.mock("../../../layouts/user-authorization/AddUserModal", () => (props: any)
   return (
     <div>
       <p>Add User Modal</p>
-      <button onClick={() => props.onAdd({ username: "test", password: "Test@123", isActive: true })}>
-        Mock Add User
-      </button>
+      <button onClick={() => props.onAdd({ username: "test", password: "Test@123", isActive: true })}>Mock Add User</button>
     </div>
   );
 });
 
-jest.mock("@/components/popup/popUp.component", () => (props: any) =>
-  props.show ? (
-    <div>
-      <p>Delete User</p>
-      <button onClick={props.handleClick}>Confirm Delete</button>
-      <button onClick={props.onHide}>Cancel</button>
-    </div>
-  ) : null
+jest.mock(
+  "@/components/popup/popUp.component",
+  () => (props: any) =>
+    props.show ? (
+      <div>
+        <p>Delete User</p>
+        <button onClick={props.handleClick}>Confirm Delete</button>
+        <button onClick={props.onHide}>Cancel</button>
+      </div>
+    ) : null,
 );
 
 const mockDispatch = jest.fn();
@@ -97,11 +90,8 @@ describe("UserAuthorization", () => {
   it("dispatches fetchUsers on mount", () => {
     render(<UserAuthorization />);
 
-    expect(mockDispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "FETCH_USERS" })
-    );
+    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: "FETCH_USERS" }));
   });
-
 
   it("renders users list", () => {
     (getUsers as jest.Mock).mockReturnValue([
@@ -137,9 +127,7 @@ describe("UserAuthorization", () => {
 
     fireEvent.click(screen.getByText("Mock Add User"));
 
-    expect(mockDispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "CREATE_USER" })
-    );
+    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: "CREATE_USER" }));
   });
 
   it("opens delete modal and confirms delete", () => {
@@ -163,9 +151,7 @@ describe("UserAuthorization", () => {
 
     fireEvent.click(screen.getByText("Confirm Delete"));
 
-    expect(mockDispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "DELETE_USER" })
-    );
+    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: "DELETE_USER" }));
   });
 
   it("pagination triggers fetchUsers", () => {
@@ -179,8 +165,6 @@ describe("UserAuthorization", () => {
 
     fireEvent.click(screen.getByText("Mock Pagination"));
 
-    expect(mockDispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "FETCH_USERS" })
-    );
+    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: "FETCH_USERS" }));
   });
 });

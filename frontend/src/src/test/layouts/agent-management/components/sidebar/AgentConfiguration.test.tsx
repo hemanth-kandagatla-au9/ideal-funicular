@@ -18,7 +18,7 @@ describe("AgentConfiguration Component", () => {
     render(
       <Accordion activeKey={activeKey}>
         <AgentConfiguration {...baseProps} {...props} />
-      </Accordion>
+      </Accordion>,
     );
 
   beforeEach(() => {
@@ -26,10 +26,10 @@ describe("AgentConfiguration Component", () => {
   });
 
   it("renders titles correctly", () => {
-  renderWithAccordion();
+    renderWithAccordion();
 
-  expect(screen.getAllByText(agentConfigurationTitle).length).toBeGreaterThan(0);
-  expect(screen.getAllByText(configurationTitle).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(agentConfigurationTitle).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(configurationTitle).length).toBeGreaterThan(0);
   });
 
   it("renders rows when applicationProperty has values", () => {
@@ -56,17 +56,17 @@ describe("AgentConfiguration Component", () => {
     expect(screen.queryByText("PROPERTY.ONE")).not.toBeInTheDocument();
     expect(screen.queryByText("valueOne")).not.toBeInTheDocument();
   });
-it("applies expanded class when accordion is open", () => {
-  renderWithAccordion("2");
+  it("applies expanded class when accordion is open", () => {
+    renderWithAccordion("2");
 
-  const title = screen.getAllByText(agentConfigurationTitle)[0];
-  expect(title.className).toContain("titleCollapsed");
-});
+    const title = screen.getAllByText(agentConfigurationTitle)[0];
+    expect(title.className).toContain("titleCollapsed");
+  });
 
-it("applies collapsed class when accordion is closed", () => {
-  renderWithAccordion("1");
+  it("applies collapsed class when accordion is closed", () => {
+    renderWithAccordion("1");
 
-  const title = screen.getAllByText(agentConfigurationTitle)[0];
-  expect(title.className).toContain("nottitleCollapsed");
-});
+    const title = screen.getAllByText(agentConfigurationTitle)[0];
+    expect(title.className).toContain("nottitleCollapsed");
+  });
 });

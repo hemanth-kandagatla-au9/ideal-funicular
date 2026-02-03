@@ -128,19 +128,19 @@ const AgentList = ({
 
   return (
     <>
-        <div className="agentHeaderRow">
-          <div className="agentRowFirst">
-            <Button className="btnFocusActive" data-testid="agentTickBtn" variant="outline" onClick={toggleSelectOrDeselectAllAgents}>
-              <img height="18px" width="18px" src={areAllAgentsSelected() ? blueTick : selecttick} alt="Select All" />
-            </Button>
-          </div>
-          {agentCardsLabel.map((ele, index) => (
-            <div key={index} className={`${index === 0 ? "agentRowSecond" : "agentRow"}`}>
-              <span className="fieldLabel">{ele}</span>
-            </div>
-          ))}
+      <div className="agentHeaderRow">
+        <div className="agentRowFirst">
+          <Button className="btnFocusActive" data-testid="agentTickBtn" variant="outline" onClick={toggleSelectOrDeselectAllAgents}>
+            <img height="18px" width="18px" src={areAllAgentsSelected() ? blueTick : selecttick} alt="Select All" />
+          </Button>
         </div>
-       <div className="agentContainer">
+        {agentCardsLabel.map((ele, index) => (
+          <div key={index} className={`${index === 0 ? "agentRowSecond" : "agentRow"}`}>
+            <span className="fieldLabel">{ele}</span>
+          </div>
+        ))}
+      </div>
+      <div className="agentContainer">
         {agents.map(({ hostname, os, agent_details, risebot, status, risebotProperties }) => (
           <div key={hostname}>
             {hostname != "" && (
@@ -151,7 +151,7 @@ const AgentList = ({
                       <img
                         src={
                           !isEmpty(selectedHostnameAgentsData) &&
-                            hostname ===
+                          hostname ===
                             get(
                               selectedHostnameAgentsData.find(({ hostname: agentHost }) => hostname === agentHost),
                               "hostname",
@@ -201,7 +201,7 @@ const AgentList = ({
                       <img src={checkSquare} alt="view" />
                     </Button>
                     {!isEmpty(agents) && (
-                      <Button  title={viewText} data-testid="viewSidebar" variant="outline" disabled={loading} className="btnFocusActive" onClick={() => toggleSideBar(hostname)}>
+                      <Button title={viewText} data-testid="viewSidebar" variant="outline" disabled={loading} className="btnFocusActive" onClick={() => toggleSideBar(hostname)}>
                         <img src={vieweye} alt="view" />
                       </Button>
                     )}
@@ -220,4 +220,3 @@ const AgentList = ({
 };
 
 export default AgentList;
-

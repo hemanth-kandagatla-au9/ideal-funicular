@@ -67,9 +67,9 @@ describe("agentManagementSelectors", () => {
     agentServiceNames: [],
     agentVersions: [],
     filterLoading: false,
-    agentSyncHealthConfigs:[],
-    agentHealthCheckUP:[],
-    upgradeAgents:{},
+    agentSyncHealthConfigs: [],
+    agentHealthCheckUP: [],
+    upgradeAgents: {},
   };
 
   it("getError() fn", () => {
@@ -179,30 +179,27 @@ describe("agentManagementSelectors", () => {
     expect(getAgentHealthCheckUp(state)).toEqual([]);
   });
 
-  it("getStartedAgent() fn",()=>{
+  it("getStartedAgent() fn", () => {
     expect(getStartedAgent(state)).toEqual([]);
-  })
+  });
 
-  it("getStoppedAgent() fn",()=>{
+  it("getStoppedAgent() fn", () => {
     expect(getStoppedAgent(state)).toEqual([]);
-  })
+  });
 
-  it("getRestartedAgent() fn",()=>{
+  it("getRestartedAgent() fn", () => {
     expect(getRestartedAgent(state)).toEqual([]);
-  })
+  });
 
   it("getUpgradeAgentVersion() fn", () => {
     expect(getUpgradeAgentVersion(state)).toEqual({});
   });
 
-    it("getAgentData() fn", () => {
+  it("getAgentData() fn", () => {
     expect(getAgentData(state)).toEqual({});
   });
 
-    it("agentLoading() fn", () => {
+  it("agentLoading() fn", () => {
     expect(agentLoading(state)).toEqual(false);
   });
 });
-
-
-

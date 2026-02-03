@@ -1,38 +1,18 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import BinaryFilterBar from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinaryFilterBar";
+import BinaryFilterBar from "../../../../../layouts/agent-management/components/versionmanagement/BinaryFilterBar";
 import "@testing-library/jest-dom";
+
 jest.mock("../../../../images/agent-management/assets/crossBlack.svg", () => "mock-image");
 jest.mock("../../../../../../src/layouts/agent-management/components/MultiSelectDropdown", () => (props: any) => {
   return (
     <div data-testid={`mock-dropdown-${props.id}`}>
-      <button onClick={() => props.toggleOpen()}>
-        Toggle {props.id}
-      </button>
+      <button onClick={() => props.toggleOpen()}>Toggle {props.id}</button>
 
-      <button
-        onClick={() =>
-          props.onSelectChange([
-            { value: "select-all" }
-          ])
-        }
-      >
-        SelectAll {props.id}
-      </button>
+      <button onClick={() => props.onSelectChange([{ value: "select-all" }])}>SelectAll {props.id}</button>
 
-      <button
-        onClick={() =>
-          props.onSelectChange([
-            { value: "Windows" },
-            { value: "Linux" }
-          ])
-        }
-      >
-        SelectSome {props.id}
-      </button>
+      <button onClick={() => props.onSelectChange([{ value: "Windows" }, { value: "Linux" }])}>SelectSome {props.id}</button>
 
-      <button onClick={() => props.clearAll()}>
-        Clear {props.id}
-      </button>
+      <button onClick={() => props.clearAll()}>Clear {props.id}</button>
     </div>
   );
 });

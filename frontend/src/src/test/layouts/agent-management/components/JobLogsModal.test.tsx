@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import JobLogsModal from "../../../../layouts/agent-management/components/JobLogsModal";
+
 jest.mock("@/constants/strings", () => ({
   closeButtonText: "Close",
   copyToClipboardButtonText: "Copy",
@@ -11,7 +12,7 @@ jest.mock("@/constants/strings", () => ({
   refreshLogsButtonText: "Refresh",
 }));
 jest.mock("@/layouts/agent-management/helpers/agentHelpers", () => ({
-  convertDateTime: jest.fn((ts) => `formatted-${ts}`),
+  convertDateTime: jest.fn(ts => `formatted-${ts}`),
 }));
 
 describe("JobLogsModal", () => {
@@ -57,12 +58,7 @@ describe("JobLogsModal", () => {
   });
 
   it("shows loader when loading", () => {
-    render(
-      <JobLogsModal
-        {...baseProps}
-        state={{ isLogsLoading: true, agentLog: [] }}
-      />
-    );
+    render(<JobLogsModal {...baseProps} state={{ isLogsLoading: true, agentLog: [] }} />);
 
     expect(screen.getByText("Loading...")).toBeInTheDocument();
   });

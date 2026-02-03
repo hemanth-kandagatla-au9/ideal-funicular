@@ -708,7 +708,7 @@ describe("Agent Actions Test", () => {
     const action = agentManagementActions.successAddAgentMasterdata();
     expect(action.type).toEqual(AGENT_MANAGEMENT.SUCCESS_ADD_AGENT_MASTERDATA);
   });
-    it("check upgrade agent has correct failure type", () => {
+  it("check upgrade agent has correct failure type", () => {
     const action = agentManagementActions.failureAddAgentMasterdata({ message: "Error occurred" });
     expect(action.type).toEqual(AGENT_MANAGEMENT.FAILURE_ADD_AGENT_MASTERDATA);
   });
@@ -725,7 +725,7 @@ describe("Agent Actions Test", () => {
     const action = agentManagementActions.successFetchAgentMasterdata();
     expect(action.type).toEqual(AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_MASTERDATA);
   });
-      it("check upgrade agent has correct failure type", () => {
+  it("check upgrade agent has correct failure type", () => {
     const action = agentManagementActions.failureFetchAgentMasterdata({ message: "Error occurred" });
     expect(action.type).toEqual(AGENT_MANAGEMENT.FAILURE_FETCH_AGENT_MASTERDATA);
   });
@@ -742,11 +742,8 @@ describe("Agent Actions Test", () => {
     const action = agentManagementActions.successDeleteHostname();
     expect(action.type).toEqual(AGENT_MANAGEMENT.SUCCESS_DELETE_HOSTNAME);
   });
-      it("check upgrade agent has correct failure type", () => {
+  it("check upgrade agent has correct failure type", () => {
     const action = agentManagementActions.failureDeleteHostname({ message: "Error occurred" });
     expect(action.type).toEqual(AGENT_MANAGEMENT.FAILURE_DELETE_HOSTNAME);
   });
 });
-
-
-

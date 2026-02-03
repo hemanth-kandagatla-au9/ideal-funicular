@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import BinaryTextField from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinaryTextField";
+import BinaryTextField from "../../../../../layouts/agent-management/components/versionmanagement/BinaryTextField";
 
 describe("BinaryTextField", () => {
   const baseProps = {
@@ -41,47 +41,25 @@ describe("BinaryTextField", () => {
   });
 
   it("shows error when touched and error provided", () => {
-    render(
-      <BinaryTextField
-        {...baseProps}
-        touched={true}
-        error="Required field"
-      />
-    );
+    render(<BinaryTextField {...baseProps} touched error="Required field" />);
 
     expect(screen.getByText("Required field")).toBeInTheDocument();
   });
 
   it("does not show error when not touched", () => {
-    render(
-      <BinaryTextField
-        {...baseProps}
-        touched={false}
-        error="Required field"
-      />
-    );
+    render(<BinaryTextField {...baseProps} touched={false} error="Required field" />);
 
     expect(screen.queryByText("Required field")).not.toBeInTheDocument();
   });
 
   it("renders placeholder when provided", () => {
-    render(
-      <BinaryTextField
-        {...baseProps}
-        placeholder="Enter username"
-      />
-    );
+    render(<BinaryTextField {...baseProps} placeholder="Enter username" />);
 
     expect(screen.getByPlaceholderText("Enter username")).toBeInTheDocument();
   });
 
   it("disables input when disabled=true", () => {
-    render(
-      <BinaryTextField
-        {...baseProps}
-        disabled={true}
-      />
-    );
+    render(<BinaryTextField {...baseProps} disabled />);
 
     expect(screen.getByRole("textbox")).toBeDisabled();
   });

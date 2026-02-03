@@ -3,14 +3,20 @@ import { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { message, Spin } from "antd";
 
-import { getVersions, isVersionManagementLoading, getVersionError, isCreateVersionLoading, getCreateVersionError, isManualSyncVersionsLoading } from "../../../../redux/selectors/agentManagement.selectors";
+import {
+  getVersions,
+  isVersionManagementLoading,
+  getVersionError,
+  isCreateVersionLoading,
+  getCreateVersionError,
+  isManualSyncVersionsLoading,
+} from "../../../../redux/selectors/agentManagement.selectors";
 import agentManagementActions from "../../../../redux/actions/agentManagement.action";
 import BinaryVersionsModal from "./BinaryVersionsModal";
 import { BinaryVersion } from "./binarytypes";
 import BinaryVersionsHeader from "./BinaryVersionsHeader";
 import BinaryVersionsTable from "./BinaryVersionsTable";
 import BinaryFilterBar from "./BinaryFilterBar";
-
 
 const BinaryVersions = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -25,12 +31,19 @@ const BinaryVersions = () => {
   });
   const osOptions = ["windows", "linux"];
   const typeOptions = ["Mandatory", "Optional"];
-  const versionOptions = useMemo(() => {
-    const uniqueVersions = [...new Set(versions.map(version => version.version))];
-    return uniqueVersions.sort();
-  }, [versions]);
   const dispatch = useDispatch();
-  const reduxResponse = useSelector(getVersions);
+  const reduxResponse: any = useSelector(getVersions);
+  const versionOptions = useMemo(() => {
+    const filterData = reduxResponse?.data?.data?.filterData;
+    const availableFromApi = filterData?.agentVersions ?? filterData?.availableVersions;
+
+    if (Array.isArray(availableFromApi) && availableFromApi.length > 0) {
+      return [...new Set(availableFromApi.map(String))].sort((a: string, b: string) => a.localeCompare(b, undefined, { numeric: true }));
+    }
+
+    const uniqueVersions = [...new Set(versions.map(version => version.version))];
+    return uniqueVersions.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  }, [reduxResponse, versions]);
   const loading = useSelector(isVersionManagementLoading);
   const error = useSelector(getVersionError);
   const createVersionLoading = useSelector(isCreateVersionLoading);
@@ -54,13 +67,13 @@ const BinaryVersions = () => {
       ...paginationFilters,
     };
     if (filters.os.length > 0) {
-      apiParams.operatingSystem = filters.os.join(',');
+      apiParams.operatingSystem = filters.os.join(",");
     }
     if (filters.types.length > 0) {
-      apiParams.upgradeType = filters.types.join(',');
+      apiParams.upgradeType = filters.types.join(",");
     }
     if (filters.versions.length > 0) {
-      apiParams.agentVersion = filters.versions.join(',');
+      apiParams.agentVersion = filters.versions.join(",");
     }
 
     dispatch(agentManagementActions.fetchVersions(apiParams));
@@ -139,7 +152,7 @@ const BinaryVersions = () => {
   };
 
   const handleUpdateBinaryVersion = async (updatedVersion: Omit<BinaryVersion, "id">) => {
-        console.log("Updating version:", updatedVersion);
+    console.log("Updating version:", updatedVersion);
 
     if (!editingVersion?.id) {
       message.error("No version selected for update");
@@ -196,16 +209,12 @@ const BinaryVersions = () => {
     setIsViewMode(false);
     setOpenModal(true);
   };
-  console.log(reduxResponse?.data?.data?.pagination?.total,"reduxResponse?.data?.data?.pagination?.total")
+  console.log(reduxResponse?.data?.data?.pagination?.total, "reduxResponse?.data?.data?.pagination?.total");
 
   return (
-    <div style={{ padding: 12, fontFamily: 'Johnson Text !important' }}>
+    <div style={{ padding: 12, fontFamily: "Johnson Text !important" }}>
       <Spin spinning={loading || createVersionLoading || manualSyncLoading}>
-        <BinaryVersionsHeader 
-          versionsCount={reduxResponse?.data?.data?.pagination?.total || 0} 
-          onSync={handleSync} 
-          isLoading={manualSyncLoading} 
-        />
+        <BinaryVersionsHeader versionsCount={reduxResponse?.data?.data?.pagination?.total || 0} onSync={handleSync} isLoading={manualSyncLoading} />
 
         <BinaryFilterBar osOptions={osOptions} versionOptions={versionOptions} typeOptions={typeOptions} filters={filters} setFilters={setFilters} />
 
@@ -240,4 +249,3 @@ const BinaryVersions = () => {
 };
 
 export default BinaryVersions;
-

@@ -1,15 +1,15 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-var */
 /* eslint-disable jest/no-identical-title */
+import { cleanup } from "@testing-library/react-hooks";
 import agentManagementReducer from "../../../redux/reducers/agentManagementReducer";
 import { AGENT_MANAGEMENT } from "../../../config/actions";
-import { cleanup } from "@testing-library/react-hooks";
 import { AxiosInstace } from "../../../services/agent/agentManagement.service";
 
 jest?.useFakeTimers();
 
 beforeEach(() => {
-  jest?.spyOn(AxiosInstace, "get")
+  jest?.spyOn(AxiosInstace, "get");
 });
 
 afterEach(() => {
@@ -17,7 +17,7 @@ afterEach(() => {
 });
 
 describe("Agent Management Reducers", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("renders", () => {
     initialState = undefined;
@@ -28,7 +28,7 @@ describe("Agent Management Reducers", () => {
 });
 
 describe("Check Agent Start Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Start Service", () => {
     action = { type: AGENT_MANAGEMENT.START_AGENT_SERVICE };
@@ -53,7 +53,7 @@ describe("Check Agent Start Service", () => {
 });
 
 describe("Check Agent Health checkup Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Health Checkup Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_HEALTH_CHECKUP };
@@ -78,7 +78,7 @@ describe("Check Agent Health checkup Service", () => {
 });
 
 describe("Check Agent Health checkup by Port", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Health Checkup by Port Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_HEALTH_CHECKUP_BY_PORT };
@@ -103,7 +103,7 @@ describe("Check Agent Health checkup by Port", () => {
 });
 
 describe("Check Agent Stop Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Stop Service", () => {
     action = { type: AGENT_MANAGEMENT.STOP_AGENT_SERVICE };
@@ -128,7 +128,7 @@ describe("Check Agent Stop Service", () => {
 });
 
 describe("Check Agent Job Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Job Service", () => {
     action = { type: AGENT_MANAGEMENT.RESTART_JOB_SERVICE };
@@ -153,7 +153,7 @@ describe("Check Agent Job Service", () => {
 });
 
 describe("Check Agent Restart Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Restart Service", () => {
     action = { type: AGENT_MANAGEMENT.RESTART_AGENT_SERVICE };
@@ -178,7 +178,7 @@ describe("Check Agent Restart Service", () => {
 });
 
 describe("Check Save Agent Property Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Save Agent Property Service", () => {
     action = { type: AGENT_MANAGEMENT.SAVE_AGENT_PROPERTY };
@@ -203,7 +203,7 @@ describe("Check Save Agent Property Service", () => {
 });
 
 describe("Check Update Agent Property Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Update Agent Property Service", () => {
     action = { type: AGENT_MANAGEMENT.UPDATE_AGENT_PROPERTY };
@@ -228,7 +228,7 @@ describe("Check Update Agent Property Service", () => {
 });
 
 describe("Check Fetch Agent Build Info", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Agent Build Info", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_AGENT_BUILD_INFO };
@@ -253,7 +253,7 @@ describe("Check Fetch Agent Build Info", () => {
 });
 
 describe("Check Fetch Agent Global Config", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Agent Global Config", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_GLOBAL_CONFIG };
@@ -278,7 +278,7 @@ describe("Check Fetch Agent Global Config", () => {
 });
 
 describe("Check Save Agent Global Config", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Save Global Config", () => {
     action = { type: AGENT_MANAGEMENT.SAVE_GLOBAL_CONFIG };
@@ -303,7 +303,7 @@ describe("Check Save Agent Global Config", () => {
 });
 
 describe("Check Fetch Agent Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Agent Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_AGENT_MANAGEMENT_SERVICE };
@@ -328,7 +328,7 @@ describe("Check Fetch Agent Service", () => {
 });
 
 describe("Check Fetch Agent Filter Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Agent Filter Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_AGENT_FILTER };
@@ -353,7 +353,7 @@ describe("Check Fetch Agent Filter Service", () => {
 });
 
 describe("Check Fetch Agent Repositories Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Agent Repositories Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_AGENT_REPOSITORIES };
@@ -378,7 +378,7 @@ describe("Check Fetch Agent Repositories Service", () => {
 });
 
 describe("Check Add Agent Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Add Agent Service", () => {
     action = { type: AGENT_MANAGEMENT.ADD_AGENT };
@@ -403,7 +403,7 @@ describe("Check Add Agent Service", () => {
 });
 
 describe("Check Agent Logs Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Agent Logs Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_AGENT_LOGS };
@@ -428,7 +428,7 @@ describe("Check Agent Logs Service", () => {
 });
 
 describe("Check Agent Logs Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Reload Agent Logs Service", () => {
     action = { type: AGENT_MANAGEMENT.RELOAD_FETCH_AGENT_LOGS };
@@ -438,86 +438,78 @@ describe("Check Agent Logs Service", () => {
 });
 
 describe("Check Save Local Configs Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
-  
+
   it("Save Local Configs Service", () => {
     action = { type: AGENT_MANAGEMENT.SAVE_LOCAL_CONFIGS };
     const res = agentManagementReducer(initialState, action);
     expect(res.localConfigReload).toBe(true);
-   
   });
-  
+
   it("Request Save Local Configs Service", () => {
     action = { type: AGENT_MANAGEMENT.REQUEST_SAVE_LOCAL_CONFIGS };
     const res = agentManagementReducer(initialState, action);
     expect(res.localConfigReload).toBe(true);
-   
   });
-  
+
   it("Success Save Local Configs Service", () => {
-    action = { 
+    action = {
       type: AGENT_MANAGEMENT.SUCCESS_SAVE_LOCAL_CONFIGS,
-      successMessage: "Saved successfully" 
+      successMessage: "Saved successfully",
     };
     const res = agentManagementReducer(initialState, action);
     expect(res.localConfigReload).toBe(false);
-   
   });
-  
+
   it("Failure Save Local Configs Service", () => {
-    action = { 
+    action = {
       type: AGENT_MANAGEMENT.FAILURE_SAVE_LOCAL_CONFIGS,
-      error: "Error message" 
+      error: "Error message",
     };
     const res = agentManagementReducer(initialState, action);
     expect(res.localConfigReload).toBe(false);
-  
   });
 });
 
 describe("Check Fetch Local Configs Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
-  
+
   it("Fetch Local Configs Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_LOCAL_CONFIGS };
     const res = agentManagementReducer(initialState, action);
     expect(res.localConfigReload).toBe(true);
-   
   });
-  
+
   it("Request Fetch Local Configs Service", () => {
     action = { type: AGENT_MANAGEMENT.REQUEST_FETCH_LOCAL_CONFIGS };
     const res = agentManagementReducer(initialState, action);
     expect(res.localConfigReload).toBe(true);
-   
   });
-  
+
   it("Success Fetch Local Configs Service", () => {
     const mockData = { config: "value" };
-    action = { 
+    action = {
       type: AGENT_MANAGEMENT.SUCCESS_FETCH_LOCAL_CONFIGS,
-      localConfigs: mockData 
+      localConfigs: mockData,
     };
     const res = agentManagementReducer(initialState, action);
     expect(res.localConfigReload).toBe(false);
-  
   });
-  
+
   it("Failure Fetch Local Configs Service", () => {
-    action = { 
+    action = {
       type: AGENT_MANAGEMENT.FAILURE_FETCH_LOCAL_CONFIGS,
-      error: "Error message" 
+      error: "Error message",
     };
     const res = agentManagementReducer(initialState, action);
     expect(res.localConfigReload).toBe(false);
- 
   });
 });
 
 describe("Check Fetch Repositories", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Repositories Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_REPOSITORIES };
@@ -542,7 +534,7 @@ describe("Check Fetch Repositories", () => {
 });
 
 describe("Check Download Repositories", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Download Repositories Service", () => {
     action = { type: AGENT_MANAGEMENT.DOWNLOAD_REPOSITORIES };
@@ -567,7 +559,7 @@ describe("Check Download Repositories", () => {
 });
 
 describe("Check Save Scheduler Command Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Save Scheduler Command Service", () => {
     action = { type: AGENT_MANAGEMENT.SAVE_SCHEDULER_COMMAND };
@@ -592,7 +584,7 @@ describe("Check Save Scheduler Command Service", () => {
 });
 
 describe("Check Update Scheduler Command Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Update Scheduler Command Service", () => {
     action = { type: AGENT_MANAGEMENT.UPDATE_SCHEDULER_COMMAND };
@@ -617,7 +609,7 @@ describe("Check Update Scheduler Command Service", () => {
 });
 
 describe("Check Delete Scheduler Command Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Delete Scheduler Command Service", () => {
     action = { type: AGENT_MANAGEMENT.DELETE_SCHEDULER_COMMAND };
@@ -642,7 +634,7 @@ describe("Check Delete Scheduler Command Service", () => {
 });
 
 describe("check list scheduler command Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("List Scheduler Command Service", () => {
     action = { type: AGENT_MANAGEMENT.LIST_SCHEDULER_COMMAND };
@@ -667,7 +659,7 @@ describe("check list scheduler command Service", () => {
 });
 
 describe("check fetch scheduler command id Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("fetch Scheduler Command id Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_SCHEDULED_JOBS_BY_COMMAND_ID };
@@ -692,7 +684,7 @@ describe("check fetch scheduler command id Service", () => {
 });
 
 describe("check syncup agent discovery Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("fetch Scheduler Command id Service", () => {
     action = { type: AGENT_MANAGEMENT.SYNCUP_AGENT_DISCOVERY };
@@ -717,7 +709,7 @@ describe("check syncup agent discovery Service", () => {
 });
 
 describe("check get agent metrics Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("fetch agent metrics Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_AGENT_METRICS };
@@ -742,7 +734,7 @@ describe("check get agent metrics Service", () => {
 });
 
 describe("check agent sync scripts", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
 
   it("Sync script Service", () => {
@@ -767,7 +759,7 @@ describe("check agent sync scripts", () => {
   });
 
   describe("check get agent region Service", () => {
-    let initialState = undefined;
+    let initialState;
     var action = { type: "" };
     it("fetch agent region Service", () => {
       action = { type: AGENT_MANAGEMENT.FETCH_AGENT_REGIONS };
@@ -791,10 +783,8 @@ describe("check agent sync scripts", () => {
     });
   });
 
-  
-
   describe("check get agent platform Service", () => {
-    let initialState = undefined;
+    let initialState;
     var action = { type: "" };
     it("fetch agent platform Service", () => {
       action = { type: AGENT_MANAGEMENT.FETCH_AGENT_PLATFORMS };
@@ -807,7 +797,7 @@ describe("check agent sync scripts", () => {
       expect(res.filterLoading).toBe(true);
     });
     it("Success fetch agent platform Service", () => {
-      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_PLATFORMS};
+      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_PLATFORMS };
       const res = agentManagementReducer(initialState, action);
       expect(res.filterLoading).toBe(false);
     });
@@ -819,7 +809,7 @@ describe("check agent sync scripts", () => {
   });
 
   describe("check get agent environment Service", () => {
-    let initialState = undefined;
+    let initialState;
     var action = { type: "" };
     it("fetch agent environment Service", () => {
       action = { type: AGENT_MANAGEMENT.FETCH_AGENT_ENVIRONMENTS };
@@ -832,7 +822,7 @@ describe("check agent sync scripts", () => {
       expect(res.filterLoading).toBe(true);
     });
     it("Success fetch agent environment Service", () => {
-      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_ENVIRONMENTS};
+      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_ENVIRONMENTS };
       const res = agentManagementReducer(initialState, action);
       expect(res.filterLoading).toBe(false);
     });
@@ -846,66 +836,65 @@ describe("check agent sync scripts", () => {
   describe("Check Fetch Metrics Tiles Data Service", () => {
     let initialState;
     let action;
-  
+
     beforeEach(() => {
       initialState = {
         filterLoading: false,
         metricsTilesData: [{ id: 1 }], // Existing data
-        error: null
+        error: null,
       };
     });
-  
+
     it("should handle FETCH_METRICS_TILES_DATA", () => {
       action = { type: AGENT_MANAGEMENT.FETCH_METRICS_TILES_DATA };
       const newState = agentManagementReducer(initialState, action);
-      
+
       expect(newState.filterLoading).toBe(true);
       expect(newState.metricsTilesData).toEqual([]);
       expect(newState.error).toBeNull();
     });
-  
+
     it("should handle REQUEST_FETCH_METRICS_TILES_DATA", () => {
       action = { type: AGENT_MANAGEMENT.REQUEST_FETCH_METRICS_TILES_DATA };
       const newState = agentManagementReducer(initialState, action);
-      
+
       expect(newState.filterLoading).toBe(true);
       expect(newState.metricsTilesData).toEqual([]);
       expect(newState.error).toBeNull();
     });
-  
+
     it("should handle SUCCESS_FETCH_METRICS_TILES_DATA", () => {
       const mockData = [
         { id: 1, name: "Metric 1" },
-        { id: 2, name: "Metric 2" }
+        { id: 2, name: "Metric 2" },
       ];
-      action = { 
+      action = {
         type: AGENT_MANAGEMENT.SUCCESS_FETCH_METRICS_TILES_DATA,
-        metricsTilesData: mockData 
+        metricsTilesData: mockData,
       };
       const newState = agentManagementReducer(initialState, action);
-      
+
       expect(newState.filterLoading).toBe(false);
       expect(newState.metricsTilesData).toEqual(mockData);
       expect(newState.error).toBeNull();
     });
-  
+
     it("should handle FAILURE_FETCH_METRICS_TILES_DATA", () => {
       const errorMessage = "Failed to fetch metrics tiles data";
-      action = { 
+      action = {
         type: AGENT_MANAGEMENT.FAILURE_FETCH_METRICS_TILES_DATA,
-        error: errorMessage 
+        error: errorMessage,
       };
       const newState = agentManagementReducer(initialState, action);
-      
+
       expect(newState.filterLoading).toBe(false);
       expect(newState.metricsTilesData).toEqual(initialState.metricsTilesData);
       expect(newState.error).toBe(errorMessage);
     });
   });
-  
 
   describe("check get agent sid Service", () => {
-    let initialState = undefined;
+    let initialState;
     var action = { type: "" };
     it("fetch agent sid Service", () => {
       action = { type: AGENT_MANAGEMENT.FETCH_AGENT_SIDS };
@@ -918,7 +907,7 @@ describe("check agent sync scripts", () => {
       expect(res.filterLoading).toBe(true);
     });
     it("Success fetch agent sid Service", () => {
-      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_SIDS};
+      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_SIDS };
       const res = agentManagementReducer(initialState, action);
       expect(res.filterLoading).toBe(false);
     });
@@ -930,7 +919,7 @@ describe("check agent sync scripts", () => {
   });
 
   describe("check get agent os Service", () => {
-    let initialState = undefined;
+    let initialState;
     var action = { type: "" };
     it("fetch agent os Service", () => {
       action = { type: AGENT_MANAGEMENT.FETCH_AGENT_OS_TYPES };
@@ -943,7 +932,7 @@ describe("check agent sync scripts", () => {
       expect(res.filterLoading).toBe(true);
     });
     it("Success fetch agent os Service", () => {
-      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_OS_TYPES};
+      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_OS_TYPES };
       const res = agentManagementReducer(initialState, action);
       expect(res.filterLoading).toBe(false);
     });
@@ -955,7 +944,7 @@ describe("check agent sync scripts", () => {
   });
 
   describe("check get agent service name Service", () => {
-    let initialState = undefined;
+    let initialState;
     var action = { type: "" };
     it("fetch agent service name Service", () => {
       action = { type: AGENT_MANAGEMENT.FETCH_AGENT_SERVICE_NAMES };
@@ -968,7 +957,7 @@ describe("check agent sync scripts", () => {
       expect(res.filterLoading).toBe(true);
     });
     it("Success fetch agent  service name Service", () => {
-      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_SERVICE_NAMES};
+      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_SERVICE_NAMES };
       const res = agentManagementReducer(initialState, action);
       expect(res.filterLoading).toBe(false);
     });
@@ -980,7 +969,7 @@ describe("check agent sync scripts", () => {
   });
 
   describe("check get agent version Service", () => {
-    let initialState = undefined;
+    let initialState;
     var action = { type: "" };
     it("fetch agent version Service", () => {
       action = { type: AGENT_MANAGEMENT.FETCH_AGENT_VERSIONS };
@@ -993,7 +982,7 @@ describe("check agent sync scripts", () => {
       expect(res.filterLoading).toBe(true);
     });
     it("Success fetch agent version Service", () => {
-      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_VERSIONS};
+      action = { type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_VERSIONS };
       const res = agentManagementReducer(initialState, action);
       expect(res.filterLoading).toBe(false);
     });
@@ -1005,7 +994,7 @@ describe("check agent sync scripts", () => {
   });
 
   describe("check force update data agent Service", () => {
-    let initialState = undefined;
+    let initialState;
     var action = { type: "" };
     it("fetch force update data agent Service", () => {
       action = { type: AGENT_MANAGEMENT.SYNC_AGENT_HEALTH_CONFIGS };
@@ -1018,7 +1007,7 @@ describe("check agent sync scripts", () => {
       expect(res.filterLoading).toBe(true);
     });
     it("Success force update data agent Service", () => {
-      action = { type: AGENT_MANAGEMENT.SUCCESS_SYNC_AGENT_HEALTH_CONFIGS};
+      action = { type: AGENT_MANAGEMENT.SUCCESS_SYNC_AGENT_HEALTH_CONFIGS };
       const res = agentManagementReducer(initialState, action);
       expect(res.filterLoading).toBe(false);
     });
@@ -1027,11 +1016,11 @@ describe("check agent sync scripts", () => {
       const res = agentManagementReducer(initialState, action);
       expect(res.filterLoading).toBe(false);
     });
-  });  
+  });
 });
 
 describe("Check Selected Agent Start Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Start Selected Agent Service", () => {
     action = { type: AGENT_MANAGEMENT.START_SELECTED_AGENT_SERVICE };
@@ -1056,7 +1045,7 @@ describe("Check Selected Agent Start Service", () => {
 });
 
 describe("Check selected Agent Stop Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Stop Selected Agent Service", () => {
     action = { type: AGENT_MANAGEMENT.STOP_SELECTED_AGENT_SERVICE };
@@ -1081,7 +1070,7 @@ describe("Check selected Agent Stop Service", () => {
 });
 
 describe("Check selected Agent Restart Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Restart Selected Agent Service", () => {
     action = { type: AGENT_MANAGEMENT.RESTART_SELECTED_AGENT_SERVICE };
@@ -1106,7 +1095,7 @@ describe("Check selected Agent Restart Service", () => {
 });
 
 describe("Check selected Agent Health checkup Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch Health Checkup for Selected Agent Service", () => {
     action = { type: AGENT_MANAGEMENT.HEALTHCHECKUP_SELECTED_AGENT_SERVICE };
@@ -1131,7 +1120,7 @@ describe("Check selected Agent Health checkup Service", () => {
 });
 
 describe("Check get Agent version upgrade Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Fetch upgrade Agent Service", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_UPGRADE_AGENTS };
@@ -1156,7 +1145,7 @@ describe("Check get Agent version upgrade Service", () => {
 });
 
 describe("Check get Agent upgrade Service", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("upgrade Agent Service", () => {
     action = { type: AGENT_MANAGEMENT.UPGRADE_SELECTED_AGENTS };
@@ -1181,7 +1170,7 @@ describe("Check get Agent upgrade Service", () => {
 });
 
 describe("Add masterdata", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("Add masterdata", () => {
     action = { type: AGENT_MANAGEMENT.ADD_AGENT_MASTERDATA };
@@ -1206,7 +1195,7 @@ describe("Add masterdata", () => {
 });
 
 describe("get masterdata", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("get masterdata", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_AGENT_MASTERDATA };
@@ -1231,7 +1220,7 @@ describe("get masterdata", () => {
 });
 
 describe("delete masterdata", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
   it("delete masterdata", () => {
     action = { type: AGENT_MANAGEMENT.DELETE_HOSTNAME };
@@ -1256,39 +1245,39 @@ describe("delete masterdata", () => {
 });
 
 describe("fetch agent info", () => {
-  let initialState = undefined;
+  let initialState;
   var action = { type: "" };
-  
+
   it("fetch agent info", () => {
     action = { type: AGENT_MANAGEMENT.FETCH_AGENT_INFO };
     const res = agentManagementReducer(initialState, action);
     expect(res.agentDetailsLoading).toBe(true);
     expect(res.agentInfo).toEqual({});
   });
-  
+
   it("Request fetch agent info", () => {
     action = { type: AGENT_MANAGEMENT.REQUEST_FETCH_AGENT_INFO };
     const res = agentManagementReducer(initialState, action);
     expect(res.agentDetailsLoading).toBe(true);
     expect(res.agentInfo).toEqual({});
   });
-  
+
   it("Success fetch agent info", () => {
     const mockAgentInfo = { id: 1, name: "Test Agent", status: "active" };
-    action = { 
+    action = {
       type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_INFO,
-      agentInfo: mockAgentInfo 
+      agentInfo: mockAgentInfo,
     };
     const res = agentManagementReducer(initialState, action);
     expect(res.agentDetailsLoading).toBe(false);
     expect(res.agentInfo).toEqual(mockAgentInfo);
   });
-  
+
   it("Failure fetch agent info", () => {
     const errorMsg = "Failed to fetch agent info";
-    action = { 
+    action = {
       type: AGENT_MANAGEMENT.FAILURE_FETCH_AGENT_INFO,
-      error: errorMsg 
+      error: errorMsg,
     };
     const res = agentManagementReducer(initialState, action);
     expect(res.agentDetailsLoading).toBe(false);
@@ -1296,6 +1285,3 @@ describe("fetch agent info", () => {
     expect(res.error).toBe(errorMsg);
   });
 });
-
-
-

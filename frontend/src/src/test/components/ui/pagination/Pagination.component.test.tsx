@@ -2,6 +2,7 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import Pagination from "../../../../components/ui/pagination/Pagination.component";
 import "@testing-library/jest-dom/extend-expect";
+
 jest.mock("../../../../components/ui/customdropdown/Dropdown.component", () => {
   return ({ handleChange }: any) => (
     <button data-testid="mock-dropdown" onClick={() => handleChange("20")}>
@@ -38,12 +39,7 @@ describe("Pagination Component", () => {
   });
 
   it("does not render when totalPage is 0", () => {
-    render(
-      <Pagination
-        {...baseProps}
-        pagination={{ pageNo: 0, totalPage: 0, totalRows: 0, limit: 10 }}
-      />
-    );
+    render(<Pagination {...baseProps} pagination={{ pageNo: 0, totalPage: 0, totalRows: 0, limit: 10 }} />);
 
     expect(screen.queryByText(/Page/i)).not.toBeInTheDocument();
   });
@@ -89,12 +85,7 @@ describe("Pagination Component", () => {
   });
 
   it("disables controls when only one page", () => {
-    render(
-      <Pagination
-        {...baseProps}
-        pagination={{ pageNo: 1, totalPage: 1, totalRows: 10, limit: 10 }}
-      />
-    );
+    render(<Pagination {...baseProps} pagination={{ pageNo: 1, totalPage: 1, totalRows: 10, limit: 10 }} />);
 
     const input = screen.queryByPlaceholderText(/enter/i);
     expect(input).not.toBeInTheDocument();

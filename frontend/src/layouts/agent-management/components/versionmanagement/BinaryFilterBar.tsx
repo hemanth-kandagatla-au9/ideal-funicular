@@ -98,11 +98,10 @@ const BinaryFilterBar: React.FC<BinaryFilterBarProps> = ({ osOptions, versionOpt
               onSelectChange={(selected: any) => handleSelectChange("os", selected)}
               clearAll={() => clearAll("os")}
               selectAllOption={() => selectAll("os")}
-              open={!!dropdownOpen["os"]}
+              open={!!dropdownOpen.os}
               toggleOpen={() => toggleDropdown("os")}
             />
 
-            
             <MultiSelectDropdown
               key="versions"
               dropDownName="All Versions"
@@ -119,11 +118,10 @@ const BinaryFilterBar: React.FC<BinaryFilterBarProps> = ({ osOptions, versionOpt
               onSelectChange={(selected: any) => handleSelectChange("versions", selected)}
               clearAll={() => clearAll("versions")}
               selectAllOption={() => selectAll("versions")}
-              open={!!dropdownOpen["versions"]}
+              open={!!dropdownOpen.versions}
               toggleOpen={() => toggleDropdown("versions")}
             />
 
-            
             <MultiSelectDropdown
               key="types"
               dropDownName="All Types"
@@ -140,7 +138,7 @@ const BinaryFilterBar: React.FC<BinaryFilterBarProps> = ({ osOptions, versionOpt
               onSelectChange={(selected: any) => handleSelectChange("types", selected)}
               clearAll={() => clearAll("types")}
               selectAllOption={() => selectAll("types")}
-              open={!!dropdownOpen["types"]}
+              open={!!dropdownOpen.types}
               toggleOpen={() => toggleDropdown("types")}
             />
           </div>
@@ -222,4 +220,3 @@ const BinaryFilterBar: React.FC<BinaryFilterBarProps> = ({ osOptions, versionOpt
 };
 
 export default BinaryFilterBar;
-

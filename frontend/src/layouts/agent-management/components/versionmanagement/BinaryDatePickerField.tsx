@@ -83,4 +83,3 @@ const BinaryDatePickerField: React.FC<DatePickerFieldProps> = ({ name, label, va
 };
 
 export default BinaryDatePickerField;
-

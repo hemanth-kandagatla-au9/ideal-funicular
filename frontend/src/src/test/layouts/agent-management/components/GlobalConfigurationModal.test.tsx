@@ -1,13 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import GlobalConfigurationModal from "../../../../../src/layouts/agent-management/components/GlobalConfigurationModal";
 
 import agentManagementAction from "@/redux/actions/agentManagement.action";
-import {
-  getAgentGlobalConfig,
-  isGlobalConfigLoading,
-} from "@/redux/selectors/agentManagement.selectors";
+import { getAgentGlobalConfig, isGlobalConfigLoading } from "@/redux/selectors/agentManagement.selectors";
+import GlobalConfigurationModal from "../../../../layouts/agent-management/components/GlobalConfigurationModal";
 
 const mockedGetAgentGlobalConfig = getAgentGlobalConfig as unknown as jest.Mock;
 const mockedIsGlobalConfigLoading = isGlobalConfigLoading as unknown as jest.Mock;
@@ -62,9 +59,7 @@ describe("GlobalConfigurationModal", () => {
 
     render(<GlobalConfigurationModal {...baseProps} />);
 
-    expect(mockDispatch).toHaveBeenCalledWith(
-      agentManagementAction.fetchGlobalConfig()
-    );
+    expect(mockDispatch).toHaveBeenCalledWith(agentManagementAction.fetchGlobalConfig());
   });
 
   it("shows loading spinner when loading true", () => {
@@ -147,7 +142,6 @@ describe("GlobalConfigurationModal", () => {
 
     expect(input).toHaveValue("new");
   });
-
 
   it("calls onHide on Cancel", () => {
     mockedGetAgentGlobalConfig.mockReturnValue({ configs: [] });

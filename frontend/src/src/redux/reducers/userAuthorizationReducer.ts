@@ -1,8 +1,5 @@
-
-
 import { AUTH } from "../../config/actions";
 import { UserAuthorizationState } from "../../types/UserAuthorization";
-
 
 const initialState: UserAuthorizationState = {
   users: [],
@@ -23,7 +20,6 @@ const initialState: UserAuthorizationState = {
   },
 };
 
-
 export default function userAuthorizationReducer(
   state = initialState,
   action: {
@@ -38,7 +34,7 @@ export default function userAuthorizationReducer(
       const backendData = action.data?.data?.data || {};
       const rawUsers = backendData.users || [];
       const backendPagination = backendData.pagination || {};
-      
+
       const users = Array.isArray(rawUsers)
         ? rawUsers.map((user: any) => ({
             id: user.id,
@@ -51,7 +47,7 @@ export default function userAuthorizationReducer(
             updatedAt: user.updatedAt || new Date().toISOString(),
           }))
         : [];
-      
+
       return {
         ...state,
         loading: false,
@@ -111,7 +107,6 @@ export default function userAuthorizationReducer(
         selectedUsers: [],
       };
 
-    
     case AUTH.PERMISSION.GET_PERMISSIONS_REQUEST:
       return { ...state, loading: true, error: null };
 
@@ -153,15 +148,14 @@ export default function userAuthorizationReducer(
       return { ...state, loading: true, error: null };
 
     case AUTH.USER.FETCH_GLOBAL_PERMISSIONS_SUCCESS:
-      return { 
-        ...state, 
-        loading: false, 
-        globalPermissions: action.data?.data?.data || null 
+      return {
+        ...state,
+        loading: false,
+        globalPermissions: action.data?.data?.data || null,
       };
 
     case AUTH.USER.FETCH_GLOBAL_PERMISSIONS_FAILURE:
       return { ...state, loading: false, error: action.error };
-
 
     default:
       return state;

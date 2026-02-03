@@ -8,7 +8,6 @@ type PermissionsData = {
   };
 };
 
-
 export const getUserPermissions = (): PermissionsData => {
   let userPermissions: PermissionsData = {};
   try {
@@ -24,7 +23,6 @@ export const getUserPermissions = (): PermissionsData => {
   }
   return userPermissions;
 };
-
 
 export const getAllowedRoutes = (): string[] => {
   const allowedRoutes: string[] = [];
@@ -47,7 +45,6 @@ export const getAllowedPages = (): string[] => {
   if (permissionsData) allowedPages.push(...Object.keys(permissionsData));
   return allowedPages;
 };
-
 
 export const canAccess = (pageTitle: string): boolean => {
   let canAccessPage = false;
@@ -81,6 +78,4 @@ const PermissionUtils = {
   refreshUserPermissions,
 };
 
-
 export default PermissionUtils;
-

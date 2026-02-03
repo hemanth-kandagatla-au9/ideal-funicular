@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  toast,
-  ToastOptions,
-  ToastContentProps,
-  Slide,
-} from "react-toastify";
+import { toast, ToastOptions, ToastContentProps, Slide } from "react-toastify";
 import type { ReactNode, CSSProperties } from "react";
 
 const BASE_OPTS: ToastOptions = {
@@ -41,26 +36,22 @@ const VARIANT_CONFIG: Record<
   success: {
     accent: "#109A48",
     borderGradient: "linear-gradient(0deg, #109A48 0%, #59D089 100%)",
-    fillGradient:
-      "linear-gradient(90deg, #EDFFF4 0%, rgba(89, 208, 137, 0) 91.17%), #FFFFFF",
+    fillGradient: "linear-gradient(90deg, #EDFFF4 0%, rgba(89, 208, 137, 0) 91.17%), #FFFFFF",
   },
   error: {
     accent: "#D34A4A",
     borderGradient: "linear-gradient(0deg, #D34A4A 0%, #FF7676 100%)",
-    fillGradient:
-      "linear-gradient(90deg, #FFE2E2 0%, rgba(255, 226, 226, 0) 91.17%), #FFFFFF",
+    fillGradient: "linear-gradient(90deg, #FFE2E2 0%, rgba(255, 226, 226, 0) 91.17%), #FFFFFF",
   },
   warning: {
     accent: "#FF9700",
     borderGradient: "linear-gradient(0deg, #FF9700 0%, #FFC464 100%)",
-    fillGradient:
-      "linear-gradient(90deg, #FFEACB 0%, rgba(255, 234, 203, 0) 91.17%), #FFFFFF",
+    fillGradient: "linear-gradient(90deg, #FFEACB 0%, rgba(255, 234, 203, 0) 91.17%), #FFFFFF",
   },
   info: {
     accent: "#459EFF",
     borderGradient: "linear-gradient(0deg, #459EFF 0%, #7BB9FF 100%)",
-    fillGradient:
-      "linear-gradient(90deg, #CFE6FF 0%, rgba(207, 230, 255, 0) 91.17%), #FFFFFF",
+    fillGradient: "linear-gradient(90deg, #CFE6FF 0%, rgba(207, 230, 255, 0) 91.17%), #FFFFFF",
   },
 };
 const parseMessage = (message: string) => {
@@ -71,8 +62,6 @@ const parseMessage = (message: string) => {
     sub: message.slice(idx + 1).trim(),
   };
 };
-
-
 
 type CloseButtonProps = {
   onClick?: () => void;
@@ -96,7 +85,7 @@ const CloseButton: React.FC<CloseButtonProps> = ({ onClick }) => {
         border: "none",
         background: "transparent",
         padding: 0,
-        marginBottom:'40px',
+        marginBottom: "40px",
         cursor: "pointer",
         display: "flex",
         alignItems: "center",
@@ -107,24 +96,12 @@ const CloseButton: React.FC<CloseButtonProps> = ({ onClick }) => {
         transition: "transform 0.15s ease, opacity 0.15s ease",
       }}
     >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M4 4L12 12M12 4L4 12"
-          stroke={strokeColor}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+      <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4L12 12M12 4L4 12" stroke={strokeColor} strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     </button>
   );
 };
-
-
 
 type LayoutProps = {
   message: string;
@@ -133,12 +110,7 @@ type LayoutProps = {
   closeToast?: () => void;
 };
 
-const VariantToastLayout: React.FC<LayoutProps> = ({
-  message,
-  icon,
-  variant,
-  closeToast,
-}) => {
+const VariantToastLayout: React.FC<LayoutProps> = ({ message, icon, variant, closeToast }) => {
   const { accent, borderGradient, fillGradient } = VARIANT_CONFIG[variant];
   const { main, sub } = parseMessage(message);
 
@@ -153,7 +125,6 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
       }}
     >
-      
       <div
         style={{
           borderRadius: CARD_RADIUS,
@@ -173,7 +144,6 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
             gap: 14,
           }}
         >
-          
           <div
             style={{
               display: "flex",
@@ -182,7 +152,6 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
               flex: 1,
             }}
           >
-            
             <div
               style={{
                 width: 40,
@@ -196,7 +165,6 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
               {icon}
             </div>
 
-            
             <div
               style={{
                 display: "flex",
@@ -237,7 +205,6 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
             </div>
           </div>
 
-          
           <CloseButton onClick={() => closeToast?.()} />
         </div>
       </div>
@@ -245,186 +212,59 @@ const VariantToastLayout: React.FC<LayoutProps> = ({
   );
 };
 
-
-
 const successIcon = (
-  <svg
-    width="40"
-    height="40"
-    viewBox="0 0 40 40"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      cx="20"
-      cy="20"
-      r="16.6667"
-      fill="#109A48"
-      stroke="#109A48"
-      strokeWidth="2"
-    />
-    <path
-      d="M26 16L18 24L14 20"
-      stroke="white"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="16.6667" fill="#109A48" stroke="#109A48" strokeWidth="2" />
+    <path d="M26 16L18 24L14 20" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const errorIcon = (
-  <svg
-    width="40"
-    height="40"
-    viewBox="0 0 40 40"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      cx="20"
-      cy="20"
-      r="16.6667"
-      fill="#D34A4A"
-      stroke="#D34A4A"
-      strokeWidth="2"
-    />
-    <path
-      d="M25 15L15 25"
-      stroke="white"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M15 15L25 25"
-      stroke="white"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="16.6667" fill="#D34A4A" stroke="#D34A4A" strokeWidth="2" />
+    <path d="M25 15L15 25" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M15 15L25 25" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const warningIcon = (
-  <svg
-    width="40"
-    height="40"
-    viewBox="0 0 40 40"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      cx="20"
-      cy="20"
-      r="16.6667"
-      fill="#FF9700"
-      stroke="#FF9700"
-      strokeWidth="2"
-    />
-    <path
-      d="M20 13.333V20"
-      stroke="white"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M20 26.667H20.0167"
-      stroke="white"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="16.6667" fill="#FF9700" stroke="#FF9700" strokeWidth="2" />
+    <path d="M20 13.333V20" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M20 26.667H20.0167" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const infoIcon = (
-  <svg
-    width="40"
-    height="40"
-    viewBox="0 0 40 40"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      cx="20"
-      cy="20"
-      r="16.6667"
-      fill="#459EFF"
-      stroke="#459EFF"
-      strokeWidth="2"
-    />
-    <path
-      d="M20 26.667V20"
-      stroke="white"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M20 13.333H19.9833"
-      stroke="white"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="16.6667" fill="#459EFF" stroke="#459EFF" strokeWidth="2" />
+    <path d="M20 26.667V20" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M20 13.333H19.9833" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
-
-
 const successtoast = (message: string): ReactNode =>
-  toast.success(
-    (props: ToastContentProps) => (
-      <VariantToastLayout
-        message={message}
-        icon={successIcon}
-        variant="success"
-        closeToast={props.closeToast}
-      />
-    ),
-    { ...BASE_OPTS, style: TOAST_OUTER_STYLE }
-  );
+  toast.success((props: ToastContentProps) => <VariantToastLayout message={message} icon={successIcon} variant="success" closeToast={props.closeToast} />, {
+    ...BASE_OPTS,
+    style: TOAST_OUTER_STYLE,
+  });
 
 const errortoast = (message: string): ReactNode =>
-  toast.error(
-    (props: ToastContentProps) => (
-      <VariantToastLayout
-        message={message}
-        icon={errorIcon}
-        variant="error"
-        closeToast={props.closeToast}
-      />
-    ),
-    { ...BASE_OPTS, style: TOAST_OUTER_STYLE }
-  );
+  toast.error((props: ToastContentProps) => <VariantToastLayout message={message} icon={errorIcon} variant="error" closeToast={props.closeToast} />, {
+    ...BASE_OPTS,
+    style: TOAST_OUTER_STYLE,
+  });
 
 const warningtoast = (message: string): ReactNode =>
-  toast.warn(
-    (props: ToastContentProps) => (
-      <VariantToastLayout
-        message={message}
-        icon={warningIcon}
-        variant="warning"
-        closeToast={props.closeToast}
-      />
-    ),
-    { ...BASE_OPTS, style: TOAST_OUTER_STYLE }
-  );
+  toast.warn((props: ToastContentProps) => <VariantToastLayout message={message} icon={warningIcon} variant="warning" closeToast={props.closeToast} />, {
+    ...BASE_OPTS,
+    style: TOAST_OUTER_STYLE,
+  });
 
 const infotoast = (message: string): ReactNode =>
-  toast.info(
-    (props: ToastContentProps) => (
-      <VariantToastLayout
-        message={message}
-        icon={infoIcon}
-        variant="info"
-        closeToast={props.closeToast}
-      />
-    ),
-    { ...BASE_OPTS, style: TOAST_OUTER_STYLE }
-  );
+  toast.info((props: ToastContentProps) => <VariantToastLayout message={message} icon={infoIcon} variant="info" closeToast={props.closeToast} />, {
+    ...BASE_OPTS,
+    style: TOAST_OUTER_STYLE,
+  });
 
 export { successtoast, errortoast, warningtoast, infotoast };
-

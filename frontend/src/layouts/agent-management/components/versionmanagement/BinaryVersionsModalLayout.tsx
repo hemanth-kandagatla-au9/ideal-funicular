@@ -32,7 +32,7 @@ const BinaryVersionsModalLayout: React.FC<BinaryVersionsModalLayoutProps> = ({ o
           </Typography>
           <Box
             component="button"
-            onClick={(e) => onClose(e, "escapeKeyDown")}
+            onClick={e => onClose(e, "escapeKeyDown")}
             sx={{
               background: "none",
               border: "none",
@@ -59,4 +59,3 @@ const BinaryVersionsModalLayout: React.FC<BinaryVersionsModalLayoutProps> = ({ o
 };
 
 export default BinaryVersionsModalLayout;
-

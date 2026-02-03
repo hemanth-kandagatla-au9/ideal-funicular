@@ -136,107 +136,103 @@ const AgentList = ({
 
   return (
     <>
-        <div className="agentHeaderRow">
-          <div className="agentRowFirst">
-            <Button className="btnFocusActive" data-testid="agentTickBtn" variant="outline" onClick={toggleSelectOrDeselectAllAgents}>
-              <img height="18px" width="18px" src={areAllAgentsSelected() ? blueTick : selecttick} alt="Select All" />
-            </Button>
-          </div>
-          {agentCardsLabel.map((ele, index) => (
-            <div key={index} className={`${index === 0 ? "agentRowSecond" : "agentRow"}`}>
-              <span className="fieldLabel">{ele}</span>
-            </div>
-          ))}
+      <div className="agentHeaderRow">
+        <div className="agentRowFirst">
+          <Button className="btnFocusActive" data-testid="agentTickBtn" variant="outline" onClick={toggleSelectOrDeselectAllAgents}>
+            <img height="18px" width="18px" src={areAllAgentsSelected() ? blueTick : selecttick} alt="Select All" />
+          </Button>
         </div>
-       <div className="agentContainer">
+        {agentCardsLabel.map((ele, index) => (
+          <div key={index} className={`${index === 0 ? "agentRowSecond" : "agentRow"}`}>
+            <span className="fieldLabel">{ele}</span>
+          </div>
+        ))}
+      </div>
+      <div className="agentContainer">
         {agents.map(agent => {
           const { hostname, os, agent_details, status, risebotProperties } = agent;
           const isExpanded = expandedHostname === hostname;
           return (
-          <div key={hostname}>
-            {hostname != "" && (
-              <div className="agentRowWrapper">
-                <div className="cardsAgent">
-                  <div className="agentRowFirst">
-                    <Button data-testid="agentTickBtn" className="btnFocusActive" variant="outline" onClick={() => handleSelectHostAgent(hostname)}>
-                      <img
-                        src={
-                          !isEmpty(selectedHostnameAgentsData) &&
+            <div key={hostname}>
+              {hostname != "" && (
+                <div className="agentRowWrapper">
+                  <div className="cardsAgent">
+                    <div className="agentRowFirst">
+                      <Button data-testid="agentTickBtn" className="btnFocusActive" variant="outline" onClick={() => handleSelectHostAgent(hostname)}>
+                        <img
+                          src={
+                            !isEmpty(selectedHostnameAgentsData) &&
                             hostname ===
-                            get(
-                              selectedHostnameAgentsData.find(({ hostname: agentHost }) => hostname === agentHost),
-                              "hostname",
-                              "",
-                            )
-                            ? blueTick
-                            : selecttick
-                        }
-                        alt="tick"
-                        style={{ height: "18px", width: "18px", border: "none" }}
-                      />
-                    </Button>
-                  </div>
-                  <div className="agentRowSecond ellipsis">
-                    <span className="fieldValue fontWeightEven">{hostname}</span>
-                  </div>
-                  <div className="agentRow">
-                    <span className="fieldValue fontWeightEven">{os}</span>
-                  </div>
-                  <div className="agentRow">
-                    <span className="fieldValue fontWeightOdd">{get(agent_details, "up_time", "0")}</span>
-                  </div>
-                  <div className="agentRow">
-                    <span className="versionBadge">{get(risebotProperties, "agent.version") ? `v${get(risebotProperties, "agent.version")}` : ""}</span>
-                  </div>
-                  <div className="agentRow">
-                    <span className={`statusBadge ${status.toLowerCase()}`}>{status}</span>
-                  </div>
-                  <div className="agentActions agentRow">
-                    <Button
-                      variant="outline"
-                      className="btnFocusActive"
-                      data-testid="agentHealthChecktBtn"
-                      title={statusButtonText}
-                      disabled={loading || risebotProperties?.server?.port === undefined || risebotProperties?.server?.port === null}
-                      onClick={() => {
-                        const port = risebotProperties?.server?.port;
-                        if (port === undefined || port === null) return;
-                        dispatch(agentManagementActions.fetchHealthCheckup({ hostname, port }));
-                      }}
-                    >
-                      <img src={checkSquare} alt="view" />
-                    </Button>
-                    {!isEmpty(agents) && (
-                      <Button  title={viewText} data-testid="viewSidebar" variant="outline" disabled={loading} className="btnFocusActive" onClick={() => toggleSideBar(hostname)}>
-                        <img src={vieweye} alt="view" />
+                              get(
+                                selectedHostnameAgentsData.find(({ hostname: agentHost }) => hostname === agentHost),
+                                "hostname",
+                                "",
+                              )
+                              ? blueTick
+                              : selecttick
+                          }
+                          alt="tick"
+                          style={{ height: "18px", width: "18px", border: "none" }}
+                        />
                       </Button>
-                    )}
+                    </div>
+                    <div className="agentRowSecond ellipsis">
+                      <span className="fieldValue fontWeightEven">{hostname}</span>
+                    </div>
+                    <div className="agentRow">
+                      <span className="fieldValue fontWeightEven">{os}</span>
+                    </div>
+                    <div className="agentRow">
+                      <span className="fieldValue fontWeightOdd">{get(agent_details, "up_time", "0")}</span>
+                    </div>
+                    <div className="agentRow">
+                      <span className="versionBadge">{get(risebotProperties, "agent.version") ? `v${get(risebotProperties, "agent.version")}` : ""}</span>
+                    </div>
+                    <div className="agentRow">
+                      <span className={`statusBadge ${status.toLowerCase()}`}>{status}</span>
+                    </div>
+                    <div className="agentActions agentRow">
+                      <Button
+                        variant="outline"
+                        className="btnFocusActive"
+                        data-testid="agentHealthChecktBtn"
+                        title={statusButtonText}
+                        disabled={loading || risebotProperties?.server?.port === undefined || risebotProperties?.server?.port === null}
+                        onClick={() => {
+                          const port = risebotProperties?.server?.port;
+                          if (port === undefined || port === null) return;
+                          dispatch(agentManagementActions.fetchHealthCheckup({ hostname, port }));
+                        }}
+                      >
+                        <img src={checkSquare} alt="view" />
+                      </Button>
+                      {!isEmpty(agents) && (
+                        <Button title={viewText} data-testid="viewSidebar" variant="outline" disabled={loading} className="btnFocusActive" onClick={() => toggleSideBar(hostname)}>
+                          <img src={vieweye} alt="view" />
+                        </Button>
+                      )}
 
-                    <Button
-                      variant="outline"
-                      className="btnFocusActive accordionToggleBtn"
-                      data-testid="hostnameAccordionToggle"
-                      title={isExpanded ? "Collapse" : "Expand"}
-                      onClick={() => toggleExpanded(hostname)}
-                    >
-                      <img
-                        className={`hostnameAccordionChevron ${isExpanded ? "expanded" : ""}`}
-                        src={downArrow}
-                        alt={isExpanded ? "collapse" : "expand"}
-                      />
-                    </Button>
+                      <Button
+                        variant="outline"
+                        className="btnFocusActive accordionToggleBtn"
+                        data-testid="hostnameAccordionToggle"
+                        title={isExpanded ? "Collapse" : "Expand"}
+                        onClick={() => toggleExpanded(hostname)}
+                      >
+                        <img className={`hostnameAccordionChevron ${isExpanded ? "expanded" : ""}`} src={downArrow} alt={isExpanded ? "collapse" : "expand"} />
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {hostname !== "" && isExpanded && (
-              <div className="agentAccordionPanel">
-                <HostnameAccordionDetails agent={agent as any} />
-              </div>
-            )}
-          </div>
-        );
+              {hostname !== "" && isExpanded && (
+                <div className="agentAccordionPanel">
+                  <HostnameAccordionDetails agent={agent as any} />
+                </div>
+              )}
+            </div>
+          );
         })}
       </div>
       <Row>

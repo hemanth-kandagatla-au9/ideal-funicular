@@ -7,8 +7,6 @@ import "../css/agentStyle.css";
 import "./CronTab.css";
 import { clearAllButtonText, cronExpressionText } from "../../../constants/strings";
 
-
-
 interface CronTabProps {
   value: string;
   onChange: (value: string) => void;
@@ -35,4 +33,3 @@ const CronTab = (props: CronTabProps) => {
 };
 
 export default CronTab;
-

@@ -2,7 +2,8 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Accordion } from "react-bootstrap";
 import AgentTasks from "../../../../../layouts/agent-management/components/sidebar/AgentTasks";
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
+
 jest.mock("react-redux", () => ({
   useDispatch: () => jest.fn(),
 }));
@@ -56,7 +57,7 @@ const renderUI = (activeKey = "0", props = {}) =>
   render(
     <Accordion defaultActiveKey={activeKey}>
       <AgentTasks {...baseProps} {...props} />
-    </Accordion>
+    </Accordion>,
   );
 describe("AgentTasks", () => {
   beforeEach(() => {
@@ -134,28 +135,23 @@ describe("AgentTasks", () => {
     expect(baseProps.restartAgent).toHaveBeenCalled();
   });
 
- it("renders modal when versionDialogOpen true", async () => {
-  renderUI("0", {
-    versionDialogOpen: true,
-    agentsVersion: {
-      risebotVersions: [
-        { version: "1.0.0", buildDate: "1700000000000" },
-      ],
-    },
+  it("renders modal when versionDialogOpen true", async () => {
+    renderUI("0", {
+      versionDialogOpen: true,
+      agentsVersion: {
+        risebotVersions: [{ version: "1.0.0", buildDate: "1700000000000" }],
+      },
+    });
+    const confirmBtn = await screen.findByTestId("agentSubServiceVersionControlBtn");
+    expect(confirmBtn).toBeInTheDocument();
+    expect(screen.getByText(/v 1.0.0/i)).toBeInTheDocument();
   });
-  const confirmBtn = await screen.findByTestId("agentSubServiceVersionControlBtn");
-  expect(confirmBtn).toBeInTheDocument();
-  expect(screen.getByText(/v 1.0.0/i)).toBeInTheDocument();
-});
-
 
   it("calls handleSelectAgentVersion on version click", () => {
     renderUI("0", {
       versionDialogOpen: true,
       agentsVersion: {
-        risebotVersions: [
-          { version: "1.0.0", buildDate: "1700000000000" },
-        ],
+        risebotVersions: [{ version: "1.0.0", buildDate: "1700000000000" }],
       },
     });
 

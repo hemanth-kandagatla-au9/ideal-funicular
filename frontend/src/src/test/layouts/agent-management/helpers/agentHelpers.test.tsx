@@ -1,9 +1,4 @@
-import {
-  convertDate,
-  convertDateTime,
-  prepareAgentDetails,
-  prepareAgentConfigDetails,
-} from "../../../../../src/layouts/agent-management/helpers/agentHelpers";
+import { convertDate, convertDateTime, prepareAgentDetails, prepareAgentConfigDetails } from "../../../../layouts/agent-management/helpers/agentHelpers";
 
 describe("agentHelpers", () => {
   describe("convertDate", () => {

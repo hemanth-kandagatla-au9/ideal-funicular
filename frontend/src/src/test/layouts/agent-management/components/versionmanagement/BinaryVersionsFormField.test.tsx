@@ -2,28 +2,16 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import BinaryVersionsFormField from "../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsFormField";
+
 jest.mock("../../../../../layouts/agent-management/components/versionmanagement/BinaryTextField", () => (props: any) => (
-  <input
-    data-testid={props.name}
-    value={props.value}
-    onChange={props.onChange}
-    disabled={props.disabled}
-  />
+  <input data-testid={props.name} value={props.value} onChange={props.onChange} disabled={props.disabled} />
 ));
 
 jest.mock("../../../../../layouts/agent-management/components/versionmanagement/BinarySelectField", () => (props: any) => (
-  <select
-    data-testid={props.name}
-    value={props.value}
-    onChange={props.onChange}
-    disabled={props.disabled}
-  />
+  <select data-testid={props.name} value={props.value} onChange={props.onChange} disabled={props.disabled} />
 ));
 
-jest.mock(
-  "../../../../../layouts/agent-management/components/versionmanagement/BinaryDatePickerField",
-  () => () => <div data-testid="datepicker" />
-);
+jest.mock("../../../../../layouts/agent-management/components/versionmanagement/BinaryDatePickerField", () => () => <div data-testid="datepicker" />);
 
 describe("BinaryVersionsFormField", () => {
   const createFormik = (overrides = {}) => ({
@@ -70,9 +58,7 @@ describe("BinaryVersionsFormField", () => {
 
     fireEvent.click(screen.getByText("Add"));
 
-    expect(formik.setFieldValue).toHaveBeenCalledWith("osEntries", [
-      { os: "Windows", version: "10" },
-    ]);
+    expect(formik.setFieldValue).toHaveBeenCalledWith("osEntries", [{ os: "Windows", version: "10" }]);
   });
 
   it("does not add OS entry when fields empty", () => {
@@ -82,10 +68,7 @@ describe("BinaryVersionsFormField", () => {
 
     fireEvent.click(screen.getByText("Add"));
 
-    expect(formik.setFieldValue).not.toHaveBeenCalledWith(
-      "osEntries",
-      expect.anything()
-    );
+    expect(formik.setFieldValue).not.toHaveBeenCalledWith("osEntries", expect.anything());
   });
 
   it("deletes OS entry", () => {
@@ -113,33 +96,22 @@ describe("BinaryVersionsFormField", () => {
     fireEvent.click(checkbox);
 
     expect(formik.setFieldValue).toHaveBeenCalledWith("isMandatory", true);
-    expect(formik.setFieldValue).toHaveBeenCalledWith(
-      "upgradeType",
-      "Mandatory"
-    );
+    expect(formik.setFieldValue).toHaveBeenCalledWith("upgradeType", "Mandatory");
   });
 
   it("hides fields when editing", () => {
     const formik = createFormik();
 
-    render(<BinaryVersionsFormField formik={formik as any} isEditing={true} />);
+    render(<BinaryVersionsFormField formik={formik as any} isEditing />);
 
     expect(screen.queryByTestId("datepicker")).not.toBeInTheDocument();
-    expect(
-      screen.queryByText("Version Download URL")
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText("Version Download URL")).not.toBeInTheDocument();
   });
 
   it("disables Add button in view mode", () => {
     const formik = createFormik();
 
-    render(
-      <BinaryVersionsFormField
-        formik={formik as any}
-        isEditing={false}
-        isViewMode
-      />
-    );
+    render(<BinaryVersionsFormField formik={formik as any} isEditing={false} isViewMode />);
 
     expect(screen.getByText("Add")).toBeDisabled();
   });

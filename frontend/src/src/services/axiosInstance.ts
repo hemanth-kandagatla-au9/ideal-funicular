@@ -1,4 +1,3 @@
-
 import axios, { AxiosInstance as AxiosInstanceType, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import Config from "../config/config";
 import { getLocalAccessToken, getLocalRefreshToken, getLocalUserId, updateLocalTokens } from "../utils/TokenUtils";
@@ -7,7 +6,6 @@ type FailedQueueItem = {
   resolve: (value: unknown) => void;
   reject: (reason?: any) => void;
 };
-
 
 class AxiosInstance {
   private baseURL: string;
@@ -49,7 +47,6 @@ class AxiosInstance {
     return false;
   }
 
-  
   public init(token?: string): AxiosInstanceType {
     const options: AxiosRequestConfig = {
       baseURL: this.baseURL,
@@ -75,7 +72,6 @@ class AxiosInstance {
     return this.instance;
   }
 
-  
   private updateHeaderToken(): void {
     this.instance.interceptors.request.use(
       (config: AxiosRequestConfig) => {
@@ -94,7 +90,6 @@ class AxiosInstance {
     );
   }
 
-  
   private refreshToken(returnError = true): void {
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => response,

@@ -1,9 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import SideBar from "../../../../src/layouts/agent-management/components/sidebar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
-
+import SideBar from "../../../layouts/agent-management/components/sidebar/SideBar";
 
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
@@ -14,40 +13,24 @@ jest.mock("../../../../src/utils/PermissionUtils", () => ({
   canAccess: jest.fn(() => true),
 }));
 
-jest.mock("../../../../src/layouts/agent-management/components/DeleteModal", () => (props: any) =>
-  props.open ? <div>DeleteModal Open</div> : null
-);
+jest.mock("../../../../src/layouts/agent-management/components/DeleteModal", () => (props: any) => props.open ? <div>DeleteModal Open</div> : null);
 
-jest.mock("../../../../src/layouts/agent-management/components/JobLogsModal", () => (props: any) =>
-  props.open ? <div>JobLogsModal Open</div> : null
-);
+jest.mock("../../../../src/layouts/agent-management/components/JobLogsModal", () => (props: any) => props.open ? <div>JobLogsModal Open</div> : null);
 
-jest.mock("../../../../src/layouts/agent-management/components/LocalConfigModal", () => () => (
-  <div>LocalConfigModal</div>
-));
+jest.mock("../../../../src/layouts/agent-management/components/LocalConfigModal", () => () => <div>LocalConfigModal</div>);
 
-jest.mock("../../../../src/layouts/agent-management/components/SchedulerDialog", () => () => (
-  <div>SchedulerDialog</div>
-));
+jest.mock("../../../../src/layouts/agent-management/components/SchedulerDialog", () => () => <div>SchedulerDialog</div>);
 
-jest.mock("../../../../src/layouts/agent-management/components/sidebar/AgentTasks", () => () => (
-  <div>AgentTasks</div>
-));
-jest.mock("../../../../src/layouts/agent-management/components/sidebar/AgentDetails", () => () => (
-  <div>AgentDetails</div>
-));
-jest.mock("../../../../src/layouts/agent-management/components/sidebar/AgentConfiguration", () => () => (
-  <div>AgentConfiguration</div>
-));
-jest.mock("../../../../src/layouts/agent-management/components/sidebar/AgentLogs", () => () => (
-  <div>AgentLogs</div>
-));
+jest.mock("../../../../src/layouts/agent-management/components/sidebar/AgentTasks", () => () => <div>AgentTasks</div>);
+jest.mock("../../../../src/layouts/agent-management/components/sidebar/AgentDetails", () => () => <div>AgentDetails</div>);
+jest.mock("../../../../src/layouts/agent-management/components/sidebar/AgentConfiguration", () => () => <div>AgentConfiguration</div>);
+jest.mock("../../../../src/layouts/agent-management/components/sidebar/AgentLogs", () => () => <div>AgentLogs</div>);
 
 jest.mock("../../../../src/services/agent/agentManagement.service", () => ({
   fetchAgentLogs: jest.fn(() =>
     Promise.resolve({
       data: { data: [] },
-    })
+    }),
   ),
 }));
 
@@ -65,7 +48,6 @@ jest.mock("../../../../src/layouts/agent-management/helpers/agentHelpers", () =>
   prepareAgentConfigDetails: jest.fn(() => ({})),
 }));
 
-
 const mockDispatch = jest.fn();
 
 const defaultSelectors = {
@@ -81,12 +63,11 @@ const defaultSelectors = {
   getAgentInfo: {},
 };
 
-(useSelector as jest.Mock).mockImplementation((selector) => {
+(useSelector as jest.Mock).mockImplementation(selector => {
   return selector(defaultSelectors);
 });
 
 (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
-
 
 describe("SideBar", () => {
   const baseProps = {

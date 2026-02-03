@@ -1,6 +1,7 @@
 import React from "react";
-import { successtoast, errortoast, warningtoast, infotoast } from "../../../../../src/layouts/agent-management/helpers/CustomToast";
 import { toast } from "react-toastify";
+import { successtoast, errortoast, warningtoast, infotoast } from "../../../../layouts/agent-management/helpers/CustomToast";
+
 jest.mock("react-toastify", () => ({
   toast: {
     success: jest.fn(),

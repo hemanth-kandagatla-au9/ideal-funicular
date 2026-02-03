@@ -213,4 +213,3 @@ const INITIAL_STATE: InitialState = {
 };
 
 export default INITIAL_STATE;
-

@@ -1,12 +1,13 @@
 /* eslint-disable jest/no-conditional-expect */
 /* eslint-disable jest/no-identical-title */
 import apiEndpoints from "../../../config/apiEndpoints";
-import AuthService,{AxiosInstance} from "../../../services/auth/AuthService";
-const { get, baseUrl } = apiEndpoints.auth; 
+import AuthService, { AxiosInstance } from "../../../services/auth/AuthService";
+
+const { get, baseUrl } = apiEndpoints.auth;
 
 describe("Auth Service", () => {
-  let mockGet = null; 
-  let mockPatch = null; 
+  let mockGet = null;
+  let mockPatch = null;
   beforeEach(() => {
     mockGet = jest.spyOn(AxiosInstance, "get");
     mockPatch = jest.spyOn(AxiosInstance, "patch");
@@ -16,41 +17,41 @@ describe("Auth Service", () => {
   });
   it("AuthService getUserById SUCCESS", async () => {
     const response = {
-      data:{
-        "status": true,
-        "statusCode": 200,
-        "message": "Fetched successfully",
-        "data": {
-            "user":{
-                "_id": "mock-id",
-                "email": "mock-email",
-                "__v": 0,
-                "accessToken": "mock-token",
-                "address": {
-                    "streetAddress": "mock-address",
-                    "country": "IN",
-                    "region": "NA",
-                    "postalCode": "mock-code"
-                },
-                "createdAt": "2022-05-02T13:37:20.454Z",
-                "familyName": "mock",
-                "givenName": "mock",
-                "locale": "NA",
-                "memberOf": ["mock"],
-                "name": "mock name",
-                "phoneNumber": "mock-number",
-                "profile": "mock-profile",
-                "refreshToken": "mock-refresh-token",
-                "sub": "mock-sub",
-                "updatedAt": "2022-07-14T21:07:24.243Z",
-                "roles": ["mock-roles"]
+      data: {
+        status: true,
+        statusCode: 200,
+        message: "Fetched successfully",
+        data: {
+          user: {
+            _id: "mock-id",
+            email: "mock-email",
+            __v: 0,
+            accessToken: "mock-token",
+            address: {
+              streetAddress: "mock-address",
+              country: "IN",
+              region: "NA",
+              postalCode: "mock-code",
             },
-            "permissions": {}
-        }
-    }
+            createdAt: "2022-05-02T13:37:20.454Z",
+            familyName: "mock",
+            givenName: "mock",
+            locale: "NA",
+            memberOf: ["mock"],
+            name: "mock name",
+            phoneNumber: "mock-number",
+            profile: "mock-profile",
+            refreshToken: "mock-refresh-token",
+            sub: "mock-sub",
+            updatedAt: "2022-07-14T21:07:24.243Z",
+            roles: ["mock-roles"],
+          },
+          permissions: {},
+        },
+      },
     };
     mockGet.mockImplementation(() => Promise.resolve(response));
-    await AuthService.getUserById('mockUserId');
+    await AuthService.getUserById("mockUserId");
     expect(mockGet).toHaveBeenCalled();
     const calls = mockGet.mock.calls.length;
     expect(calls).toEqual(1);
@@ -59,14 +60,14 @@ describe("Auth Service", () => {
     const response = {
       response: {
         data: {
-            "status": false,
-            "statusCode": 401,
-            "message": "unauthorized",
-        }
+          status: false,
+          statusCode: 401,
+          message: "unauthorized",
+        },
       },
     };
     mockGet.mockImplementation(() => Promise.reject(response));
-    await AuthService.getUserById('mockUserId');
+    await AuthService.getUserById("mockUserId");
     expect(mockGet).toHaveBeenCalled();
     const calls = mockGet.mock.calls.length;
     expect(calls).toEqual(1);
@@ -74,41 +75,41 @@ describe("Auth Service", () => {
 
   it("AuthService logout SUCCESS", async () => {
     const response = {
-      data:{
-        "status": true,
-        "statusCode": 200,
-        "message": "Fetched successfully",
-        "data": {
-            "user":{
-                "_id": "mock-id",
-                "email": "mock-email",
-                "__v": 0,
-                "accessToken": "mock-token",
-                "address": {
-                    "streetAddress": "mock-address",
-                    "country": "IN",
-                    "region": "NA",
-                    "postalCode": "mock-code"
-                },
-                "createdAt": "2022-05-02T13:37:20.454Z",
-                "familyName": "mock",
-                "givenName": "mock",
-                "locale": "NA",
-                "memberOf": ["mock"],
-                "name": "mock name",
-                "phoneNumber": "mock-number",
-                "profile": "mock-profile",
-                "refreshToken": "mock-refresh-token",
-                "sub": "mock-sub",
-                "updatedAt": "2022-07-14T21:07:24.243Z",
-                "roles": ["mock-roles"]
+      data: {
+        status: true,
+        statusCode: 200,
+        message: "Fetched successfully",
+        data: {
+          user: {
+            _id: "mock-id",
+            email: "mock-email",
+            __v: 0,
+            accessToken: "mock-token",
+            address: {
+              streetAddress: "mock-address",
+              country: "IN",
+              region: "NA",
+              postalCode: "mock-code",
             },
-            "permissions": {}
-        }
-    }
+            createdAt: "2022-05-02T13:37:20.454Z",
+            familyName: "mock",
+            givenName: "mock",
+            locale: "NA",
+            memberOf: ["mock"],
+            name: "mock name",
+            phoneNumber: "mock-number",
+            profile: "mock-profile",
+            refreshToken: "mock-refresh-token",
+            sub: "mock-sub",
+            updatedAt: "2022-07-14T21:07:24.243Z",
+            roles: ["mock-roles"],
+          },
+          permissions: {},
+        },
+      },
     };
     mockPatch.mockImplementation(() => Promise.resolve(response));
-    await AuthService.logout('mockUserId');
+    await AuthService.logout("mockUserId");
     expect(mockPatch).toHaveBeenCalled();
     const calls = mockPatch.mock.calls.length;
     expect(calls).toEqual(1);
@@ -117,14 +118,14 @@ describe("Auth Service", () => {
     const response = {
       response: {
         data: {
-            "status": false,
-            "statusCode": 401,
-            "message": "unauthorized",
-        }
+          status: false,
+          statusCode: 401,
+          message: "unauthorized",
+        },
       },
     };
     mockPatch.mockImplementation(() => Promise.reject(response));
-    await AuthService.logout('mockUserId');
+    await AuthService.logout("mockUserId");
     expect(mockPatch).toHaveBeenCalled();
     const calls = mockPatch.mock.calls.length;
     expect(calls).toEqual(1);
@@ -132,41 +133,41 @@ describe("Auth Service", () => {
 
   it("AuthService modifyUser SUCCESS", async () => {
     const response = {
-      data:{
-        "status": true,
-        "statusCode": 200,
-        "message": "Fetched successfully",
-        "data": {
-            "user":{
-                "_id": "mock-id",
-                "email": "mock-email",
-                "__v": 0,
-                "accessToken": "mock-token",
-                "address": {
-                    "streetAddress": "mock-address",
-                    "country": "IN",
-                    "region": "NA",
-                    "postalCode": "mock-code"
-                },
-                "createdAt": "2022-05-02T13:37:20.454Z",
-                "familyName": "mock",
-                "givenName": "mock",
-                "locale": "NA",
-                "memberOf": ["mock"],
-                "name": "mock name",
-                "phoneNumber": "mock-number",
-                "profile": "mock-profile",
-                "refreshToken": "mock-refresh-token",
-                "sub": "mock-sub",
-                "updatedAt": "2022-07-14T21:07:24.243Z",
-                "roles": ["mock-roles"]
+      data: {
+        status: true,
+        statusCode: 200,
+        message: "Fetched successfully",
+        data: {
+          user: {
+            _id: "mock-id",
+            email: "mock-email",
+            __v: 0,
+            accessToken: "mock-token",
+            address: {
+              streetAddress: "mock-address",
+              country: "IN",
+              region: "NA",
+              postalCode: "mock-code",
             },
-            "permissions": {}
-        }
-    }
+            createdAt: "2022-05-02T13:37:20.454Z",
+            familyName: "mock",
+            givenName: "mock",
+            locale: "NA",
+            memberOf: ["mock"],
+            name: "mock name",
+            phoneNumber: "mock-number",
+            profile: "mock-profile",
+            refreshToken: "mock-refresh-token",
+            sub: "mock-sub",
+            updatedAt: "2022-07-14T21:07:24.243Z",
+            roles: ["mock-roles"],
+          },
+          permissions: {},
+        },
+      },
     };
     mockPatch.mockImplementation(() => Promise.resolve(response));
-    await AuthService.modifyUser('mockUserId');
+    await AuthService.modifyUser("mockUserId");
     expect(mockPatch).toHaveBeenCalled();
     const calls = mockPatch.mock.calls.length;
     expect(calls).toEqual(1);
@@ -175,28 +176,28 @@ describe("Auth Service", () => {
     const response = {
       response: {
         data: {
-            "status": false,
-            "statusCode": 401,
-            "message": "unauthorized",
-        }
+          status: false,
+          statusCode: 401,
+          message: "unauthorized",
+        },
       },
     };
     mockPatch.mockImplementation(() => Promise.reject(response));
-    await AuthService.modifyUser('mockUserId');
+    await AuthService.modifyUser("mockUserId");
     expect(mockPatch).toHaveBeenCalled();
     const calls = mockPatch.mock.calls.length;
     expect(calls).toEqual(1);
   });
 
- 
   describe("Auth Service Additional Tests", () => {
-    let mockPost, mockDel;
-  
+    let mockPost;
+    let mockDel;
+
     beforeEach(() => {
       mockPost = jest.spyOn(AxiosInstance, "post");
       mockDel = jest.spyOn(AxiosInstance, "delete");
     });
-  
+
     afterEach(() => {
       jest.clearAllMocks();
     });
@@ -206,8 +207,8 @@ describe("Auth Service", () => {
           status: true,
           statusCode: 200,
           message: "Application added successfully",
-          data: { id: "mock-app-id" }
-        }
+          data: { id: "mock-app-id" },
+        },
       };
       mockPost.mockImplementation(() => Promise.resolve(response));
       const appData = { name: "Test App", description: "Test Description" };
@@ -216,20 +217,20 @@ describe("Auth Service", () => {
         expect.any(String),
         appData,
         expect.objectContaining({
-          headers: { Authorization: expect.any(String) }
-        })
+          headers: { Authorization: expect.any(String) },
+        }),
       );
     });
-  
+
     it("AuthService addApplication FAILURE", async () => {
       const errorResponse = {
         response: {
           data: {
             status: false,
             statusCode: 400,
-            message: "Invalid application data"
-          }
-        }
+            message: "Invalid application data",
+          },
+        },
       };
       mockPost.mockImplementation(() => Promise.reject(errorResponse));
       const appData = { name: "" }; // invalid data
@@ -241,8 +242,8 @@ describe("Auth Service", () => {
         data: {
           status: true,
           statusCode: 200,
-          message: "Application updated successfully"
-        }
+          message: "Application updated successfully",
+        },
       };
       mockPatch.mockImplementation(() => Promise.resolve(response));
       const appData = { name: "Updated App" };
@@ -251,35 +252,35 @@ describe("Auth Service", () => {
         expect.stringContaining("mock-id"),
         appData,
         expect.objectContaining({
-          headers: { Authorization: expect.any(String) }
-        })
+          headers: { Authorization: expect.any(String) },
+        }),
       );
     });
-  
+
     it("AuthService updateApplication FAILURE", async () => {
       const errorResponse = {
         response: {
           data: {
             status: false,
             statusCode: 404,
-            message: "Application not found"
-          }
-        }
+            message: "Application not found",
+          },
+        },
       };
       mockPatch.mockImplementation(() => Promise.reject(errorResponse));
       const result = await AuthService.updateApplication("invalid-id", {});
       expect(result).toEqual(errorResponse.response.data);
     });
-  
+
     it("AuthService deleteApplication FAILURE", async () => {
       const errorResponse = {
         response: {
           data: {
             status: false,
             statusCode: 404,
-            message: "Application not found"
-          }
-        }
+            message: "Application not found",
+          },
+        },
       };
       mockDel.mockImplementation(() => Promise.reject(errorResponse));
       const result = await AuthService.deleteApplication("invalid-id");
@@ -289,44 +290,38 @@ describe("Auth Service", () => {
       const response = {
         data: {
           status: true,
-          data: { applications: [], pagination: {} }
-        }
+          data: { applications: [], pagination: {} },
+        },
       };
       mockGet.mockImplementation(() => Promise.resolve(response));
       const params = {
         filter: "test",
-        pagination: { limit: 10, pageNo: 1 }
+        pagination: { limit: 10, pageNo: 1 },
       };
       await AuthService.listApplication(params);
-      expect(mockGet).toHaveBeenCalledWith(
-        expect.stringContaining("appName=test"),
-        expect.any(Object)
-      );
+      expect(mockGet).toHaveBeenCalledWith(expect.stringContaining("appName=test"), expect.any(Object));
     });
-  
+
     it("AuthService listApplication without filter SUCCESS", async () => {
       const response = {
         data: {
           status: true,
-          data: { applications: [], pagination: {} }
-        }
+          data: { applications: [], pagination: {} },
+        },
       };
       mockGet.mockImplementation(() => Promise.resolve(response));
       const params = {
-        pagination: { limit: 10, pageNo: 1 }
+        pagination: { limit: 10, pageNo: 1 },
       };
       await AuthService.listApplication(params);
-      expect(mockGet).toHaveBeenCalledWith(
-        expect.not.stringContaining("appName="),
-        expect.any(Object)
-      );
+      expect(mockGet).toHaveBeenCalledWith(expect.not.stringContaining("appName="), expect.any(Object));
     });
     it("AuthService getAuthAuditLogForCSV FAILURE", async () => {
       const errorResponse = {
         response: {
           status: 500,
-          data: { message: "Server error" }
-        }
+          data: { message: "Server error" },
+        },
       };
       mockGet.mockImplementation(() => Promise.reject(errorResponse));
       try {
@@ -335,67 +330,59 @@ describe("Auth Service", () => {
         expect(error).toEqual(errorResponse.response);
       }
     });
-    
+
     it("Auth Service getAuthAuditLogForCSV SUCCESS", async () => {
       const response = {
         data: {
-          "status": true,
-          "statusCode": 200,
-          "message": "Api executed successfully",
-          "data": {
-            "audits": [{
-              "_id": "6425a663c6c20df6647c9f14",
-            }],
-            "pagination": {
-              "totalRows": 15,
-              "limit": "10",
-              "pageNo": "1",
-              "totalPage": 2
-            }
-          }
-        }
+          status: true,
+          statusCode: 200,
+          message: "Api executed successfully",
+          data: {
+            audits: [
+              {
+                _id: "6425a663c6c20df6647c9f14",
+              },
+            ],
+            pagination: {
+              totalRows: 15,
+              limit: "10",
+              pageNo: "1",
+              totalPage: 2,
+            },
+          },
+        },
       };
       mockGet.mockImplementation(() => Promise.resolve(response));
-      const filter = {name: 'mock', actionType: 'delete'};
+      const filter = { name: "mock", actionType: "delete" };
       await AuthService.getAuthAuditLogForCSV(filter);
-      expect(mockGet).toHaveBeenCalledWith(
-        `${get.getAuditLogForCSV}?name=mock&actionType=delete`,
-        expect.objectContaining({ headers: expect.any(Object) })
-      );
+      expect(mockGet).toHaveBeenCalledWith(`${get.getAuditLogForCSV}?name=mock&actionType=delete`, expect.objectContaining({ headers: expect.any(Object) }));
     });
-    
+
     it("AuthService deleteApplication SUCCESS", async () => {
       const response = {
         data: {
           status: true,
           statusCode: 200,
-          message: "Application deleted successfully"
-        }
+          message: "Application deleted successfully",
+        },
       };
       mockDel.mockImplementation(() => Promise.resolve(response));
       await AuthService.deleteApplication("mock-id");
-      expect(mockDel).toHaveBeenCalledWith(
-        expect.stringContaining("mock-id"),
-        expect.objectContaining({ headers: expect.any(Object) })
-      );
+      expect(mockDel).toHaveBeenCalledWith(expect.stringContaining("mock-id"), expect.objectContaining({ headers: expect.any(Object) }));
     });
-    
+
     it("AuthService blockApplication SUCCESS", async () => {
       const response = {
         data: {
           status: true,
           statusCode: 200,
-          message: "Application blocked successfully"
-        }
+          message: "Application blocked successfully",
+        },
       };
       mockPatch.mockImplementation(() => Promise.resolve(response));
       const blockData = { isBlocked: true };
       await AuthService.blockApplication("mock-id", blockData);
-      expect(mockPatch).toHaveBeenCalledWith(
-        expect.stringContaining("mock-id"),
-        blockData,
-        expect.objectContaining({ headers: expect.any(Object) })
-      );
+      expect(mockPatch).toHaveBeenCalledWith(expect.stringContaining("mock-id"), blockData, expect.objectContaining({ headers: expect.any(Object) }));
     });
     it("AuthService blockApplication FAILURE", async () => {
       const errorResponse = {
@@ -403,19 +390,13 @@ describe("Auth Service", () => {
           data: {
             status: false,
             statusCode: 404,
-            message: "Application not found"
-          }
-        }
+            message: "Application not found",
+          },
+        },
       };
       mockPatch.mockImplementation(() => Promise.reject(errorResponse));
       const result = await AuthService.blockApplication("invalid-id", {});
       expect(result).toEqual(errorResponse.response.data);
     });
-    
   });
 });
-
-
-
-
-

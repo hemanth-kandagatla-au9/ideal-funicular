@@ -145,4 +145,3 @@ const agentPropertySchema: AgentPropertySchema = {
 };
 
 export default agentPropertySchema;
-

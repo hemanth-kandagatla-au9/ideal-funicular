@@ -3,6 +3,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import AssignPermissionsModal from "@/layouts/user-authorization/AssignPermissionModal";
+
 const mockDispatch = jest.fn();
 
 jest.mock("react-redux", () => ({
@@ -18,6 +19,7 @@ jest.mock("@/redux/actions/userAuthorization.action", () => ({
 }));
 
 import { useSelector } from "react-redux";
+
 const user = {
   id: "u1",
   userName: "Hemanth",
@@ -41,16 +43,7 @@ const permissionsMock = {
 };
 
 const renderUI = (overrideProps = {}) =>
-  render(
-    <AssignPermissionsModal
-      show={true}
-      onHide={jest.fn()}
-      selectedUser={user as any}
-      onAssign={jest.fn()}
-      loading={false}
-      {...overrideProps}
-    />
-  );
+  render(<AssignPermissionsModal show onHide={jest.fn()} selectedUser={user as any} onAssign={jest.fn()} loading={false} {...overrideProps} />);
 
 describe("AssignPermissionsModal", () => {
   beforeEach(() => {
@@ -61,7 +54,7 @@ describe("AssignPermissionsModal", () => {
         userAuthorization: {
           globalPermissions: permissionsMock,
         },
-      })
+      }),
     );
   });
 
@@ -127,15 +120,7 @@ describe("AssignPermissionsModal", () => {
   it("submit calls onAssign with selected permissions", () => {
     const onAssign = jest.fn();
 
-    render(
-      <AssignPermissionsModal
-        show={true}
-        onHide={jest.fn()}
-        selectedUser={user as any}
-        onAssign={onAssign}
-        loading={false}
-      />
-    );
+    render(<AssignPermissionsModal show onHide={jest.fn()} selectedUser={user as any} onAssign={onAssign} loading={false} />);
 
     fireEvent.click(screen.getByLabelText("Write"));
     fireEvent.click(screen.getByText("Grant : Permissions"));
@@ -146,14 +131,7 @@ describe("AssignPermissionsModal", () => {
   it("cancel button calls onHide", () => {
     const onHide = jest.fn();
 
-    render(
-      <AssignPermissionsModal
-        show={true}
-        onHide={onHide}
-        selectedUser={user as any}
-        onAssign={jest.fn()}
-      />
-    );
+    render(<AssignPermissionsModal show onHide={onHide} selectedUser={user as any} onAssign={jest.fn()} />);
 
     fireEvent.click(screen.getByText("Cancel"));
     expect(onHide).toHaveBeenCalled();
@@ -165,14 +143,7 @@ describe("AssignPermissionsModal", () => {
   });
 
   it("returns null if no user", () => {
-    const { container } = render(
-      <AssignPermissionsModal
-        show={true}
-        onHide={jest.fn()}
-        selectedUser={null}
-        onAssign={jest.fn()}
-      />
-    );
+    const { container } = render(<AssignPermissionsModal show onHide={jest.fn()} selectedUser={null} onAssign={jest.fn()} />);
 
     expect(container.firstChild).toBeNull();
   });

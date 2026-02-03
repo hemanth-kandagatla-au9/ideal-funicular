@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import FilterBar from "../../../../layouts/agent-management/home/FilterBar";
 import * as reactRedux from "react-redux";
+import FilterBar from "../../../../layouts/agent-management/home/FilterBar";
 
 jest.mock("../../../../../src/layouts/agent-management/components/MultiSelectDropdown", () => {
   return ({ toggleTestId, onSelectChange, clearAll, selectAllOption }: any) => (
@@ -52,8 +52,7 @@ const mockDispatch = jest.fn();
 
 jest.spyOn(reactRedux, "useDispatch").mockReturnValue(mockDispatch);
 
-const setup = (override = {}) =>
-  render(<FilterBar {...defaultProps} {...override} />);
+const setup = (override = {}) => render(<FilterBar {...defaultProps} {...override} />);
 
 describe("FilterBar", () => {
   it("renders action buttons", () => {
@@ -130,4 +129,3 @@ describe("FilterBar", () => {
     fireEvent.click(screen.getByText("Clear All"));
   });
 });
-

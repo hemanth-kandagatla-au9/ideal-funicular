@@ -4,7 +4,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import "@testing-library/jest-dom";
-import SideBar from "../../../../../../src/layouts/agent-management/components/sidebar/SideBar";
+import SideBar from "../../../../../layouts/agent-management/components/sidebar/SideBar";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual("react-redux"),
@@ -17,12 +17,8 @@ jest.mock("../../../../../../src/utils/PermissionUtils", () => ({
 }));
 
 jest.mock("../../../../../../src/layouts/agent-management/helpers/agentHelpers", () => ({
-  prepareAgentDetails: jest.fn(() => [
-    { label: "Host", value: "AWSBVXNVAL0002" },
-  ]),
-  prepareAgentConfigDetails: jest.fn(() => [
-    { label: "OS", value: "Linux" },
-  ]),
+  prepareAgentDetails: jest.fn(() => [{ label: "Host", value: "AWSBVXNVAL0002" }]),
+  prepareAgentConfigDetails: jest.fn(() => [{ label: "OS", value: "Linux" }]),
 }));
 
 const fetchAgentLogsMock = jest.fn().mockResolvedValue({
@@ -63,7 +59,7 @@ describe("SideBar", () => {
     render(
       <Provider store={store}>
         <SideBar {...props} />
-      </Provider>
+      </Provider>,
     );
 
   it("renders sidebar container", () => {

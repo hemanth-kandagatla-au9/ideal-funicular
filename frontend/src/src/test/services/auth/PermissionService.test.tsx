@@ -1,5 +1,6 @@
 import apiEndpoints from "../../../config/apiEndpoints";
 import PermissionService, { AxiosInstance } from "../../../services/auth/PermissionService";
+
 const { post, get, del, patch, baseUrl } = apiEndpoints.auth;
 
 describe("Permission Service", () => {
@@ -175,6 +176,3 @@ describe("Permission Service", () => {
     expect(calls).toEqual(1);
   });
 });
-
-
-

@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import BinarySelectField from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinarySelectField";
+import BinarySelectField from "../../../../../layouts/agent-management/components/versionmanagement/BinarySelectField";
 import "@testing-library/jest-dom";
 
 describe("BinarySelectField", () => {
@@ -46,25 +46,13 @@ describe("BinarySelectField", () => {
   });
 
   it("shows error when touched and error provided", () => {
-    render(
-      <BinarySelectField
-        {...baseProps}
-        touched={true}
-        error="Required field"
-      />
-    );
+    render(<BinarySelectField {...baseProps} touched error="Required field" />);
 
     expect(screen.getByText("Required field")).toBeInTheDocument();
   });
 
   it("does not show error when not touched", () => {
-    render(
-      <BinarySelectField
-        {...baseProps}
-        touched={false}
-        error="Required field"
-      />
-    );
+    render(<BinarySelectField {...baseProps} touched={false} error="Required field" />);
 
     expect(screen.queryByText("Required field")).not.toBeInTheDocument();
   });
@@ -77,13 +65,7 @@ describe("BinarySelectField", () => {
   });
 
   it("supports multiple select", () => {
-    render(
-      <BinarySelectField
-        {...baseProps}
-        multiple={true}
-        value={[]}
-      />
-    );
+    render(<BinarySelectField {...baseProps} multiple value={[]} />);
 
     const select = screen.getByRole("combobox");
     expect(select).toBeInTheDocument();

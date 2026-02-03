@@ -56,12 +56,12 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
   };
   const hasChanges = useMemo(() => {
     if (originalPermissions.length === 0) return false;
-    
+
     const currentGranted = getGrantedPermissions(localPermissions);
     const originalGranted = getGrantedPermissions(originalPermissions);
     if (currentGranted.length !== originalGranted.length) return true;
     const changed = !currentGranted.every((code, index) => code === originalGranted[index]);
-    
+
     return changed;
   }, [localPermissions, originalPermissions]);
   const handlePermissionToggle = (projectId: string, moduleId: string, permissionCode: string) => {
@@ -221,4 +221,3 @@ const AssignPermissionsModal: React.FC<AssignPermissionsModalProps> = ({ show, o
 };
 
 export default AssignPermissionsModal;
-

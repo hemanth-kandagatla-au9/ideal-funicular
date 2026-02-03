@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import BinaryVersionsModal from "../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsModal";
+
 jest.mock("../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsModalLayout", () => (props: any) => (
   <div>
     <h1>{props.title}</h1>
@@ -9,9 +10,7 @@ jest.mock("../../../../../layouts/agent-management/components/versionmanagement/
   </div>
 ));
 
-jest.mock("../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsFormField", () => () => (
-  <div data-testid="form-fields" />
-));
+jest.mock("../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsFormField", () => () => <div data-testid="form-fields" />);
 
 jest.mock("../../../../../layouts/agent-management/components/versionmanagement/BinaryFormButtons", () => (props: any) => (
   <div>
@@ -45,24 +44,13 @@ describe("BinaryVersionsModal", () => {
   });
 
   it("renders Edit Binary title when editing", () => {
-    render(
-      <BinaryVersionsModal
-        {...baseProps}
-        editingVersion={{ id: "1", version: "v1", osEntries: [], upgradeType: "Optional" }}
-      />
-    );
+    render(<BinaryVersionsModal {...baseProps} editingVersion={{ id: "1", version: "v1", osEntries: [], upgradeType: "Optional" }} />);
 
     expect(screen.getByText("Edit Binary")).toBeInTheDocument();
   });
 
   it("renders View Binary Details when in view mode", () => {
-    render(
-      <BinaryVersionsModal
-        {...baseProps}
-        isViewMode
-        editingVersion={{ id: "1", version: "v1", osEntries: [], upgradeType: "Optional" }}
-      />
-    );
+    render(<BinaryVersionsModal {...baseProps} isViewMode editingVersion={{ id: "1", version: "v1", osEntries: [], upgradeType: "Optional" }} />);
 
     expect(screen.getByText("View Binary Details")).toBeInTheDocument();
   });
@@ -85,7 +73,7 @@ describe("BinaryVersionsModal", () => {
           osEntries: [],
           upgradeType: "Optional",
         }}
-      />
+      />,
     );
 
     expect(screen.getByText("Submit")).toBeDisabled();

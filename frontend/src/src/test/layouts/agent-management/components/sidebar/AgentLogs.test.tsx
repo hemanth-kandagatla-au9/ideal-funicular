@@ -2,7 +2,8 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Accordion } from "react-bootstrap";
 import AgentLogs from "../../../../../layouts/agent-management/components/sidebar/AgentLogs";
-import '@testing-library/jest-dom/extend-expect';
+import "@testing-library/jest-dom/extend-expect";
+
 jest.mock("../../../../../layouts/agent-management/helpers/agentHelpers", () => ({
   convertDateTime: jest.fn(() => "Formatted Time"),
 }));
@@ -11,9 +12,7 @@ describe("AgentLogs Component", () => {
   const baseProps = {
     hostname: "host1",
     agentId: "agent1",
-    agentLog: [
-      { timestamp: "123", level: "INFO", message: "Test log message" },
-    ],
+    agentLog: [{ timestamp: "123", level: "INFO", message: "Test log message" }],
     isLogsLoading: false,
     loadAgentLogs: jest.fn(),
     refreshAgentLogs: jest.fn(),
@@ -25,7 +24,7 @@ describe("AgentLogs Component", () => {
     return render(
       <Accordion defaultActiveKey={activeKey}>
         <AgentLogs {...baseProps} {...props} />
-      </Accordion>
+      </Accordion>,
     );
   };
 

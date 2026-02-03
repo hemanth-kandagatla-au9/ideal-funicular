@@ -77,12 +77,12 @@ describe("Agent Management Reducer - Coverage Tests", () => {
 
   it("handles multiple consecutive actions", () => {
     let state = initialState;
-    
+
     state = agentManagementReducer(state, {
       type: AGENT_MANAGEMENT.FETCH_AGENT_MANAGEMENT_SERVICE,
     });
     expect(state.loading).toBe(true);
-    
+
     state = agentManagementReducer(state, {
       type: AGENT_MANAGEMENT.SUCCESS_FETCH_AGENT_MANAGEMENT_SERVICE,
       agentServers: [],

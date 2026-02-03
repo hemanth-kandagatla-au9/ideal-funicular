@@ -39,16 +39,10 @@ describe("DropdownComponent", () => {
     expect(screen.getByText("50 per page")).toBeInTheDocument();
   });
 
-
   it("calls custom handler when handleChangeCustom provided", () => {
     const customHandler = jest.fn();
 
-    render(
-      <DropdownComponent
-        {...baseProps}
-        handleChangeCustom={customHandler}
-      />
-    );
+    render(<DropdownComponent {...baseProps} handleChangeCustom={customHandler} />);
 
     fireEvent.click(screen.getByTestId("dropdown-test-id"));
     fireEvent.click(screen.getByTestId("option-10"));
@@ -57,24 +51,14 @@ describe("DropdownComponent", () => {
   });
 
   it("shows search input in compliance mode", () => {
-    render(
-      <DropdownComponent
-        {...baseProps}
-        isCompliancePage={true}
-      />
-    );
+    render(<DropdownComponent {...baseProps} isCompliancePage />);
 
     fireEvent.click(screen.getByTestId("dropdown-test-id"));
     expect(screen.getByPlaceholderText(searchPlaceholderText)).toBeInTheDocument();
   });
 
   it("filters dropdown options on search", () => {
-    render(
-      <DropdownComponent
-        {...baseProps}
-        isCompliancePage={true}
-      />
-    );
+    render(<DropdownComponent {...baseProps} isCompliancePage />);
 
     fireEvent.click(screen.getByTestId("dropdown-test-id"));
 
@@ -85,14 +69,8 @@ describe("DropdownComponent", () => {
     expect(screen.queryByTestId("option-10")).not.toBeInTheDocument();
   });
 
-
   it("applies cnameDropdownMenu class when provided", () => {
-    render(
-      <DropdownComponent
-        {...baseProps}
-        cnameDropdownMenu="custom-menu"
-      />
-    );
+    render(<DropdownComponent {...baseProps} cnameDropdownMenu="custom-menu" />);
 
     fireEvent.click(screen.getByTestId("dropdown-test-id"));
 
@@ -101,18 +79,12 @@ describe("DropdownComponent", () => {
   });
 
   it("disables dropdown when disabled=true", () => {
-    render(<DropdownComponent {...baseProps} disabled={true} />);
+    render(<DropdownComponent {...baseProps} disabled />);
     expect(screen.getByTestId("dropdown-test-id")).toBeDisabled();
   });
 
   it("resets search text when filter click changes", () => {
-    const { rerender } = render(
-      <DropdownComponent
-        {...baseProps}
-        isCompliancePage={true}
-        onHandleFilterClick={() => {}}
-      />
-    );
+    const { rerender } = render(<DropdownComponent {...baseProps} isCompliancePage onHandleFilterClick={() => {}} />);
 
     fireEvent.click(screen.getByTestId("dropdown-test-id"));
     const input = screen.getByPlaceholderText(searchPlaceholderText);
@@ -120,24 +92,13 @@ describe("DropdownComponent", () => {
     fireEvent.change(input, { target: { value: "20" } });
     expect(input).toHaveValue("20");
 
-    rerender(
-      <DropdownComponent
-        {...baseProps}
-        isCompliancePage={true}
-        onHandleFilterClick={() => console.log("changed")}
-      />
-    );
+    rerender(<DropdownComponent {...baseProps} isCompliancePage onHandleFilterClick={() => console.log("changed")} />);
 
     expect(input).toHaveValue("");
   });
 
   it("does not crash when dropdownData is empty", () => {
-    render(
-      <DropdownComponent
-        {...baseProps}
-        data={[]}
-      />
-    );
+    render(<DropdownComponent {...baseProps} data={[]} />);
 
     fireEvent.click(screen.getByTestId("dropdown-test-id"));
     expect(screen.queryByTestId("option-10")).not.toBeInTheDocument();

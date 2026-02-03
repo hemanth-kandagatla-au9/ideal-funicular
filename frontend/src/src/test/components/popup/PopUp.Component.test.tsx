@@ -6,6 +6,7 @@ import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import PopUp from "../../../components/popup/popUp.component";
 import "@testing-library/jest-dom/extend-expect";
 import { cancelButtonText, okButtonText } from "../../../constants/strings";
+
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Modal test", () => {

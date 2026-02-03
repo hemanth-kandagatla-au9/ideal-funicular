@@ -61,4 +61,3 @@ const AgentDetails: React.FC<AgentDetailsProps> = ({ agentDetails, agentDetailsL
 };
 
 export default AgentDetails;
-

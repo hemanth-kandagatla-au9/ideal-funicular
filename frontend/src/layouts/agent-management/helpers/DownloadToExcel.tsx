@@ -43,4 +43,3 @@ export default async function DownloadToExcel(getTotalRowsCount: any, fetchDataF
     errortoast("failed to download. please try again.");
   }
 }
-

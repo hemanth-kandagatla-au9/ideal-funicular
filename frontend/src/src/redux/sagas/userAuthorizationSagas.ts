@@ -1,5 +1,3 @@
-
-
 import { call, put, takeLatest } from "redux-saga/effects";
 import { get } from "lodash";
 import { AUTH } from "../../config/actions";
@@ -11,9 +9,8 @@ interface ActionProps {
   type: string;
   props?: any;
   userId?: string;
-  username?:string;
+  username?: string;
 }
-
 
 export function* fetchUsersSaga({ props }: ActionProps): Generator<any, void, any> {
   try {
@@ -28,7 +25,6 @@ export function* fetchUsersSaga({ props }: ActionProps): Generator<any, void, an
     errortoast(`Failed to load users: ${error.message}`);
   }
 }
-
 
 export function* createUserSaga({ props }: ActionProps): Generator<any, void, any> {
   try {
@@ -47,7 +43,6 @@ export function* createUserSaga({ props }: ActionProps): Generator<any, void, an
   }
 }
 
-
 export function* updateUserSaga({ props }: ActionProps): Generator<any, void, any> {
   try {
     const { id, ...userData } = props;
@@ -65,7 +60,6 @@ export function* updateUserSaga({ props }: ActionProps): Generator<any, void, an
   }
 }
 
-
 export function* deleteUserSaga({ username }: ActionProps): Generator<any, void, any> {
   try {
     const output = yield call(userAuthorizationService.deleteUser, username);
@@ -75,23 +69,21 @@ export function* deleteUserSaga({ username }: ActionProps): Generator<any, void,
       successtoast("User deleted successfully");
       yield put(userAuthorizationActions.fetchUsers({ page: 1, limit: 10, search: "" }));
     } else {
-      errortoast(`Failed to delete user: ${output.data.error || 'Unknown error'}`);
+      errortoast(`Failed to delete user: ${output.data.error || "Unknown error"}`);
     }
   } catch (error: any) {
     yield put(userAuthorizationActions.failureDeleteUser(error));
-    console.log(error)
+    console.log(error);
     errortoast(`Failed to delete user: ${error.message}`);
   }
 }
-
-
 
 export function* fetchPermissionsSaga(action: any): Generator<any, void, any> {
   try {
     console.log("Fetch Permissions Saga - Filters:", action.filters);
     const output = yield call(userAuthorizationService.fetchPermissions, action.filters);
     console.log("Fetch Permissions Response:", output);
-    
+
     if (output.data.flag === "success") {
       yield put(userAuthorizationActions.successFetchPermissions(output));
     } else {
@@ -103,11 +95,10 @@ export function* fetchPermissionsSaga(action: any): Generator<any, void, any> {
   }
 }
 
-
 export function* createPermissionSaga({ permissionData }: any): Generator<any, void, any> {
   try {
     const output = yield call(userAuthorizationService.createPermission, permissionData);
-    
+
     if (output.data.flag === "success") {
       successtoast("Permission created successfully!");
       yield put(userAuthorizationActions.successCreatePermission(output));
@@ -122,17 +113,16 @@ export function* createPermissionSaga({ permissionData }: any): Generator<any, v
   }
 }
 
-
 export function* deletePermissionSaga({ permissionId }: any): Generator<any, void, any> {
   try {
     const output = yield call(userAuthorizationService.deletePermission, permissionId);
-    
+
     if (output.data.flag === "success") {
       successtoast("Permission deleted successfully!");
       yield put(userAuthorizationActions.successDeletePermission(output));
       yield put(userAuthorizationActions.fetchPermissions({ page: 1, limit: 10 }));
     } else {
-      errortoast(`Failed to delete permission: ${output.data.error || 'Unknown error'}`);
+      errortoast(`Failed to delete permission: ${output.data.error || "Unknown error"}`);
       yield put(userAuthorizationActions.failureDeletePermission(output.data.error));
     }
   } catch (error: any) {
@@ -141,13 +131,12 @@ export function* deletePermissionSaga({ permissionId }: any): Generator<any, voi
   }
 }
 
-
 export function* assignUserPermissionsSaga({ userId, permissionCodes }: any): Generator<any, void, any> {
   try {
     console.log("Assign Permissions Saga - userId:", userId, "codes:", permissionCodes);
     const output = yield call(userAuthorizationService.assignUserPermissions, userId, permissionCodes);
     console.log("Assign Permissions Response:", output);
-    
+
     yield put(userAuthorizationActions.successAssignUserPermissions(output));
 
     if (get(output, "data.flag") === "success") {
@@ -163,13 +152,12 @@ export function* assignUserPermissionsSaga({ userId, permissionCodes }: any): Ge
   }
 }
 
-
 export function* fetchGlobalPermissionsSaga({ userId }: any): Generator<any, void, any> {
   try {
     console.log("Fetch Global Permissions Saga - userId:", userId);
     const output = yield call(userAuthorizationService.fetchGlobalPermissions, userId);
     console.log("Fetch Global Permissions Response:", output);
-    
+
     yield put(userAuthorizationActions.successFetchGlobalPermissions(output));
 
     if (get(output, "data.flag") !== "success") {
@@ -181,7 +169,6 @@ export function* fetchGlobalPermissionsSaga({ userId }: any): Generator<any, voi
     errortoast(`Failed to load permissions: ${error.response?.data?.error || error.message}`);
   }
 }
-
 
 export default function* userAuthorizationSagaWatcher(): Generator<any, void, any> {
   yield takeLatest(AUTH.USER.GET_USERS_REQUEST, fetchUsersSaga);

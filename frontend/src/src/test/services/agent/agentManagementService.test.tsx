@@ -1,5 +1,5 @@
 import agentManagementService, { AxiosInstace } from "../../../services/agent/agentManagement.service";
-import '@testing-library/jest-dom/extend-expect';
+import "@testing-library/jest-dom/extend-expect";
 
 jest.mock("axios", () => {
   return {
@@ -17,7 +17,6 @@ jest.mock("axios", () => {
     isAxiosError: (error: any) => !!error.isAxiosError,
   };
 });
-
 
 describe("Agent Management Services", () => {
   let mockGet = null;
@@ -154,19 +153,17 @@ describe("Agent Management Services", () => {
       hostname: "test",
       agentId: "10001",
       limit: 10,
-      skip: 10
+      skip: 10,
     };
     const dataObj = agentManagementService.fetchAgentLogs(request);
     expect(dataObj).not.toBeNull();
   });
 
   it("check fetch agent logs service error case", () => {
-
-    mockPost.mockImplementation(() => Promise.reject('test'));
+    mockPost.mockImplementation(() => Promise.reject("test"));
     const dataObj = agentManagementService.fetchAgentLogs({});
     expect(dataObj).not.toBeNull();
   });
-
 
   it("check save local configs service", () => {
     const request = {
@@ -684,7 +681,10 @@ describe("Error scenarios for service", () => {
   });
 
   describe("Additional Test Cases for Full Coverage", () => {
-    let mockGet, mockPost, mockPut, mockDelete;
+    let mockGet;
+    let mockPost;
+    let mockPut;
+    let mockDelete;
 
     beforeEach(() => {
       mockGet = jest.spyOn(AxiosInstace, "get");
@@ -709,7 +709,7 @@ describe("Error scenarios for service", () => {
       const errorResult = await agentManagementService.agentShutDownService(request);
       expect(errorResult).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
 
@@ -725,7 +725,7 @@ describe("Error scenarios for service", () => {
       const errorResult = await agentManagementService.agentStartSSHService(request);
       expect(errorResult).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
 
@@ -741,7 +741,7 @@ describe("Error scenarios for service", () => {
       const errorResult = await agentManagementService.jobReStartService(request);
       expect(errorResult).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
 
@@ -765,7 +765,7 @@ describe("Error scenarios for service", () => {
       const errorResult = await agentManagementService.getAgentInfo(request);
       expect(errorResult).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
 
@@ -777,7 +777,7 @@ describe("Error scenarios for service", () => {
       const result = await agentManagementService.agentStartService(request);
       expect(result).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
 
@@ -789,7 +789,7 @@ describe("Error scenarios for service", () => {
       const result = await agentManagementService.agentHealthCheck(request);
       expect(result).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
 
@@ -800,7 +800,7 @@ describe("Error scenarios for service", () => {
       const result = await agentManagementService.healthCheckupByPort();
       expect(result).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
 
@@ -812,7 +812,7 @@ describe("Error scenarios for service", () => {
       const result = await agentManagementService.agentStopService(request);
       expect(result).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
 
@@ -824,7 +824,7 @@ describe("Error scenarios for service", () => {
       const result = await agentManagementService.agentReStartService(request);
       expect(result).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
 
@@ -835,10 +835,9 @@ describe("Error scenarios for service", () => {
       const result = await agentManagementService.saveAgentManagerProperty();
       expect(result).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
-
 
     describe("Additional Test Cases for Full Coverage", () => {
       it("should test agentShutDownService successfully", async () => {
@@ -858,7 +857,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.agentShutDownService(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -879,7 +878,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.agentStartSSHService(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -900,7 +899,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.jobReStartService(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -921,7 +920,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.getAgentInfo(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -940,7 +939,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.getSyncAgentHealthConfigs();
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -959,7 +958,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.updateAgentManagerProperty();
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -999,7 +998,7 @@ describe("Error scenarios for service", () => {
           cronExpression: "* * * * *",
           command: "echo hello",
           opensearchEnabled: false,
-          opensearchIndex: ""
+          opensearchIndex: "",
         };
         const response = { data: "success" };
         mockPost.mockResolvedValue(response);
@@ -1013,8 +1012,8 @@ describe("Error scenarios for service", () => {
             port: "10001",
             content: "echo hello",
             cron_expression: "* * * * *",
-            script_type: 1
-          })
+            script_type: 1,
+          }),
         );
       });
 
@@ -1035,7 +1034,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.deleteAgentHostname(hostname);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1046,10 +1045,7 @@ describe("Error scenarios for service", () => {
 
         const result = await agentManagementService.addAgentMasterdata(hostname);
         expect(result).toEqual(response);
-        expect(mockPost).toHaveBeenCalledWith(
-          expect.any(String),
-          { hostnames: "test-host" }
-        );
+        expect(mockPost).toHaveBeenCalledWith(expect.any(String), { hostnames: "test-host" });
       });
 
       it("should test getAgentMasterdata with all parameters", async () => {
@@ -1062,7 +1058,6 @@ describe("Error scenarios for service", () => {
       });
     });
 
-
     describe("Remaining Coverage Tests", () => {
       it("should test fetchAgentLogs error case with jobname", async () => {
         const request = { jobname: "test-job" };
@@ -1072,7 +1067,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.fetchAgentLogs(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1084,7 +1079,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.saveLocalConfigs(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1096,7 +1091,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.fetchLocalConfigs(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1108,7 +1103,7 @@ describe("Error scenarios for service", () => {
           cronExpression: "* * * * *",
           command: "echo hello",
           opensearchEnabled: true,
-          opensearchIndex: "logs"
+          opensearchIndex: "logs",
         };
         const response = { data: "success" };
         mockPut.mockResolvedValue(response);
@@ -1125,7 +1120,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.listSchedulerCommand(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1137,7 +1132,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.startSelectedAgents(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1149,7 +1144,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.stopSelectedAgents(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1170,7 +1165,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.getAgentMasterdata(request);
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1178,7 +1173,7 @@ describe("Error scenarios for service", () => {
         const request = {
           risebotAgentVersion: "1.0.0",
           agentpath: "/path",
-          data: [{ hostname: "test", agentId: "10001" }]
+          data: [{ hostname: "test", agentId: "10001" }],
         };
         const response = { data: "success" };
         mockPut.mockResolvedValue(response);
@@ -1188,7 +1183,6 @@ describe("Error scenarios for service", () => {
       });
     });
 
-
     describe("Core Agent Operations", () => {
       it("should cover agentStartService error path", async () => {
         const errorResponse = { response: { status: 500 } };
@@ -1196,7 +1190,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.agentStartService({});
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1206,7 +1200,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.agentStopService({});
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1216,7 +1210,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.agentHealthCheck({});
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1227,7 +1221,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.jobReStartService({});
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1237,7 +1231,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.agentReStartService({});
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1247,7 +1241,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.agentShutDownService({});
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1258,7 +1252,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.agentStartSSHService({});
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1268,7 +1262,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.healthCheckupByPort();
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1279,7 +1273,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.saveAgentManagerProperty();
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1289,7 +1283,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.updateAgentManagerProperty();
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1299,7 +1293,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.fetchBuildInfo();
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1331,7 +1325,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.getAgentRepoService({});
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1341,7 +1335,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.downloadRepositories({});
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1353,11 +1347,11 @@ describe("Error scenarios for service", () => {
           hostname: "test",
           agentId: "10001",
           cronExpression: "* * * * *",
-          command: "echo hello"
+          command: "echo hello",
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1369,11 +1363,11 @@ describe("Error scenarios for service", () => {
           agentId: "10001",
           scheduledJobId: "job1",
           cronExpression: "* * * * *",
-          command: "echo hello"
+          command: "echo hello",
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1383,11 +1377,11 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.deleteSchedulerCommand({
           hostname: "test",
           port: "10001",
-          scheduledJobId: "job1"
+          scheduledJobId: "job1",
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1396,11 +1390,11 @@ describe("Error scenarios for service", () => {
         mockPost.mockRejectedValue(errorResponse);
         const result = await agentManagementService.listSchedulerCommand({
           hostname: "test",
-          agentId: "10001"
+          agentId: "10001",
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1410,11 +1404,11 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.getSchdulerById({
           hostname: "test",
           agentId: "10001",
-          scheduledJobId: "job1"
+          scheduledJobId: "job1",
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1424,11 +1418,11 @@ describe("Error scenarios for service", () => {
         mockPost.mockRejectedValue(errorResponse);
         const result = await agentManagementService.startSelectedAgents({
           hostname: "test",
-          agents: ["10001"]
+          agents: ["10001"],
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1437,11 +1431,11 @@ describe("Error scenarios for service", () => {
         mockPost.mockRejectedValue(errorResponse);
         const result = await agentManagementService.stopSelectedAgents({
           hostname: "test",
-          agents: ["10001"]
+          agents: ["10001"],
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1450,11 +1444,11 @@ describe("Error scenarios for service", () => {
         mockPost.mockRejectedValue(errorResponse);
         const result = await agentManagementService.restartSelectedAgents({
           hostname: "test",
-          agents: ["10001"]
+          agents: ["10001"],
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1463,11 +1457,11 @@ describe("Error scenarios for service", () => {
         mockPost.mockRejectedValue(errorResponse);
         const result = await agentManagementService.healthCheckSelectedAgents({
           hostname: "test",
-          agents: ["10001"]
+          agents: ["10001"],
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1478,7 +1472,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.upgradeAgents();
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1487,11 +1481,11 @@ describe("Error scenarios for service", () => {
         mockPut.mockRejectedValue(errorResponse);
         const result = await agentManagementService.upgradeBulkAgents({
           risebotAgentVersion: "1.0.0",
-          data: [{ hostname: "test", agentId: "10001" }]
+          data: [{ hostname: "test", agentId: "10001" }],
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1501,11 +1495,11 @@ describe("Error scenarios for service", () => {
         mockGet.mockRejectedValue(errorResponse);
         const result = await agentManagementService.getAgentMasterdata({
           limit: 10,
-          pageNo: 1
+          pageNo: 1,
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1515,7 +1509,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.addAgentMasterdata("test-host");
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1525,7 +1519,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.deleteAgentHostname("test-host");
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1536,7 +1530,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.adSyncup();
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1546,7 +1540,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.getAgentMetrics();
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1555,11 +1549,11 @@ describe("Error scenarios for service", () => {
         mockPost.mockRejectedValue(errorResponse);
         const result = await agentManagementService.agentSyncScripts({
           hostname: "test",
-          agentId: "10001"
+          agentId: "10001",
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
 
@@ -1568,11 +1562,11 @@ describe("Error scenarios for service", () => {
         mockPost.mockRejectedValue(errorResponse);
         const result = await agentManagementService.getAgentInfo({
           hostname: "test",
-          agentId: "10001"
+          agentId: "10001",
         });
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
@@ -1590,7 +1584,7 @@ describe("Error scenarios for service", () => {
           platform: "aws",
           sid: "123",
           agentVersion: "1.0.0",
-          serviceName: "web"
+          serviceName: "web",
         };
         const response = { data: "success" };
         mockGet.mockResolvedValue(response);
@@ -1598,9 +1592,7 @@ describe("Error scenarios for service", () => {
         const result = await agentManagementService.fetchAgentService(request);
         expect(result).toEqual(response);
         const expectedUrl = expect.stringContaining(
-          "pageSize=10&pageNo=1&status=running&search=test&osTypes=linux" +
-          "&regions=us-west&environments=prod&platforms=aws&sids=123" +
-          "&agentVersions=1.0.0&serviceNames=web"
+          "pageSize=10&pageNo=1&status=running&search=test&osTypes=linux" + "&regions=us-west&environments=prod&platforms=aws&sids=123" + "&agentVersions=1.0.0&serviceNames=web",
         );
         expect(mockGet).toHaveBeenCalledWith(expectedUrl, { timeout: 30000 });
       });
@@ -1626,8 +1618,8 @@ describe("Error scenarios for service", () => {
           agentId: "10001",
           properties: [
             { name: "prop1", value: "value1" },
-            { name: "prop2", value: "value2" }
-          ]
+            { name: "prop2", value: "value2" },
+          ],
         };
         const response = { data: "success" };
         mockPost.mockResolvedValue(response);
@@ -1638,60 +1630,56 @@ describe("Error scenarios for service", () => {
       });
     });
   });
-  it('should cover the complete request body construction in updateSchedulerCommand', async () => {
+  it("should cover the complete request body construction in updateSchedulerCommand", async () => {
     const request = {
-      agentId: '10001',
-      hostname: 'test',
-      scheduledJobId: 'job1',
-      cronExpression: '* * * * *',
-      command: 'echo hello',
+      agentId: "10001",
+      hostname: "test",
+      scheduledJobId: "job1",
+      cronExpression: "* * * * *",
+      command: "echo hello",
       opensearchEnabled: true,
-      opensearchIndex: 'logs'
+      opensearchIndex: "logs",
     };
 
     await agentManagementService.updateSchedulerCommand(request);
 
-    expect(mockPut).toHaveBeenCalledWith(
-      expect.stringContaining('hostname=test&port=10001&scheduledJobId=job1'),
-      {
-        hostname: 'test',
-        agentId: '10001',
-        script_name: 'job1',
-        content: 'echo hello',
-        arguments: '',
-        cron_expression: '* * * * *',
-        script_type: 1,
-        opensearch_enabled: true,
-        opensearch_index: 'logs',
-        async_exec: true
-      }
-    );
+    expect(mockPut).toHaveBeenCalledWith(expect.stringContaining("hostname=test&port=10001&scheduledJobId=job1"), {
+      hostname: "test",
+      agentId: "10001",
+      script_name: "job1",
+      content: "echo hello",
+      arguments: "",
+      cron_expression: "* * * * *",
+      script_type: 1,
+      opensearch_enabled: true,
+      opensearch_index: "logs",
+      async_exec: true,
+    });
   });
 
-
-  describe('fetchAgentService and filterAgentService Tests', () => {
+  describe("fetchAgentService and filterAgentService Tests", () => {
     let mockGet;
 
     beforeEach(() => {
-      mockGet = jest.spyOn(AxiosInstace, 'get');
+      mockGet = jest.spyOn(AxiosInstace, "get");
     });
 
     afterEach(() => {
       jest.clearAllMocks();
     });
-    it('should cover fetchAgentService with all parameters', async () => {
+    it("should cover fetchAgentService with all parameters", async () => {
       const request = {
         pageSize: 10,
         pageNo: 1,
-        status: 'active',
-        agentSearch: 'test',
-        os: 'linux',
-        region: 'us-west',
-        environment: 'prod',
-        platform: 'aws',
-        sid: '123',
-        agentVersion: '1.0.0',
-        serviceName: 'web-service'
+        status: "active",
+        agentSearch: "test",
+        os: "linux",
+        region: "us-west",
+        environment: "prod",
+        platform: "aws",
+        sid: "123",
+        agentVersion: "1.0.0",
+        serviceName: "web-service",
       };
 
       const mockResponse = { data: [] };
@@ -1702,17 +1690,17 @@ describe("Error scenarios for service", () => {
       expect(result).toEqual(mockResponse);
       expect(mockGet).toHaveBeenCalledWith(
         expect.stringContaining(
-          'pageSize=10&pageNo=1&status=active&search=test&osTypes=linux' +
-          '&regions=us-west&environments=prod&platforms=aws&sids=123' +
-          '&agentVersions=1.0.0&serviceNames=web-service'
+          "pageSize=10&pageNo=1&status=active&search=test&osTypes=linux" +
+            "&regions=us-west&environments=prod&platforms=aws&sids=123" +
+            "&agentVersions=1.0.0&serviceNames=web-service",
         ),
-        { timeout: 30000 }
+        { timeout: 30000 },
       );
     });
-    it('should cover filterAgentService with parameters', async () => {
+    it("should cover filterAgentService with parameters", async () => {
       const request = {
-        filter: 'status:active',
-        sort: 'name'
+        filter: "status:active",
+        sort: "name",
       };
 
       const mockResponse = { data: [] };
@@ -1721,78 +1709,75 @@ describe("Error scenarios for service", () => {
       const result = await agentManagementService.filterAgentService(request);
 
       expect(result).toEqual(mockResponse);
-      expect(mockGet).toHaveBeenCalledWith(
-        expect.any(String),
-        request
-      );
+      expect(mockGet).toHaveBeenCalledWith(expect.any(String), request);
     });
-    it('should cover fetchAgentService error case', async () => {
+    it("should cover fetchAgentService error case", async () => {
       const errorResponse = { response: { status: 500 } };
       mockGet.mockRejectedValue(errorResponse);
 
       const result = await agentManagementService.fetchAgentService({});
       expect(result).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
-    it('should cover filterAgentService error case', async () => {
+    it("should cover filterAgentService error case", async () => {
       const errorResponse = { response: { status: 500 } };
       mockGet.mockRejectedValue(errorResponse);
 
       const result = await agentManagementService.filterAgentService({});
       expect(result).toEqual({
         status: 500,
-        data: { message: "Unexpected error occurred" }
+        data: { message: "Unexpected error occurred" },
       });
     });
   });
 
-
-  describe('Agent Repository and Addition Tests', () => {
-    let mockGet, mockPost;
+  describe("Agent Repository and Addition Tests", () => {
+    let mockGet;
+    let mockPost;
 
     beforeEach(() => {
-      mockGet = jest.spyOn(AxiosInstace, 'get');
-      mockPost = jest.spyOn(AxiosInstace, 'post');
+      mockGet = jest.spyOn(AxiosInstace, "get");
+      mockPost = jest.spyOn(AxiosInstace, "post");
     });
 
     afterEach(() => {
       jest.clearAllMocks();
     });
-    describe('filterAgentRepoService', () => {
-      it('should call GET with correct endpoint and data', async () => {
-        const mockData = { type: 'rust', status: 'active' };
-        const mockResponse = { data: [{ id: 1, name: 'repo1' }] };
+    describe("filterAgentRepoService", () => {
+      it("should call GET with correct endpoint and data", async () => {
+        const mockData = { type: "rust", status: "active" };
+        const mockResponse = { data: [{ id: 1, name: "repo1" }] };
         mockGet.mockResolvedValue(mockResponse);
 
         const result = await agentManagementService.filterAgentRepoService(mockData);
 
         expect(result).toEqual(mockResponse);
         expect(mockGet).toHaveBeenCalledWith(
-          expect.stringContaining('/repositories'), // Adjust based on your actual endpoint
-          mockData
+          expect.stringContaining("/repositories"), // Adjust based on your actual endpoint
+          mockData,
         );
       });
 
-      it('should handle errors properly', async () => {
-        const errorResponse = { response: { status: 500, data: 'Error' } };
+      it("should handle errors properly", async () => {
+        const errorResponse = { response: { status: 500, data: "Error" } };
         mockGet.mockRejectedValue(errorResponse);
 
         const result = await agentManagementService.filterAgentRepoService({});
 
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
-    describe('addAgentService', () => {
-      it('should call POST with correct endpoint and data', async () => {
+    describe("addAgentService", () => {
+      it("should call POST with correct endpoint and data", async () => {
         const mockAgentData = {
-          hostname: 'agent1',
-          ip: '192.168.1.1',
-          properties: { os: 'linux', version: '1.0' }
+          hostname: "agent1",
+          ip: "192.168.1.1",
+          properties: { os: "linux", version: "1.0" },
         };
         const mockResponse = { data: { success: true } };
         mockPost.mockResolvedValue(mockResponse);
@@ -1801,26 +1786,22 @@ describe("Error scenarios for service", () => {
 
         expect(result).toEqual(mockResponse);
         expect(mockPost).toHaveBeenCalledWith(
-          expect.stringContaining('/agents'), // Adjust based on your actual endpoint
-          mockAgentData
+          expect.stringContaining("/agents"), // Adjust based on your actual endpoint
+          mockAgentData,
         );
       });
 
-      it('should handle errors properly', async () => {
-        const errorResponse = { response: { status: 400, data: 'Validation Error' } };
+      it("should handle errors properly", async () => {
+        const errorResponse = { response: { status: 400, data: "Validation Error" } };
         mockPost.mockRejectedValue(errorResponse);
 
-        const result = await agentManagementService.addAgentService({ invalid: 'data' });
+        const result = await agentManagementService.addAgentService({ invalid: "data" });
 
         expect(result).toEqual({
           status: 500,
-          data: { message: "Unexpected error occurred" }
+          data: { message: "Unexpected error occurred" },
         });
       });
     });
   });
-
 });
-
-
-

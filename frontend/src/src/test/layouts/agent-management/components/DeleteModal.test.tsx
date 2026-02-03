@@ -1,7 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import DeleteModal from "../../../../../src/layouts/agent-management/components/DeleteModal";
+import DeleteModal from "../../../../layouts/agent-management/components/DeleteModal";
+
 jest.mock("@/constants/strings", () => ({
   cancelButtonText: "Cancel",
   deleteButtonText: "Delete",
@@ -38,9 +39,7 @@ describe("DeleteModal", () => {
   it("shows correct confirmation message when version is provided", () => {
     render(<DeleteModal {...baseProps} version="v2.0" />);
 
-    expect(
-      screen.getByText("Are you sure you want to delete version v2.0?")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Are you sure you want to delete version v2.0?")).toBeInTheDocument();
   });
 
   it("shows default confirmation when version is not provided", () => {

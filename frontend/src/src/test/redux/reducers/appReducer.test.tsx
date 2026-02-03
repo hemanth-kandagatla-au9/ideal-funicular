@@ -1,12 +1,12 @@
 import { UPDATE_APP_READY } from "../../../config/actions";
-import appReducer from '../../../redux/reducers/appReducer';
+import appReducer from "../../../redux/reducers/appReducer";
 import INITIAL_STATE from "../../../redux/initialState";
-import '@testing-library/jest-dom/extend-expect';
+import "@testing-library/jest-dom/extend-expect";
 
-describe('appReducer tests', () => {
-  let initialState = undefined;
+describe("appReducer tests", () => {
+  let initialState;
   const state = INITIAL_STATE.app;
-  let action = { type: "", payload: '' };
+  let action = { type: "", payload: "" };
 
   it("renders", () => {
     initialState = undefined;
@@ -23,6 +23,3 @@ describe('appReducer tests', () => {
     expect(res.appReady).toBe(true);
   });
 });
-
-
-

@@ -9,7 +9,6 @@ interface ScheduleTypeOption {
   value: string;
 }
 
-
 export const AGENT_VERSIONS: Option[] = [
   {
     label: "0.0.1",
@@ -28,7 +27,6 @@ export const AGENT_VERSIONS: Option[] = [
     value: "0.0.4",
   },
 ];
-
 
 export const PLATFORMS: Option[] = [
   {
@@ -53,7 +51,6 @@ export const PLATFORMS: Option[] = [
   },
 ];
 
-
 export const ENVIRONMENTS: Option[] = [
   {
     label: "Environment 1",
@@ -73,7 +70,6 @@ export const ENVIRONMENTS: Option[] = [
   },
 ];
 
-
 export const SIDS: Option[] = [
   {
     label: "SID 1",
@@ -84,7 +80,6 @@ export const SIDS: Option[] = [
     value: "SID 2",
   },
 ];
-
 
 export const stateOptions: Option[] = [
   { value: "ocean1", label: "Ocean", color: "#00B8D9" },
@@ -98,7 +93,6 @@ export const stateOptions: Option[] = [
   { value: "slate", label: "Slate", color: "#253858" },
   { value: "silver", label: "Silver", color: "#666666" },
 ];
-
 
 export const AGENT_TYPES = {
   OS_AGENT_PRIMARY: "os_agent",
@@ -118,7 +112,6 @@ export const AGENT_ACTIONS = {
   STOP: "stop",
   RESTART: "restart",
 } as const;
-
 
 export const SCHEDULE_TYPES: ScheduleTypeOption[] = [
   { label: "Command", value: "command" },

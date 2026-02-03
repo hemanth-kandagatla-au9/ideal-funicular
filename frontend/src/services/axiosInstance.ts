@@ -7,7 +7,6 @@ type FailedQueueItem = {
   reject: (reason?: any) => void;
 };
 
-
 class AxiosInstance {
   private baseURL: string;
 
@@ -48,7 +47,6 @@ class AxiosInstance {
     return false;
   }
 
-  
   public init(token?: string): AxiosInstanceType {
     const options: AxiosRequestConfig = {
       baseURL: this.baseURL,
@@ -74,7 +72,6 @@ class AxiosInstance {
     return this.instance;
   }
 
-  
   private updateHeaderToken(): void {
     this.instance.interceptors.request.use(
       (config: AxiosRequestConfig) => {
@@ -93,7 +90,6 @@ class AxiosInstance {
     );
   }
 
-  
   private refreshToken(returnError = true): void {
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => response,
@@ -157,4 +153,3 @@ class AxiosInstance {
 }
 
 export default AxiosInstance;
-

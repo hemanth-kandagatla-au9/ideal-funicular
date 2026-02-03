@@ -5,7 +5,8 @@ import { getUpgradeAgentVersion } from "../../../../redux/selectors/agentManagem
 import agentManagementActions from "../../../../redux/actions/agentManagement.action";
 import UpgradeAgentsDialog from "../../../../layouts/agent-management/components/UpgradeAgentsDialog";
 import { errortoast } from "../../../../layouts/agent-management/helpers/CustomToast";
-import '@testing-library/jest-dom/extend-expect';
+import "@testing-library/jest-dom/extend-expect";
+
 jest.mock("../../../../redux/selectors/agentManagement.selectors.ts", () => ({
   getUpgradeAgentVersion: jest.fn(),
 }));
@@ -58,13 +59,7 @@ describe("UpgradeAgentsDialog", () => {
   });
 
   const setup = (props = {}) => {
-    return render(
-      <UpgradeAgentsDialog
-        showAgentUpgrade={true}
-        closeAgentUpgrade={props.closeAgentUpgrade || jest.fn()}
-        upgradeAgentData={mockUpgradeAgentData}
-      />
-    );
+    return render(<UpgradeAgentsDialog showAgentUpgrade closeAgentUpgrade={props.closeAgentUpgrade || jest.fn()} upgradeAgentData={mockUpgradeAgentData} />);
   };
 
   it("renders the modal when showAgentUpgrade is true", () => {
@@ -81,33 +76,28 @@ describe("UpgradeAgentsDialog", () => {
 
   it("selects and deselects agent version", () => {
     setup();
-  
+
     const versionBtn = screen.getByTestId("agentManagerVersionBtn-risebotVersions-0");
     const radios = screen.getAllByRole("radio");
-  
+
     expect(radios[0].checked).toBe(false);
-  
+
     fireEvent.click(versionBtn);
     expect(radios[0].checked).toBe(true);
-  
+
     fireEvent.click(versionBtn);
     expect(radios[0].checked).toBe(false);
   });
-  
 
   it("shows error toast if upgrade is clicked without selecting version", () => {
     setup();
     fireEvent.click(screen.getByTestId("upgradeBtnTestId"));
     expect(errortoast).toHaveBeenCalledWith("Please select the RISEAGENT version");
   });
-  
-
 
   it("calls closeAgentUpgrade and resets versions on cancel", () => {
     const closeMock = jest.fn();
-    const { getByTestId } = render(
-      <UpgradeAgentsDialog showAgentUpgrade={true} closeAgentUpgrade={closeMock} upgradeAgentData={mockUpgradeAgentData} />
-    );
+    const { getByTestId } = render(<UpgradeAgentsDialog showAgentUpgrade closeAgentUpgrade={closeMock} upgradeAgentData={mockUpgradeAgentData} />);
 
     fireEvent.click(getByTestId("agentManagerVersionBtn-risebotVersions-1")); // select version
     fireEvent.click(getByTestId("upgradeCancelTestid")); // cancel
@@ -119,11 +109,4 @@ describe("UpgradeAgentsDialog", () => {
     const unknownBtn = screen.getByTestId("unknownTypeBtn");
     fireEvent.click(unknownBtn);
   });
-    
- 
-  
-  
 });
-
-
-

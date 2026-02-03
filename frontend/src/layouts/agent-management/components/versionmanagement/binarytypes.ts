@@ -5,13 +5,12 @@ export interface BinaryVersion {
   status: "Current" | "Previous" | "Beta";
   upgradeType: "Mandatory" | "Optional";
   s3Url: string;
-  buildDate: string; 
-  buildDateDisplay?: string; 
-  releaseDate: string; 
+  buildDate: string;
+  buildDateDisplay?: string;
+  releaseDate: string;
   agentpath?: string;
   rustcversion?: string;
   checksum?: string;
   createdAt?: string;
   updatedAt?: string;
 }
-

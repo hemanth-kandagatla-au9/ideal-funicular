@@ -146,7 +146,7 @@ describe("AddUserModal", () => {
   });
 
   test("loading disables everything", () => {
-    render(<AddUserModal {...baseProps} loading={true} />);
+    render(<AddUserModal {...baseProps} loading />);
 
     expect(screen.getByText("Adding...")).toBeDisabled();
     expect(screen.getByText("Cancel")).toBeDisabled();

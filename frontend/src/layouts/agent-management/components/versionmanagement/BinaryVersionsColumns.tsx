@@ -5,6 +5,7 @@ import gitBranch from "../../../../images/agent-management/assets/gitBranch.svg"
 import linux from "../../../../images/agent-management/assets/linux.svg";
 import windows from "../../../../images/agent-management/assets/windows.svg";
 import { BinaryVersion } from "./binarytypes";
+
 interface OSCompatibility {
   agentType?: string;
   osVersion?: string;
@@ -77,9 +78,9 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
       flex: 1.2,
       sortable: false,
       renderCell: ({ row }) => (
-        <Box 
-          display="flex" 
-          flexDirection="row" 
+        <Box
+          display="flex"
+          flexDirection="row"
           gap={1}
           alignItems="center"
           sx={{
@@ -107,7 +108,7 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
             row.osCompatibility.map((os: OSCompatibility | string, index: number) => {
               let agentType = "";
               let osVersion = "";
-              
+
               if (typeof os === "string") {
                 agentType = os.split(" ")[0] || "";
                 osVersion = os.split(" ")[1] || "";
@@ -127,11 +128,11 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
               }
 
               return (
-                <Box 
-                  key={`${agentType}-${osVersion}-${index}`} 
-                  display="flex" 
-                  alignItems="center" 
-                  sx={{ 
+                <Box
+                  key={`${agentType}-${osVersion}-${index}`}
+                  display="flex"
+                  alignItems="center"
+                  sx={{
                     flexShrink: 0,
                     whiteSpace: "nowrap",
                   }}
@@ -252,4 +253,3 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
 };
 
 export default BinaryVersionsColumns;
-

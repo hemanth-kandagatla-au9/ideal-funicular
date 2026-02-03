@@ -4,15 +4,12 @@ import React from "react";
 import { render, fireEvent, screen, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import * as ReactRedux from "react-redux";
-import * as PermissionUtils from "../../../../../../src/utils/PermissionUtils";
-import SideBar from "../../../../../../src/layouts/agent-management/components/sidebar/SideBar";
+import * as PermissionUtils from "../../../../../utils/PermissionUtils";
+import SideBar from "../../../../../layouts/agent-management/components/sidebar/SideBar";
 
-const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+const flushPromises = () => new Promise<void>(resolve => setTimeout(resolve, 0));
 
-const setScrollGeometry = (
-  element: Element,
-  geometry: { scrollTop: number; clientHeight: number; scrollHeight: number }
-) => {
+const setScrollGeometry = (element: Element, geometry: { scrollTop: number; clientHeight: number; scrollHeight: number }) => {
   Object.defineProperty(element, "scrollTop", {
     value: geometry.scrollTop,
     writable: true,
@@ -28,7 +25,6 @@ const setScrollGeometry = (
   });
 };
 
-
 jest.mock("react-redux", () => {
   const actual = jest.requireActual("react-redux");
   return {
@@ -43,7 +39,6 @@ const mockUseDispatch = ReactRedux.useDispatch as unknown as jest.Mock;
 const mockUseSelector = ReactRedux.useSelector as unknown as jest.Mock;
 const mockDispatch = jest.fn();
 
-
 jest.mock("../../../../../../src/utils/PermissionUtils", () => ({
   __esModule: true,
   canAccess: jest.fn(),
@@ -51,20 +46,14 @@ jest.mock("../../../../../../src/utils/PermissionUtils", () => ({
 
 const mockCanAccess = PermissionUtils.canAccess as unknown as jest.Mock;
 
-
 jest.mock("../../../../../../src/layouts/agent-management/helpers/CustomToast", () => ({
   successtoast: jest.fn(),
   errortoast: jest.fn(),
 }));
 
-
 jest.mock("../../../../../../src/services/agent/agentManagement.service", () => ({
-  fetchAgentLogs: jest.fn(() =>
-    Promise.resolve({ data: { data: [{ log: "x" }] } })
-  ),
+  fetchAgentLogs: jest.fn(() => Promise.resolve({ data: { data: [{ log: "x" }] } })),
 }));
-
-
 
 jest.mock("../../../../../../src/layouts/agent-management/components/sidebar/AgentTasks", () => (props: any) => (
   <div>
@@ -99,56 +88,69 @@ jest.mock("../../../../../../src/layouts/agent-management/components/sidebar/Age
   </div>
 ));
 
-jest.mock("../../../../../../src/layouts/agent-management/components/DeleteModal", () => (props: any) =>
-  props.open ? (
-    <div>
-      <button data-testid="confirmDelete" onClick={props.onDeleteButtonClick} />
-      <button data-testid="closeDelete" onClick={props.onClose} />
-    </div>
-  ) : null
+jest.mock(
+  "../../../../../../src/layouts/agent-management/components/DeleteModal",
+  () => (props: any) =>
+    props.open ? (
+      <div>
+        <button data-testid="confirmDelete" onClick={props.onDeleteButtonClick} />
+        <button data-testid="closeDelete" onClick={props.onClose} />
+      </div>
+    ) : null,
 );
 
-jest.mock("../../../../../../src/layouts/agent-management/components/JobLogsModal", () => (props: any) =>
-  props.open ? (
-    <div>
-      <button data-testid="refreshJob" onClick={props.refreshAgentLogs} />
-      <button data-testid="copyJob" onClick={() => props.copyToClipboard({})} />
-      <ul ref={props.jobsLogRef} data-testid="jobScroll" />
-    </div>
-  ) : null
+jest.mock(
+  "../../../../../../src/layouts/agent-management/components/JobLogsModal",
+  () => (props: any) =>
+    props.open ? (
+      <div>
+        <button data-testid="refreshJob" onClick={props.refreshAgentLogs} />
+        <button data-testid="copyJob" onClick={() => props.copyToClipboard({})} />
+        <ul ref={props.jobsLogRef} data-testid="jobScroll" />
+      </div>
+    ) : null,
 );
 
-jest.mock("../../../../../../src/layouts/agent-management/components/LocalConfigModal", () => (props: any) =>
-  props.open ? (
-    <div>
-      <input data-testid="localInput" onChange={(e) => props.handleInputChangeForSideBar("x", e)} />
-      <button data-testid="saveLocal" onClick={() => props.saveConfigs("p", {})} />
-      <button data-testid="closeLocal" onClick={props.onClose} />
-    </div>
-  ) : null
+jest.mock(
+  "../../../../../../src/layouts/agent-management/components/LocalConfigModal",
+  () => (props: any) =>
+    props.open ? (
+      <div>
+        <input data-testid="localInput" onChange={e => props.handleInputChangeForSideBar("x", e)} />
+        <button data-testid="saveLocal" onClick={() => props.saveConfigs("p", {})} />
+        <button data-testid="closeLocal" onClick={props.onClose} />
+      </div>
+    ) : null,
 );
 
-jest.mock("../../../../../../src/layouts/agent-management/components/SchedulerDialog", () => () => (
-  <div data-testid="schedulerDialog" />
-));
-
+jest.mock("../../../../../../src/layouts/agent-management/components/SchedulerDialog", () => () => <div data-testid="schedulerDialog" />);
 
 const defaultSelectorMock = (fn: any) => {
   switch (fn.name) {
-    case "getAgentGlobalConfig": return { riseBot: [{ propertyName: "x", propertyValue: "y" }] };
-    case "isJobReload": return true;
-    case "isLocalConfigReload": return true;
-    case "fetchScheduledJobsByCommandId": return { id: 1 };
-    case "listScheduledJob": return [];
-    case "getRepositories": return { data: { data: [] } };
-    case "getAgentInfo": return { agent_config: {} };
-    case "isServiceLoading": return false;
-    case "isSchedulerLoading": return false;
-    case "isAgentDetailsLoading": return false;
-    default: return {};
+    case "getAgentGlobalConfig":
+      return { riseBot: [{ propertyName: "x", propertyValue: "y" }] };
+    case "isJobReload":
+      return true;
+    case "isLocalConfigReload":
+      return true;
+    case "fetchScheduledJobsByCommandId":
+      return { id: 1 };
+    case "listScheduledJob":
+      return [];
+    case "getRepositories":
+      return { data: { data: [] } };
+    case "getAgentInfo":
+      return { agent_config: {} };
+    case "isServiceLoading":
+      return false;
+    case "isSchedulerLoading":
+      return false;
+    case "isAgentDetailsLoading":
+      return false;
+    default:
+      return {};
   }
 };
-
 
 describe("SideBar coverage", () => {
   const props = {
@@ -204,13 +206,13 @@ describe("SideBar coverage", () => {
     fireEvent.click(screen.getByTestId("closeLocal"));
 
     fireEvent.click(screen.getByTestId("deleteJob"));
-fireEvent.click(screen.getByTestId("confirmDelete"));
+    fireEvent.click(screen.getByTestId("confirmDelete"));
 
-const closeBtn = screen.queryByTestId("closeDelete");
-if (closeBtn) fireEvent.click(closeBtn);
+    const closeBtn = screen.queryByTestId("closeDelete");
+    if (closeBtn) fireEvent.click(closeBtn);
 
-fireEvent.click(screen.getByTestId("refreshJob"));
-fireEvent.click(screen.getByTestId("copyJob"));
+    fireEvent.click(screen.getByTestId("refreshJob"));
+    fireEvent.click(screen.getByTestId("copyJob"));
 
     const scrollTarget = screen.getByTestId("scrollTarget");
     setScrollGeometry(scrollTarget, { scrollTop: 100, clientHeight: 100, scrollHeight: 150 });
@@ -220,12 +222,11 @@ fireEvent.click(screen.getByTestId("copyJob"));
     setScrollGeometry(jobScroll, { scrollTop: 100, clientHeight: 100, scrollHeight: 150 });
     fireEvent.scroll(jobScroll);
 
-await act(async () => {
-  await flushPromises();
-});
+    await act(async () => {
+      await flushPromises();
+    });
 
-expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
-
+    expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
   });
 
   it("does not call loadAgentInfo when open is false", async () => {
@@ -233,9 +234,7 @@ expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
     await act(async () => {
       render(<SideBar {...propsOpenFalse} />);
     });
-    expect(mockDispatch).not.toHaveBeenCalledWith(
-      expect.objectContaining({ type: expect.stringContaining("fetchAgentInfo") })
-    );
+    expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({ type: expect.stringContaining("fetchAgentInfo") }));
   });
 
   it("does not render accordions when permissions are false", async () => {
@@ -249,7 +248,7 @@ expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
   });
 
   it("handles empty globalConfigs", async () => {
-    mockUseSelector.mockImplementation((fn) => {
+    mockUseSelector.mockImplementation(fn => {
       if (fn.name === "getAgentGlobalConfig") return {};
       return defaultSelectorMock(fn);
     });
@@ -268,7 +267,7 @@ expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
   });
 
   it("handles empty fetchScheduler", async () => {
-    mockUseSelector.mockImplementation((fn) => {
+    mockUseSelector.mockImplementation(fn => {
       if (fn.name === "fetchScheduledJobsByCommandId") return {};
       return defaultSelectorMock(fn);
     });
@@ -279,16 +278,14 @@ expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
   });
 
   it("handles jobReload false", async () => {
-    mockUseSelector.mockImplementation((fn) => {
+    mockUseSelector.mockImplementation(fn => {
       if (fn.name === "isJobReload") return false;
       return defaultSelectorMock(fn);
     });
     await act(async () => {
       render(<SideBar {...props} />);
     });
-    expect(mockDispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: expect.stringContaining("listSchedulerCommand") })
-    );
+    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: expect.stringContaining("listSchedulerCommand") }));
   });
 
   it("handles error in deleteScheduler", async () => {
@@ -332,7 +329,7 @@ expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
       render(<SideBar {...props} />);
     });
     fireEvent.click(screen.getByTestId("upgradeConfirm"));
-    expect(require("../../../../../../src/layouts/agent-management/helpers/CustomToast").errortoast).toHaveBeenCalledWith("Please select the RISEBOT version");
+    expect(require("../../../../../layouts/agent-management/helpers/CustomToast").errortoast).toHaveBeenCalledWith("Please select the RISEBOT version");
   });
 
   it("handles handleClose via close button", async () => {

@@ -42,10 +42,7 @@ jest.mock("../../../layouts/agent-management/home/FilterBar", () => (props: any)
 
 jest.mock("../../../layouts/agent-management/home/SearchContainer", () => (props: any) => (
   <div>
-    <input
-      data-testid="search"
-      onChange={(e) => props.setState((prev: any) => ({ ...prev, agentSearch: e.target.value }))}
-    />
+    <input data-testid="search" onChange={e => props.setState((prev: any) => ({ ...prev, agentSearch: e.target.value }))} />
     <button data-testid="searchBtn" onClick={props.filterAgentSearch} />
   </div>
 ));
@@ -59,9 +56,7 @@ const baseState = {
   isLoading: false,
   getAgentsService: {
     pagination: {
-      totalRows: [
-        { hostname: "AWS1", agent_details: { server_port: "9000", os_version: "linux" } },
-      ],
+      totalRows: [{ hostname: "AWS1", agent_details: { server_port: "9000", os_version: "linux" } }],
       totalPage: 1,
     },
   },
@@ -75,8 +70,7 @@ const baseState = {
   getMetricsTilesData: [],
 };
 
-const setSelector = (override = {}) =>
-  mockUseSelector.mockImplementation((fn) => fn({ ...baseState, ...override }));
+const setSelector = (override = {}) => mockUseSelector.mockImplementation(fn => fn({ ...baseState, ...override }));
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -138,9 +132,7 @@ describe("AgentManagement REAL coverage", () => {
     render(<AgentManagement />);
     fireEvent.click(screen.getByTestId("download"));
 
-    await waitFor(() =>
-      expect(agentManagementService.fetchAgentService).toHaveBeenCalled()
-    );
+    await waitFor(() => expect(agentManagementService.fetchAgentService).toHaveBeenCalled());
   });
 
   it("sidebar open path", () => {

@@ -1,7 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import SearchContainer from '../../../../layouts/agent-management/home/SearchContainer';
+import SearchContainer from "../../../../layouts/agent-management/home/SearchContainer";
+
 jest.useFakeTimers();
 
 const mockDispatch = jest.fn();
@@ -18,14 +19,12 @@ jest.mock("react-router-dom", () => ({
 }));
 
 jest.mock("@/redux/actions/agentManagement.action", () => ({
-  fetchAgentManagementServices: jest.fn((payload) => ({ type: "FETCH", payload })),
+  fetchAgentManagementServices: jest.fn(payload => ({ type: "FETCH", payload })),
   fetchAgentMetrics: jest.fn(() => ({ type: "FETCH_METRICS" })),
   syncAgentHealthConfigs: jest.fn(() => ({ type: "SYNC" })),
 }));
 
-jest.mock("../../../../layouts/agent-management/components/GlobalConfigurationModal", () => (props: any) =>
-  props.show ? <div data-testid="globalModal">Modal Open</div> : null
-);
+jest.mock("../../../../layouts/agent-management/components/GlobalConfigurationModal", () => (props: any) => props.show ? <div data-testid="globalModal">Modal Open</div> : null);
 
 const defaultState = {
   showFilters: true,
@@ -66,17 +65,17 @@ describe("SearchContainer", () => {
   });
 
   it.skip("renders title and filters text", () => {
-  setup();
-  expect(screen.getByText(/RISEAGENT Installed Servers/i)).toBeInTheDocument();
-});
+    setup();
+    expect(screen.getByText(/RISEAGENT Installed Servers/i)).toBeInTheDocument();
+  });
 
-it("clicking search button calls filterAgentSearch", () => {
-  const props = setup();
+  it("clicking search button calls filterAgentSearch", () => {
+    const props = setup();
 
-  fireEvent.click(screen.getByTestId("searchBtnId"));
+    fireEvent.click(screen.getByTestId("searchBtnId"));
 
-  expect(props.filterAgentSearch).toHaveBeenCalled();
-});
+    expect(props.filterAgentSearch).toHaveBeenCalled();
+  });
 
   it("typing in search triggers debounced fetch", async () => {
     setup();
@@ -103,8 +102,6 @@ it("clicking search button calls filterAgentSearch", () => {
 
     expect(mockDispatch).toHaveBeenCalled();
   });
-
- 
 
   it("clicking Version Management navigates", () => {
     setup();
@@ -139,6 +136,4 @@ it("clicking search button calls filterAgentSearch", () => {
     expect(props.loadFilterData).toHaveBeenCalled();
     expect(mockDispatch).toHaveBeenCalled();
   });
-
-  
 });

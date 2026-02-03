@@ -1,4 +1,3 @@
-
 import Cookies from "universal-cookie";
 import { AxiosResponse, AxiosError } from "axios";
 import Config from "../../config/config";
@@ -44,7 +43,6 @@ const getPermissionsByGroup = async (groupId: string): Promise<ApiResponse | Err
     return getPermissionsErr.response?.data || { error: getPermissionsErr.message };
   }
 };
-
 
 const PermissionService = {
   addPermission,

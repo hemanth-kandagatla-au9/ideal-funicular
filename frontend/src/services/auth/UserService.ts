@@ -2,6 +2,7 @@ import Cookies from "universal-cookie";
 import Config from "../../config/config";
 import AxiosInstanceClass from "../axiosInstance";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
+
 const { patch, get, baseUrl } = Config.apiEndpoints.auth;
 const cookies = new Cookies();
 const accessToken = cookies.get("iasphere_access_token");
@@ -138,4 +139,3 @@ const UserService = {
   getUsersActivityLogExport,
 };
 export default UserService;
-

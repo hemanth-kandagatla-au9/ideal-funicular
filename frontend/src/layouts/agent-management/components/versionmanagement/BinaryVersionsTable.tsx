@@ -29,48 +29,47 @@ const BinaryVersionsTable = ({ versions, pagination, onView, onEdit }: BinaryVer
   };
 
   return (
-    <>
-      <Box sx={{ height: 480, width: "100%" }}>
-        <DataGrid
-          rows={versions}
-          columns={columns}
-          getRowId={row => row.id}
-          hideFooterPagination
-          hideFooterSelectedRowCount
-          disableSelectionOnClick
-          disableColumnMenu
-          initialState={{
-            sorting: {
-              sortModel: [{ field: 'buildDate', sort: 'asc' }],
+    <Box sx={{ height: 480, width: "100%" }}>
+      <DataGrid
+        rows={versions}
+        columns={columns}
+        getRowId={row => row.id}
+        hideFooterPagination
+        hideFooterSelectedRowCount
+        disableSelectionOnClick
+        disableColumnMenu
+        initialState={{
+          sorting: {
+            sortModel: [{ field: "buildDate", sort: "asc" }],
+          },
+        }}
+        sx={{
+          border: "none",
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: "#f9fafb",
+            fontWeight: "bold",
+            fontFamily: "Johnson text",
+          },
+          "& .MuiDataGrid-cell": {
+            borderBottom: "1px solid #e5e7eb",
+            py: 2,
+            fontFamily: "Johnson text",
+          },
+          "& .MuiDataGrid-row": {
+            "&:hover": {
+              backgroundColor: "rgba(0, 0, 0, 0.04)",
             },
-          }}
-          sx={{
-            border: "none",
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "#f9fafb",
-              fontWeight: "bold",
-              fontFamily: "Johnson text",
-            },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "1px solid #e5e7eb",
-              py: 2,
-              fontFamily: "Johnson text",
-            },
-            "& .MuiDataGrid-row": {
+            "&.Mui-selected": {
+              backgroundColor: "rgba(144, 106, 255, 0.08)",
               "&:hover": {
-                backgroundColor: "rgba(0, 0, 0, 0.04)",
-              },
-              "&.Mui-selected": {
-                backgroundColor: "rgba(144, 106, 255, 0.08)",
-                "&:hover": {
-                  backgroundColor: "rgba(144, 106, 255, 0.1)",
-                },
+                backgroundColor: "rgba(144, 106, 255, 0.1)",
               },
             },
-          }}
-          getRowHeight={() => "auto"}
-        />
-        <Pagination
+          },
+        }}
+        getRowHeight={() => "auto"}
+      />
+      <Pagination
         handlePagination={handlePagination}
         handleRowsPerPage={handleRowsPerPage}
         pagination={{
@@ -80,11 +79,8 @@ const BinaryVersionsTable = ({ versions, pagination, onView, onEdit }: BinaryVer
           limit: pagination.pageSize,
         }}
       />
-      </Box>
-      
-    </>
+    </Box>
   );
 };
 
 export default BinaryVersionsTable;
-

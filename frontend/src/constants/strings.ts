@@ -178,6 +178,4 @@ export {
   statusButtonText,
   selectedItemsText,
   clearSelectionText,
-  
 };
-

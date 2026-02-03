@@ -3,7 +3,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Permissions from "../../../../src/layouts/user-authorization/Permissions";
+import Permissions from "../../../layouts/user-authorization/Permissions";
+
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
@@ -13,23 +14,23 @@ jest.mock("react-router-dom", () => ({
   useHistory: jest.fn(),
 }));
 jest.mock("../../../../src/redux/actions/userAuthorization.action", () => ({
-  fetchPermissions: jest.fn((payload) => ({ type: "FETCH", payload })),
-  createPermission: jest.fn((payload) => ({ type: "CREATE", payload })),
-  deletePermission: jest.fn((id) => ({ type: "DELETE", payload: id })),
+  fetchPermissions: jest.fn(payload => ({ type: "FETCH", payload })),
+  createPermission: jest.fn(payload => ({ type: "CREATE", payload })),
+  deletePermission: jest.fn(id => ({ type: "DELETE", payload: id })),
 }));
 
-jest.mock("@/components/ui/pagination/Pagination.component", () => (props: any) => (
-  <button onClick={() => props.handlePagination(10, 2)}>Mock Pagination</button>
-));
+jest.mock("@/components/ui/pagination/Pagination.component", () => (props: any) => <button onClick={() => props.handlePagination(10, 2)}>Mock Pagination</button>);
 
-jest.mock("@/components/popup/popUp.component", () => (props: any) =>
-  props.show ? (
-    <div>
-      <p>Delete Permission</p>
-      <button onClick={props.handleClick}>Confirm Delete</button>
-      <button onClick={props.onHide}>Cancel Delete</button>
-    </div>
-  ) : null
+jest.mock(
+  "@/components/popup/popUp.component",
+  () => (props: any) =>
+    props.show ? (
+      <div>
+        <p>Delete Permission</p>
+        <button onClick={props.handleClick}>Confirm Delete</button>
+        <button onClick={props.onHide}>Cancel Delete</button>
+      </div>
+    ) : null,
 );
 const mockDispatch = jest.fn();
 const mockPush = jest.fn();
@@ -43,14 +44,14 @@ const mockState = {
 function setupSelectors(stateOverride = {}) {
   const state = { ...mockState, ...stateOverride };
 
-  (useSelector as jest.Mock).mockImplementation((selector) =>
+  (useSelector as jest.Mock).mockImplementation(selector =>
     selector({
       userAuthorization: {
         permissions: state.permissions,
         loading: state.loading,
         permissionsPagination: state.pagination,
       },
-    })
+    }),
   );
 }
 
@@ -65,9 +66,7 @@ describe("Permissions", () => {
     setupSelectors();
     render(<Permissions />);
 
-    expect(mockDispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "FETCH" })
-    );
+    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: "FETCH" }));
   });
 
   it("shows empty state", () => {
@@ -76,7 +75,6 @@ describe("Permissions", () => {
 
     expect(screen.getByText("No permissions found")).toBeInTheDocument();
   });
-
 
   it("validates empty inputs", () => {
     setupSelectors();
@@ -90,26 +88,23 @@ describe("Permissions", () => {
   });
 
   it("dispatches createPermission on valid submit", () => {
-  setupSelectors();
-  render(<Permissions />);
-  const projectSelect = screen.getAllByRole("combobox")[0];
-  fireEvent.change(projectSelect, {
-    target: { value: "agent" },
-  });
-  fireEvent.change(screen.getByPlaceholderText("Enter Module"), {
-    target: { value: "status" },
-  });
+    setupSelectors();
+    render(<Permissions />);
+    const projectSelect = screen.getAllByRole("combobox")[0];
+    fireEvent.change(projectSelect, {
+      target: { value: "agent" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Enter Module"), {
+      target: { value: "status" },
+    });
 
-  fireEvent.change(screen.getByPlaceholderText("Enter Permission"), {
-    target: { value: "read" },
+    fireEvent.change(screen.getByPlaceholderText("Enter Permission"), {
+      target: { value: "read" },
+    });
+    fireEvent.click(screen.getByText("Add"));
+
+    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: "CREATE" }));
   });
-  fireEvent.click(screen.getByText("Add"));
-
-  expect(mockDispatch).toHaveBeenCalledWith(
-    expect.objectContaining({ type: "CREATE" })
-  );
-});
-
 
   it("opens delete modal and confirms delete", () => {
     setupSelectors({
@@ -133,9 +128,7 @@ describe("Permissions", () => {
 
     fireEvent.click(screen.getByText("Confirm Delete"));
 
-    expect(mockDispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "DELETE", payload: "1" })
-    );
+    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: "DELETE", payload: "1" }));
   });
 
   it("pagination dispatches fetchPermissions", () => {
@@ -147,9 +140,7 @@ describe("Permissions", () => {
 
     fireEvent.click(screen.getByText("Mock Pagination"));
 
-    expect(mockDispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "FETCH" })
-    );
+    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: "FETCH" }));
   });
 
   it("back button navigates", () => {

@@ -4,6 +4,7 @@ import { createLogger } from "redux-logger";
 import initializeStore from "../../redux/initializeStore";
 import rootReducer from "../../redux/reducers";
 import sagas from "../../redux/sagas";
+
 jest.mock("redux", () => {
   const actualRedux = jest.requireActual("redux");
   return {
@@ -49,17 +50,13 @@ describe("initializeStore", () => {
 
   it("should create store with saga and logger middleware in development", () => {
     process.env.NODE_ENV = "development";
-    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = jest.fn((f) => f);
+    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = jest.fn(f => f);
 
     initializeStore();
 
     expect(createLogger).toHaveBeenCalled();
     expect(runMock).toHaveBeenCalledWith(sagas);
-    expect(reduxCreateStore).toHaveBeenCalledWith(
-      expect.anything(),
-      { app: { testKey: "testValue" } },
-      expect.anything()
-    );
+    expect(reduxCreateStore).toHaveBeenCalledWith(expect.anything(), { app: { testKey: "testValue" } }, expect.anything());
   });
 
   it("should create store without logger middleware in production", () => {
@@ -70,11 +67,7 @@ describe("initializeStore", () => {
 
     expect(createLogger).not.toHaveBeenCalled();
     expect(runMock).toHaveBeenCalledWith(sagas);
-    expect(reduxCreateStore).toHaveBeenCalledWith(
-      expect.anything(),
-      { app: { testKey: "testValue" } },
-      expect.anything()
-    );
+    expect(reduxCreateStore).toHaveBeenCalledWith(expect.anything(), { app: { testKey: "testValue" } }, expect.anything());
   });
 
   it("should use default compose if Redux DevTools is not available", () => {
@@ -84,13 +77,6 @@ describe("initializeStore", () => {
     initializeStore();
 
     expect(runMock).toHaveBeenCalledWith(sagas);
-    expect(reduxCreateStore).toHaveBeenCalledWith(
-      expect.anything(),
-      { app: { testKey: "testValue" } },
-      expect.anything()
-    );
+    expect(reduxCreateStore).toHaveBeenCalledWith(expect.anything(), { app: { testKey: "testValue" } }, expect.anything());
   });
 });
-
-
-

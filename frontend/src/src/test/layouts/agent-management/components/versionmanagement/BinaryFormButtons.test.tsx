@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import BinaryFormButtons from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinaryFormButtons";
+import BinaryFormButtons from "../../../../../layouts/agent-management/components/versionmanagement/BinaryFormButtons";
 import "@testing-library/jest-dom";
 
 describe("BinaryFormButtons", () => {
@@ -17,19 +17,13 @@ describe("BinaryFormButtons", () => {
   });
 
   it("renders Update when isEditing is true", () => {
-    render(<BinaryFormButtons onCancel={onCancel} isEditing={true} />);
+    render(<BinaryFormButtons onCancel={onCancel} isEditing />);
 
     expect(screen.getByText("Update")).toBeInTheDocument();
   });
 
   it("renders Close button in view mode and hides submit button", () => {
-    render(
-      <BinaryFormButtons 
-        onCancel={onCancel} 
-        isEditing={false} 
-        isViewMode={true} 
-      />
-    );
+    render(<BinaryFormButtons onCancel={onCancel} isEditing={false} isViewMode />);
 
     expect(screen.getByText("Close")).toBeInTheDocument();
     expect(screen.queryByText("Add")).not.toBeInTheDocument();
@@ -44,37 +38,19 @@ describe("BinaryFormButtons", () => {
   });
 
   it("shows Adding... when submitting and not editing", () => {
-    render(
-      <BinaryFormButtons 
-        onCancel={onCancel} 
-        isEditing={false} 
-        isSubmitting={true} 
-      />
-    );
+    render(<BinaryFormButtons onCancel={onCancel} isEditing={false} isSubmitting />);
 
     expect(screen.getByText("Adding...")).toBeInTheDocument();
   });
 
   it("shows Updating... when submitting and editing", () => {
-    render(
-      <BinaryFormButtons 
-        onCancel={onCancel} 
-        isEditing={true} 
-        isSubmitting={true} 
-      />
-    );
+    render(<BinaryFormButtons onCancel={onCancel} isEditing isSubmitting />);
 
     expect(screen.getByText("Updating...")).toBeInTheDocument();
   });
 
   it("disables both buttons when submitting", () => {
-    render(
-      <BinaryFormButtons 
-        onCancel={onCancel} 
-        isEditing={false} 
-        isSubmitting={true} 
-      />
-    );
+    render(<BinaryFormButtons onCancel={onCancel} isEditing={false} isSubmitting />);
 
     const buttons = screen.getAllByRole("button");
     buttons.forEach(btn => {
@@ -83,26 +59,14 @@ describe("BinaryFormButtons", () => {
   });
 
   it("disables submit when editing and hasChanges is false", () => {
-    render(
-      <BinaryFormButtons 
-        onCancel={onCancel} 
-        isEditing={true} 
-        hasChanges={false} 
-      />
-    );
+    render(<BinaryFormButtons onCancel={onCancel} isEditing hasChanges={false} />);
 
     const submitBtn = screen.getByText("Update").closest("button");
     expect(submitBtn).toBeDisabled();
   });
 
   it("shows loader when submitting", () => {
-    render(
-      <BinaryFormButtons 
-        onCancel={onCancel} 
-        isEditing={false} 
-        isSubmitting={true} 
-      />
-    );
+    render(<BinaryFormButtons onCancel={onCancel} isEditing={false} isSubmitting />);
     expect(screen.getByRole("progressbar")).toBeInTheDocument();
   });
 });

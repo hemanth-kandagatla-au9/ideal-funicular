@@ -46,24 +46,12 @@ describe("BinaryDatePickerField", () => {
   });
 
   it("shows error text when touched=true and error exists", () => {
-    render(
-      <BinaryDatePickerField
-        {...baseProps}
-        error="Date is required"
-        touched={true}
-      />
-    );
+    render(<BinaryDatePickerField {...baseProps} error="Date is required" touched />);
     expect(screen.getByText("Date is required")).toBeInTheDocument();
   });
 
   it("does not show error when not touched", () => {
-    render(
-      <BinaryDatePickerField
-        {...baseProps}
-        error="Date is required"
-        touched={false}
-      />
-    );
+    render(<BinaryDatePickerField {...baseProps} error="Date is required" touched={false} />);
     expect(screen.queryByText("Date is required")).not.toBeInTheDocument();
   });
 });
