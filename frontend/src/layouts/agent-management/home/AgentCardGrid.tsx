@@ -202,4 +202,3 @@ const AgentCardGrid = ({ agentMetricsTilesData, onSelectStatus, currentStatus = 
 };
 
 export default AgentCardGrid;
-

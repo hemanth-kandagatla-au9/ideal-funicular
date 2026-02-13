@@ -152,4 +152,3 @@ describe("AddUserModal", () => {
     expect(screen.getByText("Cancel")).toBeDisabled();
   });
 });
-

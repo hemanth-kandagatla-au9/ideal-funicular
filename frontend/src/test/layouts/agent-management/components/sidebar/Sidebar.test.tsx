@@ -4,7 +4,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import "@testing-library/jest-dom";
-import SideBar from "../../../../../layouts/agent-management/components/sidebar/SideBar";
+import SideBar from "../../../../../../src/layouts/agent-management/components/sidebar/SideBar";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual("react-redux"),
@@ -125,4 +125,3 @@ describe("SideBar", () => {
     });
   });
 });
-

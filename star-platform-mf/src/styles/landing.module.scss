@@ -1,0 +1,93 @@
+.landingContainer {
+  height: 99vh;
+  display: flex;
+  flex-direction: column;
+  width: 99vw;
+  padding: 25px;
+}
+
+.topSection {
+  // height: 40vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.header {
+  display: flex;
+  flex-direction: "column";
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.projectContainer {
+  font-size: 25px;
+  width: 250px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.projectName {
+  font-family: "Kumbh Sans";
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 22px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: rgba(104, 31, 157, 1);
+}
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userName {
+  font-size: 16px;
+}
+
+.profilePic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.card {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  img {
+    width: 274px;
+    height: 300px;
+  }
+
+  &:hover {
+    transform: scale(1.08);
+  }
+}
+
+.welcomeText {
+  text-align: center;
+  display: flex;
+  width: 848px;
+  align-self: center;
+  color: #6e55c2;
+  font-family: "Kumbh Sans";
+  font-size: 46px;
+  font-weight: 600;
+}

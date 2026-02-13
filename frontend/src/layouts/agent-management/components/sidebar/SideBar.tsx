@@ -26,6 +26,7 @@ import AgentDetails from "./AgentDetails";
 import AgentConfiguration from "./AgentConfiguration";
 import AgentLogs from "./AgentLogs";
 import SchedulerDialog from "../SchedulerDialog";
+import EnvUpgradeDialog from "../EnvUpgradeDialog";
 import agentManagementAction from "../../../../redux/actions/agentManagement.action";
 import { canAccess } from "../../../../utils/PermissionUtils";
 import agentManagementService from "../../../../services/agent/agentManagement.service";
@@ -66,6 +67,8 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
     isLogsLoading: false,
     loadMore: true,
     port: "",
+    openEnvUpgrade: false,
+    selectedEnvUpgradeAgents: [],
   });
 
   const globalConfigs: GlobalConfigs = useSelector(getAgentGlobalConfig) as GlobalConfigs;
@@ -240,6 +243,50 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
     dispatch(agentManagementAction.restartAgentService({ hostname, port }));
   };
 
+  const openEnvUpgradeModal = () => {
+    if (isEmpty(agentSelected)) return;
+    setState(prev => ({
+      ...prev,
+      openEnvUpgrade: true,
+      selectedEnvUpgradeAgents: [{ hostname, agent_details: get(agentSelected, "agent_details", {}) }],
+    }));
+  };
+
+  const closeEnvUpgradeModal = () => {
+    setState(prev => ({ ...prev, openEnvUpgrade: false, selectedEnvUpgradeAgents: [] }));
+  };
+
+  const triggerEnvUpgrade = (env: string) => {
+    if (isEmpty(env)) {
+      errortoast("Please select the target environment");
+      return;
+    }
+    const data = state.selectedEnvUpgradeAgents
+      .map(({ hostname, agent_details }: any) => ({ hostname, port: String(get(agent_details, "server_port", "")) }))
+      .filter(({ port }: any) => port);
+    if (isEmpty(data)) {
+      errortoast("Please select the Agent Server");
+      return;
+    }
+    dispatch(agentManagementAction.envUpgradeSelectedAgents({ data, env, mode: "single" }));
+    closeEnvUpgradeModal();
+  };
+
+  const syncAgentConfig = () => {
+    if (isEmpty(agentSelected)) {
+      errortoast("Please select the Agent Server");
+      return;
+    }
+
+    const portVal = String(get(agentSelected, "agent_details.server_port", ""));
+    if (!portVal) {
+      errortoast("Agent port not available");
+      return;
+    }
+
+    dispatch(agentManagementAction.syncAgentConfig({ hostname, port: portVal }));
+  };
+
   const startAgentviaSSH = (hostname: string, port: string, osVersion: string) => {
     dispatch(agentManagementAction.startSSHAgentService({ hostname, port, osVersion }));
   };
@@ -407,6 +454,8 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
                   startAgentviaSSH={startAgentviaSSH}
                   shutDownAgent={shutDownAgent}
                   restartAgent={restartAgent}
+                  openEnvUpgradeModal={openEnvUpgradeModal}
+                  syncAgentConfig={syncAgentConfig}
                   checkAgentStatus={checkAgentStatus}
                   editSchedulerCommands={editSchedulerCommands}
                   deleteSchedulerJob={deleteSchedulerJob}
@@ -485,6 +534,13 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
         commandJob={state.commandJob}
         onHide={handleSchedulerClose}
         resetSchedule={state.resetScheduleCommands}
+      />
+
+      <EnvUpgradeDialog
+        showEnvUpgrade={state.openEnvUpgrade}
+        closeEnvUpgrade={closeEnvUpgradeModal}
+        envUpgradeData={state.selectedEnvUpgradeAgents as any}
+        onConfirm={triggerEnvUpgrade}
       />
     </div>
   );

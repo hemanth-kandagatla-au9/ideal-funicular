@@ -112,4 +112,3 @@ describe("Pagination Component", () => {
     expect(baseProps.handlePagination).toHaveBeenCalledWith(10, 5);
   });
 });
-

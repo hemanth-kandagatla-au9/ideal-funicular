@@ -1,0 +1,776 @@
+.iabot_jobsList_columnName_header_container {
+  display: contents;
+  /* border-bottom: 1px solid var(--Border-border-02, #000000) */
+  background: #f6f9ff;
+}
+
+.iabot_jobsList_columnName_header_container > div,
+.jobs-card > div {
+  padding-top: 4px;
+  padding-bottom: px;
+  width: 25%;
+}
+
+.iabot_jobsList_cardsTable_container {
+  padding: 0% 1%;
+  /* width: 88vw !important; */
+  /* max-width: 88vw !important; */
+  overflow-x: auto;
+}
+
+.iabot_jobsCountTasklist {
+  font-family: "Manrope";
+  font-weight: 500;
+  font-size: 18px;
+  /* line-height: 4px; */
+  color: #404040;
+  padding: 1px 14px;
+  font-family: "Manrope";
+}
+
+.iabot_jobsList_columnName_header_container {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #404040;
+  background: #fff;
+  padding-left: 24px;
+  padding-right: 24px;
+  font-weight: bolder;
+}
+
+.iabot_jobs_category_column {
+  width: 40% !important;
+  text-align: center;
+}
+
+.iabot_jobsList_columnName_datesCol {
+  width: 37% !important;
+}
+
+.iabot_tags_hosts_column {
+  width: 28% !important;
+}
+
+.iabot_jobsList_target_column {
+  width: 35% !important;
+}
+
+.iabot_jobsList_action_column {
+  width: 15% !important;
+}
+
+.jobs-card {
+  width: 100%;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border-bottom: 1px solid #d8d8d8;
+  background: #fff;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-family: Manrope, Arial, Verdana, Tahoma, sans-serif;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  /* box-shadow 0.3s ease;  */
+}
+
+.jobs-card-inactive {
+  opacity: 0.5;
+}
+
+.jobs-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.jobs_title_column {
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40% !important;
+  color: black;
+}
+
+.iabot_jobs_description_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35% !important;
+  overflow: auto;
+}
+
+.planner_date {
+  color: black;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0px;
+}
+
+.iabot_jobs_description_column > p {
+  width: fit-content;
+  border: 1px solid red;
+}
+
+.planner_date > span {
+  width: 150px;
+}
+
+.planner_start-date {
+  margin-bottom: 5px;
+}
+
+.iabot_jobs_card_cols {
+  width: 30% !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+.iabot_jobs_tags_targets_heading {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 5px;
+}
+
+.iabot_jobs_tags_targets_heading > section {
+  width: fit-content;
+}
+
+.iabot_jobCards_actions-column {
+  width: 25% !important;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .iabot-tagsData {
+  background-color: #F9F5FF;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  min-width: fit-content;
+  max-width: 100%;
+  white-space: nowrap;
+  padding: 4px 10px;
+  margin-top: 10px;
+  gap: 6px;
+  color: #6941C6;
+} */
+
+.iabot-tag {
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  /* Ensures tag width fits content */
+  display: flex;
+  align-items: center;
+  height: 24px;
+  /* Ensures uniform height */
+}
+
+.more-tags {
+  margin-top: 15px;
+  background: #bbb;
+  color: black;
+  height: 24px;
+  /* Same height as other tags */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Centers text inside */
+  padding: 4px 8px;
+}
+
+.iabot_jobCards_actions-column > button {
+  background-color: transparent;
+  border: none;
+  /* border-radius: 50%; */
+  padding: 5px;
+}
+
+.iabot_jobCards_actions-column > button,
+#tEdit,
+#tDelete,
+#tDuplicate {
+  font-size: 16px;
+}
+
+.iabot_jobCards_actions-column > button:hover {
+  color: #2b87e3;
+}
+
+@media screen and (max-width: 1210px) {
+  .jobs_title_column {
+    width: 40% !important;
+  }
+
+  .iabot_jobs_tags_targets_heading {
+    font-size: 13px;
+  }
+}
+
+.jobs-tags {
+  background-color: #70634f1a;
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  /* padding: 8px 16px 8px 16px; */
+}
+
+.jobs_category_type {
+  font-family: Manrope;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16.8px;
+  letter-spacing: 0%;
+}
+
+.jobs_title {
+  font-family: Manrope;
+  font-size: 22px;
+  color: #404040;
+  font-weight: 500;
+}
+
+.job-description {
+  font-family: Manrope;
+  font-weight: 400;
+  font-size: 14px;
+  color: #404040;
+  text-align: center;
+  padding: 5px;
+}
+
+.iabot_tagCards_jobCol {
+  width: "100%";
+  overflow: auto;
+}
+
+.iabot_tagCards_tag_column {
+  width: 25%;
+}
+
+.iabot_tagCards_jobs_column {
+  width: 80% !important;
+  text-align: center;
+  margin-left: 96px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+.iabot_tagCards_jobs {
+  font-family: "Manrope";
+  font-weight: 400;
+  font-size: 13px;
+  color: #6941c6;
+  text-align: center;
+  margin: 3px;
+}
+
+.modal-overlay {
+  /* position: fixed !important; */
+  top: 0 !important;
+  left: 0 !important;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent !important;
+  /* z-index: 1000; */
+}
+
+.modal-container {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+  width: 90%;
+  height: 90vh;
+  background-color: #ffffff !important;
+  /* overflow: auto;  */
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: hidden !important;
+}
+
+.modal-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid #ddd !important;
+  width: 100% !important;
+  background: #ffffff;
+  /* margin-top: 40px; */
+}
+
+.modal-content {
+  background: #ffffff;
+  /* padding: 10px; */
+  border-radius: 10px;
+  width: 100%;
+}
+
+.modal-title {
+  font-weight: 600 !important;
+  color: #000000 !important;
+  font-size: 20px !important;
+  font-family: "Manrope" !important;
+  text-transform: capitalize !important;
+}
+
+.modal-close {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #777;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px !important;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.status_cards_container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+  width: 55%;
+  gap: 5px;
+}
+
+.search_filter_container {
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
+}
+.custom_filter_container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: -10px;
+}
+.custom_filter_icon_container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+.search-bar {
+  /* width: 250px; */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.view_logs_btn {
+  background-color: #bbdaf9;
+  /* Green */
+  border: 1px solid;
+  color: #2b87e3;
+  /* padding: 15px 32px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  font-weight: 600 !important;
+  cursor: pointer;
+  font-family: "Manrope" !important;
+  border-radius: 16px !important;
+  width: 120px !important;
+}
+
+.full-width {
+  grid-column: span 2 !important;
+}
+
+.tag-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 6px;
+  margin-right: 3px;
+}
+
+.iabot-tagsData {
+  padding: 10px;
+  border-radius: 16px;
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.tooltip-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.more-tags {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  padding: 4px 6px;
+}
+
+.job-run-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 12px;
+  border-radius: 50%;
+  background-color: #f4f6ff;
+  cursor: pointer;
+}
+
+.job-run-icon svg {
+  color: #2961f4;
+  /* Icon color */
+  font-size: 20px;
+  /* Adjust icon size */
+}
+
+.jobs-modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 75%;
+  max-height: 90vh;
+  background-color: #ffffff !important;
+  overflow: auto;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: hidden !important;
+}
+
+.jobs-modal-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid #ddd !important;
+  width: 100% !important;
+  background: #ffffff !important;
+  top: 0;
+  z-index: 10;
+  margin-top: 10px;
+}
+
+.jobs-modal-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.jobs-modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 100%;
+  /* max-width: 750px; */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  height: 75%;
+}
+
+.job-details {
+  font-family: "Manrope" !important;
+  font-size: 16px !important;
+  color: #000000;
+  font-weight: 600;
+}
+
+.server-grid-headers {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+.server-grid-cols {
+  font-family: "Manrope" !important;
+  font-size: 13px !important;
+  color: #334155 !important;
+  font-weight: 500 !important;
+}
+
+.left-panel-title {
+  font-weight: 600 !important;
+  color: #2961f4;
+  font-size: 14px !important;
+  font-family: "Manrope" !important;
+  text-transform: capitalize !important;
+}
+
+.recent-logs-list-item {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+.logs-sub-title {
+  font-weight: 600 !important;
+  color: #000000 !important;
+  font-size: 16px !important;
+  font-family: "Manrope" !important;
+  text-transform: capitalize !important;
+}
+
+.job_section_details {
+  display: "inline-block";
+  font-family: "Manrope" !important;
+  font-size: 12px !important;
+  color: #334155;
+  font-weight: 600 !important;
+  white-space: nowrap;
+  overflow: "hidden";
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+.grid-columns {
+  font-family: "Manrope";
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.filter_container {
+  background-color: #f9f5ff;
+  border-radius: 50%;
+  margin-left: 7px;
+  color: #2961f4;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 38px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Manrope";
+  margin-right: 10px;
+  /* margin-top: 20px; */
+}
+
+.data-grid-wrapper {
+  height: 100%;
+  overflow: hidden;
+  border-radius: 16px !important;
+}
+
+.data-grid-wrapper .MuiDataGrid-columnHeaders {
+  background-color: #f6f9ff !important;
+  color: #667085 !important;
+  text-transform: capitalize !important;
+  font-size: 14px !important;
+  font-family: "Manrope" !important;
+  font-weight: 600 !important;
+}
+
+.data-grid-wrapper .MuiDataGrid-columnHeaderTitle {
+  font-weight: 600 !important;
+  text-transform: full-width !important;
+  font-size: 14px !important;
+  font-family: "Manrope" !important;
+}
+
+.custom-header {
+  background-color: #f6f9ff !important;
+  color: #667085 !important;
+}
+
+.custom-column {
+  font-size: 13px !important;
+  font-family: "Manrope" !important;
+  font-weight: 500;
+  color: #000000;
+}
+
+.custom-column-command-output {
+  font-size: 13px !important;
+  font-family: "Manrope" !important;
+  font-weight: 500;
+  color: #000000;
+  cursor: pointer;
+}
+
+.selected-schedules-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: #ffffff;
+  /* border: 1px solid #e1e5e9; */
+  border-radius: 8px;
+}
+
+.selected-label {
+  font-family: "Manrope";
+  font-size: 15px;
+  font-weight: 700;
+  color: #344054;
+  white-space: nowrap;
+  margin-left: 16px;
+}
+
+.schedules-tiles-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+}
+
+.schedule-tile {
+  background: #f0f4ff;
+  /* border: 1px solid #d6e0ff; */
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: "Manrope";
+  font-size: 12px;
+  font-weight: 600;
+  color: #2961f4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  transition: all 0.2s ease;
+}
+
+.schedule-tile:hover {
+  background: #e6edff;
+  border-color: #2961f4;
+  box-shadow: 0 1px 3px rgba(41, 97, 244, 0.2);
+}
+
+.no-selection-message {
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  color: #667085;
+  font-style: italic;
+  padding: 4px 0;
+}
+
+.date-container {
+  color: #344054;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.date-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #667085;
+  font-family: "Manrope", sans-serif;
+}
+
+.date-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #344054;
+  font-family: "Inter", sans-serif;
+  margin-left: 8px;
+}
+
+.job-display-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.job-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2961f4;
+  text-transform: none;
+}
+
+.copy-icon-btn {
+  color: #6b7280;
+  padding: 4px;
+}
+
+.copy-icon-btn:hover {
+  color: #1f2937;
+  background-color: #f3f4f6;
+}
+
+.viewLogs_sidebar_container {
+  position: relative;
+  border-right: 1px solid #e2e8f0;
+  background-color: #fff;
+  transition: width 0.3s ease;
+}
+
+.viewLogs_sidebar_toggle {
+  position: absolute;
+  top: 25px;
+  right: -15px;
+  transform: translateY(-50%);
+  background-color: #f4f6ff;
+  color: #2961f4;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  /* opacity: 0; */
+  /* visibility: hidden; */
+}

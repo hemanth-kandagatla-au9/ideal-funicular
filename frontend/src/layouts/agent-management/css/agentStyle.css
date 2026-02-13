@@ -1,9 +1,7 @@
 body {
-  
   background: #ffffff !important;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-  border: 1px solid #dbdada;
 }
 
 .overallContainer {
@@ -407,7 +405,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 12px;
+  gap: 35px;
 }
 
 .agentContainer {
@@ -444,7 +442,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 12px;
+  gap: 35px;
   font-family: "Johnson Text";
 }
 
@@ -509,6 +507,111 @@ body {
 .agentActions {
   display: flex;
   gap: 16px;
+}
+
+.accordionToggleBtn {
+  margin-left: auto;
+}
+
+.hostnameAccordionChevron {
+  width: 14px;
+  height: 14px;
+  transform: rotate(-90deg);
+  transition: transform 150ms ease-in-out;
+}
+
+.hostnameAccordionChevron.expanded {
+  transform: rotate(0deg);
+}
+
+.agentAccordionPanel {
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 4px 4px 0px #0000000d;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: -6px 8px 10px 8px;
+}
+
+.agentAccordionPanelInner {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.agentAccordionSection {
+  background: #f7f7fa;
+  border: 1px solid #eeeeee;
+  border-radius: 12px;
+  padding: 10px 12px;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.agentAccordionSectionTitle {
+  font-family: "Johnson Text";
+  color: #102459;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.agentAccordionGrid {
+  display: grid;
+  gap: 6px;
+}
+
+.agentAccordionRow {
+  display: grid;
+  grid-template-columns: minmax(110px, 42%) minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.agentAccordionLabel {
+  font-family: "Johnson Text";
+  color: #7b7b7b;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agentAccordionValue {
+  font-family: "Johnson Text";
+  color: #102459;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 0;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.agentAccordionEmpty {
+  font-family: "Johnson Text";
+  color: #7b7b7b;
+  font-size: 12px;
+}
+
+.agentAccordionMore {
+  font-family: "Johnson Text";
+  color: #2b87e3;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  padding-top: 4px;
+}
+
+.agentAccordionInlineMore {
+  color: #2b87e3;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 6px;
+  white-space: nowrap;
 }
 
 .btnFocusActive {
@@ -2261,6 +2364,23 @@ p.pageRwSelection {
   border: none !important;
 }
 
+/* Env upgrade pill overrides remove the default grey fill */
+.envUpgradeOptionBtn {
+  background: #ffffff !important;
+  border: 1px solid #dfe3eb !important;
+  box-shadow: 0px 2px 6px rgba(16, 36, 89, 0.08) !important;
+  margin-left: 0 !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  padding: 4px 10px !important;
+}
+
+.envUpgradeOptionBtn.versionActiveBtn {
+  background: #2961f4 !important;
+  border-color: #2961f4 !important;
+  color: #ffffff !important;
+}
+
 .buildDateLabel {
   color: #39465f;
   font-family: "Johnson Text";
@@ -2583,8 +2703,9 @@ input[type="number"] {
 }
 
 .agentVersionsCover {
-  height: 220px;
-  overflow-y: scroll;
+  max-height: 220px;
+  height: auto;
+  overflow-y: auto;
 }
 
 .agentCover {

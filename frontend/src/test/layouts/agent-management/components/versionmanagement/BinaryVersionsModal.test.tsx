@@ -91,4 +91,3 @@ describe("BinaryVersionsModal", () => {
     expect(screen.getByText("Submit")).toBeDisabled();
   });
 });
-

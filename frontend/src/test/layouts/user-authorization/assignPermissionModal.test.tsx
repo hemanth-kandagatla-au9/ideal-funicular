@@ -177,4 +177,3 @@ describe("AssignPermissionsModal", () => {
     expect(container.firstChild).toBeNull();
   });
 });
-

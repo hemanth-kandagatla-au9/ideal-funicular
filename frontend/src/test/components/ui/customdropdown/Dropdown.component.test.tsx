@@ -143,4 +143,3 @@ describe("DropdownComponent", () => {
     expect(screen.queryByTestId("option-10")).not.toBeInTheDocument();
   });
 });
-

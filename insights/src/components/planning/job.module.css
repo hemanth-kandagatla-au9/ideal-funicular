@@ -1,0 +1,79 @@
+.schedulerContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .formRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  
+  .inputContainer {
+    flex: 1;
+  }
+  
+  .frequencyContainer {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  
+  .timeContainer {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .timeSeparator {
+    margin-top: 22px;
+  }
+  
+  .weekButtonsContainer {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 8px 0;
+  }
+  
+  .weekButton {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .weekButtonActive {
+    background-color: #104f8e;
+    color: white;
+  }
+  
+  .minuteSelect,
+  .hourSelect,
+  .frequencySelect {
+    flex: 1;
+    min-width: 150px;
+  }
+  
+  .custom_input_date {
+    min-width: 300px;
+    width:100%;
+    border-radius:30px;
+    padding: 0.65rem;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+  .custom_input_date {
+    min-width: 300px;
+    width: 100%;
+    border-radius: 30px;
+    padding: 0.65rem;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+  

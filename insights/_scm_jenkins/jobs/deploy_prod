@@ -1,0 +1,16 @@
+// folder('production')
+pipelineJob('insights-mf/deploy-prod') {
+    definition {
+        cpsScm {
+          scm {
+            git {
+                branch('master')
+                remote {
+                    url('https://sourcecode.jnj.com/scm/asx-jjcx/insights-mf.git')
+                    credentials('sourcecode-bitbucket')
+                }
+            }
+          }
+        }
+    }
+}

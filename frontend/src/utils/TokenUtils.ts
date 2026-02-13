@@ -1,3 +1,4 @@
+
 import { cookies } from "./utils";
 
 interface UserInfo {
@@ -13,11 +14,13 @@ interface TokenPayload {
   [key: string]: unknown;
 }
 
+
 export const updateLocalTokens = (accessToken: string, refreshToken: string): void => {
   const domain = window.location.hostname.includes("localhost") ? "localhost" : ".rise.apps.jnj.com";
   cookies.set("token", accessToken, { path: "/", domain });
   cookies.set("refreshToken", refreshToken, { path: "/", domain });
 };
+
 
 export const setLocalAccessToken = (accessToken: string): void => {
   const domain = window.location.hostname.includes("localhost") ? "localhost" : ".rise.apps.jnj.com";
@@ -26,6 +29,7 @@ export const setLocalAccessToken = (accessToken: string): void => {
 
 export const getLocalRefreshToken = (): string | undefined => cookies.get("refreshToken");
 export const getLocalAccessToken = (): string | undefined => cookies.get("token");
+
 
 export const setLocalUser = async (userInfo: UserInfo): Promise<true | false> => {
   if (userInfo) {
@@ -38,6 +42,7 @@ export const setLocalUser = async (userInfo: UserInfo): Promise<true | false> =>
   return false;
 };
 
+
 export const setLocalPermissions = async (permissions: Record<string, unknown>): Promise<true | false> => {
   if (permissions) {
     const baseEncodedPermission = btoa(JSON.stringify(permissions));
@@ -46,6 +51,7 @@ export const setLocalPermissions = async (permissions: Record<string, unknown>):
   }
   return false;
 };
+
 
 export const getUserInfo = (): UserInfo => {
   try {
@@ -59,6 +65,7 @@ export const getUserInfo = (): UserInfo => {
   return {};
 };
 
+
 export const getUserGroups = (): string[] => {
   const userInfo = getUserInfo();
   const groupInfo: string[] = [];
@@ -70,6 +77,7 @@ export const getUserGroups = (): string[] => {
   return groupInfo;
 };
 
+
 export const getLocalUserId = (): string | null => {
   try {
     const userCookieInfo = localStorage.getItem("user");
@@ -80,6 +88,7 @@ export const getLocalUserId = (): string | null => {
   }
 };
 
+
 export const isAdmin = (): boolean => {
   try {
     const userCookieInfo = localStorage.getItem("user");
@@ -89,6 +98,7 @@ export const isAdmin = (): boolean => {
     return false;
   }
 };
+
 
 export const isBreakGlassEnabled = (): boolean => {
   const token = getLocalAccessToken();
@@ -102,6 +112,7 @@ export const isBreakGlassEnabled = (): boolean => {
   }
   return false;
 };
+
 
 export const isTokenExpired = (token: string): boolean => {
   try {

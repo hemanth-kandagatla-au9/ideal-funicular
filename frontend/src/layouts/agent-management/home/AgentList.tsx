@@ -1,30 +1,37 @@
 import { Skeleton } from "@mui/material";
 import { clone, get, isEmpty, uniqBy } from "lodash";
+import { useEffect, useState } from "react";
 import { Button, Row } from "react-bootstrap";
 import { Dispatch } from "redux";
-import { Agent, AgentDetails } from "@/types/AgentList";
+import { Agent } from "@/types/AgentList";
+import HostnameAccordionDetails from "./HostnameAccordionDetails";
 import NoDataFoundImg from "../../../images/agent-management/NoDATA.png";
 import checkSquare from "../../../images/agent-management/assets/checkSquare.svg";
 import vieweye from "../../../images/agent-management/assets/eyeIcon.svg";
 import blueTick from "../../../images/agent-management/Squaretick.png";
 import selecttick from "../../../images/agent-management/assets/squareTick.svg";
+import downArrow from "../../../images/agent-management/assets/downArrow.svg";
 import Pagination from "../../../components/ui/pagination/Pagination.component";
 import agentManagementActions from "../../../redux/actions/agentManagement.action";
 import { emptyDataText, statusButtonText, viewText } from "../../../constants/strings";
 
 interface Pagination {
+  pageNo: number;
+  totalPage: number;
+  totalRows: number;
   limit: number;
-  page: number;
-  total: number;
+  // Allow extra pagination fields if caller provides them
+  [key: string]: any;
 }
 
 interface AgentListProps {
   loading: boolean;
   agents: Agent[];
   pagination: Pagination;
+  collapseToken?: string | number;
   setSelectedHostnameAgentsData: React.Dispatch<React.SetStateAction<Agent[]>>;
-  selectedHostnameAgentsData: { hostname: string; agent_details: AgentDetails }[];
-  handlePagination: (page: number) => void;
+  selectedHostnameAgentsData: Agent[];
+  handlePagination: (limit: number, pageNo: number) => void;
   handleSelectHostAgent: (hostname: string) => void;
   toggleSideBar: (hostname: string) => void;
   dispatch: Dispatch;
@@ -34,6 +41,7 @@ const AgentList = ({
   loading,
   agents,
   pagination,
+  collapseToken,
   setSelectedHostnameAgentsData,
   selectedHostnameAgentsData,
   handlePagination,
@@ -41,7 +49,21 @@ const AgentList = ({
   toggleSideBar,
   dispatch,
 }: AgentListProps) => {
-  const agentCardsLabel = ["Hostname", "PID", "OS", "Uptime", "Version", "Status", "Action"];
+  const agentCardsLabel = ["Hostname", "OS", "Uptime", "Version", "Status", "Action"];
+  const [expandedHostname, setExpandedHostname] = useState<string | null>(null);
+
+  // Close any open accordion when filters/status change or when a data refresh starts.
+  useEffect(() => {
+    setExpandedHostname(null);
+  }, [collapseToken]);
+
+  useEffect(() => {
+    if (loading) setExpandedHostname(null);
+  }, [loading]);
+
+  const toggleExpanded = (hostname: string) => {
+    setExpandedHostname(prev => (prev === hostname ? null : hostname));
+  };
 
   if (loading) {
     return (
@@ -66,9 +88,6 @@ const AgentList = ({
               </div>
               <div className="agentRowSecond ellipsis">
                 <Skeleton animation="wave" variant="text" width="120px" height={25} />
-              </div>
-              <div className="agentRow">
-                <Skeleton animation="wave" variant="text" width="60px" height={25} />
               </div>
               <div className="agentRow">
                 <Skeleton animation="wave" variant="text" width="45px" height={25} />
@@ -116,32 +135,31 @@ const AgentList = ({
       const filteredData = selectedHostnameAgentsData.filter(({ hostname }) => !allHostnames.includes(hostname));
       setSelectedHostnameAgentsData(filteredData);
     } else {
-      const clonedAgentsData = clone(selectedHostnameAgentsData);
-      const additionalData = agents.map(({ hostname, agent_details }) => ({
-        hostname,
-        agent_details,
-      }));
-      const combined = uniqBy([...clonedAgentsData, ...additionalData], "hostname");
+      
+      const combined = uniqBy([...clone(selectedHostnameAgentsData), ...agents], "hostname") as Agent[];
       setSelectedHostnameAgentsData(combined);
     }
   };
 
   return (
     <>
-      <div className="agentHeaderRow">
-        <div className="agentRowFirst">
-          <Button className="btnFocusActive" data-testid="agentTickBtn" variant="outline" onClick={toggleSelectOrDeselectAllAgents}>
-            <img height="18px" width="18px" src={areAllAgentsSelected() ? blueTick : selecttick} alt="Select All" />
-          </Button>
-        </div>
-        {agentCardsLabel.map((ele, index) => (
-          <div key={index} className={`${index === 0 ? "agentRowSecond" : "agentRow"}`}>
-            <span className="fieldLabel">{ele}</span>
+        <div className="agentHeaderRow">
+          <div className="agentRowFirst">
+            <Button className="btnFocusActive" data-testid="agentTickBtn" variant="outline" onClick={toggleSelectOrDeselectAllAgents}>
+              <img height="18px" width="18px" src={areAllAgentsSelected() ? blueTick : selecttick} alt="Select All" />
+            </Button>
           </div>
-        ))}
-      </div>
-      <div className="agentContainer">
-        {agents.map(({ hostname, os, agent_details, risebot, status, risebotProperties }) => (
+          {agentCardsLabel.map((ele, index) => (
+            <div key={index} className={`${index === 0 ? "agentRowSecond" : "agentRow"}`}>
+              <span className="fieldLabel">{ele}</span>
+            </div>
+          ))}
+        </div>
+       <div className="agentContainer">
+        {agents.map(agent => {
+          const { hostname, os, agent_details, status, risebotProperties } = agent;
+          const isExpanded = expandedHostname === hostname;
+          return (
           <div key={hostname}>
             {hostname != "" && (
               <div className="agentRowWrapper">
@@ -151,7 +169,7 @@ const AgentList = ({
                       <img
                         src={
                           !isEmpty(selectedHostnameAgentsData) &&
-                          hostname ===
+                            hostname ===
                             get(
                               selectedHostnameAgentsData.find(({ hostname: agentHost }) => hostname === agentHost),
                               "hostname",
@@ -167,9 +185,6 @@ const AgentList = ({
                   </div>
                   <div className="agentRowSecond ellipsis">
                     <span className="fieldValue fontWeightEven">{hostname}</span>
-                  </div>
-                  <div className="agentRow">
-                    <span className="fieldValue fontWeightOdd">{get(risebot, "pid", "N/A")}</span>
                   </div>
                   <div className="agentRow">
                     <span className="fieldValue fontWeightEven">{os}</span>
@@ -189,28 +204,47 @@ const AgentList = ({
                       className="btnFocusActive"
                       data-testid="agentHealthChecktBtn"
                       title={statusButtonText}
-                      onClick={() =>
-                        dispatch(
-                          agentManagementActions.fetchHealthCheckup({
-                            hostname,
-                            port: risebotProperties.server?.port,
-                          }),
-                        )
-                      }
+                      disabled={loading || risebotProperties?.server?.port === undefined || risebotProperties?.server?.port === null}
+                      onClick={() => {
+                        const port = risebotProperties?.server?.port;
+                        if (port === undefined || port === null) return;
+                        dispatch(agentManagementActions.fetchHealthCheckup({ hostname, port }));
+                      }}
                     >
                       <img src={checkSquare} alt="view" />
                     </Button>
                     {!isEmpty(agents) && (
-                      <Button title={viewText} data-testid="viewSidebar" variant="outline" disabled={loading} className="btnFocusActive" onClick={() => toggleSideBar(hostname)}>
+                      <Button  title={viewText} data-testid="viewSidebar" variant="outline" disabled={loading} className="btnFocusActive" onClick={() => toggleSideBar(hostname)}>
                         <img src={vieweye} alt="view" />
                       </Button>
                     )}
+
+                    <Button
+                      variant="outline"
+                      className="btnFocusActive accordionToggleBtn"
+                      data-testid="hostnameAccordionToggle"
+                      title={isExpanded ? "Collapse" : "Expand"}
+                      onClick={() => toggleExpanded(hostname)}
+                    >
+                      <img
+                        className={`hostnameAccordionChevron ${isExpanded ? "expanded" : ""}`}
+                        src={downArrow}
+                        alt={isExpanded ? "collapse" : "expand"}
+                      />
+                    </Button>
                   </div>
                 </div>
               </div>
             )}
+
+            {hostname !== "" && isExpanded && (
+              <div className="agentAccordionPanel">
+                <HostnameAccordionDetails agent={agent as any} />
+              </div>
+            )}
           </div>
-        ))}
+        );
+        })}
       </div>
       <Row>
         <Pagination handlePagination={handlePagination} pagination={pagination} />

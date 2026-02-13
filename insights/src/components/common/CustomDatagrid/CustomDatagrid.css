@@ -1,0 +1,219 @@
+.over-flow-none {
+  overflow: hidden !important;
+}
+
+.custom-cell {
+  border-bottom: 1px solid #e0e0e0;
+  /* border-right: 1px solid #e0e0e0; */
+  padding: 8px;
+  text-align: center;
+  font-family: "Manrope";
+  font-size: 12px;
+  color: #334155;
+  font-weight: 500;
+}
+
+.custom-col-cell {
+  border-bottom: 1px solid #d1d5db;
+  /* border-right: 1px solid #d1d5db; */
+  /* background-color: #f1f5f9; */
+  background-color: #f6f9ff;
+  padding: 8px;
+  text-align: center;
+  font-family: "Manrope";
+  color: #334155;
+}
+
+.icon-button-root {
+  margin-top: -2px;
+  margin-bottom: -2px;
+}
+
+.custom-data-grid-root
+  .custom-data-grid-columnHeader
+  .custom-data-grid-iconButtonContainer {
+  visibility: hidden;
+}
+
+.custom-grid-topContainer {
+  margin-top: 10px;
+}
+
+.custom-data-gridTable {
+  /* border: 1px solid #e5e7eb; */
+  border: none !important;
+  /* border-radius: 16px; */
+  overflow: hidden;
+  width: 100%;
+  font-family: "Manrope";
+}
+
+.MuiDataGrid-root {
+  border-radius: 16px;
+}
+
+.MuiDataGrid-main {
+  /* border-radius: 16px; */
+  position: relative;
+}
+
+.MuiDataGrid-virtualScroller {
+  overflow-x: hidden !important;
+}
+
+/* .MuiInputBase-input {
+    margin-top: 5px;
+    padding: 25px 25px 10px 5px !important;
+    font-family: "Manrope";
+  } */
+
+.MuiDataGrid-row:last-child .MuiDataGrid-cell {
+  border-bottom: 1px solid #d1d5db;
+}
+
+.MuiDataGrid-footerContainer {
+  display: none !important;
+}
+
+.custom-data-gridTable::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.custom-data-gridTable::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-data-gridTable::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.custom-data-gridTable::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.custom-set-table-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* margin: 20px; */
+  font-family: "Manrope";
+}
+
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: lightgray;
+  }
+}
+
+.MuiDataGrid-scrollbar {
+  height: 10px !important;
+  cursor: pointer;
+  position: inherit;
+}
+
+.row-success {
+  background-color: rgba(0, 128, 0, 0.1) !important;
+}
+
+.row-success:hover {
+  background-color: rgba(0, 128, 0, 0.2) !important;
+}
+
+.row-fail {
+  background-color: rgba(255, 0, 0, 0.1) !important;
+}
+
+.row-fail:hover {
+  background-color: rgba(255, 0, 0, 0.2) !important;
+}
+
+/* Add this to your CustomDatagrid.css file */
+.custom-data-gridTable .MuiDataGrid-columnHeaders {
+  display: flex;
+  width: 100%;
+}
+
+.custom-data-gridTable .MuiDataGrid-columnHeadersInner {
+  width: 100% !important;
+}
+
+.custom-data-gridTable .MuiDataGrid-columnHeaderTitleContainer {
+  padding-left: 5px;
+}
+
+/* Remove any fixed width settings that might be causing gaps */
+.custom-data-gridTable .MuiDataGrid-columnHeader {
+  min-width: 0 !important;
+}
+
+/* Ensure the first column (with the visibility icon) is compact */
+.custom-data-gridTable .MuiDataGrid-columnHeader:first-of-type {
+  max-width: 40px !important;
+  min-width: 40px !important;
+  width: 40px !important;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Make sure the grid content fills available width */
+.custom-grid-topContainer,
+.custom-set-table-container,
+.custom-data-gridTable {
+  width: 100% !important;
+}
+
+.accordion-column {
+  font-family: "Manrope" !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  color: #596372 !important;
+  cursor: default !important;
+}
+.accordion-label {
+  font-family: "Manrope" !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #334155 !important;
+  cursor: default !important;
+}
+
+.export-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #2961f4;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer !important;
+  font-family: "Manrope";
+  margin-bottom: 5px;
+  margin-right: 8px;
+}
+
+.tag {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 6px;
+}

@@ -19,6 +19,8 @@ import {
   jobLogTooltipText,
   loadingText,
   restartAgentButtonText,
+  envUpgradeButtonText,
+  syncAgentConfigButtonText,
   restartJobButtonText,
   scheduleJobButtonText,
   scheduleJobsButtonText,
@@ -44,6 +46,8 @@ interface AgentTasksProps {
   startAgentviaSSH: (hostname: string, port: string, osVersion: string) => void;
   shutDownAgent: (hostname: string, port: string) => void;
   restartAgent: (hostname: string, port: string) => void;
+  openEnvUpgradeModal: () => void;
+  syncAgentConfig: () => void;
   checkAgentStatus: (hostname: string, port: string) => void;
   editSchedulerCommands: (hostname: string, port: string, scheduledJob: string) => void;
   deleteSchedulerJob: (hostname: string, port: string, scheduledJob: string) => void;
@@ -85,6 +89,8 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
   startAgentviaSSH,
   shutDownAgent,
   restartAgent,
+  openEnvUpgradeModal,
+  syncAgentConfig,
   checkAgentStatus,
   editSchedulerCommands,
   deleteSchedulerJob,
@@ -106,6 +112,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
   const isAgentTaskRestartBtnEnabled = canAccess("Agent Task Button: Restart");
   const isAgentTaskUpgradeBtnEnabled = canAccess("Agent Task Button: Upgrade");
   const isAgentTaskCheckStatusBtnEnabled = canAccess("Agent Task Button: Check Status");
+  const isAgentTaskSyncConfigBtnEnabled = canAccess("Agent Task Button: Sync Agent Config");
   const isAgentTaskScheduleCmdBtnEnabled = canAccess("Agent Task Button: Schedule Command");
   const isAgentTaskEditBtnEnabled = canAccess("Agent Task Button: Edit");
   const isAgentTaskDeleteBtnEnabled = canAccess("Agent Task Button: Delete");
@@ -246,6 +253,28 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                 data-testid="restartAgentId"
               >
                 {restartAgentButtonText}
+              </Button>
+          )}
+          {isAgentTaskUpgradeBtnEnabled && (
+              <Button 
+                className={`agentTriggerBtn ${clickedButton === 'envUpgrade' ? 'button-clicked' : ''}`}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => handleButtonClick('envUpgrade', () => openEnvUpgradeModal())}
+                disabled={allButtonsDisabled}
+                data-testid="envUpgradeAgentBtn"
+              >
+                {envUpgradeButtonText}
+              </Button>
+          )}
+          {isAgentTaskSyncConfigBtnEnabled && (
+              <Button 
+                className={`agentTriggerBtn ${clickedButton === 'syncAgentConfig' ? 'button-clicked' : ''}`}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => handleButtonClick('syncAgentConfig', () => syncAgentConfig())}
+                disabled={allButtonsDisabled}
+                data-testid="syncAgentConfigId"
+              >
+                {syncAgentConfigButtonText}
               </Button>
           )}
         </>

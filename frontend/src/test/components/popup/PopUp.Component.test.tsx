@@ -152,4 +152,3 @@ describe("Modal test", () => {
     expect(okButton.className).toContain("btn-success");
   });
 });
-

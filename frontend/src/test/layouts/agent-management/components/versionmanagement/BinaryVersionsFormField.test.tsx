@@ -144,4 +144,3 @@ describe("BinaryVersionsFormField", () => {
     expect(screen.getByText("Add")).toBeDisabled();
   });
 });
-

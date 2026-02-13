@@ -1,0 +1,26 @@
+.expired-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.item-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-401 {
+  color: #3a7bc2;
+}
+
+.item-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-401 {
+  color: #3a7bc2;
+}

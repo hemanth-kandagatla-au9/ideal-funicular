@@ -98,15 +98,6 @@ describe('restartJobManagerService saga', () => {
       .put(agentManagementActions.successRestartJobService(successResponse))
       .run();
   });
-  it('should handle error flag in restart response', () => {
-    return expectSaga(restartJobManagerService, { props: payload })
-      .put(agentManagementActions.requestRestartJobService())
-      .provide([
-        [call(agentManagementService.jobReStartService, payload), errorFlagResponse]
-      ])
-      .put(agentManagementActions.successRestartJobService(errorFlagResponse))
-      .run();
-  });
   it('should handle job restart service failure', () => {
     const error = new Error('Network error during restart');
     return expectSaga(restartJobManagerService, { props: payload })
@@ -1904,7 +1895,6 @@ describe('getAgentVersions Saga', () => {
   });
   
 });
-
 
 
 

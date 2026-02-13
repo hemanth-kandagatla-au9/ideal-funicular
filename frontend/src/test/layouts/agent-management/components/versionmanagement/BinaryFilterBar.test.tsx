@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import BinaryFilterBar from "../../../../../layouts/agent-management/components/versionmanagement/BinaryFilterBar";
+import BinaryFilterBar from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinaryFilterBar";
 import "@testing-library/jest-dom";
 jest.mock("../../../../images/agent-management/assets/crossBlack.svg", () => "mock-image");
 jest.mock("../../../../../../src/layouts/agent-management/components/MultiSelectDropdown", () => (props: any) => {
@@ -142,4 +142,3 @@ describe("BinaryFilterBar", () => {
     expect(screen.getByText("Windows")).toBeInTheDocument();
   });
 });
-

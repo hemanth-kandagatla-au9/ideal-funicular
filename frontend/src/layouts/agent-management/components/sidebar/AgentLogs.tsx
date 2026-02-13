@@ -121,4 +121,3 @@ const AgentLogs: React.FC<AgentLogsProps> = ({ hostname, agentId, agentLog, isLo
 };
 
 export default AgentLogs;
-

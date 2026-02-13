@@ -1,3 +1,4 @@
+
 import { get } from "lodash";
 import { createSelector } from "reselect";
 
@@ -66,6 +67,7 @@ interface RootState {
 
 const agentSelector = (state: RootState) => state.agentMangement;
 
+
 export const getError = createSelector(agentSelector, props => get(props, "error", ""));
 export const isLoading = createSelector(agentSelector, props => get(props, "loading", false));
 export const isSchedulerLoading = createSelector(agentSelector, props => get(props, "schedulerLoading", false));
@@ -78,55 +80,81 @@ export const isAgentLogLoading = createSelector(agentSelector, props => get(prop
 export const isAgentDetailsLoading = createSelector(agentSelector, props => get(props, "agentDetailsLoading", false));
 export const isFilterLoading = createSelector(agentSelector, props => get(props, "filterLoading", false));
 
+
 export const getSuccessMessage = createSelector(agentSelector, props => get(props, "successMessage", false));
+
 
 export const getAgentsService = createSelector(agentSelector, props => get(props, "agentServers", {}));
 
+
 export const getAgentGlobalConfig = createSelector(agentSelector, props => get(props, "agentGlobalConfiguration.data", []));
+
 
 export const getFilterAgents = createSelector(agentSelector, props => get(props, "filterAgents", []));
 
+
 export const getFilterRepositories = createSelector(agentSelector, props => get(props, "filterRepo", []));
+
 
 export const getRepositories = createSelector(agentSelector, props => get(props, "repositories", []));
 
+
 export const getAgentLocalConfigs = createSelector(agentSelector, props => get(props, "localConfigs", []));
+
 
 export const listScheduledJob = createSelector(agentSelector, props => get(props, "scheduleConfig", []));
 
+
 export const getAgentLogs = createSelector(agentSelector, props => get(props, "agentLogs", {}));
+
 
 export const fetchScheduledJobsByCommandId = createSelector(agentSelector, props => get(props, "fetchScheduler.data.data", {}));
 
+
 export const getAgentMetrics = createSelector(agentSelector, props => get(props, "agentMetrics", []));
+
 
 export const getAgentRegions = createSelector(agentSelector, props => get(props, "agentRegions", []));
 
+
 export const getAgentEnvironments = createSelector(agentSelector, props => get(props, "agentEnvironments", []));
+
 
 export const getMetricsTilesData = createSelector(agentSelector, props => get(props, "agentMetrics", []));
 
+
 export const getAgentPlatforms = createSelector(agentSelector, props => get(props, "agentPlatforms", []));
+
 
 export const getAgentSids = createSelector(agentSelector, props => get(props, "agentSids", []));
 
+
 export const getAgentOsTypes = createSelector(agentSelector, props => get(props, "agentOsTypes", []));
+
 
 export const getAgentServiceNames = createSelector(agentSelector, props => get(props, "agentServiceNames", []));
 
+
 export const getAgentVersions = createSelector(agentSelector, props => get(props, "agentVersions", []));
+
 
 export const getAgentHealthCheckUp = createSelector(agentSelector, props => get(props, "agentHealthCheckUP.data.data", []));
 
+
 export const getStartedAgent = createSelector(agentSelector, props => get(props, "startedAgent", []));
+
 
 export const getStoppedAgent = createSelector(agentSelector, props => get(props, "stoppedAgent", []));
 
+
 export const getRestartedJob = createSelector(agentSelector, props => get(props, "restartJob", []));
+
 
 export const getRestartedAgent = createSelector(agentSelector, props => get(props, "restartAgent", []));
 
+
 export const getshutDownAgent = createSelector(agentSelector, props => get(props, "shutDownAgent", []));
+
 
 export const getUpgradeAgentVersion = createSelector(agentSelector, props => get(props, "upgradeAgents", {}));
 
@@ -146,6 +174,7 @@ export const getCreateVersionError = createSelector(agentSelector, props => get(
 
 export const isManualSyncVersionsLoading = createSelector(agentSelector, props => get(props, "manualSyncVersionsLoading", false));
 export const getManualSyncVersionsError = createSelector(agentSelector, props => get(props, "manualSyncVersionsError", ""));
+
 
 const agentManagementSelectors = {
   getStartedAgent,

@@ -1,0 +1,187 @@
+/* Table Styling */
+.table-container {
+  height: 74.5vh;
+  border-radius: 16px !important;
+  border: 1px solid #e2e8f0;
+  box-shadow: none !important;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+.table-container::-webkit-scrollbar {
+  display: none;
+}
+
+.table-head {
+}
+
+.table-head-cell {
+  font-family: "Manrope" !important;
+  font-size: 12px !important;
+  color: #64748b !important;
+  padding: 16px;
+  cursor: pointer;
+  background-color: #f6faff !important;
+  font-weight: 600 !important;
+
+  .sort-icon {
+    width: 4.85px;
+    height: 8px;
+    margin-left: 4px;
+  }
+}
+
+.first-cell {
+  border-top-left-radius: 16px;
+}
+
+.last-cell {
+  border-top-right-radius: 16px;
+}
+
+.table-cell {
+  font-family: Manrope !important;
+  font-size: 12px !important;
+  color: #070a13 !important;
+  padding: 12px !important;
+}
+
+.table-cell-disabled {
+  background-color: #f3f6f8 !important;
+  font-family: Manrope !important;
+  font-size: 12px !important;
+  color: #070a13 !important;
+  padding: 12px !important;
+}
+
+/* Collapse (Expandable rows) */
+.collapse-container {
+  padding: 0 !important;
+  border: none !important;
+}
+
+.scrollable-collapse {
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+.scrollable-collapse::-webkit-scrollbar {
+  display: none;
+}
+
+/* Collapse (Expandable rows) */
+.collapse-content {
+  padding: 16px;
+  background-color: #f5f5f5;
+  margin: 16px;
+  border-radius: 16px;
+
+  /* Collapse Headings */
+  .collapse-heading {
+    font-family: Manrope;
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+
+  /* Collapse Text */
+  .collapse-text {
+    font-family: Manrope;
+    font-size: 14px;
+    color: #070a13;
+    margin-bottom: 16px;
+  }
+
+  .chip {
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+.no-data-title {
+  font-family: Manrope;
+  font-size: 16px;
+  color: #05060f;
+}
+
+.no-data-subtitle {
+  font-family: Manrope;
+  font-size: 14px;
+  color: #7a879a;
+  margin-top: 4px;
+}
+
+/* Sticky Table Footer */
+.table-footer {
+  position: sticky !important;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 2;
+  width: 200% !important;
+}
+
+/* Pagination footer hücresinin stilini ayarlayın */
+.pagination-footer-cell {
+  padding: 0 !important;
+  border: none !important;
+}
+
+.MuiTablePagination-root {
+  background-color: #fff;
+  /* Arka plan rengini ayarlayın */
+  border-top: 1px solid #e0e0e0;
+  /* Üst çizgi ekleyin */
+}
+
+.table-pagination-select {
+  padding-right: 40px !important;
+  position: sticky !important;
+  width: 100%;
+
+  /* Sağ tarafa boşluk ekleyin */
+  .MuiSelect-icon {
+    margin-right: 20px !important;
+  }
+}
+
+.pagination-footer-cell .MuiTablePagination-selectLabel {
+  margin: 0px;
+  font-family: Manrope !important;
+}
+
+.pagination-footer-cell .MuiTablePagination-displayedRows {
+  margin: 0px;
+  font-family: Manrope !important;
+}
+
+.pagination-footer-cell .table-pagination-select {
+  font-family: Manrope !important;
+}
+
+.css-rm9hue-MuiSvgIcon-root-MuiSelect-icon {
+  right: -25px !important;
+}
+
+.css-szadsf-MuiSvgIcon-root-MuiSelect-icon {
+  right: -25px !important;
+}
+
+.more-btn-wrapper {
+  cursor: pointer;
+}
+
+.table_container_global {
+  gap: 12px;
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+  justify-content: flex-end;
+}

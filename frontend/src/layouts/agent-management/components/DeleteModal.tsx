@@ -41,4 +41,3 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ open, onClose, onCancelButton
 };
 
 export default DeleteModal;
-

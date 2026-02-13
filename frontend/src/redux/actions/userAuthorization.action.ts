@@ -1,6 +1,7 @@
+
+
 import { AUTH } from "../../config/actions";
 import { UserFilters } from "../../types/UserAuthorization";
-
 export interface PermissionAssignment {
   project: string;
   module: string;
@@ -26,6 +27,7 @@ const failureFetchUsers = (error: { message: string }) => ({
   error: error.message || "",
 });
 
+
 const createUser = (props: any) => ({
   type: AUTH.USER.CREATE_USER_REQUEST,
   props,
@@ -44,6 +46,7 @@ const failureCreateUser = (error: { message: string }) => ({
   type: AUTH.USER.CREATE_USER_FAILURE,
   error: error.message || "",
 });
+
 
 const updateUser = (props: any) => ({
   type: AUTH.USER.UPDATE_USER_REQUEST,
@@ -64,6 +67,7 @@ const failureUpdateUser = (error: { message: string }) => ({
   error: error.message || "",
 });
 
+
 const deleteUser = (username: string) => ({
   type: AUTH.USER.DELETE_USER_REQUEST,
   username,
@@ -83,6 +87,7 @@ const failureDeleteUser = (error: { message: string }) => ({
   error: error.message || "",
 });
 
+
 const selectUser = (userId: string) => ({
   type: AUTH.USER.SELECT_USER,
   userId,
@@ -96,6 +101,8 @@ const selectAllUsers = (userIds: string[]) => ({
 const clearSelectedUsers = () => ({
   type: AUTH.USER.CLEAR_SELECTED_USERS,
 });
+
+
 
 const fetchUserPermissionDetails = (username: string, filters?: { page?: number; limit?: number }) => ({
   type: AUTH.USER.GET_USER_PERMISSION_DETAILS_REQUEST,
@@ -117,6 +124,8 @@ const failureFetchUserPermissionDetails = (error: { message: string }) => ({
   error: error.message || "",
 });
 
+
+
 const fetchPermissions = (filters: any) => ({
   type: AUTH.PERMISSION.GET_PERMISSIONS_REQUEST,
   filters,
@@ -131,6 +140,7 @@ const failureFetchPermissions = (error: any) => ({
   type: AUTH.PERMISSION.GET_PERMISSIONS_FAILURE,
   error,
 });
+
 
 const createPermission = (permissionData: any) => ({
   type: AUTH.PERMISSION.CREATE_PERMISSION_REQUEST,
@@ -147,6 +157,7 @@ const failureCreatePermission = (error: any) => ({
   error,
 });
 
+
 const deletePermission = (permissionId: string) => ({
   type: AUTH.PERMISSION.DELETE_PERMISSION_REQUEST,
   permissionId,
@@ -161,6 +172,7 @@ const failureDeletePermission = (error: any) => ({
   type: AUTH.PERMISSION.DELETE_PERMISSION_FAILURE,
   error,
 });
+
 
 const assignUserPermissions = (userId: string, permissionCodes: string[]) => ({
   type: AUTH.USER.ASSIGN_USER_PERMISSIONS_REQUEST,
@@ -182,6 +194,7 @@ const failureAssignUserPermissions = (error: { message: string }) => ({
   error: error.message || "",
 });
 
+
 const fetchGlobalPermissions = (userId: string) => ({
   type: AUTH.USER.FETCH_GLOBAL_PERMISSIONS_REQUEST,
   userId,
@@ -200,6 +213,7 @@ const failureFetchGlobalPermissions = (error: { message: string }) => ({
   type: AUTH.USER.FETCH_GLOBAL_PERMISSIONS_FAILURE,
   error: error.message || "",
 });
+
 
 const userAuthorizationActions = {
   fetchUsers,

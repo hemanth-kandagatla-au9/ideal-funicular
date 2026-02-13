@@ -1,0 +1,170 @@
+.dropdownContainer {
+  position: absolute;
+  top: calc(100% + -10px);
+  right: 0;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 1100;
+
+  .searchContainer {
+    margin-bottom: 0.75rem;
+    width: 100%;
+    
+    .searchInput {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: #f5f7fa;
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+      transition: all 0.2s ease;
+      border: 1px solid #e1e4e8;
+      width: 100%;
+      box-sizing: border-box;
+
+      &:focus-within {
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+      }
+    }
+
+    .searchIcon {
+      color: #6b7280;
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+
+    .searchField {
+      flex: 1;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 0.875rem;
+      color: #1f2937;
+      width: 100%;
+      padding: 0;
+      min-width: 150px;
+      
+      &::placeholder {
+        color: #9ca3af;
+      }
+    }
+  }
+
+
+
+  .noResults {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #6b7280;
+    padding: 1rem 0;
+    font-size: 0.875rem;
+  }
+  .iconpara {
+    color: #05060fcc;
+    background: #f1f8ff;
+    border-radius: 10px;
+    font-family: "Johnson Text";
+    font-size: 12px;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown {
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    gap: 1rem;
+    padding-top: 1rem;
+    overflow-y: auto;
+    max-height: 400px;
+    animation: popupFade 0.2s ease;
+  }
+}
+
+.appItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.iconBox {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 0.6rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+
+  &:hover {
+    // border: 1px solid #2961f4;
+    transform: scale(1.05);
+  }
+}
+
+/* Circle only appears on hover or when pinned */
+.pinButton {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+
+  svg {
+    color: white;
+  }
+
+  &.active {
+    background: #0aa552;
+    opacity: 1;
+    svg {
+      color: white;
+    }
+  }
+
+  /* Circle fades in when hovered */
+  .appItem:hover & {
+    opacity: 1;
+  }
+
+  &:hover {
+    background: #3ec06c;
+  }
+}
+
+.label {
+  font-size: 0.8rem;
+  color: #05060fcc;
+  display: block;           /* Necessary for max-width to work */
+  max-width: 75px;          /* Adjust this number to cut the text where you want */
+  white-space: nowrap;      /* Force text to stay on one line */
+  overflow: hidden;         /* Hide the rest of the text */
+  text-overflow: ellipsis;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

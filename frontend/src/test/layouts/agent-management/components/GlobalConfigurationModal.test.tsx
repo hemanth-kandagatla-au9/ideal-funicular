@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import GlobalConfigurationModal from "../../../../layouts/agent-management/components/GlobalConfigurationModal";
+import GlobalConfigurationModal from "../../../../../src/layouts/agent-management/components/GlobalConfigurationModal";
 
 import agentManagementAction from "@/redux/actions/agentManagement.action";
 import {
@@ -160,4 +160,3 @@ describe("GlobalConfigurationModal", () => {
     expect(baseProps.onHide).toHaveBeenCalled();
   });
 });
-

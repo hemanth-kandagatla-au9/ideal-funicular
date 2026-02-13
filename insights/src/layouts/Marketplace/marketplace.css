@@ -1,0 +1,461 @@
+.marketplace-tags-btn-container {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+.market-place-feature-tag {
+  text-transform: capitalize;
+  width: 100%;
+  border-radius: 20px;
+  height: 30px;
+  font-size: 12px !important;
+  margin-left: 4px !important;
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  color: #64748b;
+  border: none;
+  background: #e2e8f0;
+  margin-bottom: 10px;
+}
+
+.marketplace-card-title {
+  /* margin-top: 15px !important; */
+  font-weight: 600 !important;
+  font-family: "Manrope" !important;
+  color: #1e293b !important;
+  font-size: 13px !important;
+  /* line-height: 32px !important;
+  letter-spacing: -0.308px !important; */
+}
+
+.marketplace-card-description {
+  margin-top: 2px !important;
+  margin-bottom: 5px !important;
+  font-size: 11px !important;
+  font-family: "Manrope" !important;
+  color: #64748b;
+  letter-spacing: 0 !important;
+  line-height: 16px !important;
+  font-weight: 400;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.marketplace-card-description-schedule {
+  font-size: 11px !important;
+  font-family: "Manrope" !important;
+  color: #64748b;
+  letter-spacing: 0 !important;
+  line-height: 16px !important;
+  font-weight: 400;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.marketplace-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e2e8f0;
+  /* margin-top: 15px; */
+}
+
+.version-tag {
+  width: "100px";
+  height: 30px;
+  background-color: #f4f6ff;
+  color: #2961f4;
+  font-family: "Manrope" !important;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.card-main-title {
+  display: flex !important;
+  font-family: "Manrope" !important;
+  font-size: 18px !important;
+  color: #101828 !important;
+  font-weight: 500 !important;
+}
+
+.action-type-lable {
+  margin-top: 10px !important;
+}
+
+.approval-tag {
+  width: "100px";
+  height: 40px;
+  background-color: #faf0f0;
+  color: #e62727;
+  font-family: "Manrope" !important;
+  font-weight: 600;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.template-details-title {
+  font-family: "Manrope" !important;
+  font-size: 16px !important;
+}
+
+.preview-modal-title {
+  font-family: "Manrope" !important;
+  font-size: 16px !important;
+  color: black;
+  font-weight: 600 !important;
+}
+.preview-modal-value {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  color: #64748b;
+}
+.preview-modal-labels {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  color: black;
+  font-weight: 500 !important;
+}
+
+.not_found_card {
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+  height: "100%";
+  color: #999;
+  font-family: "Manrope" !important;
+}
+.sort-label {
+  font-family: "Manrope" !important;
+  font-weight: 500;
+  font-family: 15px;
+}
+
+.dropdownText_appStore {
+  font-family: "Manrope" !important;
+  font-weight: 500;
+  color: "#344054";
+  font-size: "14px";
+}
+
+.user_details {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user_info {
+  font-family: "Manrope" !important;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.icon-selector-wrapper {
+  background: #f9fafb;
+  padding: 8px;
+  border-radius: 12px;
+  display: flex;
+  overflow-x: auto;
+}
+
+.icon-toggle-group {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-toggle-button {
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 8px !important;
+  background-color: transparent !important;
+  transition: background-color 0.3s ease;
+}
+
+.icon-toggle-group {
+  display: flex;
+  gap: 12px;
+}
+
+.lang-toggle-button {
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 12px !important;
+  background-color: transparent !important;
+  color: #1e293b !important;
+  transition: all 0.3s ease;
+}
+
+.lang-toggle-button:hover {
+  background-color: #f4f6ff !important;
+}
+
+.lang-toggle-button.Mui-selected {
+  background-color: #f4f6ff !important;
+  color: #3b82f6 !important;
+}
+
+.lang-toggle-button.Mui-selected:hover {
+  background-color: #f4f6ff !important;
+}
+
+.lang-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.lang-toggle-group {
+  gap: 4px;
+}
+.market_place_title_ele {
+  display: flex !important;
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  color: #101828 !important;
+  font-weight: 500 !important;
+}
+
+.schedule_info_container {
+  width: 80px;
+  background-color: #f4f6ff;
+  color: #2961f4;
+  font-family: "Manrope" !important;
+  font-weight: 600;
+  padding: 2px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  height: 28px;
+}
+.template_info_container {
+  width: 80px;
+  color: #101828;
+  font-family: "Manrope" !important;
+  font-weight: 600;
+  padding: 2px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  height: 28px;
+}
+
+.output-mapping-disabled-container {
+  margin-bottom: 24px;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+}
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.output-mapping-icon {
+  color: var(--primary-main, #1976d2);
+  font-size: 20px !important;
+}
+
+.output-mapping-title {
+  font-family: "Manrope" !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: var(--text-primary, #000000) !important;
+  line-height: 1.3;
+}
+
+.output-mapping-description {
+  font-family: "Manrope" !important;
+  font-size: 15px !important;
+  color: var(--text-secondary, #666666) !important;
+  margin-top: 3px !important;
+  line-height: 1.4;
+  font-weight: 500;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  width: 443px;
+}
+
+.config_btn {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  text-transform: capitalize !important;
+  font-weight: 500 !important;
+}
+
+.input_modal_title {
+  font-family: "Manrope" !important;
+  font-size: 16px !important;
+  text-transform: capitalize !important;
+  font-weight: 500 !important;
+}
+.input-temp_title {
+  font-family: "Manrope" !important;
+  font-size: 15px !important;
+  text-transform: capitalize !important;
+  font-weight: 600 !important;
+}
+.input_info {
+  font-family: "Manrope" !important;
+  font-size: 12px !important;
+  text-transform: capitalize !important;
+  font-weight: 600 !important;
+  color: rgb(134, 133, 133);
+}
+
+.variable-parameters-disabled-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 420px;
+  text-align: center;
+  padding: 20px;
+}
+
+.variable-parameters-content {
+  margin-bottom: 20px;
+}
+
+.variable-parameters-icon {
+  font-size: 48px;
+  color: #ccc;
+}
+
+.content-container {
+  max-width: 400px;
+}
+
+.variable-parameters-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.variable-parameters-description {
+  font-family: "Manrope" !important;
+  font-size: 15px !important;
+  color: var(--text-secondary, #666666) !important;
+  margin-top: 3px !important;
+  line-height: 1.4;
+  font-weight: 500;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  width: 470px;
+}
+
+.template_count {
+  background-color: #f4f6ff;
+  border-radius: 50%;
+  margin-left: 7px;
+  color: #2961f4;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Manrope";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.template-active-btn {
+  font-weight: bold;
+  font-family: "Manrope";
+  font-size: 14px;
+  display: "flex";
+  justify-content: center;
+  align-items: center;
+  color: #ffffff !important;
+  background-color: green !important;
+  width: 100px;
+}
+
+/* ====================================== */
+/* Platform-Specific Styles for Marketplace (isLoadingInHost) */
+/* ====================================== */
+
+.platform-marketplace-wrapper {
+  background: #ffffff;
+  padding: 8px 16px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 8px 12px !important;
+}
+
+/* Reduce header spacing in platform */
+.platform-marketplace-wrapper .iabot_jobsCount {
+  padding: 2px 4px !important;
+}
+
+/* Reduce filter and search section spacing */
+.platform-marketplace-wrapper > div:first-child {
+  padding: 4px 0 !important;
+  margin: 0 8px !important;
+}
+
+/* Reduce template cards grid spacing */
+.platform-marketplace-wrapper div[style*="gridTemplateColumns"] {
+  padding: 8px !important;
+  gap: 12px !important;
+}
+
+/* Make cards more compact */
+.platform-marketplace-wrapper .MuiCard-root {
+  min-height: 140px !important;
+}
+
+/* Reduce card content padding */
+.platform-marketplace-wrapper .MuiCardContent-root {
+  padding: 10px !important;
+}
+
+/* Smaller filter buttons and sort dropdown */
+.platform-marketplace-wrapper button,
+.platform-marketplace-wrapper .MuiSelect-select {
+  font-size: 13px !important;
+}
+
+/* Platform-specific version tag padding */
+.platform-marketplace-wrapper .version-tag {
+  padding: 6px 8px !important;
+}
+
+/* Responsive adjustments for platform marketplace */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .platform-marketplace-wrapper {
+    padding: 6px 14px !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .platform-marketplace-wrapper {
+    padding: 8px 16px !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  .platform-marketplace-wrapper {
+    padding: 10px 18px !important;
+  }
+}

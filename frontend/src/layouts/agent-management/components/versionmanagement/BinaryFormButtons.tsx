@@ -8,7 +8,13 @@ interface FormButtonsProps {
   hasChanges?: boolean;
 }
 
-const BinaryFormButtons: React.FC<FormButtonsProps> = ({ onCancel, isEditing, isSubmitting = false, isViewMode = false, hasChanges = true }) => {
+const BinaryFormButtons: React.FC<FormButtonsProps> = ({ 
+  onCancel, 
+  isEditing, 
+  isSubmitting = false, 
+  isViewMode = false,
+  hasChanges = true
+}) => {
   const getButtonText = () => {
     if (isViewMode) {
       return "Close";

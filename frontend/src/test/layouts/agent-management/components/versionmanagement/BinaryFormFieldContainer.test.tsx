@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import FormFieldsContainer from "../../../../../layouts/agent-management/components/versionmanagement/BinaryFormFieldsContainer";
+import FormFieldsContainer from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinaryFormFieldsContainer";
 
 describe("FormFieldsContainer", () => {
   it("renders children correctly", () => {
@@ -16,4 +16,3 @@ describe("FormFieldsContainer", () => {
     expect(screen.getByText("Field 2")).toBeInTheDocument();
   });
 });
-

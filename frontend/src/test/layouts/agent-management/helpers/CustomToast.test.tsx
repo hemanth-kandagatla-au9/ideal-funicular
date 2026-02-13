@@ -1,5 +1,5 @@
 import React from "react";
-import { successtoast, errortoast, warningtoast, infotoast } from "../../../../layouts/agent-management/helpers/CustomToast";
+import { successtoast, errortoast, warningtoast, infotoast } from "../../../../../src/layouts/agent-management/helpers/CustomToast";
 import { toast } from "react-toastify";
 jest.mock("react-toastify", () => ({
   toast: {
@@ -56,4 +56,3 @@ describe("CustomToast helpers", () => {
     expect(React.isValidElement(element)).toBe(true);
   });
 });
-

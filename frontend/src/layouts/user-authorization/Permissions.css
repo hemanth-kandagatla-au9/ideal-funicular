@@ -1,3 +1,8 @@
+
+
+
+
+
 .permissions-container {
   padding: 16px 32px;
   background-color: #ffffff;
@@ -416,4 +421,3 @@ select.filter-select {
 .table-body::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
-

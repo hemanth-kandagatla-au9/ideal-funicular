@@ -91,22 +91,22 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = props => {
         isOpen={open}
         onClose={toggleOpen}
         target={
-          <Button
-            onClick={toggleOpen}
-            className={`risebot-btnToggle ${open ? "active" : ""}`}
+          <Button 
+            onClick={toggleOpen} 
+            className={`risebot-btnToggle ${open ? 'active' : ''}`}
             data-testid={toggleTestId}
             style={{
-              backgroundColor: open ? "#F8FAFC" : "#FFFFFF",
-              borderColor: open ? "#2961F4" : "#E2E8F0",
+              backgroundColor: open ? '#F8FAFC' : '#FFFFFF',
+              borderColor: open ? '#2961F4' : '#E2E8F0',
             }}
           >
             <span className="optionsLabel">{dropDownName}</span>
-            <div
-              style={{
-                alignSelf: "center",
+            <div 
+              style={{ 
+                alignSelf: "center", 
                 padding: "0 4px 0 16px",
-                transform: open ? "rotate(180deg)" : "rotate(0deg)",
-                transition: "transform 0.2s ease-in-out",
+                transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s ease-in-out'
               }}
             >
               <img src={downArrow} alt="down arrow" />
@@ -236,20 +236,21 @@ const Option: React.FC<OptionProps<OptionType, true>> = props => {
   const isAllSelected = label === "Select All" ? value?.length === options.length - 1 : isSelected;
 
   return (
-    <div className="listMenu">
-      <components.Option {...props} className="rowList">
+    <components.Option {...props} className="rowList">
+      <div style={{ pointerEvents: "none" }} className="listMenu">
         <input
           type="checkbox"
           data-testid={`checkboxTestId-${label}`}
           checked={isAllSelected}
-          onChange={() => null} // onChange is handled by react-select
+          readOnly
           className="inputCheckbox checkRow"
           style={{ accentColor: isAllSelected ? "#2961F4" : "" }}
         />{" "}
         <label className="inputCheckLabel checkRow">{label}</label>
-      </components.Option>
-    </div>
+      </div>
+    </components.Option>
   );
 };
 
 export default MultiSelectDropdown;
+

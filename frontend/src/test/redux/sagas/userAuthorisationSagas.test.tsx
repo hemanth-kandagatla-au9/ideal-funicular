@@ -1,3 +1,5 @@
+
+
 import { runSaga } from 'redux-saga';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AUTH } from '../../../config/actions';
@@ -538,4 +540,3 @@ describe('User Authorization Sagas - REAL FUNCTIONAL TESTS', () => {
     });
   });
 });
-

@@ -4,6 +4,7 @@ import { Edit as EditIcon, Visibility as VisibilityIcon } from "@mui/icons-mater
 import gitBranch from "../../../../images/agent-management/assets/gitBranch.svg";
 import linux from "../../../../images/agent-management/assets/linux.svg";
 import windows from "../../../../images/agent-management/assets/windows.svg";
+
 import { BinaryVersion } from "./binarytypes";
 
 interface OSCompatibility {
@@ -85,23 +86,8 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
           alignItems="center"
           sx={{
             maxWidth: "100%",
-            overflowX: "auto",
-            overflowY: "hidden",
+            flexWrap: "wrap",
             py: 0.5,
-            "&::-webkit-scrollbar": {
-              height: "6px",
-            },
-            "&::-webkit-scrollbar-track": {
-              backgroundColor: "#f1f1f1",
-              borderRadius: "3px",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "#888",
-              borderRadius: "3px",
-              "&:hover": {
-                backgroundColor: "#555",
-              },
-            },
           }}
         >
           {Array.isArray(row.osCompatibility) &&
@@ -118,9 +104,9 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
               }
 
               if (!agentType) return null;
+
               let icon;
               const lowerAgentType = agentType.toLowerCase();
-
               if (lowerAgentType.includes("windows")) {
                 icon = <img src={windows} alt="Windows" style={{ width: 20, height: 20, marginRight: 4 }} />;
               } else if (lowerAgentType.includes("linux")) {
@@ -253,3 +239,4 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
 };
 
 export default BinaryVersionsColumns;
+

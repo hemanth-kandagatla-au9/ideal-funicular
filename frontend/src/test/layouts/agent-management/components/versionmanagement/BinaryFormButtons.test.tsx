@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import BinaryFormButtons from "../../../../../layouts/agent-management/components/versionmanagement/BinaryFormButtons";
+import BinaryFormButtons from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinaryFormButtons";
 import "@testing-library/jest-dom";
 
 describe("BinaryFormButtons", () => {
@@ -106,4 +106,3 @@ describe("BinaryFormButtons", () => {
     expect(screen.getByRole("progressbar")).toBeInTheDocument();
   });
 });
-

@@ -1,0 +1,81 @@
+.filter_header {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+  margin-top: 10px;
+  /* margin-left: -13px; */
+}
+
+.input-label {
+  font-size: 16px !important;
+  color: #000000 !important;
+  font-family: "Manrope" !important;
+  white-space: normal;
+}
+
+.clear_filters {
+  display: flex !important;
+  align-items: center !important;
+  padding: 4px 8px !important;
+  border: 1px solid blue !important;
+  border-radius: 24px !important;
+  margin: 2px !important;
+  display: inline-block !important;
+  background-color: #2961f4 !important;
+  cursor: pointer !important;
+  color: white;
+}
+
+.filter_area.open {
+  max-height: 300px !important;
+  width: 100% !important;
+}
+
+.filters_container {
+  /* margin: 18px 0px 0px 0px !important;
+    padding: 8px !important;
+    display: flex !important;
+    position: relative !important;
+    width: 100% ;
+    justify-content: space-between !important;
+    align-items: center !important; */
+}
+
+.custom-pill-container:hover .hover-preview {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.server_filter_section {
+  margin-top: 7px !important;
+  display: grid !important;
+  /* grid-template-columns: repeat(5, 1fr) ; */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px !important;
+  /* align-items: center !important; */
+}
+
+.selected_filters_tag {
+  /* display: flex; */
+  align-items: center;
+  padding: 4px 8px;
+  border: 1px solid #3a7bc2;
+  border-radius: 24px;
+  margin: 2px;
+  display: inline-block;
+  /* opacity: 0; */
+  /* transform: scale(0.9); */
+  /* animation: fadeInScale 0.3s forwards; */
+}
+
+.selected_filters_tag.filled_background {
+  border: 1px solid red !important;
+}
+
+.selected_filters_tag.approved_background {
+  border: 1px solid rgb(57, 211, 57) !important;
+}
+
+.selected_filters_tag.disabled_background {
+  border: 1px solid gray !important;
+}

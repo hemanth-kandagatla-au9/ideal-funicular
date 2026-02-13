@@ -123,4 +123,3 @@ const JobLogsModal: React.FC<JobLogsModalProps> = ({ open, onClose, onCancelButt
 };
 
 export default JobLogsModal;
-

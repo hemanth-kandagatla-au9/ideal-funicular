@@ -1,0 +1,819 @@
+/* Workflow Trigger Modal Styles */
+.workflow_dialog_paper {
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2) !important;
+  min-height: 600px !important;
+  max-height: 70vh !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_dialog_title {
+  margin: 0 !important;
+  background-color: var(--mui-palette-background-paper) !important;
+  border-bottom: 1px solid var(--mui-palette-divider) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_title_container {
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_title_text {
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  margin-bottom: 0.5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 17px !important;
+}
+
+.workflow_title_subtext {
+  color: var(--mui-palette-text-secondary) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_close_button {
+  color: var(--mui-palette-text-secondary) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_close_button:hover {
+  background-color: var(--mui-palette-action-hover) !important;
+  color: #1e293b !important;
+}
+
+.workflow_dialog_content {
+  padding: 0 !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_tabs {
+  border-bottom: 1px solid var(--mui-palette-divider) !important;
+  padding-left: 1rem !important;
+  padding-right: 2rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_tab {
+  font-weight: 600 !important;
+  text-transform: none !important;
+  font-size: 15px !important;
+  color: var(--mui-palette-text-secondary) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_tab.Mui-selected {
+  color: var(--mui-palette-primary-main) !important;
+}
+
+.workflow_tab_content {
+  padding: 1rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+
+
+.workflow_search_bar {
+  display: flex !important;
+  gap: 1rem !important;
+  align-items: center !important;
+  margin-bottom: 1rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_search_icon {
+  font-size: 20px !important;
+}
+
+.workflow_search_input {
+  border-radius: 10px !important;
+  background-color: var(--mui-palette-background-paper) !important;
+  font-size: 12px !important;
+  font-family: 'Manrope', sans-serif !important;
+  height: 37px !important;
+  width: 100% !important;
+}
+
+/* .workflow_search_input:hover {
+  border-color: var(--mui-palette-primary-main) !important;
+} */
+
+.workflow_search_field .MuiOutlinedInput-root:hover fieldset {
+  border-color: var(--mui-palette-primary-light) !important;
+}
+
+.workflow_filter_adornment {
+  margin-left: 0.5rem !important;
+}
+
+/* .workflow_category_select {
+  min-width: 185px !important;
+  border-radius: 10px !important;
+  background-color: var(--mui-palette-background-paper) !important;
+  font-family: 'Manrope', sans-serif !important;
+  height: 37px;
+} */
+
+/* .workflow_category_select .MuiSelect-select {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.9375rem !important;
+  font-family: 'Manrope', sans-serif !important;
+} */
+
+.workflow_menu_item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_results_info {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_results_title {
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_results_count {
+  font-family: 'Manrope', sans-serif !important;
+  background-color: #f4f6ff !important;
+  border-radius: 50% !important;
+  color: #2961f4 !important;
+  padding: 5px 10px !important;
+  width: 32px !important;
+  height: 30px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  font-family: "Manrope" !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+}
+
+.workflow_selected_chip {
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_loading_container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_loading_spinner {
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_loading_text {
+  margin-top: 1.5rem !important;
+  color: var(--mui-palette-text-secondary) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_empty_state {
+  text-align: center !important;
+  padding: 5rem !important;
+  border: 2px dashed var(--mui-palette-divider) !important;
+  border-radius: 16px !important;
+  background-color: rgba(0, 0, 0, 0.02) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_empty_icon {
+  font-size: 64px !important;
+  color: var(--mui-palette-text-disabled) !important;
+  margin-bottom: 1.5rem !important;
+  opacity: 0.5 !important;
+}
+
+.workflow_empty_title {
+  color: var(--mui-palette-text-secondary) !important;
+  margin-bottom: 0.5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_empty_subtitle {
+  color: var(--mui-palette-text-secondary) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_card {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border: 2px solid var(--mui-palette-divider) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  background-color: var(--mui-palette-background-paper) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  font-family: 'Manrope', sans-serif !important;
+  box-shadow: none !important;
+}
+
+.workflow_card:hover {
+  border-color: var(--mui-palette-primary-light) !important;
+}
+
+.workflow_card_selected {
+  border-color: var(--mui-palette-primary-main) !important;
+  background-color: var(--mui-palette-primary-50) !important;
+}
+
+.workflow_card_selected:hover {
+  border-color: var(--mui-palette-primary-dark) !important;
+}
+
+.workflow_card_checkbox_container {
+  position: absolute !important;
+  top: 16px !important;
+  right: 16px !important;
+  z-index: 2 !important;
+}
+
+.workflow_card_checkbox.Mui-checked {
+  color: var(--mui-palette-primary-main) !important;
+}
+
+.workflow_card_content {
+  padding: 1rem !important;
+  flex-grow: 1 !important;
+  font-family: 'Manrope', sans-serif !important;
+  border-radius: 16px !important;
+  border: 1px solid rgb(224, 224, 224) !important;
+
+}
+
+.workflow_card_title {
+  font-weight: 600 !important;
+  color:  #1e293b !important;
+  line-height: 1.3 !important;
+  margin-bottom: 0.5rem !important;
+  padding-right: 2rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 14px !important;
+}
+
+.workflow_card_title_selected {
+  color: var(--mui-palette-primary-main) !important;
+}
+
+.workflow_status_chip {
+  margin-bottom: 1rem !important;
+  height: 22px !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  border-radius: 4px !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_card_description {
+  color: var(--mui-palette-text-secondary) !important;
+  font-size: 12px !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_card_divider {
+  margin-top: 1rem !important;
+  border: none !important;
+}
+
+.workflow_info_section {
+  font-family: 'Manrope', sans-serif !important;
+  margin-bottom: 1rem !important;
+}
+
+.workflow_info_label {
+  color: var(--mui-palette-text-secondary) !important;
+  display: block !important;
+  margin-bottom: 0.25rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.workflow_info_content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_info_icon {
+  color: var(--mui-palette-action-active) !important;
+  font-size: 16px !important;
+}
+
+.workflow_info_text {
+  font-weight: 500 !important;
+  color: #1e293b !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+/* Creator and Date in single line */
+.workflow_creator_date_container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-top: 0.5rem !important;
+  padding-top: 0.5rem !important;
+  border-top: 1px solid var(--mui-palette-divider) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_creator_container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  flex: 1 !important;
+  position: relative !important;
+  cursor: default !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_creator_container:hover .workflow_creator_name {
+  color: var(--mui-palette-primary-main) !important;
+}
+
+/* Tooltip for full name */
+.workflow_creator_container::after {
+  content: attr(title) !important;
+  position: absolute !important;
+  bottom: 100% !important;
+  left: 0 !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px !important;
+  font-size: 0.75rem !important;
+  white-space: nowrap !important;
+  z-index: 10 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-10px) !important;
+  transition: all 0.2s ease !important;
+  pointer-events: none !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_creator_container:hover::after {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(-5px) !important;
+}
+
+.workflow_creator_icon {
+  color: #1e293b  !important;
+  font-size: 16px !important;
+  flex-shrink: 0 !important;
+}
+
+.workflow_creator_name {
+  font-weight: 500 !important;
+  color: #1e293b !important;
+  transition: color 0.2s ease !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  max-width: 150px !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 14px !important;
+}
+
+.workflow_date_container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  flex-shrink: 0 !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_date_icon {
+  color: #1e293b  !important;
+  font-size: 16px !important;
+  flex-shrink: 0 !important;
+}
+
+.workflow_date_text {
+  font-weight: 500 !important;
+  color: #1e293b  !important;
+  white-space: nowrap !important;
+  font-family: 'Manrope', sans-serif !important;
+    font-size: 14px !important;
+
+}
+
+.workflow_conditions_container {
+  padding: 2rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_conditions_header {
+  margin-bottom: 15px !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_conditions_title {
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 14px !important;
+}
+
+.workflow_conditions_subtitle {
+  color: #1e293b !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 12px !important;
+
+}
+
+.workflow_no_selection_state {
+  text-align: center !important;
+  padding: 5rem !important;
+  border: 2px dashed var(--mui-palette-divider) !important;
+  border-radius: 16px !important;
+  background-color: rgba(0, 0, 0, 0.02) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_no_selection_icon {
+  font-size: 64px !important;
+  color: var(--mui-palette-text-disabled) !important;
+  margin-bottom: 1.5rem !important;
+  opacity: 0.5 !important;
+}
+
+.workflow_no_selection_title {
+  color: var(--mui-palette-text-secondary) !important;
+  margin-bottom: 0.5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_no_selection_text {
+  color: var(--mui-palette-text-secondary) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_card {
+  margin-bottom: 1.5rem !important;
+  border: 1px solid var(--mui-palette-divider) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_card_content {
+  padding: 1rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  border: 1px solid #ebe7e7;
+  border-radius: 16px !important;
+}
+
+.workflow_condition_header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-bottom: 5px !important;
+  padding-bottom: 5px !important;
+  border-bottom: 1px solid var(--mui-palette-divider) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_info {
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_name {
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 16px !important;
+}
+
+.workflow_add_condition_button {
+  border-radius: 8px !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_item {
+  display: flex !important;
+  gap: 1rem !important;
+  margin-bottom: 1rem !important;
+  align-items: center !important;
+  padding: 1.5rem !important;
+  background-color: rgba(0, 0, 0, 0.02) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--mui-palette-divider) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_label {
+  min-width: 100px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_select {
+  min-width: 160px !important;
+  border-radius: 8px !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_select .MuiSelect-select {
+  font-size: 0.875rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_input {
+  flex: 1 !important;
+  border-radius: 8px !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_input .MuiOutlinedInput-input {
+  font-size: 0.875rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_delete_button {
+  margin-left: auto !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_condition_delete_button:hover {
+  background-color: var(--mui-palette-error-light) !important;
+}
+
+/* .workflow_condition_delete_button:hover .MuiSvgIcon-root {
+  color: white !important;
+} */
+
+.workflow_no_conditions_state {
+  text-align: center !important;
+  padding: 2rem !important;
+  background-color: rgba(0, 0, 0, 0.02) !important;
+  border-radius: 12px !important;
+  border: 2px dashed var(--mui-palette-divider) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_no_conditions_text {
+  color: #1e293b !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_dialog_actions {
+  padding: 1.3rem !important;
+  border-top: 1px solid var(--mui-palette-divider) !important;
+  background-color: var(--mui-palette-background-paper) !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_actions_container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_selection_summary {
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_selection_count {
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_selection_hint {
+  color: #1e293b !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_action_buttons {
+  display: flex !important;
+  gap: 1rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_cancel_button {
+  border-radius: 8px !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_save_button {
+  border-radius: 8px !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_search_container {
+  margin-bottom: 2rem !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_search_header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 1rem !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+}
+
+.workflow_results_info {
+  flex: 1 !important;
+  min-width: 200px !important;
+}
+
+.workflow_results_title {
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  font-size: 1.1rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.workflow_search_filter_container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  min-width: 400px !important;
+}
+
+.workflow_search_bar {
+  display: flex !important;
+  gap: 1rem !important;
+  align-items: center !important;
+  flex: 1 !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_search_field {
+  flex: 2 !important;
+  min-width: 250px !important;
+}
+
+
+
+
+
+.workflow_search_icon {
+  font-size: 20px !important;
+}
+
+.workflow_category_select {
+  flex: 1 !important;
+  min-width: 185px !important;
+  border-radius: 10px !important;
+  background-color: var(--mui-palette-background-paper) !important;
+  height: 37px !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.workflow_category_select .MuiSelect-select {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.875rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  height: 40px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.workflow_filter_adornment {
+  margin-left: 0.5rem !important;
+}
+
+/* .workflow_menu_item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-family: 'Manrope', sans-serif !important;
+} */
+
+.workflow_selected_indicator {
+  display: flex !important;
+  justify-content: flex-start !important;
+  margin-top: 0.5rem !important;
+}
+
+.workflow_condition_item {
+  border: 1px solid #e0e0e0;
+}
+
+.workflow_condition_label {
+  font-weight: 500;
+  color: #333;
+}
+
+.json-key-label-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.workflow_condition_input .MuiFormHelperText-root {
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+.workflow_access_denied_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  height: 100%;
+  min-height: 300px;
+}
+
+.workflow_access_denied_icon {
+  font-size: 60px !important;
+  color: #f44336;
+  margin-bottom: 20px;
+}
+
+.workflow_access_denied_title {
+  font-weight: 600 !important;
+  margin-bottom: 12px !important;
+  color: #d32f2f;
+}
+
+.workflow_access_denied_message {
+  color: #666;
+  margin-bottom: 8px !important;
+  max-width: 400px;
+}
+
+.workflow_access_denied_detail {
+  color: #999;
+  margin-bottom: 24px !important;
+  font-style: italic;
+  max-width: 400px;
+}
+
+.workflow_access_denied_button {
+  margin-top: 16px;
+  padding: 8px 24px !important;
+}
+
+.workflow-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  display: block;
+}
+
+.workflow-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  max-height: 2.8em;
+  min-height: 40px;
+}

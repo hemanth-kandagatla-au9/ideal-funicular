@@ -20,7 +20,7 @@ interface ApiEndpoints {
 
 const apiEndpoints: ApiEndpoints = {
   auth: {
-    baseUrl: process.env.REACT_APP_AUTH_URL || "http://localhost:3000" || "https://predev.auth.rise.apps.jnj.com",
+    baseUrl: process.env.REACT_APP_AUTH_URL ||"http://localhost:3000" || "https://predev.auth.rise.apps.jnj.com",
     post: {
       addGroup: "/v1/auth/groups/",
       addPermission: "/v1/auth/permissions/",
@@ -103,6 +103,9 @@ const apiEndpoints: ApiEndpoints = {
       scheduler: "/agents/scheduler",
       healthCheck: "dnd/executejob/100009",
       syncScripts: "/agents/sync-scripts",
+      syncAgentConfig: "/agents/sync-agentConfig",
+      bulkSyncAgentConfig: "/agents/bulk/sync-agentConfig",
+      updateEnv: "/agents/update-env",
       bulkStartAgents: "/agents/bulk/start",
       bulkStopAgents: "/agents/bulk/stop",
       bulkReStartAgents: "/agents/bulk/restart",
@@ -118,6 +121,7 @@ const apiEndpoints: ApiEndpoints = {
       syncHealthConfigs: "/agents/sync-agent-discovery",
       upgrade: "/agents/bulk/upgrade",
       download: "/agents/download",
+      envUpgrade: "/agents/bulk/update-env",
     },
     delete: {
       stopByPort: "/agents/stop",
@@ -165,6 +169,9 @@ const apiEndpoints: ApiEndpoints = {
       postjob: "/agents/postjob",
       healthCheck: "dnd/executejob/100009",
       syncScripts: "/agents/sync-scripts",
+      syncAgentConfig: "/agents/sync-agentConfig",
+      bulkSyncAgentConfig: "/agents/bulk/sync-agentConfig",
+      updateEnv: "/agents/update-env",
       bulkStartAgents: "/agents/bulk/start",
       bulkStopAgents: "/agents/bulk/stop",
       bulkReStartAgents: "/agents/bulk/restart",
@@ -187,8 +194,9 @@ const apiEndpoints: ApiEndpoints = {
       syncHealthConfigs: "/agents/syncAgentStatus",
       upgrade: "/agents/bulk/upgrade",
       download: "/agents/download",
-      updateVersion: "agents/updateVersion",
-      syncVersions: "agents/syncversions",
+      envUpgrade: "/agents/bulk/update-env",
+      updateVersion:"agents/updateVersion",
+      syncVersions:"agents/syncversions"
     },
     delete: {
       stopByPort: "/agents/jobs/stop",
@@ -197,15 +205,15 @@ const apiEndpoints: ApiEndpoints = {
     },
   },
   userAuthorization: {
-    baseURL: process.env.REACT_APP_USER_AUTH_URL || "http://localhost:3001",
+    baseURL: process.env.REACT_APP_USER_AUTH_URL || "https://predev.agent.ias.apps.jnj.com/api/agent",
     get: {
       users: "/auth/user-details",
-      PermissionsList: "auth/permissionsList",
+      PermissionsList:"auth/permissionsList",
       permissionMatrix: "/auth/users",
     },
     post: {
       createUser: "/auth/add-user",
-      deleteUserPermissionsList: "auth/update-permission",
+      deleteUserPermissionsList:"auth/update-permission",
       createPermission: "/auth/add-permission",
     },
     patch: {
@@ -225,3 +233,4 @@ const apiEndpoints: ApiEndpoints = {
 };
 
 export default apiEndpoints;
+

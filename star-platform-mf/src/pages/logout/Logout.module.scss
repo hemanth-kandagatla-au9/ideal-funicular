@@ -1,0 +1,72 @@
+.logoutPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #f0f6ff 0%, #eef2ff 100%);
+  padding: 48px 16px;
+}
+
+.card {
+  width: 640px;
+  max-width: 92%;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 30px rgba(3, 32, 63, 0.06);
+  padding: 56px 56px 32px 56px;
+  text-align: center;
+}
+
+.iconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #e6f9ee;
+  margin: 0 auto 18px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(6, 80, 41, 0.04);
+}
+
+.check {
+  color: #13a85a;
+  font-size: 28px;
+}
+
+.title {
+  font-family: 'Johnson Display', 'Kumbh Sans', sans-serif;
+  color: #0b63e5;
+  font-weight: 700;
+  font-size: 44px;
+  margin: 10px 0 6px 0;
+}
+
+.subtitle {
+  color: #111827;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.redirectText {
+  color: #9aa3b2;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.goLogin {
+  color: #111827;
+  text-decoration: none;
+  display: inline-block;
+  margin: 12px 0 0 0;
+  background: none;
+  border-radius: 1px solid transparent;
+}
+
+.cardFooter {
+  margin-top: 28px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 18px;
+  color: #9aa3b2;
+  font-size: 13px;
+}

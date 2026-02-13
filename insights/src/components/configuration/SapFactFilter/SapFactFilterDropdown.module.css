@@ -1,0 +1,43 @@
+.multi_select_dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown_toggle {
+  padding: 8px 12px;
+  /* more styling */
+}
+.dropdown_menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  z-index: 1000;
+}
+
+.dropdown_header {
+  text-align: left;
+}
+
+.dropdown_header,
+.dropdown_footer {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+.dropdown_list {
+  padding: 8px;
+  text-align: left;
+}
+.dropdown_item {
+  display: block;
+  margin-bottom: 4px;
+}
+.clear_button {
+  margin-right: 8px;
+}
+.apply_button {
+  /* primary styling */
+}

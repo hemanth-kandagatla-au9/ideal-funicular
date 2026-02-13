@@ -175,4 +175,3 @@ describe("AgentTasks", () => {
     expect(baseProps.agentVersionUpgrade).toHaveBeenCalled();
   });
 });
-

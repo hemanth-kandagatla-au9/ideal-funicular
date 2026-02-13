@@ -5,7 +5,6 @@ import "./popup.modal.css";
 import "../../layouts/agent-management/css/agentStyle.css";
 import "../../layouts/agent-management/css/common-style.css";
 import { cancelButtonText, okButtonText } from "../../constants/strings";
-
 interface ButtonConfig {
   variant?: string;
   buttonBg?: string;
@@ -54,12 +53,11 @@ const PopUp: React.FC<PopUpProps> = ({ show, onHide, dataObj, handleClick }) => 
             (dataObj.button.buttonOne.buttonOneName && dataObj.button.buttonOne.buttonOneName.toLowerCase().includes("delete") ? "danger" : "primary")
           }
           data-testid="OkButton"
-          className={`saveButtonAgent ${
-            dataObj.button.buttonOne.buttonBg ||
+          className={`saveButtonAgent ${dataObj.button.buttonOne.buttonBg ||
             (dataObj.button.buttonOne.buttonOneName && dataObj.button.buttonOne.buttonOneName.toLowerCase().includes("delete")
               ? "modalButton modalButtonDanger"
               : "modalButton modalButtonBlue")
-          }`}
+            }`}
           id={
             dataObj.button.buttonOne.buttonBg ||
             (dataObj.button.buttonOne.buttonOneName && dataObj.button.buttonOne.buttonOneName.toLowerCase().includes("delete") ? "modalButtonDanger" : "modalButtonBlue")

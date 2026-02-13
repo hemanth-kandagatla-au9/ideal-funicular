@@ -1,0 +1,261 @@
+.add-job-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(226, 232, 240);
+  padding: 0;
+}
+
+.main-wrapper {
+  padding: 0.5rem;
+}
+
+.fileSelect {
+  padding: 0.5rem;
+}
+
+.labelled-input-container .MuiOutlinedInput-root,
+.custom-input-wrapper .MuiOutlinedInput-root {
+  background-color: #fff;
+}
+
+.labelled-input-container .MuiOutlinedInput-input {
+  background-color: #fff;
+}
+
+.iabot_required {
+  color: red;
+  text-decoration-color: red;
+}
+.upper-fields-wrapper-3 .labelled-input-container {
+  max-width: 450px;
+}
+.upper-fields-wrapper {
+  /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* Creates 4 equal columns */
+  gap: 6px;
+  /* Space between grid items, adjust as necessary */
+}
+.upper-fields-wrapper-2 {
+  /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Creates 4 equal columns */
+  gap: 10px 80px;
+  /* Space between grid items, adjust as necessary */
+}
+.upper-fields-wrapper-3 {
+  /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* Creates 4 equal columns */
+  gap: 10px 20px;
+  /* Space between grid items, adjust as necessary */
+}
+
+.lower-fields-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-input-wrapper {
+  /* min-width: 345px; */
+  width: 100%;
+}
+
+.custom-input-wrapper .MuiOutlinedInput-root {
+  min-width: 250px;
+  width: 100%;
+  border-radius: 30px;
+}
+.custom-input-small .MuiOutlinedInput-root {
+  min-width: 9rem !important;
+  max-width: 9rem !important;
+  width: 100%;
+  border-radius: 30px;
+}
+.custom-input-wrapper .MuiOutlinedInput-input {
+  padding: 0.65rem;
+}
+
+.custom-input-wrapper .custom-label {
+  display: block;
+}
+
+.iabot_cancel_button {
+  width: 75px !important;
+  height: 40px !important;
+  background-color: #fff !important;
+  color: #344054 !important;
+  border-radius: 8px !important;
+  border: 1px solid #eeeeee !important;
+  padding: 10px 16px !important;
+  text-transform: none !important;
+}
+
+.iabot_add_button {
+  width: 60px !important;
+  height: 40px !important;
+  background-color: #2961f4 !important;
+  border: 1px solid #033eda !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+  color: white !important;
+  text-transform: none !important;
+}
+
+.iabot_add_button:disabled {
+  background-color: #c0c0c0 !important;
+  /* Grey background for disabled state */
+  border: 1px solid #a0a0a0 !important;
+  /* Change border for disabled state */
+  border-radius: 8px !important;
+  color: #7f7f7f !important;
+  /* Change text color for better visibility */
+  cursor: not-allowed;
+  /* Change cursor to show the button is not clickable */
+  text-transform: none !important;
+}
+
+.custom-label {
+  font-family: Manrope;
+  font-size: 14px !important;
+  font-weight: 600;
+  color: #102459;
+}
+
+.custom-input-wrapper .react-datepicker-wrapper {
+  display: block;
+}
+
+/* new css starts here */
+
+/* Section headers */
+.section-header {
+  display: flex;
+  align-items: center;
+  color: #1976d2;
+  gap: 0.25rem;
+  font-family: "Manrope" !important;
+}
+
+.section-icon {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #0d6efd;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Host filters section */
+.host-filters-section {
+  background: #f8f9fa;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  /* border: 1px solid #e0e0e0; */
+  border-radius: 8px;
+}
+
+.section-subheader {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.filter-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.filter-value {
+  padding: 4px 8px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+/* Conditional sections */
+.host-selection-section,
+.smart-fields {
+  /* margin-top: 1.5rem; */
+  /* padding-top: 1rem; */
+  /* border-top: 1px dashed #e0e0e0; */
+}
+
+/* Button container */
+/* .MuiBox-root {
+  padding: 0 3rem;
+} */
+
+.main-wrapper .job-section {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.main-wrapper .execution-section {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.command-chip {
+  height: 28px;
+  min-width: 120px;
+  max-width: 200px;
+  border-radius: 16px;
+  padding: 0 8px;
+  background-color: transparent !important;
+}
+
+.command-chip-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  color: #2961f4;
+  border: 1px solid #2961f4;
+  font-size: 12px;
+  background-color: transparent !important;
+  font-family: "Manrope";
+  min-width: 100px;
+  height: 25px;
+  padding: 3px;
+  font-weight: 600;
+  border-radius: 16px;
+}
+.config_btn {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  text-transform: capitalize !important;
+  font-weight: 500 !important;
+}
+
+.publish_btn_wrapper {
+  display: flex !important;
+  justify-content: space-between;
+  font-family: "Manrope";
+}

@@ -93,4 +93,3 @@ describe("AgentLogs Component", () => {
     expect(baseProps.copyToClipboard).toHaveBeenCalledWith(baseProps.agentLog);
   });
 });
-

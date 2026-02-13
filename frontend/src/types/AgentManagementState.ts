@@ -45,6 +45,8 @@ interface AgentManagementState {
   selectedHostnameAgents: Agent[];
   openAgentUpgrade: boolean;
   selectedUpgradeAgents: Agent[];
+  openEnvUpgrade: boolean;
+  selectedEnvUpgradeAgents: Agent[];
   selectedOption: string;
   dropdownOptionsobj: {
     os: DropdownOption[];

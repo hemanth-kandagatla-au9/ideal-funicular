@@ -1,3 +1,6 @@
+
+
+
 export interface User {
   id: string;
   userName: string;
@@ -9,17 +12,20 @@ export interface User {
   rolesCount?: number;
 }
 
+
 export interface UserPagination {
   page: number;
   limit: number;
   total: number;
 }
 
+
 export interface UserFilters {
   search?: string;
   page?: number;
   limit?: number;
 }
+
 
 export interface UserAuthorizationState {
   users: User[];
@@ -33,6 +39,7 @@ export interface UserAuthorizationState {
   permissionsPagination: PermissionPagination; // Pagination for permissions list
 }
 
+
 export interface UserApiResponse {
   data: {
     flag: "success" | "error";
@@ -44,6 +51,7 @@ export interface UserApiResponse {
   };
 }
 
+
 export interface Permission {
   id: string;
   project: string;
@@ -54,11 +62,13 @@ export interface Permission {
   createdBy: string;
 }
 
+
 export interface PermissionPagination {
   page: number;
   limit: number;
   total: number;
 }
+
 
 export interface PermissionFilters {
   project?: string;
@@ -67,6 +77,7 @@ export interface PermissionFilters {
   page?: number;
   limit?: number;
 }
+
 
 export interface PermissionItem {
   id: string; // Using code as id

@@ -471,6 +471,30 @@ export function* upgradeAgents({ props }: ActionProps): Generator<any, void, any
 }
 
 
+export function* envUpgradeAgents({ props }: ActionProps): Generator<any, void, any> {
+  try {
+    yield put(agentManagementAction.requestEnvUpgradeSelectedAgents());
+    const data = get(props, "data", []);
+    const env = get(props, "env", "");
+    const mode = get(props, "mode", "");
+    const payload = Array.isArray(data) ? data : data ? [data] : [];
+    const output = mode === "bulk"
+      ? yield call(agentManagementService.envUpgradeBulkAgents, payload, env)
+      : mode === "single"
+        ? yield call(agentManagementService.envUpgradeSingle, payload[0], env)
+        : payload.length === 1
+          ? yield call(agentManagementService.envUpgradeSingle, payload[0], env)
+          : yield call(agentManagementService.envUpgradeBulkAgents, payload, env);
+    yield put(agentManagementAction.successEnvUpgradeSelectedAgents(output));
+    if (get(output, "data.flag") === "success") successtoast("Environment update triggered successfully");
+    else errortoast("Failed to trigger environment update for selected RISEAGENTs");
+  } catch (error: any) {
+    yield put(agentManagementAction.failureEnvUpgradeSelectedAgents(error));
+    errortoast(get(error, "message", "Failed to trigger environment update for selected RISEAGENTs"));
+  }
+}
+
+
 export function* getAgentUpgrade(): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestFetchUpgradeAgents());
@@ -555,6 +579,26 @@ export function* getAgentVersions(): Generator<any, void, any> {
     yield put(agentManagementAction.successFetchAgentVersions(get(output, "data.agentVersions", [])));
   } catch (error: any) {
     yield put(agentManagementAction.failureFetchAgentVersions(error));
+  }
+}
+
+
+export function* syncAgentConfiguration({ props }: ActionProps): Generator<any, void, any> {
+  try {
+    yield put(agentManagementAction.requestSyncAgentConfig());
+    const payload = Array.isArray(props) ? props : props ? [props] : [];
+    const output = payload.length === 1
+      ? yield call(agentManagementService.syncAgentConfigSingle, payload[0])
+      : yield call(agentManagementService.syncAgentConfigBulk, payload);
+    yield put(agentManagementAction.successSyncAgentConfig(output));
+    if (get(output, "data.flag") === "success") {
+      successtoast(get(output, "data.message", "Agent configuration sync triggered"));
+    } else {
+      errortoast(get(output, "data.error", "Failed to sync agent configuration"));
+    }
+  } catch (error: any) {
+    yield put(agentManagementAction.failureSyncAgentConfig(error));
+    errortoast(get(error, "message", "Failed to sync agent configuration"));
   }
 }
 
@@ -739,6 +783,8 @@ export default function* actionWatcher(): Generator<any, void, any> {
     yield takeLatest(AGENT_MANAGEMENT.FETCH_AGENT_OS_TYPES, getAgentOsTypes),
     yield takeLatest(AGENT_MANAGEMENT.FETCH_AGENT_SERVICE_NAMES, getAgentServiceNames),
     yield takeLatest(AGENT_MANAGEMENT.FETCH_AGENT_VERSIONS, getAgentVersions),
+    yield takeLatest(AGENT_MANAGEMENT.ENV_UPGRADE_SELECTED_AGENTS, envUpgradeAgents),
+    yield takeLatest(AGENT_MANAGEMENT.SYNC_AGENT_CONFIG, syncAgentConfiguration),
     yield takeLatest(AGENT_MANAGEMENT.SYNC_AGENT_HEALTH_CONFIGS, getSyncAgentHealthConfigs),
 
     yield takeLatest(AGENT_MANAGEMENT.FETCH_AGENT_MASTERDATA, getAgentMasterdata),

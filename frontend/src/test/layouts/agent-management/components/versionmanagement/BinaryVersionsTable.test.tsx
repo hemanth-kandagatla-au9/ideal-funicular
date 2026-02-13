@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import BinaryVersionsTable from '../../../../../layouts/agent-management/components/versionmanagement/BinaryVersionsTable';
 jest.mock('@mui/x-data-grid', () => ({
-  DataGrid: ({ rows, columns, ...props }: any) => (
-    <div data-testid="data-grid" {...props}>
+  DataGrid: ({ rows, columns }: any) => (
+    <div data-testid="data-grid">
       <div data-testid="grid-rows">{rows.length} rows</div>
       <div data-testid="grid-columns">{columns.length} columns</div>
     </div>
@@ -184,9 +184,13 @@ describe('BinaryVersionsTable Component', () => {
 
   test('renders table container with proper styling', () => {
     renderComponent();
-    
-    const container = screen.getByTestId('mui-box');
-    expect(container).toBeInTheDocument();
+
+    const boxes = screen.getAllByTestId('mui-box');
+    const container = boxes.find(box => {
+      const scoped = within(box);
+      return Boolean(scoped.queryByTestId('data-grid') && scoped.queryByTestId('pagination'));
+    });
+    expect(container).toBeTruthy();
   });
 });
 

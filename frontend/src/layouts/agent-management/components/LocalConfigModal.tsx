@@ -106,4 +106,3 @@ const LocalConfigModal: React.FC<LocalConfigModalProps> = ({
 };
 
 export default LocalConfigModal;
-

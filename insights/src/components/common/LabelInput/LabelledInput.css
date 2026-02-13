@@ -1,0 +1,297 @@
+.labelled-input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 413px;
+  }
+  
+  .MuiList-root.MuiList-padding.MuiMenu-list {
+    width: 100%;
+    /* max-width: 433px; */
+    /* max-height: 300px; */
+    overflow: scroll;
+    /* top: 160px !important;
+    left:220px !important; */
+
+  }
+  
+  .label-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-label {
+    font-size: 16px !important;
+    color: #070a13 !important;
+    font-family: 'Manrope' !important;
+    white-space: normal;
+  }
+  
+  .optional-header {
+    font-size: 14px !important;
+    color: #48525f !important;
+    font-family: 'Manrope' !important;
+    margin-left: 3px;
+  }
+  
+  .optional-description {
+    font-family: 'Manrope' !important;
+    font-size: 14px !important;
+    color: #64748b !important;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-top: 4px;
+  }
+  
+  .custom-form-control .custom-input,
+  .custom-form-control .custom-input-textarea,
+  .custom-form-control .custom-date-input {
+    /* border: 1px solid #CCD4DE; */
+    background: #fff;
+    border-radius: 16px;
+  }
+
+  .no-background .custom-form-control .custom-input,
+  .custom-form-control .custom-input-textarea,
+  .custom-form-control .custom-date-input {
+    /* border: 1px solid #CCD4DE; */
+    background: none !important;
+  }
+  
+  .custom-form-control .custom-date-input:focus {
+    border: 1px solid #3A7BC2 !important;
+  }
+  
+  .f-w .custom-form-control .custom-input {
+    max-width: 100%;
+  }
+  
+  .custom-input.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border: none;
+  }
+  
+  .MuiOutlinedInput-input {
+    /* padding: 16px !important; */
+    font-family: 'Manrope' !important;
+    /* color: #070a13 !important; */
+    /* font-size: 16px !important; */
+  }
+  
+  .MuiOutlinedInput-input.MuiInputBase-inputMultiline {
+    padding: 0;
+  }
+  
+  .custom-input.Mui-focused {
+    border-color: #3A7BC2 !important;
+  }
+  
+  .dropdown-value {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dropdown-value .icon {
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .MuiSelect-select {
+    padding: 16px;
+  }
+  
+  .MuiOutlinedInput-notchedOutline {
+    border: none;
+  }
+  
+  .custom-input .MuiSelect-select {
+    font-size: 16px !important;
+    border: 1px solid #CCD4DE;
+    border-radius: 25px !important;
+  }
+  
+  .MuiSelect-icon {
+    display: flex;
+    align-items: center;
+    color: #808080;
+    width: 16px;
+    height: 16px;
+    margin-right: 9px;
+  }
+  
+  .dropdown-divider {
+    border: 1px solid #E0E0E0;
+    margin: 6px 16px;
+  }
+  
+  .MuiPaper-root.MuiMenu-paper,
+  .MuiPaper-root.MuiPickersPopper-paper {
+    border-radius: 16px !important;
+    box-shadow: none;
+    border: 1px solid #CCD4DE;
+  }
+  
+  .MuiList-root.MuiList-padding.MuiMenu-list {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .MuiCheckbox-checkbox {
+    border: 1.8px solid #070a13;
+    border-radius: 4px;
+    width: 21.2px;
+    height: 21.2px;
+  }
+  
+  .MuiCheckbox-root.Mui-checked .MuiCheckbox-checkbox {
+    background-color: #fff;
+    color: #3A7BC2;
+    border-color: #3A7BC2;
+    border-radius: 4px;
+  }
+  
+  .list-item-primary {
+    font-family: 'Manrope';
+    color: #070a13;
+  }
+  
+  .menu-item {
+    font-size: 16px !important;
+    font-family: 'Manrope' !important;
+    color: #64748b;
+    gap: 10px;
+  }
+  
+  .menu-item .icon {
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .MuiMenuItem-root.Mui-selected,
+  .MuiMenuItem-root.Mui-focusVisible {
+    background-color: transparent;
+  }
+  
+  .radio-label-active {
+    color: #3A7BC2;
+  }
+  
+  .radio-label-inactive {
+    color: #A0AEC0;
+  }
+  
+  .custom-radio-group {
+    display: flex;
+    gap: 32px;
+  }
+  
+  .custom-radio-group.with-description {
+    margin-left: 16px;
+  }
+  
+  .custom-radio-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 0;
+  }
+  
+  .custom-radio {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 8px;
+  }
+  
+  .custom-radio .MuiSvgIcon-root {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .MuiRadio-root.Mui-checked {
+    color: #3A7BC2;
+  }
+  
+  .MuiFormControlLabel-label {
+    font-size: 16px !important;
+    font-family: 'Manrope';
+  }
+  
+  .MuiButtonBase-root.MuiPickersDay-root.Mui-selected {
+    background-color: #3A7BC2;
+  }
+  
+  .css-1g9bazu-MuiButtonBase-root-MuiChip-root {
+    background-color: transparent !important;
+    border: 1px solid #3A7BC2 !important;
+    color: #3A7BC2 !important;
+  }
+  
+  .custom-tooltip .MuiTooltip-tooltip {
+    background-color: #fff !important;
+    color: black !important;
+    font-size: 14px;
+    min-width: 200px;
+    border: 1px solid #CCD4DE;
+  }
+  
+  .custom-tooltip .MuiTooltip-arrow {
+    color: #CCD4DE !important;
+  }
+  
+  .custom-tooltip-icon {
+    stroke: #285E8E;
+  }
+  
+  .custom-tooltip-title {
+    border-bottom: 1px solid #A0AEC0;
+    margin-bottom: 10px;
+  }
+  
+  .css-9zab1y-MuiDateCalendar-root,
+  .css-1gli0rh-MuiMultiSectionDigitalClock-root.MuiMultiSectionDigitalClock-root {
+    max-height: 300px !important;
+  }
+  
+  .css-1ca0hkk-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item {
+    font-size: 14px !important;
+    font-family: 'Manrope';
+  }
+  
+  .svg-bg-fill {
+    fill: #E9F3FF !important;
+  }
+  
+  .svg-path-fill {
+    fill: #3A7BC2 !important;
+  }
+
+  .w-220 {
+    width: 208px;
+  }
+  
+  .label_custom-search {
+    border: none;
+    border-bottom: 1px solid #CCD4DE;
+    width: 100%;
+    padding: 8px;
+  }
+  
+  .custom-select-box.MuiPaper-root.MuiMenu-paper {
+    border-radius: 4px 4px 16px 16px !important;
+    max-height: 400px;
+  }
+  
+  .label_search-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0px 8px;
+  }
+  

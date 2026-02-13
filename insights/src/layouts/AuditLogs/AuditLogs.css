@@ -1,0 +1,46 @@
+.users-title {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.template_count {
+  background-color: #f4f6ff;
+  border-radius: 50%;
+  margin-left: 7px;
+  color: #2961f4;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8x;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Manrope";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.count_forModule_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 120px;
+  height: 32px;
+  padding: 2px 8px 0 8px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Manrope";
+  background-color: #f4f6ff;
+  border-radius: 20px;
+  margin-left: 4px;
+}
+
+.count_forModule_ellipsis {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #2961f4;
+}

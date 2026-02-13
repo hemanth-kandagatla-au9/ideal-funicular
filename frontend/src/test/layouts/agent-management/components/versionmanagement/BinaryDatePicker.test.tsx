@@ -67,4 +67,3 @@ describe("BinaryDatePickerField", () => {
     expect(screen.queryByText("Date is required")).not.toBeInTheDocument();
   });
 });
-

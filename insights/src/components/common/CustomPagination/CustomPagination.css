@@ -1,0 +1,25 @@
+.pagination-text {
+  font-family: "Manrope";
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  letter-spacing: 0% !important;
+}
+
+.custom-select {
+  color: #777d74 !important; 
+  font-family: "Marope";
+  font-size: 12px;
+  font-weight: 600;
+  width: 160px;
+  height: 32px;
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+
+/* Ensure the dropdown items also have the same style */
+.custom-select .MuiMenuItem-root {
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
+  color: #777d74 !important; 
+}

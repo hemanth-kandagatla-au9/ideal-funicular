@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import FilterBar from "../../../../layouts/agent-management/home/FilterBar";
+import * as reactRedux from "react-redux";
 
 jest.mock("../../../../../src/layouts/agent-management/components/MultiSelectDropdown", () => {
   return ({ toggleTestId, onSelectChange, clearAll, selectAllOption }: any) => (
@@ -40,11 +41,16 @@ const defaultProps: any = {
   restartAgents: jest.fn(),
   healthCheckAgents: jest.fn(),
   openAgentUpgradeModal: jest.fn(),
+  openEnvUpgradeModal: jest.fn(),
   downloadToExcel: jest.fn(),
   sortBy: "",
   sortOrder: null,
   onSortChange: jest.fn(),
 };
+
+const mockDispatch = jest.fn();
+
+jest.spyOn(reactRedux, "useDispatch").mockReturnValue(mockDispatch);
 
 const setup = (override = {}) =>
   render(<FilterBar {...defaultProps} {...override} />);
@@ -55,6 +61,7 @@ describe("FilterBar", () => {
     expect(screen.getByTestId("agentStartBtn")).toBeInTheDocument();
     expect(screen.getByTestId("agentStopBtn")).toBeInTheDocument();
     expect(screen.getByTestId("agentRestartBtn")).toBeInTheDocument();
+    expect(screen.getByTestId("envUpgradeBtn")).toBeInTheDocument();
     expect(screen.getByTestId("agentUpdateBtn")).toBeInTheDocument();
     expect(screen.getByTestId("agentDownloadBtn")).toBeInTheDocument();
   });
@@ -72,9 +79,11 @@ describe("FilterBar", () => {
 
   it("calls upgrade and download", () => {
     setup();
+    fireEvent.click(screen.getByTestId("envUpgradeBtn"));
     fireEvent.click(screen.getByTestId("agentUpdateBtn"));
     fireEvent.click(screen.getByTestId("agentDownloadBtn"));
 
+    expect(defaultProps.openEnvUpgradeModal).toHaveBeenCalled();
     expect(defaultProps.openAgentUpgradeModal).toHaveBeenCalled();
     expect(defaultProps.downloadToExcel).toHaveBeenCalled();
   });

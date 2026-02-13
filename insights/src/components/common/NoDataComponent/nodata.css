@@ -1,0 +1,15 @@
+.nodata-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+}
+
+.item-align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.my-icon {
+    fill: blue;
+  }

@@ -22,6 +22,7 @@ import {
 } from "../../redux/selectors/agentManagement.selectors";
 import { canAccess } from "../../utils/PermissionUtils";
 import UpgradeAgentsDialog from "./components/UpgradeAgentsDialog";
+import EnvUpgradeDialog from "./components/EnvUpgradeDialog";
 import { AGENT_ACTIONS, ERROR_MESSAGE } from "./components/constants";
 import "./css/agentStyle.css";
 import "./css/common-style.css";
@@ -66,6 +67,8 @@ const AgentManagement = () => {
     selectedHostnameAgents: [],
     openAgentUpgrade: false,
     selectedUpgradeAgents: [],
+    openEnvUpgrade: false,
+    selectedEnvUpgradeAgents: [],
     selectedOption: AGENT_ACTIONS.UPDATE,
     dropdownOptionsobj: {
       os: [],
@@ -357,6 +360,20 @@ const AgentManagement = () => {
     return get(agentServices, "pagination.allCount", 0);
   };
 
+  const syncAgentConfig = () => {
+    const data = selectedHostnameAgentsData.map(({ hostname, agent_details }) => ({
+      hostname,
+      port: String(get(agent_details, "server_port", "")),
+    })).filter(({ port }) => port);
+
+    if (isEmpty(data)) {
+      errortoast("Please select the Agent Server");
+      return;
+    }
+
+    dispatch(agentManagementAction.syncAgentConfig(data));
+  };
+
   const executeStartStopAgents = () => {
     const finalData = agentSelectedData();
     if (startBulkAgent) {
@@ -395,6 +412,35 @@ const AgentManagement = () => {
       dispatch(agentManagementAction.fetchUpgradeAgents());
       updateState({ openAgentUpgrade: true, selectedUpgradeAgents: finalUpgradedAgents });
     }
+  };
+
+  const openEnvUpgradeModal = () => {
+    const finalEnvUpgradeAgents = upgradeSelectedAgents();
+    if (!isEmpty(finalEnvUpgradeAgents)) {
+      updateState({ openEnvUpgrade: true, selectedEnvUpgradeAgents: finalEnvUpgradeAgents });
+    }
+  };
+
+  const triggerEnvUpgrade = (env: string) => {
+    if (isEmpty(env)) {
+      errortoast("Please select the target environment");
+      return;
+    }
+
+    const data = state.selectedEnvUpgradeAgents
+      .map(({ hostname, agent_details }) => ({
+        hostname,
+        port: String(get(agent_details, "server_port", "")),
+      }))
+      .filter(({ port }) => port);
+
+    if (isEmpty(data)) {
+      errortoast("Please select the Agent Server");
+      return;
+    }
+
+    dispatch(agentManagementAction.envUpgradeSelectedAgents({ data, env, mode: "bulk" }));
+    updateState({ openEnvUpgrade: false, selectedEnvUpgradeAgents: [] });
   };
 
   const fetchDataForDownload = async (pageSize: number): Promise<any[]> => {
@@ -481,6 +527,8 @@ const AgentManagement = () => {
             restartAgents={restartAgents}
             healthCheckAgents={healthCheckAgents}
             openAgentUpgradeModal={openAgentUpgradeModal}
+            openEnvUpgradeModal={openEnvUpgradeModal}
+            syncAgentConfig={syncAgentConfig}
             downloadToExcel={downloadToExcel}
             sortBy={sortBy}
             sortOrder={sortOrder}
@@ -492,6 +540,7 @@ const AgentManagement = () => {
               loading={loading}
               agents={getAgents()}
               pagination={pagination}
+              collapseToken={status}
               selectedHostnameAgentsData={selectedHostnameAgentsData}
               handlePagination={handlePagination}
               handleSelectHostAgent={handleSelectHostAgent}
@@ -515,6 +564,12 @@ const AgentManagement = () => {
         showAgentUpgrade={state.openAgentUpgrade}
         closeAgentUpgrade={() => updateState({ openAgentUpgrade: false })}
         upgradeAgentData={state.selectedUpgradeAgents}
+      />
+      <EnvUpgradeDialog
+        showEnvUpgrade={state.openEnvUpgrade}
+        closeEnvUpgrade={() => updateState({ openEnvUpgrade: false })}
+        envUpgradeData={state.selectedEnvUpgradeAgents}
+        onConfirm={triggerEnvUpgrade}
       />
       <PopUp
         show={showAgentModal}

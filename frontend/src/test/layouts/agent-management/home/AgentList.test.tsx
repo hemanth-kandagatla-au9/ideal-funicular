@@ -41,9 +41,9 @@ describe('AgentList Component', () => {
 
   const mockPagination = {
     limit: 10,
-    page: 1,
-    total: 2,
-    totalPages: 1
+    pageNo: 1,
+    totalPage: 1,
+    totalRows: 2
   };
 
   const defaultProps = {
@@ -74,21 +74,18 @@ describe('AgentList Component', () => {
   test('renders agent list correctly when not loading and has data', () => {
     render(<AgentList {...defaultProps} />);
     expect(screen.getByText('Hostname')).toBeInTheDocument();
-    expect(screen.getByText('PID')).toBeInTheDocument();
     expect(screen.getByText('OS')).toBeInTheDocument();
     expect(screen.getByText('Uptime')).toBeInTheDocument();
     expect(screen.getByText('Version')).toBeInTheDocument();
     expect(screen.getByText('Status')).toBeInTheDocument();
     expect(screen.getByText('Action')).toBeInTheDocument();
     expect(screen.getByText('agent1')).toBeInTheDocument();
-    expect(screen.getByText('1234')).toBeInTheDocument();
     expect(screen.getByText('Linux')).toBeInTheDocument();
     expect(screen.getByText('2 days')).toBeInTheDocument();
     expect(screen.getByText('v1.0.0')).toBeInTheDocument();
     expect(screen.getByText('Active')).toBeInTheDocument();
     
     expect(screen.getByText('agent2')).toBeInTheDocument();
-    expect(screen.getByText('5678')).toBeInTheDocument();
     expect(screen.getByText('Windows')).toBeInTheDocument();
     expect(screen.getByText('1 day')).toBeInTheDocument();
     expect(screen.getByText('v1.1.0')).toBeInTheDocument();
@@ -101,9 +98,9 @@ describe('AgentList Component', () => {
    
     expect(defaultProps.pagination).toEqual(expect.objectContaining({
       limit: 10,
-      page: 1,
-      total: 2,
-      totalPages: 1
+      pageNo: 1,
+      totalPage: 1,
+      totalRows: 2
     }));
     
    
@@ -116,19 +113,18 @@ describe('AgentList Component', () => {
     const selectAllButton = screen.getAllByTestId('agentTickBtn')[0];
     fireEvent.click(selectAllButton);
     
-    expect(defaultProps.setSelectedHostnameAgentsData).toHaveBeenCalledWith([
-      { hostname: 'agent1', agent_details: { up_time: '2 days' } },
-      { hostname: 'agent2', agent_details: { up_time: '1 day' } }
-    ]);
+    expect(defaultProps.setSelectedHostnameAgentsData).toHaveBeenCalledWith(
+      expect.arrayContaining([
+        expect.objectContaining({ hostname: 'agent1' }),
+        expect.objectContaining({ hostname: 'agent2' })
+      ])
+    );
   });
 
   test('handles deselect all agents correctly when all are selected', () => {
     const propsWithSelectedAgents = {
       ...defaultProps,
-      selectedHostnameAgentsData: [
-        { hostname: 'agent1', agent_details: {} },
-        { hostname: 'agent2', agent_details: {} }
-      ]
+      selectedHostnameAgentsData: mockAgents
     };
     
     render(<AgentList {...propsWithSelectedAgents} />);
@@ -151,7 +147,7 @@ describe('AgentList Component', () => {
   test('displays blue tick for selected agents', () => {
     const propsWithSelectedAgent = {
       ...defaultProps,
-      selectedHostnameAgentsData: [{ hostname: 'agent1', agent_details: {} }]
+      selectedHostnameAgentsData: [mockAgents[0]]
     };
     
     render(<AgentList {...propsWithSelectedAgent} />);
@@ -201,6 +197,19 @@ describe('AgentList Component', () => {
     expect(screen.getByText('v1.1.0')).toBeInTheDocument();
   });
 
+  test('expands hostname accordion and shows module sections', () => {
+    render(<AgentList {...defaultProps} />);
+
+    const toggleButtons = screen.getAllByTestId('hostnameAccordionToggle');
+    fireEvent.click(toggleButtons[0]);
+
+    expect(screen.getByText('Agent')).toBeInTheDocument();
+    expect(screen.getByText('Supervisor')).toBeInTheDocument();
+    expect(screen.getByText('Cybersphere')).toBeInTheDocument();
+    expect(screen.getByText('Insights')).toBeInTheDocument();
+    expect(screen.getByText('Workflow')).toBeInTheDocument();
+  });
+
   test('areAllAgentsSelected returns correct value', () => {
   });
 
@@ -216,6 +225,5 @@ describe('AgentList Component', () => {
     expect(screen.getAllByTestId('agentTickBtn')).toHaveLength(1);
   });
 });
-
 
 

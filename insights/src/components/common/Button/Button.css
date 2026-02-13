@@ -1,0 +1,33 @@
+.primary-btn {
+  justify-content: center;
+  background-color: #3a7bc2 !important;
+  min-width: 89px;
+  border-radius: 32px !important;
+  height: 36px;
+  color: white !important;
+  align-items: center;
+  display: flex;
+
+  &:disabled {
+    background-color: adjust-color(#3a7bc2, 30%) !important;
+    color: adjust-color(white, 60%) !important;
+    cursor: not-allowed;
+  }
+}
+
+.secondary-btn {
+  justify-content: center;
+  background-color: #e9f3ff !important;
+  min-width: 89px;
+  border-radius: 32px !important;
+  height: 36px;
+  color: #3a7bc2 !important;
+  align-items: center;
+  display: flex;
+
+  &:disabled {
+    background-color: adjust-color(#e9f3ff, 30%) !important;
+    color: adjust-color(#3a7bc2, 60%) !important;
+    cursor: not-allowed !important;
+  }
+}

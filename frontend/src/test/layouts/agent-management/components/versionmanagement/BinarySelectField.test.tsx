@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import BinarySelectField from "../../../../../layouts/agent-management/components/versionmanagement/BinarySelectField";
+import BinarySelectField from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinarySelectField";
 import "@testing-library/jest-dom";
 
 describe("BinarySelectField", () => {
@@ -89,4 +89,3 @@ describe("BinarySelectField", () => {
     expect(select).toBeInTheDocument();
   });
 });
-

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import SideBar from "../../../layouts/agent-management/components/sidebar/SideBar";
+import SideBar from "../../../../src/layouts/agent-management/components/sidebar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -139,4 +139,3 @@ describe("SideBar", () => {
     expect(screen.getByText("SchedulerDialog")).toBeInTheDocument();
   });
 });
-

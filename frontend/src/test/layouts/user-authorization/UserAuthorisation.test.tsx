@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import UserAuthorization from "../../../layouts/user-authorization/UserAuthorization";
+import UserAuthorization from "../../../../src/layouts/user-authorization/UserAuthorization";
 
 import {
   getUsers,
@@ -184,4 +184,3 @@ describe("UserAuthorization", () => {
     );
   });
 });
-

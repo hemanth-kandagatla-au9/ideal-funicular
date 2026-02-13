@@ -42,4 +42,3 @@ const exportDataToExcel = (jsonData: Record<string, any>[], fileName: string): v
 
 const ExcelUtils = { exportDataToExcel };
 export default ExcelUtils;
-

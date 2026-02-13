@@ -4,8 +4,8 @@ import React from "react";
 import { render, fireEvent, screen, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import * as ReactRedux from "react-redux";
-import * as PermissionUtils from "../../../../../utils/PermissionUtils";
-import SideBar from "../../../../../layouts/agent-management/components/sidebar/SideBar";
+import * as PermissionUtils from "../../../../../../src/utils/PermissionUtils";
+import SideBar from "../../../../../../src/layouts/agent-management/components/sidebar/SideBar";
 
 const flushPromises = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
 
@@ -344,4 +344,3 @@ expect(screen.getByTestId("sidebarId")).toBeInTheDocument();
     expect(props.setOpenSidebar).toHaveBeenCalledWith(false);
   });
 });
-

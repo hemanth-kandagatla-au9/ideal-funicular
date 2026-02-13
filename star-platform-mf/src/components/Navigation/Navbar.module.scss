@@ -1,0 +1,74 @@
+$accent: #2961F4;
+$text: #05060F;
+// #2961F4
+.navParent {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  // padding-right: 1.5rem;
+  // gap: 1rem;
+  img{
+    // background: #F1F1F1;
+  }
+}
+
+.navWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  // border: 1px solid rgba(41, 97, 244, 0.25);
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: #fff;
+  flex-shrink: 0;
+  min-height: 40px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Johnson Text", "Kumbh Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: $text;
+  background: #fff;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $accent;
+    // border-color: rgba(41, 97, 244, 0.3);
+    // background: #f8faff;
+  }
+}
+
+.activeTab {
+  color: $accent;
+  // border: 1px solid $accent;
+  border-radius: 8px;
+  // background: #f1f8ff;
+}
+
+.tabContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.gridWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gridIcon {
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+}

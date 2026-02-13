@@ -1,0 +1,184 @@
+.platformDashboard {
+  font-family: 'Kumbh Sans';
+  // overflow-x: hidden;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  margin-top: 80px;
+  align-items: center;
+  background: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+}
+.lp_header_l1_welcome {
+  font-family: 'JohnsonDisplay-Medium' !important;
+  background: linear-gradient(90deg, #0a5db7 0%, #6c5ce7 53.85%, #eb1700 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0);
+}
+.lp_header_l1 h2 {
+  font-family: 'JohnsonDisplay-Medium' !important;
+  padding: 3px;
+  margin: 2px;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 36px;
+  leading-trim: NONE;
+  line-height: 100%;
+  letter-spacing: 0%;
+  background: linear-gradient(90deg, #3a7bc2 0%, #6c5ce7 53.85%, #eb1700 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: auto;
+  display: inline-block;
+  white-space: nowrap;
+
+  /* Slightly better text flow on long names */
+  max-width: 100%;
+}
+
+.lp_header_l2 {
+  font-size: 16px;
+  font-family: 'JohnsonDisplay-Light' !important;
+  font-weight: 400;
+  color: #97a2b0;
+  margin: 13px 0px 5px 0px;
+}
+
+.subheader_text {
+  font-size: 16px;
+  color: rgba(5, 6, 15, 0.8) !important;
+  font-family: 'JohnsonText-Medium' !important;
+  // color: #05060fcc !important;
+  font-size: 16px;
+  // background: none !important;
+  // height: 2.4rem;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.impact-card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+
+.value {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.change {
+  color: green;
+}
+
+.systemsGrid1 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+
+  // max-width: 1100px;
+  /* margin: 0 auto; */
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.systemCard {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(221, 225, 230, 1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-width: 0;
+  /* max-width: 360px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 279px;
+  // min-height: 230px;
+  // max-height: 290px;
+  position: relative;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.systemCard:hover {
+  transform: translateY(-3px) scale(1.01);
+}
+
+.risebotCard {
+  &:hover {
+    background: linear-gradient(55deg, #149181 7.46%, rgba(41, 115, 172, 0.6) 97.51%);
+
+    .systemName,
+    .systemDetail {
+      color: white !important;
+    }
+  }
+}
+
+.pamCard:hover {
+  background: linear-gradient(227.06deg, #c64169 0%, #b7a2e5 97.01%);
+
+  .systemName,
+  .systemDetail {
+    color: white !important;
+  }
+}
+
+.neuroflowCard:hover {
+  background: linear-gradient(226.22deg, #ff2909 0%, #ffd9bb 94.95%);
+
+  .systemName,
+  .systemDetail {
+    color: white !important;
+  }
+}
+
+.agenthubCard:hover {
+  background: linear-gradient(247.73deg, #ffb534 0%, #ff33d6 100%);
+
+  .systemName,
+  .systemDetail {
+    color: white !important;
+  }
+}
+
+.insightCard:hover {
+  background: linear-gradient(225.91deg, #773dff 0%, #92ffcc 98.76%);
+
+  .systemName,
+  .systemDetail {
+    color: white !important;
+  }
+}
+
+.discoveryhubCard:hover {
+  background: linear-gradient(225.24deg, #ff9028 3.28%, #81eeb6 98.24%);
+
+  .systemName,
+  .systemDetail {
+    color: white !important;
+  }
+}

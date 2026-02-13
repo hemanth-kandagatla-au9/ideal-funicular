@@ -1,0 +1,42 @@
+.customProgressBar .progress-bar {
+  background-color: #4caf50 !important;
+}
+
+.job-summery-accordion-label {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+.job-summery-accordion-value {
+  color: #334155 !important;
+  font-weight: 500 !important;
+  font-family: "Manrope" !important;
+  font-size: 13px !important;
+  width: 100px !important;
+  text-overflow: ellipsis !important;
+}
+
+.custom_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: color-mix(in srgb, var(--card-color) 30%, transparent);
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  width: 35%;
+  height: 40px;
+}
+
+/* Hover effect */
+.custom_card:hover {
+  transform: scale(1.02);
+}
+
+.custom_card.active_card {
+  border: 2px solid var(--card-color);
+}

@@ -1,0 +1,57 @@
+.modal-dialog.popupModal {
+  margin-top: 185px !important;
+  width: 471px !important;
+  height: 192px !important;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 1%);
+}
+
+#modalHeaderTitle {
+  font-family: "RobotoMedium", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #5e5873;
+}
+
+#modalBody {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+#modalButtonSpan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin-top: 18px;
+  margin-bottom: 7px;
+  margin-right: 13px;
+}
+.modalButton {
+  height: 40px;
+  width: 170px;
+  border-radius: 4px;
+}
+.modalButton#modalButtonWhite {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  background: #e4e4e4;
+  border-color: #e4e4e4;
+  color: #404040;
+  line-height: 16px;
+}
+.modalButton#modalButtonBlue {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  background: #104f8e;
+  border-color: #104f8e;
+  color: #ffffff;
+  line-height: 16px;
+}

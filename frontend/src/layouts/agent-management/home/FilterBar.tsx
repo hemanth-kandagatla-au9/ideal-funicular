@@ -8,14 +8,18 @@ import restartIcon from "../../../images/agent-management/assets/Restart.svg";
 import HistoryIcon from "../../../images/agent-management/assets/History.svg";
 import downloadIcon from "../../../images/agent-management/assets/download.svg";
 import crossBlack from "../../../images/agent-management/assets/crossBlack.svg";
+import syncIcon from "../../../images/agent-management/assets/Sync.svg";
+import envUpgradeIcon from "../../../images/agent-management/assets/EnvUpgrade.svg";
 import {
   restartAgentButtonText,
   startAgentButtonText,
   stopAgentButtonText,
   checkStatusAgentButtonText,
   upgradeAgentText,
+  envUpgradeButtonText,
   downloadToExcelButtonText,
   clearAllButtonText,
+  syncAgentConfigButtonText,
 } from "../../../constants/strings";
 import { DropdownOption, FilteredData } from "@/types/AgentManagementState";
 
@@ -50,6 +54,8 @@ interface FilterBarProps {
   restartAgents: () => void;
   healthCheckAgents: () => void;
   openAgentUpgradeModal: () => void;
+  openEnvUpgradeModal: () => void;
+  syncAgentConfig: () => void;
   downloadToExcel: () => void;
   sortBy: string;
   sortOrder: 'asc' | 'desc' | null;
@@ -72,7 +78,9 @@ const FilterBar: React.FC<FilterBarProps> = ({
   restartAgents,
   healthCheckAgents,
   openAgentUpgradeModal,
+  openEnvUpgradeModal,
   downloadToExcel,
+  syncAgentConfig,
   sortBy,
   sortOrder,
   onSortChange,
@@ -242,7 +250,32 @@ const FilterBar: React.FC<FilterBarProps> = ({
                 </Button>
               </div>
             )}
+
+            <div className="executionBtnsSection">
+              <Button
+                variant="outline"
+                data-testid="syncAgentConfigRowBtn"
+                title={syncAgentConfigButtonText}
+                onClick={syncAgentConfig}
+                style={{ padding: "5px" }}
+              >
+                <img src={syncIcon} alt="sync agent config" />
+              </Button>
+            </div>
             
+            <div className="executionBtnsSection">
+              <Button
+                variant="outline"
+                className="envUpgradeBtn"
+                data-testid="envUpgradeBtn"
+                title={envUpgradeButtonText}
+                onClick={openEnvUpgradeModal}
+                style={{ padding: "5px" }}
+              >
+                <img src={envUpgradeIcon} alt="env upgrade" />
+              </Button>
+            </div>
+
             {isForceUpgradeAgentEnabled && (
               <div className="executionBtnsSection">
                 <Button variant="outline" className="updateAllBtn" data-testid="agentUpdateBtn" title={upgradeAgentText} onClick={openAgentUpgradeModal} style={{ padding: "5px" }}>

@@ -3,7 +3,7 @@ import {
   convertDateTime,
   prepareAgentDetails,
   prepareAgentConfigDetails,
-} from "../../../../layouts/agent-management/helpers/agentHelpers";
+} from "../../../../../src/layouts/agent-management/helpers/agentHelpers";
 
 describe("agentHelpers", () => {
   describe("convertDate", () => {
@@ -98,4 +98,3 @@ describe("agentHelpers", () => {
     });
   });
 });
-

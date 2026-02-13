@@ -1,8 +1,8 @@
-import DownloadToExcel from "../../../../layouts/agent-management/helpers/DownloadToExcel";
+import DownloadToExcel from "../../../../../src/layouts/agent-management/helpers/DownloadToExcel";
 import ExcelUtils from "@/utils/ExportDataToExcel";
 import Utils from "@/utils/utils";
-import { successtoast, errortoast } from "../../../../layouts/agent-management/helpers/CustomToast";
-import { convertDate } from "../../../../layouts/agent-management/helpers/agentHelpers";
+import { successtoast, errortoast } from "../../../../../src/layouts/agent-management/helpers/CustomToast";
+import { convertDate } from "../../../../../src/layouts/agent-management/helpers/agentHelpers";
 jest.mock("@/utils/ExportDataToExcel", () => ({
   exportDataToExcel: jest.fn(),
 }));
@@ -82,4 +82,3 @@ describe("DownloadToExcel", () => {
     );
   });
 });
-

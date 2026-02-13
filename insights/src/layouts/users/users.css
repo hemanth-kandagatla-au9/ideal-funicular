@@ -1,0 +1,29 @@
+.users-title {
+  font-family: Manrope !important;
+  color: rgb(16, 24, 40) !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  padding-left: 16px !important;
+}
+
+.tag-view-container {
+  font-size: 12px;
+  max-height: 100px;
+  max-width: 350px;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  background-color: #3a7bc2;
+  color: white;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  font-family: Manrope !important;
+  margin-left: 6px;
+  font-weight: 500 !important;
+}

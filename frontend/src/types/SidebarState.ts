@@ -35,6 +35,8 @@ interface SidebarState {
   isLogsLoading: boolean;
   loadMore: boolean;
   port: string;
+  openEnvUpgrade: boolean;
+  selectedEnvUpgradeAgents: any[];
 }
 
 interface SideBarProps {

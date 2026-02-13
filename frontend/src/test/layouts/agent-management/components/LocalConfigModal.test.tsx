@@ -68,4 +68,3 @@ describe('LocalConfigModal Component', () => {
     expect(screen.queryByRole('dialog')).toBeTruthy();
   });
 });
-

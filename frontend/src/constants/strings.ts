@@ -9,7 +9,7 @@ const deleteText = "Delete";
 const hostNameLabel = "Hostname";
 const jobLogTooltipText = "Job Log";
 const refreshTooltipText = "Refresh";
-const userAuthorisationTooltipText = "User Authorisation";
+const userAuthorisationTooltipText = "User Authorization";
 const buildDateText = "Build Date : ";
 const notAvailableText = "Not Available";
 const emptyMessageText = "Please fill in the blank field";
@@ -51,6 +51,9 @@ const utilizationMetricsTitle = "Utilization Metrics";
 const startAgentButtonText = "Start Agent";
 const stopAgentButtonText = "Stop Agent";
 const restartAgentButtonText = "Restart Agent";
+const envUpgradeButtonText = "Env Change";
+const envUpgradeTitleText = "Environment Upgrade";
+const syncAgentConfigButtonText = "Sync Agent Config";
 const checkStatusAgentButtonText = "Check Status";
 const upgradeAgentText = "Upgrade RISEAGENT";
 const downloadToExcelButtonText = "Download to Excel";
@@ -97,6 +100,9 @@ export {
   startAgentButtonText,
   stopAgentButtonText,
   restartAgentButtonText,
+  envUpgradeButtonText,
+  envUpgradeTitleText,
+  syncAgentConfigButtonText,
   checkStatusAgentButtonText,
   upgradeAgentText,
   downloadToExcelButtonText,

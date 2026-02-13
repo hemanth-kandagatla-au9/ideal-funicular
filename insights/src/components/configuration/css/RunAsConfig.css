@@ -1,0 +1,133 @@
+.config-container {
+  width: 100%;
+  max-width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.config-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.config-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgb(64, 64, 64);
+}
+
+.config-body {
+  padding: 24px;
+}
+
+.namespace-input {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 16px;
+}
+
+.namespace-input:focus {
+  border-color: #4a90e2;
+}
+
+.namespaces-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 40px;
+}
+
+.namespace-tag {
+  display: flex;
+  align-items: center;
+  border: 1px solid #033eda;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #033eda;
+  font-weight: 500;
+  font-family: "Manrope";
+}
+.namespace-tag.active {
+  border: 1px solid #033eda;
+  color: #033eda;
+}
+
+.namespace-tag.pending {
+  border: 1px solid #ff9800;
+  color: #ff9800;
+}
+.namespace-tag.rejected {
+  border: 1px solid #cc2901;
+  color: #cc2901;
+}
+.namespace-tag.not_saved_yet {
+  border: 1px solid #000000;
+  color: #000000;
+}
+
+.tag-actions {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.edit-tag,
+.remove-tag {
+  background: none;
+  border: none;
+  color: #667085;
+  cursor: pointer;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+}
+
+.edit-tag:hover {
+  color: #0d5bba;
+}
+
+.remove-tag {
+  margin-left: 4px;
+  color: black;
+}
+
+.remove-tag:hover {
+  color: #c0392b;
+}
+
+.config-footer {
+  padding: 16px 24px;
+  /* border-top: 1px solid #eaeaea; */
+  text-align: left;
+}
+
+.save-btn {
+  padding: 8px 20px;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.save-btn:hover {
+  background: #0d5bba;
+}
+
+.save-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}

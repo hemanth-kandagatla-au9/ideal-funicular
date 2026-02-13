@@ -31,7 +31,6 @@
   animation-direction: reverse;
 }
 
-
 button,
 .btn,
 button.btn,
@@ -41,7 +40,6 @@ input[type="submit"] {
   border-radius: 36px !important;
   transition: all 0.15s ease;
 }
-
 
 button:focus,
 button:focus-visible,
@@ -67,7 +65,6 @@ input[type="submit"]:not([disabled]):active {
   outline: none !important;
 }
 
-
 .risebot-dropdownMenus [class*="control"],
 .risebot-searchfilter .form-control,
 .form-control,
@@ -81,7 +78,7 @@ body {
   color: #404040;
   font-size: 14px;
   font-weight: 500;
-  font-family:  "Johnson Text";
+  font-family:  "Johnson Text", sans-serif;
   font-style: normal;
 }
 
@@ -90,12 +87,12 @@ h1 {
   font-size: 1.7em !important;
   font-style: normal;
   line-height: 1.5;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
 }
 
 h2 {
   color: #404040;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-weight: 500;
   font-size: 1.5em !important;
   margin-top: 1em;
@@ -103,7 +100,7 @@ h2 {
 
 h3 {
   color: #000;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-weight: 500;
   font-size: 1.2em !important;
   margin-top: 1.2em;
@@ -111,7 +108,7 @@ h3 {
 
 h4 {
   color: #000;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-weight: 500;
   font-size: 1em !important;
   margin-top: 1.3em;
@@ -332,7 +329,7 @@ a:hover {
 }
 
 .breadcrumb-item::before {
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-size: 24px;
   vertical-align: sub;
   color: #ffffff;
@@ -849,14 +846,14 @@ button:not(:disabled),
   position: relative;
   letter-spacing: 0;
   min-width: 155px;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-weight: 500;
 }
 
 .form-select {
   background-color: #faf9f7 !important;
   border: 1px solid #e8e8e8;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 13px !important;
@@ -870,7 +867,7 @@ button:not(:disabled),
   border-bottom: 5px solid #c4321d;
   padding-bottom: 10px;
   border-radius: 3px;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-weight: 500 !important;
 }
 
@@ -878,7 +875,7 @@ button:not(:disabled),
   text-decoration: none;
   color: #ffffff !important;
   font-size: 16px;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-weight: 400;
 }
 
@@ -910,7 +907,7 @@ button:not(:disabled),
   border: 0px;
   display: flex;
   align-items: center;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
 }
 
 .node__leaf > .group {
@@ -924,7 +921,7 @@ button:not(:disabled),
   line-height: 16px;
   padding-left: 24px;
   padding-right: 18px;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
 }
 
 .breadcrumb .form-select option:hover {
@@ -939,7 +936,7 @@ select option {
 
 .roboto-medium-desert-storm-18px {
   color: #faf9f7;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -972,7 +969,7 @@ select option {
   box-shadow: none !important;
   font-size: 16px;
   line-height: 19px;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   padding: 0px;
   padding-left: 0px !important;
   background-color: #faf9f7 !important;
@@ -1236,7 +1233,7 @@ div.dateTimePicker {
   right: 31.56%;
   top: 26.25%;
   bottom: 26.25%;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-style: normal;
   
   font-size: 16px;
@@ -1321,7 +1318,7 @@ div.dateTimePicker {
 }
 
 .nameRole .col div {
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -1359,7 +1356,7 @@ div.dateTimePicker {
   border: unset !important;
   background-color: unset !important;
   border-radius: 20px !important;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -1369,7 +1366,7 @@ div.dateTimePicker {
 
 .page-item.active .page-link {
   color: #ffffff !important;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -1396,7 +1393,7 @@ div.dateTimePicker {
 
 .rightRailModal .form-select {
   padding: 8px;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-size: 16px;
   line-height: 19px;
   color: #404040;
@@ -1604,7 +1601,7 @@ span.jodit-toolbar-button.jodit-toolbar-button_size_middle.jodit-toolbar-button_
   margin: -20px 0px;
   height: 40px !important;
   background: #f0efed;
-  font-family:  "Johnson Text";
+  font-family: "Johnson Text", sans-serif;
   font-size: 16px !important;
 }
 .dateRangeForPLanner .dateDropdown {
@@ -1616,4 +1613,3 @@ span.jodit-toolbar-button.jodit-toolbar-button_size_middle.jodit-toolbar-button_
 .dateRangeForPLanner .dateDropdown svg {
   margin-top: -6px !important;
 }
-

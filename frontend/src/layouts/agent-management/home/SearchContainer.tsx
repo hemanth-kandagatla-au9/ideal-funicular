@@ -276,4 +276,3 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
 };
 
 export default SearchContainer;
-

@@ -1,0 +1,548 @@
+.title {
+  font-family: "Manrope" !important;
+  color: black !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}
+
+.dialogue_title {
+  font-family: "Manrope" !important;
+  color: black !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+
+.model_input_field {
+  border-radius: 30px !important;
+}
+
+.job-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-container {
+  /* background-color: #f9f5ff; */
+  border-radius: 50%;
+  /* margin-left: 7px; */
+  color: #2961f4;
+  /* padding: 5px 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Manrope";
+}
+
+.job-icon {
+  color: #2961f4;
+  font-size: 16px !important;
+  min-width: 24px;
+}
+.label_title {
+  font-family: "Manrope" !important;
+  color: black !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+
+.grid-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.loader-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+.menu-title {
+  font-family: "Manrope" !important;
+  color: black !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  display: flex !important;
+}
+
+.menu-caption {
+  font-family: "Manrope" !important;
+  color: rgb(148, 163, 184) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+.cmdb-filter-chip {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+}
+.cmdb-adhoc_run_btn {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  background-color: #2961f4 !important;
+  color: #ffffff !important;
+  text-transform: capitalize !important;
+}
+.cmdb-adhoc_delete_btn {
+  font-family: "Manrope" !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  background-color: #2961f4 !important;
+  color: #ffffff !important;
+  text-transform: capitalize !important;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.host-modal-count-tile {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  width: 50% !important;
+  padding: 12px 16px !important;
+  min-height: 60px !important;
+  opacity: 1 !important;
+}
+
+.host-modal-count-tile:hover:not(.host-modal-count-tile--disabled) {
+  transform: scale(1.02);
+}
+
+.host-modal-count-tile--active {
+  border-width: 2px;
+  border-style: solid;
+}
+
+.host-modal-count-tile--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.host-modal-count-tile--disabled:hover {
+  transform: none;
+}
+
+.host-modal-count-tile__content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* width: 100%; */
+  justify-content: center;
+}
+
+.host-modal-count-tile__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.host-modal-count-tile__title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+}
+
+.host-modal-count-tile__value {
+  font-size: 16px !important;
+  font-weight: bold;
+  color: #333;
+  margin-left: auto;
+  font-family: "Manrope";
+}
+
+/* Modal Container Styles */
+.host-modal-container {
+  position: relative;
+}
+
+.host-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1200px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 24px;
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  font-family: "Manrope";
+}
+
+.host-modal-count-tiles {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-family: "Manrope";
+}
+
+/* Table Cell Styles */
+.host-modal-table-cell {
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Manrope";
+}
+
+.host-modal-table-cell--pending {
+  color: #000000;
+}
+
+.host-modal-table-cell--success {
+  color: #008000;
+}
+
+.host-modal-table-cell--fail {
+  color: #ff0000;
+}
+
+/* Status Cell Styles */
+.host-modal-status-cell {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.host-modal-status-cell--pending {
+  color: #ffc107;
+}
+
+.host-modal-status-cell--success {
+  color: #008000;
+}
+
+.host-modal-status-cell--fail {
+  color: #ff0000;
+}
+
+.host-modal-datagrid-container {
+  /* height: 46vh; */
+  height: 100%;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.host-modal-loading-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 56px);
+  width: 100%;
+  position: relative;
+  top: 56px;
+}
+
+.host-modal-manual-loading-overlay {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+}
+
+.host-modal-manual-loading-content {
+  text-align: center;
+}
+
+.host-modal-loading-spinner {
+  color: #2196f3;
+}
+
+.host-modal-loading-text {
+  margin-top: 12px;
+  color: #666;
+}
+
+.host-modal-no-rows-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #666;
+  padding-top: 56px;
+}
+
+.host-modal-no-rows-message {
+  margin-bottom: 16px;
+  color: #666;
+  font-weight: 500;
+}
+
+.host-modal-pagination-container {
+  border-top: 1px solid #ddd;
+  /* padding-top: 16px; */
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .host-modal-content {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .host-modal-count-tile {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .host-modal-count-tiles {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .host-modal-close-button {
+    top: 16px;
+    right: 16px;
+  }
+
+  .host-modal-title {
+    font-size: 13px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .host-modal-content {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .host-modal-count-tile__content {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .host-modal-count-tile__value {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.host-modal-header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 8px;
+}
+
+.host-modal-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.host-modal-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+
+.host-modal-close-button {
+  color: #666;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+
+.host-modal-close-button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .host-modal-header-content {
+    padding-right: 0;
+  }
+
+  .host-modal-title {
+    padding-right: 8px;
+  }
+
+  .host-modal-close-button {
+    position: static;
+    transform: none;
+  }
+}
+
+.host-modal-count-tile--disabled {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+/* ====================================== */
+/* Platform-Specific Styles for CMDB (isLoadingInHost) */
+/* ====================================== */
+
+.platform-cmdb-wrapper {
+  background: #ffffff;
+  padding: 8px 16px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+/* Reduce header spacing in platform */
+.platform-cmdb-wrapper > .menu-title {
+  margin-bottom: 8px !important;
+}
+
+/* Reduce table card spacing - target the white card specifically */
+.platform-cmdb-wrapper > div[style*="backgroundColor"] {
+  padding: 8px 12px !important;
+  margin-bottom: 16px !important;
+}
+
+/* Reduce search and controls section spacing */
+.platform-cmdb-wrapper > div > div[style*="justifyContent"] {
+  margin-bottom: 12px !important;
+}
+
+/* Make filter chips smaller */
+.platform-cmdb-wrapper .cmdb-filter-chip {
+  font-size: 13px !important;
+  height: 30px !important;
+}
+
+/* Reduce pagination footer spacing - target the pagination container */
+.platform-cmdb-wrapper div[style*="borderTop"] {
+  margin-top: 12px !important;
+  padding-top: 12px !important;
+}
+
+/* Fix action buttons alignment */
+.platform-cmdb-wrapper .cmdb-adhoc_delete_btn {
+  font-size: 13px !important;
+  padding: 6px 14px !important;
+  min-height: 34px !important;
+}
+
+/* Responsive adjustments for platform CMDB */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .platform-cmdb-wrapper {
+    padding: 6px 14px !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .platform-cmdb-wrapper {
+    padding: 8px 16px !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  .platform-cmdb-wrapper {
+    padding: 10px 18px !important;
+  }
+}
+
+/* ====================================== */
+/* Platform-Specific Styles for CMDB Logs Modal (isLoadingInHost) */
+/* ====================================== */
+
+/* Main modal container - fixed, no scroll on container itself */
+.modal-container.platform-cmdb-logs-modal {
+  height: 96vh !important;
+  width: 96vw !important;
+  max-height: 96vh !important;
+  max-width: 96vw !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Modal header - fixed at top */
+.modal-container.platform-cmdb-logs-modal .modal-header {
+  flex: 0 0 auto !important;
+  padding-bottom: 12px !important;
+  margin-bottom: 0px !important;
+  max-height: 80px !important;
+}
+
+/* Content wrapper - this is the scrollable area */
+.modal-container.platform-cmdb-logs-modal > div[style*="flex: 1"] {
+  flex: 1 1 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  min-height: 0 !important;
+  max-height: calc(96vh - 100px) !important;
+}
+
+/* Modal content area */
+.modal-container.platform-cmdb-logs-modal .modal-content {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+}
+
+/* Search and filter container */
+.modal-container.platform-cmdb-logs-modal .search_filter_container {
+  margin-bottom: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Data grid container - constrained height */
+.modal-container.platform-cmdb-logs-modal div[style*="height: 60vh"] {
+  height: calc(96vh - 320px) !important;
+  max-height: calc(96vh - 320px) !important;
+  overflow: auto !important;
+  flex: 1 1 auto !important;
+}
+
+/* Pagination footer - fixed at bottom of scroll area */
+.modal-container.platform-cmdb-logs-modal div[style*="borderTop"] {
+  flex: 0 0 auto !important;
+  padding: 8px 10px !important;
+  margin-top: 8px !important;
+  position: sticky !important;
+  bottom: 0 !important;
+  background: white !important;
+  z-index: 10 !important;
+}

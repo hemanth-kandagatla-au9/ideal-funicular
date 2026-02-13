@@ -4,6 +4,7 @@ import Config from "../../config/config";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
 import AxiosInstanceClass from "../axiosInstance";
 
+
 const token = getLocalAccessToken();
 
 interface EndpointGroup {
@@ -40,7 +41,7 @@ interface PaginationData {
   agentVersion?: string | string[];
   serviceName?: string | string[];
   sortBy?: string;
-  sortOrder?: "asc" | "desc";
+  sortOrder?: 'asc' | 'desc';
 }
 
 interface AgentLogsData {
@@ -197,12 +198,15 @@ const fetchAgentService = async (data: PaginationData) => {
   const { pageSize, pageNo, status, agentSearch, os, region, environment, platform, sid, agentVersion, serviceName, sortBy, sortOrder } = data;
   try {
     const baseUrl = `${rustAgent.get.getAgents}?pageSize=${pageSize}&pageNo=${pageNo}&status=${status}&search=${agentSearch}&osTypes=${os}&regions=${region}&environments=${environment}&platforms=${platform}&sids=${sid}&agentVersions=${agentVersion}&serviceNames=${serviceName}`;
-    const sortParams = sortBy && sortOrder ? `&sortBy=${sortBy}&sortOrder=${sortOrder}` : "";
+    const sortParams = sortBy && sortOrder ? `&sortBy=${sortBy}&sortOrder=${sortOrder}` : '';
 
-    console.log("🔍 [API Call] Sorting Parameters:", { sortBy, sortOrder, sortParams });
-    console.log("🌐 [API Call] Full URL:", `${baseUrl}${sortParams}`);
+    console.log('🔍 [API Call] Sorting Parameters:', { sortBy, sortOrder, sortParams });
+    console.log('🌐 [API Call] Full URL:', `${baseUrl}${sortParams}`);
 
-    return await AxiosInstace.get(`${baseUrl}${sortParams}`, { timeout: 30000 });
+    return await AxiosInstace.get(
+      `${baseUrl}${sortParams}`,
+      { timeout: 30000 },
+    );
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -366,6 +370,7 @@ const getAgentInfo = async (data: any) => {
   }
 };
 
+
 const startSelectedAgents = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.bulkStartAgents}`, data);
@@ -373,6 +378,7 @@ const startSelectedAgents = async (data: any) => {
     return handleAxiosError(error);
   }
 };
+
 
 const stopSelectedAgents = async (data: any) => {
   try {
@@ -382,6 +388,7 @@ const stopSelectedAgents = async (data: any) => {
   }
 };
 
+
 const restartSelectedAgents = async (data: any) => {
   try {
     return await AxiosInstace.post(`${rustAgent.post.bulkReStartAgents}`, data);
@@ -389,6 +396,7 @@ const restartSelectedAgents = async (data: any) => {
     return handleAxiosError(error);
   }
 };
+
 
 const healthCheckSelectedAgents = async (data: any) => {
   try {
@@ -398,6 +406,7 @@ const healthCheckSelectedAgents = async (data: any) => {
   }
 };
 
+
 const upgradeAgents = async () => {
   try {
     return await AxiosInstace.get(`${rustAgent.get.repositories}`);
@@ -406,10 +415,30 @@ const upgradeAgents = async () => {
   }
 };
 
+
 const upgradeBulkAgents = async (jsonData: BulkAgentsData) => {
   try {
     const { risebotAgentVersion, data } = jsonData;
     return await AxiosInstace.put(`${rustAgent.put.upgrade}?risebotAgentVersion=${risebotAgentVersion}`, data);
+  } catch (error: unknown) {
+    return handleAxiosError(error);
+  }
+};
+
+const envUpgradeBulkAgents = async (jsonData: { hostname: string; port: string }[] = [], env = "") => {
+  try {
+    const payload = Array.isArray(jsonData) ? jsonData : [jsonData];
+    const endpoint = rustAgent.put.envUpgrade ?? rustAgent.post.envUpgrade;
+    if (!endpoint) throw new Error("envUpgrade endpoint is not configured");
+    return await AxiosInstace.put(`${endpoint}?env=${encodeURIComponent(env)}`, payload);
+  } catch (error: unknown) {
+    return handleAxiosError(error);
+  }
+};
+
+const envUpgradeSingle = async (jsonData: { hostname: string; port: string }, env = "") => {
+  try {
+    return await AxiosInstace.post(`${rustAgent.post.updateEnv}`, { ...jsonData, env });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -471,6 +500,23 @@ const getSyncAgentHealthConfigs = async () => {
   }
 };
 
+const syncAgentConfigBulk = async (jsonData: { hostname: string; port: string }[] = []) => {
+  try {
+    const payload = Array.isArray(jsonData) ? jsonData : [jsonData];
+    return await AxiosInstace.post(`${rustAgent.post.bulkSyncAgentConfig}`, payload);
+  } catch (error: unknown) {
+    return handleAxiosError(error);
+  }
+};
+
+const syncAgentConfigSingle = async (jsonData: { hostname: string; port: string }) => {
+  try {
+    return await AxiosInstace.post(`${rustAgent.post.syncAgentCongig ?? rustAgent.post.syncAgentConfig}`, jsonData);
+  } catch (error: unknown) {
+    return handleAxiosError(error);
+  }
+};
+
 const getAgentMasterdata = async (jsonData: { limit: number; pageNo: number; search?: string }) => {
   try {
     const { limit, pageNo, search } = jsonData;
@@ -525,7 +571,7 @@ const createVersion = async (payload: BinaryVersionPayload) => {
 
 const updateVersion = async (payload: BinaryVersionPayload, id: string) => {
   try {
-    return await AxiosInstace.put(`${rustAgent.put.updateVersion}/${id}`, payload);
+    return await AxiosInstace.put( `${rustAgent.put.updateVersion}/${id}`, payload);
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -584,6 +630,8 @@ const agentManagementService = {
   healthCheckSelectedAgents,
   upgradeAgents,
   upgradeBulkAgents,
+  envUpgradeBulkAgents,
+  envUpgradeSingle,
   getAgentRegions,
   getAgentPlatforms,
   getAgentEnvironments,
@@ -592,6 +640,8 @@ const agentManagementService = {
   getAgentServiceNames,
   getAgentVersions,
   getSyncAgentHealthConfigs,
+  syncAgentConfigBulk,
+  syncAgentConfigSingle,
   getAgentMasterdata,
   addAgentMasterdata,
   deleteAgentHostname,
@@ -605,3 +655,4 @@ const agentManagementService = {
 };
 
 export default agentManagementService;
+
