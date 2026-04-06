@@ -2,6 +2,7 @@ body {
   background: #ffffff !important;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
+  border: 0px solid #dbdada;
 }
 
 .overallContainer {
@@ -18,11 +19,9 @@ body {
   position: relative;
   padding: 20px 30px 10px;
   border-bottom: 1px solid #c1bbb3;
-  
 }
 
 .agentTopInfo {
-  
   display: flex;
 }
 
@@ -32,7 +31,7 @@ body {
   font-size: 20.356px;
   font-style: normal;
   font-weight: 700;
-  line-height: 34.896px; 
+  line-height: 34.896px;
   letter-spacing: -0.727px;
   display: flex;
   gap: 6px;
@@ -44,11 +43,11 @@ body {
   font-size: 20.356px;
   font-style: normal;
   font-weight: 700;
-  line-height: 34.896px; 
+  line-height: 34.896px;
   letter-spacing: -0.727px;
 }
 
-.card-grid {
+.riseagent-card-grid {
   width: 100%;
   padding: 16px 20px;
   display: flex;
@@ -57,7 +56,7 @@ body {
   position: relative;
 }
 
-.card-container {
+.riseagent-card-container {
   position: relative;
   width: 100%;
   height: 80px;
@@ -68,21 +67,19 @@ body {
   z-index: 1;
   transform: translateX(-8px);
   z-index: 10;
-  
   border: 1px solid rgba(237, 230, 255, 1);
 }
 
-.card-container:hover {
+.riseagent-card-container:hover {
   box-shadow: 0px 4px 13.5px 0px #b69eef;
   border: none;
 }
 
-.card-container:hover:not(.selected) {
+.riseagent-card-container:hover:not(.riseagent-selected) {
   border-color: currentColor;
 }
 
-.card-container.selected {
-  
+.riseagent-card-container.riseagent-selected {
   transform: translateX(-8px);
   z-index: 10;
   border: 1px solid rgba(0, 0, 0, 0.25);
@@ -99,7 +96,7 @@ body {
   pointer-events: none;
 }
 
-.card-inner {
+.riseagent-card-inner {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -108,7 +105,7 @@ body {
   padding: 0 30px;
 }
 
-.card-left {
+.riseagent-card-left {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,7 +113,7 @@ body {
   height: 80px;
 }
 
-.card-icon-wrapper {
+.riseagent-card-icon-wrapper {
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -125,7 +122,7 @@ body {
   align-items: center;
 }
 
-.card-label {
+.riseagent-card-label {
   height: 80px;
   display: flex;
   justify-content: center;
@@ -133,18 +130,18 @@ body {
   z-index: 20;
 }
 
-.card-label p {
+.riseagent-card-label p {
   color: #39465f;
   font-size: 20px;
   margin: auto;
 }
 
-.card-right {
+.riseagent-card-right {
   margin-top: auto;
   z-index: 20;
 }
 
-.card-right p {
+.riseagent-card-right p {
   font-size: 32px;
   margin-top: 15px;
   font-weight: "bold";
@@ -172,7 +169,7 @@ body {
   margin: 20px 0px;
 }
 
-.overallWrapper {
+.riseagent-overallWrapper {
   width: 100%;
   background: #ffffff;
 }
@@ -182,12 +179,16 @@ body {
   padding: 25px 0px;
 }
 
-.topBtnsWrapper {
+.riseagent-topBtnsWrapper {
   text-align: right;
 }
 
+.riseagent-topbar-hover-btn:hover {
+  background-color: #2961F4 !important;
+  color: #FFFFFF !important;
+}
 
-.topbar-hover-btn {
+.riseagent-topbar-hover-btn {
   font-family: "Johnson Text";
   font-weight: 500;
   font-style: normal;
@@ -198,29 +199,23 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.topbar-hover-btn:hover {
-  background-color: #2961F4 !important;
-  color: #FFFFFF !important;
-}
-
-.topbar-hover-btn:active {
+.riseagent-topbar-hover-btn:active {
   background-color: #1840b8 !important;
   transform: scale(0.95);
   outline: none !important;
 }
 
-.topbar-hover-btn:hover img {
+.riseagent-topbar-hover-btn:hover img {
   filter: brightness(0) invert(1);
 }
 
-.agentTitle {
+.riseagent-agentTitle {
   font-family: "Johnson Display";
   font-size: 20px;
   line-height: 28px;
   color: #101828;
   font-weight: 500;
   margin-top: 5px;
-  
 }
 
 .agentTextContent {
@@ -263,7 +258,7 @@ body {
   height: 40px;
 }
 
-.risebot-syncUpStatusBtn {
+.riseagent-syncUpStatusBtn {
   border-radius: 36px;
   background: #ffffff;
   color: #39465f;
@@ -279,11 +274,11 @@ body {
 }
 
 
-.risebot-syncUpStatusBtn button,
-.risebot-syncUpStatusBtn button:hover,
-.risebot-syncUpStatusBtn button:focus,
-.risebot-syncUpStatusBtn button:focus-visible,
-.risebot-syncUpStatusBtn button:active {
+.riseagent-syncUpStatusBtn button,
+.riseagent-syncUpStatusBtn button:hover,
+.riseagent-syncUpStatusBtn button:focus,
+.riseagent-syncUpStatusBtn button:focus-visible,
+.riseagent-syncUpStatusBtn button:active {
   all: unset !important;
   pointer-events: none !important;
   background: transparent !important;
@@ -296,20 +291,20 @@ body {
   margin: 0 !important;
 }
 
-.risebot-syncUpStatusBtn:hover {
+.riseagent-syncUpStatusBtn:hover {
   background-color: #2961F4 !important;
   color: #ffffff !important;
   border-color: #2961F4 !important;
 }
 
-.risebot-syncUpStatusBtn:focus,
-.risebot-syncUpStatusBtn:focus-visible {
+.riseagent-syncUpStatusBtn:focus,
+.riseagent-syncUpStatusBtn:focus-visible {
   outline: none !important;
   box-shadow: none !important;
   border: 1px solid #eeeeee !important;
 }
 
-.risebot-syncUpStatusBtn:active {
+.riseagent-syncUpStatusBtn:active {
   background: #f5f5f5 !important;
   border: 1px solid #e0e0e0 !important;
   color: #39465f !important;
@@ -344,7 +339,7 @@ body {
   background-color: #338bf3;
 }
 
-.risebot-syncUpStatusBtn:hover {
+.riseagent-syncUpStatusBtn:hover {
   
   cursor: pointer;
 }
@@ -357,8 +352,8 @@ body {
   box-shadow: none;
 }
 
-.risebot-syncUpStatusBtn:active,
-.risebot-syncUpStatusBtn:focus {
+.riseagent-syncUpStatusBtn:active,
+.riseagent-syncUpStatusBtn:focus {
   
   
   color: #404040;
@@ -391,7 +386,7 @@ body {
 
 
 
-.agentHeaderRow {
+.riseagent-agentHeaderRow {
   height: 48px;
   font-family: "Johnson Text";
   background-color: #f7f7fa;
@@ -408,23 +403,23 @@ body {
   gap: 35px;
 }
 
-.agentContainer {
+.riseagent-agentContainer {
   height: 47vh;
   overflow: auto;
 }
 
-.agentRowFirst {
+.riseagent-agentRowFirst {
   min-width: 3%;
 }
 
-.agentRowSecond {
+.riseagent-agentRowSecond {
   min-width: 20%;
 }
-.agentRow {
+.riseagent-agentRow {
   min-width: 11.8%;
 }
 
-.agentRowWrapper {
+.riseagent-agentRowWrapper {
   height: 64px;
   display: flex;
   flex-wrap: wrap;
@@ -437,7 +432,7 @@ body {
   box-shadow: 0px 4px 4px 0px #0000000d;
 }
 
-.cardsAgent {
+.riseagent-cardsAgent {
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -446,33 +441,33 @@ body {
   font-family: "Johnson Text";
 }
 
-.ellipsis {
+.riseagent-ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 200px;
 }
 
-.fieldLabel {
+.riseagent-fieldLabel {
   font-size: 16px;
   color: #7b7b7b;
   font-weight: 500;
 }
 
-.fieldValue {
+.riseagent-fieldValue {
   color: #102459;
   font-size: 16px;
 }
 
-.fontWeightEven {
+.riseagent-fontWeightEven {
   font-weight: 600;
 }
 
-.fontWeightOdd {
+.riseagent-fontWeightOdd {
   font-weight: 600;
 }
 
-.versionBadge {
+.riseagent-versionBadge {
   background-color: #dbdbdb;
   font-family: "Johnson Text";
   padding: 4px 12px;
@@ -483,7 +478,7 @@ body {
   align-self: flex-start;
 }
 
-.statusBadge {
+.riseagent-statusBadge {
   font-family: "Johnson Text";
   padding: 4px 12px;
   border-radius: 16px;
@@ -494,37 +489,37 @@ body {
   background-color: #c2f7b0;
 }
 
-.statusBadge.inactive {
+.riseagent-statusBadge.inactive {
   background-color: #98a2b3;
   color: #ffffff;
 }
 
-.statusBadge.failed {
+.riseagent-statusBadge.failed {
   background-color: #c4321d;
   color: #ffffff;
 }
 
-.agentActions {
+.riseagent-agentActions {
   display: flex;
   gap: 16px;
 }
 
-.accordionToggleBtn {
+.riseagent-accordionToggleBtn {
   margin-left: auto;
 }
 
-.hostnameAccordionChevron {
+.riseagent-hostnameAccordionChevron {
   width: 14px;
   height: 14px;
   transform: rotate(-90deg);
   transition: transform 150ms ease-in-out;
 }
 
-.hostnameAccordionChevron.expanded {
+.riseagent-hostnameAccordionChevron.riseagent-expanded {
   transform: rotate(0deg);
 }
 
-.agentAccordionPanel {
+.riseagent-agentAccordionPanel {
   background: #ffffff;
   border: 1px solid #eeeeee;
   box-shadow: 0px 4px 4px 0px #0000000d;
@@ -533,13 +528,13 @@ body {
   margin: -6px 8px 10px 8px;
 }
 
-.agentAccordionPanelInner {
+.riseagent-agentAccordionPanelInner {
   display: grid;
   grid-template-columns: repeat(5, minmax(160px, 1fr));
   gap: 12px;
 }
 
-.agentAccordionSection {
+.riseagent-agentAccordionSection {
   background: #f7f7fa;
   border: 1px solid #eeeeee;
   border-radius: 12px;
@@ -548,7 +543,7 @@ body {
   overflow: auto;
 }
 
-.agentAccordionSectionTitle {
+.riseagent-agentAccordionSectionTitle {
   font-family: "Johnson Text";
   color: #102459;
   font-weight: 600;
@@ -556,19 +551,19 @@ body {
   margin-bottom: 8px;
 }
 
-.agentAccordionGrid {
+.riseagent-agentAccordionGrid {
   display: grid;
   gap: 6px;
 }
 
-.agentAccordionRow {
+.riseagent-agentAccordionRow {
   display: grid;
   grid-template-columns: minmax(110px, 42%) minmax(0, 1fr);
   gap: 8px;
   align-items: start;
 }
 
-.agentAccordionLabel {
+.riseagent-agentAccordionLabel {
   font-family: "Johnson Text";
   color: #7b7b7b;
   font-size: 12px;
@@ -579,7 +574,7 @@ body {
   white-space: nowrap;
 }
 
-.agentAccordionValue {
+.riseagent-agentAccordionValue {
   font-family: "Johnson Text";
   color: #102459;
   font-size: 12px;
@@ -590,13 +585,13 @@ body {
   overflow-wrap: anywhere;
 }
 
-.agentAccordionEmpty {
+.riseagent-agentAccordionEmpty {
   font-family: "Johnson Text";
   color: #7b7b7b;
   font-size: 12px;
 }
 
-.agentAccordionMore {
+.riseagent-agentAccordionMore {
   font-family: "Johnson Text";
   color: #2b87e3;
   font-size: 12px;
@@ -606,7 +601,7 @@ body {
   padding-top: 4px;
 }
 
-.agentAccordionInlineMore {
+.riseagent-agentAccordionInlineMore {
   color: #2b87e3;
   cursor: pointer;
   user-select: none;
@@ -614,7 +609,7 @@ body {
   white-space: nowrap;
 }
 
-.btnFocusActive {
+.riseagent-btnFocusActive {
   height: 40px;
   width: 40px;
   display: flex;
@@ -687,17 +682,17 @@ body {
   z-index: -10;
 }
 
-.topBtnsWrapper {
+.riseagent-topBtnsWrapper {
   display: flex;
   justify-content: end;
 }
 
-.risebot-searchfilter {
+.riseagent-searchfilter {
   min-width: 30% !important;
   position: relative !important;
 }
 
-.risebot-searchfilter .form-control {
+.riseagent-searchfilter .form-control {
   padding-left: 2.7em;
   background-color: #f7f7fa !important;
   border-radius: 36px;
@@ -741,7 +736,7 @@ body {
   z-index: 0;
 }
 
-.risebot-btnSearchIcon {
+.riseagent-btnSearchIcon {
   background: none !important;
   border-color: #faf9f7 !important;
   padding: 0px !important;
@@ -753,9 +748,9 @@ body {
   margin: auto !important;
 }
 
-.risebot-btnSearchIcon:focus,
-.risebot-btnSearchIcon:active,
-.risebot-btnSearchIcon:hover {
+.riseagent-btnSearchIcon:focus,
+.riseagent-btnSearchIcon:active,
+.riseagent-btnSearchIcon:hover {
   background: none !important;
   border-color: #faf9f7 !important;
   box-shadow: none !important;
@@ -848,7 +843,8 @@ body {
   outline: none !important;
 }
 
-.agentTriggerBtn {
+.agentTriggerBtn,
+.riseagent-agentTriggerBtn {
   color: #39465f !important;
   font-family: "Johnson Text";
   font-size: 14px;
@@ -860,7 +856,8 @@ body {
   border-radius: 36px !important;
 }
 
-.agentTriggerBtn:hover {
+.agentTriggerBtn:hover,
+.riseagent-agentTriggerBtn:hover {
   background: #2961F4 !important;
   color: #fff !important;
   border-color: unset !important;
@@ -869,7 +866,9 @@ body {
 }
 
 .agentTriggerBtn:focus,
-.agentTriggerBtn:focus-visible {
+.agentTriggerBtn:focus-visible,
+.riseagent-agentTriggerBtn:focus,
+.riseagent-agentTriggerBtn:focus-visible {
   outline: none !important;
   box-shadow: none !important;
   background: #fff !important;
@@ -877,7 +876,8 @@ body {
   border: 1px solid #eee !important;
 }
 
-.agentTriggerBtn:active {
+.agentTriggerBtn:active,
+.riseagent-agentTriggerBtn:active {
   outline: none !important;
   box-shadow: none !important;
   background: #f5f5f5 !important;
@@ -886,7 +886,8 @@ body {
   transform: scale(0.94);
 }
 
-.agentTriggerBtn:disabled {
+.agentTriggerBtn:disabled,
+.riseagent-agentTriggerBtn:disabled {
   background: #f5f5f5 !important;
   color: #9ca3af !important;
   border: 1px solid #e5e7eb !important;
@@ -896,7 +897,8 @@ body {
 }
 
 
-.agentTriggerBtn.button-clicked {
+.agentTriggerBtn.button-clicked,
+.riseagent-agentTriggerBtn.riseagent-button-clicked {
   background: #2961F4 !important;
   color: #fff !important;
   border-color: #2961F4 !important;
@@ -905,7 +907,8 @@ body {
 }
 
 
-.agentTriggerBtn:disabled:hover {
+.agentTriggerBtn:disabled:hover,
+.riseagent-agentTriggerBtn:disabled:hover {
   background: #f5f5f5 !important;
   color: #9ca3af !important;
   transform: none !important;
@@ -928,7 +931,7 @@ body {
 }
 
 
-.selectionCounterBadge {
+.riseagent-selectionCounterBadge {
   position: fixed;
   bottom: 55px;
   right: 30px;
@@ -947,7 +950,7 @@ body {
   }
 }
 
-.selectionCounterContent {
+.riseagent-selectionCounterContent {
   background: linear-gradient(135deg, #2961F4 0%, #1e4abd 100%);
   border-radius: 50px;
   padding: 10px 20px;
@@ -960,12 +963,12 @@ body {
   transition: all 0.3s ease;
 }
 
-.selectionCounterContent:hover {
+.riseagent-selectionCounterContent:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(41, 97, 244, 0.5), 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.selectionCounterText {
+.riseagent-selectionCounterText {
   color: #ffffff;
   font-family: 'Johnson Text', sans-serif;
   font-size: 14px;
@@ -977,7 +980,7 @@ body {
   gap: 6px;
 }
 
-.selectionCounterText strong {
+.riseagent-selectionCounterText strong {
   font-weight: 700;
   font-size: 16px;
   background: rgba(255, 255, 255, 0.2);
@@ -987,7 +990,7 @@ body {
   text-align: center;
 }
 
-.clearSelectionButton {
+.riseagent-clearSelectionButton {
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
@@ -1002,16 +1005,16 @@ body {
   margin-left: 4px;
 }
 
-.clearSelectionButton:hover {
+.riseagent-clearSelectionButton:hover {
   background: rgba(255, 255, 255, 0.35);
   transform: rotate(90deg);
 }
 
-.clearSelectionButton:active {
+.riseagent-clearSelectionButton:active {
   transform: scale(0.9) rotate(90deg);
 }
 
-.executionBtnsSection {
+.riseagent-executionBtnsSection {
   display: inline-block;
   vertical-align: middle;
   height: 40px;
@@ -1029,37 +1032,37 @@ body {
   margin-right: 10px;
 }
 
-.executionBtnsSection button {
+.riseagent-executionBtnsSection button {
   padding: 0.375rem 0.35rem;
   transition: all 0.15s ease;
   border: none !important;
   background: transparent !important;
 }
 
-.executionBtnsSection button:hover {
+.riseagent-executionBtnsSection button:hover {
   background: transparent !important;
 }
 
-.executionBtnsSection button:focus {
+.riseagent-executionBtnsSection button:focus {
   box-shadow: none;
   outline: none !important;
   border: none !important;
   background: transparent !important;
 }
 
-.executionBtnsSection button:active {
+.riseagent-executionBtnsSection button:active {
   transform: scale(0.95);
   background: transparent !important;
   outline: none !important;
   border: none !important;
 }
 
-.executionBtnsSection:active {
+.riseagent-executionBtnsSection:active {
   background-color: #f5f5f5;
   border-color: #e0e0e0;
 }
 
-.btnsWrapper {
+.riseagent-btnsWrapper {
   text-align: right;
 }
 
@@ -1470,7 +1473,8 @@ p.pageRwSelection {
   margin-right: 8px;
 }
 
-.risebot-ModalTitle {
+.risebot-ModalTitle,
+.riseagent-risebot-ModalTitle {
   font-family: "Johnson Text";
   font-style: normal;
   font-weight: 700;
@@ -1648,7 +1652,7 @@ p.pageRwSelection {
 
 
 
-.risebot-agentDrawer {
+.riseagent-agentDrawer {
   min-width: 565px !important;
   padding: 30px;
   gap: 16px;
@@ -1656,7 +1660,7 @@ p.pageRwSelection {
   background: #fff;
 }
 
-.risebot-offcanvas-title {
+.riseagent-offcanvas-title {
   color: #101828;
   font-family: "Johnson Text";
   font-size: 16px;
@@ -1697,19 +1701,22 @@ p.pageRwSelection {
   padding-bottom: 10px;
 }
 
-.risebot-sidebarAccodions .accordion-item {
+.risebot-sidebarAccodions .accordion-item,
+.riseagent-sidebarAccodions .accordion-item {
   border: none;
   border-bottom: 1px solid #d8d8d8;
 }
 
-.risebot-sidebarAccodions .accordion-button:not(.collapsed) {
+.risebot-sidebarAccodions .accordion-button:not(.collapsed),
+.riseagent-sidebarAccodions .accordion-button:not(.collapsed) {
   background-color: transparent;
   color: #404040;
   box-shadow: none;
   padding-bottom: 0px;
 }
 
-.accordionHead .agentDetailsArrow {
+.accordionHead .agentDetailsArrow,
+.riseagent-accordionHead .riseagent-agentDetailsArrow {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1718,7 +1725,8 @@ p.pageRwSelection {
   background-color: #fff;
 }
 
-.accordionHead .accordionTitle {
+.accordionHead .accordionTitle,
+.riseagent-accordionHead .riseagent-accordionTitle {
   color: #140f25;
   font-family: "Johnson Text";
   font-size: 16px;
@@ -1730,7 +1738,8 @@ p.pageRwSelection {
   width: 100%;
 }
 
-.accordionHead button {
+.accordionHead button,
+.riseagent-accordionHead button {
   font-family: "Johnson Text";
   font-style: normal;
   font-weight: 500;
@@ -1741,30 +1750,36 @@ p.pageRwSelection {
   margin: 0px;
 }
 
-.collapsedSvg {
+.collapsedSvg,
+.riseagent-collapsedSvg {
   transform: rotateZ(0deg) !important;
 }
 
-.notcollapsedSvg {
+.notcollapsedSvg,
+.riseagent-notcollapsedSvg {
   transform: rotateZ(180deg) !important;
 }
 
-.titleCollapsed {
+.titleCollapsed,
+.riseagent-titleCollapsed {
   background-color: #F4F6FF;
   border-radius: 16px 16px 0px 0px;
 }
 
-.nottitleCollapsed {
+.nottitleCollapsed,
+.riseagent-nottitleCollapsed {
   background-color: #f7f7fa;
   border-radius: 16px;
 }
 
-.accordionHead .accordion-button:focus {
+.accordionHead .accordion-button:focus,
+.riseagent-accordionHead .accordion-button:focus {
   border-color: unset;
   box-shadow: none;
 }
 
-.risebot_configDetails {
+.risebot_configDetails,
+.riseagent-risebot_configDetails {
   background: white;
   border: 1px solid #eee;
   box-sizing: border-box;
@@ -1776,7 +1791,8 @@ p.pageRwSelection {
   border-top: none;
 }
 
-.risebot_configTitle p {
+.risebot_configTitle p,
+.riseagent-risebot_configTitle p {
   color: #101828;
   font-family: "Johnson Text";
   font-size: 16px;
@@ -1860,7 +1876,8 @@ p.pageRwSelection {
   color: #e4a951;
 }
 
-.buttonBody button {
+.buttonBody button,
+.riseagent-buttonBody button {
   background-color: #404040;
   border-radius: 8px;
   color: #fff;
@@ -1873,7 +1890,8 @@ p.pageRwSelection {
   line-height: 0px;
 }
 
-.risebot_logDetails {
+.risebot_logDetails,
+.riseagent-risebot_logDetails {
   background: white;
   border: 1px solid #eee;
   border-top: none;
@@ -1882,7 +1900,8 @@ p.pageRwSelection {
   padding: 16px;
 }
 
-.risebot_logDetails ul {
+.risebot_logDetails ul,
+.riseagent-risebot_logDetails ul {
   height: 300px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -1890,7 +1909,8 @@ p.pageRwSelection {
   padding-top: 0px !important;
 }
 
-.risebot_logDetails ul li {
+.risebot_logDetails ul li,
+.riseagent-risebot_logDetails ul li {
   font-family: "Johnson Text";
   color: #44424c;
   font-size: 16px;
@@ -1914,20 +1934,23 @@ p.pageRwSelection {
   line-height: 19px;
 }
 
-.risebot_logDetails ul::-webkit-scrollbar {
+.risebot_logDetails ul::-webkit-scrollbar,
+.riseagent-risebot_logDetails ul::-webkit-scrollbar {
   width: 10px;
 }
 
 
 
 
-.risebot_logDetails ul::-webkit-scrollbar-thumb {
+.risebot_logDetails ul::-webkit-scrollbar-thumb,
+.riseagent-risebot_logDetails ul::-webkit-scrollbar-thumb {
   background: #5e5873;
   border-radius: 10px;
 }
 
 
-.risebot_logDetails ul::-webkit-scrollbar-thumb:hover {
+.risebot_logDetails ul::-webkit-scrollbar-thumb:hover,
+.riseagent-risebot_logDetails ul::-webkit-scrollbar-thumb:hover {
   background: #5e5873;
 }
 
@@ -1938,7 +1961,8 @@ p.pageRwSelection {
   border-top: 14px;
 }
 
-.risebot_agentdetailsBodyConfig {
+.risebot_agentdetailsBodyConfig,
+.riseagent-risebot_agentdetailsBodyConfig {
   padding-left: 10px;
   background-color: white;
 }
@@ -1986,20 +2010,23 @@ p.pageRwSelection {
 
 
 
-.risebothealthCheckModal {
+.risebothealthCheckModal,
+.riseagent-risebothealthCheckModal {
   display: flex !important;
   align-items: center;
   justify-content: center;
 }
 
-.risebothealthCheckModal .modal-content {
+.risebothealthCheckModal .modal-content,
+.riseagent-risebothealthCheckModal .modal-content {
   width: 676px;
   padding: 30px;
   border-radius: 16px !important;
   background: #fff;
 }
 
-.risebothealthCheckModal .modal-header {
+.risebothealthCheckModal .modal-header,
+.riseagent-risebothealthCheckModal .modal-header {
   color: #101828;
   font-family: "Johnson Text";
   font-size: 16px;
@@ -2014,12 +2041,14 @@ p.pageRwSelection {
   align-items: center;
 }
 
-.risebothealthCheckModal .modal-body {
+.risebothealthCheckModal .modal-body,
+.riseagent-risebothealthCheckModal .modal-body {
   padding: 16px 0px;
   border-bottom: 1px solid #bcbcbc;
 }
 
-.risebothealthCheckModal .modal-body > .modal-body-content {
+.risebothealthCheckModal .modal-body > .modal-body-content,
+.riseagent-risebothealthCheckModal .modal-body > .modal-body-content {
   color: #102459;
   font-family: "Johnson Text";
   font-size: 14px;
@@ -2029,23 +2058,25 @@ p.pageRwSelection {
   padding: 16px 0px;
 }
 
-.risebothealthCheckModal .modal-footer {
+.risebothealthCheckModal .modal-footer,
+.riseagent-risebothealthCheckModal .modal-footer {
   padding: 16px 0px 0px 0px !important;
   margin: 0px !important;
 }
 
-.risebothealthCheckModal .btn-close {
+.risebothealthCheckModal .btn-close,
+.riseagent-risebothealthCheckModal .btn-close {
   padding: 0px !important;
   width: 16px !important;
   height: 16px !important;
   margin: 0px !important;
 }
 
-.risebot-agentDrawer.show {
+.riseagent-agentDrawer.show {
   display: flex;
 }
 
-.risebot-agentDrawer .offcanvas-body {
+.riseagent-agentDrawer .offcanvas-body {
   padding: 0px !important;
 }
 
@@ -2057,12 +2088,13 @@ p.pageRwSelection {
   padding-bottom: 14px;
 }
 
-.risebot-agentDrawer .offcanvas-header {
+.riseagent-agentDrawer .offcanvas-header {
   border-bottom: 1px solid #c1bbb3;
   
 }
 
-.risebot-globeLocalConfigs {
+.risebot-globeLocalConfigs,
+.riseagent-risebot-globeLocalConfigs {
   padding: 20px 80px;
 }
 
@@ -2072,7 +2104,8 @@ p.pageRwSelection {
   vertical-align: top;
 }
 
-.risebot-globalLocalConfig .modal-content {
+.risebot-globalLocalConfig .modal-content,
+.riseagent-risebot-globalLocalConfig .modal-content {
   border-radius: 0px;
 }
 
@@ -2096,7 +2129,8 @@ p.pageRwSelection {
   font-weight: 500;
 }
 
-.risebot-globeLocalConfigs .saveButtonsWrapper button {
+.risebot-globeLocalConfigs .saveButtonsWrapper button,
+.riseagent-risebot-globeLocalConfigs .saveButtonsWrapper button {
   width: 160px;
   height: 50px;
 }
@@ -2120,28 +2154,34 @@ p.pageRwSelection {
   font-weight: 700;
 }
 
-.risebot-sidebarAccodions .agentSubServices .accordion-item {
+.risebot-sidebarAccodions .agentSubServices .accordion-item,
+.riseagent-sidebarAccodions .agentSubServices .accordion-item {
   background: #f0efed !important;
   border: 1px solid #e4e4e4 !important;
   border-radius: 4px;
   position: relative;
 }
 
-.risebot-sidebarAccodions .agentSubServices .accordion-button {
+.risebot-sidebarAccodions .agentSubServices .accordion-button,
+.riseagent-sidebarAccodions .agentSubServices .accordion-button {
   background: #201b11 !important;
 }
 
-.risebot-sidebarAccodions .agentSubServices .accordion {
+.risebot-sidebarAccodions .agentSubServices .accordion,
+.riseagent-sidebarAccodions .agentSubServices .accordion {
   margin-bottom: 15px;
 }
 
 .risebot-sidebarAccodions .agentSubServices .accordion-header .accordion-button,
-.risebot-sidebarAccodions .agentSubServices .accordion-body {
+.risebot-sidebarAccodions .agentSubServices .accordion-body,
+.riseagent-sidebarAccodions .agentSubServices .accordion-header .accordion-button,
+.riseagent-sidebarAccodions .agentSubServices .accordion-body {
   padding-left: 16px !important;
   padding-right: 16px;
 }
 
-.risebot-sidebarAccodions .agentSubServices .accordion-button:focus {
+.risebot-sidebarAccodions .agentSubServices .accordion-button:focus,
+.riseagent-sidebarAccodions .agentSubServices .accordion-button:focus {
   border-color: none;
   box-shadow: none;
 }
@@ -2288,13 +2328,14 @@ p.pageRwSelection {
   color: #000000;
 }
 
-.subPopVersionCvr {
+.riseagent-subPopVersionCvr {
   display: flex;
   align-items: center;
   
 }
 
-.risebotmdlBtn {
+.risebotmdlBtn,
+.riseagent-risebotmdlBtn {
   width: 22%;
 }
 
@@ -2302,7 +2343,8 @@ p.pageRwSelection {
   width: 18%;
 }
 
-.risebotmdlCont {
+.risebotmdlCont,
+.riseagent-risebotmdlCont {
   width: 80%;
   text-align: left;
   border-radius: 4px;
@@ -2311,7 +2353,8 @@ p.pageRwSelection {
   height: 39px;
 }
 
-.risebotmdlCont p {
+.risebotmdlCont p,
+.riseagent-risebotmdlCont p {
   color: #82807c;
   font-weight: 400;
   font-size: 12px;
@@ -2328,14 +2371,16 @@ p.pageRwSelection {
 }
 
 
-.risebot_agentLogsHeader {
+.risebot_agentLogsHeader,
+.riseagent-risebot_agentLogsHeader {
   display: flex;
   justify-content: space-between;
   padding-bottom: 8px;
   border-bottom: 1px solid #c1bbb3;
 }
 
-.risebot_agentVersionsTitle {
+.risebot_agentVersionsTitle,
+.riseagent-risebot_agentVersionsTitle {
   color: #101828;
   font-family: "Johnson Text";
   font-size: 16px;
@@ -2349,7 +2394,7 @@ p.pageRwSelection {
   padding: 0px !important;
 }
 
-.risebotagentSubVersionBtn {
+.riseagent-risebotagentSubVersionBtn {
   border-radius: 16px !important;
   background: #dbdbdb !important;
   padding: 2px 8px !important;
@@ -2365,7 +2410,7 @@ p.pageRwSelection {
 }
 
 /* Env upgrade pill overrides remove the default grey fill */
-.envUpgradeOptionBtn {
+.riseagent-envUpgradeOptionBtn {
   background: #ffffff !important;
   border: 1px solid #dfe3eb !important;
   box-shadow: 0px 2px 6px rgba(16, 36, 89, 0.08) !important;
@@ -2375,13 +2420,14 @@ p.pageRwSelection {
   padding: 4px 10px !important;
 }
 
-.envUpgradeOptionBtn.versionActiveBtn {
+.riseagent-envUpgradeOptionBtn.riseagent-versionActiveBtn {
   background: #2961f4 !important;
   border-color: #2961f4 !important;
   color: #ffffff !important;
 }
 
-.buildDateLabel {
+.buildDateLabel,
+.riseagent-buildDateLabel {
   color: #39465f;
   font-family: "Johnson Text";
   font-size: 14px;
@@ -2390,7 +2436,8 @@ p.pageRwSelection {
   line-height: 20px;
 }
 
-.buildDate {
+.buildDate,
+.riseagent-buildDate {
   color: #39465f;
   font-family: "Johnson Text";
   font-size: 14px;
@@ -2399,17 +2446,17 @@ p.pageRwSelection {
   line-height: 20px;
 }
 
-.risebotagentSubVersionBtn:hover,
-.versionActiveBtn {
+.riseagent-risebotagentSubVersionBtn:hover,
+.riseagent-versionActiveBtn {
   background: #404040;
   color: #fff;
 }
-.risebotagentSubVersionBtn:focus {
+.riseagent-risebotagentSubVersionBtn:focus {
   outline: 2px solid #2961F4;
   outline-offset: 2px;
 }
 
-.risebotagentSubVersionBtn:active {
+.riseagent-risebotagentSubVersionBtn:active {
   background: #404040 !important;
   color: #fff !important;
   transform: scale(0.95) !important;
@@ -2487,11 +2534,11 @@ p.pageRwSelection {
   border-radius: 0px;
 }
 
-.noDataFound {
+.riseagent-noDataFound {
   text-align: center;
 }
 
-.noDataInnerSection p {
+.riseagent-noDataInnerSection p {
   font-size: 18px;
   line-height: 21px;
   color: #404040;
@@ -2522,14 +2569,16 @@ p.pageRwSelection {
   background: url("../../../images/agent-management/failedstatus.png");
 }
 
-.confirmBtnModal {
+.confirmBtnModal,
+.riseagent-confirmBtnModal {
   text-align: right;
   padding-top: 16px;
   border-top: 1px solid #bcbcbc;
   margin-top: 10px;
 }
 
-.confirmBtnModal Button {
+.confirmBtnModal Button,
+.riseagent-confirmBtnModal Button {
   margin-bottom: 0px !important;
   color: #fff;
   font-family: "Johnson Text";
@@ -2588,7 +2637,8 @@ p.pageRwSelection {
   margin-top: 0px !important;
 }
 
-.buttonBody {
+.buttonBody,
+.riseagent-buttonBody {
   border-bottom: 1px solid #d8d8d8;
   padding-bottom: 20px;
 }
@@ -2618,7 +2668,8 @@ p.pageRwSelection {
   vertical-align: middle;
 }
 
-.risebotagentHealCheck {
+.risebotagentHealCheck,
+.riseagent-risebotagentHealCheck {
   border-bottom: none;
   margin: 0px;
   border-radius: 0px 0px 16px 16px;
@@ -2664,7 +2715,8 @@ p.pageRwSelection {
   height: 1.3em;
 }
 
-.risebotschedularDialog .modal-content {
+.risebotschedularDialog .modal-content,
+.riseagent-risebotschedularDialog .modal-content {
   padding: 30px;
   border-radius: 16px !important;
   background: #fff;
@@ -2702,7 +2754,7 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.agentVersionsCover {
+.riseagent-agentVersionsCover {
   max-height: 220px;
   height: auto;
   overflow-y: auto;
@@ -2716,20 +2768,20 @@ input[type="number"] {
   padding: 0px 0px !important;
 }
 
-.agentVersionsCover::-webkit-scrollbar {
+.riseagent-agentVersionsCover::-webkit-scrollbar {
   width: 4px;
 }
 
 
 
 
-.agentVersionsCover::-webkit-scrollbar-thumb {
+.riseagent-agentVersionsCover::-webkit-scrollbar-thumb {
   background: #5e5873;
   border-radius: 10px;
 }
 
 
-.agentVersionsCover::-webkit-scrollbar-thumb:hover {
+.riseagent-agentVersionsCover::-webkit-scrollbar-thumb:hover {
   background: #5e5873;
 }
 
@@ -2756,13 +2808,13 @@ input[type="number"] {
   order: 2;
 }
 
-.btnFocusActive:hover,
-.btnFocusActive:focus {
+.riseagent-btnFocusActive:hover,
+.riseagent-btnFocusActive:focus {
   background-color: transparent;
   box-shadow: none;
 }
 
-.btnFocusActive:active {
+.riseagent-btnFocusActive:active {
   background-color: transparent;
   box-shadow: none;
   transform: scale(0.92);
@@ -2786,14 +2838,18 @@ input[type="number"] {
   box-shadow: none;
 }
 
-.risebotschedularDialog .modal-header {
+.risebotschedularDialog .modal-header,
+.riseagent-risebotschedularDialog .modal-header {
   border-radius: 0;
   padding: 0px !important;
   padding-bottom: 14px !important;
   border-bottom: 1px solid #c1bbb3;
 }
 
-.risebotschedularDialog .modal-header .risebot-ModalTitle {
+.risebotschedularDialog .modal-header .risebot-ModalTitle,
+.risebotschedularDialog .modal-header .riseagent-risebot-ModalTitle,
+.riseagent-risebotschedularDialog .modal-header .risebot-ModalTitle,
+.riseagent-risebotschedularDialog .modal-header .riseagent-risebot-ModalTitle {
   color: #101828;
   font-family: "Johnson Text";
   font-size: 16px;
@@ -2844,7 +2900,8 @@ input[type="number"] {
   margin-bottom: 2px;
 }
 
-.risebotschedulerdCover {
+.risebotschedulerdCover,
+.riseagent-risebotschedulerdCover {
   display: flex;
   justify-content: flex-end;
   gap: 16px;
@@ -3017,40 +3074,48 @@ input[type="number"] {
   box-shadow: none;
 }
 
-.risebotschedularDialog .modalBody {
+.risebotschedularDialog .modalBody,
+.riseagent-risebotschedularDialog .modalBody {
   padding: 0px !important;
   padding-top: 32px !important;
 }
 
-.risebotschedularDialog .modal-dialog {
+.risebotschedularDialog .modal-dialog,
+.riseagent-risebotschedularDialog .modal-dialog {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.risebotschedularDialog .sideAlign {
+.risebotschedularDialog .sideAlign,
+.riseagent-risebotschedularDialog .sideAlign {
   display: inline-block;
   vertical-align: top;
 }
 
-.risebotschedularDialog .sideAlign.leftAlignBox {
+.risebotschedularDialog .sideAlign.leftAlignBox,
+.riseagent-risebotschedularDialog .sideAlign.leftAlignBox {
   width: 300px;
 }
 
-.risebotschedularDialog .flexProperty {
+.risebotschedularDialog .flexProperty,
+.riseagent-risebotschedularDialog .flexProperty {
   display: flex;
   flex-direction: column;
 }
 
-.risebotschedularDialog .flexPadding {
+.risebotschedularDialog .flexPadding,
+.riseagent-risebotschedularDialog .flexPadding {
   width: 100%;
 }
 
-.risebotschedularDialog .leftSwitchSection {
+.risebotschedularDialog .leftSwitchSection,
+.riseagent-risebotschedularDialog .leftSwitchSection {
   
 }
 
-.risebotschedularDialog.modal {
+.risebotschedularDialog.modal,
+.riseagent-risebotschedularDialog.modal {
   z-index: 1050;
 }
 
@@ -3131,7 +3196,8 @@ input[type="number"] {
 }
 
 
-.risebotcronInput {
+.risebotcronInput,
+.riseagent-risebotcronInput {
   background: #f0efed !important;
   border-radius: 8px !important;
   padding: 0.5em 1em !important;
@@ -3142,7 +3208,9 @@ input[type="number"] {
 }
 
 .risebotcronInput:hover,
-.risebotcronInput:focus {
+.risebotcronInput:focus,
+.riseagent-risebotcronInput:hover,
+.riseagent-risebotcronInput:focus {
   border-color: #2961F4 !important;
 }
 
@@ -3275,17 +3343,20 @@ input[type="number"] {
   line-height: 20px;
 }
 
-.risebot_spinnerLoader .spinner-border {
+.risebot_spinnerLoader .spinner-border,
+.riseagent-risebot_spinnerLoader .spinner-border {
   width: 1.5em;
   height: 1.5em;
   margin-top: 8px;
 }
 
-.risebot_logRelative {
+.risebot_logRelative,
+.riseagent-risebot_logRelative {
   position: relative;
 }
 
-.risebot_logRelative .risebot_spinnerLoader {
+.risebot_logRelative .risebot_spinnerLoader,
+.riseagent-risebot_logRelative .riseagent-risebot_spinnerLoader {
   position: absolute;
   left: 0;
   right: 0;
@@ -3312,7 +3383,8 @@ input[type="number"] {
 }
 
 
-.upgradeHeader {
+.upgradeHeader,
+.riseagent-upgradeHeader {
   font-size: 18px !important;
 }
 
@@ -3383,15 +3455,15 @@ input[type="number"] {
   box-shadow: none;
 }
 
-.restartAllBtn img {
+.riseagent-restartAllBtn img {
   width: 21px;
 }
 
-.updateAllBtn img {
+.riseagent-updateAllBtn img {
   width: 23px;
 }
 
-.downloadBtn img {
+.riseagent-downloadBtn img {
   width: 25px;
   height: 25px;
 }
@@ -3403,31 +3475,31 @@ input[type="number"] {
 }
 
 
-.sortBtn {
+.riseagent-sortBtn {
   outline: none !important;
   border-color: #eeeeee !important;
 }
 
-.sortBtn:focus,
-.sortBtn:focus-visible {
+.riseagent-sortBtn:focus,
+.riseagent-sortBtn:focus-visible {
   outline: none !important;
   box-shadow: none !important;
   border-color: #eeeeee !important;
 }
 
-.sortBtn:active {
+.riseagent-sortBtn:active {
   background-color: #f5f5f5 !important;
   border-color: #e0e0e0 !important;
   outline: none !important;
   transform: scale(0.95);
 }
 
-.sortBtn svg {
+.riseagent-sortBtn svg {
   display: block;
 }
 
 
-.sortDropdownHeader {
+.riseagent-sortDropdownHeader {
   padding: 10px 16px;
   font-family: "Johnson Text", sans-serif;
   font-size: 12px;
@@ -3442,7 +3514,7 @@ input[type="number"] {
   text-align: left;
 }
 
-.hostAgentColoumn {
+.riseagent-hostAgentColoumn {
   width: 54.333333% !important;
 }
 
@@ -3668,8 +3740,7 @@ input[type="number"] {
   border-radius: 6px;
 }
 
-
-.sidebar-action-btn {
+.riseagent-sidebar-action-btn {
   height: 44px;
   min-width: 189px;
   border-radius: 36px;
@@ -3735,11 +3806,18 @@ input[type="number"] {
   box-shadow: 0 0 0 3px rgba(41, 97, 244, 0.1);
 }
 
-.globalConfigCustomModalDialog .modal-footer .btn-primary {
+.riseagent-mfe .globalConfigCustomModalDialog .modal-footer {
   background: #2961F4;
   color: #fff;
   border: 1px solid #2961F4;
 }
+
+.riseagent-mfe .btn-primary {
+  background: #2961F4;
+  color: #fff;
+  border: 1px solid #2961F4;
+}
+
 .globalConfigCustomModalDialog .modal-footer .btn-secondary {
   background: #fff;
   color: #101828;
@@ -3773,6 +3851,7 @@ input[type="number"] {
   border-bottom: 1px solid #EAECF0;
   padding: 0 0 16px 0 !important;
   margin-bottom: 20px;
+  justify-content: space-between;
 }
 .globalConfigCustomModalDialog .modal-header .btn-close {
   font-size: 20px;

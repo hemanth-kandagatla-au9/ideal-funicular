@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 import CodeMirror from "@uiw/react-codemirror";
 import { python } from "@codemirror/lang-python";
 import agentManagementAction from "@/redux/actions/agentManagement.action";
@@ -26,7 +25,6 @@ const GlobalConfigurationModal: React.FC<GlobalConfigurationModalProps> = ({ sho
   const globalConfigData = useSelector(getAgentGlobalConfig);
   const loading = useSelector(isGlobalConfigLoading);
   const [configs, setConfigs] = useState<ConfigItem[]>([]);
-  const [showPasswords, setShowPasswords] = useState<{ [key: string]: boolean }>({});
 
   const formatPythonScriptForEditor = (value: string): string => {
     const input = String(value ?? "");
@@ -122,10 +120,6 @@ const GlobalConfigurationModal: React.FC<GlobalConfigurationModalProps> = ({ sho
     setConfigs(updatedConfigs);
   };
 
-  const togglePasswordVisibility = (propertyName: string) => {
-    setShowPasswords(prev => ({ ...prev, [propertyName]: !prev[propertyName] }));
-  };
-
   const isPasswordField = (propertyName: string): boolean => propertyName.toLowerCase().includes("password");
 
   const isTechnicalScriptField = (propertyName: string): boolean => propertyName.toLowerCase() === "technical_info_python_script";
@@ -154,7 +148,6 @@ const GlobalConfigurationModal: React.FC<GlobalConfigurationModalProps> = ({ sho
 
   const handleClose = () => {
     setConfigs([]);
-    setShowPasswords({});
     onHide();
   };
 
@@ -180,7 +173,6 @@ const GlobalConfigurationModal: React.FC<GlobalConfigurationModalProps> = ({ sho
           <div className="config-fields-container">
             {configs.map((config, index) => {
               const isPassword = isPasswordField(config.propertyName);
-              const showPassword = showPasswords[config.propertyName];
               const isTechnicalScript = isTechnicalScriptField(config.propertyName);
               const displayKey = formatKeyAsCamelCase(config.propertyName);
               const value = config.propertyValue ?? "";
@@ -214,22 +206,12 @@ const GlobalConfigurationModal: React.FC<GlobalConfigurationModalProps> = ({ sho
                         <Form.Control
                           as={useTextarea ? "textarea" : undefined}
                           rows={useTextarea ? 4 : undefined}
-                          type={!useTextarea && isPassword && !showPassword ? "password" : "text"}
+                          type={!useTextarea && isPassword ? "password" : "text"}
                           className={isPassword ? "global-config-password-input" : undefined}
                           value={config.propertyValue}
                           onChange={e => handleInputChange(index, e.target.value)}
                         />
                       )}
-                      {isPassword ? (
-                        <Button
-                          variant="link"
-                          onClick={() => togglePasswordVisibility(config.propertyName)}
-                          aria-label={showPassword ? "Hide password" : "Show password"}
-                          style={{ position: "absolute", right: "10px", top: "50%", transform: "translateY(-50%)" }}
-                        >
-                          {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
-                        </Button>
-                      ) : null}
                     </div>
                   </Form.Group>
                 </div>

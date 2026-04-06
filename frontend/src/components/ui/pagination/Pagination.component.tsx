@@ -241,7 +241,7 @@ function Pagination(props: PaginationProps) {
           <Col className={CSSpagination.risebot_goToPageCol} md={3}>
             {!(propsPagination.pageNo === 1 && propsPagination.pageNo === propsPagination.totalPage) && (
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "12px" }}>
-                <div className="risebot_label1_div">
+                <div className={CSSpagination["riseagent-risebot_label1_div"]}>
                   <span className={CSSpagination.risebot_label1}> Go to page </span>
                 </div>
 

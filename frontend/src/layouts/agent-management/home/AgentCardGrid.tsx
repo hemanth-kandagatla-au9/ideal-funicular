@@ -104,18 +104,18 @@ const AgentCardGrid = ({ agentMetricsTilesData, onSelectStatus, currentStatus = 
   };
 
   return (
-    <div className="card-grid">
+    <div className="riseagent-card-grid">
       {cardData.map((card, index) =>
         initialLoading ? (
-          <Card key={index} className="card-container" sx={{ borderRadius: "16px", marginBottom: "20px", width: "24%" }}>
-            <div className="card-inner">
-              <div className="card-left">
-                <div className="card-icon-wrapper">
+          <Card key={index} className="riseagent-card-container" sx={{ borderRadius: "16px", marginBottom: "20px", width: "24%" }}>
+            <div className="riseagent-card-inner">
+              <div className="riseagent-card-left">
+                <div className="riseagent-card-icon-wrapper">
                   <Skeleton animation="wave" variant="circular" width={40} height={40} />
                 </div>
                 <Skeleton animation="wave" variant="text" width="50px" height={25} />
               </div>
-              <div className="card-icon-wrapper">
+              <div className="riseagent-card-icon-wrapper">
                 <Skeleton animation="wave" variant="circular" width={40} height={40} />
               </div>
             </div>
@@ -130,7 +130,7 @@ const AgentCardGrid = ({ agentMetricsTilesData, onSelectStatus, currentStatus = 
             }}
           >
             <div
-              className={`card-container${currentStatus === card.action ? " selected" : ""}`}
+              className={`riseagent-card-container${currentStatus === card.action ? " riseagent-selected" : ""}`}
               style={{
                 background: currentStatus === card.action 
                   ? "linear-gradient(135deg, #E8EEFF 0%, #F4F6FF 100%)"
@@ -163,17 +163,17 @@ const AgentCardGrid = ({ agentMetricsTilesData, onSelectStatus, currentStatus = 
                 onSelectStatus(card.action);
               }}
             >
-              <div className="card-inner">
-                <div className="card-left">
+              <div className="riseagent-card-inner">
+                <div className="riseagent-card-left">
                   <div
-                    className="card-icon-wrapper"
+                    className="riseagent-card-icon-wrapper"
                     style={{
                       backgroundColor: currentStatus === card.action ? "rgba(41, 97, 244, 1)" : "rgba(234, 236, 240, 1)",
                     }}
                   >
                     <img src={currentStatus === card.action ? card.icon : card.inactiveIcon} alt="icon" />
                   </div>
-                  <div className="card-label">
+                  <div className="riseagent-card-label">
                     <p
                       style={{
                         color: currentStatus === card.action ? card.activeTextColor : card.textColor,
@@ -183,7 +183,7 @@ const AgentCardGrid = ({ agentMetricsTilesData, onSelectStatus, currentStatus = 
                     </p>
                   </div>
                 </div>
-                <div className="card-right">
+                <div className="riseagent-card-right">
                   <p
                     style={{
                       color: currentStatus === card.action ? card.activeTextColor : card.textColor,

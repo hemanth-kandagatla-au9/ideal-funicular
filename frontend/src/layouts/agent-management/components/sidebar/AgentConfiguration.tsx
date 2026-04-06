@@ -8,12 +8,18 @@ import { agentConfigurationTitle, configurationTitle } from "../../../../constan
 const AgentConfiguration: React.FC<AgentConfigurationProps> = ({ applicationProperty, trimAgentPropertyName }) => {
   return (
     <Accordion.Item eventKey="2">
-      <Accordion.Header className="accordionHead">
+      <Accordion.Header className="riseagent-accordionHead">
         <AccordionContext.Consumer>
           {({ activeEventKey }) => (
             <>
-              <Typography className={`accordionTitle ${activeEventKey === "2" ? "titleCollapsed" : "nottitleCollapsed"}`}>{agentConfigurationTitle}</Typography>
-              <span className={`agentDetailsArrow ${activeEventKey !== "2" ? "collapsedSvg" : "notcollapsedSvg"}`}>
+              <Typography
+                className={`riseagent-accordionTitle ${activeEventKey === "2" ? "riseagent-titleCollapsed" : "riseagent-nottitleCollapsed"}`}
+              >
+                {agentConfigurationTitle}
+              </Typography>
+              <span
+                className={`riseagent-agentDetailsArrow ${activeEventKey !== "2" ? "riseagent-collapsedSvg" : "riseagent-notcollapsedSvg"}`}
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="#102459" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -23,11 +29,11 @@ const AgentConfiguration: React.FC<AgentConfigurationProps> = ({ applicationProp
         </AccordionContext.Consumer>
       </Accordion.Header>
       <Accordion.Body>
-        <div className="risebot_configDetails">
-          <div className="risebot_configTitle">
+        <div className="riseagent-risebot_configDetails">
+          <div className="riseagent-risebot_configTitle">
             <p>{configurationTitle}</p>
           </div>
-          <div className="risebot_agentdetailsBodyConfig">
+          <div className="riseagent-risebot_agentdetailsBodyConfig">
             <TableContainer component={Paper} sx={{ boxShadow: 0, maxHeight: 400, overflow: "auto" }}>
               <Table size="small" aria-label="agent configuration table" sx={{ minWidth: 280 }}>
                 <TableBody>

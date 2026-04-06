@@ -1,5 +1,6 @@
 
 import { cookies } from "./utils";
+import { getIdToken , getAccessToken} from "./TokenService";
 
 interface UserInfo {
   _id?: string;
@@ -28,7 +29,10 @@ export const setLocalAccessToken = (accessToken: string): void => {
 };
 
 export const getLocalRefreshToken = (): string | undefined => cookies.get("refreshToken");
-export const getLocalAccessToken = (): string | undefined => cookies.get("token");
+// Prefer the platform SSO cookie; fall back to the legacy app-written cookie
+export const getLocalAccessToken = (): string | undefined =>
+  cookies.get("iasphere_access_token") ?? cookies.get("token");
+
 
 
 export const setLocalUser = async (userInfo: UserInfo): Promise<true | false> => {

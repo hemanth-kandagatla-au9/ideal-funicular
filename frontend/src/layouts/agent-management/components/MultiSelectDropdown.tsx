@@ -93,14 +93,14 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = props => {
         target={
           <Button 
             onClick={toggleOpen} 
-            className={`risebot-btnToggle ${open ? 'active' : ''}`}
+            className={`riseagent-btnToggle ${open ? 'active' : ''}`}
             data-testid={toggleTestId}
             style={{
               backgroundColor: open ? '#F8FAFC' : '#FFFFFF',
               borderColor: open ? '#2961F4' : '#E2E8F0',
             }}
           >
-            <span className="optionsLabel">{dropDownName}</span>
+            <span className="riseagent-optionsLabel">{dropDownName}</span>
             <div 
               style={{ 
                 alignSelf: "center", 
@@ -136,7 +136,7 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = props => {
           styles={selectStyles}
           tabSelectsValue={false}
           value={value}
-          className="risebot-dropdownMenus"
+          className="riseagent-dropdownMenus"
         />
         {}
         {}
@@ -153,7 +153,7 @@ const Menu: React.FC<MenuProps> = props => {
   const shadow = "hsla(218, 50%, 10%, 0.1)";
   return (
     <div
-      className="risebot-dropdownMenu"
+      className="riseagent-dropdownMenu"
       style={{
         backgroundColor: "white",
         borderRadius: 8,
@@ -236,17 +236,17 @@ const Option: React.FC<OptionProps<OptionType, true>> = props => {
   const isAllSelected = label === "Select All" ? value?.length === options.length - 1 : isSelected;
 
   return (
-    <components.Option {...props} className="rowList">
-      <div style={{ pointerEvents: "none" }} className="listMenu">
+    <components.Option {...props} className="riseagent-rowList">
+      <div style={{ pointerEvents: "none" }} className="riseagent-listMenu">
         <input
           type="checkbox"
           data-testid={`checkboxTestId-${label}`}
           checked={isAllSelected}
           readOnly
-          className="inputCheckbox checkRow"
+          className="riseagent-inputCheckbox riseagent-checkRow"
           style={{ accentColor: isAllSelected ? "#2961F4" : "" }}
         />{" "}
-        <label className="inputCheckLabel checkRow">{label}</label>
+        <label className="riseagent-inputCheckLabel riseagent-checkRow">{label}</label>
       </div>
     </components.Option>
   );

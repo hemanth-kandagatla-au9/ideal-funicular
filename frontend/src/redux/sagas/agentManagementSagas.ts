@@ -399,7 +399,9 @@ export function* getAgentMetrics(): Generator<any, void, any> {
     yield put(agentManagementAction.requestFetchAgentMetrics());
     const output = yield call(agentManagementService.getAgentMetrics);
     yield put(agentManagementAction.successFetchAgentMetrics(get(output, "data.data", [])));
-    if (get(output, "data.flag") !== "success") errortoast(`Failed to fetch RISEAGENT Metrics: ${output.data.error}`);
+    if (get(output, "data.flag") !== "success"){
+      errortoast(`Failed to fetch RISEAGENT Metrics: ${output.data.message}`);
+    } 
   } catch (error: any) {
     yield put(agentManagementAction.failureFetchAgentMetrics(error));
   }
@@ -411,8 +413,8 @@ export function* startsSelectedAgent({ props }: ActionProps): Generator<any, voi
     yield put(agentManagementAction.requestStartSelectedAgentService());
     const { data } = yield call(agentManagementService.startSelectedAgents, props);
     yield put(agentManagementAction.successStartSelectedAgentService(data.data));
-    if (get(data, "flag") === "error") errortoast(`Failed to Start selected RISEAGENTs: ${data.error}`);
-    else successtoast("RISEAGENT Start action triggered successfully");
+    if (get(data, "flag") === "error") errortoast(get(data, "message", `Failed to Start selected RISEAGENTs: ${data.error}`));
+    else successtoast(get(data, "message", "RISEAGENT Start action triggered successfully"));
   } catch (error: any) {
     yield put(agentManagementAction.failureStartSelectedAgentService(error));
   }
@@ -424,8 +426,8 @@ export function* stopsSelectedAgent({ props }: ActionProps): Generator<any, void
     yield put(agentManagementAction.requestStopSelectedAgentService());
     const { data } = yield call(agentManagementService.stopSelectedAgents, props);
     yield put(agentManagementAction.successStopSelectedAgentService(data.data));
-    if (get(data, "flag") === "error") errortoast(`Failed to Stop selected RISEAGENTs: ${data.error}`);
-    else successtoast("RISEAGENT Stop action triggered successfully");
+    if (get(data, "flag") === "error") errortoast(get(data, "message", `Failed to Stop selected RISEAGENTs: ${data.error}`));
+    else successtoast(get(data, "message", `RISEAGENT Stop action triggered successfully : ${data.data.message}`));
   } catch (error: any) {
     yield put(agentManagementAction.failureStopSelectedAgentService(error));
   }
@@ -437,8 +439,8 @@ export function* restartsSelectedAgent({ props }: ActionProps): Generator<any, v
     yield put(agentManagementAction.requestRestartSelectedAgentService());
     const { data } = yield call(agentManagementService.restartSelectedAgents, props);
     yield put(agentManagementAction.successRestartSelectedAgentService(data.data));
-    if (get(data, "flag") === "error") errortoast(`Failed to Restart selected RISEAGENTs: ${data.error}`);
-    else successtoast("RISEAGENT Restart action triggered successfully");
+    if (get(data, "flag") === "error") errortoast(get(data, "message", `Failed to Restart selected RISEAGENTs: ${data.error}`));
+    else successtoast(get(data, "message", `RISEAGENT Restart action triggered successfully`));
   } catch (error: any) {
     yield put(agentManagementAction.failureRestartSelectedAgentService(error));
   }
@@ -450,8 +452,8 @@ export function* healthChecksSelectedAgent({ props }: ActionProps): Generator<an
     yield put(agentManagementAction.requestHealthCheckupSelectedAgentService());
     const output = yield call(agentManagementService.healthCheckSelectedAgents, props);
     yield put(agentManagementAction.successHealthCheckupSelectedAgentService(output));
-    if (get(output, "data.flag") === "error") errortoast(`Failed to execute RISEAGENT Healthcheck for selected RISEAGENTs: ${output.data.error}`);
-    else successtoast("RISEAGENT Healthcheck action triggered successfully", { autoClose: 2000 });
+    if (get(output, "data.flag") === "error") errortoast(get(output, "data.message", `Failed to execute RISEAGENT Healthcheck for selected RISEAGENTs: ${output.data.error}`));
+    else successtoast(get(output, "output.data", `RISEAGENT Healthcheck action triggered successfully: ${output.data.data.message}`));
   } catch (error: any) {
     yield put(agentManagementAction.failureHealthCheckupSelectedAgentService(error));
   }
@@ -463,8 +465,8 @@ export function* upgradeAgents({ props }: ActionProps): Generator<any, void, any
     yield put(agentManagementAction.requestUpgradeSelectedAgents());
     const output = yield call(agentManagementService.upgradeBulkAgents, props);
     yield put(agentManagementAction.successUpgradeSelectedAgents(output));
-    if (get(output, "data.flag") === "success") successtoast("RISEAGENT upgrade triggerred successfully");
-    else errortoast("failed to trigger upgrade RISEAGENTs");
+    if (get(output, "data.flag") === "success") successtoast(get(output, "output.data", `RISEAGENT upgrade triggerred successfully: ${output.data.data.message}`));
+    else errortoast(get(output, "data.message", "failed to trigger upgrade RISEAGENTs"));
   } catch (error: any) {
     yield put(agentManagementAction.failureUpgradeSelectedAgents(error));
   }
@@ -486,8 +488,8 @@ export function* envUpgradeAgents({ props }: ActionProps): Generator<any, void, 
           ? yield call(agentManagementService.envUpgradeSingle, payload[0], env)
           : yield call(agentManagementService.envUpgradeBulkAgents, payload, env);
     yield put(agentManagementAction.successEnvUpgradeSelectedAgents(output));
-    if (get(output, "data.flag") === "success") successtoast("Environment update triggered successfully");
-    else errortoast("Failed to trigger environment update for selected RISEAGENTs");
+    if (get(output, "data.flag") === "success") successtoast(get(output, "data.message", `Environment update triggered successfully: ${output.data.data.message}`));
+    else errortoast(get(output, "data.message", "Failed to trigger environment update for selected RISEAGENTs"));
   } catch (error: any) {
     yield put(agentManagementAction.failureEnvUpgradeSelectedAgents(error));
     errortoast(get(error, "message", "Failed to trigger environment update for selected RISEAGENTs"));
@@ -609,7 +611,7 @@ export function* getSyncAgentHealthConfigs(): Generator<any, void, any> {
     const output = yield call(agentManagementService.getSyncAgentHealthConfigs);
     yield put(agentManagementAction.successSyncAgentHealthConfigs(output));
     if (get(output, "data.flag") === "success") successtoast("RISEAGENT Sync Status triggered successfully");
-    else errortoast(`Failed to Sync RISEAGENT: ${output.data.error}`);
+    else errortoast(`Failed to Sync RISEAGENT: ${output.data.message}`);
   } catch (error: any) {
     yield put(agentManagementAction.failureSyncAgentHealthConfigs(error));
   }

@@ -28,9 +28,9 @@ interface PopUpProps {
 }
 const PopUp: React.FC<PopUpProps> = ({ show, onHide, dataObj, handleClick }) => {
   return (
-    <Modal data-testid="popupModalTestId" className="risebothealthCheckModal" show={show} animation={false} onHide={onHide}>
+    <Modal data-testid="popupModalTestId" className="riseagent-risebothealthCheckModal" show={show} animation={false} onHide={onHide}>
       <Modal.Header id="modalHeader" closeButton>
-        <Modal.Title className="upgradeHeader">{dataObj.header}</Modal.Title>
+        <Modal.Title className="riseagent-upgradeHeader">{dataObj.header}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="modal-body-content">{dataObj.body}</div>

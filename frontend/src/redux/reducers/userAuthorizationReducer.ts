@@ -21,6 +21,9 @@ const initialState: UserAuthorizationState = {
     limit: 10,
     total: 0,
   },
+  // Current logged-in user's own permissions (project/module/permission tree)
+  myPermissions: null,
+  myPermissionsLoading: false,
 };
 
 
@@ -161,6 +164,27 @@ export default function userAuthorizationReducer(
 
     case AUTH.USER.FETCH_GLOBAL_PERMISSIONS_FAILURE:
       return { ...state, loading: false, error: action.error };
+
+      // ---- Current user's own permissions ----
+    case AUTH.USER.GET_MY_PERMISSIONS_REQUEST:
+      return { ...state, myPermissionsLoading: true, error: null };
+
+    case AUTH.USER.GET_MY_PERMISSIONS_SUCCESS: {
+      // API shape: { flag, message, data: { permissions: [...] } }
+      // axios wraps it one level, saga dispatches the full axios response,
+      // so: action.data (axios response) → .data (API body) → .data.permissions (array)
+      const payload = action.data?.data?.data;
+      const permissionsArray: any[] = Array.isArray(payload)
+        ? payload // null-fallback path sends []
+        : Array.isArray(payload?.permissions)
+        ? payload.permissions // real API path
+        : [];
+      console.log('[permissionsReducer] permissionsArray:', permissionsArray);
+      return { ...state, myPermissionsLoading: false, myPermissions: permissionsArray };
+    }
+
+    case AUTH.USER.GET_MY_PERMISSIONS_FAILURE:
+      return { ...state, myPermissionsLoading: false, error: action.error };
 
 
     default:

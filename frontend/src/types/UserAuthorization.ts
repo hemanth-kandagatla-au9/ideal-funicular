@@ -37,6 +37,26 @@ export interface UserAuthorizationState {
   globalPermissions?: any; // Global permissions with user's current selections
   permissions: Permission[]; // Global permissions list
   permissionsPagination: PermissionPagination; // Pagination for permissions list
+  /** Current logged-in user's project/module permission tree from getUserPermission API */
+  myPermissions: ProjectPermission[] | null;
+  myPermissionsLoading: boolean;
+}
+
+/** Shape returned by /auth/getUserPermission */
+export interface ActionPermission {
+  label: string;
+  hasAccess: boolean;
+}
+
+export interface ModulePermission {
+  module: string;
+  hasAccess: boolean;
+  permissions: ActionPermission[];
+}
+
+export interface ProjectPermission {
+  project: string;
+  modules: ModulePermission[];
 }
 
 

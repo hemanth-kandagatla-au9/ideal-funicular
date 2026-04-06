@@ -5,6 +5,7 @@ import { get } from "lodash";
 import { AUTH } from "../../config/actions";
 import userAuthorizationActions from "../actions/userAuthorization.action";
 import userAuthorizationService from "../../services/userAuthorization/userAuthorization.service";
+import permissionsService from "../../services/auth/permissionsService";
 import { successtoast, errortoast } from "../../layouts/agent-management/helpers/CustomToast";
 
 interface ActionProps {
@@ -183,6 +184,28 @@ export function* fetchGlobalPermissionsSaga({ userId }: any): Generator<any, voi
 }
 
 
+export function* fetchMyPermissionsSaga(): Generator<any, void, any> {
+  try {
+    const output = yield call(permissionsService.fetchMyPermissions);
+
+    if (!output) {
+      // null means session expired – permissionsService already redirected
+      return;
+    }
+
+    yield put(userAuthorizationActions.successFetchMyPermissions(output));
+  } catch (error: any) {
+    const status = error?.response?.status;
+    if (status === 401 || error?.response?.data?.message === "Session Expired") {
+      window.location.href = "/session-expired";
+      return;
+    }
+    yield put(userAuthorizationActions.failureFetchMyPermissions(error.message));
+    errortoast(`Failed to load permissions: ${error.message}`);
+  }
+}
+
+
 export default function* userAuthorizationSagaWatcher(): Generator<any, void, any> {
   yield takeLatest(AUTH.USER.GET_USERS_REQUEST, fetchUsersSaga);
   yield takeLatest(AUTH.USER.CREATE_USER_REQUEST, createUserSaga);
@@ -193,4 +216,5 @@ export default function* userAuthorizationSagaWatcher(): Generator<any, void, an
   yield takeLatest(AUTH.PERMISSION.GET_PERMISSIONS_REQUEST, fetchPermissionsSaga);
   yield takeLatest(AUTH.PERMISSION.CREATE_PERMISSION_REQUEST, createPermissionSaga);
   yield takeLatest(AUTH.PERMISSION.DELETE_PERMISSION_REQUEST, deletePermissionSaga);
+  yield takeLatest(AUTH.USER.GET_MY_PERMISSIONS_REQUEST, fetchMyPermissionsSaga);
 }

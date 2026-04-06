@@ -123,7 +123,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
           justifyContent: "center",
         }}
       >
-        <h3 className="agentTitle">{risebotAgentTitleText}</h3>
+        <h3 className="riseagent-agentTitle">{risebotAgentTitleText}</h3>
         {showFilters && (
           <p
             style={{
@@ -138,8 +138,8 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
         )}
       </div>
 
-      <div className="topBtnsWrapper" style={{ display: "flex", gap: "10px", width: "70%" }}>
-        <div className="risebot-searchfilter">
+      <div className="riseagent-topBtnsWrapper" style={{ display: "flex", gap: "10px", width: "70%" }}>
+        <div className="riseagent-searchfilter">
           <Form.Control
             data-testid="agentFilterSearch"
             size="sm"
@@ -160,12 +160,12 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
               }
             }}
           />
-          <Button data-testId="searchBtnId" className="risebot-btnSearchIcon" onClick={filterAgentSearch}>
+          <Button data-testId="searchBtnId" className="riseagent-btnSearchIcon" onClick={filterAgentSearch}>
             <img src={searchIcon} alt="search" style={{ padding: "0 0 2px 4px" }} />
           </Button>
         </div>
         <Button
-          className="topbar-hover-btn"
+          className="riseagent-topbar-hover-btn"
           style={{
             height: "40px",
             backgroundColor: "#FFFFFF",
@@ -179,7 +179,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
           Version Management
         </Button>
         <div
-          className="risebot-syncUpStatusBtn popOne topbar-hover-btn"
+          className="riseagent-syncUpStatusBtn riseagent-popOne riseagent-topbar-hover-btn"
           style={{ display: "flex", gap: "8px", height: "40px" }}
           onClick={() => {
             dispatch(agentManagementAction.syncAgentHealthConfigs());
@@ -189,14 +189,14 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
           data-testid="forceUpdateTestId"
         >
           <img
-            className={syncspin ? "refresh_spin" : ""} src={syncStatus} alt="search" style={{ height: "20px", alignSelf: "center" }} />
+            className={syncspin ? "riseagent-refresh_spin" : ""} src={syncStatus} alt="search" style={{ height: "20px", alignSelf: "center" }} />
           <Button style={{ all: "unset" }}>{syncStatusButtonText}</Button>
         </div>
 
         <div>
           <Button
             title={userAuthorisationTooltipText}
-            className="topbar-hover-btn"
+            className="riseagent-topbar-hover-btn"
             style={{
               height: "40px",
               backgroundColor: "#FFFFFF",
@@ -222,7 +222,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
         <div>
           <Button
             title={refreshTooltipText}
-            className="topbar-hover-btn"
+            className="riseagent-topbar-hover-btn"
             style={{
               height: "40px",
               backgroundColor: "#FFFFFF",
@@ -246,7 +246,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
           >
 
             <img
-              className={refreshspin ? "refresh_spin" : ""}
+              className={refreshspin ? "riseagent-refresh_spin" : ""}
               src={restartIcon}
               style={{
                 display: "flex",
@@ -259,7 +259,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
           </Button>
         </div>
            <Button
-                    className="sidebar-action-btn"
+                    className="riseagent-sidebar-action-btn"
                     onClick={() => setShowGlobalConfigModal(true)}
                   >
                     {viewEditConfigurationButtonText}

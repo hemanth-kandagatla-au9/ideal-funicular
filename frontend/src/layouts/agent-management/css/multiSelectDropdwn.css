@@ -2,7 +2,7 @@
   max-height: 150px !important;
 }
 
-.risebot-btnToggle {
+.riseagent-btnToggle {
   border: 1px solid #eeeeee !important;
   border-radius: 36px !important;
   font-size: 15px !important;
@@ -27,7 +27,7 @@
   width: auto !important;
 }
 
-.optionsLabel {
+.riseagent-optionsLabel {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -50,9 +50,9 @@
   box-shadow: none !important;
 }
 
-.risebot-btnToggle:hover,
-.risebot-btnToggle:focus,
-.risebot-btnToggle:active {
+.riseagent-btnToggle:hover,
+.riseagent-btnToggle:focus,
+.riseagent-btnToggle:active {
   background: #faf9f7;
   color: #404040;
   box-shadow: none !important;
@@ -105,10 +105,10 @@
   color: #2c2929;
   opacity: 1;
 }
-.rowList {
+.riseagent-rowList {
   background-color: #fff !important;
 }
-.inputCheckbox {
+.riseagent-inputCheckbox {
   width: 18px;
   height: 18px;
   border: 1px solid #667085;
@@ -122,7 +122,7 @@
   margin-top: 16px;
 }
 
-.checkRow {
+.riseagent-checkRow {
   display: inline-block;
   vertical-align: middle;
   font-size: 14px;
@@ -136,7 +136,7 @@
   height: 44px;
 }
 
-.risebot-dropdownMenus [class*="control"] {
+.riseagent-dropdownMenus [class*="control"] {
   height: 44px;
   min-width: 300px;
   padding: 0 8px;
@@ -160,17 +160,17 @@
   border-radius: 20px;
 }
 
-.risebot-dropdownMenus [class*="IndicatorsContainer"] {
+.riseagent-dropdownMenus [class*="IndicatorsContainer"] {
   order: 1;
   text-align: center;
 }
 
-.risebot-dropdownMenus [class*="ValueContainer"] {
+.riseagent-dropdownMenus [class*="ValueContainer"] {
   order: 2;
   margin-right: 40px;
 }
 
-.risebot-dropdownMenus [class*="ValueContainer"] [class*="Input"] {
+.riseagent-dropdownMenus [class*="ValueContainer"] [class*="Input"] {
   width: 85%;
 }
 

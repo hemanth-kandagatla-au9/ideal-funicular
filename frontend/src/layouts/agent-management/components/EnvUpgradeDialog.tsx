@@ -42,15 +42,15 @@ const EnvUpgradeDialog: React.FC<EnvUpgradeDialogProps> = ({ showEnvUpgrade, clo
 
   return (
     <div data-testid="envUpgradeModal">
-      <Modal show={showEnvUpgrade} onHide={handleClose} backdrop="static" className="risebothealthCheckModal">
+      <Modal show={showEnvUpgrade} onHide={handleClose} backdrop="static" className="riseagent-risebothealthCheckModal">
         <Modal.Header closeButton>
-          <Modal.Title className="upgradeHeader">{envUpgradeTitleText}</Modal.Title>
+          <Modal.Title className="riseagent-upgradeHeader">{envUpgradeTitleText}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="agentVersionsCover">
-            <div className="subPopVersionCvr" style={{ display: "grid", gap: "12px" }}>
+          <div className="riseagent-agentVersionsCover">
+            <div className="riseagent-subPopVersionCvr" style={{ display: "grid", gap: "12px" }}>
               {ENV_OPTIONS.map(option => (
-                <div key={option} className="subPopVersionCvr" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div key={option} className="riseagent-subPopVersionCvr" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                   <input
                     type="radio"
                     name="env-upgrade-options"
@@ -61,7 +61,7 @@ const EnvUpgradeDialog: React.FC<EnvUpgradeDialogProps> = ({ showEnvUpgrade, clo
                     style={{ width: 18, height: 18 }}
                   />
                   <Button
-                    className={`risebotagentSubVersionBtn envUpgradeOptionBtn ${selectedEnv === option ? "versionActiveBtn" : ""}`}
+                    className={`riseagent-risebotagentSubVersionBtn riseagent-envUpgradeOptionBtn ${selectedEnv === option ? "riseagent-versionActiveBtn" : ""}`}
                     onClick={() => setSelectedEnv(option)}
                     style={{ minWidth: 120, textTransform: "uppercase" }}
                   >

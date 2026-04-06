@@ -21,17 +21,17 @@ interface JobLogsModalProps {
 
 const JobLogsModal: React.FC<JobLogsModalProps> = ({ open, onClose, onCancelButtonClick, refreshAgentLogs, copyToClipboard, state, hostname, agentId, jobsLogRef }) => {
   return (
-    <Modal show={open} backdrop="static" onHide={onClose} className="risebothealthCheckModal">
+    <Modal show={open} backdrop="static" onHide={onClose} className="riseagent-risebothealthCheckModal">
       <Modal.Header closeButton>
-        <Modal.Title className="upgradeHeader">
+        <Modal.Title className="riseagent-upgradeHeader">
           {}
           {jobLogsTitle}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="risebot_logDetails risebot_logRelative" style={{ border: "none" }}>
-          <div className="risebot_agentLogsHeader">
-            <Typography className="risebot_agentVersionsTitle">{logDetailsTitle}</Typography>
+        <div className="riseagent-risebot_logDetails riseagent-risebot_logRelative" style={{ border: "none" }}>
+          <div className="riseagent-risebot_agentLogsHeader">
+            <Typography className="riseagent-risebot_agentVersionsTitle">{logDetailsTitle}</Typography>
             <div>
               <Button variant="outline" title={refreshLogsButtonText} onClick={() => refreshAgentLogs(hostname, agentId, "")}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -103,8 +103,8 @@ const JobLogsModal: React.FC<JobLogsModalProps> = ({ open, onClose, onCancelButt
               })}
           </ul>
           {state.isLogsLoading && (
-            <div className="risebot_spinnerLoader">
-              <div className="risebot_innerSpinner">
+            <div className="riseagent-risebot_spinnerLoader">
+              <div className="riseagent-risebot_innerSpinner">
                 <div className="spinner-border" role="status">
                   <span className="sr-only">{loadingText}</span>
                 </div>

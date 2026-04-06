@@ -35,6 +35,8 @@ interface AgentListProps {
   handleSelectHostAgent: (hostname: string) => void;
   toggleSideBar: (hostname: string) => void;
   dispatch: Dispatch;
+  isViewAgentEnabled?: boolean;
+  isCheckStatusAgentEnabled?: boolean;
 }
 
 const AgentList = ({
@@ -48,6 +50,8 @@ const AgentList = ({
   handleSelectHostAgent,
   toggleSideBar,
   dispatch,
+  isViewAgentEnabled = true,
+  isCheckStatusAgentEnabled = true,
 }: AgentListProps) => {
   const agentCardsLabel = ["Hostname", "OS", "Uptime", "Version", "Status", "Action"];
   const [expandedHostname, setExpandedHostname] = useState<string | null>(null);
@@ -68,40 +72,40 @@ const AgentList = ({
   if (loading) {
     return (
       <>
-        <div className="agentHeaderRow">
-          <div className="agentRowFirst">
-            <Button className="btnFocusActive" data-testid="agentTickBtn" variant="outline">
+        <div className="riseagent-agentHeaderRow">
+          <div className="riseagent-agentRowFirst">
+            <Button className="riseagent-btnFocusActive" data-testid="agentTickBtn" variant="outline">
               <img src={selecttick} alt="Select All" />
             </Button>
           </div>
           {agentCardsLabel.map((ele, index) => (
-            <div key={index} className={`${index === 0 ? "agentRowSecond" : "agentRow"}`}>
-              <span className="fieldLabel">{ele}</span>
+            <div key={index} className={`${index === 0 ? "riseagent-agentRowSecond" : "riseagent-agentRow"}`}>
+              <span className="riseagent-fieldLabel">{ele}</span>
             </div>
           ))}
         </div>
         {Array.from({ length: pagination.limit }).map((_, i) => (
-          <div className="agentRowWrapper" key={i}>
-            <div className="cardsAgent">
-              <div className="agentRowFirst">
+          <div className="riseagent-agentRowWrapper" key={i}>
+            <div className="riseagent-cardsAgent">
+              <div className="riseagent-agentRowFirst">
                 <Skeleton animation="wave" variant="circular" width={40} height={40} />
               </div>
-              <div className="agentRowSecond ellipsis">
+              <div className="riseagent-agentRowSecond riseagent-ellipsis">
                 <Skeleton animation="wave" variant="text" width="120px" height={25} />
               </div>
-              <div className="agentRow">
+              <div className="riseagent-agentRow">
                 <Skeleton animation="wave" variant="text" width="45px" height={25} />
               </div>
-              <div className="agentRow">
+              <div className="riseagent-agentRow">
                 <Skeleton animation="wave" variant="text" width="80px" height={25} />
               </div>
-              <div className="agentRow">
+              <div className="riseagent-agentRow">
                 <Skeleton animation="wave" variant="text" width="40px" height={25} />
               </div>
-              <div className="agentRow">
+              <div className="riseagent-agentRow">
                 <Skeleton animation="wave" variant="text" width="70px" height={25} />
               </div>
-              <div className="agentActions agentRow">
+              <div className="riseagent-agentActions riseagent-agentRow">
                 <Skeleton animation="wave" variant="circular" width={40} height={40} />
                 <Skeleton animation="wave" variant="circular" width={40} height={40} />
               </div>
@@ -114,8 +118,8 @@ const AgentList = ({
 
   if (isEmpty(agents)) {
     return (
-      <div className="noDataFound">
-        <div className="noDataInnerSection">
+      <div className="riseagent-noDataFound">
+        <div className="riseagent-noDataInnerSection">
           <img src={NoDataFoundImg} alt="No Data" />
           <p>{emptyDataText}</p>
         </div>
@@ -143,29 +147,29 @@ const AgentList = ({
 
   return (
     <>
-        <div className="agentHeaderRow">
-          <div className="agentRowFirst">
-            <Button className="btnFocusActive" data-testid="agentTickBtn" variant="outline" onClick={toggleSelectOrDeselectAllAgents}>
+        <div className="riseagent-agentHeaderRow">
+          <div className="riseagent-agentRowFirst">
+            <Button className="riseagent-btnFocusActive" data-testid="agentTickBtn" variant="outline" onClick={toggleSelectOrDeselectAllAgents}>
               <img height="18px" width="18px" src={areAllAgentsSelected() ? blueTick : selecttick} alt="Select All" />
             </Button>
           </div>
           {agentCardsLabel.map((ele, index) => (
-            <div key={index} className={`${index === 0 ? "agentRowSecond" : "agentRow"}`}>
-              <span className="fieldLabel">{ele}</span>
+            <div key={index} className={`${index === 0 ? "riseagent-agentRowSecond" : "riseagent-agentRow"}`}>
+              <span className="riseagent-fieldLabel">{ele}</span>
             </div>
           ))}
         </div>
-       <div className="agentContainer">
+       <div className="riseagent-agentContainer">
         {agents.map(agent => {
           const { hostname, os, agent_details, status, risebotProperties } = agent;
           const isExpanded = expandedHostname === hostname;
           return (
           <div key={hostname}>
             {hostname != "" && (
-              <div className="agentRowWrapper">
-                <div className="cardsAgent">
-                  <div className="agentRowFirst">
-                    <Button data-testid="agentTickBtn" className="btnFocusActive" variant="outline" onClick={() => handleSelectHostAgent(hostname)}>
+              <div className="riseagent-agentRowWrapper">
+                <div className="riseagent-cardsAgent">
+                  <div className="riseagent-agentRowFirst">
+                    <Button data-testid="agentTickBtn" className="riseagent-btnFocusActive" variant="outline" onClick={() => handleSelectHostAgent(hostname)}>
                       <img
                         src={
                           !isEmpty(selectedHostnameAgentsData) &&
@@ -183,51 +187,53 @@ const AgentList = ({
                       />
                     </Button>
                   </div>
-                  <div className="agentRowSecond ellipsis">
-                    <span className="fieldValue fontWeightEven">{hostname}</span>
+                  <div className="riseagent-agentRowSecond riseagent-ellipsis">
+                    <span className="riseagent-fieldValue riseagent-fontWeightEven">{hostname}</span>
                   </div>
-                  <div className="agentRow">
-                    <span className="fieldValue fontWeightEven">{os}</span>
+                  <div className="riseagent-agentRow">
+                    <span className="riseagent-fieldValue riseagent-fontWeightEven">{os}</span>
                   </div>
-                  <div className="agentRow">
-                    <span className="fieldValue fontWeightOdd">{get(agent_details, "up_time", "0")}</span>
+                  <div className="riseagent-agentRow">
+                    <span className="riseagent-fieldValue riseagent-fontWeightOdd">{get(agent_details, "up_time", "0")}</span>
                   </div>
-                  <div className="agentRow">
-                    <span className="versionBadge">{get(risebotProperties, "agent.version") ? `v${get(risebotProperties, "agent.version")}` : ""}</span>
+                  <div className="riseagent-agentRow">
+                    <span className="riseagent-versionBadge">{get(risebotProperties, "agent.version") ? `v${get(risebotProperties, "agent.version")}` : ""}</span>
                   </div>
-                  <div className="agentRow">
-                    <span className={`statusBadge ${status.toLowerCase()}`}>{status}</span>
+                  <div className="riseagent-agentRow">
+                    <span className={`riseagent-statusBadge ${status.toLowerCase()}`}>{status}</span>
                   </div>
-                  <div className="agentActions agentRow">
-                    <Button
-                      variant="outline"
-                      className="btnFocusActive"
-                      data-testid="agentHealthChecktBtn"
-                      title={statusButtonText}
-                      disabled={loading || risebotProperties?.server?.port === undefined || risebotProperties?.server?.port === null}
-                      onClick={() => {
-                        const port = risebotProperties?.server?.port;
-                        if (port === undefined || port === null) return;
-                        dispatch(agentManagementActions.fetchHealthCheckup({ hostname, port }));
-                      }}
-                    >
-                      <img src={checkSquare} alt="view" />
-                    </Button>
-                    {!isEmpty(agents) && (
-                      <Button  title={viewText} data-testid="viewSidebar" variant="outline" disabled={loading} className="btnFocusActive" onClick={() => toggleSideBar(hostname)}>
+                  <div className="riseagent-agentActions riseagent-agentRow">
+                    {isCheckStatusAgentEnabled && (
+                      <Button
+                        variant="outline"
+                        className="riseagent-btnFocusActive"
+                        data-testid="agentHealthChecktBtn"
+                        title={statusButtonText}
+                        disabled={loading || risebotProperties?.server?.port === undefined || risebotProperties?.server?.port === null}
+                        onClick={() => {
+                          const port = risebotProperties?.server?.port;
+                          if (port === undefined || port === null) return;
+                          dispatch(agentManagementActions.fetchHealthCheckup({ hostname, port }));
+                        }}
+                      >
+                        <img src={checkSquare} alt="view" />
+                      </Button>
+                    )}
+                    {!isEmpty(agents) && isViewAgentEnabled && (
+                      <Button  title={viewText} data-testid="viewSidebar" variant="outline" disabled={loading} className="riseagent-btnFocusActive" onClick={() => toggleSideBar(hostname)}>
                         <img src={vieweye} alt="view" />
                       </Button>
                     )}
 
                     <Button
                       variant="outline"
-                      className="btnFocusActive accordionToggleBtn"
+                      className="riseagent-btnFocusActive riseagent-accordionToggleBtn"
                       data-testid="hostnameAccordionToggle"
                       title={isExpanded ? "Collapse" : "Expand"}
                       onClick={() => toggleExpanded(hostname)}
                     >
                       <img
-                        className={`hostnameAccordionChevron ${isExpanded ? "expanded" : ""}`}
+                        className={`riseagent-hostnameAccordionChevron ${isExpanded ? "riseagent-expanded" : ""}`}
                         src={downArrow}
                         alt={isExpanded ? "collapse" : "expand"}
                       />
@@ -238,7 +244,7 @@ const AgentList = ({
             )}
 
             {hostname !== "" && isExpanded && (
-              <div className="agentAccordionPanel">
+              <div className="riseagent-agentAccordionPanel">
                 <HostnameAccordionDetails agent={agent as any} />
               </div>
             )}

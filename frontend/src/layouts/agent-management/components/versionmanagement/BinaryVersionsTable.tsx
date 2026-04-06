@@ -1,3 +1,4 @@
+import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { BinaryVersion } from "./binarytypes";
@@ -5,6 +6,7 @@ import BinaryVersionsColumns from "./BinaryVersionsColumns";
 import Pagination from "../../../../components/ui/pagination/Pagination.component";
 
 interface BinaryVersionsTableProps {
+  style?: React.CSSProperties;
   versions: BinaryVersion[];
   pagination: {
     current: number;
@@ -17,7 +19,7 @@ interface BinaryVersionsTableProps {
   onEdit?: (version: BinaryVersion) => void;
 }
 
-const BinaryVersionsTable = ({ versions, pagination, onView, onEdit }: BinaryVersionsTableProps) => {
+const BinaryVersionsTable = ({ versions, pagination, onView, onEdit, style }: BinaryVersionsTableProps) => {
   const columns = BinaryVersionsColumns({ onView, onEdit });
 
   const handlePagination = (limit: number, pageNo: number) => {
@@ -29,7 +31,7 @@ const BinaryVersionsTable = ({ versions, pagination, onView, onEdit }: BinaryVer
   };
 
   return (
-    <Box sx={{ height: 480, width: "100%", display: "flex", flexDirection: "column" }}>
+    <Box sx={{ height: "calc(100vh - 150px)", minHeight: 200, width: "100%", display: "flex", flexDirection: "column", ...style }}>
       <Box sx={{ flex: "1 1 auto", minHeight: 0 }}>
         <DataGrid
           rows={versions}

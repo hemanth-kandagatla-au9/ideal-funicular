@@ -156,7 +156,7 @@ const UserAuthorization: React.FC = () => {
           <span className="users-number">{pagination.total}</span>
         </div>
         <div className="users-actions">
-          <div className="risebot-searchfilter-user">
+          <div className="riseagent-risebot-searchfilter-user">
             <input
               type="text"
               className="user-search-input search-icon-input"

@@ -13,9 +13,9 @@ interface DeleteModalProps {
 }
 const DeleteModal: React.FC<DeleteModalProps> = ({ open, onClose, onCancelButtonClick, onDeleteButtonClick, version }) => {
   return (
-    <Modal show={open} backdrop="static" onHide={onClose} className="risebothealthCheckModal">
+    <Modal show={open} backdrop="static" onHide={onClose} className="riseagent-risebothealthCheckModal">
       <Modal.Header closeButton>
-        <Modal.Title className="upgradeHeader">{version ? deleteBinaryTitle : deleteJobsTitle}</Modal.Title>
+        <Modal.Title className="riseagent-upgradeHeader">{version ? deleteBinaryTitle : deleteJobsTitle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="modal-body-content">

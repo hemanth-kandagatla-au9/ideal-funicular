@@ -215,6 +215,22 @@ const failureFetchGlobalPermissions = (error: { message: string }) => ({
 });
 
 
+// --------------- Current logged-in user's own permissions ---------------
+const fetchMyPermissions = () => ({
+  type: AUTH.USER.GET_MY_PERMISSIONS_REQUEST,
+});
+
+const successFetchMyPermissions = (data: any) => ({
+  type: AUTH.USER.GET_MY_PERMISSIONS_SUCCESS,
+  data,
+});
+
+const failureFetchMyPermissions = (error: { message: string } | string) => ({
+  type: AUTH.USER.GET_MY_PERMISSIONS_FAILURE,
+  error: typeof error === "string" ? error : error.message || "",
+});
+
+
 const userAuthorizationActions = {
   fetchUsers,
   requestFetchUsers,
@@ -256,6 +272,9 @@ const userAuthorizationActions = {
   requestFetchGlobalPermissions,
   successFetchGlobalPermissions,
   failureFetchGlobalPermissions,
+  fetchMyPermissions,
+  successFetchMyPermissions,
+  failureFetchMyPermissions,
 };
 
 export default userAuthorizationActions;

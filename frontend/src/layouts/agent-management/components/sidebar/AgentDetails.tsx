@@ -11,12 +11,18 @@ interface AgentDetailsProps {
 const AgentDetails: React.FC<AgentDetailsProps> = ({ agentDetails, agentDetailsLoading }) => {
   return (
     <Accordion.Item eventKey="1">
-      <Accordion.Header className="accordionHead">
+      <Accordion.Header className="riseagent-accordionHead">
         <AccordionContext.Consumer>
           {({ activeEventKey }) => (
             <>
-              <Typography className={`accordionTitle ${activeEventKey === "1" ? "titleCollapsed" : "nottitleCollapsed"}`}>{agentDetailsTitle}</Typography>
-              <span className={`agentDetailsArrow ${activeEventKey !== "1" ? "collapsedSvg" : "notcollapsedSvg"}`}>
+              <Typography
+                className={`riseagent-accordionTitle ${activeEventKey === "1" ? "riseagent-titleCollapsed" : "riseagent-nottitleCollapsed"}`}
+              >
+                {agentDetailsTitle}
+              </Typography>
+              <span
+                className={`riseagent-agentDetailsArrow ${activeEventKey !== "1" ? "riseagent-collapsedSvg" : "riseagent-notcollapsedSvg"}`}
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="#102459" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -26,7 +32,7 @@ const AgentDetails: React.FC<AgentDetailsProps> = ({ agentDetails, agentDetailsL
         </AccordionContext.Consumer>
       </Accordion.Header>
       <Accordion.Body>
-        <div className="risebot_agentdetailsBodyConfig">
+        <div className="riseagent-risebot_agentdetailsBodyConfig">
           <TableContainer component={Paper} sx={{ boxShadow: 0, maxHeight: 400, overflow: "auto" }}>
             <Table size="small" aria-label="agent details table" sx={{ minWidth: 280 }}>
               <TableBody>

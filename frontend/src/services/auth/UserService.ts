@@ -1,12 +1,21 @@
-
 import Cookies from "universal-cookie";
 import Config from "../../config/config";
 import AxiosInstanceClass from "../axiosInstance";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
 const { patch, get, baseUrl } = Config.apiEndpoints.auth;
 const cookies = new Cookies();
-const accessToken = cookies.get("iasphere_access_token");
-export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init(accessToken);
+import { getIdToken, getAccessToken } from "@/utils/TokenService"; 
+let _instance: ReturnType<AxiosInstanceClass["init"]> | null = null;
+
+export const getAxiosInstance = async () => {
+  if (_instance) return _instance;
+   console.log('newtoken>>',await getIdToken())
+  const token = (await getIdToken()) ?? cookies.get("iasphere_id_token") ?? "";
+   console.log('token>>',token)
+  _instance = new AxiosInstanceClass(baseUrl).init(token);
+  return _instance;
+};
+
 interface Pagination {
   limit: number;
   pageNo: number;
@@ -55,7 +64,8 @@ const getUsers = async (payload: GetUsersPayload): Promise<ApiResponse> => {
     if (filter?.isLoggedIn != null) {
       url += `&isLoggedIn=${filter.isLoggedIn}`;
     }
-    const response = await AxiosInstance.get(`${url}`);
+    const instance = await getAxiosInstance();
+    const response = await instance.get(`${url}`);
     return response.data;
   } catch (error: any) {
     return error.response;
@@ -65,11 +75,13 @@ const getUser = async (userId: string, accessToken?: string): Promise<UserData> 
   try {
     let response: any;
     if (accessToken) {
-      response = await AxiosInstance.get(`${get.users}${userId}`, {
+      const instance = await getAxiosInstance();
+      response = await instance.get(`${get.users}${userId}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
-    } else {
-      response = await AxiosInstance.get(`${get.users}${userId}`);
+    } else {      
+      const instance = await getAxiosInstance();
+      response = await instance.get(`${get.users}${userId}`);
     }
     return response.data.data;
   } catch (error: any) {
@@ -78,7 +90,8 @@ const getUser = async (userId: string, accessToken?: string): Promise<UserData> 
 };
 const updateUser = async (id: string, data: any): Promise<ApiResponse> => {
   try {
-    const response = await AxiosInstance.patch(`${patch.updateUser}/${id}`, data);
+    const instance = await getAxiosInstance();
+    const response = await instance.patch(`${patch.updateUser}/${id}`, data);
     return response.data;
   } catch (updateUserErr: any) {
     return updateUserErr.response.data;
@@ -97,7 +110,8 @@ const exportUsers = async (payload: ExportUsersPayload): Promise<ApiResponse> =>
     }
 
     const filterParams = new URLSearchParams(cleanedFilter as Record<string, string>).toString();
-    const response = await AxiosInstance.get(filterParams ? `${get.usersExport}?${filterParams}` : get.usersExport);
+     const instance = await getAxiosInstance();
+    const response = await instance.get(filterParams ? `${get.usersExport}?${filterParams}` : get.usersExport);
     return response.data;
   } catch (error: any) {
     return error.response;
@@ -106,8 +120,9 @@ const exportUsers = async (payload: ExportUsersPayload): Promise<ApiResponse> =>
 const getUsersActivityLog = async (payload: UsersActivityLogPayload): Promise<ApiResponse> => {
   try {
     const { filter, pagination } = payload;
+    const instance = await getAxiosInstance();
     const filterParams = new URLSearchParams({ ...filter, ...pagination } as Record<string, string>).toString();
-    const response = await AxiosInstance.get(filterParams ? `${get.usersActivityLog}?${filterParams}` : `${get.usersActivityLog}`);
+    const response = await instance.get(filterParams ? `${get.usersActivityLog}?${filterParams}` : `${get.usersActivityLog}`);
     return response.data;
   } catch (error: any) {
     return error.response;
@@ -116,7 +131,8 @@ const getUsersActivityLog = async (payload: UsersActivityLogPayload): Promise<Ap
 const getUsersActivityLogExport = async (filter: Record<string, any>): Promise<ApiResponse> => {
   try {
     const filterParams = new URLSearchParams(filter).toString();
-    const response = await AxiosInstance.get(filterParams ? `${get.usersActivityLog}/export?${filterParams}` : `${get.usersActivityLog}/export`);
+     const instance = await getAxiosInstance();
+    const response = await instance.get(filterParams ? `${get.usersActivityLog}/export?${filterParams}` : `${get.usersActivityLog}/export`);
 
     if (response.data?.data?.usersActivityLog) {
       response.data.data.usersActivityLog = response.data.data.usersActivityLog.map((item: any) => {

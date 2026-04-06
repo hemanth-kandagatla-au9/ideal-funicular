@@ -89,20 +89,20 @@ const DropdownComponent: React.FC<DropdownComponentProps> = props => {
   const getDropdownItemClasses = (dropdownVal: string, item: DropdownItem): string => {
     if (cnameDropdownMenu) {
       if (dropdownVal === item.value) {
-        return `${cnameDropdownMenu} risebot_dropdown-item selected-option`;
+        return `${cnameDropdownMenu} riseagent-risebot_dropdown-item selected-option`;
       }
-      return `risebot_dropdown-item ${cnameDropdownMenu}`;
+      return `riseagent-risebot_dropdown-item ${cnameDropdownMenu}`;
     }
     if (dropdownVal === item.value) {
-      return "risebot_dropdown-item selected-option";
+      return "riseagent-risebot_dropdown-item selected-option";
     }
-    return "risebot_dropdown-item";
+    return "riseagent-risebot_dropdown-item";
   };
 
   return (
     <Dropdown
       data-test="cs-dropdown-component"
-      className={propsCname ? `${propsCname} risebot_dropdown-outer ` : "risebot_dropdown-outer"}
+      className={propsCname ? `${propsCname} riseagent-risebot_dropdown-outer ` : "riseagent-risebot_dropdown-outer"}
       onSelect={typeof propsHandleChangeCustom === "function" ? handleSelectCustom : handleSelect}
       onToggle={isCompliancePage ? onHandleFilterClick : undefined}
     >
@@ -110,10 +110,10 @@ const DropdownComponent: React.FC<DropdownComponentProps> = props => {
         <Dropdown.Toggle
           data-testid={testId || "dropdown-test-id"}
           id="risebot_dropdown-autoclose-inside"
-          className={cnameToggleTitle ? `${cnameToggleTitle} risebot_dropdown-title-container` : "risebot_dropdown-title-container"}
+          className={cnameToggleTitle ? `${cnameToggleTitle} riseagent-risebot_dropdown-title-container` : "riseagent-risebot_dropdown-title-container"}
           disabled={disabled}
         >
-          <div data-testid={testidMain} className={cnameToggleTitle ? `${cnameToggleTitle} risebot_dropdown-title` : "risebot_dropdown-title"}>
+          <div data-testid={testidMain} className={cnameToggleTitle ? `${cnameToggleTitle} riseagent-risebot_dropdown-title` : "riseagent-risebot_dropdown-title"}>
             {dropdownValue} per page{" "}
             <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: 4 }}>
               <path d="M0.5 3.5L5.5 8.5L10.5 3.5H8.75L5.5 6.75L2.25 3.5H0.5Z" fill="#000" />

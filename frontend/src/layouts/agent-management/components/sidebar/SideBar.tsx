@@ -29,6 +29,8 @@ import SchedulerDialog from "../SchedulerDialog";
 import EnvUpgradeDialog from "../EnvUpgradeDialog";
 import agentManagementAction from "../../../../redux/actions/agentManagement.action";
 import { canAccess } from "../../../../utils/PermissionUtils";
+import useAgentPermissions from "../../../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../../../config/agentPermissionLabels";
 import agentManagementService from "../../../../services/agent/agentManagement.service";
 import { errortoast, successtoast } from "../../helpers/CustomToast";
 import { viewDetailsTitle } from "../../../../constants/strings";
@@ -36,6 +38,7 @@ import { prepareAgentDetails, prepareAgentConfigDetails } from "../../helpers/ag
 
 const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initialOpenBar, configureModal, agentSelected, port }) => {
   const dispatch = useDispatch();
+  const { hasPermission } = useAgentPermissions();
   const logsBodyRef = useRef<HTMLUListElement>(null);
   const jobsLogRef = useRef<HTMLUListElement>(null);
 
@@ -92,10 +95,11 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
 
   const agentConfigDetails = prepareAgentConfigDetails(agentInfo);
 
-  const isAgentDetailsAccordionEnabled = canAccess("Agent Accordion: RISEBOT Details");
-  const isAgentConfigAccordionEnabled = canAccess("Agent Accordion: RISEBOT Configuration");
-  const isAgentTaskAccordionEnabled = canAccess("Agent Accordion: RISEBOT Tasks");
-  const isAgentLogAccordionEnabled = canAccess("Agent Accordion: RISEBOT Logs");
+  // Accordion-level visibility flags driven by API permissions.
+  const isAgentTaskAccordionEnabled    = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_TASKS_READ);
+  const isAgentDetailsAccordionEnabled = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_DETAILS_READ);
+  const isAgentConfigAccordionEnabled  = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_CONFIG_READ);
+  const isAgentLogAccordionEnabled     = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_LOGS_READ);
 
   useEffect(() => {
     if (open && !state.openBar) {
@@ -430,14 +434,14 @@ const SideBar: React.FC<SideBarProps> = ({ open, setOpenSidebar, openBar: initia
 
   return (
     <div data-testid="sidebarId">
-      <Offcanvas show={state.openBar} onHide={handleClose} placement="end" className="risebot-agentDrawer">
+      <Offcanvas show={state.openBar} onHide={handleClose} placement="end" className="riseagent-agentDrawer">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title className="risebot-offcanvas-title">
+          <Offcanvas.Title className="riseagent-offcanvas-title">
             {viewDetailsTitle} ({hostname ? hostname.toUpperCase() : ""})
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className="risebot-sidebarAccodions">
+          <div className="riseagent-sidebarAccodions">
             <Accordion defaultActiveKey="0">
               {isAgentTaskAccordionEnabled && (
                 <AgentTasks

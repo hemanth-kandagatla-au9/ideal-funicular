@@ -6,6 +6,8 @@ import { isEmpty, isNull } from "lodash";
 import moment from "moment";
 import { AccordionContext } from "react-bootstrap";
 import { canAccess } from "../../../../utils/PermissionUtils";
+import useAgentPermissions from "../../../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../../../config/agentPermissionLabels";
 import { convertDateTime } from "../../helpers/agentHelpers";
 import { useDispatch } from "react-redux";
 import agentManagementActions from "../../../../redux/actions/agentManagement.action";
@@ -107,15 +109,21 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
   setJobName,
   setJobLogModal,
 }) => {
-  const isAgentTaskStartBtnEnabled = canAccess("Agent Task Button: Start");
-  const isAgentTaskStopBtnEnabled = canAccess("Agent Task Button: Stop");
-  const isAgentTaskRestartBtnEnabled = canAccess("Agent Task Button: Restart");
-  const isAgentTaskUpgradeBtnEnabled = canAccess("Agent Task Button: Upgrade");
-  const isAgentTaskCheckStatusBtnEnabled = canAccess("Agent Task Button: Check Status");
-  const isAgentTaskSyncConfigBtnEnabled = canAccess("Agent Task Button: Sync Agent Config");
-  const isAgentTaskScheduleCmdBtnEnabled = canAccess("Agent Task Button: Schedule Command");
-  const isAgentTaskEditBtnEnabled = canAccess("Agent Task Button: Edit");
-  const isAgentTaskDeleteBtnEnabled = canAccess("Agent Task Button: Delete");
+  const { hasPermission } = useAgentPermissions();
+    // Job-level operations
+  const isAgentTaskStartBtnEnabled       = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_JOB_START);
+  const isAgentTaskStopBtnEnabled        = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_JOB_STOP);
+  const isAgentTaskRestartBtnEnabled     = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_JOB_RESTART);
+  // Agent-level operations (same permissions as FilterBar bulk actions)
+  const isAgentStartBtnEnabled           = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_START);
+  const isAgentStopBtnEnabled            = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_STOP);
+  const isAgentRestartBtnEnabled         = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_RESTART);
+  const isAgentTaskUpgradeBtnEnabled     = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_UPGRADE);
+  const isAgentTaskCheckStatusBtnEnabled = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_CHECK_STATUS);
+  const isAgentTaskSyncConfigBtnEnabled  = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_SYNC_CONFIG);
+  const isAgentTaskScheduleCmdBtnEnabled = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_WRITE);   // no specific label yet
+  const isAgentTaskEditBtnEnabled        = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_WRITE);   // no specific label yet
+  const isAgentTaskDeleteBtnEnabled      = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_WRITE);   // no specific label yet
 
   const [allButtonsDisabled, setAllButtonsDisabled] = useState<boolean>(false);
   const [clickedButton, setClickedButton] = useState<string | null>(null);
@@ -151,12 +159,12 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
 
   return (
     <Accordion.Item eventKey="0">
-      <Accordion.Header className="accordionHead" onClick={e => !isNull(e) && listScheduledCommands(port, hostname)}>
+      <Accordion.Header className="riseagent-accordionHead" onClick={e => !isNull(e) && listScheduledCommands(port, hostname)}>
         <AccordionContext.Consumer>
           {({ activeEventKey }) => (
             <>
-              <Typography className={`accordionTitle ${activeEventKey === "0" ? "titleCollapsed" : "nottitleCollapsed"}`}>{agentTasksTitle}</Typography>
-              <span className={`agentDetailsArrow ${activeEventKey !== "0" ? "collapsedSvg" : "notcollapsedSvg"}`}>
+              <Typography className={`riseagent-accordionTitle ${activeEventKey === "0" ? "riseagent-titleCollapsed" : "riseagent-nottitleCollapsed"}`}>{agentTasksTitle}</Typography>
+              <span className={`riseagent-agentDetailsArrow ${activeEventKey !== "0" ? "riseagent-collapsedSvg" : "riseagent-notcollapsedSvg"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="#102459" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -165,11 +173,11 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
         </AccordionContext.Consumer>
       </Accordion.Header>
-      <Accordion.Body className="buttonBody risebotagentHealCheck" style={{ position: "relative" }}>
+      <Accordion.Body className="riseagent-buttonBody riseagent-risebotagentHealCheck" style={{ position: "relative" }}>
          <>
           {isAgentTaskStartBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'startJob' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'startJob' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('startJob', () => startJob(hostname, port))}
                 disabled={allButtonsDisabled}
@@ -180,7 +188,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskStopBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'stopJob' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'stopJob' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('stopJob', () => stopJob(hostname, port))}
                 disabled={allButtonsDisabled}
@@ -191,7 +199,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskRestartBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'restartJob' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'restartJob' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('restartJob', () => restartJob(hostname, port))}
                 disabled={allButtonsDisabled}
@@ -202,7 +210,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskUpgradeBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'upgradeAgent' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'upgradeAgent' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('upgradeAgent', () => upgradeAgent(port, type))}
                 disabled={allButtonsDisabled}
@@ -213,7 +221,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskCheckStatusBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'checkStatus' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'checkStatus' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('checkStatus', () => checkAgentStatus(hostname, port))}
                 disabled={allButtonsDisabled}
@@ -222,9 +230,9 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                 {checkStatusAgentButtonText}
               </Button>
           )}
-          {isAgentTaskRestartBtnEnabled && (
+          {isAgentStartBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'startSSH' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'startSSH' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('startSSH', () => startAgentviaSSH(hostname, port, osVersion))}
                 disabled={allButtonsDisabled}
@@ -233,9 +241,9 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                 {startAgentButtonText}
               </Button>
           )}
-          {isAgentTaskRestartBtnEnabled && (
+          {isAgentStopBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'shutDown' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'shutDown' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('shutDown', () => shutDownAgent(hostname, port))}
                 disabled={allButtonsDisabled}
@@ -244,9 +252,9 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                 {stopAgentButtonText}
               </Button>
           )}
-          {isAgentTaskRestartBtnEnabled && (
+          {isAgentRestartBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'restartAgent' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'restartAgent' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('restartAgent', () => restartAgent(hostname, port))}
                 disabled={allButtonsDisabled}
@@ -257,7 +265,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskUpgradeBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'envUpgrade' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'envUpgrade' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('envUpgrade', () => openEnvUpgradeModal())}
                 disabled={allButtonsDisabled}
@@ -268,7 +276,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
           )}
           {isAgentTaskSyncConfigBtnEnabled && (
               <Button 
-                className={`agentTriggerBtn ${clickedButton === 'syncAgentConfig' ? 'button-clicked' : ''}`}
+                className={`riseagent-agentTriggerBtn ${clickedButton === 'syncAgentConfig' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleButtonClick('syncAgentConfig', () => syncAgentConfig())}
                 disabled={allButtonsDisabled}
@@ -278,18 +286,18 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
               </Button>
           )}
         </>
-        <div className="coverAlertModal">
+        <div className="riseagent-coverAlertModal">
           {versionDialogOpen && (
-            <Modal show={versionDialogOpen} onHide={closeSubModal} backdrop="static" className="risebothealthCheckModal">
+            <Modal show={versionDialogOpen} onHide={closeSubModal} backdrop="static" className="riseagent-risebothealthCheckModal">
               <Modal.Header closeButton>
-                <Modal.Title className="upgradeHeader">{upgradeVersionText}</Modal.Title>
+                <Modal.Title className="riseagent-upgradeHeader">{upgradeVersionText}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <div className="agentVersionsCover">
+                <div className="riseagent-agentVersionsCover">
                   <RadioGroup aria-labelledby="demo-radio-buttons-group-label" value={selectedAgentVersion} name="radio-buttons-group">
                     {!isEmpty(agentsVersion) &&
                       (agentsVersion as AgentsVersionData)?.risebotVersions.map(({ version, buildDate }) => (
-                        <div className="subPopVersionCvr" key={version}>
+                        <div className="riseagent-subPopVersionCvr" key={version}>
                           <Radio
                             name="agentVersion"
                             value={version}
@@ -301,18 +309,18 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                               },
                             }}
                           />
-                          <div className="subPopVersionCvrBtn risebotmdlBtn">
+                          <div className="riseagent-subPopVersionCvrBtn riseagent-risebotmdlBtn">
                             <Button
-                              className={`risebotagentSubVersionBtn ${selectedAgentVersion === version ? "versionActiveBtn" : ""}`}
+                              className={`riseagent-risebotagentSubVersionBtn ${selectedAgentVersion === version ? "riseagent-versionActiveBtn" : ""}`}
                               onClick={() => handleSelectAgentVersion(version)}
                             >
                               v {version}
                             </Button>
                           </div>
-                          <div className="subPopVersionCvrBtn risebotmdlCont">
+                          <div className="riseagent-subPopVersionCvrBtn riseagent-risebotmdlCont">
                             <p>
-                              <span className="buildDateLabel">{buildDateText}</span>
-                              <time dateTime={buildDate} className="buildDate">
+                              <span className="riseagent-buildDateLabel">{buildDateText}</span>
+                              <time dateTime={buildDate} className="riseagent-buildDate">
                                 {(() => {
                                   const timestamp = Number(buildDate);
                                   if (moment(timestamp).isValid() && timestamp > 1000000000000) {
@@ -334,7 +342,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                   </RadioGroup>
                 </div>
               </Modal.Body>
-              <Modal.Footer className="confirmBtnModal">
+              <Modal.Footer className="riseagent-confirmBtnModal">
                 <Button className="" onClick={() => agentVersionUpgrade(port, agentsVersion)} data-testid="agentSubServiceVersionControlBtn">
                   {confirmButtonText}
                 </Button>

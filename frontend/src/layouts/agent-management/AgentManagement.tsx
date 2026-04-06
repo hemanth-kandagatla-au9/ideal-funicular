@@ -20,7 +20,9 @@ import {
   isLoading,
   isReload,
 } from "../../redux/selectors/agentManagement.selectors";
-import { canAccess } from "../../utils/PermissionUtils";
+import useAgentPermissions from "../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../config/agentPermissionLabels";
+import userAuthorizationActions from "../../redux/actions/userAuthorization.action";
 import UpgradeAgentsDialog from "./components/UpgradeAgentsDialog";
 import EnvUpgradeDialog from "./components/EnvUpgradeDialog";
 import { AGENT_ACTIONS, ERROR_MESSAGE } from "./components/constants";
@@ -41,6 +43,7 @@ import { Spin } from "antd";
 const AgentManagement = () => {
   const dispatch = useDispatch();
   const reload = useSelector(isReload);
+  const { hasPermission } = useAgentPermissions();
   const agentServices = useSelector(getAgentsService);
   const globalConfigs = useSelector(getAgentGlobalConfig);
   const loading = useSelector(isLoading);
@@ -107,6 +110,8 @@ const AgentManagement = () => {
     dispatch(agentManagementAction.fetchAgentManagementServices(getJsonData()));
     dispatch(agentManagementAction.fetchAgentMetrics());
     loadFilterData();
+    // Fetch the current user's permissions on mount so hasPermission() works
+    dispatch(userAuthorizationActions.fetchMyPermissions());
   }, []);
 
   useEffect(() => {
@@ -300,11 +305,12 @@ const AgentManagement = () => {
     dispatch(agentManagementAction.fetchAgentManagementServices(getJsonData()));
   };
 
-  const isStartAgentEnabled = canAccess("Agent: Start");
-  const isStopAgentEnabled = canAccess("Agent: Stop");
-  const isRestartAgentEnabled = canAccess("Agent: Restart");
-  const isCheckStatusAgentEnabled = canAccess("Agent: Check Status");
-  const isForceUpgradeAgentEnabled = canAccess("Agent: Force Upgrade");
+  const isViewAgentEnabled         = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_READ);
+  const isStartAgentEnabled        = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_START);
+  const isStopAgentEnabled         = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_STOP);
+  const isRestartAgentEnabled      = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_RESTART);
+  const isCheckStatusAgentEnabled  = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_CHECK_STATUS);
+  const isForceUpgradeAgentEnabled = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_UPGRADE);
 
   const startAgents = () => {
     if (!isEmpty(selectedHostnameAgentsData)) {
@@ -335,15 +341,13 @@ const AgentManagement = () => {
     }
   };
 
-  const agentSelectedData = (): Array<{ hostname: string; port: string; osVersion: string }> => {
+  const agentSelectedData = (): Array<{ hostname: string}> => {
     if (isEmpty(selectedHostnameAgentsData)) {
       errortoast("Please select the Agent Server");
       return [];
     }
-    return selectedHostnameAgentsData.map(({ hostname, agent_details }) => ({
-      hostname,
-      port: String(get(agent_details, "server_port", "")),
-      osVersion: get(agent_details, "os_version", ""),
+    return selectedHostnameAgentsData.map(({ hostname }) => ({
+      hostname
     }));
   };
 
@@ -478,7 +482,7 @@ const AgentManagement = () => {
     <>
       <AgentCardGrid agentMetricsTilesData={agentMetricsTilesData} onSelectStatus={handleStatusSelect} currentStatus={status} />
 
-      <div className="overallWrapper">
+      <div className="riseagent-overallWrapper">
         <Container>
           <SearchContainer
             state={state}
@@ -490,16 +494,16 @@ const AgentManagement = () => {
           />
 
           {selectedHostnameAgentsData.length > 0 && (
-            <div className="selectionCounterBadge">
-              <div className="selectionCounterContent">
+            <div className="riseagent-selectionCounterBadge">
+              <div className="riseagent-selectionCounterContent">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                <span className="selectionCounterText">
+                <span className="riseagent-selectionCounterText">
                   <strong>{selectedHostnameAgentsData.length}</strong> {selectedItemsText}
                 </span>
                 <button 
-                  className="clearSelectionButton"
+                  className="riseagent-clearSelectionButton"
                   onClick={() => setSelectedHostnameAgentsData([])}
                   title={clearSelectionText}
                 >
@@ -547,6 +551,8 @@ const AgentManagement = () => {
               toggleSideBar={toggleSideBar}
               dispatch={dispatch}
               setSelectedHostnameAgentsData={setSelectedHostnameAgentsData}
+              isViewAgentEnabled={isViewAgentEnabled}
+              isCheckStatusAgentEnabled={isCheckStatusAgentEnabled}
             />
           </Spin>
         </Container>

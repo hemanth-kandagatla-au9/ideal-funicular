@@ -227,31 +227,31 @@ const FilterBar: React.FC<FilterBarProps> = ({
         </div>
 
         {}
-        <div className="hostAgentColoumn">
-          <div className="btnsWrapper d-flex flex-wrap justify-content-end" style={{ gap: "8px" }}>
+        <div className="riseagent-hostAgentColoumn">
+          <div className="riseagent-btnsWrapper d-flex flex-wrap justify-content-end" style={{ gap: "8px" }}>
             {isStartAgentEnabled && (
-              <div className="executionBtnsSection">
+              <div className="riseagent-executionBtnsSection">
                 <Button variant="outline" data-testid="agentStartBtn" title={startAgentButtonText} onClick={startAgents} style={{ padding: "5px" }}>
                   <img src={startIcon} alt="Start" />
                 </Button>
               </div>
             )}
             {isStopAgentEnabled && (
-              <div className="executionBtnsSection">
+              <div className="riseagent-executionBtnsSection">
                 <Button variant="outline" data-testid="agentStopBtn" title={stopAgentButtonText} onClick={stopAgents} style={{ padding: "5px" }}>
                   <img src={stopIcon} alt="stop" />
                 </Button>
               </div>
             )}
             {isRestartAgentEnabled && (
-              <div className="executionBtnsSection">
-                <Button variant="outline" className="restartAllBtn" data-testid="agentRestartBtn" title={restartAgentButtonText} onClick={restartAgents} style={{ padding: "5px" }}>
+              <div className="riseagent-executionBtnsSection">
+                <Button variant="outline" className="riseagent-restartAllBtn" data-testid="agentRestartBtn" title={restartAgentButtonText} onClick={restartAgents} style={{ padding: "5px" }}>
                   <img src={restartIcon} alt="restart" />
                 </Button>
               </div>
             )}
 
-            <div className="executionBtnsSection">
+            <div className="riseagent-executionBtnsSection">
               <Button
                 variant="outline"
                 data-testid="syncAgentConfigRowBtn"
@@ -263,10 +263,10 @@ const FilterBar: React.FC<FilterBarProps> = ({
               </Button>
             </div>
             
-            <div className="executionBtnsSection">
+            <div className="riseagent-executionBtnsSection">
               <Button
                 variant="outline"
-                className="envUpgradeBtn"
+                className="riseagent-envUpgradeBtn"
                 data-testid="envUpgradeBtn"
                 title={envUpgradeButtonText}
                 onClick={openEnvUpgradeModal}
@@ -277,16 +277,16 @@ const FilterBar: React.FC<FilterBarProps> = ({
             </div>
 
             {isForceUpgradeAgentEnabled && (
-              <div className="executionBtnsSection">
-                <Button variant="outline" className="updateAllBtn" data-testid="agentUpdateBtn" title={upgradeAgentText} onClick={openAgentUpgradeModal} style={{ padding: "5px" }}>
+              <div className="riseagent-executionBtnsSection">
+                <Button variant="outline" className="riseagent-updateAllBtn" data-testid="agentUpdateBtn" title={upgradeAgentText} onClick={openAgentUpgradeModal} style={{ padding: "5px" }}>
                   <img src={HistoryIcon} alt="Upgrade" />
                 </Button>
               </div>
             )}
-            <div className="executionBtnsSection" style={{ position: 'relative' }} ref={sortDropdownRef}>
+            <div className="riseagent-executionBtnsSection" style={{ position: 'relative' }} ref={sortDropdownRef}>
               <Button
                 variant="outline"
-                className="sortBtn"
+                className="riseagent-sortBtn"
                 data-testid="agentSortBtn"
                 title="Sort agents"
                 onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
@@ -314,7 +314,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                     minWidth: '180px',
                   }}
                 >
-                  <div className="sortDropdownHeader">
+                  <div className="riseagent-sortDropdownHeader">
                     Sort By
                   </div>
                   <div
@@ -359,10 +359,10 @@ const FilterBar: React.FC<FilterBarProps> = ({
                 </div>
               )}
             </div>
-            <div className="executionBtnsSection">
+            <div className="riseagent-executionBtnsSection">
               <Button
                 variant="outline"
-                className="downloadBtn"
+                className="riseagent-downloadBtn"
                 data-testid="agentDownloadBtn"
                 title={downloadToExcelButtonText}
                 onClick={downloadToExcel}

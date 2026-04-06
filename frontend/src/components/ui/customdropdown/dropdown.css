@@ -6,14 +6,17 @@
   font-weight: 500;
 }
 .risebot_dropdown-item:focus,
-.risebot_dropdown-item:hover {
+.risebot_dropdown-item:hover,
+.riseagent-risebot_dropdown-item:focus,
+.riseagent-risebot_dropdown-item:hover {
   
   background-color: #3463d1 !important;
   color: #ffffff !important;
   -webkit-animation: 0;
   animation: 0;
 }
-.risebot_dropdown-item:hover {
+.risebot_dropdown-item:hover,
+.riseagent-risebot_dropdown-item:hover {
   font-family: "Johnson Text";
   font-style: normal;
   font-weight: 500;
@@ -49,7 +52,8 @@
   font-size: 16px !important;
 }
 
-.risebot_dropdown-item {
+.risebot_dropdown-item,
+.riseagent-risebot_dropdown-item {
   position: relative;
   font-family: kumbh Sans;
   font-style: normal;
@@ -73,7 +77,8 @@
   
 }
 
-.risebot_dropdown-title {
+.risebot_dropdown-title,
+.riseagent-risebot_dropdown-title {
   overflow: hidden;
   
   position: relative;
@@ -87,7 +92,8 @@
 .dropdown-menu {
   padding: 0px !important;
 }
-.risebot_dropdown-item:last-child {
+.risebot_dropdown-item:last-child,
+.riseagent-risebot_dropdown-item:last-child {
   border: 0px;
 }
 
@@ -120,7 +126,7 @@
   border-radius: 4px;
   line-height: normal;
 }
-.apply-background {
+.riseagent-mfe .apply-background {
   background: #104f8e;
 }
 .cancel-background {

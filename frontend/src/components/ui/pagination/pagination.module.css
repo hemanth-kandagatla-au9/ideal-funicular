@@ -6,7 +6,8 @@
   line-height: 20px;
   font-family: "Johnson Text";
 }
-.risebot_label1_div {
+.risebot_label1_div,
+.riseagent-risebot_label1_div {
   height: 30px;
 }
 .risebot_label1 {

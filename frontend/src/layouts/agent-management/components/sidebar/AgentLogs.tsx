@@ -18,12 +18,12 @@ interface AgentLogsProps {
 const AgentLogs: React.FC<AgentLogsProps> = ({ hostname, agentId, agentLog, isLogsLoading, loadAgentLogs, refreshAgentLogs, copyToClipboard, logsBodyRef }) => {
   return (
     <Accordion.Item eventKey="3">
-      <Accordion.Header className="accordionHead" onClick={() => loadAgentLogs(hostname, agentId, "")}>
+      <Accordion.Header className="riseagent-accordionHead" onClick={() => loadAgentLogs(hostname, agentId, "")}>
         <AccordionContext.Consumer>
           {({ activeEventKey }) => (
             <>
-              <Typography className={`accordionTitle ${activeEventKey === "3" ? "titleCollapsed" : "nottitleCollapsed"}`}>{agentLogsTitle}</Typography>
-              <span className={`agentDetailsArrow ${activeEventKey !== "3" ? "collapsedSvg" : "notcollapsedSvg"}`}>
+              <Typography className={`riseagent-accordionTitle ${activeEventKey === "3" ? "riseagent-titleCollapsed" : "riseagent-nottitleCollapsed"}`}>{agentLogsTitle}</Typography>
+              <span className={`riseagent-agentDetailsArrow ${activeEventKey !== "3" ? "riseagent-collapsedSvg" : "riseagent-notcollapsedSvg"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="#102459" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -32,10 +32,10 @@ const AgentLogs: React.FC<AgentLogsProps> = ({ hostname, agentId, agentLog, isLo
           )}
         </AccordionContext.Consumer>
       </Accordion.Header>
-      <Accordion.Body className="logsBody">
-        <div className="risebot_logDetails risebot_logRelative">
-          <div className="risebot_agentLogsHeader">
-            <Typography className="risebot_agentVersionsTitle">{logDetailsTitle}</Typography>
+      <Accordion.Body className="riseagent-logsBody">
+        <div className="riseagent-risebot_logDetails riseagent-risebot_logRelative">
+          <div className="riseagent-risebot_agentLogsHeader">
+            <Typography className="riseagent-risebot_agentVersionsTitle">{logDetailsTitle}</Typography>
             <div>
               <Button variant="outline" title={refreshLogsButtonText} onClick={() => refreshAgentLogs(hostname, agentId, "")}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -106,8 +106,8 @@ const AgentLogs: React.FC<AgentLogsProps> = ({ hostname, agentId, agentLog, isLo
               })}
           </ul>
           {isLogsLoading && (
-            <div className="risebot_spinnerLoader">
-              <div className="risebot_innerSpinner">
+            <div className="riseagent-risebot_spinnerLoader">
+              <div className="riseagent-risebot_innerSpinner">
                 <div className="spinner-border" role="status">
                   <span className="sr-only">{loadingText}</span>
                 </div>

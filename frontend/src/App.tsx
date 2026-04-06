@@ -22,24 +22,33 @@ declare global {
   }
 }
 
-const basepath = window.__HOST_APP__?"/app/riseagent":"/"
-console.log("window.__HOST_APP__ = " ,basepath)
+// Create store once at module level — not inside the component so it
+// survives re-renders without resetting state.
+const store = initializeStore();
+if (process.env.NODE_ENV === 'development') {
+  (window as any).__AGENT_STORE__ = store;
+}
+
 const App: React.FC = () => {
-  const store = initializeStore();
+
+  const globalWindow = globalThis as unknown as Window;
+  const isHostApp = Boolean(globalWindow.__HOST_APP__);
+  const basepath = isHostApp ? "/app/riseagent" : "/";
+
   return (
+    <div className="riseagent-mfe">
       <Provider store={store}>
-      <BrowserRouter basename = {basepath}>
-       
-        <ToastContainer />
-        <Switch>
-          <Route exact path="/" component={AgentManagement} />
-          <Route path="/versionmanagement" component={BinaryVersions} />
-          <Route path="/userAuthorization" component={UserAuthorization} />
-          <Route path="/permissions" component={Permissions} />
-        </Switch>
-       
-      </BrowserRouter>
+        <BrowserRouter basename={basepath}>
+          <ToastContainer />
+          <Switch>
+            <Route exact path="/" component={AgentManagement} />
+            <Route path="/versionmanagement" component={BinaryVersions} />
+            <Route path="/userAuthorization" component={UserAuthorization} />
+            <Route path="/permissions" component={Permissions} />
+          </Switch>
+        </BrowserRouter>
       </Provider>
+    </div>
   );
 };
  

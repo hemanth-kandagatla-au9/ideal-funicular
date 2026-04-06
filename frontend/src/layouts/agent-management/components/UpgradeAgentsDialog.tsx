@@ -79,7 +79,7 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
     return (
       <div>
         {get(upgradeVersions, versionType, [] as VersionInfo[]).map(({ version, buildDate }, index) => (
-          <div className="subPopVersionCvr" key={version}>
+          <div className="riseagent-subPopVersionCvr" key={version}>
             <Radio
               name="agentAgent"
               value={version}
@@ -91,15 +91,19 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
                 },
               }}
             />
-            <div className="subPopVersionCvrBtn risebotmdlBtn">
-              <Button data-testid={`agentManagerVersionBtn-${agentType}-${index}`} className="risebotagentSubVersionBtn" onClick={() => selectAgentVersion(version)}>
+            <div className="riseagent-subPopVersionCvrBtn riseagent-risebotmdlBtn">
+              <Button
+                data-testid={`agentManagerVersionBtn-${agentType}-${index}`}
+                className="riseagent-risebotagentSubVersionBtn"
+                onClick={() => selectAgentVersion(version)}
+              >
                 v{version}
               </Button>
             </div>
-            <div className="subPopVersionCvrBtn risebotmdlCont">
+            <div className="riseagent-subPopVersionCvrBtn riseagent-risebotmdlCont">
               <p>
-                <span className="buildDateLabel">{buildDateText}</span>
-                <time dateTime={buildDate} className="buildDate">
+                <span className="riseagent-buildDateLabel">{buildDateText}</span>
+                <time dateTime={buildDate} className="riseagent-buildDate">
                   {(() => {
                     const timestamp = Number(buildDate);
                     if (moment(timestamp).isValid() && timestamp > 1000000000000) {
@@ -124,12 +128,12 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
 
   return (
     <div data-testid="upgradeAgentTestId">
-      <Modal show={showAgentUpgrade} onHide={closeUpgradeModal} backdrop="static" className="risebothealthCheckModal">
+      <Modal show={showAgentUpgrade} onHide={closeUpgradeModal} backdrop="static" className="riseagent-risebothealthCheckModal">
         <Modal.Header closeButton>
-          <Modal.Title className="upgradeHeader">{upgradeAgentText}</Modal.Title>
+          <Modal.Title className="riseagent-upgradeHeader">{upgradeAgentText}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="agentVersionsCover">
+          <div className="riseagent-agentVersionsCover">
             <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="agents" name="radio-buttons-group">
               {renderAccordionData("risebotVersions", risebotAgentVersion, "risebotVersions")}
             </RadioGroup>

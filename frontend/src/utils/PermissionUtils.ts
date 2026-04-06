@@ -1,6 +1,7 @@
 import UserService from "../services/auth/UserService";
 import { getLocalAccessToken, getLocalUserId, setLocalPermissions, setLocalUser } from "./TokenUtils";
 import { Logout } from "./AuthUtils";
+import type { ProjectPermission } from "../types/UserAuthorization";
 
 type PermissionsData = {
   [key: string]: {
@@ -59,7 +60,7 @@ export const canAccess = (pageTitle: string): boolean => {
       }
     }
   }
-  return true; // This seems like a bug: always returning true regardless of check
+  return canAccessPage; // fixed: was always returning true regardless of check
 };
 
 export const refreshUserPermissions = async (): Promise<string[]> => {

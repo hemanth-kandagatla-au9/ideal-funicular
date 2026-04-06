@@ -170,7 +170,7 @@ const HostnameAccordionDetails = ({ agent }: HostnameAccordionDetailsProps) => {
         return (
           <span>
             {asText.join(", ")}
-            <span className="agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
+            <span className="riseagent-agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
               {"  Show less"}
             </span>
           </span>
@@ -183,7 +183,7 @@ const HostnameAccordionDetails = ({ agent }: HostnameAccordionDetailsProps) => {
         <span>
           {truncate(preview.join(", "))}
           {remaining > 0 && (
-            <span className="agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
+            <span className="riseagent-agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
               {`  +${remaining} more`}
             </span>
           )}
@@ -199,7 +199,7 @@ const HostnameAccordionDetails = ({ agent }: HostnameAccordionDetailsProps) => {
         return (
           <span>
             {truncate(text)}
-            <span className="agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
+            <span className="riseagent-agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
               {"  +more"}
             </span>
           </span>
@@ -210,7 +210,7 @@ const HostnameAccordionDetails = ({ agent }: HostnameAccordionDetailsProps) => {
         return (
           <span>
             {text}
-            <span className="agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
+            <span className="riseagent-agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
               {"  Show less"}
             </span>
           </span>
@@ -231,7 +231,7 @@ const HostnameAccordionDetails = ({ agent }: HostnameAccordionDetailsProps) => {
         return (
           <span>
             {truncate(json)}
-            <span className="agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
+            <span className="riseagent-agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
               {"  +more"}
             </span>
           </span>
@@ -242,7 +242,7 @@ const HostnameAccordionDetails = ({ agent }: HostnameAccordionDetailsProps) => {
         return (
           <span>
             {json}
-            <span className="agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
+            <span className="riseagent-agentAccordionInlineMore" onClick={() => toggleRow(rowKey)}>
               {"  Show less"}
             </span>
           </span>
@@ -256,29 +256,29 @@ const HostnameAccordionDetails = ({ agent }: HostnameAccordionDetailsProps) => {
   };
 
   return (
-    <div className="agentAccordionPanelInner">
+    <div className="riseagent-agentAccordionPanelInner">
       {sections.map(section => {
         const isExpanded = !!expandedSections[section.title];
         const visibleRows = isExpanded ? section.allRows : section.rows;
         const hasAnyRealValue = visibleRows.some(r => formatValue(r.value) !== "N/A");
 
         return (
-          <div key={section.title} className="agentAccordionSection">
-            <div className="agentAccordionSectionTitle">{section.title}</div>
+          <div key={section.title} className="riseagent-agentAccordionSection">
+            <div className="riseagent-agentAccordionSectionTitle">{section.title}</div>
             {!hasAnyRealValue ? (
-              <div className="agentAccordionEmpty">No data available</div>
+              <div className="riseagent-agentAccordionEmpty">No data available</div>
             ) : (
-              <div className="agentAccordionGrid">
+              <div className="riseagent-agentAccordionGrid">
                 {visibleRows.map(r => (
-                  <div key={`${section.title}-${r.label}`} className="agentAccordionRow">
-                    <div className="agentAccordionLabel">{r.label}</div>
-                    <div className="agentAccordionValue">{renderValue(section.title, r.label, r.value)}</div>
+                  <div key={`${section.title}-${r.label}`} className="riseagent-agentAccordionRow">
+                    <div className="riseagent-agentAccordionLabel">{r.label}</div>
+                    <div className="riseagent-agentAccordionValue">{renderValue(section.title, r.label, r.value)}</div>
                   </div>
                 ))}
 
                 {section.remaining > 0 && !isExpanded && (
                   <div
-                    className="agentAccordionMore"
+                    className="riseagent-agentAccordionMore"
                     role="button"
                     tabIndex={0}
                     onClick={() => toggleSection(section.title)}
@@ -292,7 +292,7 @@ const HostnameAccordionDetails = ({ agent }: HostnameAccordionDetailsProps) => {
 
                 {section.remaining > 0 && isExpanded && (
                   <div
-                    className="agentAccordionMore"
+                    className="riseagent-agentAccordionMore"
                     role="button"
                     tabIndex={0}
                     onClick={() => toggleSection(section.title)}

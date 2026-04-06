@@ -43,3 +43,14 @@ export const isUserSelected = (state: any, userId: string) => {
   const selectedUsers = getSelectedUsers(state);
   return selectedUsers.includes(userId);
 };
+
+/** The current logged-in user's project/module permission tree */
+export const getMyPermissions = createSelector(
+  [getUserAuthorizationState],
+  (userAuth) => userAuth?.myPermissions ?? null,
+);
+
+export const isMyPermissionsLoading = createSelector(
+  [getUserAuthorizationState],
+  (userAuth) => userAuth?.myPermissionsLoading ?? false,
+);

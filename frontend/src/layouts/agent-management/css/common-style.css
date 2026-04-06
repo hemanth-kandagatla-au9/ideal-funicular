@@ -108,27 +108,32 @@ a[aria-expanded="true"] {
   color: #404040;
 }
 
-.risebot-sidebarAccodions .accordion-item {
+.risebot-sidebarAccodions .accordion-item,
+.riseagent-sidebarAccodions .accordion-item {
   border: none !important;
   padding-left: 0px !important;
   background: white !important;
 }
 
-.risebot-sidebarAccodions .accordion-item .accordion-button {
+.risebot-sidebarAccodions .accordion-item .accordion-button,
+.riseagent-sidebarAccodions .accordion-item .accordion-button {
   padding-left: 0px !important;
 }
 
-.risebot-sidebarAccodions .accordion-item .accordion-body {
+.risebot-sidebarAccodions .accordion-item .accordion-body,
+.riseagent-sidebarAccodions .accordion-item .accordion-body {
   padding: 0px;
   padding-bottom: 20px;
   margin-right: 30px;
 }
 
-.risebot-sidebarAccodions .accordion-item .accordion-header {
+.risebot-sidebarAccodions .accordion-item .accordion-header,
+.riseagent-sidebarAccodions .accordion-item .accordion-header {
   margin-top: 0px;
 }
 
-.risebot-sidebarAccodions .accordion-button:not(.collapsed) {
+.risebot-sidebarAccodions .accordion-button:not(.collapsed),
+.riseagent-sidebarAccodions .accordion-button:not(.collapsed) {
   background-color: transparent;
   color: #404040;
   box-shadow: none;
@@ -137,13 +142,15 @@ a[aria-expanded="true"] {
 
 
 
-.risebot_logDetails ul::-webkit-scrollbar-thumb {
+.risebot_logDetails ul::-webkit-scrollbar-thumb,
+.riseagent-risebot_logDetails ul::-webkit-scrollbar-thumb {
   background: #5e5873;
   border-radius: 10px;
 }
 
 
-.risebot_logDetails ul::-webkit-scrollbar-thumb:hover {
+.risebot_logDetails ul::-webkit-scrollbar-thumb:hover,
+.riseagent-risebot_logDetails ul::-webkit-scrollbar-thumb:hover {
   background: #5e5873;
 }
 

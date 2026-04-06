@@ -33,12 +33,12 @@ const LocalConfigModal: React.FC<LocalConfigModalProps> = ({
   const isAgentLocalConfigSaveBtnEnabled = canAccess("Agent Local Config Button: Save");
 
   return (
-    <Modal show={open} backdrop="static" onHide={onClose} className="risebot-globalLocalConfig">
+    <Modal show={open} backdrop="static" onHide={onClose} className="riseagent-risebot-globalLocalConfig">
       <Modal.Header closeButton>
-        <Modal.Title className="risebot-ModalTitle">{globalLocalConfigurationTitle}</Modal.Title>
+        <Modal.Title className="riseagent-risebot-ModalTitle">{globalLocalConfigurationTitle}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="risebot-globeLocalConfigs">
+        <div className="riseagent-risebot-globeLocalConfigs">
           <div className="container">
             <div className="row">
               <div className="col-md-6">

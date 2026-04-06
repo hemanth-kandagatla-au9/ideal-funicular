@@ -104,7 +104,7 @@ describe("GlobalConfigurationModal", () => {
     expect(screen.getByDisplayValue("http://localhost")).toBeInTheDocument();
   });
 
-  it("toggles password visibility", () => {
+  it("keeps password masked and does not render visibility toggle", () => {
     mockedGetAgentGlobalConfig.mockReturnValue({
       configs: [
         {
@@ -121,10 +121,8 @@ describe("GlobalConfigurationModal", () => {
 
     const input = screen.getByDisplayValue("secret");
     expect(input).toHaveAttribute("type", "password");
-
-    fireEvent.click(screen.getByRole("button", { name: "Show password" }));
-
-    expect(input).toHaveAttribute("type", "text");
+    expect(screen.queryByLabelText("Show password")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Hide password")).not.toBeInTheDocument();
   });
 
   it("updates input value on change", () => {

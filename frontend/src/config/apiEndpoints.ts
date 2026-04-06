@@ -162,6 +162,7 @@ const apiEndpoints: ApiEndpoints = {
     },
     post: {
       start: "/agents/jobs/start",
+      shutdown: "/agents/stopAgent",
       propertySetup: "/agents/property-setup",
       globalConfiguration: "/agents/update-agentconfig",
       addAgent: "/agents",
@@ -229,6 +230,9 @@ const apiEndpoints: ApiEndpoints = {
   },
   utilities: {
     baseUrl: process.env.REACT_APP_UTILITIES_URL || "https://dev.utilities.rise.apps.jnj.com",
+  },
+  RBAC_auth: {
+    baseUrl: process.env.AUTH_API_URL || `https://predev.insightsauth.ias.apps.jnj.com/api/insightsauth`,
   },
 };
 

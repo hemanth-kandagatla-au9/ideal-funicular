@@ -124,9 +124,9 @@ const SchedulerDialog: React.FC<SchedulerDialogProps> = ({
 
   return (
     <div data-testid="schedulerId">
-      <Modal show={schedulerCommand} backdrop="static" onHide={onHide} className="risebotschedularDialog">
+      <Modal show={schedulerCommand} backdrop="static" onHide={onHide} className="riseagent-risebotschedularDialog">
         <Modal.Header closeButton>
-          <Modal.Title className="risebot-ModalTitle">{openEditScheduleCommand ? editJobsText : scheduleJobText}</Modal.Title>
+          <Modal.Title className="riseagent-risebot-ModalTitle">{openEditScheduleCommand ? editJobsText : scheduleJobText}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="modalBody">
           <Form noValidate validated={validated} className="scheduleForm">
@@ -160,7 +160,6 @@ const SchedulerDialog: React.FC<SchedulerDialogProps> = ({
                     <Form.Control
                       data-testid="sourceDirTestid"
                       size="sm"
-                      type="text"
                       id="sourceDir"
                       name="sourceDir"
                       value={sourceDir}
@@ -173,7 +172,7 @@ const SchedulerDialog: React.FC<SchedulerDialogProps> = ({
             </div>
             <div>{enabled && <CronTab value={cronExpression} onClear={() => setCronExpression("* * * * *")} onChange={handleCronChange} />}</div>
             <div>
-              <div className="risebotschedulerdCover">
+              <div className="riseagent-risebotschedulerdCover">
                 <button type="button" data-testid="risebotscheduleSaveCommand" className="cancelButtonAgent" onClick={closeDialog}>
                   {cancelButtonText}
                 </button>

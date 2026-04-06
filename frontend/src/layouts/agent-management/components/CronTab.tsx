@@ -22,7 +22,7 @@ const CronTab = (props: CronTabProps) => {
   return (
     <div data-testid="cronTab">
       <div className="formLabel scheduleLabel">{cronExpressionText}</div>
-      <AntdInput value={value} className="risebotcronInput" />
+      <AntdInput value={value} className="riseagent-risebotcronInput" />
 
       <div className="cron-wrapper">
         <Cron value={value} setValue={onChange} />
