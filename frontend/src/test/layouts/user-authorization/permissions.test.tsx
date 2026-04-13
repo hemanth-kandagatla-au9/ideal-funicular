@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Permissions from "../../../../src/layouts/user-authorization/Permissions";
 jest.mock("react-redux", () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
+  useDispatch: () => jest.fn(),
+  useSelector: (selector) => selector({}),
 }));
 
 jest.mock("react-router-dom", () => ({

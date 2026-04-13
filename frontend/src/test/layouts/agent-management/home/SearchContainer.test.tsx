@@ -9,6 +9,9 @@ const mockPush = jest.fn();
 
 jest.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
+  useSelector: (selector) => selector({}),
+  Provider: ({ children }) => children,
+  connect: jest.fn((mapStateToProps, mapDispatchToProps) => (Component) => Component),
 }));
 
 jest.mock("react-router-dom", () => ({

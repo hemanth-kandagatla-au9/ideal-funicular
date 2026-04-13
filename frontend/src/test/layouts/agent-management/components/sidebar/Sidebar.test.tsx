@@ -8,7 +8,7 @@ import SideBar from "../../../../../../src/layouts/agent-management/components/s
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual("react-redux"),
-  useSelector: jest.fn(),
+  useSelector: jest.fn((selector) => selector({})),
   useDispatch: () => jest.fn(),
 }));
 

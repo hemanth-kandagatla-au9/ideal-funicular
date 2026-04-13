@@ -39,9 +39,9 @@ jest.mock("react-redux", () => {
   };
 });
 
+const mockDispatch = jest.fn();
 const mockUseDispatch = ReactRedux.useDispatch as unknown as jest.Mock;
 const mockUseSelector = ReactRedux.useSelector as unknown as jest.Mock;
-const mockDispatch = jest.fn();
 
 
 jest.mock("../../../../../../src/utils/PermissionUtils", () => ({

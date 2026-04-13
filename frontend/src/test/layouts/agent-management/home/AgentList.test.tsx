@@ -5,6 +5,11 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import AgentList from '../../../../layouts/agent-management/home/AgentList';
 import '@testing-library/jest-dom/extend-expect';
 
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn(),
+  useSelector: (selector) => selector({}),
+  Provider: ({ children }) => children,
+}));
 
 jest.mock('../../../../redux/actions/agentManagement.action', () => ({
     fetchHealthCheckup: jest.fn((payload) => ({

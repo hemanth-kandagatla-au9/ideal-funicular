@@ -23,8 +23,8 @@ jest.mock("../../../../redux/actions/agentManagement.action", () => ({
 }));
 jest.mock("../../../../components/ui/pagination/Pagination.component", () => () => <div />);
 jest.mock("react-redux", () => ({
-  useSelector: jest.fn(),
-  useDispatch: jest.fn(() => jest.fn()),
+  useSelector: (selector) => selector({}),
+  useDispatch: () => jest.fn(),
 }));
 jest.mock("../../../../utils/hooks/useAgentPermissions", () => ({
   __esModule: true,

@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 jest.mock("react-redux", () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
+  useDispatch: jest.fn(() => jest.fn()),
+  useSelector: jest.fn((selector) => selector({})),
 }));
 
 jest.mock("../../../../src/utils/PermissionUtils", () => ({

@@ -5,6 +5,7 @@ import AgentTasks from "../../../../../layouts/agent-management/components/sideb
 import '@testing-library/jest-dom';
 jest.mock("react-redux", () => ({
   useDispatch: () => jest.fn(),
+  useSelector: (selector) => selector({}),
 }));
 
 jest.mock("../../../../../utils/PermissionUtils", () => ({

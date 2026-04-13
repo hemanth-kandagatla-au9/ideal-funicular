@@ -15,8 +15,8 @@ import {
 } from "@/redux/selectors/userAuthorization.selectors";
 
 jest.mock("react-redux", () => ({
-  useDispatch: jest.fn(),
-  useSelector: (selector: any) => selector(),
+  useDispatch: () => jest.fn(),
+  useSelector: (selector) => selector({}),
 }));
 
 jest.mock("react-router-dom", () => ({

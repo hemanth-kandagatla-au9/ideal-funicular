@@ -28,7 +28,7 @@ jest.mock("@/redux/selectors/agentManagement.selectors", () => ({
 const mockDispatch = jest.fn();
 jest.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
-  useSelector: (fn: any) => fn(),
+  useSelector: (fn) => fn({}),
 }));
 
 // mock actions
