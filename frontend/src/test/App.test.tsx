@@ -40,6 +40,6 @@ describe("App Component", () => {
         </BrowserRouter>
       </Provider>,
     );
-    expect(initializeStore).toHaveBeenCalledTimes(2);
+    expect(initializeStore).toHaveBeenCalledTimes(1);
   });
 });

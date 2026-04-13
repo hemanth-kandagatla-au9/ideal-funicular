@@ -305,7 +305,7 @@ const AgentManagement = () => {
     dispatch(agentManagementAction.fetchAgentManagementServices(getJsonData()));
   };
 
-  const isViewAgentEnabled         = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_READ);
+  const isViewAgentEnabled         = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW);
   const isStartAgentEnabled        = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_START);
   const isStopAgentEnabled         = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_STOP);
   const isRestartAgentEnabled      = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_RESTART);

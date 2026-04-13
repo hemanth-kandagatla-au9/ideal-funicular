@@ -12,6 +12,8 @@ import searchIcon from "../../../images/agent-management/assets/searchIcon.svg";
 import userAuthIcon from "../../../images/agent-management/assets/Button_base.png";
 import { useHistory } from "react-router-dom";
 import GlobalConfigurationModal from '../components/GlobalConfigurationModal';
+import useAgentPermissions from "../../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../../config/agentPermissionLabels";
 
 interface SearchContainerProps {
   state: any;
@@ -37,12 +39,18 @@ interface SearchContainerProps {
 const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, setStatus, loadFilterData, filterAgentSearch, setState }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { hasPermission } = useAgentPermissions();
   const [refreshspin, setRefreshspin] = useState(false);
   const [syncspin, setSyncspin] = useState(false);
   const [showGlobalConfigModal, setShowGlobalConfigModal] = useState(false);
   const { showFilters, agentSearch, ...rest } = state;
   const updateState = useCallback((newState: Partial<AgentManagementState>) => setState(prevState => ({ ...prevState, ...newState })), []);
   const timeoutRef = useRef<number | null>(null);
+  const getJsonDataRef = useRef(getJsonData);
+
+  useEffect(() => {
+    getJsonDataRef.current = getJsonData;
+  }, [getJsonData]);
 
   const handleInputChange = useCallback(
     async (id: string, event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +64,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
     debounce((searchValue: string) => {
       dispatch(
         agentManagementAction.fetchAgentManagementServices({
-          ...getJsonData(),
+          ...getJsonDataRef.current(),
           agentSearch: searchValue,
         }),
       );
@@ -68,14 +76,20 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
       debouncedFetch.cancel();
       dispatch(
         agentManagementAction.fetchAgentManagementServices({
-          ...getJsonData(),
+          ...getJsonDataRef.current(),
           agentSearch: "",
         }),
       );
     } else {
       debouncedFetch(agentSearch);
     }
-  }, [agentSearch, debouncedFetch]);
+  }, [agentSearch, debouncedFetch, dispatch]);
+
+  useEffect(() => {
+    return () => {
+      debouncedFetch.cancel();
+    };
+  }, [debouncedFetch]);
 
   useEffect(() => {
     return () => {
@@ -154,7 +168,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
                 debouncedFetch.cancel();
                 const trimmedValue = (e.currentTarget as HTMLInputElement).value.trim();
                 dispatch(agentManagementAction.fetchAgentManagementServices({
-                  ...getJsonData(),
+                  ...getJsonDataRef.current(),
                   agentSearch: trimmedValue,
                 }));
               }
@@ -164,6 +178,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
             <img src={searchIcon} alt="search" style={{ padding: "0 0 2px 4px" }} />
           </Button>
         </div>
+        {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_VERSION_MANAGEMENT) && (
         <Button
           className="riseagent-topbar-hover-btn"
           style={{
@@ -178,6 +193,8 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
         >
           Version Management
         </Button>
+        )}
+        {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_SYNC_STATUS) && (
         <div
           className="riseagent-syncUpStatusBtn riseagent-popOne riseagent-topbar-hover-btn"
           style={{ display: "flex", gap: "8px", height: "40px" }}
@@ -192,7 +209,9 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
             className={syncspin ? "riseagent-refresh_spin" : ""} src={syncStatus} alt="search" style={{ height: "20px", alignSelf: "center" }} />
           <Button style={{ all: "unset" }}>{syncStatusButtonText}</Button>
         </div>
+        )}
 
+        {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_USER_AUTHORIZATION_READ) && (
         <div>
           <Button
             title={userAuthorisationTooltipText}
@@ -218,6 +237,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
             />
           </Button>
         </div>
+        )}
 
         <div>
           <Button
@@ -258,12 +278,14 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
             />
           </Button>
         </div>
+           {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_GLOBAL_CONFIG_READ) && (
            <Button
                     className="riseagent-sidebar-action-btn"
                     onClick={() => setShowGlobalConfigModal(true)}
                   >
                     {viewEditConfigurationButtonText}
             </Button>
+           )}
         
       </div>
       <GlobalConfigurationModal

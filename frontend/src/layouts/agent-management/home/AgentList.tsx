@@ -13,6 +13,8 @@ import selecttick from "../../../images/agent-management/assets/squareTick.svg";
 import downArrow from "../../../images/agent-management/assets/downArrow.svg";
 import Pagination from "../../../components/ui/pagination/Pagination.component";
 import agentManagementActions from "../../../redux/actions/agentManagement.action";
+import useAgentPermissions from "../../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../../config/agentPermissionLabels";
 import { emptyDataText, statusButtonText, viewText } from "../../../constants/strings";
 
 interface Pagination {
@@ -55,6 +57,7 @@ const AgentList = ({
 }: AgentListProps) => {
   const agentCardsLabel = ["Hostname", "OS", "Uptime", "Version", "Status", "Action"];
   const [expandedHostname, setExpandedHostname] = useState<string | null>(null);
+  const { hasPermission } = useAgentPermissions();
 
   // Close any open accordion when filters/status change or when a data refresh starts.
   useEffect(() => {
@@ -225,24 +228,31 @@ const AgentList = ({
                       </Button>
                     )}
 
-                    <Button
-                      variant="outline"
-                      className="riseagent-btnFocusActive riseagent-accordionToggleBtn"
-                      data-testid="hostnameAccordionToggle"
-                      title={isExpanded ? "Collapse" : "Expand"}
-                      onClick={() => toggleExpanded(hostname)}
-                    >
-                      <img
-                        className={`riseagent-hostnameAccordionChevron ${isExpanded ? "riseagent-expanded" : ""}`}
-                        src={downArrow}
-                        alt={isExpanded ? "collapse" : "expand"}
-                      />
-                    </Button>
+                    {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_ACCORDION) && (
+                      <Button
+                        variant="outline"
+                        className="riseagent-btnFocusActive riseagent-accordionToggleBtn"
+                        data-testid="hostnameAccordionToggle"
+                        title={isExpanded ? "Collapse" : "Expand"}
+                        onClick={() => toggleExpanded(hostname)}
+                      >
+                        <img
+                          className={`riseagent-hostnameAccordionChevron ${isExpanded ? "riseagent-expanded" : ""}`}
+                          src={downArrow}
+                          alt={isExpanded ? "collapse" : "expand"}
+                        />
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
             )}
 
+            {/* {hostname !== "" && isExpanded && hasPermission(AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW) && (
+              <div className="riseagent-agentAccordionPanel">
+                <HostnameAccordionDetails agent={agent as any} />
+              </div>
+            )} */}
             {hostname !== "" && isExpanded && (
               <div className="riseagent-agentAccordionPanel">
                 <HostnameAccordionDetails agent={agent as any} />

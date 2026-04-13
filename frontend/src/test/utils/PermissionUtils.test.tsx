@@ -1,7 +1,5 @@
 /* eslint-disable prefer-const */
 /* eslint-disable jest/no-identical-title */
-import {AxiosInstance} from "../../services/auth/UserService";
-
 import PermissionUtils from "../../utils/PermissionUtils";
 import { cookies } from "../../utils/utils";
 import * as TokenUtils from '../../utils/TokenUtils';
@@ -9,7 +7,13 @@ import * as TokenUtils from '../../utils/TokenUtils';
 localStorage.setItem('token','bW9jay10b2tlbg==')
 
 const mockPermission='ewoJImRpc2NvdmVyeSI6IHsKCQkiRGlzY292ZXJ5OiBNb2NrIjogdHJ1ZSwKCQkiU3R1ZGlvOiBNb2NrMiI6IHRydWUKCX0sCgkiZ3JvdXBzIjogWyJKSlQtQVBQLVJJU0UtTW9jayJdCn0='
-let mockGet = jest.spyOn(AxiosInstance, "get");
+
+jest.mock("../../services/auth/UserService", () => ({
+  AxiosInstance: jest.fn(() => ({
+    get: jest.fn(),
+  })),
+}));
+
 describe('PermissionUtils', () => {
     beforeEach(() => {
         jest.clearAllMocks();

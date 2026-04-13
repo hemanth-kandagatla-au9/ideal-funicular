@@ -33,6 +33,10 @@ describe("permissionsService.fetchMyPermissions", () => {
       },
     }));
 
+    jest.doMock("../../utils/TokenService", () => ({
+      getIdToken: jest.fn().mockResolvedValue("mock-token"),
+    }));
+
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     permissionsService = require("../../services/auth/permissionsService").default;
   });

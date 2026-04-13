@@ -23,6 +23,8 @@ import PopUp from "@/components/popup/popUp.component";
 import searchIcon from "../../images/agent-management/assets/searchIcon.svg";
 import { formatNameByFirstLetterCase } from "@/utils/utils";
 import "./UserAuthorization.css";
+import useAgentPermissions from "../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../config/agentPermissionLabels";
 import "../user-authorization/AssignPermissionsModal.css";
 
 const UserAuthorization: React.FC = () => {
@@ -34,6 +36,7 @@ const UserAuthorization: React.FC = () => {
   const pagination = useSelector(getUsersPagination);
   const selectedUsers = useSelector(getSelectedUsers);
   const usersList = Array.isArray(users) ? users : [];
+  const { hasPermission } = useAgentPermissions();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [showAddUserModal, setShowAddUserModal] = useState(false);
@@ -174,14 +177,18 @@ const UserAuthorization: React.FC = () => {
             />
           </div>
           
+          {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_PERMISSION_LIST_READ) && (
           <button type="button" className="permission-list-btn" onClick={handlePermissionList}>
             <img src={buttonBaseIcon} alt="users icon" className="permission-icon" />
             <span className="permission-text">Permission List</span>
           </button>
+          )}
+          {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_USER_AUTHORIZATION_ADDUSER) && (
           <button className="add-user-btn" onClick={handleAddUserClick}>
             <span className="add-user-btn-icon">+</span>
             <span className="add-user-btn-text">Add User</span>
           </button>
+          )}
         </div>
       </div>
 
@@ -271,6 +278,7 @@ const UserAuthorization: React.FC = () => {
                 <span className="user-table-value">{formatDate(user.updatedAt)}</span>
               </div>
               <div className="user-table-cell user-table-cell-actions">
+                {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_ASSIGN_PERMISSION) && (
                 <button
                   type="button"
                   className="user-action-btn"
@@ -282,6 +290,8 @@ const UserAuthorization: React.FC = () => {
                     <path d="M9 12L11 14L15 10" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
+                )}
+                {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_USER_AUTHORIZATION_DELETEUSER) && (
                 <button
                   type="button"
                   className="user-action-btn"
@@ -295,6 +305,7 @@ const UserAuthorization: React.FC = () => {
                     <path d="M6.6665 4.99984V3.33317C6.6665 2.49984 7.49984 1.6665 8.33317 1.6665H11.6665C12.4998 1.6665 13.3332 2.49984 13.3332 3.33317V4.99984" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
+                )}
               </div>
             </div>
           ))}

@@ -25,16 +25,11 @@ interface UserAuthConfig {
 }
 const userAuthConfig = Config.apiEndpoints.userAuthorization as UserAuthConfig;
 const userAuthBaseURL = userAuthConfig?.baseURL || process.env.REACT_APP_USER_AUTH_URL || "http://localhost:3001";
-const cookies = new Cookies();
-const accessToken = cookies.get("iasphere_id_token");
 let _instance: ReturnType<AxiosInstanceClass["init"]> | null = null;
 
 export const getAxiosInstance = async () => {
   if (_instance) return _instance;
-  console.log('newtoken>>',await getIdToken())
-  const token = (await getIdToken()) ?? cookies.get("iasphere_id_token") ?? "";
-  console.log('token>>',token)
-  _instance = new AxiosInstanceClass(userAuthBaseURL).init(token);
+  _instance = new AxiosInstanceClass(userAuthBaseURL).init();
   return _instance;
 };
 

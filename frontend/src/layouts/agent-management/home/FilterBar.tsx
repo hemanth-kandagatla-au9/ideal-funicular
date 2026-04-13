@@ -21,6 +21,8 @@ import {
   clearAllButtonText,
   syncAgentConfigButtonText,
 } from "../../../constants/strings";
+import useAgentPermissions from "../../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../../config/agentPermissionLabels";
 import { DropdownOption, FilteredData } from "@/types/AgentManagementState";
 
 interface FilterOption {
@@ -85,6 +87,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
   sortOrder,
   onSortChange,
 }) => {
+  const { hasPermission } = useAgentPermissions();
   const [dropdownOpen, setDropdownOpen] = useState<Record<string, boolean>>({});
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const sortDropdownRef = useRef<HTMLDivElement>(null);
@@ -229,21 +232,21 @@ const FilterBar: React.FC<FilterBarProps> = ({
         {}
         <div className="riseagent-hostAgentColoumn">
           <div className="riseagent-btnsWrapper d-flex flex-wrap justify-content-end" style={{ gap: "8px" }}>
-            {isStartAgentEnabled && (
+            {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_BULK_START) && (
               <div className="riseagent-executionBtnsSection">
                 <Button variant="outline" data-testid="agentStartBtn" title={startAgentButtonText} onClick={startAgents} style={{ padding: "5px" }}>
                   <img src={startIcon} alt="Start" />
                 </Button>
               </div>
             )}
-            {isStopAgentEnabled && (
+            {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_BULK_STOP) && (
               <div className="riseagent-executionBtnsSection">
                 <Button variant="outline" data-testid="agentStopBtn" title={stopAgentButtonText} onClick={stopAgents} style={{ padding: "5px" }}>
                   <img src={stopIcon} alt="stop" />
                 </Button>
               </div>
             )}
-            {isRestartAgentEnabled && (
+            {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_BULK_RESTART) && (
               <div className="riseagent-executionBtnsSection">
                 <Button variant="outline" className="riseagent-restartAllBtn" data-testid="agentRestartBtn" title={restartAgentButtonText} onClick={restartAgents} style={{ padding: "5px" }}>
                   <img src={restartIcon} alt="restart" />
@@ -251,32 +254,36 @@ const FilterBar: React.FC<FilterBarProps> = ({
               </div>
             )}
 
-            <div className="riseagent-executionBtnsSection">
-              <Button
-                variant="outline"
-                data-testid="syncAgentConfigRowBtn"
-                title={syncAgentConfigButtonText}
-                onClick={syncAgentConfig}
-                style={{ padding: "5px" }}
-              >
-                <img src={syncIcon} alt="sync agent config" />
-              </Button>
-            </div>
+            {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_BULK_SYNC_CONFIG) && (
+              <div className="riseagent-executionBtnsSection">
+                <Button
+                  variant="outline"
+                  data-testid="syncAgentConfigRowBtn"
+                  title={syncAgentConfigButtonText}
+                  onClick={syncAgentConfig}
+                  style={{ padding: "5px" }}
+                >
+                  <img src={syncIcon} alt="sync agent config" />
+                </Button>
+              </div>
+            )}
             
-            <div className="riseagent-executionBtnsSection">
-              <Button
-                variant="outline"
-                className="riseagent-envUpgradeBtn"
-                data-testid="envUpgradeBtn"
-                title={envUpgradeButtonText}
-                onClick={openEnvUpgradeModal}
-                style={{ padding: "5px" }}
-              >
-                <img src={envUpgradeIcon} alt="env upgrade" />
-              </Button>
-            </div>
+            {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_BULK_ENV_UPGRADE) && (
+              <div className="riseagent-executionBtnsSection">
+                <Button
+                  variant="outline"
+                  className="riseagent-envUpgradeBtn"
+                  data-testid="envUpgradeBtn"
+                  title={envUpgradeButtonText}
+                  onClick={openEnvUpgradeModal}
+                  style={{ padding: "5px" }}
+                >
+                  <img src={envUpgradeIcon} alt="env upgrade" />
+                </Button>
+              </div>
+            )}
 
-            {isForceUpgradeAgentEnabled && (
+            {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_BULK_UPGRADE) && (
               <div className="riseagent-executionBtnsSection">
                 <Button variant="outline" className="riseagent-updateAllBtn" data-testid="agentUpdateBtn" title={upgradeAgentText} onClick={openAgentUpgradeModal} style={{ padding: "5px" }}>
                   <img src={HistoryIcon} alt="Upgrade" />
@@ -359,18 +366,20 @@ const FilterBar: React.FC<FilterBarProps> = ({
                 </div>
               )}
             </div>
-            <div className="riseagent-executionBtnsSection">
-              <Button
-                variant="outline"
-                className="riseagent-downloadBtn"
-                data-testid="agentDownloadBtn"
-                title={downloadToExcelButtonText}
-                onClick={downloadToExcel}
-                style={{ padding: "5px" }}
-              >
-                <img src={downloadIcon} alt="Download" />
-              </Button>
-            </div>
+            {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_DOWNLOAD_TO_EXCEL) && (
+              <div className="riseagent-executionBtnsSection">
+                <Button
+                  variant="outline"
+                  className="riseagent-downloadBtn"
+                  data-testid="agentDownloadBtn"
+                  title={downloadToExcelButtonText}
+                  onClick={downloadToExcel}
+                  style={{ padding: "5px" }}
+                >
+                  <img src={downloadIcon} alt="Download" />
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

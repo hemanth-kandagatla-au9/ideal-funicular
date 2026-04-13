@@ -13,6 +13,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import AgentList from "../../../../layouts/agent-management/home/AgentList";
+import useAgentPermissions from "../../../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../../../config/agentPermissionLabels";
 
 // ─── mocks ───────────────────────────────────────────────────────────────────
 
@@ -23,6 +25,10 @@ jest.mock("../../../../components/ui/pagination/Pagination.component", () => () 
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
   useDispatch: jest.fn(() => jest.fn()),
+}));
+jest.mock("../../../../utils/hooks/useAgentPermissions", () => ({
+  __esModule: true,
+  default: jest.fn(),
 }));
 
 // ─── fixture data ─────────────────────────────────────────────────────────────
@@ -114,9 +120,14 @@ describe("AgentList — permission-gated buttons", () => {
     expect(screen.getByTestId("agentHealthChecktBtn")).toBeInTheDocument();
   });
 
-  // ── Navigation chevron always shows (not permission-gated) ─────────────────
+  // ── Accordion toggle gated by RISE_AGENT_ACCORDION permission ────────
 
-  it("always shows accordion toggle chevron regardless of permissions", () => {
+  it("shows accordion toggle chevron when RISE_AGENT_ACCORDION permission is granted", () => {
+    (useAgentPermissions as jest.Mock).mockReturnValue({
+      hasPermission: jest.fn((label) => label === AGENT_PERMISSIONS.RISE_AGENT_ACCORDION),
+      loading: false,
+      permissions: null,
+    });
     render(
       <AgentList
         {...defaultProps}
@@ -125,6 +136,22 @@ describe("AgentList — permission-gated buttons", () => {
       />
     );
     expect(screen.getByTestId("hostnameAccordionToggle")).toBeInTheDocument();
+  });
+
+  it("hides accordion toggle chevron when RISE_AGENT_ACCORDION permission is not granted", () => {
+    (useAgentPermissions as jest.Mock).mockReturnValue({
+      hasPermission: jest.fn(() => false),
+      loading: false,
+      permissions: null,
+    });
+    render(
+      <AgentList
+        {...defaultProps}
+        isViewAgentEnabled={false}
+        isCheckStatusAgentEnabled={false}
+      />
+    );
+    expect(screen.queryByTestId("hostnameAccordionToggle")).not.toBeInTheDocument();
   });
 
   // ── Loading state ──────────────────────────────────────────────────────────

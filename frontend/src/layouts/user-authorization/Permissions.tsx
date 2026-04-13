@@ -12,6 +12,8 @@ import userAuthorizationActions from "../../redux/actions/userAuthorization.acti
 import { getPermissions, isUsersLoading, getPermissionsPagination } from "@/redux/selectors/userAuthorization.selectors";
 import NoDataFoundImg from "../../images/agent-management/NoDATA.png";
 import "./Permissions.css";
+import useAgentPermissions from "../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../config/agentPermissionLabels";
 
 interface Permission {
   id: string;
@@ -30,6 +32,7 @@ const Permissions: React.FC = () => {
   const permissions = useSelector(getPermissions);
   const loading = useSelector(isUsersLoading);
   const permissionsPagination = useSelector(getPermissionsPagination);
+  const { hasPermission } = useAgentPermissions();
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
   const [projectInput, setProjectInput] = useState("");
   const [moduleInput, setModuleInput] = useState("");
@@ -204,10 +207,12 @@ const Permissions: React.FC = () => {
 
         
         <div className="filter-group-btn">
+          {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_PERMISSION_ADD) && (
           <button type="button" className="add-btn" onClick={handleAddPermission}>
             <AiOutlinePlus size={20} color="#ffffff" />
             <span className="add-btn-text">Add</span>
           </button>
+          )}
         </div>
       </div>
 
@@ -295,6 +300,7 @@ const Permissions: React.FC = () => {
                 <span className="table-value">{permission.createdBy}</span>
               </div>
               <div className="table-cell table-cell-action">
+                {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_DELETE_PERMISSION) && (
                 <button type="button" className="table-action-btn" onClick={() => handleDeletePermission(permission.id, permission.permission)}>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.5 5H17.5" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -302,6 +308,7 @@ const Permissions: React.FC = () => {
                     <path d="M6.6665 4.99984V3.33317C6.6665 2.49984 7.49984 1.6665 8.33317 1.6665H11.6665C12.4998 1.6665 13.3332 2.49984 13.3332 3.33317V4.99984" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
+                )}
               </div>
             </div>
           ))}

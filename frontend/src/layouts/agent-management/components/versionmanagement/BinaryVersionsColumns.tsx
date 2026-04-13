@@ -6,6 +6,8 @@ import linux from "../../../../images/agent-management/assets/linux.svg";
 import windows from "../../../../images/agent-management/assets/windows.svg";
 
 import { BinaryVersion } from "./binarytypes";
+import useAgentPermissions from "../../../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../../../config/agentPermissionLabels";
 
 interface OSCompatibility {
   agentType?: string;
@@ -23,6 +25,7 @@ interface BinaryVersionsColumnsProps {
 }
 
 const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): GridColDef[] => {
+  const { hasPermission } = useAgentPermissions();
   return [
     {
       field: "version",
@@ -197,40 +200,44 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
       sortable: false,
       renderCell: ({ row }) => (
         <Box display="flex" gap={1}>
-          <IconButton
-            size="small"
-            sx={{
-              width: "32px",
-              height: "32px",
-              borderRadius: "8px",
-              bgcolor: "#F8FAFC",
-              border: "1px solid #E2E8F0",
-              "&:hover": {
-                bgcolor: "#F1F5F9",
-              },
-            }}
-            onClick={() => onView?.(row)}
-            title="View version details"
-          >
-            <VisibilityIcon sx={{ fontSize: "16px", color: "#64748B" }} />
-          </IconButton>
-          <IconButton
-            size="small"
-            sx={{
-              width: "32px",
-              height: "32px",
-              borderRadius: "8px",
-              bgcolor: "#F8FAFC",
-              border: "1px solid #E2E8F0",
-              "&:hover": {
-                bgcolor: "#F1F5F9",
-              },
-            }}
-            onClick={() => onEdit?.(row)}
-            title="Edit version"
-          >
-            <EditIcon sx={{ fontSize: "16px", color: "#64748B" }} />
-          </IconButton>
+          {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_VERSIONMANAGEMENT_VIEW) && (
+            <IconButton
+              size="small"
+              sx={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "8px",
+                bgcolor: "#F8FAFC",
+                border: "1px solid #E2E8F0",
+                "&:hover": {
+                  bgcolor: "#F1F5F9",
+                },
+              }}
+              onClick={() => onView?.(row)}
+              title="View version details"
+            >
+              <VisibilityIcon sx={{ fontSize: "16px", color: "#64748B" }} />
+            </IconButton>
+          )}
+          {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_VERSIONMANAGEMENT_EDIT) && (
+            <IconButton
+              size="small"
+              sx={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "8px",
+                bgcolor: "#F8FAFC",
+                border: "1px solid #E2E8F0",
+                "&:hover": {
+                  bgcolor: "#F1F5F9",
+                },
+              }}
+              onClick={() => onEdit?.(row)}
+              title="Edit version"
+            >
+              <EditIcon sx={{ fontSize: "16px", color: "#64748B" }} />
+            </IconButton>
+          )}
         </Box>
       ),
       headerClassName: "data-grid-header",

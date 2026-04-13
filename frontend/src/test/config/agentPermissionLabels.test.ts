@@ -8,7 +8,7 @@
 import AGENT_PERMISSIONS, {
   AGENT_PROJECT,
   AGENT_MODULE,
-  RISE_AGENT_READ,
+  RISE_AGENT_ACTION_VIEW,
   RISE_AGENT_WRITE,
   RISE_AGENT_START,
   RISE_AGENT_STOP,
@@ -52,8 +52,8 @@ describe("agentPermissionLabels", () => {
 
   // ── Individual constants ──────────────────────────────────────────────────
 
-  it("RISE_AGENT_READ is 'Rise Agent : read'", () =>
-    expect(RISE_AGENT_READ).toBe("Rise Agent : read"));
+  it("RISE_AGENT_ACTION_VIEW is 'Rise Agent : read'", () =>
+    expect(RISE_AGENT_ACTION_VIEW).toBe("Rise Agent : read"));
 
   it("RISE_AGENT_WRITE is 'Rise Agent : write'", () =>
     expect(RISE_AGENT_WRITE).toBe("Rise Agent : write"));
@@ -90,12 +90,12 @@ describe("agentPermissionLabels", () => {
 
   // ── AGENT_PERMISSIONS convenience object ──────────────────────────────────
 
-  it("AGENT_PERMISSIONS has exactly 12 entries", () => {
-    expect(Object.keys(AGENT_PERMISSIONS)).toHaveLength(12);
+  it("AGENT_PERMISSIONS has exactly 27 entries", () => {
+    expect(Object.keys(AGENT_PERMISSIONS)).toHaveLength(27);
   });
 
-  it("default export (AGENT_PERMISSIONS) contains all 12 label constants", () => {
-    expect(AGENT_PERMISSIONS.RISE_AGENT_READ).toBe(RISE_AGENT_READ);
+  it("default export (AGENT_PERMISSIONS) contains all 27 label constants", () => {
+    expect(AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW).toBe(RISE_AGENT_ACTION_VIEW);
     expect(AGENT_PERMISSIONS.RISE_AGENT_WRITE).toBe(RISE_AGENT_WRITE);
     expect(AGENT_PERMISSIONS.RISE_AGENT_START).toBe(RISE_AGENT_START);
     expect(AGENT_PERMISSIONS.RISE_AGENT_STOP).toBe(RISE_AGENT_STOP);

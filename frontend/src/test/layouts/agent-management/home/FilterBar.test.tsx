@@ -15,6 +15,13 @@ jest.mock("../../../../../src/layouts/agent-management/components/MultiSelectDro
   );
 });
 
+jest.mock("../../../../utils/hooks/useAgentPermissions", () => ({
+  __esModule: true,
+  default: () => ({
+    hasPermission: () => true,
+  }),
+}));
+
 const defaultProps: any = {
   filterOptions: {
     os: [{ name: "Linux" }],

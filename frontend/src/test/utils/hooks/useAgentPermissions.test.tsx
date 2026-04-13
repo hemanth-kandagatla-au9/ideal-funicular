@@ -66,7 +66,7 @@ describe("useAgentPermissions", () => {
     mockUseSelector.mockImplementation((fn: any) => {
       // getMyPermissions
       if (fn.toString().includes("myPermissions") || mockUseSelector.mock.calls.length % 2 === 1) {
-        return buildPermissions(AGENT_PERMISSIONS.RISE_AGENT_READ, true);
+        return buildPermissions(AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW, true);
       }
       return false; // isMyPermissionsLoading
     });
@@ -75,11 +75,11 @@ describe("useAgentPermissions", () => {
     let callCount = 0;
     mockUseSelector.mockImplementation(() => {
       callCount++;
-      if (callCount === 1) return buildPermissions(AGENT_PERMISSIONS.RISE_AGENT_READ, true);
+      if (callCount === 1) return buildPermissions(AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW, true);
       return false;
     });
 
-    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_READ} />);
+    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW} />);
     expect(screen.getByTestId("result")).toHaveTextContent("true");
   });
 
@@ -99,7 +99,7 @@ describe("useAgentPermissions", () => {
     let callCount = 0;
     mockUseSelector.mockImplementation(() => {
       callCount++;
-      if (callCount === 1) return buildPermissions(AGENT_PERMISSIONS.RISE_AGENT_READ, true);
+      if (callCount === 1) return buildPermissions(AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW, true);
       return false;
     });
 
@@ -111,7 +111,7 @@ describe("useAgentPermissions", () => {
 
   it("returns false when own store is null and no host store", () => {
     mockUseSelector.mockReturnValue(null);
-    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_READ} />);
+    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW} />);
     expect(screen.getByTestId("result")).toHaveTextContent("false");
   });
 
@@ -121,7 +121,7 @@ describe("useAgentPermissions", () => {
       callCount++;
       return callCount === 1 ? [] : false;
     });
-    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_READ} />);
+    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW} />);
     expect(screen.getByTestId("result")).toHaveTextContent("false");
   });
 
@@ -177,7 +177,7 @@ describe("useAgentPermissions", () => {
       getState: () => { throw new Error("store error"); },
     };
 
-    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_READ} />);
+    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW} />);
     expect(screen.getByTestId("result")).toHaveTextContent("false");
   });
 
@@ -190,7 +190,7 @@ describe("useAgentPermissions", () => {
       return callCount === 1 ? null : true; // 2nd call = isMyPermissionsLoading
     });
 
-    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_READ} />);
+    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW} />);
     expect(screen.getByTestId("loading")).toHaveTextContent("true");
   });
 
@@ -198,11 +198,11 @@ describe("useAgentPermissions", () => {
     let callCount = 0;
     mockUseSelector.mockImplementation(() => {
       callCount++;
-      if (callCount === 1) return buildPermissions(AGENT_PERMISSIONS.RISE_AGENT_READ, true);
+      if (callCount === 1) return buildPermissions(AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW, true);
       return false;
     });
 
-    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_READ} />);
+    render(<TestComponent label={AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW} />);
     expect(screen.getByTestId("loading")).toHaveTextContent("false");
   });
 
@@ -217,7 +217,7 @@ describe("useAgentPermissions", () => {
             module: "Rise Agent",
             hasAccess: true,
             permissions: [
-              { label: AGENT_PERMISSIONS.RISE_AGENT_READ,    hasAccess: true  },
+              { label: AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW,    hasAccess: true  },
               { label: AGENT_PERMISSIONS.RISE_AGENT_START,   hasAccess: true  },
               { label: AGENT_PERMISSIONS.RISE_AGENT_STOP,    hasAccess: false },
               { label: AGENT_PERMISSIONS.RISE_AGENT_RESTART, hasAccess: true  },
@@ -231,7 +231,7 @@ describe("useAgentPermissions", () => {
       const { hasPermission } = useAgentPermissions();
       return (
         <div>
-          <span data-testid="read">{String(hasPermission(AGENT_PERMISSIONS.RISE_AGENT_READ))}</span>
+          <span data-testid="read">{String(hasPermission(AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW))}</span>
           <span data-testid="start">{String(hasPermission(AGENT_PERMISSIONS.RISE_AGENT_START))}</span>
           <span data-testid="stop">{String(hasPermission(AGENT_PERMISSIONS.RISE_AGENT_STOP))}</span>
           <span data-testid="restart">{String(hasPermission(AGENT_PERMISSIONS.RISE_AGENT_RESTART))}</span>

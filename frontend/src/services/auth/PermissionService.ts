@@ -2,12 +2,10 @@ import Cookies from "universal-cookie";
 import { AxiosResponse, AxiosError } from "axios";
 import Config from "../../config/config";
 import AxiosInstanceClass from "../axiosInstance";
-import { getLocalAccessToken } from "../../utils/TokenUtils";
 
 const { post, get, baseUrl } = Config.apiEndpoints.auth;
 const cookies = new Cookies();
-const accessToken = cookies.get("iasphere_access_token");
-export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init(accessToken);
+export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init();
 interface PermissionData {
   [key: string]: any;
 }
@@ -27,7 +25,7 @@ interface ErrorResponse {
 }
 const addPermission = async (permissionData: PermissionData): Promise<ApiResponse | ErrorResponse> => {
   try {
-    const response: AxiosResponse = await AxiosInstance.post(`${post.addPermission}`, permissionData);
+    const response: AxiosResponse = await AxiosInstance.post(`${post?.addPermission}`, permissionData);
     return response.data;
   } catch (error) {
     const addPermissionErr = error as AxiosError;
@@ -36,7 +34,7 @@ const addPermission = async (permissionData: PermissionData): Promise<ApiRespons
 };
 const getPermissionsByGroup = async (groupId: string): Promise<ApiResponse | ErrorResponse> => {
   try {
-    const response: AxiosResponse = await AxiosInstance.get(`${get.permissionsByGroup}/${groupId}`);
+    const response: AxiosResponse = await AxiosInstance.get(`${get?.permissionsByGroup}/${groupId}`);
     return response.data;
   } catch (error) {
     const getPermissionsErr = error as AxiosError;

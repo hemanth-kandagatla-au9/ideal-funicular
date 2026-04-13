@@ -1,7 +1,8 @@
 
 import Config from "../../config/config";
 import AxiosInstanceClass from "../axiosInstance";
-import { getLocalAccessToken, getUserInfo } from "../../utils/TokenUtils";
+import {  getUserInfo } from "../../utils/TokenUtils";
+
 interface UtilizationMetricsPayload {
   userID?: string;
   [key: string]: any;
@@ -21,7 +22,7 @@ interface GetUtilizationMetricDataPayload {
   pageNo?: number;
 }
 const { baseUrl } = Config.apiEndpoints.utilities;
-export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init(getLocalAccessToken());
+export const AxiosInstance = new AxiosInstanceClass(`${baseUrl}/`).init();
 const utilizationMetrics = async (type: string, payload: UtilizationMetricsPayload): Promise<string | any> => {
   try {
     const today = new Date();
@@ -74,9 +75,9 @@ const getUtilizationMetricData = async (payload: GetUtilizationMetricDataPayload
   }
 };
 
-const getMetricsData = async (): Promise<any> => AxiosInstance.get(`${Config.apiEndpoints.utilities.baseUrl}${Config.apiEndpoints.utilities.get.getMetricsData}`);
+const getMetricsData = async (): Promise<any> => AxiosInstance.get(`${Config.apiEndpoints.utilities.baseUrl}${Config?.apiEndpoints?.utilities?.get?.getMetricsData}`);
 
-const getDownloadMetricsData = async (): Promise<any> => AxiosInstance.get(`${Config.apiEndpoints.utilities.baseUrl}${Config.apiEndpoints.utilities.get.getDownloadMetricsData}`);
+const getDownloadMetricsData = async (): Promise<any> => AxiosInstance.get(`${Config.apiEndpoints.utilities.baseUrl}${Config?.apiEndpoints?.utilities?.get?.getDownloadMetricsData}`);
 const UtilizationService = {
   utilizationMetrics,
   getUtilizationMetrics,

@@ -7,6 +7,8 @@ import agentManagementAction from "@/redux/actions/agentManagement.action";
 import { getAgentGlobalConfig, isGlobalConfigLoading } from "@/redux/selectors/agentManagement.selectors";
 import "../css/agentStyle.css";
 import { updateButtonText, viewEditConfigurationButtonText } from "@/constants/strings";
+import useAgentPermissions from "../../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../../config/agentPermissionLabels";
 
 interface ConfigItem {
   propertyName: string;
@@ -24,6 +26,7 @@ const GlobalConfigurationModal: React.FC<GlobalConfigurationModalProps> = ({ sho
   const dispatch = useDispatch();
   const globalConfigData = useSelector(getAgentGlobalConfig);
   const loading = useSelector(isGlobalConfigLoading);
+  const { hasPermission } = useAgentPermissions();
   const [configs, setConfigs] = useState<ConfigItem[]>([]);
 
   const formatPythonScriptForEditor = (value: string): string => {
@@ -224,9 +227,11 @@ const GlobalConfigurationModal: React.FC<GlobalConfigurationModalProps> = ({ sho
         <Button variant="secondary" onClick={handleClose} disabled={loading}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={handleSave} disabled={loading}>
-          {loading ? "Updating..." : updateButtonText}
-        </Button>
+        {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_GLOBAL_CONFIG_UPDATE) && (
+          <Button variant="primary" onClick={handleSave} disabled={loading}>
+            {loading ? "Updating..." : updateButtonText}
+          </Button>
+        )}
       </Modal.Footer>
     </Modal>
   );

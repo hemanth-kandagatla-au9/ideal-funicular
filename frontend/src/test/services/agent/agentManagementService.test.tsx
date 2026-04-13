@@ -736,6 +736,7 @@ describe("Error scenarios for service", () => {
 
       const result = await agentManagementService.jobReStartService(request);
       expect(result).toEqual(response);
+      expect(mockPut).toHaveBeenCalledWith(expect.any(String), { hostname: ["test"] });
       const errorResponse = { response: { status: 500, data: "error" } };
       mockPut.mockRejectedValue(errorResponse);
       const errorResult = await agentManagementService.jobReStartService(request);
@@ -743,6 +744,7 @@ describe("Error scenarios for service", () => {
         status: 500,
         data: { message: "Unexpected error occurred" }
       });
+      expect(mockPut).toHaveBeenCalledWith(expect.any(String), { hostname: ["test"] });
     });
 
     it("should test getSyncAgentHealthConfigs success case", async () => {
@@ -791,6 +793,7 @@ describe("Error scenarios for service", () => {
         status: 500,
         data: { message: "Unexpected error occurred" }
       });
+      expect(mockPost).toHaveBeenCalledWith(expect.any(String), { hostname: ["test"] });
     });
 
     it("should test error case for healthCheckupByPort", async () => {

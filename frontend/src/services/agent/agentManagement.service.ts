@@ -23,10 +23,7 @@ let _instance: ReturnType<AxiosInstanceClass["init"]> | null = null;
 
 export const getAxiosInstance = async () => {
   if (_instance) return _instance;
-  console.log('newtoken>>',await getIdToken())
-  const token = (await getIdToken()) ?? cookies.get("iasphere_id_token") ?? "";
-   console.log('token>>',token)
-  _instance = new AxiosInstanceClass(rustAgentbaseURL).init(token);
+  _instance = new AxiosInstanceClass(rustAgentbaseURL).init();
   return _instance;
 };
 interface AgentActionData {
@@ -128,7 +125,7 @@ const agentStopService = async (data: { hostname: string }) => {
 const agentHealthCheck = async (data: AgentActionData) => {
   try {
     const instance = await getAxiosInstance();
-    return await instance.post(`${rustAgent.get.health}`, data);
+    return await instance.post(`${rustAgent.get.health}`, { hostname: [data.hostname] });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -136,7 +133,7 @@ const agentHealthCheck = async (data: AgentActionData) => {
 const jobReStartService = async (data: AgentActionData) => {
   try {
     const instance = await getAxiosInstance();
-    return await instance.put(`${rustAgent.put.restartJobs}`, data);
+    return await instance.put(`${rustAgent.put.restartJobs}`, { hostname: [data.hostname] });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }

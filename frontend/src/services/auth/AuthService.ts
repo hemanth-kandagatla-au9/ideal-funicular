@@ -3,7 +3,6 @@ import Cookies from "universal-cookie";
 import Config from "../../config/config";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
 import AxiosInstanceClass from "../axiosInstance";
-import { getIdToken, getAccessToken } from "../../utils/TokenService";
 
 const authEndpoints = Config.apiEndpoints?.auth || {};
 const baseUrl = authEndpoints.baseUrl || "";
@@ -16,10 +15,7 @@ let _instance: ReturnType<AxiosInstanceClass["init"]> | null = null;
 
 export const getAxiosInstance = async () => {
   if (_instance) return _instance;
-  console.log('newtoken>>',await getIdToken())
-  const token = (await getIdToken()) ?? cookies.get("iasphere_id_token") ?? "";
-  console.log('token>>',token)
-  _instance = new AxiosInstanceClass(baseUrl).init(token);
+  _instance = new AxiosInstanceClass(baseUrl).init();
   return _instance;
 };
 

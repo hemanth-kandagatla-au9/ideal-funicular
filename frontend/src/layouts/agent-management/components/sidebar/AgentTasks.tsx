@@ -124,6 +124,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
   const isAgentTaskScheduleCmdBtnEnabled = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_WRITE);   // no specific label yet
   const isAgentTaskEditBtnEnabled        = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_WRITE);   // no specific label yet
   const isAgentTaskDeleteBtnEnabled      = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_WRITE);   // no specific label yet
+  const isAgentEnvUpgradeBtnEnabled      = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_UPDATE_ENV);
 
   const [allButtonsDisabled, setAllButtonsDisabled] = useState<boolean>(false);
   const [clickedButton, setClickedButton] = useState<string | null>(null);
@@ -263,7 +264,7 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
                 {restartAgentButtonText}
               </Button>
           )}
-          {isAgentTaskUpgradeBtnEnabled && (
+          {isAgentEnvUpgradeBtnEnabled && (
               <Button 
                 className={`riseagent-agentTriggerBtn ${clickedButton === 'envUpgrade' ? 'riseagent-button-clicked' : ''}`}
                 onMouseDown={(e) => e.preventDefault()}
