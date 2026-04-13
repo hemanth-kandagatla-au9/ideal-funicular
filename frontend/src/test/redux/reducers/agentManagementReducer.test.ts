@@ -4,12 +4,11 @@
 import agentManagementReducer from "../../../redux/reducers/agentManagementReducer";
 import { AGENT_MANAGEMENT } from "../../../config/actions";
 import { cleanup } from "@testing-library/react-hooks";
-import { AxiosInstace } from "../../../services/agent/agentManagement.service";
 
 jest?.useFakeTimers();
 
 beforeEach(() => {
-  jest?.spyOn(AxiosInstace, "get")
+  jest?.clearAllMocks();
 });
 
 afterEach(() => {

@@ -1,15 +1,30 @@
 /* eslint-disable jest/no-conditional-expect */
 /* eslint-disable jest/no-identical-title */
 import apiEndpoints from "../../../config/apiEndpoints";
-import AuthService,{AxiosInstance} from "../../../services/auth/AuthService";
+import AuthService from "../../../services/auth/AuthService";
 const { get, baseUrl } = apiEndpoints.auth; 
 
+// Create mock functions
+const mockGet = jest.fn();
+const mockPatch = jest.fn();
+const mockPost = jest.fn();
+const mockDelete = jest.fn();
+
+// Mock the axios instance
+jest.mock("../../../services/axiosInstance", () => {
+  return jest.fn().mockImplementation(() => ({
+    init: jest.fn().mockReturnValue({
+      get: mockGet,
+      patch: mockPatch,
+      post: mockPost,
+      delete: mockDelete,
+    }),
+  }));
+});
+
 describe("Auth Service", () => {
-  let mockGet = null; 
-  let mockPatch = null; 
   beforeEach(() => {
-    mockGet = jest.spyOn(AxiosInstance, "get");
-    mockPatch = jest.spyOn(AxiosInstance, "patch");
+    jest.clearAllMocks();
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -190,11 +205,8 @@ describe("Auth Service", () => {
 
  
   describe("Auth Service Additional Tests", () => {
-    let mockPost, mockDel;
-  
     beforeEach(() => {
-      mockPost = jest.spyOn(AxiosInstance, "post");
-      mockDel = jest.spyOn(AxiosInstance, "delete");
+      jest.clearAllMocks();
     });
   
     afterEach(() => {
@@ -281,7 +293,7 @@ describe("Auth Service", () => {
           }
         }
       };
-      mockDel.mockImplementation(() => Promise.reject(errorResponse));
+      mockDelete.mockImplementation(() => Promise.reject(errorResponse));
       const result = await AuthService.deleteApplication("invalid-id");
       expect(result).toEqual(errorResponse.response.data);
     });
@@ -372,9 +384,9 @@ describe("Auth Service", () => {
           message: "Application deleted successfully"
         }
       };
-      mockDel.mockImplementation(() => Promise.resolve(response));
+      mockDelete.mockImplementation(() => Promise.resolve(response));
       await AuthService.deleteApplication("mock-id");
-      expect(mockDel).toHaveBeenCalledWith(
+      expect(mockDelete).toHaveBeenCalledWith(
         expect.stringContaining("mock-id"),
         expect.objectContaining({ headers: expect.any(Object) })
       );

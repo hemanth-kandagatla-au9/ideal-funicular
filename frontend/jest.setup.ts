@@ -1,10 +1,15 @@
 // Jest setup file - runs before all tests
 import '@testing-library/jest-dom';
 
-// Mock window object
+// Mock Redux DevTools Extension
+Object.defineProperty(window, '__REDUX_DEVTOOLS_EXTENSION__', {
+  writable: true,
+  value: undefined,
+});
+
 Object.defineProperty(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__', {
   writable: true,
-  value: jest.fn((next) => next),
+  value: undefined,
 });
 
 Object.defineProperty(window, '__HOST_APP__', {

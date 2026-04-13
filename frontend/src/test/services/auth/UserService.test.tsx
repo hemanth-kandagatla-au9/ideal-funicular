@@ -2,16 +2,26 @@
 
 import apiEndpoints from "../../../config/apiEndpoints";
 import AuthService from "../../../services/auth/AuthService";
-import UserService,{AxiosInstance} from "./../../../services/auth/UserService";
+import UserService from "./../../../services/auth/UserService";
 const { get, patch, baseUrl } = apiEndpoints.auth;
 
+// Create global mock functions
+const mockGet = jest.fn();
+const mockPatch = jest.fn();
+
+// Mock the axiosInstance module
+jest.mock("./../../../services/axiosInstance", () => {
+  return jest.fn().mockImplementation(() => ({
+    init: jest.fn().mockReturnValue({
+      get: mockGet,
+      patch: mockPatch,
+    }),
+  }));
+});
+
 describe("UserService", () => {
-  let mockGet = null;
-  let mockPatch = null;
- 
   beforeEach(() => {
-    mockGet = jest.spyOn(AxiosInstance, "get");
-    mockPatch = jest.spyOn(AxiosInstance, "patch");
+    jest.clearAllMocks();
   });
   afterEach(() => {
     jest.clearAllMocks();

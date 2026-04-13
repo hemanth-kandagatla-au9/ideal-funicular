@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable jest/no-identical-title */
+import UserService from "../../services/auth/UserService";
 import PermissionUtils from "../../utils/PermissionUtils";
 import { cookies } from "../../utils/utils";
 import * as TokenUtils from '../../utils/TokenUtils';
@@ -7,12 +8,6 @@ import * as TokenUtils from '../../utils/TokenUtils';
 localStorage.setItem('token','bW9jay10b2tlbg==')
 
 const mockPermission='ewoJImRpc2NvdmVyeSI6IHsKCQkiRGlzY292ZXJ5OiBNb2NrIjogdHJ1ZSwKCQkiU3R1ZGlvOiBNb2NrMiI6IHRydWUKCX0sCgkiZ3JvdXBzIjogWyJKSlQtQVBQLVJJU0UtTW9jayJdCn0='
-
-jest.mock("../../services/auth/UserService", () => ({
-  AxiosInstance: jest.fn(() => ({
-    get: jest.fn(),
-  })),
-}));
 
 describe('PermissionUtils', () => {
     beforeEach(() => {
@@ -120,7 +115,7 @@ describe('PermissionUtils', () => {
             }
         }
         };
-        mockGet.mockImplementation(() => Promise.resolve(response));
+        jest.spyOn(UserService, 'getUser').mockResolvedValue(response.data.data);
         cookies.get=jest.fn().mockReturnValue("bW9jay10b2tlbgo=")
         await PermissionUtils.refreshUserPermissions();
         const permissions=localStorage.getItem("permissions")
@@ -144,10 +139,10 @@ describe('PermissionUtils', () => {
         console.log = originalConsoleLog;
       });
     
-      it("PermissionUtils canAccess false case (component always returns true)", () => {
+      it("PermissionUtils canAccess false case", () => {
         localStorage.setItem('permissions', mockPermission);
         const canAccessPage = PermissionUtils.canAccess("Non-existent Page");
-        expect(canAccessPage).toBe(true);
+        expect(canAccessPage).toBe(false);
       });
     
     it("refreshUserPermissions with missing userId or token", async () => {
@@ -158,7 +153,7 @@ describe('PermissionUtils', () => {
         
         const result = await PermissionUtils.refreshUserPermissions();
         expect(result).toEqual([]);
-        expect(mockGet).not.toHaveBeenCalled();
+        expect(UserService.getUser).not.toHaveBeenCalled();
         expect(TokenUtils.getLocalUserId).toHaveBeenCalled();
         expect(TokenUtils.getLocalAccessToken).toHaveBeenCalled();
       });
@@ -177,7 +172,7 @@ describe('PermissionUtils', () => {
                 data: {} // No permissions or user
             }
         };
-        mockGet.mockImplementation(() => Promise.resolve(emptyResponse));
+        jest.spyOn(UserService, 'getUser').mockResolvedValue(emptyResponse.data.data);
         
         await PermissionUtils.refreshUserPermissions();
         const permissions = localStorage.getItem("permissions");

@@ -1,7 +1,7 @@
 /**
  * agentPermissionLabels.test.ts
  *
- * Tests that all 12 permission label constants and the AGENT_PERMISSIONS
+ * Tests that all permission label constants and the AGENT_PERMISSIONS
  * convenience object are correctly defined and match the backend format.
  */
 
@@ -52,8 +52,8 @@ describe("agentPermissionLabels", () => {
 
   // ── Individual constants ──────────────────────────────────────────────────
 
-  it("RISE_AGENT_ACTION_VIEW is 'Rise Agent : read'", () =>
-    expect(RISE_AGENT_ACTION_VIEW).toBe("Rise Agent : read"));
+  it("RISE_AGENT_ACTION_VIEW is 'Rise Agent : action_view'", () =>
+    expect(RISE_AGENT_ACTION_VIEW).toBe("Rise Agent : action_view"));
 
   it("RISE_AGENT_WRITE is 'Rise Agent : write'", () =>
     expect(RISE_AGENT_WRITE).toBe("Rise Agent : write"));
@@ -90,11 +90,11 @@ describe("agentPermissionLabels", () => {
 
   // ── AGENT_PERMISSIONS convenience object ──────────────────────────────────
 
-  it("AGENT_PERMISSIONS has exactly 27 entries", () => {
-    expect(Object.keys(AGENT_PERMISSIONS)).toHaveLength(27);
+  it("AGENT_PERMISSIONS has exactly 38 entries", () => {
+    expect(Object.keys(AGENT_PERMISSIONS)).toHaveLength(38);
   });
 
-  it("default export (AGENT_PERMISSIONS) contains all 27 label constants", () => {
+  it("default export (AGENT_PERMISSIONS) contains all imported label constants", () => {
     expect(AGENT_PERMISSIONS.RISE_AGENT_ACTION_VIEW).toBe(RISE_AGENT_ACTION_VIEW);
     expect(AGENT_PERMISSIONS.RISE_AGENT_WRITE).toBe(RISE_AGENT_WRITE);
     expect(AGENT_PERMISSIONS.RISE_AGENT_START).toBe(RISE_AGENT_START);
