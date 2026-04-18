@@ -20,7 +20,7 @@ interface ApiEndpoints {
 
 const apiEndpoints: ApiEndpoints = {
   auth: {
-    baseUrl: process.env.REACT_APP_AUTH_URL ||"http://localhost:3000" || "https://predev.auth.rise.apps.jnj.com",
+    baseUrl: process.env.REACT_APP_AUTH_URL || "http://localhost:3000" || "https://predev.auth.rise.apps.jnj.com",
     post: {
       addGroup: "/v1/auth/groups/",
       addPermission: "/v1/auth/permissions/",
@@ -196,8 +196,8 @@ const apiEndpoints: ApiEndpoints = {
       upgrade: "/agents/bulk/upgrade",
       download: "/agents/download",
       envUpgrade: "/agents/bulk/update-env",
-      updateVersion:"agents/updateVersion",
-      syncVersions:"agents/syncversions"
+      updateVersion: "agents/updateVersion",
+      syncVersions: "agents/syncversions",
     },
     delete: {
       stopByPort: "/agents/jobs/stop",
@@ -209,12 +209,12 @@ const apiEndpoints: ApiEndpoints = {
     baseURL: process.env.REACT_APP_USER_AUTH_URL || "https://predev.agent.ias.apps.jnj.com/api/agent",
     get: {
       users: "/auth/user-details",
-      PermissionsList:"auth/permissionsList",
+      PermissionsList: "auth/permissionsList",
       permissionMatrix: "/auth/users",
     },
     post: {
       createUser: "/auth/add-user",
-      deleteUserPermissionsList:"auth/update-permission",
+      deleteUserPermissionsList: "auth/update-permission",
       createPermission: "/auth/add-permission",
     },
     patch: {
@@ -232,9 +232,8 @@ const apiEndpoints: ApiEndpoints = {
     baseUrl: process.env.REACT_APP_UTILITIES_URL || "https://dev.utilities.rise.apps.jnj.com",
   },
   RBAC_auth: {
-    baseUrl: process.env.AUTH_API_URL || `https://predev.insightsauth.ias.apps.jnj.com/api/insightsauth`,
+    baseUrl: process.env.AUTH_API_URL || "https://predev.insightsauth.ias.apps.jnj.com/api/insightsauth",
   },
 };
 
 export default apiEndpoints;
-

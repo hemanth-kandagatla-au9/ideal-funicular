@@ -91,22 +91,22 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = props => {
         isOpen={open}
         onClose={toggleOpen}
         target={
-          <Button 
-            onClick={toggleOpen} 
-            className={`riseagent-btnToggle ${open ? 'active' : ''}`}
+          <Button
+            onClick={toggleOpen}
+            className={`riseagent-btnToggle ${open ? "active" : ""}`}
             data-testid={toggleTestId}
             style={{
-              backgroundColor: open ? '#F8FAFC' : '#FFFFFF',
-              borderColor: open ? '#2961F4' : '#E2E8F0',
+              backgroundColor: open ? "#F8FAFC" : "#FFFFFF",
+              borderColor: open ? "#2961F4" : "#E2E8F0",
             }}
           >
             <span className="riseagent-optionsLabel">{dropDownName}</span>
-            <div 
-              style={{ 
-                alignSelf: "center", 
+            <div
+              style={{
+                alignSelf: "center",
                 padding: "0 4px 0 16px",
-                transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'transform 0.2s ease-in-out'
+                transform: open ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.2s ease-in-out",
               }}
             >
               <img src={downArrow} alt="down arrow" />
@@ -253,4 +253,3 @@ const Option: React.FC<OptionProps<OptionType, true>> = props => {
 };
 
 export default MultiSelectDropdown;
-

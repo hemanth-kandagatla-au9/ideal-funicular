@@ -8,14 +8,14 @@ import "bootstrap-daterangepicker/daterangepicker.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
- 
+
 import AgentManagement from "./layouts/agent-management/AgentManagement";
- 
+
 import BinaryVersions from "./layouts/agent-management/components/versionmanagement/BinaryVersions";
 import UserAuthorization from "./layouts/user-authorization/UserAuthorization";
 import Permissions from "./layouts/user-authorization/Permissions";
 import initializeStore from "./redux/initializeStore";
- 
+
 declare global {
   interface Window {
     __HOST_APP__?: boolean;
@@ -25,12 +25,11 @@ declare global {
 // Create store once at module level — not inside the component so it
 // survives re-renders without resetting state.
 const store = initializeStore();
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   (window as any).__AGENT_STORE__ = store;
 }
 
 const App: React.FC = () => {
-
   const globalWindow = globalThis as unknown as Window;
   const isHostApp = Boolean(globalWindow.__HOST_APP__);
   const basepath = isHostApp ? "/app/riseagent" : "/";
@@ -51,6 +50,5 @@ const App: React.FC = () => {
     </div>
   );
 };
- 
+
 export default App;
- 

@@ -1,4 +1,3 @@
-
 import Cookies from "universal-cookie";
 import Config from "../../config/config";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
@@ -50,12 +49,10 @@ interface ErrorResponse {
   message?: string;
 }
 
-
 const getUserById = async (userId: string): Promise<UserData | ApiResponse> => {
   try {
     if (!getEndpoints.users) throw new Error("Users endpoint not configured");
 
-    const cookies = new Cookies();
     const accessToken = cookies.get("token");
     const instance = await getAxiosInstance();
     const response = await instance.get(`${getEndpoints.users}${userId}`, {
@@ -68,15 +65,13 @@ const getUserById = async (userId: string): Promise<UserData | ApiResponse> => {
   }
 };
 
-
 const logout = async (userId: string | null): Promise<ApiResponse> => {
   try {
     if (!patchEndpoints.logout) throw new Error("Logout endpoint not configured");
 
-    const cookies = new Cookies();
     const accessToken = cookies.get("token");
     const instance = await getAxiosInstance();
-    const response = await instance.patch(`${patchEndpoints.logout}/${userId}`, null, { headers: { Authorization: `Bearer ${accessToken}` }});
+    const response = await instance.patch(`${patchEndpoints.logout}/${userId}`, null, { headers: { Authorization: `Bearer ${accessToken}` } });
     return response?.data?.data || { success: true, message: "Logged out successfully" };
   } catch (error: unknown) {
     const err = error as ErrorResponse;
@@ -84,12 +79,10 @@ const logout = async (userId: string | null): Promise<ApiResponse> => {
   }
 };
 
-
 const modifyUser = async (userId: string, body: Partial<UserData>): Promise<UserData | ApiResponse> => {
   try {
     if (!patchEndpoints.updateUser) throw new Error("Update user endpoint not configured");
 
-    const cookies = new Cookies();
     const accessToken = cookies.get("token");
     const instance = await getAxiosInstance();
     const response = await instance.patch(`${patchEndpoints.updateUser}/${userId}`, body, { headers: { token: `Bearer ${accessToken}` } });
@@ -99,7 +92,6 @@ const modifyUser = async (userId: string, body: Partial<UserData>): Promise<User
     return err?.response?.data || { success: false, message: "User update failed" };
   }
 };
-
 
 const addApplication = async (applicationData: ApplicationData): Promise<ApiResponse> => {
   try {
@@ -113,7 +105,6 @@ const addApplication = async (applicationData: ApplicationData): Promise<ApiResp
   }
 };
 
-
 const updateApplication = async (id: string, applicationData: Partial<ApplicationData>): Promise<ApiResponse> => {
   try {
     if (!patchEndpoints.updateApplication) throw new Error("Update application endpoint not configured");
@@ -126,11 +117,10 @@ const updateApplication = async (id: string, applicationData: Partial<Applicatio
   }
 };
 
-
 const deleteApplication = async (id: string): Promise<ApiResponse> => {
   try {
     if (!delEndpoints.deleteApplication) throw new Error("Delete application endpoint not configured");
-const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
     const response = await instance.delete(`${delEndpoints.deleteApplication}/${id}`, { headers: { Authorization: `Bearer ${getLocalAccessToken()}` } });
     return response?.data || { success: true, message: "Application deleted successfully" };
   } catch (error: unknown) {
@@ -139,11 +129,10 @@ const instance = await getAxiosInstance();
   }
 };
 
-
 const blockApplication = async (id: string, data: { isBlocked: boolean }): Promise<ApiResponse> => {
   try {
     if (!patchEndpoints.blockApplication) throw new Error("Block application endpoint not configured");
-const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
     const response = await instance.patch(`${patchEndpoints.blockApplication}/${id}`, data, { headers: { Authorization: `Bearer ${getLocalAccessToken()}` } });
     return response?.data || { success: true, message: data.isBlocked ? "Application blocked successfully" : "Application unblocked successfully" };
   } catch (error: unknown) {
@@ -152,7 +141,6 @@ const instance = await getAxiosInstance();
   }
 };
 
-
 const listApplication = async (listParam: ListParams): Promise<ApiResponse> => {
   try {
     if (!getEndpoints.applicationList) throw new Error("Application list endpoint not configured");
@@ -160,7 +148,7 @@ const listApplication = async (listParam: ListParams): Promise<ApiResponse> => {
     const { filter, pagination } = listParam;
     const { limit, pageNo } = pagination;
     const url = !filter ? `${getEndpoints.applicationList}?limit=${limit}&pageNo=${pageNo}` : `${getEndpoints.applicationList}?limit=${limit}&pageNo=${pageNo}&appName=${filter}`;
-const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
     const response = await instance.get(url, {
       headers: { Authorization: `Bearer ${getLocalAccessToken()}` },
     });
@@ -171,11 +159,10 @@ const instance = await getAxiosInstance();
   }
 };
 
-
 const getAuthAuditLogForCSV = async (filter: Record<string, any> = {}): Promise<ApiResponse> => {
   try {
     if (!getEndpoints.getAuditLogForCSV) throw new Error("Audit log endpoint not configured");
-const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
     const filterParams = new URLSearchParams(filter).toString();
     const response = await instance.get(filterParams ? `${getEndpoints.getAuditLogForCSV}?${filterParams}` : getEndpoints.getAuditLogForCSV, {
       headers: { Authorization: `Bearer ${getLocalAccessToken()}` },
@@ -187,7 +174,6 @@ const instance = await getAxiosInstance();
   }
 };
 
-
 const AuthService = {
   getUserById,
   logout,
@@ -197,7 +183,7 @@ const AuthService = {
   updateApplication,
   deleteApplication,
   blockApplication,
-  getAuthAuditLogForCSV
+  getAuthAuditLogForCSV,
 };
 
 export default AuthService;

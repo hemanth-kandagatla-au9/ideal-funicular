@@ -7,7 +7,37 @@ import { useDispatch, useSelector } from "react-redux";
 
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(() => jest.fn()),
-  useSelector: jest.fn((selector) => selector({})),
+  useSelector: jest.fn((selector) => selector({
+    userAuthorization: {
+      myPermissions: [
+        {
+          project: 'agent',
+          modules: [
+            {
+              module: 'Rise Agent',
+              hasAccess: true,
+              permissions: [
+                { label: 'Rise Agent : bulk_start', hasAccess: true },
+                { label: 'Rise Agent : bulk_stop', hasAccess: true },
+                { label: 'Rise Agent : view_agent', hasAccess: true },
+                { label: 'Rise Agent : check_status', hasAccess: true }
+              ]
+            }
+          ]
+        }
+      ],
+      myPermissionsLoading: false
+    }
+  })),
+}));
+
+jest.mock("../../../../src/utils/hooks/useAgentPermissions", () => ({
+  __esModule: true,
+  default: () => ({
+    hasPermission: () => true,
+    loading: false,
+    permissions: []
+  })
 }));
 
 jest.mock("../../../../src/utils/PermissionUtils", () => ({

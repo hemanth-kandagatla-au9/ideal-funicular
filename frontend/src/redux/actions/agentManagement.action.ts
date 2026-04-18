@@ -1,8 +1,6 @@
 import { BinaryVersionPayload } from "@/services/agent/agentManagement.service";
 import { AGENT_MANAGEMENT } from "../../config/actions";
 
-
-
 interface AgentManagementProps {
   port?: string | number;
   hostname?: string;
@@ -30,7 +28,6 @@ interface ConfigProperty {
   encrypted?: boolean;
   error?: boolean;
 }
-
 
 interface GlobalConfigItemPayload {
   propertyName: string;
@@ -65,7 +62,6 @@ const failureStartAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const fetchHealthCheckup = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_HEALTH_CHECKUP,
   props,
@@ -81,7 +77,6 @@ const failureFetchHealthCheckup = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_FETCH_HEALTH_CHECKUP,
   error: error.message || "",
 });
-
 
 const fetchHealthCheckRun = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.FETCH_HEALTH_CHECK_RUN,
@@ -99,7 +94,6 @@ const failureFetchHealthCheckRun = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const fetchHealthCheckupByPort = () => ({
   type: AGENT_MANAGEMENT.FETCH_HEALTH_CHECKUP_BY_PORT,
 });
@@ -113,7 +107,6 @@ const failureFetchHealthCheckupByPort = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_FETCH_HEALTH_CHECKUP_BY_PORT,
   error: error.message || "",
 });
-
 
 const stopAgentServices = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.STOP_AGENT_SERVICE,
@@ -131,7 +124,6 @@ const failureStopAgentServices = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const restartAgentService = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.RESTART_AGENT_SERVICE,
   props,
@@ -147,7 +139,6 @@ const failureRestartAgentService = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_RESTART_AGENT_SERVICE,
   error: error.message || "",
 });
-
 
 const restartJobService = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.RESTART_JOB_SERVICE,
@@ -165,7 +156,6 @@ const failureRestartJobService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const shutDownAgentService = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.SHUTDOWN_AGENT_SERVICE,
   props,
@@ -181,7 +171,6 @@ const failureShutDownAgentService = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_SHUTDOWN_AGENT_SERVICE,
   error: error.message || "",
 });
-
 
 const startSSHAgentService = (props: { hostname: string; port: string; osVersion: string }) => ({
   type: AGENT_MANAGEMENT.STARTSSH_AGENT_SERVICE,
@@ -199,7 +188,6 @@ const failureStartSSHAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const saveAgentProperty = () => ({
   type: AGENT_MANAGEMENT.SAVE_AGENT_PROPERTY,
 });
@@ -215,7 +203,6 @@ const failureSaveAgentProperty = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const updateAgentProperty = () => ({
   type: AGENT_MANAGEMENT.UPDATE_AGENT_PROPERTY,
 });
@@ -230,7 +217,6 @@ const failureUpdateAgentProperty = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const fetchAgentBuildInfo = () => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_BUILD_INFO,
 });
@@ -244,7 +230,6 @@ const failureFetchAgentBuildInfo = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_FETCH_AGENT_BUILD_INFO,
   error: error.message || "",
 });
-
 
 const fetchAgentInfo = (props: { hostname: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_INFO,
@@ -262,8 +247,7 @@ const failureFetchAgentInfo = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
-const saveGlobalConfig = (props: {data: GlobalConfigItemPayload[] }) => ({
+const saveGlobalConfig = (props: { data: GlobalConfigItemPayload[] }) => ({
   type: AGENT_MANAGEMENT.SAVE_GLOBAL_CONFIG,
   props,
 });
@@ -278,7 +262,6 @@ const failureSaveGlobalConfig = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_SAVE_GLOBAL_CONFIG,
   error: error.message || "",
 });
-
 
 const fetchGlobalConfig = () => ({
   type: AGENT_MANAGEMENT.FETCH_GLOBAL_CONFIG,
@@ -335,7 +318,6 @@ const failureFetchAgentManagementServices = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const fetchAgentFilters = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_FILTER,
   props,
@@ -351,7 +333,6 @@ const failureFetchAgentFilters = (error: { message: string }) => ({
   types: AGENT_MANAGEMENT.FAILURE_FETCH_AGENT_FILTER,
   error: error.message || "",
 });
-
 
 const fetchAgentRepositories = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_REPOSITORIES,
@@ -369,7 +350,6 @@ const failureFetchAgentRepositories = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const addAgent = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.ADD_AGENT,
   props,
@@ -385,7 +365,6 @@ const failureAddAgent = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_ADD_AGENT,
   error: error.message || "",
 });
-
 
 const fetchAgentLogs = (props: { hostname: string; agentId: string | null; limit: number; skip: number; jobname: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_LOGS,
@@ -403,11 +382,9 @@ const failureFetchAgentLogs = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const reloadFetchAgentLogs = () => ({
   type: AGENT_MANAGEMENT.RELOAD_FETCH_AGENT_LOGS,
 });
-
 
 const saveLocalConfigs = (props: { hostname: string; port: string; propertiesSchemas: any[] }) => ({
   type: AGENT_MANAGEMENT.SAVE_LOCAL_CONFIGS,
@@ -425,7 +402,6 @@ const failureSaveLocalConfigs = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const fetchLocalConfigs = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.FETCH_LOCAL_CONFIGS,
   props,
@@ -441,7 +417,6 @@ const failureFetchLocalConfigs = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_FETCH_LOCAL_CONFIGS,
   error: error.message || "",
 });
-
 
 const fetchRepositories = (props: { type: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_REPOSITORIES,
@@ -459,7 +434,6 @@ const failureFetchRepositories = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const downloadRepositories = (props: { agentpath: any; version: string; port: string; hostname: string }) => ({
   type: AGENT_MANAGEMENT.DOWNLOAD_REPOSITORIES,
   props,
@@ -475,7 +449,6 @@ const failureDownloadRepositories = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_DOWNLOAD_REPOSITORIES,
   error: error.message || "",
 });
-
 
 const saveSchedulerCommand = (props: {
   hostname: string;
@@ -504,7 +477,6 @@ const failureSaveSchedulerCommand = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const updateSchedulerCommand = (props: {
   hostname: string;
   agentId: string;
@@ -532,7 +504,6 @@ const failureUpdateSchedulerCommand = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const deleteSchedulerCommand = (props: { hostname: string; port: string; scheduledJobId: string }) => ({
   type: AGENT_MANAGEMENT.DELETE_SCHEDULER_COMMAND,
   props,
@@ -548,7 +519,6 @@ const failureDeleteSchedulerCommand = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_DELETE_SCHEDULER_COMMAND,
   error: error.message || "",
 });
-
 
 const listSchedulerCommand = (props: { hostname: string; port: string }) => ({
   type: AGENT_MANAGEMENT.LIST_SCHEDULER_COMMAND,
@@ -573,7 +543,6 @@ const failureListSchedulerCommand = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const fetchScheduledJobsByCommandId = (props: { hostname: string; port: string; scheduledJobId: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_SCHEDULED_JOBS_BY_COMMAND_ID,
   props,
@@ -595,7 +564,6 @@ const failureFetchScheduledJobsByCommandId = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const syncUpAgentDiscovery = () => ({
   type: AGENT_MANAGEMENT.SYNCUP_AGENT_DISCOVERY,
 });
@@ -609,7 +577,6 @@ const failureSyncUpAgentDiscovery = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_SYNCUP_AGENT_DISCOVERY,
   error: error.message || "",
 });
-
 
 const fetchAgentMetrics = () => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_METRICS,
@@ -795,7 +762,6 @@ const failureSyncAgentHealthConfigs = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const startSelectedAgentService = (
   props: {
     hostname: string;
@@ -823,7 +789,6 @@ const failureStartSelectedAgentService = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_SELECTED_START_AGENT_SERVICE,
   error: error.message || "",
 });
-
 
 const stoptSelectedAgentService = (
   props: {
@@ -853,7 +818,6 @@ const failureStopSelectedAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const restartSelectedAgentService = (
   props: {
     hostname: string;
@@ -882,7 +846,6 @@ const failureRestartSelectedAgentService = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const healthCheckupSelectedAgentService = (props: AgentManagementProps) => ({
   type: AGENT_MANAGEMENT.HEALTHCHECKUP_SELECTED_AGENT_SERVICE,
   props,
@@ -903,7 +866,6 @@ const failureHealthCheckupSelectedAgentService = (error: { message: string }) =>
   error: error.message || "",
 });
 
-
 const fetchUpgradeAgents = () => ({
   type: AGENT_MANAGEMENT.FETCH_UPGRADE_AGENTS,
 });
@@ -918,7 +880,6 @@ const failureFetchUpgradeAgents = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_FETCH_UPGRADE_AGENTS,
   error: error.message || "",
 });
-
 
 const upgradeSelectedAgents = (props: {
   data: {
@@ -943,7 +904,6 @@ const failureUpgradeSelectedAgents = (error: { message: string }) => ({
   error: error.message || "",
 });
 
-
 const envUpgradeSelectedAgents = (props: { data: { hostname: string; port: string }[]; env: string; mode?: "single" | "bulk" }) => ({
   type: AGENT_MANAGEMENT.ENV_UPGRADE_SELECTED_AGENTS,
   props,
@@ -959,7 +919,6 @@ const failureEnvUpgradeSelectedAgents = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_ENV_UPGRADE_SELECTED_AGENTS,
   error: error.message || "",
 });
-
 
 const fetchAgentMasterdata = (props: { limit: string; pageNo: number; search: string }) => ({
   type: AGENT_MANAGEMENT.FETCH_AGENT_MASTERDATA,
@@ -977,7 +936,6 @@ const failureFetchAgentMasterdata = (error: { message: string }) => ({
   error: error?.message || "",
 });
 
-
 const addAgentMasterdata = (props: string) => ({
   type: AGENT_MANAGEMENT.ADD_AGENT_MASTERDATA,
   props,
@@ -992,7 +950,6 @@ const failureAddAgentMasterdata = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_ADD_AGENT_MASTERDATA,
   error: error?.message || "",
 });
-
 
 const deleteHostname = (props: string) => ({
   type: AGENT_MANAGEMENT.DELETE_HOSTNAME,
@@ -1098,7 +1055,6 @@ const failureManualSyncVersions = (error: { message: string }) => ({
   type: AGENT_MANAGEMENT.FAILURE_MANUAL_SYNC_VERSIONS,
   error: error.message || "",
 });
-
 
 const agentManagementActions = {
   startAgentService,

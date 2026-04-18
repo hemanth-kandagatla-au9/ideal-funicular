@@ -68,7 +68,7 @@ const BinaryVersionsModal = ({ open, onClose, handleAddBinaryVersion, handleUpda
   }>({
     enableReinitialize: false, // DISABLE to prevent infinite loops
     initialValues: {
-      _id:"",
+      _id: "",
       version: "",
       osCompatibility: "",
       osVersion: "",
@@ -85,7 +85,7 @@ const BinaryVersionsModal = ({ open, onClose, handleAddBinaryVersion, handleUpda
       try {
         setSubmitting(true);
         const payload: any = {
-          id:values._id,
+          id: values._id,
           version: values.version,
           osCompatibility: values.osEntries.length > 0 ? values.osEntries[0].os : "",
           osVersion: values.osEntries.length > 0 ? values.osEntries[0].version : "",
@@ -127,7 +127,7 @@ const BinaryVersionsModal = ({ open, onClose, handleAddBinaryVersion, handleUpda
         upgradeType: editingVersion.upgradeType,
       });
       formik.setValues({
-        _id:editingVersion.id,
+        _id: editingVersion.id,
         version: editingVersion.version,
         osCompatibility: "",
         osVersion: "",
@@ -144,18 +144,15 @@ const BinaryVersionsModal = ({ open, onClose, handleAddBinaryVersion, handleUpda
       setOriginalValues(null);
     }
   }, [open, editingVersion?.id]); // Only depend on stable values - open state and editingVersion ID
-const hasChanges = useMemo(() => {
+  const hasChanges = useMemo(() => {
     if (!editingVersion || !originalValues) return true; // Always allow submit in add mode
-    const osEntriesChanged = 
+    const osEntriesChanged =
       formik.values.osEntries.length !== originalValues.osEntries.length ||
-      !formik.values.osEntries.every((entry, index) => 
-        entry.os === originalValues.osEntries[index]?.os &&
-        entry.version === originalValues.osEntries[index]?.version
-      );
+      !formik.values.osEntries.every((entry, index) => entry.os === originalValues.osEntries[index]?.os && entry.version === originalValues.osEntries[index]?.version);
     const upgradeTypeChanged = formik.values.upgradeType !== originalValues.upgradeType;
-    
+
     const changed = osEntriesChanged || upgradeTypeChanged;
-    
+
     return changed;
   }, [formik.values.osEntries, formik.values.upgradeType, originalValues, editingVersion]);
 

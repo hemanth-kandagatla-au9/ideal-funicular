@@ -15,8 +15,8 @@ import {
 } from "@/redux/selectors/userAuthorization.selectors";
 
 jest.mock("react-redux", () => ({
-  useDispatch: () => jest.fn(),
-  useSelector: (selector) => selector({}),
+  useDispatch: jest.fn(),
+  useSelector: jest.fn((selector) => (typeof selector === "function" ? selector({}) : null)),
 }));
 
 jest.mock("react-router-dom", () => ({
@@ -29,6 +29,15 @@ jest.mock("@/redux/selectors/userAuthorization.selectors", () => ({
   getUsersError: jest.fn(),
   getUsersPagination: jest.fn(),
   getSelectedUsers: jest.fn(),
+}));
+
+jest.mock("@/utils/hooks/useAgentPermissions", () => ({
+  __esModule: true,
+  default: () => ({
+    hasPermission: () => true,
+    loading: false,
+    permissions: []
+  })
 }));
 
 jest.mock("../../../../src/redux/actions/userAuthorization.action", () => ({

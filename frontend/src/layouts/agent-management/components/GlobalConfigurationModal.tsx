@@ -180,11 +180,7 @@ const GlobalConfigurationModal: React.FC<GlobalConfigurationModalProps> = ({ sho
               const displayKey = formatKeyAsCamelCase(config.propertyName);
               const value = config.propertyValue ?? "";
               const useTextarea = shouldUseTextarea(config.propertyName, value);
-              const fullWidth =
-                shouldSpanFullWidth(config.propertyName, displayKey) ||
-                useTextarea ||
-                value.includes("\n") ||
-                value.length >= 80;
+              const fullWidth = shouldSpanFullWidth(config.propertyName, displayKey) || useTextarea || value.includes("\n") || value.length >= 80;
 
               return (
                 <div key={config.propertyName} className={`config-field ${fullWidth ? "config-field--full" : ""}`.trim()}>

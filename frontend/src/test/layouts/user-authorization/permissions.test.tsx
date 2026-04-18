@@ -3,14 +3,23 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Permissions from "../../../../src/layouts/user-authorization/Permissions";
+import Permissions from "../../../layouts/user-authorization/Permissions";
 jest.mock("react-redux", () => ({
-  useDispatch: () => jest.fn(),
-  useSelector: (selector) => selector({}),
+  useDispatch: jest.fn(),
+  useSelector: jest.fn((selector) => (typeof selector === "function" ? selector({}) : null)),
 }));
 
 jest.mock("react-router-dom", () => ({
   useHistory: jest.fn(),
+}));
+
+jest.mock("@/utils/hooks/useAgentPermissions", () => ({
+  __esModule: true,
+  default: () => ({
+    hasPermission: () => true,
+    loading: false,
+    permissions: []
+  })
 }));
 jest.mock("../../../../src/redux/actions/userAuthorization.action", () => ({
   fetchPermissions: jest.fn((payload) => ({ type: "FETCH", payload })),

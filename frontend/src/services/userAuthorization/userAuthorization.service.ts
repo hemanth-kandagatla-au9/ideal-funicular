@@ -1,15 +1,12 @@
-
-import Cookies from "universal-cookie"
+import Cookies from "universal-cookie";
 import axios from "axios";
+import { getIdToken, getAccessToken } from "@/utils/TokenService";
 import Config from "../../config/config";
 import { getLocalAccessToken } from "../../utils/TokenUtils";
 import AxiosInstanceClass from "../axiosInstance";
-import { UserFilters } from "../../types/UserAuthorization"
-import { getIdToken, getAccessToken } from "@/utils/TokenService";
-
+import { UserFilters } from "../../types/UserAuthorization";
 
 const token = getLocalAccessToken();
-
 
 interface EndpointGroup {
   [key: string]: string;
@@ -40,7 +37,6 @@ function handleAxiosError(error: unknown) {
   return { status: 500, data: { message: "Unexpected error occurred" } };
 }
 
-
 const fetchUsers = async (filters?: UserFilters) => {
   try {
     const params = {
@@ -48,56 +44,50 @@ const fetchUsers = async (filters?: UserFilters) => {
       limit: filters?.limit || 10,
       search: filters?.search || "",
     };
-     const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
 
     const response = await instance.get(`${userAuthConfig.get.users}`, { params });
-    console.log(`response users`,response);
-    
+    console.log("response users", response);
+
     return response;
   } catch (error: any) {
-    return handleAxiosError(error) 
+    return handleAxiosError(error);
   }
 };
-
 
 const createUser = async (userData: any) => {
   try {
-     const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
     const response = await instance.post(`${userAuthConfig.post.createUser}`, userData);
     return response;
   } catch (error: any) {
-    return handleAxiosError(error)
+    return handleAxiosError(error);
   }
 };
-
 
 const updateUser = async (userId: string, userData: any) => {
   try {
-       const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
     const response = await instance.delete(`/api/users/${userId}`, userData);
     return response;
   } catch (error: any) {
-    return handleAxiosError(error)
+    return handleAxiosError(error);
   }
 };
-
-
 
 const deleteUser = async (username: any) => {
   try {
-     const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
     const response = await instance.delete(`${userAuthConfig.delete.deleteUser}?username=${username}`);
     return response;
   } catch (error: any) {
-    return handleAxiosError(error)
+    return handleAxiosError(error);
   }
 };
 
-
-
 const fetchUserPermissionDetails = async (username: string, filters?: { page?: number; limit?: number }) => {
   try {
-     const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
     const params = {
       username,
       page: filters?.page || 1,
@@ -107,21 +97,12 @@ const fetchUserPermissionDetails = async (username: string, filters?: { page?: n
     const response = await instance.get(`${userAuthConfig.get.userPermissionsList}`, { params });
     return response;
   } catch (error: any) {
-    return handleAxiosError(error)
+    return handleAxiosError(error);
   }
 };
 
-
-
-const fetchPermissions = async (filters?: {
-  page?: number;
-  limit?: number;
-  project?: string;
-  module?: string;
-  permission?: string;
-}) => {
+const fetchPermissions = async (filters?: { page?: number; limit?: number; project?: string; module?: string; permission?: string }) => {
   try {
-    
     const params = {
       page: filters?.page || 1,
       limit: filters?.limit || 10,
@@ -129,31 +110,24 @@ const fetchPermissions = async (filters?: {
       module: filters?.module || "",
       permission: filters?.permission || "",
     };
-     const instance = await getAxiosInstance();
+    const instance = await getAxiosInstance();
     const response = await instance.get(`${userAuthConfig.get.PermissionsList}`, { params });
     return response;
   } catch (error: any) {
-    return handleAxiosError(error)
+    return handleAxiosError(error);
   }
 };
 
-
-const createPermission = async (permissionData: {
-  project: string;
-  module: string;
-  permission: string;
-  description?: string;
-}) => {
+const createPermission = async (permissionData: { project: string; module: string; permission: string; description?: string }) => {
   try {
     const endpoint = userAuthConfig.post.createPermission;
     const instance = await getAxiosInstance();
     const response = await instance.post(endpoint, permissionData);
     return response;
   } catch (error: any) {
-    return handleAxiosError(error)
+    return handleAxiosError(error);
   }
 };
-
 
 const deletePermission = async (permissionId: string) => {
   try {
@@ -162,10 +136,9 @@ const deletePermission = async (permissionId: string) => {
     const response = await instance.delete(endpoint);
     return response;
   } catch (error: any) {
-    return handleAxiosError(error)
+    return handleAxiosError(error);
   }
 };
-
 
 const assignUserPermissions = async (userId: string, permissionCodes: string[]) => {
   try {
@@ -174,10 +147,9 @@ const assignUserPermissions = async (userId: string, permissionCodes: string[]) 
     const response = await instance.put(endpoint, { codes: permissionCodes });
     return response;
   } catch (error: any) {
-    return handleAxiosError(error)
+    return handleAxiosError(error);
   }
 };
-
 
 const fetchGlobalPermissions = async (userId: string): Promise<any> => {
   try {
@@ -186,7 +158,7 @@ const fetchGlobalPermissions = async (userId: string): Promise<any> => {
     const response = await instance.get(endpoint);
     return response;
   } catch (error: any) {
-    return handleAxiosError(error)
+    return handleAxiosError(error);
   }
 };
 

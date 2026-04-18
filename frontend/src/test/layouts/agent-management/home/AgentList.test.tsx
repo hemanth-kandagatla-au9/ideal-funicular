@@ -7,7 +7,28 @@ import '@testing-library/jest-dom/extend-expect';
 
 jest.mock('react-redux', () => ({
   useDispatch: () => jest.fn(),
-  useSelector: (selector) => selector({}),
+  useSelector: (selector) => selector({
+    userAuthorization: {
+      myPermissions: [
+        {
+          project: 'agent',
+          modules: [
+            {
+              module: 'Rise Agent',
+              hasAccess: true,
+              permissions: [
+                { label: 'Rise Agent : bulk_start', hasAccess: true },
+                { label: 'Rise Agent : bulk_stop', hasAccess: true },
+                { label: 'Rise Agent : view_agent', hasAccess: true },
+                { label: 'Rise Agent : check_status', hasAccess: true }
+              ]
+            }
+          ]
+        }
+      ],
+      myPermissionsLoading: false
+    }
+  }),
   Provider: ({ children }) => children,
 }));
 
@@ -17,6 +38,15 @@ jest.mock('../../../../redux/actions/agentManagement.action', () => ({
       payload
     }))
   }));
+
+jest.mock('../../../../utils/hooks/useAgentPermissions', () => ({
+  __esModule: true,
+  default: () => ({
+    hasPermission: () => true,
+    loading: false,
+    permissions: []
+  })
+}));
 
 describe('AgentList Component', () => {
   const mockAgents = [
@@ -191,8 +221,10 @@ describe('AgentList Component', () => {
     const activeBadge = screen.getByText('Active');
     const inactiveBadge = screen.getByText('Inactive');
     
-    expect(activeBadge).toHaveClass('statusBadge active');
-    expect(inactiveBadge).toHaveClass('statusBadge inactive');
+    expect(activeBadge.className).toContain('statusBadge');
+    expect(activeBadge.className).toContain('active');
+    expect(inactiveBadge.className).toContain('statusBadge');
+    expect(inactiveBadge.className).toContain('inactive');
   });
 
   test('displays correct version badges', () => {

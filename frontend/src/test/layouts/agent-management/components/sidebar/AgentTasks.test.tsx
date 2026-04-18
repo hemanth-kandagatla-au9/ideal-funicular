@@ -5,7 +5,37 @@ import AgentTasks from "../../../../../layouts/agent-management/components/sideb
 import '@testing-library/jest-dom';
 jest.mock("react-redux", () => ({
   useDispatch: () => jest.fn(),
-  useSelector: (selector) => selector({}),
+  useSelector: (selector) => selector({
+    userAuthorization: {
+      myPermissions: [
+        {
+          project: 'agent',
+          modules: [
+            {
+              module: 'Rise Agent',
+              hasAccess: true,
+              permissions: [
+                { label: 'Rise Agent : bulk_start', hasAccess: true },
+                { label: 'Rise Agent : bulk_stop', hasAccess: true },
+                { label: 'Rise Agent : view_agent', hasAccess: true },
+                { label: 'Rise Agent : check_status', hasAccess: true }
+              ]
+            }
+          ]
+        }
+      ],
+      myPermissionsLoading: false
+    }
+  }),
+}));
+
+jest.mock("../../../../../utils/hooks/useAgentPermissions", () => ({
+  __esModule: true,
+  default: () => ({
+    hasPermission: () => true,
+    loading: false,
+    permissions: []
+  })
 }));
 
 jest.mock("../../../../../utils/PermissionUtils", () => ({

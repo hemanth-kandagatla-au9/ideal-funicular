@@ -23,12 +23,37 @@ jest.mock("../../../../redux/actions/agentManagement.action", () => ({
 }));
 jest.mock("../../../../components/ui/pagination/Pagination.component", () => () => <div />);
 jest.mock("react-redux", () => ({
-  useSelector: (selector) => selector({}),
+  useSelector: (selector) => selector({
+    userAuthorization: {
+      myPermissions: [
+        {
+          project: 'agent',
+          modules: [
+            {
+              module: 'Rise Agent',
+              hasAccess: true,
+              permissions: [
+                { label: 'Rise Agent : bulk_start', hasAccess: true },
+                { label: 'Rise Agent : bulk_stop', hasAccess: true },
+                { label: 'Rise Agent : view_agent', hasAccess: true },
+                { label: 'Rise Agent : check_status', hasAccess: true }
+              ]
+            }
+          ]
+        }
+      ],
+      myPermissionsLoading: false
+    }
+  }),
   useDispatch: () => jest.fn(),
 }));
 jest.mock("../../../../utils/hooks/useAgentPermissions", () => ({
   __esModule: true,
-  default: jest.fn(),
+  default: jest.fn(() => ({
+    hasPermission: jest.fn(() => true),
+    loading: false,
+    permissions: []
+  })),
 }));
 
 // ─── fixture data ─────────────────────────────────────────────────────────────

@@ -8,7 +8,29 @@ import SideBar from "../../../../../../src/layouts/agent-management/components/s
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual("react-redux"),
-  useSelector: jest.fn((selector) => selector({})),
+  useSelector: jest.fn((selector) => selector({
+    agentManagement: {},
+    userAuthorization: {
+      myPermissions: [
+        {
+          project: 'agent',
+          modules: [
+            {
+              module: 'Rise Agent',
+              hasAccess: true,
+              permissions: [
+                { label: 'Rise Agent : bulk_start', hasAccess: true },
+                { label: 'Rise Agent : bulk_stop', hasAccess: true },
+                { label: 'Rise Agent : view_agent', hasAccess: true },
+                { label: 'Rise Agent : check_status', hasAccess: true }
+              ]
+            }
+          ]
+        }
+      ],
+      myPermissionsLoading: false
+    }
+  })),
   useDispatch: () => jest.fn(),
 }));
 
@@ -37,11 +59,41 @@ jest.mock("../../../../../../src/layouts/agent-management/components/DeleteModal
 jest.mock("../../../../../../src/layouts/agent-management/components/JobLogsModal", () => () => <div data-testid="jobLogsModal" />);
 jest.mock("../../../../../../src/layouts/agent-management/components/LocalConfigModal", () => () => <div data-testid="localConfigModal" />);
 jest.mock("../../../../../../src/layouts/agent-management/components/SchedulerDialog", () => () => <div data-testid="schedulerDialog" />);
+
+jest.mock("../../../../../../src/utils/hooks/useAgentPermissions", () => ({
+  __esModule: true,
+  default: () => ({
+    hasPermission: () => true,
+    loading: false,
+    permissions: []
+  })
+}));
+
 const useSelectorMock = require("react-redux").useSelector;
 
 useSelectorMock.mockImplementation((selectorFn: any) => {
   return selectorFn({
     agentManagement: {},
+    userAuthorization: {
+      myPermissions: [
+        {
+          project: 'agent',
+          modules: [
+            {
+              module: 'Rise Agent',
+              hasAccess: true,
+              permissions: [
+                { label: 'Rise Agent : bulk_start', hasAccess: true },
+                { label: 'Rise Agent : bulk_stop', hasAccess: true },
+                { label: 'Rise Agent : view_agent', hasAccess: true },
+                { label: 'Rise Agent : check_status', hasAccess: true }
+              ]
+            }
+          ]
+        }
+      ],
+      myPermissionsLoading: false
+    }
   });
 });
 const store = createStore(() => ({}));

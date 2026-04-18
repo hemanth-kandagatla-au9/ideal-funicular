@@ -92,11 +92,7 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
               }}
             />
             <div className="riseagent-subPopVersionCvrBtn riseagent-risebotmdlBtn">
-              <Button
-                data-testid={`agentManagerVersionBtn-${agentType}-${index}`}
-                className="riseagent-risebotagentSubVersionBtn"
-                onClick={() => selectAgentVersion(version)}
-              >
+              <Button data-testid={`agentManagerVersionBtn-${agentType}-${index}`} className="riseagent-risebotagentSubVersionBtn" onClick={() => selectAgentVersion(version)}>
                 v{version}
               </Button>
             </div>

@@ -1,7 +1,6 @@
-
 import Config from "../../config/config";
 import AxiosInstanceClass from "../axiosInstance";
-import {  getUserInfo } from "../../utils/TokenUtils";
+import { getUserInfo } from "../../utils/TokenUtils";
 
 interface UtilizationMetricsPayload {
   userID?: string;
@@ -77,7 +76,8 @@ const getUtilizationMetricData = async (payload: GetUtilizationMetricDataPayload
 
 const getMetricsData = async (): Promise<any> => AxiosInstance.get(`${Config.apiEndpoints.utilities.baseUrl}${Config?.apiEndpoints?.utilities?.get?.getMetricsData}`);
 
-const getDownloadMetricsData = async (): Promise<any> => AxiosInstance.get(`${Config.apiEndpoints.utilities.baseUrl}${Config?.apiEndpoints?.utilities?.get?.getDownloadMetricsData}`);
+const getDownloadMetricsData = async (): Promise<any> =>
+  AxiosInstance.get(`${Config.apiEndpoints.utilities.baseUrl}${Config?.apiEndpoints?.utilities?.get?.getDownloadMetricsData}`);
 const UtilizationService = {
   utilizationMetrics,
   getUtilizationMetrics,

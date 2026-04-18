@@ -2,142 +2,76 @@
 
 import axios from "axios";
 import AxiosInstance from "../../services/axiosInstance";
-import * as TokenUtils from "../../utils/TokenUtils";
+import * as TokenService from "../../utils/TokenService";
 
 jest.mock("axios");
-jest.mock("../../utils/TokenUtils");
-
-const mockedAxios = {
-  interceptors: {
-    request: { use: jest.fn() },
-    response: { use: jest.fn() },
-  },
-  patch: jest.fn(),
-  defaults: { headers: { common: {} } },
-} as any;
-
-(axios.create as jest.Mock).mockReturnValue(mockedAxios);
+jest.mock("../../utils/TokenService");
 
 describe("AxiosInstance", () => {
   let instance: AxiosInstance;
+  let mockedAxios: any;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    instance = new AxiosInstance("http://test.api");
+    jest.resetAllMocks();
+    
+    mockedAxios = {
+      interceptors: {
+        request: { use: jest.fn() },
+        response: { use: jest.fn() },
+      },
+      defaults: { headers: { common: {} } },
+    };
+    
+    (axios.create as jest.Mock).mockReturnValue(mockedAxios);
+    instance = new AxiosInstance("https://test.api");
   });
 
-  it("should initialize axios instance with token", () => {
-    const token = "test-token";
-    const spyRefresh = jest.spyOn<any, any>(instance, "refreshToken");
-    const spyUpdate = jest.spyOn<any, any>(instance, "updateHeaderToken");
-    const result = instance.init(token);
+  it("should initialize axios instance with correct options", () => {
+    instance.init();
+    expect(axios.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        baseURL: "https://test.api",
+        headers: { "X-Custom-Header": "erpops" },
+        credentials: "include",
+      })
+    );
+  });
+
+  it("should attach request interceptor", () => {
+    instance.init();
+    expect(mockedAxios.interceptors.request.use).toHaveBeenCalled();
+  });
+
+  it("should attach response interceptor", () => {
+    instance.init();
+    expect(mockedAxios.interceptors.response.use).toHaveBeenCalled();
+  });
+
+  it("should return the axios instance from init", () => {
+    const result = instance.init();
     expect(result).toBe(mockedAxios);
-    expect(spyRefresh).toHaveBeenCalled();
-    expect(spyUpdate).toHaveBeenCalled();
   });
 
-  it("should process queue with token", () => {
-    const resolve = jest.fn();
-    const reject = jest.fn();
-    (instance as any).failedQueue = [{ resolve, reject }];
-    (instance as any).processQueue(null, "token");
-    expect(resolve).toHaveBeenCalledWith("token");
-  });
-
-  it("should update header token in request interceptor", async () => {
-    const config = { headers: {}, isUpdated: false };
-    (TokenUtils.getLocalAccessToken as jest.Mock).mockReturnValue("access-token");
+  it("should add authorization header when token is available", async () => {
+    (TokenService.getIdToken as jest.Mock).mockResolvedValue("access-token");
     instance.init();
     const reqInterceptor = mockedAxios.interceptors.request.use.mock.calls[0][0];
+    const config = { headers: {} };
     const result = await reqInterceptor(config);
     expect(result.headers.Authorization).toBe("Bearer access-token");
   });
 
-  it("should handle 401 and queue requests", async () => {
-    const error = {
-      config: { url: "/not-auth", headers: {}, _retry: false },
-      response: { status: 401 },
-    };
-    (TokenUtils.getLocalRefreshToken as jest.Mock).mockReturnValue(null);
-    instance.init();
-    const responseInterceptor = mockedAxios.interceptors.response.use.mock.calls[0][1];
-    await expect(responseInterceptor(error)).rejects.toBe(error);
-  });
-
-  it("should reject error if not 401", async () => {
-    const error = {
-      config: { url: "/not-auth", headers: {}, _retry: false },
-      response: { status: 500 },
-    };
-    instance.init();
-    const responseInterceptor = mockedAxios.interceptors.response.use.mock.calls[0][1];
-    await expect(responseInterceptor(error)).rejects.toBe(error);
-  });
-  it("should process queue with error", () => {
-    const error = new Error("test error");
-  
-    class FakePromise extends Promise<any> {
-      reject = jest.fn();
-      resolve = jest.fn();
-    }
-  
-    const fake = new FakePromise(() => {});
-    (instance as any).failedQueue = [fake];
-    (instance as any).processQueue(error, null);
-  
-    expect(fake.reject).toHaveBeenCalledWith(error);
-  });
-  
-  it("should handle 401 and refresh token", async () => {
-    const error = {
-      config: { url: "/not-auth", headers: {}, _retry: false },
-      response: { status: 401 },
-    };
-  
-    (TokenUtils.getLocalRefreshToken as jest.Mock).mockReturnValue("refresh-token");
-    (TokenUtils.getLocalUserId as jest.Mock).mockReturnValue("user-id");
-  
-    mockedAxios.patch.mockResolvedValue({
-      data: { data: { accessToken: "new-access", refreshToken: "new-refresh" } },
-    });
-    const mockInstance = jest.fn().mockResolvedValue("retried");
-    Object.assign(mockInstance, mockedAxios); // copy interceptors, patch, defaults, etc.
-  
-    (axios.create as jest.Mock).mockReturnValue(mockInstance);
-  
-    instance = new AxiosInstance("http://test.api");
-    instance.init();
-  
-    const responseInterceptor = mockInstance.interceptors.response.use.mock.calls[0][1];
-    const result = await responseInterceptor(error);
-  
-    expect(TokenUtils.updateLocalTokens).toHaveBeenCalledWith("new-access", "new-refresh");
-    expect(mockInstance).toHaveBeenCalledWith(expect.objectContaining({
-      headers: expect.objectContaining({
-        Authorization: "Bearer new-access",
-      }),
-    }));
-    expect(result).toBe("retried");
-  });
-  
-  it("should process queue with token using plain object", () => {
-    const resolve = jest.fn();
-    const prom = { resolve };
-    (instance as any).failedQueue = [prom];
-    (instance as any).processQueue(null, "token");
-    expect(resolve).toHaveBeenCalledWith("token");
-  });
-  
-  it("should return config unchanged if no token is found", async () => {
-    (TokenUtils.getLocalAccessToken as jest.Mock).mockReturnValue(null);
+  it("should not add authorization header when token is not available", async () => {
+    (TokenService.getIdToken as jest.Mock).mockResolvedValue(null);
     instance.init();
     const reqInterceptor = mockedAxios.interceptors.request.use.mock.calls[0][0];
-    const config = { headers: {}, isUpdated: false };
+    const config = { headers: {} };
     const result = await reqInterceptor(config);
-    expect(result).toEqual(config);
+    expect(result.headers.Authorization).toBeUndefined();
   });
-  
-  it("should return response directly in response interceptor", async () => {
+
+  it("should return response in response interceptor success case", async () => {
     instance.init();
     const responseInterceptor = mockedAxios.interceptors.response.use.mock.calls[0][0];
     const response = { data: "ok" };
@@ -145,32 +79,44 @@ describe("AxiosInstance", () => {
     expect(result).toBe(response);
   });
 
-  it("should set default Authorization header after token refresh", async () => {
-    const error = {
-      config: { url: "/not-auth", headers: {}, _retry: false },
-      response: { status: 401 },
-    };
-  
-    (TokenUtils.getLocalRefreshToken as jest.Mock).mockReturnValue("refresh-token");
-    (TokenUtils.getLocalUserId as jest.Mock).mockReturnValue("user-id");
-  
-    mockedAxios.patch.mockResolvedValue({
-      data: { data: { accessToken: "new-access", refreshToken: "new-refresh" } },
-    });
-  
-    const mockInstance = jest.fn().mockResolvedValue("retried");
-    Object.assign(mockInstance, mockedAxios);
-    (axios.create as jest.Mock).mockReturnValue(mockInstance);
-  
-    instance = new AxiosInstance();
+  it("should clear session and redirect on 401 error", async () => {
     instance.init();
-  
-    const responseInterceptor = mockInstance.interceptors.response.use.mock.calls[0][1];
-    await responseInterceptor(error);
-  
-    expect(mockInstance.defaults.headers.common.Authorization).toBe("Bearer new-access");
+    const responseInterceptor = mockedAxios.interceptors.response.use.mock.calls[0][1];
+    const error = {
+      response: { status: 401, data: {} },
+    };
+    
+    // Mock window.location.href assignment
+    delete (window as any).location;
+    window.location = { href: "" } as any;
+    
+    await expect(responseInterceptor(error)).rejects.toBe(error);
+    expect(window.location.href).toBe("/session-expired");
   });
-   
+
+  it("should clear session and redirect on Session Expired message", async () => {
+    instance.init();
+    const responseInterceptor = mockedAxios.interceptors.response.use.mock.calls[0][1];
+    const error = {
+      response: { status: 200, data: { message: "Session Expired" } },
+    };
+    
+    delete (window as any).location;
+    window.location = { href: "" } as any;
+    
+    await expect(responseInterceptor(error)).rejects.toBe(error);
+    expect(window.location.href).toBe("/session-expired");
+  });
+
+  it("should reject other errors without redirecting", async () => {
+    instance.init();
+    const responseInterceptor = mockedAxios.interceptors.response.use.mock.calls[0][1];
+    const error = {
+      response: { status: 500, data: { message: "Server Error" } },
+    };
+    
+    await expect(responseInterceptor(error)).rejects.toBe(error);
+  });
 });
 
 

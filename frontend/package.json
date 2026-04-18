@@ -203,13 +203,17 @@
       "./jest.setup.ts"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!<react-bootstrap>)/"
+      "node_modules/(?!(@restart|@emotion|react-bootstrap)/)"
     ],
     "moduleNameMapper": {
       "\\.(css|less|scss)$": "jest-css-modules",
       "\\.(png|svg|pdf|jpg|jpeg)$": "<rootDir>/__mocks__/fileMock.js",
       "^multiSelectWithFilter(.*)$": "<rootDir>/__mocks__/multiSelectWithFilter.js",
-      "^@/(.*)$": "<rootDir>/src/$1"
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "^cheerio(.*)$": "<rootDir>/__mocks__/cheerio.js",
+      "^domhandler(.*)$": "<rootDir>/__mocks__/domhandler.js",
+      "^domelementtype(.*)$": "<rootDir>/__mocks__/domelementtype.js",
+      "^entities(.*)$": "<rootDir>/__mocks__/entities.js"
     },
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",

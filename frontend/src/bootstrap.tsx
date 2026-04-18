@@ -5,10 +5,9 @@ import { Provider } from "react-redux";
 import App from "./App";
 import initializeStore from "./redux/initializeStore";
 import reportWebVitals from "./reportWebVitals";
- 
+
 const store = initializeStore();
- 
- 
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -19,4 +18,3 @@ ReactDOM.render(
 );
 
 reportWebVitals();
- 

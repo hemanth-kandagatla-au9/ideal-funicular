@@ -1,5 +1,5 @@
 const POLL_INTERVAL_MS = 100;
-const POLL_TIMEOUT_MS  = 8000;
+const POLL_TIMEOUT_MS = 8000;
 
 interface TokenPair {
   accessToken: string;
@@ -7,14 +7,14 @@ interface TokenPair {
 }
 
 const waitForBridge = (): Promise<boolean> => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     if (typeof window.__HOST_GET_TOKEN__ === "function") {
       resolve(true);
       return;
     }
 
     const start = Date.now();
-    const poll  = setInterval(() => {
+    const poll = setInterval(() => {
       if (typeof window.__HOST_GET_TOKEN__ === "function") {
         clearInterval(poll);
         resolve(true);
@@ -23,8 +23,7 @@ const waitForBridge = (): Promise<boolean> => {
       if (Date.now() - start >= POLL_TIMEOUT_MS) {
         clearInterval(poll);
         console.error(
-          `[Auth tokenService] window.__HOST_GET_TOKEN__ not found after ${POLL_TIMEOUT_MS / 1000}s. ` +
-          "Ensure host has called initTokenBridge() before loading this remote."
+          `[Auth tokenService] window.__HOST_GET_TOKEN__ not found after ${POLL_TIMEOUT_MS / 1000}s. ` + "Ensure host has called initTokenBridge() before loading this remote.",
         );
         resolve(false);
       }
@@ -37,10 +36,7 @@ const getTokensFromBridge = async (): Promise<TokenPair | null> => {
   if (!bridgeReady) return null;
 
   try {
-    const [accessToken, idToken] = await Promise.all([
-      window.__HOST_GET_TOKEN__?.(),
-      window.__HOST_GET_ID_TOKEN__?.(),
-    ]);
+    const [accessToken, idToken] = await Promise.all([window.__HOST_GET_TOKEN__?.(), window.__HOST_GET_ID_TOKEN__?.()]);
 
     if (!accessToken) {
       console.error("[Auth tokenService] tokenBridge returned empty access token");

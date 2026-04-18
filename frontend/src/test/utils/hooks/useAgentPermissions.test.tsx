@@ -14,6 +14,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { renderWithRedux } from "../../redux-test-utils";
 import useAgentPermissions from "../../../utils/hooks/useAgentPermissions";
 import { AGENT_PERMISSIONS } from "../../../config/agentPermissionLabels";
 import type { ProjectPermission } from "../../../types/UserAuthorization";

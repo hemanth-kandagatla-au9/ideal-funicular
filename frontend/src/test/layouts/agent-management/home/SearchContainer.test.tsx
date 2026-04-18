@@ -9,9 +9,37 @@ const mockPush = jest.fn();
 
 jest.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
-  useSelector: (selector) => selector({}),
+  useSelector: (selector) => selector({
+    userAuthorization: {
+      myPermissions: [
+        {
+          project: 'agent',
+          modules: [
+            {
+              module: 'Rise Agent',
+              hasAccess: true,
+              permissions: [
+                { label: 'Rise Agent : view_agent', hasAccess: true },
+                { label: 'Rise Agent : check_status', hasAccess: true }
+              ]
+            }
+          ]
+        }
+      ],
+      myPermissionsLoading: false
+    }
+  }),
   Provider: ({ children }) => children,
   connect: jest.fn((mapStateToProps, mapDispatchToProps) => (Component) => Component),
+}));
+
+jest.mock("@/utils/hooks/useAgentPermissions", () => ({
+  __esModule: true,
+  default: () => ({
+    hasPermission: () => true,
+    loading: false,
+    permissions: []
+  })
 }));
 
 jest.mock("react-router-dom", () => ({
