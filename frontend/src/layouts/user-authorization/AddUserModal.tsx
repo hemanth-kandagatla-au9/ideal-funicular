@@ -28,7 +28,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
     if (!value.trim()) return "Username is required";
     if (value.length < 3) return "Username must be at least 3 characters";
     if (value.length > 50) return "Username must not exceed 50 characters";
-    if (!/^[A-Za-z0-9_-]+$/.test((value || "").trim())) return "Username can only contain letters, numbers, hyphens, and underscores";
+    if (!/^[A-Za-z0-9_-]+$/.test((value || '').trim()))  return "Username can only contain letters, numbers, hyphens, and underscores";
     return "";
   };
 
@@ -38,47 +38,49 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
     if (!/[@$!%*?&]/.test(value)) return "Password must contain at least one special character (@$!%*?&)";
     return "";
   };
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setUsername(value);
-    if (touched.username) {
-      setUsernameError(validateUsername(value));
-    }
-  };
+ const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value;
+  setUsername(value);
+  if (touched.username) {
+    setUsernameError(validateUsername(value));
+  }
+};
 
-  const handleUsernameBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const related = e.relatedTarget as HTMLElement | null;
-    if (related?.closest?.(".add-user-modal-close") || related?.closest?.(".add-user-cancel-btn")) {
-      return;
-    }
+const handleUsernameBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+  const related = e.relatedTarget as HTMLElement | null;
+  if (related?.closest?.(".add-user-modal-close") || related?.closest?.(".add-user-cancel-btn")) {
+    return;
+  }
 
-    setTouched(prev => ({ ...prev, username: true }));
-    setUsernameError(validateUsername(e.target.value));
-  };
+  setTouched(prev => ({ ...prev, username: true }));
+  setUsernameError(validateUsername(e.target.value));
+};
 
-  const handlePasswordBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const related = e.relatedTarget as HTMLElement | null;
-    if (related?.closest?.(".add-user-modal-close") || related?.closest?.(".add-user-cancel-btn")) {
-      return;
-    }
+const handlePasswordBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+  const related = e.relatedTarget as HTMLElement | null;
+  if (related?.closest?.(".add-user-modal-close") || related?.closest?.(".add-user-cancel-btn")) {
+    return;
+  }
 
-    setTouched(prev => ({ ...prev, password: true }));
-    setPasswordError(validatePassword(e.target.value));
-  };
+  setTouched(prev => ({ ...prev, password: true }));
+  setPasswordError(validatePassword(e.target.value));
+};
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setPassword(value);
-    if (touched.password) {
-      setPasswordError(validatePassword(value));
-    }
-  };
+const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value;
+  setPassword(value);
+  if (touched.password) {
+    setPasswordError(validatePassword(value));
+  }
+};
+
 
   const toggleShowPassword = () => {
     setShowPassword(prev => !prev);
   };
-  const filteredUsers = users.filter(
-    user => user.userName.toLowerCase().includes(cloneUserSearch.toLowerCase()) && (user.rolesCount || 0) > 0, // Only show users with permissions
+  const filteredUsers = users.filter(user => 
+    user.userName.toLowerCase().includes(cloneUserSearch.toLowerCase()) && 
+    (user.rolesCount || 0) > 0 // Only show users with permissions
   );
   const handleSelectCloneUser = (user: User) => {
     setSelectedCloneUser(user);
@@ -100,11 +102,11 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
 
     if (usernameErr || passwordErr) return;
 
-    onAdd({
+  onAdd({
       username: username.trim(),
       password,
       isActive,
-      cloneFromUserId: selectedCloneUser?.userName,
+      cloneFromUserId: selectedCloneUser?.userName
     });
     setUsername("");
     setPassword("");
@@ -132,14 +134,28 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
       handleAdd();
     }
   };
-  const isFormValid = !validateUsername(username) && !validatePassword(password);
+  const isFormValid =
+    !validateUsername(username) &&
+    !validatePassword(password);
 
   return (
-    <Modal show={show} onHide={handleCancel} centered className="add-user-modal" backdrop="static" keyboard={!loading}>
+    <Modal
+      show={show}
+      onHide={handleCancel}
+      centered
+      className="add-user-modal"
+      backdrop="static"
+      keyboard={!loading}
+    >
       <div className="add-user-modal-content">
         <Modal.Header className="add-user-modal-header">
           <Modal.Title className="add-user-modal-title">Add New User</Modal.Title>
-          <button className="add-user-modal-close" onClick={handleCancel} disabled={loading} aria-label="Close">
+          <button
+            className="add-user-modal-close"
+            onClick={handleCancel}
+            disabled={loading}
+            aria-label="Close"
+          >
             ✕
           </button>
         </Modal.Header>
@@ -152,7 +168,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
             <input
               id="username-input"
               type="text"
-              className={`add-user-input ${usernameError ? "add-user-input-error" : ""}`}
+              className={`add-user-input ${usernameError ? 'add-user-input-error' : ''}`}
               placeholder="Enter username"
               value={username}
               onChange={handleUsernameChange}
@@ -161,24 +177,39 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
               disabled={loading}
               autoFocus
             />
-            {usernameError && <div className="add-user-error-message">{usernameError}</div>}
+            {usernameError && (
+              <div className="add-user-error-message">{usernameError}</div>
+            )}
           </div>
 
+          
           <div className="add-user-form-group">
-            <label className="add-user-label">Clone Permissions from :</label>
-
+            <label className="add-user-label">
+              Clone Permissions from :
+            </label>
+            
             {selectedCloneUser ? (
               <div className="clone-user-selected">
                 <div>
                   <span className="clone-user-name">{selectedCloneUser.userName}</span>
+                  
                 </div>
-                <button type="button" className="clone-user-clear" onClick={handleClearCloneUser} disabled={loading} aria-label="Clear selection">
+                <button
+                  type="button"
+                  className="clone-user-clear"
+                  onClick={handleClearCloneUser}
+                  disabled={loading}
+                  aria-label="Clear selection"
+                >
                   X
                 </button>
               </div>
             ) : (
               <div className="clone-user-dropdown-container">
-                <div className="clone-user-trigger" onClick={() => !loading && setShowCloneDropdown(!showCloneDropdown)}>
+                <div
+                  className="clone-user-trigger"
+                  onClick={() => !loading && setShowCloneDropdown(!showCloneDropdown)}
+                >
                   <span className="clone-user-placeholder">Select</span>
                   <FaChevronDown style={{ color: "#94a3b8", marginLeft: "auto" }} size={14} />
                 </div>
@@ -191,24 +222,31 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
                         type="text"
                         placeholder="Search users..."
                         value={cloneUserSearch}
-                        onChange={e => setCloneUserSearch(e.target.value)}
+                        onChange={(e) => setCloneUserSearch(e.target.value)}
                         className="clone-user-search-input"
                         autoFocus
                       />
                     </div>
-
+                    
                     <div className="clone-user-list">
                       {filteredUsers.length > 0 ? (
-                        filteredUsers.map(user => (
-                          <div key={user.id} className="clone-user-item" onClick={() => handleSelectCloneUser(user)}>
+                        filteredUsers.map((user) => (
+                          <div
+                            key={user.id}
+                            className="clone-user-item"
+                            onClick={() => handleSelectCloneUser(user)}
+                          >
                             <div className="clone-user-item-info">
                               <span className="clone-user-item-name">{user.userName}</span>
                               {!user.isActive && <span className="clone-user-inactive-badge">Inactive</span>}
                             </div>
+                            
                           </div>
                         ))
                       ) : (
-                        <div className="clone-user-empty">{cloneUserSearch ? "No users found" : "No users with permissions available"}</div>
+                        <div className="clone-user-empty">
+                          {cloneUserSearch ? "No users found" : "No users with permissions available"}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -224,7 +262,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
             <input
               id="password-input"
               type={showPassword ? "text" : "password"}
-              className={`add-user-input ${passwordError ? "add-user-input-error" : ""}`}
+              className={`add-user-input ${passwordError ? 'add-user-input-error' : ''}`}
               placeholder="Enter password"
               value={password}
               onChange={handlePasswordChange}
@@ -250,12 +288,14 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
                 width: 24,
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "center"
               }}
             >
-              {showPassword ? <FaEye size={18} color="#888" /> : <FaEyeSlash size={18} color="#888" />}
+              {showPassword ? <FaEye size={18} color="#888" /> : <FaEyeSlash size={18} color="#888"/>}
             </button>
-            {passwordError && <div className="add-user-error-message">{passwordError}</div>}
+            {passwordError && (
+              <div className="add-user-error-message">{passwordError}</div>
+            )}
             <div className="add-user-requirements">
               Password must contain:
               <ul>
@@ -268,10 +308,18 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ show, onHide, onAdd, loadin
         </Modal.Body>
 
         <Modal.Footer className="add-user-modal-footer">
-          <Button className="add-user-cancel-btn" onClick={handleCancel} disabled={loading}>
+          <Button
+            className="add-user-cancel-btn"
+            onClick={handleCancel}
+            disabled={loading}
+          >
             Cancel
           </Button>
-          <Button className="add-user-add-btn" onClick={handleAdd} disabled={!isFormValid || loading}>
+          <Button
+            className="add-user-add-btn"
+            onClick={handleAdd}
+            disabled={!isFormValid || loading}
+          >
             {loading ? "Adding..." : "Add User"}
           </Button>
         </Modal.Footer>

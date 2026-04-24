@@ -42,6 +42,7 @@ const getPermissionsByGroup = async (groupId: string): Promise<ApiResponse | Err
   }
 };
 
+
 const PermissionService = {
   addPermission,
   getPermissionsByGroup,

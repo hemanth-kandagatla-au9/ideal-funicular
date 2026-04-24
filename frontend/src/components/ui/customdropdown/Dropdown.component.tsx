@@ -115,7 +115,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = props => {
         >
           <div data-testid={testidMain} className={cnameToggleTitle ? `${cnameToggleTitle} riseagent-risebot_dropdown-title` : "riseagent-risebot_dropdown-title"}>
             {dropdownValue} per page{" "}
-            <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: 4 }}>
+            <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: 4 , display: 'inline-block'}}>
               <path d="M0.5 3.5L5.5 8.5L10.5 3.5H8.75L5.5 6.75L2.25 3.5H0.5Z" fill="#000" />
             </svg>
           </div>

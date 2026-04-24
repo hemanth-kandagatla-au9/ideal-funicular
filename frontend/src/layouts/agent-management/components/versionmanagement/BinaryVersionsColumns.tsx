@@ -246,3 +246,4 @@ const BinaryVersionsColumns = ({ onView, onEdit }: BinaryVersionsColumnsProps): 
 };
 
 export default BinaryVersionsColumns;
+

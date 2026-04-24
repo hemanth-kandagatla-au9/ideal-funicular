@@ -6,7 +6,7 @@ import BinaryDatePickerField from "./BinaryDatePickerField";
 import BinaryTextField from "./BinaryTextField";
 
 type FormValues = {
-  _id: string;
+  _id:string,
   version: string;
   osCompatibility: string;
   osVersion: string;
@@ -131,6 +131,7 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      
       <BinaryTextField
         name="version"
         label="Agent Version"
@@ -143,6 +144,7 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
         disabled={isViewMode || isEditing}
       />
 
+      
       <Box sx={{ backgroundColor: "#f7f7fa", marginTop: "-25px", padding: "16px" }}>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 1, fontFamily: "Johnson Text" }}>
@@ -269,8 +271,10 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
         )}
       </Box>
 
+      
       {!isEditing && <BinarySelectField label="Version Status" options={["Current", "Previous", "Beta"]} {...commonSelectProps("status")} />}
 
+      
       <Box
         sx={{
           display: "flex",
@@ -304,6 +308,7 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
         />
       </Box>
 
+      
       {!isEditing && (
         <Box sx={{ display: "flex", gap: 2 }}>
           <Box sx={{ flex: 1 }}>
@@ -325,6 +330,7 @@ const BinaryVersionsFormField = ({ formik, isEditing, isViewMode = false }: Fiel
         </Box>
       )}
 
+      
       {!isEditing && (
         <BinaryTextField
           name="s3Url"

@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/prefer-presence-queries */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';

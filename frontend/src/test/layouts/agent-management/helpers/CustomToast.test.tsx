@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/render-result-naming-convention */
 import React from "react";
 import { successtoast, errortoast, warningtoast, infotoast } from "../../../../../src/layouts/agent-management/helpers/CustomToast";
 import { toast } from "react-toastify";

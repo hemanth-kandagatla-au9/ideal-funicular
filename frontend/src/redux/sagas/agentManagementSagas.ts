@@ -440,7 +440,7 @@ export function* restartsSelectedAgent({ props }: ActionProps): Generator<any, v
     const { data } = yield call(agentManagementService.restartSelectedAgents, props);
     yield put(agentManagementAction.successRestartSelectedAgentService(data.data));
     if (get(data, "flag") === "error") errortoast(get(data, "message", `Failed to Restart selected RISEAGENTs: ${data.error}`));
-    else successtoast(get(data, "message", `RISEAGENT Restart action triggered successfully`));
+    else successtoast(get(data, "message", `RISEAGENT Restart action triggered successfully : ${data.data.message}`));
   } catch (error: any) {
     yield put(agentManagementAction.failureRestartSelectedAgentService(error));
   }
@@ -594,7 +594,7 @@ export function* syncAgentConfiguration({ props }: ActionProps): Generator<any, 
       : yield call(agentManagementService.syncAgentConfigBulk, payload);
     yield put(agentManagementAction.successSyncAgentConfig(output));
     if (get(output, "data.flag") === "success") {
-      successtoast(get(output, "data.message", "Agent configuration sync triggered"));
+      successtoast(get(output, "data.message", `Agent configuration sync triggered : ${output.data.data.message}`));
     } else {
       errortoast(get(output, "data.error", "Failed to sync agent configuration"));
     }

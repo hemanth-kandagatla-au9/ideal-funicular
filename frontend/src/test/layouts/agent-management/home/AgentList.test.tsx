@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
@@ -262,5 +263,3 @@ describe('AgentList Component', () => {
     expect(screen.getAllByTestId('agentTickBtn')).toHaveLength(1);
   });
 });
-
-

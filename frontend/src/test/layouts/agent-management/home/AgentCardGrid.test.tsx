@@ -137,5 +137,3 @@ describe('AgentCardGrid Component', () => {
     expect(container).toBeInTheDocument();
   });
 });
-
-

@@ -75,7 +75,7 @@ const getUser = async (userId: string, accessToken?: string): Promise<UserData> 
       response = await instance.get(`${get.users}${userId}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
-    } else {
+    } else {      
       const instance = await getAxiosInstance();
       response = await instance.get(`${get.users}${userId}`);
     }
@@ -106,7 +106,7 @@ const exportUsers = async (payload: ExportUsersPayload): Promise<ApiResponse> =>
     }
 
     const filterParams = new URLSearchParams(cleanedFilter as Record<string, string>).toString();
-    const instance = await getAxiosInstance();
+     const instance = await getAxiosInstance();
     const response = await instance.get(filterParams ? `${get.usersExport}?${filterParams}` : get.usersExport);
     return response.data;
   } catch (error: any) {
@@ -127,7 +127,7 @@ const getUsersActivityLog = async (payload: UsersActivityLogPayload): Promise<Ap
 const getUsersActivityLogExport = async (filter: Record<string, any>): Promise<ApiResponse> => {
   try {
     const filterParams = new URLSearchParams(filter).toString();
-    const instance = await getAxiosInstance();
+     const instance = await getAxiosInstance();
     const response = await instance.get(filterParams ? `${get.usersActivityLog}/export?${filterParams}` : `${get.usersActivityLog}/export`);
 
     if (response.data?.data?.usersActivityLog) {

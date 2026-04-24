@@ -44,7 +44,7 @@ interface PaginationData {
   agentVersion?: string | string[];
   serviceName?: string | string[];
   sortBy?: string;
-  sortOrder?: "asc" | "desc";
+  sortOrder?: 'asc' | 'desc';
 }
 
 interface AgentLogsData {
@@ -73,6 +73,7 @@ interface BulkAgentsData {
   risebotAgentVersion: string;
   data: { hostname: string; [key: string]: any }[];
 }
+
 
 interface VersionManagementParams {
   versionStatus?: string;
@@ -213,13 +214,16 @@ const fetchAgentService = async (data: PaginationData) => {
   const { pageSize, pageNo, status, agentSearch, os, region, environment, platform, sid, agentVersion, serviceName, sortBy, sortOrder } = data;
   try {
     const baseUrl = `${rustAgent.get.getAgents}?pageSize=${pageSize}&pageNo=${pageNo}&status=${status}&search=${agentSearch}&osTypes=${os}&regions=${region}&environments=${environment}&platforms=${platform}&sids=${sid}&agentVersions=${agentVersion}&serviceNames=${serviceName}`;
-    const sortParams = sortBy && sortOrder ? `&sortBy=${sortBy}&sortOrder=${sortOrder}` : "";
+    const sortParams = sortBy && sortOrder ? `&sortBy=${sortBy}&sortOrder=${sortOrder}` : '';
 
-    console.log("🔍 [API Call] Sorting Parameters:", { sortBy, sortOrder, sortParams });
-    console.log("🌐 [API Call] Full URL:", `${baseUrl}${sortParams}`);
+    console.log('🔍 [API Call] Sorting Parameters:', { sortBy, sortOrder, sortParams });
+    console.log('🌐 [API Call] Full URL:', `${baseUrl}${sortParams}`);
 
     const instance = await getAxiosInstance();
-    return await instance.get(`${baseUrl}${sortParams}`, { timeout: 30000 });
+    return await instance.get(
+      `${baseUrl}${sortParams}`,
+      { timeout: 30000 },
+    );
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -400,6 +404,7 @@ const getAgentInfo = async (data: any) => {
   }
 };
 
+
 const startSelectedAgents = async (data: any) => {
   try {
     const instance = await getAxiosInstance();
@@ -409,25 +414,28 @@ const startSelectedAgents = async (data: any) => {
   }
 };
 
+
 const stopSelectedAgents = async (data: { hostname: string; [key: string]: any }[]) => {
   try {
     const payload = Array.isArray(data) ? data : [data];
     const instance = await getAxiosInstance();
-    return await instance.post(`${rustAgent.post.bulkStopAgents}`, { hostname: payload.map(x => x.hostname) });
+    return await instance.post(`${rustAgent.post.bulkStopAgents}`, { hostname: payload.map((x) => x.hostname) });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
 };
 
+
 const restartSelectedAgents = async (data: { hostname: string; [key: string]: any }[]) => {
   try {
     const payload = Array.isArray(data) ? data : [data];
     const instance = await getAxiosInstance();
-    return await instance.post(`${rustAgent.post.bulkReStartAgents}`, { hostname: payload.map(x => x.hostname) });
+    return await instance.post(`${rustAgent.post.bulkReStartAgents}`, { hostname: payload.map((x) => x.hostname) });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
 };
+
 
 const healthCheckSelectedAgents = async (data: any) => {
   try {
@@ -438,6 +446,7 @@ const healthCheckSelectedAgents = async (data: any) => {
   }
 };
 
+
 const upgradeAgents = async () => {
   try {
     const instance = await getAxiosInstance();
@@ -447,12 +456,14 @@ const upgradeAgents = async () => {
   }
 };
 
+
 const upgradeBulkAgents = async (jsonData: BulkAgentsData) => {
   try {
     const { risebotAgentVersion, data } = jsonData;
     const payload = Array.isArray(data) ? data : [data];
     const instance = await getAxiosInstance();
-    return await instance.put(`${rustAgent.put.upgrade}`, { hostname: payload.map(x => x.hostname), version: risebotAgentVersion });
+    const endpoint = payload.length === 1 ? rustAgent.put.upgrade : rustAgent.put.upgradeBulk;
+    return await instance.put(`${endpoint}`, { hostname: payload.map((x) => x.hostname), version: risebotAgentVersion });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -464,7 +475,7 @@ const envUpgradeBulkAgents = async (jsonData: { hostname: string; port: string }
     const endpoint = rustAgent.put.envUpgrade ?? rustAgent.post.envUpgrade;
     if (!endpoint) throw new Error("envUpgrade endpoint is not configured");
     const instance = await getAxiosInstance();
-    return await instance.put(`${endpoint}`, { hostname: payload.map(x => x.hostname), env });
+    return await instance.put(`${endpoint}`,  { hostname: payload.map((x) => x.hostname), env });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -473,7 +484,7 @@ const envUpgradeBulkAgents = async (jsonData: { hostname: string; port: string }
 const envUpgradeSingle = async (jsonData: { hostname: string; port: string }, env = "") => {
   try {
     const instance = await getAxiosInstance();
-    return await instance.post(`${rustAgent.post.updateEnv}`, { hostname: [jsonData.hostname], env });
+    return await instance.post(`${rustAgent.post.updateEnv}`, { hostname:[jsonData.hostname], env });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -547,7 +558,7 @@ const syncAgentConfigBulk = async (jsonData: { hostname: string; port: string }[
   try {
     const payload = Array.isArray(jsonData) ? jsonData : [jsonData];
     const instance = await getAxiosInstance();
-    return await instance.post(`${rustAgent.post.bulkSyncAgentConfig}`, { hostname: payload.map(x => x.hostname) });
+    return await instance.post(`${rustAgent.post.bulkSyncAgentConfig}`, { hostname: payload.map((x) => x.hostname) });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -612,7 +623,7 @@ const fetchVersions = async (params: VersionManagementParams) => {
 
 const createVersion = async (payload: BinaryVersionPayload) => {
   try {
-    const url = `${rustAgent.get.getVersionManagementdata}`;
+    const url = `${rustAgent.get.getVersionManagementdata}`
     const instance = await getAxiosInstance();
     return await instance.post(url, payload);
   } catch (error: unknown) {
@@ -623,16 +634,55 @@ const createVersion = async (payload: BinaryVersionPayload) => {
 const updateVersion = async (payload: BinaryVersionPayload, id: string) => {
   try {
     const instance = await getAxiosInstance();
-    return await instance.put(`${rustAgent.put.updateVersion}/${id}`, payload);
+    return await instance.put( `${rustAgent.put.updateVersion}/${id}`, payload);
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
 };
 
+
 const manualSyncVersions = async () => {
   try {
     const instance = await getAxiosInstance();
     return await instance.put(`${rustAgent.put.syncVersions}`);
+  } catch (error: unknown) {
+    return handleAxiosError(error);
+  }
+};
+
+const getBulkActionLogs = async (filters: any = {}, pagination: any = { pageNo: 0, pageSize: 10 }) => {
+  try {
+    const { pageNo, pageSize } = pagination;
+    
+    const payload = {
+      pageNo: pageNo || 0,
+      pageSize: pageSize || 10,
+      ...filters
+    };
+    
+    const instance = await getAxiosInstance();
+    return await instance.post(`${rustAgent.get.bulkActionLogs}`, payload);
+  } catch (error: unknown) {
+    return handleAxiosError(error);
+  }
+};
+
+const getBulkActionDetails = async (jobId: string) => {
+  try {
+    if (!jobId) throw new Error("Job ID is required");
+    const instance = await getAxiosInstance();
+    const endpoint = rustAgent.get.bulkActionDetails.replace(":jobId", jobId);
+    return await instance.get(endpoint);
+  } catch (error: unknown) {
+    return handleAxiosError(error);
+  }
+};
+
+
+const exportBulkActionLogs = async () => {
+  try {
+    const instance = await getAxiosInstance();
+    return await instance.get(`${rustAgent.get.exportBulkActionLogs}`);
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -696,6 +746,11 @@ const agentManagementService = {
   createVersion,
   updateVersion,
   manualSyncVersions,
+
+  getBulkActionLogs,
+  getBulkActionDetails,
+  exportBulkActionLogs
 };
 
 export default agentManagementService;
+

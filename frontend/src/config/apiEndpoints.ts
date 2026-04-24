@@ -20,7 +20,7 @@ interface ApiEndpoints {
 
 const apiEndpoints: ApiEndpoints = {
   auth: {
-    baseUrl: process.env.REACT_APP_AUTH_URL || "http://localhost:3000" || "https://predev.auth.rise.apps.jnj.com",
+    baseUrl: process.env.REACT_APP_AUTH_URL ||"http://localhost:3000" || "https://predev.auth.rise.apps.jnj.com",
     post: {
       addGroup: "/v1/auth/groups/",
       addPermission: "/v1/auth/permissions/",
@@ -94,6 +94,9 @@ const apiEndpoints: ApiEndpoints = {
       download: "/agents/download",
       getJobStatus: "/dnd/job-status/",
       getMasterdata: "/agents/masterdata",
+      bulkActionLogs: "/agents/bulk-action-logs",
+      bulkActionDetails: "/agents/bulk-action-logs/:jobId",
+      exportBulkActionLogs: "/agents/export-bulk-action-logs",
     },
     post: {
       start: "/agents/start",
@@ -111,6 +114,7 @@ const apiEndpoints: ApiEndpoints = {
       bulkReStartAgents: "/agents/bulk/restart",
       bulkHealthCheckup: "/agents/bulk/health",
       addMasterdata: "/agents/masterdata/:hostname",
+      syncBulkActionConfig: "/agents/bulk-action-logs/sync/:jobId",
     },
     put: {
       restartByPort: "/agents/restart",
@@ -159,6 +163,9 @@ const apiEndpoints: ApiEndpoints = {
       getJobStatus: "/dnd/job-status/",
       getMasterdata: "/agents/masterdata",
       getVersionManagementdata: "/versionManagement",
+      bulkActionLogs: "/agents/bulk-action-logs",
+      bulkActionDetails: "/agents/bulk-action-logs/:jobId",
+      exportBulkActionLogs: "/agents/export-bulk-action-logs",
     },
     post: {
       start: "/agents/jobs/start",
@@ -183,6 +190,9 @@ const apiEndpoints: ApiEndpoints = {
       getJobLog: "/agents/joblogs",
       startAgentviaSSH: "/agents/startagent",
       info: "/agents/info",
+      bulkActionLogs: "/agents/bulk-action-logs",
+      syncBulkActionConfig: "/agents/bulk-action-logs/sync/:jobId",
+      exportBulkActionLogs: "/agents/bulk-action-logs/export",
     },
     put: {
       shutdown: "/agents/shutdown",
@@ -193,11 +203,12 @@ const apiEndpoints: ApiEndpoints = {
       scheduler: "/agents/updatejob",
       adSyncUp: "/agents/syncCMDBData",
       syncHealthConfigs: "/agents/syncAgentStatus",
-      upgrade: "/agents/bulk/upgrade",
+      upgrade: "/agents/upgrade",
+      upgradeBulk: "/agents/bulk/upgrade",
       download: "/agents/download",
       envUpgrade: "/agents/bulk/update-env",
-      updateVersion: "agents/updateVersion",
-      syncVersions: "agents/syncversions",
+      updateVersion:"agents/updateVersion",
+      syncVersions:"agents/syncversions",
     },
     delete: {
       stopByPort: "/agents/jobs/stop",
@@ -209,12 +220,12 @@ const apiEndpoints: ApiEndpoints = {
     baseURL: process.env.REACT_APP_USER_AUTH_URL || "https://predev.agent.ias.apps.jnj.com/api/agent",
     get: {
       users: "/auth/user-details",
-      PermissionsList: "auth/permissionsList",
+      PermissionsList:"auth/permissionsList",
       permissionMatrix: "/auth/users",
     },
     post: {
       createUser: "/auth/add-user",
-      deleteUserPermissionsList: "auth/update-permission",
+      deleteUserPermissionsList:"auth/update-permission",
       createPermission: "/auth/add-permission",
     },
     patch: {
@@ -232,8 +243,9 @@ const apiEndpoints: ApiEndpoints = {
     baseUrl: process.env.REACT_APP_UTILITIES_URL || "https://dev.utilities.rise.apps.jnj.com",
   },
   RBAC_auth: {
-    baseUrl: process.env.AUTH_API_URL || "https://predev.insightsauth.ias.apps.jnj.com/api/insightsauth",
+    baseUrl: process.env.AUTH_API_URL || `https://predev.insightsauth.ias.apps.jnj.com/api/insightsauth`,
   },
 };
 
 export default apiEndpoints;
+

@@ -121,9 +121,6 @@ const AgentTasks: React.FC<AgentTasksProps> = ({
   const isAgentTaskUpgradeBtnEnabled     = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_UPGRADE);
   const isAgentTaskCheckStatusBtnEnabled = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_CHECK_STATUS);
   const isAgentTaskSyncConfigBtnEnabled  = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_SYNC_CONFIG);
-  const isAgentTaskScheduleCmdBtnEnabled = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_WRITE);   // no specific label yet
-  const isAgentTaskEditBtnEnabled        = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_WRITE);   // no specific label yet
-  const isAgentTaskDeleteBtnEnabled      = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_WRITE);   // no specific label yet
   const isAgentEnvUpgradeBtnEnabled      = hasPermission(AGENT_PERMISSIONS.RISE_AGENT_UPDATE_ENV);
 
   const [allButtonsDisabled, setAllButtonsDisabled] = useState<boolean>(false);

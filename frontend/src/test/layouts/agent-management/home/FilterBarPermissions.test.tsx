@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/prefer-presence-queries */
 /**
  * FilterBarPermissions.test.tsx
  *

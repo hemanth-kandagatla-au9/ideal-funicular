@@ -1,6 +1,6 @@
+
 import { UPDATE_APP_READY } from "../../config/actions";
 import INITIAL_STATE from "../initialState";
-
 interface AppState {
   appReady: boolean;
 }

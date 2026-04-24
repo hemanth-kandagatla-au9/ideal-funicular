@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/prefer-screen-queries */
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import * as reactRedux from "react-redux";

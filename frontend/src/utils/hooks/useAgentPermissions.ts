@@ -78,9 +78,9 @@ export const useAgentPermissions = (): UseAgentPermissionsResult => {
   const myPermissions = useSelector(getMyPermissions);
   const loading = useSelector(isMyPermissionsLoading);
 
-  console.log("[useAgentPermissions] myPermissions:", myPermissions);
-  console.log("[useAgentPermissions] loading:", loading);
-  console.log("[useAgentPermissions] hostPermissions:", getHostPermissions());
+  console.log('[useAgentPermissions] myPermissions:', myPermissions);
+  console.log('[useAgentPermissions] loading:', loading);
+  console.log('[useAgentPermissions] hostPermissions:', getHostPermissions());
 
   const hasPermission = (label: string): boolean => {
     // 1. Own store

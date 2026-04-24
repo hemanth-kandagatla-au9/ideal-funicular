@@ -1,180 +1,111 @@
-import apiEndpoints from "../../../config/apiEndpoints";
-import PermissionService, { AxiosInstance } from "../../../services/auth/PermissionService";
-const { post, get, del, patch, baseUrl } = apiEndpoints.auth;
+/**
+ * permissionsService.test.tsx
+ *
+ * Tests for permissionsService.fetchMyPermissions:
+ *  - Returns axios response on success
+ *  - Returns null on error (never throws)
+ *  - GET request goes to /auth/getUserPermission
+ *
+ * NOTE: uses jest.doMock + jest.resetModules() + require() to avoid the
+ * temporal-dead-zone problem that occurs when a module-level variable is
+ * referenced inside a hoisted jest.mock() factory.
+ */
 
-describe("Permission Service", () => {
-  let mockGet = null;
-  let mockPost = null;
-  let mockDelete = null;
-  let mockUpdate = null;
+// ─── tests ───────────────────────────────────────────────────────────────────
+
+describe("permissionsService.fetchMyPermissions", () => {
+  let mockGet: jest.Mock;
+  let permissionsService: { fetchMyPermissions: () => Promise<any> };
+
   beforeEach(() => {
-    mockGet = jest.spyOn(AxiosInstance, "get");
-    mockPost = jest.spyOn(AxiosInstance, "post");
-    mockDelete = jest.spyOn(AxiosInstance, "delete");
-    mockUpdate = jest.spyOn(AxiosInstance, "patch");
+    jest.resetModules();
+    mockGet = jest.fn();
+
+    jest.doMock("../../../services/axiosInstance", () =>
+      jest.fn().mockImplementation(() => ({
+        init: () => ({ get: mockGet }),
+      }))
+    );
+
+    jest.doMock("../../../config/config", () => ({
+      apiEndpoints: {
+        RBAC_auth: { baseUrl: "https://mock-auth-api" },
+      },
+    }));
+
+    jest.doMock("../../../utils/TokenService", () => ({
+      getIdToken: jest.fn().mockResolvedValue("mock-token"),
+    }));
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    permissionsService = require("../../../services/auth/permissionsService").default;
   });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it("getPermissions SUCCESS", async () => {
-    const response = {
+
+  it("calls GET /auth/getUserPermission", async () => {
+    mockGet.mockResolvedValue({ data: { flag: "success", data: { permissions: [] } } });
+    await permissionsService.fetchMyPermissions();
+    expect(mockGet).toHaveBeenCalledWith("/auth/getUserPermission");
+  });
+
+  it("returns the full axios response on success", async () => {
+    const mockResponse = {
       data: {
-        status: true,
-        statusCode: 200,
-        message: "Api executed successfully",
+        flag: "success",
+        message: "OK",
         data: {
           permissions: [
             {
-              _id: "62a2d73a4e99b96f0703c299",
-              taskId: "62506c7ebe11eacb364ffc71",
-              roleId: "62a2d72c4e99b96f0703c295",
-              type: "Display",
-              isDeleted: false,
-              createdAt: "2022-06-10T05:31:38.933Z",
-              updatedAt: "2022-06-10T05:31:38.933Z",
-              __v: 0,
-              role: "RoleTest1",
-              task: "Create Studio workflow",
-            },
-            {
-              _id: "629dbc0ea4b0317a9993e164",
-              taskId: "62506c7ebe11eacb364ffc75",
-              roleId: "62653952fa7faa343d0bd802",
-              type: "Edit (Add, Update)",
-              isDeleted: false,
-              createdAt: "2022-06-06T08:34:22.163Z",
-              updatedAt: "2022-06-06T08:34:22.163Z",
-              __v: 0,
-              role: "Role1",
-              task: "CI Dashboard - View 1",
-            },
-            {
-              _id: "627a579d72aa9fe19aad2825",
-              taskId: "62506c7ebe11eacb364ffc72",
-              roleId: "6265395bfa7faa343d0bd806",
-              type: "Display",
-              isDeleted: false,
-              createdAt: "2022-05-10T12:16:29.702Z",
-              updatedAt: "2022-05-10T12:16:29.702Z",
-              __v: 0,
-              role: "Role11",
-              task: "Execute Task",
-            },
-            {
-              _id: "627a53ac72aa9fe19aad280b",
-              taskId: "62506c7ebe11eacb364ffc72",
-              roleId: "62653952fa7faa343d0bd802",
-              type: "Display",
-              isDeleted: false,
-              createdAt: "2022-05-10T11:59:40.019Z",
-              updatedAt: "2022-05-10T11:59:40.019Z",
-              __v: 0,
-              role: "Role1",
-              task: "Execute Task",
-            },
-            {
-              _id: "62666541fa7faa343d0bd8ae",
-              taskId: "62506c7ebe11eacb364ffc76",
-              roleId: "62653952fa7faa343d0bd802",
-              type: "Display",
-              isDeleted: false,
-              createdAt: "2022-04-25T09:09:21.751Z",
-              updatedAt: "2022-04-25T09:09:21.751Z",
-              __v: 0,
-              role: "Role1",
-              task: "CI Dashboard - View 2",
-            },
-            {
-              _id: "626539c4fa7faa343d0bd80f",
-              taskId: "62506c7ebe11eacb364ffc71",
-              roleId: "62653952fa7faa343d0bd802",
-              type: "Display",
-              isDeleted: false,
-              createdAt: "2022-04-24T11:51:32.942Z",
-              updatedAt: "2022-04-24T11:51:32.942Z",
-              __v: 0,
-              role: "Role1",
-              task: "Create Studio workflow",
+              project: "agent",
+              modules: [
+                {
+                  module: "Rise Agent",
+                  hasAccess: true,
+                  permissions: [
+                    { label: "Rise Agent : read",  hasAccess: true },
+                    { label: "Rise Agent : start", hasAccess: true },
+                  ],
+                },
+              ],
             },
           ],
-          pagination: { totalRows: 6, limit: "10", pageNo: "1", totalPage: 1 },
         },
       },
     };
 
-    mockGet.mockImplementation(() => Promise.resolve(response));
-    const mockPagination = {
-      pagination: { totalRows: 6, limit: "10", pageNo: "1", totalPage: 1 },
-    };
-    const filter = null;
-    const dataobj = await PermissionService.getPermissionsByGroup("123");
-    expect(mockGet).toHaveBeenCalledWith(`${get.permissionsByGroup}/123`);
-  });
-  it("getPermissions FAILURE", async () => {
-    const response = {
-      response: {
-        data: "Fail",
-      },
-    };
-
-    mockGet.mockImplementation(() => Promise.reject(response));
-    const mockPagination = {
-      pagination: { totalRows: 6, limit: "10", pageNo: "1", totalPage: 1 },
-    };
-    const filter = null;
-    const dataobj = await PermissionService.getPermissionsByGroup("123");
-    expect(mockGet).toHaveBeenCalledWith(`${get.permissionsByGroup}/123`);
+    mockGet.mockResolvedValue(mockResponse);
+    const result = await permissionsService.fetchMyPermissions();
+    expect(result).toEqual(mockResponse);
   });
 
-  it("addPermission SUCCESS", async () => {
-    const response = {
-      data: {
-        status: true,
-        statusCode: 201,
-        message: "Saved successfully",
-        data: {
-          permissions: {
-            taskId: "62506c7ebe11eacb364ffc71",
-            roleId: "62a2d72c4e99b96f0703c295",
-            type: "Display",
-            isDeleted: false,
-            _id: "62a2d73a4e99b96f0703c299",
-            createdAt: "2022-06-10T05:31:38.933Z",
-            updatedAt: "2022-06-10T05:31:38.933Z",
-            __v: 0,
-          },
-        },
-      },
-    };
-    const mockData = {
-      taskId: "62506c7ebe11eacb364ffc71",
-      roleId: "62a2d72c4e99b96f0703c295",
-      type: "Display",
-    };
-    mockPost.mockImplementation(() => Promise.resolve(response));
-    const dataobj = await PermissionService.addPermission(mockData);
-    expect(mockPost).toHaveBeenCalled();
-    const calls = mockPost.mock.calls.length;
-    expect(calls).toEqual(1);
+  it("returns null when the request throws (never throws itself)", async () => {
+    mockGet.mockRejectedValue(new Error("Network error"));
+    const result = await permissionsService.fetchMyPermissions();
+    expect(result).toBeNull();
   });
-  it("addPermission FAILURE", async () => {
-    const response = {
-      response: {
-        data: "Fail",
-      },
+
+  it("returns null on 401 error (never throws)", async () => {
+    mockGet.mockRejectedValue({ response: { status: 401 } });
+    const result = await permissionsService.fetchMyPermissions();
+    expect(result).toBeNull();
+  });
+
+  it("returns null on 500 error (never throws)", async () => {
+    mockGet.mockRejectedValue({ response: { status: 500, data: { message: "Server error" } } });
+    const result = await permissionsService.fetchMyPermissions();
+    expect(result).toBeNull();
+  });
+
+  it("returns response with empty permissions array gracefully", async () => {
+    const emptyResponse = {
+      data: { flag: "success", data: { permissions: [] } },
     };
-    const mockData = {
-      taskId: "62506c7ebe11eacb364ffc71",
-      roleId: "62a2d72c4e99b96f0703c295",
-      type: "Display",
-    };
-    mockPost.mockImplementation(() => Promise.reject(response));
-    const dataobj = await PermissionService.addPermission(mockData);
-    expect(mockPost).toHaveBeenCalled();
-    const calls = mockPost.mock.calls.length;
-    expect(calls).toEqual(1);
+    mockGet.mockResolvedValue(emptyResponse);
+    const result = await permissionsService.fetchMyPermissions();
+    expect(result).toEqual(emptyResponse);
+    expect(result.data.data.permissions).toEqual([]);
   });
 });
-
-
-

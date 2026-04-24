@@ -10,6 +10,7 @@ import syncStatus from "../../../images/agent-management/assets/Refresh.svg";
 import restartIcon from "../../../images/agent-management/assets/RestartIcon.svg";
 import searchIcon from "../../../images/agent-management/assets/searchIcon.svg";
 import userAuthIcon from "../../../images/agent-management/assets/Button_base.png";
+import actionIcon from "../../../images/agent-management/assets/bulkActionLog.svg";
 import { useHistory } from "react-router-dom";
 import GlobalConfigurationModal from '../components/GlobalConfigurationModal';
 import useAgentPermissions from "../../../utils/hooks/useAgentPermissions";
@@ -210,6 +211,30 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
           <Button style={{ all: "unset" }}>{syncStatusButtonText}</Button>
         </div>
         )}
+        
+        <Button
+          className="riseagent-topbar-hover-btn"
+          style={{
+            height: "40px",
+            backgroundColor: "#FFFFFF",
+            border: "1px solid #EEEEEE",
+            borderRadius: "36px",
+          }}
+          onClick={() => history.push("/bulkActionLogs")}
+          data-testid="bulkActionLogsBtn"
+          title="Bulk Action Logs"
+        >
+          <img
+            src={actionIcon}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "20px",
+            }}
+            alt="bulk action logs"
+          />
+        </Button>
 
         {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_USER_AUTHORIZATION_READ) && (
         <div>

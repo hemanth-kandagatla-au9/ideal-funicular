@@ -11,7 +11,7 @@ exports[`CronTab Component matches snapshot with default props 1`] = `
       Cron Expression
     </div>
     <input
-      class="ant-input riseagent-risebotcronInput"
+      class="ant-input risebotcronInput"
       type="text"
       value="0 0 * * *"
     />
@@ -347,7 +347,7 @@ exports[`CronTab Component matches snapshot with different cron value 1`] = `
       Cron Expression
     </div>
     <input
-      class="ant-input riseagent-risebotcronInput"
+      class="ant-input risebotcronInput"
       type="text"
       value="*/5 * * * *"
     />

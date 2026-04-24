@@ -1,3 +1,6 @@
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
+/* eslint-disable testing-library/render-result-naming-convention */
 /* eslint-disable jest/no-conditional-expect */
 import React from "react";
 import { screen, fireEvent } from "@testing-library/react";

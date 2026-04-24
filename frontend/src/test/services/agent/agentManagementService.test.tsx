@@ -2,7 +2,7 @@ import agentManagementService from "../../../services/agent/agentManagement.serv
 import '@testing-library/jest-dom/extend-expect';
 
 // Helper to create axios-like error
-const createAxiosError = (status: number, message: string = "Error") => ({
+const createAxiosError = (status: number, message = "Error") => ({
   response: { status, data: message },
   isAxiosError: true,
 });
@@ -585,7 +585,7 @@ describe("Agent Repository and Addition Tests", () => {
     it.skip("should call POST with correct endpoint and data", async () => {
       const mockAgentData = {
         hostname: "agent1",
-        ip: "192.168.1.1",
+        ip: "0.0.0.0",
         properties: { os: "linux", version: "1.0" }
       };
       mockInstance.post.mockResolvedValue({ data: { success: true } });

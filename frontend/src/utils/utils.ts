@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createBrowserHistory } from "history";
 import Cookies from "universal-cookie";
-
 export const history = createBrowserHistory();
 export const cookies = new Cookies();
+
 
 export const ExcelDateToJSDateOnly = (d: Date | string | number): string => {
   if (d) {
@@ -24,11 +24,13 @@ export const formatNameByFirstLetterCase = (value: string | null | undefined): s
   return firstLetter === firstLetter.toLowerCase() ? str.toLowerCase() : str.toUpperCase();
 };
 
+
 export const getDateFormatByRegion = (date: string | number | Date, isDateOnly: boolean): string => {
   const locale = navigator.language;
   const dt = new Date(date);
   return isDateOnly ? dt.toLocaleDateString(locale) : `${dt.toLocaleDateString(locale)} ${dt.toLocaleTimeString(locale)}`;
 };
+
 
 export const formatTimestamp = (originalTimestamp: string | number | Date): string => {
   const dateObj = new Date(originalTimestamp);
@@ -42,12 +44,14 @@ export const formatTimestamp = (originalTimestamp: string | number | Date): stri
   return `${month}-${day}-${year} ${hours}:${minutes}:${seconds}`;
 };
 
+
 export const bytesToMB = (bytes: number): string => {
   if (isNaN(bytes)) {
     return "Invalid input";
   }
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 };
+
 
 export const toPercentage = (number: number): string => {
   return `${number.toFixed(3)}%`;
@@ -61,7 +65,7 @@ const Utils = {
   formatTimestamp,
   bytesToMB,
   toPercentage,
-  formatNameByFirstLetterCase,
+  formatNameByFirstLetterCase
 };
 
 export default Utils;

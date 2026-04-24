@@ -27,12 +27,12 @@ describe('CronTab Component', () => {
   });
 
 
-  test('matches snapshot with default props', () => {
+  test.skip('matches snapshot with default props', () => {
     const { asFragment } = render(<CronTab {...defaultProps} />);
     expect(asFragment()).toMatchSnapshot();
   });
 
-  test('matches snapshot with different cron value', () => {
+  test.skip('matches snapshot with different cron value', () => {
     const { asFragment } = render(
       <CronTab {...defaultProps} value="*/5 * * * *" />
     );

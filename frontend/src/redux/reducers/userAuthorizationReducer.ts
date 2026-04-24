@@ -1,5 +1,8 @@
+
+
 import { AUTH } from "../../config/actions";
 import { UserAuthorizationState } from "../../types/UserAuthorization";
+
 
 const initialState: UserAuthorizationState = {
   users: [],
@@ -23,6 +26,7 @@ const initialState: UserAuthorizationState = {
   myPermissionsLoading: false,
 };
 
+
 export default function userAuthorizationReducer(
   state = initialState,
   action: {
@@ -37,7 +41,7 @@ export default function userAuthorizationReducer(
       const backendData = action.data?.data?.data || {};
       const rawUsers = backendData.users || [];
       const backendPagination = backendData.pagination || {};
-
+      
       const users = Array.isArray(rawUsers)
         ? rawUsers.map((user: any) => ({
             id: user.id,
@@ -50,7 +54,7 @@ export default function userAuthorizationReducer(
             updatedAt: user.updatedAt || new Date().toISOString(),
           }))
         : [];
-
+      
       return {
         ...state,
         loading: false,
@@ -110,6 +114,7 @@ export default function userAuthorizationReducer(
         selectedUsers: [],
       };
 
+    
     case AUTH.PERMISSION.GET_PERMISSIONS_REQUEST:
       return { ...state, loading: true, error: null };
 
@@ -151,16 +156,16 @@ export default function userAuthorizationReducer(
       return { ...state, loading: true, error: null };
 
     case AUTH.USER.FETCH_GLOBAL_PERMISSIONS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        globalPermissions: action.data?.data?.data || null,
+      return { 
+        ...state, 
+        loading: false, 
+        globalPermissions: action.data?.data?.data || null 
       };
 
     case AUTH.USER.FETCH_GLOBAL_PERMISSIONS_FAILURE:
       return { ...state, loading: false, error: action.error };
 
-    // ---- Current user's own permissions ----
+      // ---- Current user's own permissions ----
     case AUTH.USER.GET_MY_PERMISSIONS_REQUEST:
       return { ...state, myPermissionsLoading: true, error: null };
 
@@ -169,18 +174,18 @@ export default function userAuthorizationReducer(
       // axios wraps it one level, saga dispatches the full axios response,
       // so: action.data (axios response) → .data (API body) → .data.permissions (array)
       const payload = action.data?.data?.data;
-      // eslint-disable-next-line no-nested-ternary
       const permissionsArray: any[] = Array.isArray(payload)
         ? payload // null-fallback path sends []
         : Array.isArray(payload?.permissions)
         ? payload.permissions // real API path
         : [];
-      console.log("[permissionsReducer] permissionsArray:", permissionsArray);
+      console.log('[permissionsReducer] permissionsArray:', permissionsArray);
       return { ...state, myPermissionsLoading: false, myPermissions: permissionsArray };
     }
 
     case AUTH.USER.GET_MY_PERMISSIONS_FAILURE:
       return { ...state, myPermissionsLoading: false, error: action.error };
+
 
     default:
       return state;

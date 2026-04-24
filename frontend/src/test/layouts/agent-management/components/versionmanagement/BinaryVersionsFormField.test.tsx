@@ -1,3 +1,5 @@
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";

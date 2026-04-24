@@ -1,9 +1,11 @@
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Permissions from "../../../layouts/user-authorization/Permissions";
+import Permissions from "../../../../src/layouts/user-authorization/Permissions";
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn((selector) => (typeof selector === "function" ? selector({}) : null)),

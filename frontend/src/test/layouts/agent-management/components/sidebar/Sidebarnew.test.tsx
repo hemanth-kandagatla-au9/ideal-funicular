@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React from "react";

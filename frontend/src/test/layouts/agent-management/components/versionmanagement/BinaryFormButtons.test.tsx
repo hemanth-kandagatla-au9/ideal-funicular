@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 import { render, screen, fireEvent } from "@testing-library/react";
 import BinaryFormButtons from "../../../../../../src/layouts/agent-management/components/versionmanagement/BinaryFormButtons";
 import "@testing-library/jest-dom";

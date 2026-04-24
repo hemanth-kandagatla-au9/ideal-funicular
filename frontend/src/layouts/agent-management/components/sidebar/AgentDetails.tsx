@@ -15,10 +15,14 @@ const AgentDetails: React.FC<AgentDetailsProps> = ({ agentDetails, agentDetailsL
         <AccordionContext.Consumer>
           {({ activeEventKey }) => (
             <>
-              <Typography className={`riseagent-accordionTitle ${activeEventKey === "1" ? "riseagent-titleCollapsed" : "riseagent-nottitleCollapsed"}`}>
+              <Typography
+                className={`riseagent-accordionTitle ${activeEventKey === "1" ? "riseagent-titleCollapsed" : "riseagent-nottitleCollapsed"}`}
+              >
                 {agentDetailsTitle}
               </Typography>
-              <span className={`riseagent-agentDetailsArrow ${activeEventKey !== "1" ? "riseagent-collapsedSvg" : "riseagent-notcollapsedSvg"}`}>
+              <span
+                className={`riseagent-agentDetailsArrow ${activeEventKey !== "1" ? "riseagent-collapsedSvg" : "riseagent-notcollapsedSvg"}`}
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="#102459" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

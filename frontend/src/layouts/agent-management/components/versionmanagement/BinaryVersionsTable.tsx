@@ -109,3 +109,4 @@ const BinaryVersionsTable = ({ versions, pagination, onView, onEdit, style }: Bi
 };
 
 export default BinaryVersionsTable;
+

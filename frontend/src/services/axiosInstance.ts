@@ -1,15 +1,15 @@
+
 import axios, { AxiosInstance as AxiosInstanceType, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
-import { getIdToken } from "@/utils/TokenService";
 import Config from "../config/config";
+import { getIdToken } from "@/utils/TokenService";
 
 class AxiosInstance {
   private baseURL: string;
-
   private instance: AxiosInstanceType;
-
-  constructor(baseURL?: string) {
+    constructor(baseURL?: string) {
     this.baseURL = baseURL || `${Config.baseURL}`;
     this.instance = axios.create();
+   
   }
 
   init() {
@@ -27,21 +27,21 @@ class AxiosInstance {
 
   attachRequestInterceptor() {
     this.instance.interceptors.request.use(
-      async config => {
+      async (config) => {
         const token = await getIdToken();
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
       },
-      error => Promise.reject(error),
+      (error) => Promise.reject(error)
     );
   }
 
   attachResponseInterceptor() {
     this.instance.interceptors.response.use(
-      response => response,
-      error => {
+      (response) => response,
+      (error) => {
         const status = error.response?.status;
         const message = error.response?.data?.message;
 
@@ -62,7 +62,7 @@ class AxiosInstance {
         }
 
         return Promise.reject(error);
-      },
+      }
     );
   }
 }

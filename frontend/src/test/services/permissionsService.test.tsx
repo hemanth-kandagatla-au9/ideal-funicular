@@ -25,7 +25,7 @@ jest.mock("../../services/axiosInstance", () => {
 
 jest.mock("../../config/config", () => ({
   apiEndpoints: {
-    RBAC_auth: { baseUrl: "http://mock-auth-api" },
+    RBAC_auth: { baseUrl: "https://mock-auth-api" },
   },
 }));
 

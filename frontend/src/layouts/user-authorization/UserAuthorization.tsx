@@ -13,19 +13,19 @@ import { MdCheckBox, MdCheckBoxOutlineBlank, MdDelete } from "react-icons/md";
 import userAuthorizationActions from "@/redux/actions/userAuthorization.action";
 import { getUsers, isUsersLoading, getUsersError, getUsersPagination, getSelectedUsers } from "@/redux/selectors/userAuthorization.selectors";
 import { User } from "@/types/UserAuthorization";
+import AssignPermissionsModal from "../user-authorization/AssignPermissionModal";
 import Pagination from "@/components/ui/pagination/Pagination.component";
-import PopUp from "@/components/popup/popUp.component";
-import { formatNameByFirstLetterCase } from "@/utils/utils";
-import AssignPermissionsModal from "./AssignPermissionModal";
-import AddUserModal from "./AddUserModal";
+import AddUserModal from "../user-authorization/AddUserModal";
 import NoDataFoundImg from "../../images/agent-management/NoDATA.png";
 import buttonBaseIcon from "../../images/agent-management/assets/Button_base.png";
 import actionIcon from "../../images/agent-management/assets/action_icon.png";
+import PopUp from "@/components/popup/popUp.component";
 import searchIcon from "../../images/agent-management/assets/searchIcon.svg";
+import { formatNameByFirstLetterCase } from "@/utils/utils";
 import "./UserAuthorization.css";
 import useAgentPermissions from "../../utils/hooks/useAgentPermissions";
 import AGENT_PERMISSIONS from "../../config/agentPermissionLabels";
-import "./AssignPermissionsModal.css";
+import "../user-authorization/AssignPermissionsModal.css";
 
 const UserAuthorization: React.FC = () => {
   const dispatch = useDispatch();
@@ -142,13 +142,18 @@ const UserAuthorization: React.FC = () => {
   return (
     <div className="user-authorization-container">
       <div className="user-authorization-header">
+        
         <div className="header-left">
           <IoIosArrowBack color="#000" size="24px" onClick={handleBack} style={{ cursor: "pointer" }} />
           <h1 className="header-title">User Authorization</h1>
         </div>
       </div>
 
+      
+      
+      
       <div className="users-section">
+        
         <div className="users-count">
           <span className="users-label">Users</span>
           <span className="users-number">{pagination.total}</span>
@@ -171,23 +176,27 @@ const UserAuthorization: React.FC = () => {
               }}
             />
           </div>
-
+          
           {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_PERMISSION_LIST_READ) && (
-            <button type="button" className="permission-list-btn" onClick={handlePermissionList}>
-              <img src={buttonBaseIcon} alt="users icon" className="permission-icon" />
-              <span className="permission-text">Permission List</span>
-            </button>
+          <button type="button" className="permission-list-btn" onClick={handlePermissionList}>
+            <img src={buttonBaseIcon} alt="users icon" className="permission-icon" />
+            <span className="permission-text">Permission List</span>
+          </button>
           )}
           {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_USER_AUTHORIZATION_ADDUSER) && (
-            <button className="add-user-btn" onClick={handleAddUserClick}>
-              <span className="add-user-btn-icon">+</span>
-              <span className="add-user-btn-text">Add User</span>
-            </button>
+          <button className="add-user-btn" onClick={handleAddUserClick}>
+            <span className="add-user-btn-icon">+</span>
+            <span className="add-user-btn-text">Add User</span>
+          </button>
           )}
         </div>
       </div>
 
+      
+      
+      
       <div className="user-table-header">
+        
         <div className="user-table-cell user-table-cell-name">
           <span className="user-table-label">{userLabels[0]}</span>
         </div>
@@ -208,6 +217,9 @@ const UserAuthorization: React.FC = () => {
         </div>
       </div>
 
+      
+      
+      
       {loading && (
         <div className="user-table-body">
           {Array.from({ length: pagination.limit }).map((_, i) => (
@@ -249,6 +261,7 @@ const UserAuthorization: React.FC = () => {
         <div className="user-table-body">
           {usersList.map((user: User) => (
             <div className="user-table-row" key={user.id}>
+              
               <div className="user-table-cell user-table-cell-name">
                 <span className="user-table-value">{user.userName}</span>
               </div>
@@ -266,39 +279,32 @@ const UserAuthorization: React.FC = () => {
               </div>
               <div className="user-table-cell user-table-cell-actions">
                 {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_ASSIGN_PERMISSION) && (
-                  <button type="button" className="user-action-btn" onClick={() => handleAssignPermissions(user)} title="Assign Permissions">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M20 13C20 18 16.5 20.5 12.34 21.95C12.1222 22.0238 11.8855 22.0202 11.67 21.94C7.5 20.5 4 18 4 13V5.99996C4 5.73474 4.10536 5.48039 4.29289 5.29285C4.48043 5.10532 4.73478 4.99996 5 4.99996C7 4.99996 9.5 3.79996 11.24 2.27996C11.4519 2.09896 11.7214 1.99951 12 1.99951C12.2786 1.99951 12.5481 2.09896 12.76 2.27996C14.51 3.80996 17 4.99996 19 4.99996C19.2652 4.99996 19.5196 5.10532 19.7071 5.29285C19.8946 5.48039 20 5.73474 20 5.99996V13Z"
-                        stroke="#667085"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path d="M9 12L11 14L15 10" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </button>
+                <button
+                  type="button"
+                  className="user-action-btn"
+                  onClick={() => handleAssignPermissions(user)}
+                  title="Assign Permissions"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 13C20 18 16.5 20.5 12.34 21.95C12.1222 22.0238 11.8855 22.0202 11.67 21.94C7.5 20.5 4 18 4 13V5.99996C4 5.73474 4.10536 5.48039 4.29289 5.29285C4.48043 5.10532 4.73478 4.99996 5 4.99996C7 4.99996 9.5 3.79996 11.24 2.27996C11.4519 2.09896 11.7214 1.99951 12 1.99951C12.2786 1.99951 12.5481 2.09896 12.76 2.27996C14.51 3.80996 17 4.99996 19 4.99996C19.2652 4.99996 19.5196 5.10532 19.7071 5.29285C19.8946 5.48039 20 5.73474 20 5.99996V13Z" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M9 12L11 14L15 10" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
                 )}
                 {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_USER_AUTHORIZATION_DELETEUSER) && (
-                  <button type="button" className="user-action-btn" onClick={() => handleDeleteUser(user.userName)} title="Delete User" style={{ marginLeft: "8px" }}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M2.5 5H17.5" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      <path
-                        d="M15.8332 5V16.6667C15.8332 17.5 14.9998 18.3333 14.1665 18.3333H5.83317C4.99984 18.3333 4.1665 17.5 4.1665 16.6667V5"
-                        stroke="#667085"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M6.6665 4.99984V3.33317C6.6665 2.49984 7.49984 1.6665 8.33317 1.6665H11.6665C12.4998 1.6665 13.3332 2.49984 13.3332 3.33317V4.99984"
-                        stroke="#667085"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
+                <button
+                  type="button"
+                  className="user-action-btn"
+                  onClick={() => handleDeleteUser(user.userName)}
+                  title="Delete User"
+                  style={{ marginLeft: "8px" }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.5 5H17.5" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M15.8332 5V16.6667C15.8332 17.5 14.9998 18.3333 14.1665 18.3333H5.83317C4.99984 18.3333 4.1665 17.5 4.1665 16.6667V5" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M6.6665 4.99984V3.33317C6.6665 2.49984 7.49984 1.6665 8.33317 1.6665H11.6665C12.4998 1.6665 13.3332 2.49984 13.3332 3.33317V4.99984" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
                 )}
               </div>
             </div>
@@ -306,6 +312,9 @@ const UserAuthorization: React.FC = () => {
         </div>
       )}
 
+      
+      
+      
       {pagination.total > 0 && (
         <div style={{ marginTop: "20px" }}>
           <Pagination
@@ -330,6 +339,9 @@ const UserAuthorization: React.FC = () => {
 
       <AddUserModal show={showAddUserModal} onHide={() => setShowAddUserModal(false)} onAdd={handleAddUser} loading={loading} users={usersList} />
 
+      
+      
+
       <AssignPermissionsModal
         show={showAssignPermissionsModal}
         onHide={() => {
@@ -341,6 +353,9 @@ const UserAuthorization: React.FC = () => {
         loading={loading}
       />
 
+      
+      
+      
       <PopUp
         show={showDeleteConfirmation}
         onHide={cancelDeleteUser}
@@ -349,15 +364,15 @@ const UserAuthorization: React.FC = () => {
           header: "Delete User",
           body: (
             <span>
-              Are you sure you want to delete user <strong style={{ color: "black" }}>&quot;{userToDelete}&quot;</strong>?
+              Are you sure you want to delete user  <strong style={{ color: "black" }}>&quot;{userToDelete}&quot;</strong>?
               <br />
             </span>
           ),
-          button: {
+           button: {
             buttonOne: {
-              buttonOneName: "Delete",
-              buttonBg: "modalButtonDanger",
-              variant: "danger",
+            buttonOneName: "Delete",
+            buttonBg: "modalButtonDanger",
+            variant: "danger"
             },
             buttonTwo: {
               buttonTwoName: "Cancel",

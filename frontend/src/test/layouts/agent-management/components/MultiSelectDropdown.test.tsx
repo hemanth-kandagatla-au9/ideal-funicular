@@ -1,8 +1,9 @@
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import MultiSelectDropdown from '../../../../layouts/agent-management/components/MultiSelectDropdown';
 import '@testing-library/jest-dom';
-
 jest.mock('react-redux', () => ({
   useDispatch: () => jest.fn(),
   useSelector: () => ({}),

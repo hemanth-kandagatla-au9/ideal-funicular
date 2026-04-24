@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,8 +8,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import PopUp from "@/components/popup/popUp.component";
 import Pagination from "@/components/ui/pagination/Pagination.component";
-import { getPermissions, isUsersLoading, getPermissionsPagination } from "@/redux/selectors/userAuthorization.selectors";
 import userAuthorizationActions from "../../redux/actions/userAuthorization.action";
+import { getPermissions, isUsersLoading, getPermissionsPagination } from "@/redux/selectors/userAuthorization.selectors";
 import NoDataFoundImg from "../../images/agent-management/NoDATA.png";
 import "./Permissions.css";
 import useAgentPermissions from "../../utils/hooks/useAgentPermissions";
@@ -78,7 +79,7 @@ const Permissions: React.FC = () => {
     return `${month} ${day}, ${year} | ${time}`;
   };
   const handleAddPermission = () => {
-    setProjectError("");
+    setProjectError("")
     setModuleError("");
     setPermissionError("");
     let hasError = false;
@@ -132,8 +133,16 @@ const Permissions: React.FC = () => {
 
   return (
     <div className="permissions-container">
+      
+      
+      
       <div className="permissions-header">
-        <IoIosArrowBack color="#000" size="24px" onClick={handleBack} style={{ cursor: "pointer", marginRight: "12px" }} />
+        <IoIosArrowBack 
+          color="#000" 
+          size="24px" 
+          onClick={handleBack} 
+          style={{ cursor: "pointer", marginRight: "12px" }} 
+        />
         <span className="breadcrumb-link" onClick={handleBack}>
           User Authorization
         </span>
@@ -141,7 +150,11 @@ const Permissions: React.FC = () => {
         <span className="breadcrumb-current">Permissions</span>
       </div>
 
+      
+      
+      
       <div className="permissions-filters">
+        
         <div className="filter-group">
           <label className="filter-label">Project</label>
           <select
@@ -160,7 +173,7 @@ const Permissions: React.FC = () => {
           </select>
           {projectError && <span className="filter-error">{projectError}</span>}
         </div>
-
+        
         <div className="filter-group">
           <label className="filter-label">Module</label>
           <input
@@ -176,6 +189,7 @@ const Permissions: React.FC = () => {
           {moduleError && <span className="filter-error">{moduleError}</span>}
         </div>
 
+        
         <div className="filter-group">
           <label className="filter-label">Permissions</label>
           <input
@@ -191,17 +205,22 @@ const Permissions: React.FC = () => {
           {permissionError && <span className="filter-error">{permissionError}</span>}
         </div>
 
+        
         <div className="filter-group-btn">
           {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_PERMISSION_ADD) && (
-            <button type="button" className="add-btn" onClick={handleAddPermission}>
-              <AiOutlinePlus size={20} color="#ffffff" />
-              <span className="add-btn-text">Add</span>
-            </button>
+          <button type="button" className="add-btn" onClick={handleAddPermission}>
+            <AiOutlinePlus size={20} color="#ffffff" />
+            <span className="add-btn-text">Add</span>
+          </button>
           )}
         </div>
       </div>
 
+      
+      
+      
       <div className="table-header">
+        
         <div className="table-cell table-cell-project">
           <span className="table-label">{permissionLabels[0]}</span>
         </div>
@@ -222,10 +241,14 @@ const Permissions: React.FC = () => {
         </div>
       </div>
 
+      
+      
+      
       {loading && (
         <div className="table-body">
           {Array.from({ length: permissionsPagination.limit }).map((_, i) => (
             <div className="table-row" key={i}>
+              
               <div className="table-cell table-cell-project">
                 <Skeleton animation="wave" variant="text" width="120px" height={25} />
               </div>
@@ -260,6 +283,7 @@ const Permissions: React.FC = () => {
         <div className="table-body">
           {permissions.map((permission: Permission) => (
             <div className="table-row" key={permission.id}>
+              
               <div className="table-cell table-cell-project">
                 <span className="table-value">{permission.project}</span>
               </div>
@@ -277,25 +301,13 @@ const Permissions: React.FC = () => {
               </div>
               <div className="table-cell table-cell-action">
                 {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_DELETE_PERMISSION) && (
-                  <button type="button" className="table-action-btn" onClick={() => handleDeletePermission(permission.id, permission.permission)}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M2.5 5H17.5" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      <path
-                        d="M15.8332 5V16.6667C15.8332 17.5 14.9998 18.3333 14.1665 18.3333H5.83317C4.99984 18.3333 4.1665 17.5 4.1665 16.6667V5"
-                        stroke="#667085"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M6.6665 4.99984V3.33317C6.6665 2.49984 7.49984 1.6665 8.33317 1.6665H11.6665C12.4998 1.6665 13.3332 2.49984 13.3332 3.33317V4.99984"
-                        stroke="#667085"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
+                <button type="button" className="table-action-btn" onClick={() => handleDeletePermission(permission.id, permission.permission)}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.5 5H17.5" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M15.8332 5V16.6667C15.8332 17.5 14.9998 18.3333 14.1665 18.3333H5.83317C4.99984 18.3333 4.1665 17.5 4.1665 16.6667V5" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M6.6665 4.99984V3.33317C6.6665 2.49984 7.49984 1.6665 8.33317 1.6665H11.6665C12.4998 1.6665 13.3332 2.49984 13.3332 3.33317V4.99984" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
                 )}
               </div>
             </div>
@@ -303,6 +315,9 @@ const Permissions: React.FC = () => {
         </div>
       )}
 
+      
+      
+      
       {permissionsPagination.total > 0 && (
         <div style={{ marginTop: "20px" }}>
           <Pagination
@@ -324,6 +339,7 @@ const Permissions: React.FC = () => {
         </div>
       )}
 
+      
       <PopUp
         show={showDeleteConfirmation}
         onHide={cancelDeletePermission}
@@ -338,9 +354,9 @@ const Permissions: React.FC = () => {
           ),
           button: {
             buttonOne: {
-              buttonOneName: "Delete",
-              buttonBg: "modalButtonDanger",
-              variant: "danger",
+            buttonOneName: "Delete",
+            buttonBg: "modalButtonDanger",
+            variant: "danger"
             },
             buttonTwo: {
               buttonTwoName: "Cancel",

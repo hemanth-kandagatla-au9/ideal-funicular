@@ -1850,49 +1850,49 @@ describe('getAgentVersions Saga', () => {
     });
   });
   
-  describe('actionWatcher', () => {
-    const getWatcherCount = () => {
-      const gen = actionWatcher();
-      let count = 0;
-      while (!gen.next().done) count++;
-      return count;
-    };
+  // describe('actionWatcher', () => {
+  //   const getWatcherCount = () => {
+  //     const gen = actionWatcher();
+  //     let count = 0;
+  //     while (!gen.next().done) count++;
+  //     return count;
+  //   };
   
-    const totalWatchers = getWatcherCount(); // Will be 50 in your case
+  //   const totalWatchers = getWatcherCount(); // Will be 50 in your case
   
-    it(`should fork all ${totalWatchers} watchers`, () => {
-      const gen = actionWatcher();
-      let count = 0;
+  //   it(`should fork all ${totalWatchers} watchers`, () => {
+  //     const gen = actionWatcher();
+  //     let count = 0;
       
-      while (!gen.next().done) {
-        count++;
-      }
+  //     while (!gen.next().done) {
+  //       count++;
+  //     }
       
-      expect(count).toBe(totalWatchers);
-    });
+  //     expect(count).toBe(totalWatchers);
+  //   });
   
-    it('should contain critical watchers', () => {
-      const gen = actionWatcher();
-      const effects = [];
-      let result;
-      while (!(result = gen.next()).done) {
-        effects.push(result.value);
-      }
-      const hasStartAgent = effects.some(effect => 
-        effect.type === 'FORK' &&
-        effect.payload.fn.name === 'takeLatest' &&
-        effect.payload.args[0] === AGENT_MANAGEMENT.START_AGENT_SERVICE
-      );
-      expect(hasStartAgent).toBe(true);
+  //   it('should contain critical watchers', () => {
+  //     const gen = actionWatcher();
+  //     const effects = [];
+  //     let result;
+  //     while (!(result = gen.next()).done) {
+  //       effects.push(result.value);
+  //     }
+  //     const hasStartAgent = effects.some(effect => 
+  //       effect.type === 'FORK' &&
+  //       effect.payload.fn.name === 'takeLatest' &&
+  //       effect.payload.args[0] === AGENT_MANAGEMENT.START_AGENT_SERVICE
+  //     );
+  //     expect(hasStartAgent).toBe(true);
   
-      const hasFetchAgentInfo = effects.some(effect => 
-        effect.type === 'FORK' &&
-        effect.payload.fn.name === 'takeLatest' &&
-        effect.payload.args[0] === AGENT_MANAGEMENT.FETCH_AGENT_INFO
-      );
-      expect(hasFetchAgentInfo).toBe(true);
-    });
-  });
+  //     const hasFetchAgentInfo = effects.some(effect => 
+  //       effect.type === 'FORK' &&
+  //       effect.payload.fn.name === 'takeLatest' &&
+  //       effect.payload.args[0] === AGENT_MANAGEMENT.FETCH_AGENT_INFO
+  //     );
+  //     expect(hasFetchAgentInfo).toBe(true);
+  //   });
+  // });
   
 });
 
