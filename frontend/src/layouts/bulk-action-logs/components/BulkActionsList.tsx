@@ -1,11 +1,13 @@
 /* eslint-disable import/namespace */
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, CircularProgress, Chip } from "@mui/material";
+import { Box, CircularProgress, Chip, Tooltip } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowUpIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownIcon from "@mui/icons-material/ArrowDownward";
+
+import SortIcon from "@mui/icons-material/Sort";
 import BulkActionCard from "./BulkActionCard";
 import BulkActionFilterDialog, { FilterState } from "./BulkActionFilterDialog";
 import bulkActionLogsActions from "../../../redux/actions/bulkActionLogs.action";
@@ -135,6 +137,38 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
   const totalPages = (pagination as any)?.totalPages || 1;
   const currentPageNo = (pagination as any)?.pageNo || 0;
 
+  // Convert to UI (1-based)
+  const currentPage = currentPageNo + 1;
+
+  // Ellipsis pagination logic
+  const getPages = () => {
+    const pages: (number | string)[] = [];
+
+    if (totalPages <= 1) return [1];
+
+    pages.push(1);
+
+    if (currentPage > 3) pages.push("...");
+
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+      pages.push(i);
+    }
+
+    if (currentPage < totalPages - 2) pages.push("...");
+
+    if (totalPages > 1) pages.push(totalPages);
+
+    return pages;
+  };
+
+  const navBtn = {
+    border: "none",
+    background: "transparent",
+    cursor: "pointer",
+    fontSize: "14px",
+    padding: "4px",
+    color: "#6B7280",
+  };
   return (
     <Box
       sx={{
@@ -168,15 +202,21 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
           sx={{
             display: "flex",
             alignItems: "center",
-            flex: 1,
-            maxWidth: "220px",
-            height: "32px",
-            padding: "0 10px",
+            justifyContent: "center",
+            gap: "6px",
+            height: "36px",
+            padding: "6px 16px",
             backgroundColor: "#FFFFFF",
             border: "1px solid #E0E3E7",
-            borderRadius: "999px",
-            gap: "8px",
+            borderRadius: "36px",
+            cursor: "pointer",
+            fontSize: "13px",
+            fontWeight: 500,
+            color: "#374151",
             flexShrink: 0,
+            "&:hover": {
+              backgroundColor: "#F9FAFB",
+            },
           }}
         >
           <SearchIcon sx={{ width: "16px", height: "16px", color: "#9CA3AF", flexShrink: 0 }} />
@@ -201,37 +241,6 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
           />
         </Box>
 
-        {/* 1.2 SORT BUTTON */}
-        <Box
-          component="button"
-          onClick={() => setSortOrder(prev => (prev === "desc" ? "asc" : "desc"))}
-          title={sortOrder === "desc" ? "Sorted: newest first. Click for oldest first" : "Sorted: oldest first. Click for newest first"}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: "4px",
-            height: "32px",
-            padding: "0 10px",
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E0E3E7",
-            borderRadius: "999px",
-            cursor: "pointer",
-            transition: "all 0.2s ease",
-            fontSize: "12px",
-            fontWeight: 500,
-            color: "#374151",
-            flexShrink: 0,
-            "&:hover": { backgroundColor: "#F9FAFB" },
-          }}
-        >
-          {sortOrder === "desc" ? (
-            <ArrowDownwardIcon sx={{ width: "14px", height: "14px", color: "#7C3AED" }} />
-          ) : (
-            <ArrowUpwardIcon sx={{ width: "14px", height: "14px", color: "#7C3AED" }} />
-          )}
-          <span>Date</span>
-        </Box>
-
         {/* 1.3 FILTER BUTTON */}
         <Box
           component="button"
@@ -239,14 +248,14 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
           sx={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
             gap: "6px",
-            height: "32px",
-            padding: "0 12px",
+            height: "36px",
+            padding: "6px 16px",
             backgroundColor: "#FFFFFF",
             border: "1px solid #E0E3E7",
-            borderRadius: "999px",
+            borderRadius: "36px",
             cursor: "pointer",
-            transition: "all 0.2s ease",
             fontSize: "13px",
             fontWeight: 500,
             color: "#374151",
@@ -259,7 +268,36 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
           <TuneIcon sx={{ width: "16px", height: "16px" }} />
           <span>Filter</span>
         </Box>
+        {/* 1.2 SORT BUTTON */}
+        <Tooltip title={sortOrder === "desc" ? "Sorted by date: newest first" : "Sorted by date: oldest first"} arrow>
+          <Box
+            component="button"
+            onClick={() => setSortOrder(prev => (prev === "desc" ? "asc" : "desc"))}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+              height: "36px",
+              padding: "6px 14px",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #E0E3E7",
+              borderRadius: "36px",
+              cursor: "pointer",
+              fontSize: "13px",
+              fontWeight: 500,
+              color: "#374151",
+              "&:hover": {
+                backgroundColor: "#F9FAFB",
+              },
+            }}
+          >
+            <SortIcon sx={{ width: "16px", height: "16px" }} />
 
+            <span>Sort</span>
+
+            {sortOrder === "desc" ? <ArrowDownIcon sx={{ width: "16px", height: "16px" }} /> : <ArrowUpIcon sx={{ width: "16px", height: "16px" }} />}
+          </Box>
+        </Tooltip>
         {/* ===== FILTER DIALOG ===== */}
         <BulkActionFilterDialog
           open={showFilterDialog}
@@ -429,100 +467,80 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
       <Box
         sx={{
           display: "flex",
+          justifyContent: "center",
           alignItems: "center",
-          justifyContent: "space-between",
-          gap: "8px",
           paddingTop: "8px",
           borderTop: "1px solid #E0E3E7",
           flexShrink: 0,
         }}
       >
-        {/* Previous Button */}
         <Box
-          component="button"
-          onClick={() => handlePageChange(Math.max(0, currentPageNo - 1))}
-          disabled={currentPageNo === 0}
           sx={{
+            background: "#FFFFFF",
+            padding: "0",
+            borderRadius: "0",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            width: "28px",
-            height: "28px",
-            padding: 0,
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E0E3E7",
-            borderRadius: "4px",
-            cursor: currentPageNo === 0 ? "not-allowed" : "pointer",
-            transition: "all 0.2s ease",
-            fontSize: "12px",
-            color: currentPageNo === 0 ? "#D1D5DB" : "#6B7280",
-            opacity: currentPageNo === 0 ? 0.5 : 1,
-            "&:hover": {
-              backgroundColor: currentPageNo === 0 ? "#FFFFFF" : "#F3F4F6",
-            },
+            gap: "6px",
           }}
         >
-          ←
-        </Box>
+          {/* Prev */}
+          <Box
+            component="button"
+            onClick={() => handlePageChange(currentPageNo - 1)}
+            disabled={currentPageNo === 0}
+            sx={{
+              ...navBtn,
+              opacity: currentPageNo === 0 ? 0.4 : 1,
+              cursor: currentPageNo === 0 ? "not-allowed" : "pointer",
+            }}
+          >
+            ‹
+          </Box>
 
-        {/* Page Numbers */}
-        <Box sx={{ display: "flex", gap: "4px", flex: 1, justifyContent: "center" }}>
-          {Array.from({ length: Math.min(5, totalPages) }, (_, i) => i).map(pageNum => (
-            <Box
-              key={pageNum}
-              component="button"
-              onClick={() => handlePageChange(pageNum)}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "24px",
-                height: "24px",
-                padding: 0,
-                backgroundColor: currentPageNo === pageNum ? "#7C3AED" : "transparent",
-                border: currentPageNo === pageNum ? "none" : "1px solid #E0E3E7",
-                borderRadius: "4px",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-                fontSize: "11px",
-                fontWeight: 500,
-                color: currentPageNo === pageNum ? "#FFFFFF" : "#374151",
-                "&:hover": {
-                  backgroundColor: currentPageNo === pageNum ? "#7C3AED" : "#F9FAFB",
-                },
-              }}
-            >
-              {pageNum + 1}
-            </Box>
-          ))}
-        </Box>
+          {/* Pages */}
+          {getPages().map((p, i) =>
+            p === "..." ? (
+              <Box key={i} sx={{ fontSize: "12px", px: "2px" }}>
+                ...
+              </Box>
+            ) : (
+              <Box
+                key={i}
+                component="div"
+                onClick={() => handlePageChange((p as number) - 1)}
+                sx={{
+                  width: "18px",
+                  height: "18px",
+                  borderRadius: "3px !important",
+                  border: currentPage === p ? "1px solid #1d7bd8" : "1px solid #E0E3E7",
+                  fontSize: "11px",
+                  cursor: "pointer",
+                  backgroundColor: currentPage === p ? "#2b87e3" : "#FFFFFF",
+                  color: currentPage === p ? "#fff" : "#374151",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {p}
+              </Box>
+            ),
+          )}
 
-        {/* Next Button */}
-        <Box
-          component="button"
-          onClick={() => handlePageChange(Math.min(totalPages - 1, currentPageNo + 1))}
-          disabled={currentPageNo === totalPages - 1}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "28px",
-            height: "28px",
-            padding: 0,
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E0E3E7",
-            borderRadius: "4px",
-            cursor: currentPageNo === totalPages - 1 ? "not-allowed" : "pointer",
-            transition: "all 0.2s ease",
-            fontSize: "12px",
-            color: currentPageNo === totalPages - 1 ? "#D1D5DB" : "#6B7280",
-            opacity: currentPageNo === totalPages - 1 ? 0.5 : 1,
-            "&:hover": {
-              backgroundColor: currentPageNo === totalPages - 1 ? "#FFFFFF" : "#F3F4F6",
-            },
-          }}
-        >
-          →
+          {/* Next */}
+          <Box
+            component="button"
+            onClick={() => handlePageChange(currentPageNo + 1)}
+            disabled={currentPageNo === totalPages - 1}
+            sx={{
+              ...navBtn,
+              opacity: currentPageNo === totalPages - 1 ? 0.4 : 1,
+              cursor: currentPageNo === totalPages - 1 ? "not-allowed" : "pointer",
+            }}
+          >
+            ›
+          </Box>
         </Box>
       </Box>
     </Box>
