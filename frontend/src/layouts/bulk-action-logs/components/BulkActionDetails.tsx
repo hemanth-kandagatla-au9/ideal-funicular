@@ -63,15 +63,22 @@ const formatDateTime = (dateString?: string): string => {
 
 const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
   const [searchText, setSearchText] = useState("");
-  const [selectedStatusFilter, setSelectedStatusFilter] = useState<string | null>(null);
+  const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>('ALL');
+
 
   const filteredServers = useMemo(() => {
     if (!jobDetails?.servers) return [];
     let servers = jobDetails.servers.filter(server => server.serverName.toLowerCase().includes(searchText.toLowerCase()));
 
     // Apply status filter if a status is selected
-    if (selectedStatusFilter) {
-      servers = servers.filter(server => server.status === selectedStatusFilter);
+    if (selectedStatusFilter && selectedStatusFilter !== 'ALL') {
+      if (selectedStatusFilter === "Failure") {
+        servers = servers.filter(server => server.status === "Failure" || server.status === "Failed");
+      } else if (selectedStatusFilter === "InProgress") {
+        servers = servers.filter(server => server.status === "In Progress" || server.status === "InProgress");
+      } else {
+        servers = servers.filter(server => server.status === selectedStatusFilter);
+      }
     }
 
     return servers;
@@ -111,14 +118,43 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
     );
   }
 
+  // Use serverSummary from API directly (pre-aggregated, avoids "Failed" vs "Failure" mismatch)
+  const { serverSummary } = jobDetails as any;
   const statusCounts = {
-    success: jobDetails.servers?.filter(s => s.status === "Success").length || 0,
-    pending: jobDetails.servers?.filter(s => s.status === "Pending").length || 0,
-    failure: jobDetails.servers?.filter(s => s.status === "Failure").length || 0,
-    inProgress: jobDetails.servers?.filter(s => s.status === "In Progress").length || 0,
+    success: serverSummary?.success ?? jobDetails.servers?.filter((s: any) => s.status === "Success").length ?? 0,
+    pending: serverSummary?.pending ?? jobDetails.servers?.filter((s: any) => s.status === "Pending").length ?? 0,
+    failure: serverSummary?.failure ?? jobDetails.servers?.filter((s: any) => s.status === "Failure" || s.status === "Failed").length ?? 0,
+    inProgress: serverSummary?.inProgress ?? jobDetails.servers?.filter((s: any) => s.status === "In Progress" || s.status === "InProgress").length ?? 0,
   };
 
-  const totalServers = jobDetails.servers?.length || 0;
+  const totalServers = serverSummary?.total ?? jobDetails.servers?.length ?? 0;
+
+  const handleCardClick = (filter: string) => {
+    setSelectedStatusFilter(filter);
+  };
+
+  const getSelectedStyles = (type: string, isSelected: boolean) => {
+    const accent: Record<string, string> = {
+      ALL: 'rgba(37,99,235,0.25)',
+      Success: 'rgba(16,185,129,0.25)',
+      Pending: 'rgba(245,158,11,0.18)',
+      Failure: 'rgba(239,68,68,0.18)',
+    };
+    const bg: Record<string, string> = {
+      ALL: '#EBF4FF',
+      Success: '#ECFDF3',
+      Pending: '#FFFBEB',
+      Failure: '#FEF2F2',
+    };
+
+    return isSelected
+      ? {
+          backgroundColor: bg[type as keyof typeof bg] || '#F3F4F6',
+          borderBottom: `3px solid ${accent[type as keyof typeof accent] || 'rgba(224,227,231,1)'}`,
+          transition: 'background-color 0.15s ease, border-bottom 0.15s ease',
+        }
+      : {};
+  };
 
   return (
     <Box
@@ -129,6 +165,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
         overflow: "hidden",
         backgroundColor: "#FFFFFF",
         padding: "12px",
+        fontFamily:"Johnson Text"
       }}
     >
       {/* ===== TOP HEADER SECTION ===== */}
@@ -144,9 +181,10 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
         >
           <Typography
             sx={{
-              fontSize: "14px",
-              fontWeight: 600,
-              color: "#2563EB",
+              fontSize: "20px",
+              fontWeight: 500,
+              color: "#2961F4",
+              fontFamily:"Johnson Text"
             }}
           >
             JOB ID : {jobDetails.jobId}
@@ -158,6 +196,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
               fontSize: "11px",
               fontWeight: 600,
               padding: "0 8px",
+              fontFamily:"Johnson Text",
               ...getStatusBadgeStyle(jobDetails.status),
               "& .MuiChip-label": {
                 padding: "0",
@@ -181,18 +220,20 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "2px" }}>
             <Typography
               sx={{
-                fontSize: "11px",
-                color: "#6B7280",
-                fontWeight: 500,
+                fontSize: "14px",
+                color: "#05060F99",
+                fontWeight: 400,
+                fontFamily:"Johnson Text"
               }}
             >
               Type
             </Typography>
             <Typography
               sx={{
-                fontSize: "12px",
-                color: "#111827",
-                fontWeight: 600,
+                fontSize: "14px",
+                color: "#05060F",
+                fontWeight: 500,
+                fontFamily:"Johnson Text"
               }}
             >
               {jobDetails.type}
@@ -203,18 +244,20 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "2px" }}>
             <Typography
               sx={{
-                fontSize: "11px",
-                color: "#6B7280",
-                fontWeight: 500,
+                fontSize: "14px",
+                color: "#05060F99",
+                fontWeight: 400,
+                fontFamily:"Johnson Text"
               }}
             >
               User
             </Typography>
             <Typography
               sx={{
-                fontSize: "12px",
-                color: "#111827",
-                fontWeight: 600,
+                fontSize: "14px",
+                color: "#05060F",
+                fontWeight: 500,
+                fontFamily:"Johnson Text"
               }}
             >
               {jobDetails.user}
@@ -225,18 +268,18 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "2px" }}>
             <Typography
               sx={{
-                fontSize: "11px",
-                color: "#6B7280",
-                fontWeight: 500,
+                fontSize: "14px",
+                color: "#05060F99",
+                fontWeight: 400,
               }}
             >
               Created At
             </Typography>
             <Typography
               sx={{
-                fontSize: "12px",
-                color: "#111827",
-                fontWeight: 600,
+                fontSize: "14px",
+                color: "#05060F",
+                fontWeight: 500,
               }}
             >
               {formatDateTime(jobDetails.createdAt)}
@@ -255,41 +298,36 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           overflow: "visible",
           paddingY: "6px",
           justifyContent: "space-between",
+          fontFamily:"Johnson Text"
         }}
       >
         {/* Total Card */}
         <Box
-          onClick={() => setSelectedStatusFilter(null)}
+          onClick={() => handleCardClick('ALL')}
           sx={{
+            margin: "6px",
+            padding: "6px",
+            background: "#FFFFFF",
+            borderRadius: "50%",
             display: "flex",
             alignItems: "center",
             gap: "6px",
-            height: "36px",
-            padding: "0 12px",
-            borderRadius: "999px",
+            height: "40px",
             border: "1px solid #E0E3E7",
-            backgroundColor: "#F0F4FF",
             whiteSpace: "nowrap",
             flex: 1,
             justifyContent: "flex-start",
             cursor: "pointer",
             transition: "all 0.2s ease",
+            ...getSelectedStyles('ALL', selectedStatusFilter === 'ALL'),
           }}
         >
-          <Box
-            sx={{
-              width: "6px",
-              height: "6px",
-              borderRadius: "50%",
-              backgroundColor: getIndicatorDotColor("total"),
-            }}
-          />
-          <Typography sx={{ fontSize: "12px", color: "#374151", fontWeight: 500 }}>Total Servers</Typography>
+          <Typography sx={{ fontSize: "16px", color: "#2961F4", fontWeight: 700,fontFamily:"Johnson Text" }}>Total Servers</Typography>
           <Typography
             sx={{
-              fontSize: "11px",
-              fontWeight: 700,
-              color: "#2563EB",
+              fontSize: "12px",
+              fontWeight: 500,
+              color: "#2961F4",
             }}
           >
             {String(totalServers).padStart(2, "0")}
@@ -298,37 +336,31 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
 
         {/* Success Card */}
         <Box
-          onClick={() => setSelectedStatusFilter("Success")}
+          onClick={() => handleCardClick("Success")}
           sx={{
+            margin: "6px",
+            padding: "6px",
+            background: "#FFFFFF",
+            borderRadius: "50%",
             display: "flex",
             alignItems: "center",
             gap: "6px",
-            height: "36px",
-            padding: "0 12px",
-            borderRadius: "999px",
+            height: "40px",
             border: "1px solid #E0E3E7",
-            backgroundColor: "#F0FDF4",
             whiteSpace: "nowrap",
             flex: 1,
             justifyContent: "flex-start",
             cursor: "pointer",
             transition: "all 0.2s ease",
+            ...getSelectedStyles('ALL', selectedStatusFilter === 'Success'),
           }}
         >
-          <Box
-            sx={{
-              width: "6px",
-              height: "6px",
-              borderRadius: "50%",
-              backgroundColor: getIndicatorDotColor("success"),
-            }}
-          />
-          <Typography sx={{ fontSize: "12px", color: "#047857", fontWeight: 600 }}>Success</Typography>
+          <Typography sx={{ fontSize: "16px", color: "#328714", fontWeight: 700,fontFamily:"Johnson Text" }}>Success</Typography>
           <Typography
             sx={{
-              fontSize: "11px",
-              fontWeight: 700,
-              color: "#10B981",
+              fontSize: "12px",
+              fontWeight: 500,
+              color: "#328714",
             }}
           >
             {String(statusCounts.success).padStart(2, "0")}
@@ -337,37 +369,31 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
 
         {/* Pending Card */}
         <Box
-          onClick={() => setSelectedStatusFilter("Pending")}
+          onClick={() => handleCardClick("Pending")}
           sx={{
+            margin: "6px",
+            padding: "6px",
+            background: "#FFFFFF",
+            borderRadius: "50%",
             display: "flex",
             alignItems: "center",
             gap: "6px",
-            height: "36px",
-            padding: "0 12px",
-            borderRadius: "999px",
+            height: "40px",
             border: "1px solid #E0E3E7",
-            backgroundColor: "#FFFBEB",
             whiteSpace: "nowrap",
             flex: 1,
             justifyContent: "flex-start",
             cursor: "pointer",
             transition: "all 0.2s ease",
+            ...getSelectedStyles('ALL', selectedStatusFilter === 'Pending'),
           }}
         >
-          <Box
-            sx={{
-              width: "6px",
-              height: "6px",
-              borderRadius: "50%",
-              backgroundColor: getIndicatorDotColor("pending"),
-            }}
-          />
-          <Typography sx={{ fontSize: "12px", color: "#92400E", fontWeight: 600 }}>Pending</Typography>
+          <Typography sx={{ fontSize: "16px", color: "#FFB712", fontWeight: 700,fontFamily:"Johnson Text" }}>Pending</Typography>
           <Typography
             sx={{
-              fontSize: "11px",
-              fontWeight: 700,
-              color: "#F59E0B",
+              fontSize: "12px",
+              fontWeight: 500,
+              color: "#FFB712",
             }}
           >
             {String(statusCounts.pending).padStart(2, "0")}
@@ -376,37 +402,31 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
 
         {/* Failure Card */}
         <Box
-          onClick={() => setSelectedStatusFilter("Failure")}
+          onClick={() => handleCardClick("Failure")}
           sx={{
+            margin: "6px",
+            padding: "6px",
+            background: "#FFFFFF",
+            borderRadius: "50%",
             display: "flex",
             alignItems: "center",
             gap: "6px",
-            height: "36px",
-            padding: "0 12px",
-            borderRadius: "999px",
+            height: "40px",
             border: "1px solid #E0E3E7",
-            backgroundColor: "#FEF2F2",
             whiteSpace: "nowrap",
             flex: 1,
             justifyContent: "flex-start",
             cursor: "pointer",
             transition: "all 0.2s ease",
+            ...getSelectedStyles('ALL', selectedStatusFilter === 'Failure'),
           }}
         >
-          <Box
-            sx={{
-              width: "6px",
-              height: "6px",
-              borderRadius: "50%",
-              backgroundColor: getIndicatorDotColor("failure"),
-            }}
-          />
-          <Typography sx={{ fontSize: "12px", color: "#991B1B", fontWeight: 600 }}>Failure</Typography>
+          <Typography sx={{ fontSize: "16px", color: "#DB1500", fontWeight: 700,fontFamily:"Johnson Text" }}>Failure</Typography>
           <Typography
             sx={{
-              fontSize: "11px",
-              fontWeight: 700,
-              color: "#EF4444",
+              fontSize: "12px",
+              fontWeight: 500,
+              color: "#DB1500",
             }}
           >
             {String(statusCounts.failure).padStart(2, "0")}
@@ -474,6 +494,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           border: "1px solid #E0E3E7",
           borderBottom: "none",
           tableLayout: "fixed",
+          fontFamily:"Johnson Text"
         }}
       >
         <Box
@@ -568,14 +589,12 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                   {/* Server Name */}
                   <TableCell
                     sx={{
-                      fontSize: "12px",
-                      color: "#2563EB",
+                      fontSize: "14px",
+                      color: "#102459",
                       fontWeight: 500,
                       padding: "8px 10px",
                       cursor: "pointer",
-                      "&:hover": {
-                        textDecoration: "underline",
-                      },
+                      fontFamily:"Johnson Text"
                     }}
                   >
                     {server.serverName}
@@ -595,13 +614,14 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                       size="small"
                       sx={{
                         height: "20px",
-                        fontSize: "11px",
-                        fontWeight: 600,
+                        fontSize: "12px",
+                        fontWeight: 500,
                         padding: "0 8px",
                         ...getServerStatusStyle(server.status),
                         "& .MuiChip-label": {
                           padding: "0",
                         },
+                         fontFamily:"Johnson Text"
                       }}
                     />
                   </TableCell>
@@ -609,13 +629,15 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                   {/* Message */}
                   <TableCell
                     sx={{
-                      fontSize: "12px",
-                      color: "#6B7280",
+                      fontSize: "14px",
+                      color: "#37383F",
                       padding: "8px 10px",
                       maxWidth: "300px",
+                      fontWeight: 400,
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
+                      fontFamily:"Johnson Text"
                     }}
                     title={server.message}
                   >

@@ -41,6 +41,8 @@ export const RISE_AGENT_BULK_RESTART     = 'Rise Agent : bulk_restart';
 export const RISE_AGENT_BULK_UPGRADE     = 'Rise Agent : bulk_upgrade';
 export const RISE_AGENT_BULK_SYNC_CONFIG = 'Rise Agent : bulk_sync_config';
 export const RISE_AGENT_BULK_ENV_UPGRADE = 'Rise Agent : bulk_env_upgrade';
+export const RISE_AGENT_BULK_LOGS_VIEW   = 'Rise Agent : view_bulk_logs';
+
 
 // ── ViewDetails sidebar accordion visibility ──────────────────────────────────
 export const RISE_AGENT_TASKS_READ  = "Rise Agent : host_list";
@@ -84,6 +86,7 @@ export const AGENT_PERMISSIONS = {
   RISE_AGENT_BULK_UPGRADE,
   RISE_AGENT_BULK_SYNC_CONFIG,
   RISE_AGENT_BULK_ENV_UPGRADE,
+  RISE_AGENT_BULK_LOGS_VIEW,
   RISE_AGENT_TASKS_READ,
   RISE_AGENT_DETAILS_READ,
   RISE_AGENT_CONFIG_READ,

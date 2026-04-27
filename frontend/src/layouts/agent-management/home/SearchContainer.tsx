@@ -212,6 +212,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
         </div>
         )}
         
+        {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_BULK_LOGS_VIEW) && (
         <Button
           className="riseagent-topbar-hover-btn"
           style={{
@@ -235,6 +236,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ state, getJsonData, s
             alt="bulk action logs"
           />
         </Button>
+        )}
 
         {hasPermission(AGENT_PERMISSIONS.RISE_AGENT_USER_AUTHORIZATION_READ) && (
         <div>

@@ -8,7 +8,6 @@ export default async function DownloadBulkActionLogsToExcel() {
   try {
     const response = await agentManagementService.exportBulkActionLogs();
 
-    // Response shape: { data: { flag, data: [...] } }  (axios wraps in .data)
     const payload = response?.data || response;
     const records: any[] = payload?.data || [];
 
@@ -17,20 +16,38 @@ export default async function DownloadBulkActionLogsToExcel() {
       return;
     }
 
-    // Flatten each record for Excel columns
-    const rows = records.map((job: any) => {
+    const rows = records.flatMap((job: any) => {
       const servers = get(job, "servers", []);
-      return {
+
+      if (!servers.length) {
+        return [
+          {
+            "Job ID": job.jobId,
+            "Type": job.type,
+            "Status": job.status,
+            "User": job.user,
+            "Created At": job.createdAt,
+
+            "Server Name": "",
+            "Server Status": "",
+            "Message": "",
+            "Completed At": "",
+          },
+        ];
+      }
+
+      return servers.map((server: any) => ({
         "Job ID": job.jobId,
         "Type": job.type,
         "Status": job.status,
         "User": job.user,
         "Created At": job.createdAt,
-        "Total Servers": get(job, "serverSummary.total", servers.length),
-        "Successful": get(job, "serverSummary.success", 0),
-        "Failed": get(job, "serverSummary.failure", 0),
-        "Pending": get(job, "serverSummary.pending", 0),
-      };
+
+        "Server Name": server.serverName,
+        "Server Status": server.status,
+        "Message": server.message,
+        "Completed At": server.completedAt,
+      }));
     });
 
     ExcelUtils.exportDataToExcel(rows, "BulkActionLogs");

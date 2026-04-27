@@ -12,13 +12,14 @@
 
 /* Header */
 .ral-header {
-  height: 56px;
+  height: 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
   background: white;
+  padding: 19px 54px;
 }
 
 .ral-left {
@@ -28,8 +29,8 @@
 }
 
 .ral-back {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,18 +46,18 @@
 }
 
 .ral-back-icon {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: #6B7280;
 }
 
 .ral-title {
-  font-size: 21px;
-  font-weight: 700;
+  font-size: 36px;
+  font-weight: 500;
   margin: 0;
-  line-height: 1.2;
+  line-height: 2;
   margin-left: 4px;
-  background: linear-gradient(90deg, #2563EB, #7C3AED, #EF4444);
+  background: linear-gradient(90deg, #2961F4, #6C5CE7, #EB1700);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -66,17 +67,17 @@
 .ral-export {
   display: flex;
   align-items: center;
-  gap: 6px;
-  height: 30px;
-  padding: 4px 12px;
+  gap: 8px;
+  height: 36px;
+  padding: 10px 16px;
   background: white;
-  border: 1px solid #E0E3E7;
-  border-radius: 999px;
+  border: 1px solid #E2E8F0;
+  border-radius: 36px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
   color: #374151;
-  font-family: Johnson Text;
+  font-family: "Johnson Text";
   transition: all 0.2s ease;
   outline: none;
 }

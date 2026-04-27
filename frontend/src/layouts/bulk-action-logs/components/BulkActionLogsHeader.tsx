@@ -16,14 +16,17 @@ const Header: React.FC<HeaderProps> = ({ onExport }) => {
   return (
     <Box
       sx={{
-        height: "56px",
+        height: "80px",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingX: "10px",
+        paddingX: "54px",
+        paddingY: "19px",
         marginBottom: "12px",
         backgroundColor: "white",
+        paddingLeft:"1px",
+        paddingRight:"8px"
       }}
     >
       {/* Left Section: Back Icon + Title */}
@@ -38,9 +41,9 @@ const Header: React.FC<HeaderProps> = ({ onExport }) => {
         <IconButton
           onClick={handleBack}
           sx={{
-            width: "30px",
-            height: "30px",
-            minWidth: "30px",
+            width: "60px",
+            height: "60px",
+            minWidth: "60px",
             padding: "0",
             backgroundColor: "#F1F3F5",
             color: "#6B7280",
@@ -55,8 +58,8 @@ const Header: React.FC<HeaderProps> = ({ onExport }) => {
               color: "#4B5563",
             },
             "& svg": {
-              width: "16px",
-              height: "16px",
+              width: "20px",
+              height: "20px",
             },
           }}
         >
@@ -66,15 +69,15 @@ const Header: React.FC<HeaderProps> = ({ onExport }) => {
         {/* Title */}
         <Typography
           sx={{
-            fontSize: "21px",
-            fontWeight: 700,
-            lineHeight: 1.2,
+            fontSize: "36px",
+            fontWeight: 500,
+            lineHeight: 2,
             marginLeft: "4px",
-            background: "linear-gradient(90deg, #2563EB, #7C3AED, #EF4444)",
+            background: "linear-gradient(90deg, #2961F4, #6C5CE7, #EB1700)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            fontFamily: "Johnson Display, Inter, sans-serif",
+            fontFamily: "Johnson Display",
           }}
         >
           Bulk Action Logs
@@ -88,16 +91,16 @@ const Header: React.FC<HeaderProps> = ({ onExport }) => {
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: "6px",
-          height: "30px",
-          paddingX: "12px",
-          paddingY: "4px",
+          gap: "8px",
+          height: "36px",
+          paddingX: "16px",
+          paddingY: "10px",
           backgroundColor: "#FFFFFF",
-          border: "1px solid #E0E3E7",
-          borderRadius: "999px",
+          border: "1px solid #E2E8F0",
+          borderRadius: "36px",
           cursor: "pointer",
           transition: "all 0.2s ease",
-          fontFamily: "Johnson Text, Inter, sans-serif",
+          fontFamily: "Johnson Text",
           fontSize: "13px",
           fontWeight: 500,
           color: "#374151",

@@ -124,32 +124,50 @@ const FilterBar: React.FC<FilterBarProps> = ({
     setSortDropdownOpen(false);
   };
 
-  const handleSelectChange = (key: string, selectedOptions: SelectedOption[]) => {
-    const allRegularOptions = filterOptions[key].map(opt => ({
-      label: opt.name,
-      value: opt.name,
-      name: opt.name,
+  const handleSelectChange = (
+  key: string,
+  selectedOptions: SelectedOption[],
+  event?: any
+) => {
+
+  // Ignore Enter / Space when select-all is auto-selected
+  if (
+    event?.type === "keydown" &&
+    (event.key === "Enter" || event.key === " ") &&
+    selectedOptions.some(opt => opt.value === "select-all")
+  ) {
+    return;
+  }
+
+  const allRegularOptions = filterOptions[key].map(opt => ({
+    label: opt.name,
+    value: opt.name,
+    name: opt.name,
+  }));
+
+  const isSelectAllClicked = selectedOptions.some(opt => opt.value === "select-all");
+
+  if (isSelectAllClicked) {
+    const allSelected = selectedOptions.length - 1 === allRegularOptions.length;
+    const newValue = allSelected ? [] : allRegularOptions;
+
+    setFilters(prev => ({
+      ...prev,
+      [key]: newValue,
     }));
-    const isSelectAllClicked = selectedOptions.some(opt => opt.value === "select-all");
 
-    if (isSelectAllClicked) {
-      const allSelected = selectedOptions.length - 1 === allRegularOptions.length;
-      const newValue = allSelected ? [] : allRegularOptions;
+    handleCustomFilterCallback(newValue, key, key);
+  } else {
+    const filteredOptions = selectedOptions.filter(opt => opt.value !== "select-all");
 
-      setFilters(prev => ({
-        ...prev,
-        [key]: newValue,
-      }));
-      handleCustomFilterCallback(newValue, key, key);
-    } else {
-      const filteredOptions = selectedOptions.filter(opt => opt.value !== "select-all");
-      setFilters(prev => ({
-        ...prev,
-        [key]: filteredOptions,
-      }));
-      handleCustomFilterCallback(filteredOptions, key, key);
-    }
-  };
+    setFilters(prev => ({
+      ...prev,
+      [key]: filteredOptions,
+    }));
+
+    handleCustomFilterCallback(filteredOptions, key, key);
+  }
+};
 
   const clearAll = (key: string) => {
     setFilters(prev => ({
@@ -214,7 +232,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                   })),
                 ]}
                 value={filters[key] || []}
-                onSelectChange={(selected: SelectedOption[]) => handleSelectChange(key, selected)}
+               onSelectChange={(selected: SelectedOption[], event: any) =>handleSelectChange(key, selected, event)}
                 clearAll={() => clearAll(key)}
                 selectAllOption={() => selectAll(key)}
                 open={!!dropdownOpen[key]}

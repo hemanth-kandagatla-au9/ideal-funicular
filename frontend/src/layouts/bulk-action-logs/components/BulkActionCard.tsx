@@ -59,19 +59,22 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
       onClick={onClick}
       sx={{
         width: "100%",
-        padding: "10px 12px",
-        borderRadius: "12px",
-        border: isActive ? "1px solid #3B82F6" : "1px solid #E0E3E7",
-        backgroundColor: isActive ? "#F8FAFF" : "#FFFFFF",
-        marginBottom: "8px",
+        padding: "14px",
+        borderRadius: "16px",
+        border: isActive ? "1px solid #2961F4" : "1px solid #E2E8F0",
+        backgroundColor: isActive ? "#FFFFFF" : "#FFFFFF",
+        marginBottom: "2px",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
+        justifyContent: "space-between",
         gap: "16px",
         cursor: "pointer",
         transition: "all 0.2s ease",
+        boxShadow: isActive ? "0px 4px 4px rgba(41, 97, 244, 0.20)" : "none",
         "&:hover": {
-          backgroundColor: isActive ? "#F8FAFF" : "#F9FAFB",
+          backgroundColor: isActive ? "#FFFFFF" : "#F9FAFB",
+          borderColor: isActive ? "#2961F4" : "#D1D5DB",
         },
       }}
     >
@@ -84,16 +87,16 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
           flex: 0.5,
           minWidth: 0,
           paddingRight: "12px",
-          borderRight: "1px solid #E0E3E7",
         }}
       >
         {/* Job ID */}
         <Typography
           sx={{
-            fontSize: "13px",
-            fontWeight: 600,
-            color: "#111827",
-            lineHeight: 1.3,
+            fontSize: "16px",
+            fontWeight: 500,
+            color: "#334155",
+            lineHeight: "20px",
+            fontFamily: "Johnson Text",
             wordBreak: "break-all",
           }}
         >
@@ -103,10 +106,12 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
         {/* Job Type */}
         <Typography
           sx={{
-            fontSize: "11px",
-            color: "#6B7280",
-            marginTop: "2px",
-            lineHeight: 1.2,
+            fontSize: "14px",
+            fontWeight: 400,
+            color: "#334155",
+            marginTop: "4px",
+            lineHeight: "20px",
+            fontFamily: "Johnson Text",
           }}
         >
           {type}
@@ -121,14 +126,13 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
           justifyContent: "flex-start",
           flex: 0.3,
           paddingRight: "12px",
-          borderRight: "1px solid #E0E3E7",
         }}
       >
         <Box
           sx={{
             height: "22px",
-            padding: "0 10px",
-            borderRadius: "999px",
+            padding: "4px 8px",
+            borderRadius: "8px",
             fontSize: "12px",
             fontWeight: 500,
             display: "flex",
@@ -137,6 +141,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
             backgroundColor: statusStyles.backgroundColor,
             color: statusStyles.color,
             whiteSpace: "nowrap",
+            width: "90px",
           }}
         >
           {status}

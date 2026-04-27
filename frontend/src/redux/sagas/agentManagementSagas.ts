@@ -691,9 +691,13 @@ export function* updateVersionSaga({ versionData, id }: { versionData: BinaryVer
     const response = yield call(agentManagementService.updateVersion, versionData, id);
     yield put(agentManagementAction.successUpdateVersion(response));
 
-    if (get(response, "data.status") === true) successtoast("Updated Binary data successfully");
-    else errortoast(get(response, "data.error", "Failed to Update Binary data"));
-
+    if (get(response, "data.status") === true) {
+      successtoast("Updated Binary data successfully");
+  
+      yield put(agentManagementAction.fetchVersions({}));
+    } else {
+      errortoast(get(response, "data.error", "Failed to Update Binary data"));
+    }
   } catch (error: any) {
     yield put(agentManagementAction.failureUpdateVersion(error));
   }
@@ -705,7 +709,13 @@ export function* deleteteVersionSaga({ id }: { id: string }): Generator<any, voi
     const response = yield call(agentManagementService.deleteVersion, id);
     yield put(agentManagementAction.successDeleteVersion(response));
 
-    if (get(response, "data.status") === true) successtoast("Deleted Binary");
+    if (get(response, "data.status") === true) {
+      successtoast("Deleted Binary data successfully");
+      yield put(agentManagementAction.fetchVersions({}));
+
+    } else {
+      errortoast(get(response, "data.error", "Failed to Delete Binary"));
+    }
 
   } catch (error: any) {
     yield put(agentManagementAction.failureDeleteVersion(error));

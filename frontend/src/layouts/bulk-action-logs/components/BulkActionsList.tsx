@@ -30,6 +30,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [currentFilters, setCurrentFilters] = useState<FilterState>({ type: [], user: [], status: "" });
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [showChips, setShowChips] = useState(true);
   const pageSize = 10;
 
   // Convert Redux availableFilters format to component format
@@ -131,7 +132,18 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
   };
 
   const handlePageChange = (newPageNo: number) => {
-    dispatch(bulkActionLogsActions.updateBulkActionPagination({ pageNo: newPageNo, limit: 10 }));
+    // Always include active filters when paginating — prevents unfiltered results on other pages
+    const activeFilters: any = {};
+    if (debouncedSearchQuery) activeFilters.search = debouncedSearchQuery;
+    if (currentFilters.type.length > 0) activeFilters.type = currentFilters.type;
+    if (currentFilters.user.length > 0) activeFilters.users = currentFilters.user;
+    if (currentFilters.status) activeFilters.status = [currentFilters.status];
+    dispatch(
+      bulkActionLogsActions.fetchBulkActions({
+        filters: { ...activeFilters, sortBy: "date", sortOrder },
+        pagination: { pageNo: newPageNo, limit: pageSize },
+      }),
+    );
   };
 
   const totalPages = (pagination as any)?.totalPages || 1;
@@ -161,6 +173,8 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
     return pages;
   };
 
+  const hasActiveFilters = currentFilters.type.length > 0 || currentFilters.user.length > 0 || !!currentFilters.status;
+
   const navBtn = {
     border: "none",
     background: "transparent",
@@ -169,6 +183,23 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
     padding: "4px",
     color: "#6B7280",
   };
+
+    const chipSx = {
+    height: "24px",
+    fontSize: "11px",
+    fontWeight: 500,
+    backgroundColor: "#F0F4FF",
+    color: "#374151",
+    borderRadius: "4px",
+    border: "1px solid #D0DCFF",
+    "& .MuiChip-label": { paddingLeft: "8px", paddingRight: "4px" },
+    "& .MuiChip-deleteIcon": {
+      color: "#6B7280",
+      fontSize: "14px",
+      "&:hover": { color: "#111827" },
+    },
+  };
+
   return (
     <Box
       sx={{
@@ -176,11 +207,9 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        backgroundColor: "#FFFFFF",
-        border: "1px solid #E0E3E7",
         borderRadius: "12px",
-        padding: "12px",
-        gap: "8px",
+        padding: "0px",
+        gap: "4px",
         overflow: "hidden",
       }}
     >
@@ -309,64 +338,55 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
         />
       </Box>
 
-      {/* ===== 3. FILTER CHIPS ROW ===== */}
-      {(currentFilters.type.length > 0 || currentFilters.user.length > 0 || currentFilters.status) && (
-        <Box
-          sx={{
-            display: "flex",
-            gap: "8px",
-            flexWrap: "wrap",
-            marginBottom: "12px",
-            flexShrink: 0,
-          }}
-        >
-          {currentFilters.type.map(type => (
-            <Chip
-              key={type}
-              label={type}
-              onDelete={() => handleRemoveChip(type)}
-              size="small"
+            {/* ── ACTIVE FILTER CHIPS ── */}
+      {hasActiveFilters && (
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "6px", flexShrink: 0, border: "1px solid #E2E8F0", borderRadius: "8px", padding: "8px 10px" }}>
+          <Box sx={{ display: "flex", gap: "6px", flexWrap: "wrap", alignItems: "center" }}>
+            {/* Show/Hide Filters toggle — only collapses chips, does NOT reopen dialog */}
+            <Box
+              component="button"
+              onClick={() => setShowChips(v => !v)}
               sx={{
-                backgroundColor: "#f0f0f0",
-                "& .MuiChip-deleteIcon": {
-                  color: "#666",
-                  marginLeft: "4px",
-                  "&:hover": { color: "#000" },
-                },
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                fontSize: "12px",
+                fontWeight: 600,
+                color: "#374151",
+                cursor: "pointer",
+                background: "none",
+                border: "1px solid #D1D5DB",
+                borderRadius: "999px",
+                padding: "3px 10px 3px 8px",
+                flexShrink: 0,
+                "&:hover": { borderColor: "#9CA3AF", backgroundColor: "#F9FAFB" },
               }}
-            />
-          ))}
-          {currentFilters.user.map(user => (
-            <Chip
-              key={user}
-              label={user}
-              onDelete={() => handleRemoveChip(user)}
-              size="small"
-              sx={{
-                backgroundColor: "#f0f0f0",
-                "& .MuiChip-deleteIcon": {
-                  color: "#666",
-                  marginLeft: "4px",
-                  "&:hover": { color: "#000" },
-                },
-              }}
-            />
-          ))}
-          {currentFilters.status && (
-            <Chip
-              label={currentFilters.status}
-              onDelete={() => handleRemoveChip(currentFilters.status)}
-              size="small"
-              sx={{
-                backgroundColor: "#f0f0f0",
-                "& .MuiChip-deleteIcon": {
-                  color: "#666",
-                  marginLeft: "4px",
-                  "&:hover": { color: "#000" },
-                },
-              }}
-            />
-          )}
+            >
+              <span style={{ fontSize: "13px", color: "#6B7280", lineHeight: 1 }}>{showChips ? "▾" : "▸"}</span>
+              <span style={{ fontSize: "12px", color: "#374151" }}>Show Filters</span>
+              <Box
+                sx={{
+                  backgroundColor: "#374151",
+                  color: "#fff",
+                  borderRadius: "999px",
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  padding: "1px 6px",
+                  lineHeight: 1.4,
+                  minWidth: "18px",
+                  textAlign: "center",
+                }}
+              >
+                {currentFilters.type.length + currentFilters.user.length + (currentFilters.status ? 1 : 0)}
+              </Box>
+            </Box>
+
+            {showChips && currentFilters.type.map(t => <Chip key={t} label={`Type: ${t}`} onDelete={() => handleRemoveChip(t)} size="small" sx={chipSx} />)}
+            {showChips && currentFilters.user.map(u => <Chip key={u} label={`User: ${u}`} onDelete={() => handleRemoveChip(u)} size="small" sx={chipSx} />)}
+            {showChips && currentFilters.status && (
+              <Chip label={`Status: ${currentFilters.status}`} onDelete={() => handleRemoveChip(currentFilters.status)} size="small" sx={chipSx} />
+            )}
+          </Box>
         </Box>
       )}
 
@@ -376,10 +396,11 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
           display: "flex",
           alignItems: "center",
           gap: "16px",
-          padding: "10px 12px",
-          backgroundColor: "#F9FAFB",
-          borderRadius: "0px",
-          borderBottom: "1px solid #E0E3E7",
+          padding: "12px",
+          color:"#FAF9F7",
+          backgroundColor: "#FAF9F7",
+          borderRadius: "16px",
+          border: "1px solid #E2E8F0",
           flexShrink: 0,
         }}
       >
@@ -388,13 +409,12 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
             display: "flex",
             alignItems: "center",
             flex: 0.5,
-            fontSize: "11px",
-            fontWeight: 700,
-            color: "#6B7280",
-            textTransform: "uppercase",
+            fontSize: "16px",
+            fontWeight: 500,
+            color: "#64748B",
             paddingRight: "12px",
-            borderRight: "1px solid #E0E3E7",
             minWidth: 0,
+            fontFamily:"Johnson Text"
           }}
         >
           Job ID & Type
@@ -405,17 +425,18 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
             alignItems: "center",
             justifyContent: "flex-start",
             flex: 0.3,
-            fontSize: "11px",
-            fontWeight: 700,
-            color: "#6B7280",
-            textTransform: "uppercase",
+            fontSize: "16px",
+            fontWeight: 500,
+            color: "#64748B",
             paddingRight: "12px",
-            borderRight: "1px solid #E0E3E7",
+            fontFamily:"Johnson Text"
           }}
         >
           Status
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", flex: 0.2, fontSize: "11px", fontWeight: 700, color: "#6B7280", textTransform: "uppercase" }}>Servers</Box>
+        <Box sx={{ display: "flex", alignItems: "center", flex: 0.2, fontSize: "16px",fontFamily:"Johnson Text",
+            fontWeight: 500,
+            color: "#64748B"}}>Servers</Box>
       </Box>
 
       {/* ===== 5. JOBS LIST ===== */}
@@ -469,8 +490,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          paddingTop: "8px",
-          borderTop: "1px solid #E0E3E7",
+          padding: "8px 12px",
           flexShrink: 0,
         }}
       >
@@ -481,7 +501,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
             borderRadius: "0",
             display: "flex",
             alignItems: "center",
-            gap: "6px",
+            gap: "12px",
           }}
         >
           {/* Prev */}
@@ -513,7 +533,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
                   width: "18px",
                   height: "18px",
                   borderRadius: "3px !important",
-                  border: currentPage === p ? "1px solid #1d7bd8" : "1px solid #E0E3E7",
+                  border: currentPage === p ? "1px solid #1d7bd8" : "",
                   fontSize: "11px",
                   cursor: "pointer",
                   backgroundColor: currentPage === p ? "#2b87e3" : "#FFFFFF",
