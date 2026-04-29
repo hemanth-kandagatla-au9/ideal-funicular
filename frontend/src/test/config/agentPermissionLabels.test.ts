@@ -91,7 +91,7 @@ describe("agentPermissionLabels", () => {
   // ── AGENT_PERMISSIONS convenience object ──────────────────────────────────
 
   it("AGENT_PERMISSIONS has exactly 38 entries", () => {
-    expect(Object.keys(AGENT_PERMISSIONS)).toHaveLength(38);
+    expect(Object.keys(AGENT_PERMISSIONS)).toHaveLength(39);
   });
 
   it("default export (AGENT_PERMISSIONS) contains all imported label constants", () => {

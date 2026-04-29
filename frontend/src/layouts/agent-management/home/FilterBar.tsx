@@ -124,19 +124,17 @@ const FilterBar: React.FC<FilterBarProps> = ({
     setSortDropdownOpen(false);
   };
 
-  const handleSelectChange = (
+const handleSelectChange = (
   key: string,
   selectedOptions: SelectedOption[],
   event?: any
 ) => {
 
-  // Ignore Enter / Space when select-all is auto-selected
-  if (
-    event?.type === "keydown" &&
-    (event.key === "Enter" || event.key === " ") &&
-    selectedOptions.some(opt => opt.value === "select-all")
-  ) {
-    return;
+  if (event?.type === "keydown") {
+    const keyPressed = event?.key || event?.nativeEvent?.key;
+    if (keyPressed === "Enter" || keyPressed === " ") {
+      return;
+    }
   }
 
   const allRegularOptions = filterOptions[key].map(opt => ({
@@ -145,11 +143,19 @@ const FilterBar: React.FC<FilterBarProps> = ({
     name: opt.name,
   }));
 
-  const isSelectAllClicked = selectedOptions.some(opt => opt.value === "select-all");
+  const hasSelectAll = selectedOptions.some(opt => opt.value === "select-all");
+  const isOnlySelectAll = selectedOptions.length === 1 && hasSelectAll;
 
-  if (isSelectAllClicked) {
-    const allSelected = selectedOptions.length - 1 === allRegularOptions.length;
-    const newValue = allSelected ? [] : allRegularOptions;
+  const currentSelection = filters[key] || [];
+
+  if (isOnlySelectAll && currentSelection.length === 0) {
+    return;
+  }
+
+  if (hasSelectAll) {
+    const isAllAlreadySelected = currentSelection.length === allRegularOptions.length;
+
+    const newValue = isAllAlreadySelected ? [] : allRegularOptions;
 
     setFilters(prev => ({
       ...prev,
@@ -157,6 +163,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
     }));
 
     handleCustomFilterCallback(newValue, key, key);
+
   } else {
     const filteredOptions = selectedOptions.filter(opt => opt.value !== "select-all");
 
@@ -168,7 +175,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
     handleCustomFilterCallback(filteredOptions, key, key);
   }
 };
-
   const clearAll = (key: string) => {
     setFilters(prev => ({
       ...prev,
@@ -232,7 +238,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                   })),
                 ]}
                 value={filters[key] || []}
-               onSelectChange={(selected: SelectedOption[], event: any) =>handleSelectChange(key, selected, event)}
+               onSelectChange={(selected: SelectedOption[]) => handleSelectChange(key, selected)}
                 clearAll={() => clearAll(key)}
                 selectAllOption={() => selectAll(key)}
                 open={!!dropdownOpen[key]}

@@ -62,7 +62,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
         padding: "14px",
         borderRadius: "16px",
         border: isActive ? "1px solid #2961F4" : "1px solid #E2E8F0",
-        backgroundColor: isActive ? "#FFFFFF" : "#FFFFFF",
+        backgroundColor: isActive ? "#f7f4f4" : "#FFFFFF",
         marginBottom: "2px",
         display: "flex",
         flexDirection: "row",
@@ -92,8 +92,8 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
         {/* Job ID */}
         <Typography
           sx={{
-            fontSize: "16px",
-            fontWeight: 500,
+            fontSize: "14px",
+            fontWeight: 600,
             color: "#334155",
             lineHeight: "20px",
             fontFamily: "Johnson Text",
@@ -107,7 +107,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
         <Typography
           sx={{
             fontSize: "14px",
-            fontWeight: 400,
+            fontWeight: 500,
             color: "#334155",
             marginTop: "4px",
             lineHeight: "20px",

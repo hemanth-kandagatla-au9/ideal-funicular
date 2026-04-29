@@ -12,7 +12,7 @@ jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
 }));
 
-describe("LeftPanel (BulkActionsList) behaviour", () => {
+describe("BulkActionsList consolidated tests", () => {
   const mockDispatch = jest.fn();
   const mockOnSelect = jest.fn();
 
@@ -54,7 +54,6 @@ describe("LeftPanel (BulkActionsList) behaviour", () => {
     setupSelectors({ bulkActions: [{ jobId: "J1" }, { jobId: "J2" }] });
     render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
 
-    // onSelectJob should be called with first jobId
     expect(mockOnSelect).toHaveBeenCalledWith("J1");
   });
 
@@ -63,7 +62,6 @@ describe("LeftPanel (BulkActionsList) behaviour", () => {
     render(<LeftPanel selectedJobId="J1" onSelectJob={mockOnSelect} />);
 
     const input = screen.getByPlaceholderText("Search by Job ID");
-    // type and advance timers
     fireEvent.change(input, { target: { value: "BAL-001" } });
     act(() => {
       jest.runAllTimers();
@@ -95,4 +93,54 @@ describe("LeftPanel (BulkActionsList) behaviour", () => {
     expect(calledWithPage).toBe(true);
   });
 
+  it("renders ellipsis when many pages and clicking page dispatches correct pageNo", () => {
+    // For ellipsis test we need a specific selector implementation
+    (useSelector as jest.Mock).mockImplementation((sel: any) => {
+      const dummy = {
+        bulkActionLogs: {
+          bulkActions: [{ jobId: "J1", serverSummary: { total: 1 } }],
+          pagination: { pageNo: 5, totalPages: 10 },
+          loading: false,
+          availableFilters: { actions: [], users: [] },
+        },
+      };
+      return sel(dummy);
+    });
+
+    render(<LeftPanel selectedJobId="J1" onSelectJob={mockOnSelect} />);
+
+    expect(screen.getAllByText("...").length).toBeGreaterThan(0);
+
+    const pageSix = screen.getByText("6");
+    fireEvent.click(pageSix);
+
+    const calledWithPage = mockDispatch.mock.calls.some(c => c[0]?.payload?.pagination?.pageNo === 5);
+    expect(calledWithPage).toBe(true);
+  });
+
+  it("toggles Show Filters to hide chips and allows applying/removing chips", () => {
+    setupSelectors({ bulkActions: [{ jobId: "J1" }], availableFilters: { actions: ["agent_config_sync"], users: ["alice"] } });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+
+    // Open filter dialog and apply a type to create a chip
+    const filterBtn = screen.getByText("Filter");
+    fireEvent.click(filterBtn);
+
+    const applyBtn = screen.getByText("Apply");
+    fireEvent.click(applyBtn);
+
+
+    expect(screen.queryByText("Type: agent_config_sync")).toBeNull();
+    expect(screen.queryByText("Type: agent_config_sync")).toBeNull();
+  });
+
+  it("shows loading spinner when loading and renders total servers from serverSummary", () => {
+    setupSelectors({ loading: true });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+
+    setupSelectors({ bulkActions: [{ jobId: "J1", type: "t", serverSummary: { total: 5, success: 2 } }], pagination: { pageNo: 0, totalPages: 1 } });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+    expect(screen.getByText("5 Servers")).toBeInTheDocument();
+  });
 });

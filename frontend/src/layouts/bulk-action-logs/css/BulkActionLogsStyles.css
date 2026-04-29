@@ -61,7 +61,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: Johnson Display;
+  font-family: "Johnson Display", sans-serif;
 }
 
 .ral-export {
@@ -77,7 +77,7 @@
   font-size: 13px;
   font-weight: 500;
   color: #374151;
-  font-family: "Johnson Text";
+  font-family: "Johnson Display", sans-serif;
   transition: all 0.2s ease;
   outline: none;
 }

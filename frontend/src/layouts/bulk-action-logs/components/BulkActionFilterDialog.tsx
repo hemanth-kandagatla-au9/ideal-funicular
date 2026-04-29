@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, FormControlLabel, Radio, RadioGroup, Chip } from "@mui/material";
+import { Box, FormControlLabel, Radio, RadioGroup, Chip, FormControl, InputLabel, Select, MenuItem, OutlinedInput, SelectChangeEvent, Checkbox } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface BulkActionFilterProps {
@@ -34,19 +34,25 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
   const handleTypeToggle = (type: string) => {
     setFilters(prev => ({
       ...prev,
-      type: prev.type.includes(type)
-        ? prev.type.filter(t => t !== type)
-        : [...prev.type, type],
+      type: prev.type.includes(type) ? prev.type.filter(t => t !== type) : [...prev.type, type],
     }));
   };
 
   const handleUserToggle = (user: string) => {
     setFilters(prev => ({
       ...prev,
-      user: prev.user.includes(user)
-        ? prev.user.filter(u => u !== user)
-        : [...prev.user, user],
+      user: prev.user.includes(user) ? prev.user.filter(u => u !== user) : [...prev.user, user],
     }));
+  };
+
+  const handleTypeSelectChange = (event: SelectChangeEvent<string[]>) => {
+    const value = event.target.value as unknown as string[];
+    setFilters(prev => ({ ...prev, type: Array.isArray(value) ? value : [value] }));
+  };
+
+  const handleUserSelectChange = (event: SelectChangeEvent<string[]>) => {
+    const value = event.target.value as unknown as string[];
+    setFilters(prev => ({ ...prev, user: Array.isArray(value) ? value : [value] }));
   };
 
   const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,23 +74,16 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
 
   const statusOptions = ["Completed", "Partial", "Failed"];
 
-  // Native styled checkbox — avoids MUI ButtonBase ripple entirely
-  const StyledCheckbox: React.FC<{ checked: boolean; onChange: () => void }> = ({ checked, onChange }) => (
-    <input
-      type="checkbox"
-      checked={checked}
-      onChange={onChange}
-      style={{
-        width: "15px",
-        height: "15px",
-        minWidth: "15px",
-        cursor: "pointer",
-        accentColor: "#4A90E2",
-        margin: "0 8px 0 0",
-        flexShrink: 0,
-      }}
-    />
-  );
+  // Provide fallback mock data when callers don't pass available types/users
+  const types = Array.isArray(availableTypes) && availableTypes.length > 0
+    ? availableTypes
+    : ["Import", "Export", "Delete"];
+
+  const users = Array.isArray(availableUsers) && availableUsers.length > 0
+    ? availableUsers
+    : ["Alice", "Bob", "Charlie"];
+
+  // NOTE: Removed native StyledCheckbox — replaced lists with Select dropdowns
 
   const chipSx = {
     height: "22px",
@@ -113,8 +112,8 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
         zIndex: 1000,
         backgroundColor: "#ffffff",
         width: "340px",
-        borderRadius: "8px",
-        boxShadow: "0px 8px 24px rgba(74,144,226,0.15), 0px 4px 12px rgba(0,0,0,0.1)",
+        borderRadius: "16px",
+        boxShadow: "0px 12px 30px rgba(41,97,244,0.12), 0px 6px 18px rgba(0,0,0,0.08)",
         border: "1px solid #e8f0ff",
         overflow: "hidden",
       }}
@@ -185,36 +184,44 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
             Type
           </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            {availableTypes.map(type => (
-              <Box
-                key={type}
-                component="label"
-                sx={{
-                  display: "flex", alignItems: "center", gap: "0",
-                  cursor: "pointer", padding: "2px 0",
-                  fontSize: "12px", color: "#374151", fontWeight: 500,
-                  userSelect: "none",
-                  "&:hover": { color: "#111827" },
-                }}
-              >
-                <StyledCheckbox
-                  checked={filters.type.includes(type)}
-                  onChange={() => handleTypeToggle(type)}
-                />
-                {type}
-              </Box>
-            ))}
-          </Box>
-
-          {/* Selected type chips */}
-          {filters.type.length > 0 && (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: "5px", mt: "8px" }}>
-              {filters.type.map(t => (
-                <Chip key={t} label={t} onDelete={() => handleRemoveType(t)} size="small" sx={chipSx} />
+          <FormControl fullWidth size="small">
+            <InputLabel id="type-select-label">Type</InputLabel>
+            <Select
+              labelId="type-select-label"
+              multiple
+              value={filters.type}
+              onChange={handleTypeSelectChange}
+              input={<OutlinedInput label="Type" />}
+              sx={{
+                borderRadius: '12px',
+                height: '44px',
+                '& .MuiOutlinedInput-notchedOutline': { borderRadius: '12px' },
+                '& .MuiSelect-select': { padding: '12px 14px', display: 'flex', alignItems: 'center' },
+              }}
+              renderValue={(selected) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  {selected.length === 0 ? (
+                    <Box sx={{ color: '#9CA3AF', fontSize: '12px' }}>Select</Box>
+                  ) : (
+                    selected.map((value) => (
+                      <Chip key={value} label={value} onDelete={() => handleRemoveType(value)} size="small" sx={chipSx} />
+                    ))
+                  )}
+                </Box>
+              )}
+            >
+              {types.map((type) => (
+                <MenuItem key={type} value={type}>
+                  <Checkbox
+                    size="small"
+                    checked={filters.type.includes(type)}
+                    sx={{ color: '#d1d5db', '&.Mui-checked': { color: '#2961F4' }, marginRight: '8px' }}
+                  />
+                  {type}
+                </MenuItem>
               ))}
-            </Box>
-          )}
+            </Select>
+          </FormControl>
         </Box>
 
         {/* USER - Checkboxes */}
@@ -232,36 +239,44 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
             User
           </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            {availableUsers.map(user => (
-              <Box
-                key={user}
-                component="label"
-                sx={{
-                  display: "flex", alignItems: "center", gap: "0",
-                  cursor: "pointer", padding: "2px 0",
-                  fontSize: "12px", color: "#374151", fontWeight: 500,
-                  userSelect: "none",
-                  "&:hover": { color: "#111827" },
-                }}
-              >
-                <StyledCheckbox
-                  checked={filters.user.includes(user)}
-                  onChange={() => handleUserToggle(user)}
-                />
-                {user}
-              </Box>
-            ))}
-          </Box>
-
-          {/* Selected user chips */}
-          {filters.user.length > 0 && (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: "5px", mt: "8px" }}>
-              {filters.user.map(u => (
-                <Chip key={u} label={u} onDelete={() => handleRemoveUser(u)} size="small" sx={chipSx} />
+          <FormControl fullWidth size="small">
+            <InputLabel id="user-select-label">User</InputLabel>
+            <Select
+              labelId="user-select-label"
+              multiple
+              value={filters.user}
+              onChange={handleUserSelectChange}
+              input={<OutlinedInput label="User" />}
+              sx={{
+                borderRadius: '12px',
+                height: '44px',
+                '& .MuiOutlinedInput-notchedOutline': { borderRadius: '12px' },
+                '& .MuiSelect-select': { padding: '12px 14px', display: 'flex', alignItems: 'center' },
+              }}
+              renderValue={(selected) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  {selected.length === 0 ? (
+                    <Box sx={{ color: '#9CA3AF', fontSize: '12px' }}>Tags</Box>
+                  ) : (
+                    selected.map((value) => (
+                      <Chip key={value} label={value} onDelete={() => handleRemoveUser(value)} size="small" sx={chipSx} />
+                    ))
+                  )}
+                </Box>
+              )}
+            >
+              {users.map((user) => (
+                <MenuItem key={user} value={user}>
+                  <Checkbox
+                    size="small"
+                    checked={filters.user.includes(user)}
+                    sx={{ color: '#d1d5db', '&.Mui-checked': { color: '#2961F4' }, marginRight: '8px' }}
+                  />
+                  {user}
+                </MenuItem>
               ))}
-            </Box>
-          )}
+            </Select>
+          </FormControl>
         </Box>
 
         {/* STATUS - Horizontal radio */}
@@ -295,7 +310,7 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
                     sx={{
                       color: "#d1d5db",
                       padding: "3px",
-                      "&.Mui-checked": { color: "#4A90E2" },
+                      "&.Mui-checked": { color: "#2961F4" },
                     }}
                   />
                 }
@@ -330,12 +345,12 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
             border: "none",
             cursor: "pointer",
             padding: "0",
-            fontSize: "11px",
-            fontWeight: 700,
-            color: "#6b7280",
-            textTransform: "uppercase",
-            letterSpacing: "0.5px",
-            "&:hover": { color: "#374151" },
+            fontSize: "13px",
+            fontWeight: 600,
+            color: "#2961F4",
+            textTransform: "none",
+            letterSpacing: "0",
+            "&:hover": { color: "#174FD1" },
           }}
         >
           Clear All
@@ -343,37 +358,20 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
         <Box sx={{ display: "flex", gap: "7px" }}>
           <Box
             component="button"
-            onClick={onClose}
-            sx={{
-              background: "#f0f7ff",
-              border: "1px solid #d0e8ff",
-              color: "#4A90E2",
-              fontSize: "11px",
-              borderRadius: "4px",
-              padding: "5px 11px",
-              cursor: "pointer",
-              fontWeight: 600,
-              "&:hover": { backgroundColor: "#e6f2ff", borderColor: "#4A90E2", color: "#2E5DB8" },
-            }}
-          >
-            Cancel
-          </Box>
-          <Box
-            component="button"
             onClick={handleApply}
             sx={{
-              background: "#4A90E2",
+              background: "#2961F4",
               color: "white",
               border: "none",
               fontSize: "11px",
               fontWeight: 700,
-              borderRadius: "4px",
-              padding: "5px 11px",
+              borderRadius: "20px",
+              padding: "6px 14px",
               cursor: "pointer",
-              boxShadow: "0px 2px 8px rgba(74,144,226,0.3)",
+              boxShadow: "0px 2px 8px rgba(41,97,244,0.25)",
               "&:hover": {
-                backgroundColor: "#357ABD",
-                boxShadow: "0px 4px 14px rgba(74,144,226,0.4)",
+                backgroundColor: "#174FD1",
+                boxShadow: "0px 4px 14px rgba(41,97,244,0.35)",
                 transform: "translateY(-1px)",
               },
             }}

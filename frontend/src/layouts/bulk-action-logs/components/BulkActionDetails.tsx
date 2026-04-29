@@ -35,15 +35,6 @@ const getServerStatusStyle = (status: string): { backgroundColor: string; color:
   return styles[status] || styles.Pending;
 };
 
-const getIndicatorDotColor = (type: string): string => {
-  const colors: Record<string, string> = {
-    success: "#10B981",
-    pending: "#F59E0B",
-    failure: "#EF4444",
-    total: "#2563EB",
-  };
-  return colors[type] || "#6B7280";
-};
 
 const formatDateTime = (dateString?: string): string => {
   if (!dateString) return "N/A";
@@ -96,7 +87,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           color: "#999",
         }}
       >
-        <CircularProgress size={40} sx={{ color: "#7C3AED" }} />
+        <CircularProgress size={40} sx={{ color: "#2961F4" }} />
       </Box>
     );
   }
@@ -306,9 +297,9 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           onClick={() => handleCardClick('ALL')}
           sx={{
             margin: "6px",
-            padding: "6px",
+            padding: "12px",
             background: "#FFFFFF",
-            borderRadius: "50%",
+            borderRadius: "16px",
             display: "flex",
             alignItems: "center",
             gap: "6px",
@@ -316,7 +307,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             border: "1px solid #E0E3E7",
             whiteSpace: "nowrap",
             flex: 1,
-            justifyContent: "flex-start",
+            justifyContent: "space-evenly",
             cursor: "pointer",
             transition: "all 0.2s ease",
             ...getSelectedStyles('ALL', selectedStatusFilter === 'ALL'),
@@ -327,7 +318,10 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             sx={{
               fontSize: "12px",
               fontWeight: 500,
-              color: "#2961F4",
+              color: "#2F3A4C",
+              background: "#f0f0f0",
+              borderradius: "16px",
+              padding: "4px",
             }}
           >
             {String(totalServers).padStart(2, "0")}
@@ -339,9 +333,9 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           onClick={() => handleCardClick("Success")}
           sx={{
             margin: "6px",
-            padding: "6px",
+            padding: "12px",
             background: "#FFFFFF",
-            borderRadius: "50%",
+            borderRadius: "16px",
             display: "flex",
             alignItems: "center",
             gap: "6px",
@@ -349,7 +343,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             border: "1px solid #E0E3E7",
             whiteSpace: "nowrap",
             flex: 1,
-            justifyContent: "flex-start",
+            justifyContent: "space-evenly",
             cursor: "pointer",
             transition: "all 0.2s ease",
             ...getSelectedStyles('ALL', selectedStatusFilter === 'Success'),
@@ -360,7 +354,10 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             sx={{
               fontSize: "12px",
               fontWeight: 500,
-              color: "#328714",
+              color: "#2F3A4C",
+              background: "#f0f0f0",
+              borderradius: "16px",
+              padding: "4px",
             }}
           >
             {String(statusCounts.success).padStart(2, "0")}
@@ -372,9 +369,9 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           onClick={() => handleCardClick("Pending")}
           sx={{
             margin: "6px",
-            padding: "6px",
+            padding: "12px",
             background: "#FFFFFF",
-            borderRadius: "50%",
+            borderRadius: "16px",
             display: "flex",
             alignItems: "center",
             gap: "6px",
@@ -382,7 +379,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             border: "1px solid #E0E3E7",
             whiteSpace: "nowrap",
             flex: 1,
-            justifyContent: "flex-start",
+            justifyContent: "space-evenly",
             cursor: "pointer",
             transition: "all 0.2s ease",
             ...getSelectedStyles('ALL', selectedStatusFilter === 'Pending'),
@@ -393,7 +390,10 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             sx={{
               fontSize: "12px",
               fontWeight: 500,
-              color: "#FFB712",
+              color: "#2F3A4C",
+              background: "#f0f0f0",
+              borderradius: "16px",
+              padding: "4px",
             }}
           >
             {String(statusCounts.pending).padStart(2, "0")}
@@ -405,9 +405,9 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           onClick={() => handleCardClick("Failure")}
           sx={{
             margin: "6px",
-            padding: "6px",
+            padding: "12px",
             background: "#FFFFFF",
-            borderRadius: "50%",
+            borderRadius: "16px",
             display: "flex",
             alignItems: "center",
             gap: "6px",
@@ -415,7 +415,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             border: "1px solid #E0E3E7",
             whiteSpace: "nowrap",
             flex: 1,
-            justifyContent: "flex-start",
+            justifyContent: "space-evenly",
             cursor: "pointer",
             transition: "all 0.2s ease",
             ...getSelectedStyles('ALL', selectedStatusFilter === 'Failure'),
@@ -426,7 +426,10 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             sx={{
               fontSize: "12px",
               fontWeight: 500,
-              color: "#DB1500",
+              color: "#2F3A4C",
+              background: "#f0f0f0",
+              borderradius: "16px",
+              padding: "4px",
             }}
           >
             {String(statusCounts.failure).padStart(2, "0")}
@@ -589,9 +592,9 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                   {/* Server Name */}
                   <TableCell
                     sx={{
-                      fontSize: "14px",
+                      fontSize: "13px",
                       color: "#102459",
-                      fontWeight: 500,
+                      fontWeight: 600,
                       padding: "8px 10px",
                       cursor: "pointer",
                       fontFamily:"Johnson Text"
@@ -617,6 +620,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                         fontSize: "12px",
                         fontWeight: 500,
                         padding: "0 8px",
+                        borderRadius:"6px",
                         ...getServerStatusStyle(server.status),
                         "& .MuiChip-label": {
                           padding: "0",
