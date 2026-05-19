@@ -1,83 +1,3 @@
-// // import axios from "axios";
-
-// // const axiosInstance = axios.create({
-// //   baseURL: process.env.STAR_API_URL ?? "http://localhost:3001/api",
-// // });
-
-// // axiosInstance.interceptors.request.use(
-// //   (config:any) => {
-// //     const token = sessionStorage.getItem("msal_id_token");
-// //     if (token) {
-// //       config.headers.Authorization = `Bearer ${token}`;
-// //     }
-// //     return config;
-// //   },
-// //   (error) => {
-// //     return Promise.reject(error);
-// //   }
-// // );
-
-// // axiosInstance.interceptors.response.use(
-// //   (response) => response,
-// //   (error) => {
-// //     if (error.response && error.response?.data?.message === "Session Expired") {
-// //       sessionStorage.clear();
-// //       window.location.href = "/session-expired";
-// //     }
-// //     if (error.response && error.response.status === 404) {
-// //       window.location.href = "/not-found";
-// //     }
-
-// //     return Promise.reject(error);
-// //   }
-// // );
-
-// // export default axiosInstance;
-
-// // iasphere/src/axiosInstance.ts
-// import axios from "axios";
-
-// const axiosInstance = axios.create({
-//   baseURL: process.env.STAR_API_URL ?? "http://localhost:3001/api",
-// });
-
-// // const token = sessionStorage.getItem("msal_id_token");
-
-// // export const AxiosInstance = new AxiosInstanceClass(
-// //   `${
-// //     process.env.REACT_APP_BACKEND_URL
-// //       ? process.env.REACT_APP_BACKEND_URL
-// //       : "http://localhost:3001"
-// //   }`
-// // ).init(token);
-
-// axiosInstance.interceptors.request.use(
-//   (config) => {
-//     const token = sessionStorage.getItem("msal_id_token");
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error)
-// );
-
-// axiosInstance.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     if (error.response?.data?.message === "Session Expired") {
-//       sessionStorage.clear();
-//       window.location.href = "/session-expired";
-//     }
-//     if (error.response?.status === 404) {
-//       window.location.href = "/not-found";
-//     }
-//     return Promise.reject(error);
-//   }
-// );
-
-// export default axiosInstance;
-
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
@@ -92,7 +12,7 @@ const axiosInstance = axios.create({
 
 // ------------------ TOKEN HELPERS ------------------
 
-const getAccessToken = () => cookies.get('token');
+const getAccessToken = () => cookies.get('iasphere_access_token');
 const getRefreshToken = () => cookies.get('refreshToken');
 const getTokenExpiry = () => cookies.get('tokenValidity');
 
@@ -124,7 +44,7 @@ const refreshBackendToken = async () => {
 
     const { accessToken, refreshToken: newRT, expiresOn } = response.data.data;
 
-    cookies.set('token', accessToken, { path: '/' });
+    cookies.set('iasphere_access_token', accessToken, { path: '/' });
     cookies.set('refreshToken', newRT, { path: '/' });
     cookies.set('tokenValidity', expiresOn, { path: '/' });
 

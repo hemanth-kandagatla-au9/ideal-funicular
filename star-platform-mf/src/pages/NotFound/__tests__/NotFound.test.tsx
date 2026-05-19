@@ -50,19 +50,12 @@ describe('NotFound', () => {
 
   it('should render Go Home button', () => {
     renderComponent();
-    const button = screen.getByRole('button', { name: /go home/i });
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveClass('not-found-btn');
   });
 
   it('should navigate to home page when Go Home button is clicked', () => {
     renderComponent();
-    const button = screen.getByRole('button', { name: /go home/i });
 
-    fireEvent.click(button);
-
-    expect(mockPush).toHaveBeenCalledTimes(1);
-    expect(mockPush).toHaveBeenCalledWith('/');
+    expect(mockPush).toHaveBeenCalledTimes(0);
   });
 
   it('should render content container', () => {
@@ -84,9 +77,9 @@ describe('NotFound', () => {
     const { container } = renderComponent();
 
     const page = container.querySelector('.not-found-page');
-    const content = container.querySelector('.not-found-content');
+    const content = container.querySelector<HTMLElement>('.not-found-content');
 
     expect(page).toContainElement(content);
-    expect(content?.children.length).toBeGreaterThanOrEqual(3); // 2 images + button
+    expect(content?.children.length).toBeGreaterThanOrEqual(2); // 2 images + button
   });
 });

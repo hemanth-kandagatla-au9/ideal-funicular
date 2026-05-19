@@ -1,167 +1,3 @@
-// import React from "react";
-// import { useLocation } from "react-router-dom";
-// import Cookies from "universal-cookie";
-// import Navbar from "../Navigation/Navbar";
-// import styles from "./css/dashboard.module.scss";
-
-// const cookies = new Cookies();
-
-// const LandingPageHeader: React.FC = () => {
-//   const location = useLocation();
-//   const pathname = location.pathname;
-//   const username = cookies.get("user_fullname") ?? "User";
-
-//   const HOME_PATHS = ["/app/workflow"];
-
-//   const TAB_META: Record<
-//     string,
-//     { name: string; description: string }
-//   > = {
-//     "/app/workflow": {
-//       name: "My Space",
-//       description:
-//         "View your pinned workflows easily. Run, review, or favorite them, and organize into your preferred Labels.",
-//     },
-//     "/app/workflow/capability": {
-//       name: "Capability Registry",
-//       description:
-//         "Manage, and configure available capabilities. Integrate and organize your automation assets with ease.",
-//     },
-//     "/app/workflow/execution": {
-//       name: "Executions",
-//       description:
-//         "Check all execution logs in one spot and filter results by your preferred execution status.",
-//     },
-//     "/app/workflow/metrics": {
-//       name: "Metrics",
-//       description:
-//         "Track efficiency, savings, and adoption to see how automation drives business outcomes.",
-//     },
-//     "/app/workflow/nodemanagement": {
-//       name: "Node Management",
-//       description:
-//         "View and manage all connected nodes and their health status.",
-//     },
-//       "/app/workflow/approvalrequest": {
-//       name: "Approval Request",
-//       description:
-//         "View and manage all connected nodes and their health status.",
-//     },
-//       "/app/workflow/auditlogs": {
-//       name: "WF-Audit Logs",
-//       description:
-//         "View and manage all connected nodes and their health status.",
-//     },
-//     "/app/workflow/settings": {
-//       name: "Settings",
-//       description:
-//         "Configure workflow categories, triggers, and system preferences.",
-//     },
-//     // INSIGHTS
-//     "/app/users": {
-//       name: "Users",
-//       description:
-//         "Manage member profiles, assign roles, and enforce secure access control.",
-//     },
-//     "/app/AuditLogs": {
-//       name: "Audit Logs",
-//       description:
-//         "Track user actions, system changes, and security-sensitive events with accuracy.",
-//     },
-//     "/app/approvals": {
-//       name: "Request Approval",
-//       description:
-//         "",
-//     },
-//     "/app/approval_status": {
-//       name: "Approval Status",
-//       description:
-//         "Monitor current approval progress and workflow state transitions.",
-//     },
-//     "/app/sapfacts": {
-//       name: "SAP Facts",
-//       description:
-//         "Review SAP integration intelligence with actionable reporting.",
-//     },
-//     "/app/Cmdb": {
-//       name: "CMDB",
-//       description:
-//         "Manage configuration items, dependencies, and change tracking across environments.",
-//     },
-//     "/app/Codemarketplace": {
-//       name: "Code Marketplace",
-//       description:
-//         "Discover reusable workflow scripts and automation building blocks.",
-//     },
-//     "/app/report": {
-//       name: "Reports",
-//       description:
-//         "Generate, Customize and Manage reports.",
-//     },
-//     "/app/Settings": {
-//       name: "Settings",
-//       description:
-//         "Control Insights configuration, user permissions, and global behavior.",
-//     },
-//      "/app/risebot": {
-//       name: "Rise bot",
-//       description:
-//         "",
-//     },
-//     // "/app/authApp": {
-//     //   name: "Auth",
-//     //   description:
-//     //     "",
-//     // },
-//      "/app/schedule": {
-//       name: "schedule Jobs",
-//       description:
-//         "Manage ad hoc and scheduled tasks in one place",
-//     },
-//     "/app/ins_auth": {
-//       name: "Insights Auth",
-//       description:
-//         "Manage permissions and AD Groups",
-//     },
-//   };
-
-//   const matchedRoute = Object.keys(TAB_META).find(route =>
-//     pathname.startsWith(route)
-//   );
-
-//   const activeTab = matchedRoute ? TAB_META[matchedRoute] : null;
-
-//   // Home case
-//   if (HOME_PATHS.includes(pathname)) {
-//     return (
-//       <header className={styles.header}>
-//         {/* <h2 className={styles.lp_header_l1_welcome}>Welcome back {username}</h2> */}
-//         <div className = {styles.right_header}>
-//         <h2 className={styles.lp_header_l1_welcome}>Welcome back, {username} – My Space</h2>
-//         {location.pathname === pathname ?<p className = {styles.subheader_text} >{activeTab?.description || ""}</p> : "" }
-// </div>
-//         <Navbar />
-//       </header>
-//     );
-//   }
-
-//   // Header must be visible even for create/workflow
-// const isWorkflowCanvas =
-//   location.pathname === "/app/workflow/myspace-add"
-//   return (
-//     <header className={styles.header}>
-//       <div className={styles.lp_header_l1}>
-//         <h2>{activeTab?.name || ""}</h2>
-//         <p className={styles.subheader_text}>
-//           {activeTab?.description || ""}
-//         </p>
-//       </div>
-//       <Navbar />
-//     </header>
-//   );
-// };
-
-// export default LandingPageHeader;
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -210,6 +46,14 @@ const TAB_META: Record<string, { name: string; description?: string }> = {
     name: 'WF-Settings',
     description: 'Configure workflow categories, triggers, and system preferences.',
   },
+  '/app/workflow/auth': {
+    name: 'WF User Authorisation',
+    description: '',
+  },
+  '/app/workflow/helpcontent': {
+    name: 'Help Content',
+    description: '',
+  },
 
   // INSIGHTS
   '/app/users': {
@@ -225,7 +69,7 @@ const TAB_META: Record<string, { name: string; description?: string }> = {
     description: '',
   },
   '/app/approval_status': {
-    name: 'Approval Status',
+    name: 'Request Status',
     description: 'Monitor current approval progress and workflow state transitions.',
   },
   '/app/sapfacts': {
@@ -249,8 +93,8 @@ const TAB_META: Record<string, { name: string; description?: string }> = {
     name: 'Settings',
     description: 'Control Insights configuration, user permissions, and global behavior.',
   },
-  '/app/risebot': {
-    name: 'Rise bot',
+  '/app/riseagent': {
+    name: 'Rise Agent',
     description: '',
   },
   '/app/schedule': {
@@ -258,13 +102,32 @@ const TAB_META: Record<string, { name: string; description?: string }> = {
     description: 'Manage ad hoc and scheduled tasks in one place',
   },
   '/app/ins_auth': {
-    name: 'Insights Auth',
-    description: 'Manage permissions and AD Groups',
+    name: 'User Authorisation',
+    description: '',
+  },
+  '/app/pipeline-configuration': {
+    name: 'Pipeline Configuration',
+    description:
+      'Define approval stages, assign approvers, and control how changes move across environments.',
+  },
+  '/app/cm-settings': {
+    name: 'CM-Settings',
+    description: 'Configure module types,teams and Approval categeories.',
+  },
+  '/app/cm-approvalrequest': {
+    name: 'Approval Request',
+    description:
+      'View and manage approval requests, track their status, and review past decisions.',
+  },
+  '/app/cm-requeststatus': {
+    name: 'CM-Request Status',
+    description: 'Check the status of your approval requests and review past decisions..',
   },
 };
 
 const LandingPageHeader: React.FC = () => {
-  const { pathname } = useLocation();
+  const location = useLocation<{ deniedPath?: string }>();
+  const { pathname } = location;
   const username = cookies.get('user_fullname') ?? 'User';
 
   // longest route wins
@@ -275,6 +138,30 @@ const LandingPageHeader: React.FC = () => {
   const activeTab = matchedRoute ? TAB_META[matchedRoute] : null;
 
   const isWorkflowHome = pathname === '/app/workflow';
+
+  if (pathname === '/app/unauthorized') {
+    const deniedRoute = location.state?.deniedPath || sessionStorage.getItem('deniedRoute') || '';
+    const deniedMatch = deniedRoute
+      ? Object.keys(TAB_META)
+          .sort((a, b) => b.length - a.length)
+          .find((route) => deniedRoute.startsWith(route))
+      : null;
+    const deniedTabName = deniedMatch ? TAB_META[deniedMatch]?.name : 'Access Denied';
+
+    return (
+      <header className={styles.header}>
+        <div className={styles.lp_header_l1}>
+          <h2>{deniedTabName}</h2>
+          <p className={styles.subheader_text}>
+            {deniedMatch
+              ? `Access denied. You do not have permission to access ${deniedTabName}.`
+              : 'Access denied. You do not have permission to access this page.'}
+          </p>
+        </div>
+        <Navbar />
+      </header>
+    );
+  }
 
   if (isWorkflowHome) {
     return (

@@ -4,7 +4,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
 }
 .risebot_label1_div,
 .riseagent-risebot_label1_div {
@@ -12,7 +12,7 @@
 }
 .risebot_label1 {
   color: #344054 !important;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -21,7 +21,7 @@
 }
 
 .label2 {
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -33,7 +33,7 @@
 }
 
 .risebot_textBox {
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -48,7 +48,7 @@
   padding: 0px 8px;
 }
 .risebot_textBox::placeholder {
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   color: #7b7b7b !important;
   font-size: 14px;
   font-style: normal;
@@ -57,7 +57,7 @@
 }
 .risebot_buttonBox {
   cursor: pointer !important;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 13px;
@@ -99,7 +99,7 @@
 }
 
 .risebot_customDropdownTitle {
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -145,7 +145,7 @@
   border: unset !important;
   background-color: unset !important;
   border-radius: 36px !important;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   color: #102459 !important;
   font-size: 14px;
   font-style: normal;

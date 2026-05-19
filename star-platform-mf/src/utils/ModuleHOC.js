@@ -8,7 +8,23 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError() {
+  static getDerivedStateFromError(error) {
+    const isChunkError =
+      error?.name === 'ChunkLoadError' ||
+      error?.message?.includes('Loading chunk') ||
+      error?.message?.includes('loading CSS chunk') ||
+      error?.message?.includes('Failed to fetch');
+
+    if (isChunkError) {
+      const reloadCount = parseInt(sessionStorage.getItem('mfe_chunk_reload') || '0');
+
+      if (reloadCount < 1) {
+        sessionStorage.setItem('mfe_chunk_reload', '1');
+        window.location.reload();
+        return { hasError: false };
+      }
+    }
+
     return { hasError: true };
   }
 
@@ -17,9 +33,7 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
-    if (this.state.hasError) {
-      return <NotFound />;
-    }
+    if (this.state.hasError) return <NotFound />;
     return this.props.children;
   }
 }

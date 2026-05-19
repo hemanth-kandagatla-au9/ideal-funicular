@@ -87,7 +87,7 @@ a[aria-expanded="true"] {
 }
 
 .drawerTitle {
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 22px;
@@ -100,7 +100,7 @@ a[aria-expanded="true"] {
 }
 
 .titleDescription p {
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 13px;

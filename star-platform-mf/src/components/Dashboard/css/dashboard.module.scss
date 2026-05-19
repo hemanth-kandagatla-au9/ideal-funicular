@@ -9,13 +9,14 @@
   justify-content: space-between;
   padding: 0.5rem 2rem;
   margin-top: 80px;
+  // height: 20%;
   align-items: center;
   background: #ffffff;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 500;
+  z-index: 50;
 }
 .lp_header_l1_welcome {
   font-family: 'JohnsonDisplay-Medium' !important;
@@ -23,6 +24,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(0, 0, 0, 0);
+  font-size: calc(1.325rem + 0.9vw);
 }
 .lp_header_l1 h2 {
   font-family: 'JohnsonDisplay-Medium' !important;

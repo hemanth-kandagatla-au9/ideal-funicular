@@ -2,7 +2,7 @@
 
 /* Full Screen Container */
 .riseagent-bulkActionLogs {
-  height: 100vh;
+  height: calc(100vh - 80px);
   background: #f5f7fb;
   padding: 16px;
   display: flex;
@@ -61,7 +61,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: "Johnson Display", sans-serif;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
 }
 
 .ral-export {
@@ -77,7 +77,7 @@
   font-size: 13px;
   font-weight: 500;
   color: #374151;
-  font-family: "Johnson Display", sans-serif;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   transition: all 0.2s ease;
   outline: none;
 }
@@ -96,7 +96,8 @@
   flex: 1;
   display: flex;
   gap: 16px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   min-width: 0;
 }
 

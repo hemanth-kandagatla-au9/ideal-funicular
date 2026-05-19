@@ -7,21 +7,6 @@ import { useDispatch } from 'react-redux';
 const cookies = new Cookies();
 
 const LandingPage: React.FC = () => {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const fetchPermissions = async () => {
-  //     try {
-  //       const data = await getUserPermissions();
-  //       dispatch(setPermissions(data?.data?.permissions));
-  //       console.log(data, 'permissionsData');
-  //       localStorage.setItem('permissions', JSON.stringify(data));
-  //     } catch (error) {
-  //       console.error('Error fetching permissions:', error);
-  //     }
-  //   };
-
-  //   fetchPermissions();
-  // }, []);
   return (
     <div className={styles.landingContainer}>
       {/* Top Section */}

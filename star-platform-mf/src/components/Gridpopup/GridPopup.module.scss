@@ -11,7 +11,7 @@
   .searchContainer {
     margin-bottom: 0.75rem;
     width: 100%;
-    
+
     .searchInput {
       position: relative;
       display: flex;
@@ -47,14 +47,12 @@
       width: 100%;
       padding: 0;
       min-width: 150px;
-      
+
       &::placeholder {
         color: #9ca3af;
       }
     }
   }
-
-
 
   .noResults {
     grid-column: 1 / -1;
@@ -67,7 +65,7 @@
     color: #05060fcc;
     background: #f1f8ff;
     border-radius: 10px;
-    font-family: "Johnson Text";
+    font-family: 'Johnson Text';
     font-size: 12px;
     padding: 0.6rem 1rem;
     margin-bottom: 0.5rem;
@@ -94,7 +92,6 @@
 }
 
 .iconBox {
-  background-color: #fff;
   border-radius: 10px;
   padding: 0.6rem;
   font-size: 1.5rem;
@@ -124,7 +121,9 @@
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.2s ease, background 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    background 0.2s ease;
 
   svg {
     color: white;
@@ -144,20 +143,41 @@
   }
 
   &:hover {
-    background: #3ec06c;
+    // background: #3ec06c;
   }
 }
 
 .label {
   font-size: 0.8rem;
   color: #05060fcc;
-  display: block;           /* Necessary for max-width to work */
-  max-width: 75px;          /* Adjust this number to cut the text where you want */
-  white-space: nowrap;      /* Force text to stay on one line */
-  overflow: hidden;         /* Hide the rest of the text */
+  display: block; /* Necessary for max-width to work */
+  max-width: 75px; /* Adjust this number to cut the text where you want */
+  white-space: nowrap; /* Force text to stay on one line */
+  overflow: hidden; /* Hide the rest of the text */
   text-overflow: ellipsis;
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.appItem:hover {
+  background: #ecf1ff !important;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.appItem:hover .label {
+  background: #ecf1ff;
+
+  overflow: visible;
+  white-space: normal;
+}
+
+.appItem:hover .iconBox {
+  // background: transparent;
+}
+
+.appItem:hover .iconBox svg:hover {
+  color: #ecf1ff !important;
+  fill: #ecf1ff !important;
+}
 @keyframes popupFade {
   from {
     opacity: 0;

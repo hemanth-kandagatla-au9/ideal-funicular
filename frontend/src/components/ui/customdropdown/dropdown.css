@@ -1,6 +1,6 @@
 .select-tag {
   color: #404040;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -17,7 +17,7 @@
 }
 .risebot_dropdown-item:hover,
 .riseagent-risebot_dropdown-item:hover {
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: 500;
 }
@@ -48,14 +48,14 @@
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  font-family: "Johnson Text" !important;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif !important;
   font-size: 16px !important;
 }
 
 .risebot_dropdown-item,
 .riseagent-risebot_dropdown-item {
   position: relative;
-  font-family: kumbh Sans;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -82,7 +82,7 @@
   overflow: hidden;
   
   position: relative;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   color: #344054 !important;
   font-size: 14px;
   font-style: normal;
@@ -134,7 +134,7 @@
   right: 31.36%;
   top: 89.01%;
   bottom: 5.63%;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -234,7 +234,7 @@
   align-items: center;
   display: flex;
   justify-content: space-around;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -261,7 +261,7 @@
 .dropdown-content li span.optioncontent {
   width: fit-content !important;
   height: 16px;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;

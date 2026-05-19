@@ -17,7 +17,7 @@
 
 .header {
   display: flex;
-  flex-direction: "column";
+  flex-direction: 'column';
   justify-content: space-between;
   align-items: center;
   color: white;
@@ -34,7 +34,7 @@
 }
 
 .projectName {
-  font-family: "Kumbh Sans";
+  font-family: 'Kumbh Sans';
   font-weight: 700;
   font-style: Bold;
   font-size: 22px;
@@ -87,7 +87,7 @@
   width: 848px;
   align-self: center;
   color: #6e55c2;
-  font-family: "Kumbh Sans";
+  font-family: 'Kumbh Sans';
   font-size: 46px;
   font-weight: 600;
 }

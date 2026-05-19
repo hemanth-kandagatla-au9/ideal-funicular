@@ -1,6 +1,6 @@
 body {
   background-color: #e4e4e4 !important;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 14px;
@@ -95,4 +95,9 @@ code {
 .btn-warning a {
   color: white !important;
   text-decoration: none;
+}
+
+/* Global enforcement: ensure consistent font across app (falls back to Johnson if available) */
+html, body, * {
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif !important;
 }

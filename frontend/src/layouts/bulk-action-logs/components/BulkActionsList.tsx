@@ -10,6 +10,7 @@ import BulkActionCard from "./BulkActionCard";
 import BulkActionFilterDialog, { FilterState } from "./BulkActionFilterDialog";
 import bulkActionLogsActions from "../../../redux/actions/bulkActionLogs.action";
 import { getBulkActions, getBulkActionPagination, isLoadingBulkActions, getAvailableFilters } from "../../../redux/selectors/bulkActionLog.selectors";
+import DropdownComponent from "../../../components/ui/customdropdown/Dropdown.component";
 
 interface LeftPanelProps {
   selectedJobId: string | null;
@@ -27,7 +28,6 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
   const [currentFilters, setCurrentFilters] = useState<FilterState>({ type: [], user: [], status: "", dateRange: { from: "", to: "" } });
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showChips, setShowChips] = useState(true);
-  const pageSize = 10;
 
   // Convert Redux availableFilters format to component format
   const availableFilters = {
@@ -122,8 +122,8 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
     setCurrentFilters(filters);
   };
 
-  const handlePageChange = (newPageNo: number) => {
-    // Always include active filters when paginating — prevents unfiltered results on other pages
+  const handlePagination = (limit: number, pageNo: number) => {
+    // Pagination component uses 1-based pageNo; API uses 0-based
     const activeFilters: any = {};
     if (currentFilters.type.length > 0) activeFilters.type = currentFilters.type;
     if (currentFilters.user.length > 0) activeFilters.users = currentFilters.user;
@@ -137,49 +137,38 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
     dispatch(
       bulkActionLogsActions.fetchBulkActions({
         filters: { ...activeFilters, sortBy: "date", sortOrder },
-        pagination: { pageNo: newPageNo, limit: pageSize },
+        pagination: { pageNo: pageNo - 1, limit },
       }),
     );
   };
 
-  const totalPages = (pagination as any)?.totalPages || 1;
+  const totalPages = (pagination as any)?.totalPage || (pagination as any)?.totalPages || 1;
   const currentPageNo = (pagination as any)?.pageNo || 0;
-
-  // Convert to UI (1-based)
   const currentPage = currentPageNo + 1;
+  const currentLimit = (pagination as any)?.limit || 10;
 
-  // Ellipsis pagination logic
   const getPages = () => {
     const pages: (number | string)[] = [];
-
     if (totalPages <= 1) return [1];
-
     pages.push(1);
-
     if (currentPage > 3) pages.push("...");
-
     for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
       pages.push(i);
     }
-
     if (currentPage < totalPages - 2) pages.push("...");
-
     if (totalPages > 1) pages.push(totalPages);
-
     return pages;
   };
 
+  const perPageOptions = [
+    { key: "10", value: "10" },
+    { key: "20", value: "20" },
+    { key: "50", value: "50" },
+    { key: "100", value: "100" },
+  ];
+
   const hasDateRange = !!(currentFilters.dateRange?.from || currentFilters.dateRange?.to);
   const hasActiveFilters = currentFilters.type.length > 0 || currentFilters.user.length > 0 || !!currentFilters.status || hasDateRange;
-
-  const navBtn = {
-    border: "none",
-    background: "transparent",
-    cursor: "pointer",
-    fontSize: "14px",
-    padding: "4px",
-    color: "#6B7280",
-  };
 
   const chipSx = {
     height: "24px",
@@ -203,11 +192,12 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
         width: "540px",
         display: "flex",
         flexDirection: "column",
-        height: "100%",
+        alignSelf: "stretch",
         borderRadius: "12px",
         padding: "0px",
         gap: "4px",
-        overflow: "hidden",
+        minHeight: 0,
+        overflow: "visible",
       }}
     >
       {/* ===== 1. TOP CONTROL ROW ===== */}
@@ -454,57 +444,53 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
       {/* ===== 5. PAGINATION ===== */}
       <Box
         sx={{
-          width: "100%",
+          flexShrink: 0,
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
-          padding: "1px 4px",
+          justifyContent: "space-between",
+          padding: "4px",
+          border: "1px solid #E5EAF2",
+          borderRadius: "8px",
           backgroundColor: "#FFFFFF",
-          borderTop: "1px solid #E5EAF2",
-          boxSizing: "border-box",
         }}
       >
-        <Box
-          sx={{
-            background: "#FFFFFF",
-            padding: "0",
-            borderRadius: "0",
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-          }}
-        >
-          {/* Prev */}
+        {/* Left: Page X of Y */}
+        <Box sx={{ fontSize: "13px", color: "#374151", minWidth: "80px" }}>
+          Page {currentPage} of {totalPages}
+        </Box>
+
+        {/* Middle: Prev / numbered pages / Next */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: "4px" }}>
           <Box
             component="button"
-            onClick={() => handlePageChange(currentPageNo - 1)}
+            onClick={() => handlePagination(currentLimit, currentPage - 1)}
             disabled={currentPageNo === 0}
             sx={{
-              ...navBtn,
-              opacity: currentPageNo === 0 ? 0.4 : 1,
+              border: "none",
+              background: "transparent",
               cursor: currentPageNo === 0 ? "not-allowed" : "pointer",
+              fontSize: "16px",
+              padding: "2px 6px",
+              color: currentPageNo === 0 ? "#C0C0C0" : "#6B7280",
             }}
           >
             ‹
           </Box>
 
-          {/* Pages */}
           {getPages().map((p, i) =>
             p === "..." ? (
-              <Box key={i} sx={{ fontSize: "12px", px: "2px" }}>
-                ...
-              </Box>
+              <Box key={i} sx={{ fontSize: "12px", px: "2px", color: "#6B7280" }}>...</Box>
             ) : (
               <Box
                 key={i}
                 component="div"
-                onClick={() => handlePageChange((p as number) - 1)}
+                onClick={() => handlePagination(currentLimit, p as number)}
                 sx={{
-                  width: "18px",
-                  height: "18px",
-                  borderRadius: "3px !important",
-                  border: currentPage === p ? "1px solid #1d7bd8" : "",
-                  fontSize: "11px",
+                  width: "24px",
+                  height: "24px",
+                  borderRadius: "3px",
+                  border: currentPage === p ? "1px solid #1d7bd8" : "1px solid transparent",
+                  fontSize: "12px",
                   cursor: "pointer",
                   backgroundColor: currentPage === p ? "#2961F4" : "transparent",
                   color: currentPage === p ? "#fff" : "#374151",
@@ -518,19 +504,31 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
             ),
           )}
 
-          {/* Next */}
           <Box
             component="button"
-            onClick={() => handlePageChange(currentPageNo + 1)}
-            disabled={currentPageNo === totalPages - 1}
+            onClick={() => handlePagination(currentLimit, currentPage + 1)}
+            disabled={currentPage >= totalPages}
             sx={{
-              ...navBtn,
-              opacity: currentPageNo === totalPages - 1 ? 0.4 : 1,
-              cursor: currentPageNo === totalPages - 1 ? "not-allowed" : "pointer",
+              border: "none",
+              background: "transparent",
+              cursor: currentPage >= totalPages ? "not-allowed" : "pointer",
+              fontSize: "16px",
+              padding: "2px 6px",
+              color: currentPage >= totalPages ? "#C0C0C0" : "#6B7280",
             }}
           >
             ›
           </Box>
+        </Box>
+
+        {/* Right: Per page dropdown — override the hardcoded 30px height in DropdownComponent */}
+        <Box sx={{ minWidth: "110px", "& .riseagent-risebot_dropdown-outer > div": { height: "auto !important" } }}>
+          <DropdownComponent
+            id="bulkActionPerPage"
+            value={String(currentLimit)}
+            handleChange={(val: string) => handlePagination(Number(val), 1)}
+            data={perPageOptions}
+          />
         </Box>
       </Box>
     </Box>

@@ -62,7 +62,12 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
 
   const filteredServers = useMemo(() => {
     if (!jobDetails?.servers) return [];
-    let servers = jobDetails.servers.filter(server => server.serverName.toLowerCase().includes(searchText.toLowerCase()));
+    const q = searchText.toLowerCase();
+    let servers = jobDetails.servers.filter(server =>
+      server.serverName.toLowerCase().includes(q) ||
+      server.status.toLowerCase().includes(q) ||
+      (server.message || "").toLowerCase().includes(q),
+    );
 
     // Apply status filter if a status is selected
     if (selectedStatusFilter && selectedStatusFilter !== "ALL") {
@@ -439,7 +444,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
         }}
       >
         <TextField
-          placeholder="Search servers..."
+          placeholder="Search"
           size="small"
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
@@ -512,7 +517,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                 fontWeight: 700,
               }}
             >
-              Server Name
+              Hostname
             </Typography>
           </Box>
           <Box
@@ -653,7 +658,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                     fontSize: "12px",
                   }}
                 >
-                  {searchText ? "No servers found" : "No servers available"}
+                  {searchText ? "No results found" : "No servers available"}
                 </TableCell>
               </TableRow>
             )}

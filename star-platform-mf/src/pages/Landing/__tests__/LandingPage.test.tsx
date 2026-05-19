@@ -18,7 +18,6 @@ jest.mock('../../../components/Dashboard/Dashboard', () => {
 jest.mock('universal-cookie');
 
 describe('LandingPage', () => {
-
   it('should render the landing container', () => {
     const { container } = render(<LandingPage />);
     const landingContainer = container.querySelector('[class*="landingContainer"]');

@@ -1,160 +1,99 @@
 import axios from 'axios';
-import axiosInstance from './axiosInstance';
 import Cookies from 'universal-cookie';
+import axiosInstance from './axiosInstance';
+import { getAccessToken } from '../utils/tokenService';
 const cookies = new Cookies();
 
-export const authAction = async (data: any) => {
-  try {
-    const response = await axiosInstance.post('/auth/authAction', data);
-    return response.data;
-  } catch (error: any) {
-    return error.response;
+const AUTH_API_URL = process.env.AUTH_API_URL;
+const INSIGHTS_API_URL = process.env.REACT_APP_BACKEND_URL;
+
+const SESSION_EXPIRED_ROUTE = '/session-expired';
+
+const buildAuthHeaders = (token: string) => ({
+  Authorization: `Bearer ${token}`,
+  'Content-Type': 'application/json',
+  Accept: 'application/json',
+});
+
+const redirectToSessionExpired = () => {
+  if (window.location.pathname !== SESSION_EXPIRED_ROUTE) {
+    window.location.href = SESSION_EXPIRED_ROUTE;
   }
 };
 
+const isSessionExpiredError = (errorOrResponse: any) => {
+  const data = errorOrResponse?.response?.data ?? errorOrResponse?.data ?? {};
+  const message = `${data?.message ?? errorOrResponse?.message ?? ''}`.toLowerCase();
+  return (
+    message.includes('session expired') ||
+    message.includes('session-expired') ||
+    data?.errorCode === 'SESSION_EXPIRED'
+  );
+};
+
+// FUNCTION FOR GETTING NEW USER INFO AND FETCHING AD GROUPS
+export const loginInsights = async (data: any) => {
+  // const token = cookies.get('iasphere_id_token');
+  const token = await getAccessToken();
+  if (!token) {
+    console.log('Token not ready yet');
+    return false;
+  }
+
+  try {
+    await axios.post(`${INSIGHTS_API_URL}auth/loginInsights`, data, {
+      headers: buildAuthHeaders(token),
+    });
+
+    return true;
+  } catch (error: any) {
+    console.error('loginInsights failed', error);
+
+    if (isSessionExpiredError(error)) {
+      redirectToSessionExpired();
+    }
+
+    return false;
+  }
+};
+
+// FUNCTION FOR GETTING USER PERMISSINS USING INSIGHTS AUTH API
 export const getUserPermissions = async () => {
   try {
-    const AUTH_API_URL = process.env.AUTH_API_URL;
-    const getAccessToken = () => cookies.get('iasphere_access_token');
-    const token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    };
-    const response = await axios.get(`${AUTH_API_URL}/auth/getUserPermission`, {
-      headers: headers,
-    });
-    if (response.data?.statusCode === 401 && response?.data?.message === 'Session Expired') {
-      window.location.href = '/session-expired';
+    // const AUTH_API_URL = process.env.AUTH_API_URL;
+
+    if (!AUTH_API_URL) {
+      console.error('AUTH_API_URL is not defined');
       return null;
     }
-    console.log('response from getUserPermissions => ', response);
+
+    // Get token directly from MSAL cache — no cookies, no race conditions
+    const token = await getAccessToken();
+
+    if (!token) {
+      console.warn('getUserPermissions: no token available');
+      return null;
+    }
+
+    const response = await axios.get(`${AUTH_API_URL}/auth/getUserPermission`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+
+    if (isSessionExpiredError(response)) {
+      redirectToSessionExpired();
+      return null;
+    }
+
     return response.data;
   } catch (error: any) {
-    if (error?.response?.status === 401 || error?.response?.message === 'Session Expired') {
-      window.location.href = '/session-expired';
+    if (isSessionExpiredError(error)) {
+      redirectToSessionExpired();
       return null;
     }
     return error.response;
   }
 };
-
-// export const mockPermissions = [
-//   {
-//     project: "insights",
-//     modules: [
-//       {
-//         module: "Reports",
-//         hasAccess: true,
-//         permissions: [
-//           { label: "Reports : read", hasAccess: false },
-//           { label: "Reports : write", hasAccess: false },
-//           { label: "Reports : export", hasAccess: false },
-//           {
-//             label: "Reports : report_publish_as_system",
-//             hasAccess: false,
-//           },
-//         ],
-//       },
-//       {
-//         module: "Request Status",
-//         hasAccess: false,
-//         permissions: [
-//           { label: "Request Status : read", hasAccess: false },
-//           { label: "Request Status : write", hasAccess: false },
-//         ],
-//       },
-//       {
-//         module: "Users",
-//         hasAccess: false,
-//         permissions: [{ label: "Users : read", hasAccess: false }],
-//       },
-//       {
-//         module: "CMDB",
-//         hasAccess: true,
-//         permissions: [{ label: "CMDB : read", hasAccess: true }],
-//       },
-//     ],
-//   },
-//    {
-//     project : "agent",
-//     modules : [{
-//       module:"Rise Agent",
-//       hasAccess:true,
-//        permissions: [
-//           { label: "Rise Agent : read", hasAccess: true },
-//           { label: "Rise Agent : write", hasAccess: true },
-//         ],
-//     }]
-
-//   },
-//   {
-//     project: "workflow",
-//     modules: [
-//       {
-//         module: "Approval Flow",
-//         hasAccess: false,
-//         permissions: [
-//           { label: "Approval Flow : read", hasAccess: false },
-//           { label: "Approval Flow : write", hasAccess: false },
-//         ],
-//       },
-//       {
-//         module: "Workflow",
-//         hasAccess: false,
-//         permissions: [{ label: "Workflow : read", hasAccess: false }],
-//       },
-//       {
-//         module: "Execution",
-//         hasAccess: false,
-//         permissions: [{ label: "Execution : read", hasAccess: false }],
-//       },
-//       {
-//         module: "Capabilities",
-//         hasAccess: false,
-//         permissions: [{ label: "Capabilities : read", hasAccess: false }],
-//       },
-//       {
-//         module: "Approval Requests",
-//         hasAccess: true,
-//         permissions: [
-//           { label: "Approval Requests : read", hasAccess: false },
-//         ],
-//       },
-//       {
-//         module: "Audit",
-//         hasAccess: false,
-//         permissions: [{ label: "Audit : read", hasAccess: false }],
-//       },
-//       {
-//         module: "Analytics",
-//         hasAccess: false,
-//         permissions: [{ label: "Analytics : read", hasAccess: false }],
-//       },
-//       {
-//         module: "Manage Nodes",
-//         hasAccess: false,
-//         permissions: [{ label: "Manage Nodes : read", hasAccess: false }],
-//       },
-//       {
-//         module: "Approval Settings",
-//         hasAccess: false,
-//         permissions: [
-//           { label: "Approval Settings : read", hasAccess: false },
-//         ],
-//       },
-//       {
-//         module: "Category",
-//         hasAccess: false,
-//         permissions: [{ label: "Category : read", hasAccess: false }],
-//       },
-//       {
-//         module: "Server",
-//         hasAccess: false,
-//         permissions: [{ label: "Server : read", hasAccess: false }],
-//       },
-//     ],
-//   },
-// ];
-

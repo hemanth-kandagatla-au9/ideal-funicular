@@ -5,41 +5,51 @@ import {
   AuthenticationResult,
   EventMessage,
   EventType,
-  InteractionRequiredAuthError,
 } from '@azure/msal-browser';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-  Redirect,
-  useLocation,
-} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { msalConfig } from './utils/msalConfig';
 import { MsalProvider } from '@azure/msal-react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store';
+import { registerMsalInstance } from './utils/tokenService';
+import { initTokenBridge } from './utils/tokenBridge';
 import App from './App';
 import './App.css';
 
-// Flags for remotes
+const IS_LOCALHOST =
+  window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
 if (typeof window !== 'undefined') {
   (window as any).__POWERED_BY_IASPHERE__ = true;
   (window as any).__HOST_APP__ = true;
-  console.log('Host: IASphere mode activated');
-  console.log(process.env);
 }
 
 const msalInstance = new PublicClientApplication(msalConfig);
+initTokenBridge(msalInstance);
+console.log('✅ tokenBridge initialized:');
 
 async function renderApp() {
   await msalInstance.initialize();
 
-  // Handle redirect
-  const redirectResponse = await msalInstance.handleRedirectPromise();
-  if (redirectResponse?.account) {
-    msalInstance.setActiveAccount(redirectResponse.account);
+  try {
+    const redirectResponse = await msalInstance.handleRedirectPromise();
+
+    if (redirectResponse?.account) {
+      msalInstance.setActiveAccount(redirectResponse.account);
+
+      const savedUrl = sessionStorage.getItem('postLoginRedirect');
+      if (savedUrl) {
+        sessionStorage.removeItem('postLoginRedirect');
+        window.location.href = savedUrl;
+      } else {
+        window.location.href = '/app/workflow';
+      }
+      return;
+    }
+  } catch (err) {
+    console.error('handleRedirectPromise failed:', err);
+    return;
   }
 
   const accounts = msalInstance.getAllAccounts();
@@ -48,71 +58,12 @@ async function renderApp() {
   }
 
   msalInstance.addEventCallback((event: EventMessage) => {
-    if (event.eventType === EventType.LOGIN_SUCCESS) {
+    if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
       msalInstance.setActiveAccount((event.payload as AuthenticationResult).account);
     }
   });
 
-  const activeAccount = msalInstance.getActiveAccount();
-
-  if (!activeAccount) {
-    console.warn('No account — redirecting to login');
-    msalInstance.loginRedirect({ scopes: ['User.Read', 'profile', 'email'] });
-    return;
-  }
-
-  // LIVE, ASYNC, AUTO-REFRESHING
-  (window as any).__HOST_GET_TOKEN__ = async (): Promise<string | null> => {
-    try {
-      const response = await msalInstance.acquireTokenSilent({
-        scopes: ['User.Read', 'profile', 'email'],
-        account: activeAccount,
-        forceRefresh: false,
-      });
-
-      // Update storage for standalone fallback
-      sessionStorage.setItem('msal_access_token', response.accessToken);
-      sessionStorage.setItem('msal_id_token', response.idToken);
-
-      return response.accessToken;
-    } catch (error) {
-      console.warn('Silent token failed — falling back to popup', error);
-
-      // This triggers interactive re-auth without page reload
-      try {
-        const popupResponse = await msalInstance.acquireTokenPopup({
-          scopes: ['User.Read', 'profile', 'email'],
-          account: activeAccount,
-        });
-        sessionStorage.setItem('msal_access_token', popupResponse.accessToken);
-        return popupResponse.accessToken;
-      } catch (popupError) {
-        console.error('All token methods failed', popupError);
-        msalInstance.loginRedirect();
-        return null;
-      }
-    }
-  };
-
-  // Pre-warm token so first remote load is instant
-  await (window as any).__HOST_GET_TOKEN__();
-
-  // Bridge tokens for Insight Remote MF (non-breaking)
-  const existingGetToken = (window as any).__HOST_GET_TOKEN__;
-  (window as any).__HOST_GET_INSIGHTS_TOKEN__ = async () => {
-    const token = await existingGetToken?.();
-
-    (window as any).__INSIGHTS_AUTH__ = {
-      idToken: sessionStorage.getItem('msal_id_token') || null,
-      accessToken: sessionStorage.getItem('msal_access_token') || token || null,
-    };
-
-    return (window as any).__INSIGHTS_AUTH__.accessToken;
-  };
-
-  // Run once immediately so remote MF gets the tokens upfront
-  await (window as any).__HOST_GET_INSIGHTS_TOKEN__();
-  console.log('Insights Token Bridge Initialized');
+  registerMsalInstance(msalInstance);
 
   ReactDOM.render(
     <Provider store={store}>

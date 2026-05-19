@@ -5,6 +5,11 @@ body {
   border: 0px solid #dbdada;
 }
 
+/* Enforce canonical font stack across Agent Management area */
+[class*="riseagent"], .appname, .appname1, .riseagent-card-grid {
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif !important;
+}
+
 .overallContainer {
   padding-left: 25px;
   padding-right: 25px;
@@ -27,7 +32,7 @@ body {
 
 .appname {
   color: #2c2c2c;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-size: 20.356px;
   font-style: normal;
   font-weight: 700;
@@ -39,7 +44,7 @@ body {
 
 .appname1 {
   color: #6941c6;
-  font-family: "Johnson Text";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-size: 20.356px;
   font-style: normal;
   font-weight: 700;
@@ -52,7 +57,7 @@ body {
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
-  font-family: "Johnson Display";
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   position: relative;
 }
 

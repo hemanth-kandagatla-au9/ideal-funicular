@@ -1,26 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Kumbh+Sans:wght@100..900&family=Manrope:wght@200..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-@font-face {
-  
-  font-family: "Kumbh Sans", sans-serif;
-  src: url(./fonts/Roboto-Regular.ttf);
-}
-
-@font-face {
-  font-family: "Kumbh Sans", sans-serif;
-  src: url(./fonts/Roboto-Bold.ttf);
-}
-
-@font-face {
-  
-  font-family: "Kumbh Sans", sans-serif;
-  src: url(./fonts/Roboto-Medium.ttf);
-}
-
-@font-face {
-  font-family: "Kumbh Sans", sans-serif;
-  src: url(./fonts/Manrope-Regular.ttf);
-}
+/* Fonts are loaded via Google import above. Local font-face declarations removed to avoid conflicting names. */
 
 .spinning {
   animation: spin 1s linear infinite;
@@ -29,7 +9,7 @@
 .riseagent-refresh_spin {
   animation: spin 1s linear infinite;
   animation-direction: reverse;
-}
+} 
 
 .riseagent-mfe button,
 .riseagent-mfe .btn,
@@ -76,8 +56,13 @@
   color: #404040;
   font-size: 14px;
   font-weight: 500;
-  font-family:  "Johnson Text", sans-serif;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-style: normal;
+}
+
+/* Enforce canonical font stack across RiseAgent components to override scattered declarations */
+.riseagent-mfe, [class*="riseagent"], .riseagent-mfe * {
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif !important;
 }
 
 h1 {
@@ -85,12 +70,12 @@ h1 {
   font-size: 1.7em !important;
   font-style: normal;
   line-height: 1.5;
-  font-family: "Johnson Text", sans-serif;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
 }
 
 h2 {
   color: #404040;
-  font-family: "Johnson Text", sans-serif;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-weight: 500;
   font-size: 1.5em !important;
   margin-top: 1em;
@@ -98,7 +83,7 @@ h2 {
 
 h3 {
   color: #000;
-  font-family: "Johnson Text", sans-serif;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-weight: 500;
   font-size: 1.2em !important;
   margin-top: 1.2em;
@@ -106,7 +91,7 @@ h3 {
 
 h4 {
   color: #000;
-  font-family: "Johnson Text", sans-serif;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif;
   font-weight: 500;
   font-size: 1em !important;
   margin-top: 1.3em;

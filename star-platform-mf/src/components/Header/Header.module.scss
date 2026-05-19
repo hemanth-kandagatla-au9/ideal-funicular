@@ -2,36 +2,62 @@
   // display: flex;
   // flex-direction: column;
   // padding: 15px;
-
+  // height: 1rem;
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #FFFFFF !important;
+    background: #ffffff !important;
     color: #fff;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 80px;
-    z-index: 1000;
-  // border-bottom: 1px solid black;
+    z-index: 50;
+    &.dropdownActive {
+      z-index: 1000;
+    }
 
     .headerJNJ {
       display: flex;
       align-items: center;
       justify-content: center;
       // gap: 12px;
-        padding: 18px 32px;
-
+      padding: 18px 32px;
 
       .titleimage {
         height: 60px;
         width: 11rem;
       }
-
     }
-
+    .helpcontent {
+      background: #f1f1f1;
+      border-radius: 50px;
+      cursor: pointer;
+      width: 60px;
+      height: 60px;
+      img {
+        position: relative;
+        top: 15px;
+        left: 15px;
+      }
+    }
+    .Homebutton {
+      display: flex;
+      background: #f1f1f1;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'JohnsonDisplay-Medium';
+      gap: 12px;
+      padding: 10px 16px;
+      box-shadow: 0 1px 0 rgba(16, 24, 40, 0.04);
+      span {
+        color: #2961f4;
+        weight: 700;
+        font-family: 'JohnsonDisplay-Medium';
+      }
+    }
     .projectContainer {
       font-size: 25px;
       width: 188px;
@@ -43,14 +69,14 @@
       justify-content: center;
 
       .projectName {
-        font-family: "Kumbh Sans";
+        font-family: 'Kumbh Sans';
         font-weight: 700;
         font-style: Bold;
         font-size: 22px;
         line-height: 120%;
         letter-spacing: 0%;
         vertical-align: middle;
-        color: #906AFF;
+        color: #906aff;
         cursor: pointer;
       }
 
@@ -85,112 +111,113 @@
     //   }
     // }
     .userIconContainer {
-  background: #F1F1F1;
-  border-radius: 9999px;    
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-right: 45px;
-  padding: 6px 12px;
-  box-shadow: 0 1px 0 rgba(16,24,40,0.04);
-  min-width: 220px;
-  max-width: 320px;
+      background: #f1f1f1;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-right: 45px;
+      padding: 6px 12px;
+      box-shadow: 0 1px 0 rgba(16, 24, 40, 0.04);
+      min-width: 220px;
+      max-width: 320px;
       position: relative;
 
-  /* Avatar image when present */
-  .profile {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    flex-shrink: 0;
-    border: 2px solid rgba(0,0,0,0.04);
-  }
+      /* Avatar image when present */
+      .profile {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        flex-shrink: 0;
+        border: 2px solid rgba(0, 0, 0, 0.04);
+      }
 
-  .profileinitials {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #0b63e5;          
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-    border: 2px solid rgba(0,0,0,0.04);
-  }
+      .profileinitials {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #0b63e5;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 1;
+        letter-spacing: 0.5px;
+        flex-shrink: 0;
+        border: 2px solid rgba(0, 0, 0, 0.04);
+      }
 
-  .profilename {
-    font-family: "Johnson Display";
-    font-weight: 700;
-    color: #05060F;                
-    white-space: nowrap;          
-    overflow: hidden;
-    text-overflow: ellipsis;
-    // margin-left: 4px;
-    letter-spacing:0;
-  }
+      .profilename {
+        font-family: 'Johnson Display';
+        font-weight: 700;
+        color: #05060f;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 104px;
+        // margin-left: 4px;
+        letter-spacing: 0;
+      }
 
-  .arrowBtn {
-    appearance: none;
-    background: transparent;
-    border: 0;
-    padding: 6px 8px;
-    border-radius: 6px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
+      .arrowBtn {
+        appearance: none;
+        background: transparent;
+        border: 0;
+        padding: 6px 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-  .arrow {
-    font-size: 12px;
-    color: #334155;
-    margin-left: 6px;
-  }
+      .arrow {
+        font-size: 12px;
+        color: #334155;
+        margin-left: 6px;
+      }
 
-  .dropdown {
-    position: absolute;
-    right: 12px;
-    top: calc(100% + 8px);
-    min-width: 160px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 12px 24px rgba(2,6,23,0.08);
-    overflow: hidden;
-    transform-origin: top right;
-    opacity: 0;
-    transform: translateY(-6px) scale(0.98);
-    transition: opacity 160ms ease, transform 160ms ease;
-    pointer-events: none;
-    z-index: 1200;
-  }
+      .dropdown {
+        position: absolute;
+        right: 12px;
+        top: calc(100% + 8px);
+        min-width: 160px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 12px 24px rgba(2, 6, 23, 0.08);
+        overflow: hidden;
+        transform-origin: top right;
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+        transition:
+          opacity 160ms ease,
+          transform 160ms ease;
+        pointer-events: none;
+        z-index: 1200;
+      }
 
-  .dropdown.open {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-  }
+      .dropdown.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
 
-  .dropdown.closing {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.98);
-  }
+      .dropdown.closing {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+      }
 
-  .dropdownItem {
-    padding: 12px 14px;
-    cursor: pointer;
-    color: #0b1220;
-    font-weight: 600;
-    font-size: 14px;
+      .dropdownItem {
+        padding: 12px 14px;
+        cursor: pointer;
+        color: #0b1220;
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
   }
-}
-
-  }
-
 }

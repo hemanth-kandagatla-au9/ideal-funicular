@@ -1,0 +1,87 @@
+$tooltip-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+$tooltip-bg: rgba(97, 97, 97, 0.92);
+$tooltip-color: #fff;
+$tooltip-radius: 4px;
+$tooltip-font-size: 0.6875rem;
+$tooltip-font-weight: 500;
+$tooltip-padding: 4px 8px;
+$arrow-size: 5px;
+$transition-duration: 200ms;
+$transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+.tooltipWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip {
+  position: fixed;
+  background: $tooltip-bg;
+  color: $tooltip-color;
+  font-size: $tooltip-font-size;
+  font-weight: $tooltip-font-weight;
+  font-family: $tooltip-font-family;
+  line-height: 1.4;
+  letter-spacing: 0.01071em;
+  padding: $tooltip-padding;
+  border-radius: $tooltip-radius;
+  max-width: 300px;
+  white-space: nowrap;
+  word-wrap: break-word;
+  pointer-events: none;
+  user-select: none;
+  z-index: 999999;
+
+  &.copyable {
+    pointer-events: auto;
+    user-select: text;
+  }
+
+  opacity: 0;
+  transition: opacity $transition-duration $transition-easing;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  // ─── Arrow ───────────────────────────────────────────────────────
+  .arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  &.top .arrow {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: $arrow-size $arrow-size 0 $arrow-size;
+    border-color: $tooltip-bg transparent transparent transparent;
+  }
+
+  &.bottom .arrow {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 $arrow-size $arrow-size $arrow-size;
+    border-color: transparent transparent $tooltip-bg transparent;
+  }
+
+  &.left .arrow {
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: $arrow-size 0 $arrow-size $arrow-size;
+    border-color: transparent transparent transparent $tooltip-bg;
+  }
+
+  &.right .arrow {
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: $arrow-size $arrow-size $arrow-size 0;
+    border-color: transparent $tooltip-bg transparent transparent;
+  }
+}

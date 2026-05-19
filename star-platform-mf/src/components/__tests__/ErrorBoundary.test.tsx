@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import ErrorBoundary from '../ErrorBoundary';
 
 // Component that throws an error for testing
-const ThrowError = ({ shouldThrow }) => {
+const ThrowError = ({ shouldThrow }: { shouldThrow: boolean }) => {
   if (shouldThrow) {
     throw new Error('Test error');
   }
@@ -83,11 +83,11 @@ describe('ErrorBoundary', () => {
     );
 
     expect(spy).toHaveBeenCalled();
-    expect(console.log).toHaveBeenCalledWith(
+    expect(console.error).toHaveBeenCalledWith(
       'Error caught by getDerivedStateFromError: ',
       expect.any(Error)
     );
-    
+
     spy.mockRestore();
   });
 
@@ -98,11 +98,11 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    expect(console.log).toHaveBeenCalledWith(
+    expect(console.error).toHaveBeenCalledWith(
       'Error caught by ErrorBoundary: ',
       expect.any(Error),
       expect.objectContaining({
-        componentStack: expect.any(String)
+        componentStack: expect.any(String),
       })
     );
   });
@@ -117,7 +117,7 @@ describe('ErrorBoundary', () => {
     const fallbackElement = screen.getByText('Failed to load.');
     expect(fallbackElement).toHaveStyle({
       textAlign: 'center',
-      color: '#FF8500'
+      color: '#FF8500',
     });
     expect(fallbackElement.tagName).toBe('H4');
   });

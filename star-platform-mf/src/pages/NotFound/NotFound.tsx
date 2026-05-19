@@ -13,10 +13,6 @@ const NotFound = () => {
         <img src={NotFoundTextImg} alt="404 Header Text" className="not-found-text-img" />
 
         <img src={NotFoundBigImg} alt="404 Illustration" className="not-found-big-img" />
-
-        <button onClick={() => history.push('/')} className="not-found-btn">
-          Go Home
-        </button>
       </div>
     </div>
   );

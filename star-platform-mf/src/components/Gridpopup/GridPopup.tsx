@@ -1,18 +1,26 @@
-import React, { useMemo, useState } from "react";
-import { useHistory } from "react-router-dom";
-import styles from "./GridPopup.module.scss";
-import { CheckCircle2, Search } from "lucide-react";
-import { hasPermission } from "../../utils/permissionUtil";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import React, { useMemo, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import styles from './GridPopup.module.scss';
+import { CheckCircle2, Search } from 'lucide-react';
+import { hasPermission } from '../../utils/permissionUtil';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 interface GridDropdownProps {
-  apps: { id: string; name: string; icon: React.ReactNode; route: string, project: string, module: string }[];
+  apps: {
+    id: string;
+    name: string;
+    icon: React.ReactNode;
+    route: string;
+    project: string;
+    module: string;
+    openInNewWindow?: boolean;
+  }[];
   selectedIds: string[];
   onToggleSelect: (id: string) => void;
   onClose: () => void;
+  setOpenon?: () => void;
   maxSelected?: number;
-  setOpenon: () => void;
 }
 
 const GridDropdown: React.FC<GridDropdownProps> = ({
@@ -21,19 +29,43 @@ const GridDropdown: React.FC<GridDropdownProps> = ({
   onToggleSelect,
   onClose,
 }) => {
-  const permissions = useSelector((state: RootState) => state?.permissions?.permissions);
-  const { loaded } = useSelector((state: RootState) => state?.permissions);
   const history = useHistory();
   const [hovered, setHovered] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  console.log("permissions ============== = ",permissions)
-  const filteredApps = useMemo(() => {
-    if (!searchTerm.trim()) return apps;
-    const term = searchTerm.toLowerCase();
-    return apps.filter((app) => app.name.toLowerCase().includes(term));
-  }, [apps, searchTerm]);
+
+  const permissions = useSelector((state: RootState) => state.permissions?.permissions);
+  const loaded = useSelector((state: RootState) => state.permissions?.loaded);
+
+  const visibleApps = useMemo(() => {
+    if (!loaded || !Array.isArray(permissions)) return [];
+
+    const term = searchTerm.trim().toLowerCase();
+
+    return apps.filter((app) => {
+      const matchesSearch = !term || app.name.toLowerCase().includes(term);
+
+      const hasAccess = hasPermission(permissions, app.project, app.module);
+
+      return matchesSearch && hasAccess;
+    });
+  }, [apps, searchTerm, permissions, loaded]);
+
+  const navigateToApp = (app: any) => {
+    onClose();
+    if (app.openInNewWindow === true) {
+      window.open(
+        process.env.IACRYPT_URL || 'https://predev.iacrypt.ias.apps.jnj.com/',
+        '_blank',
+        'noopener,noreferrer'
+      );
+    } else {
+      history.push(app.route);
+    }
+  };
+
   return (
     <div className={styles.dropdownContainer}>
+      {/* Search */}
       <div className={styles.searchContainer}>
         <div className={styles.searchInput}>
           <Search size={16} className={styles.searchIcon} />
@@ -50,34 +82,21 @@ const GridDropdown: React.FC<GridDropdownProps> = ({
           />
         </div>
       </div>
+
       <p className={styles.iconpara}>
         Pin up to 3 menu items to the top. Drag to rearrange their order.
       </p>
 
+      {/* Content */}
       <div className={styles.dropdown}>
-        {filteredApps.length === 0 ? (
+        {!loaded ? (
+          <div className={styles.noResults}>Loading permissions…</div>
+        ) : visibleApps.length === 0 ? (
           <div className={styles.noResults}>No apps found</div>
         ) : (
-          filteredApps.map((app) => {
-            // Debug logging
-            const hasAccess = hasPermission(permissions, app?.project, app?.module);
-            console.log(`Checking permission for ${app.name}:`, {
-              project: app?.project,
-              module: app?.module,
-              loaded,
-              hasAccess,
-              permissionsLength: permissions?.length || 0
-            });
-            
-            // Only filter if permissions are loaded
-            if (loaded && !hasAccess) {
-              console.log(`❌ Filtering out ${app.name} - no permission`);
-              return null;
-            }
-            
-            console.log(`✅ Showing ${app.name}`);
+          visibleApps.map((app) => {
             const isSelected = selectedIds.includes(app.id);
-          const isHovered = hovered === app.id;
+            const isHovered = hovered === app.id;
 
             return (
               <div
@@ -86,18 +105,12 @@ const GridDropdown: React.FC<GridDropdownProps> = ({
                 onMouseEnter={() => setHovered(app.id)}
                 onMouseLeave={() => setHovered(null)}
               >
-                {/* Navigation icon */}
-                <div
-                  className={styles.iconBox}
-                  onClick={() => {
-                    onClose();
-                    history.push(app.route);
-                  }}
-                >
+                {/* App Icon */}
+                <div className={styles.iconBox} onClick={() => navigateToApp(app)}>
                   {app.icon}
                 </div>
 
-                {/* Pin toggle circle */}
+                {/* Pin Button */}
                 {(isHovered || isSelected) && (
                   <button
                     className={`${styles.pinButton} ${isSelected ? styles.active : ''}`}
@@ -110,13 +123,8 @@ const GridDropdown: React.FC<GridDropdownProps> = ({
                   </button>
                 )}
 
-                <div
-                  className={styles.label}
-                  onClick={() => {
-                    onClose();
-                    history.push(app.route);
-                  }}
-                >
+                {/* Label */}
+                <div className={styles.label} onClick={() => navigateToApp(app)}>
                   {app.name}
                 </div>
               </div>

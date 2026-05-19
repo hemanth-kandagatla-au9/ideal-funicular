@@ -1,0 +1,36 @@
+.access_denied_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  // background-color: #fff;
+  flex-direction: column;
+  width: 100%;
+}
+
+.access_denied_card {
+  text-align: center;
+  max-width: 400px;
+
+  .access_denied_title {
+    font-size: 22px;
+    font-weight: 500;
+    color: #0a5db7;
+    margin-bottom: 10px;
+    font-family: 'Johnson Display', sans-serif !important;
+  }
+
+  .access_denied_message {
+    font-size: 15px;
+    color: #555;
+  }
+}
+
+.icon_wrapper_image {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}

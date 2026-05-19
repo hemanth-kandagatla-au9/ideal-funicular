@@ -24,7 +24,7 @@
   font-weight: 700;
   color: #101828;
   margin: 0;
-  font-family: 'Johnson Text' !important;
+  font-family: "Kumbh Sans", "Johnson Text", sans-serif !important;
 }
 
 .add-user-modal-close {

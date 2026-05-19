@@ -1,5 +1,5 @@
 .host-header-container {
-  font-family: "Kumbh Sans" !important;
+  font-family: 'Kumbh Sans' !important;
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between !important;
@@ -36,7 +36,7 @@
 
 .activeTab {
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 3px;
     width: 70%;
@@ -71,7 +71,7 @@
 }
 
 .userName {
-  font-family: "Kumbh Sans";
+  font-family: 'Kumbh Sans';
   font-weight: 400;
   font-style: Regular;
   font-size: 16px;
@@ -82,7 +82,7 @@
 }
 
 .userRole {
-  font-family: "Kumbh Sans";
+  font-family: 'Kumbh Sans';
   font-weight: 400;
   font-style: Regular;
   font-size: 14px;
@@ -93,12 +93,12 @@
 
 .insightsRoot {
   width: 100%;
-  // height: calc(100vh - 205px); 
-  margin-top: 205px;    
+  // height: calc(100vh - 205px);
+  // margin-top: 205px;
   overflow-y: auto;
-  padding: 24px;
+  padding: 24px !important;
   background: #ffffff;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
 }
 
@@ -126,7 +126,7 @@
 .pagelayout {
   // display: flex;
   justify-content: space-between;
-//  padding: 3rem;
+  //  padding: 3rem;
   &__container {
     display: flex;
     position: relative;

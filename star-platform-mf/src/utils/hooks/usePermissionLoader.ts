@@ -1,74 +1,122 @@
-    import { useEffect, useRef } from 'react';
-    import { useDispatch, useSelector } from 'react-redux';
-    import { setPermissions } from '../../redux/slices/permissionSlice';
-    import { getUserPermissions } from '../../services/userServices';
-    import { RootState } from '../../redux/store';
+// import { useCallback, useEffect, useRef } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { setPermissions } from '../../redux/slices/permissionSlice';
+// import { getUserPermissions } from '../../services/userServices';
+// import { RootState } from '../../redux/store';
+// import { normalizePermissions } from '../permissionUtil';
+// import {authBootstrapState} from '../AuthBootstrap';
+// export const usePermissionLoader = (enabled = true) => {
+//   const dispatch = useDispatch();
+//   const { permissions, loaded } = useSelector((state: RootState) => state.permissions);
+//   const fetchedRef = useRef(false);
 
-    export const usePermissionLoader = () => {
-    const dispatch = useDispatch();
-    const { permissions, loaded } = useSelector((state: RootState) => state.permissions);
-    const fetchAttemptedRef = useRef(false);
+//   const refreshPermissions = useCallback(async () => {
+//     try {
 
-    useEffect(() => {
-        // Only attempt to fetch once per component mount
-        if (fetchAttemptedRef.current) {
-        return;
-        }
+//       const data = await getUserPermissions();
+//       if (data == null) return false;
+//       const permissionsToSet = normalizePermissions(data);
+//       dispatch(setPermissions(permissionsToSet));
+//       return true;
+//     } catch (error) {
+//       console.error('Failed to load permissions', error);
+//       dispatch(setPermissions([]));
+//       return true;
+//     }
+//   }, [dispatch]);
 
-        // If already loaded with permissions, skip fetch
-        if (loaded && permissions && permissions.length > 0) {
-        return;
-        }
+//   useEffect(() => {
+//     if (!enabled) return;
+// // if (!authBootstrapState.ready) return;
+//     if (fetchedRef.current) return;
 
-        fetchAttemptedRef.current = true;
+//     let isMounted = true;
+//     const tryLoad = async () => {
+//       if (!isMounted || fetchedRef.current) return;
+//       const done = await refreshPermissions();
+//       if (done && isMounted) {
+//         fetchedRef.current = true;
+//       }
+//     };
 
-        const fetchPermissions = async () => {
-        try {
-            const data = await getUserPermissions();
-            console.log('=== FULL API RESPONSE ===', data);
-            console.log('API Response Structure:', JSON.stringify(data, null, 2));
-            
-            // Extract permissions from the response
-            let permissionsToSet: any[] = [];
-            
-            if (data?.data?.permissions && Array.isArray(data.data.permissions)) {
-            permissionsToSet = data.data.permissions;
-            console.log('Found permissions in data.data.permissions');
-            } else if (Array.isArray(data)) {
-            permissionsToSet = data;
-            console.log('Response is already an array');
-            } else if (data?.permissions && Array.isArray(data.permissions)) {
-            permissionsToSet = data.permissions;
-            console.log('Found permissions in data.permissions');
-            } else {
-            console.warn('Unexpected permissions format. Received:', data);
-            permissionsToSet = [];
-            }
-            
-            // Log detailed permission structure
-            console.log('Permissions to set:', permissionsToSet);
-            if (permissionsToSet.length > 0) {
-              console.log('First permission item:', JSON.stringify(permissionsToSet[0], null, 2));
-              console.log('All projects in permissions:', permissionsToSet.map((p: any) => p.project));
-              permissionsToSet.forEach((proj: any) => {
-                console.log(`Project: ${proj.project}`, {
-                  modules: proj.modules?.map((m: any) => ({ module: m.module, hasAccess: m.hasAccess }))
-                });
-              });
-            }
-            
-            dispatch(setPermissions(permissionsToSet));
-        } catch (error) {
-            console.error('❌ Error fetching permissions:', error);
-            // Still dispatch empty array to mark as loaded
-            dispatch(setPermissions([]));
-        }
-        };
+//     tryLoad();
+//     const intervalId = window.setInterval(tryLoad, 10000);
+//     return () => {
+//       isMounted = false;
+//       window.clearInterval(intervalId);
+//     };
+//   }, [enabled, refreshPermissions]);
 
-        fetchPermissions();
-    }, []); // Empty dependency array - run only once on mount
+//   return { permissions, loaded, refreshPermissions };
+// };
+import { useCallback, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPermissions, setPermissionsError } from '../../redux/slices/permissionSlice';
+import { getUserPermissions } from '../../services/userServices';
+import { RootState } from '../../redux/store';
+import { normalizePermissions } from '../permissionUtil';
+import { authBootstrapState } from '../AuthBootstrap';
 
-    return { permissions, loaded };
+export const usePermissionLoader = (enabled = true) => {
+  const dispatch = useDispatch();
+  const { permissions, loaded } = useSelector((state: RootState) => state.permissions);
+
+  const fetchedRef = useRef(false);
+
+  // host/src/utils/hooks/usePermissionLoader.ts
+  const refreshPermissions = useCallback(async () => {
+    try {
+      const data = await getUserPermissions();
+      if (data == null) return false;
+
+      const permissionsToSet = normalizePermissions(data);
+      dispatch(setPermissions(permissionsToSet));
+
+      // 👇 bridge raw permissions to window for insights to pick up
+      (window as any).__INSIGHTS_PERMISSIONS__ = data;
+      window.dispatchEvent(new Event('INSIGHTS_PERMISSIONS_READY'));
+
+      return true;
+    } catch (error) {
+      dispatch(setPermissionsError());
+      return true;
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!enabled) return;
+    if (fetchedRef.current) return;
+
+    let cancelled = false;
+
+    const loadPermissions = async () => {
+      if (cancelled || fetchedRef.current) return;
+
+      const done = await refreshPermissions();
+
+      if (done && !cancelled) {
+        fetchedRef.current = true;
+      }
     };
 
-  
+    // If backend login already completed
+    if (authBootstrapState.ready) {
+      loadPermissions();
+      return;
+    }
+
+    // Otherwise wait for bootstrap event
+    const handleBootstrapReady = () => {
+      loadPermissions();
+    };
+
+    window.addEventListener('IAS_AUTH_READY', handleBootstrapReady);
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener('IAS_AUTH_READY', handleBootstrapReady);
+    };
+  }, [enabled, refreshPermissions]);
+
+  return { permissions, loaded, refreshPermissions };
+};

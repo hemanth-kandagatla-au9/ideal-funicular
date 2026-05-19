@@ -4,15 +4,26 @@ import { useMsal } from '@azure/msal-react';
 import { loginRequest } from '../../utils/msalConfig';
 
 const cookies = new Cookies();
+const COOKIE_PATH = '/';
+const COOKIE_DOMAINS = ['localhost', '.ias.apps.jnj.com'];
+const SESSION_COOKIE_KEYS = [
+  'token',
+  'refreshToken',
+  'tokenValidity',
+  'iasphere_access_token',
+  'iasphere_id_token',
+  'isAuthenticated',
+  'username',
+  'user_fullname',
+  'profile_image',
+];
 
 function removeCookieEverywhere(name: string) {
   try {
-    // default
-
-    cookies.remove(name, { path: '/', domain: "localhost" });
-    // known prod domain (from PageLayout)
-    cookies.remove(name, { path: '/', domain: '.ias.apps.jnj.com' });
-    // fallback: also try without explicit path
+    cookies.remove(name, { path: COOKIE_PATH });
+    COOKIE_DOMAINS.forEach((domain) => {
+      cookies.remove(name, { path: COOKIE_PATH, domain });
+    });
     cookies.remove(name);
   } catch {
     // ignore
@@ -26,8 +37,6 @@ export const SessionExpired: React.FC = () => {
     // Clear tokens / session state
     try {
       sessionStorage.clear();
-      sessionStorage.removeItem('msal_id_token');
-      sessionStorage.removeItem('msal_access_token');
     } catch {
       // ignore
     }
@@ -41,17 +50,7 @@ export const SessionExpired: React.FC = () => {
     }
 
     // Clear known cookies used across the app/session management
-    [
-      'token',
-      'refreshToken',
-      'tokenValidity',
-      'iasphere_access_token',
-      'iasphere_id_token',
-      'isAuthenticated',
-      'username',
-      'user_fullname',
-      'profile_image',
-    ].forEach(removeCookieEverywhere);
+    SESSION_COOKIE_KEYS.forEach(removeCookieEverywhere);
 
     // If there are other cookies, leaving them alone avoids breaking unrelated apps.
   }, []);

@@ -666,13 +666,13 @@ const manualSyncVersions = async () => {
   }
 };
 
-const getBulkActionLogs = async (filters: any = {}, pagination: any = { pageNo: 0, pageSize: 10 }) => {
+const getBulkActionLogs = async (filters: any = {}, pagination: any = { pageNo: 0, limit: 10 }) => {
   try {
-    const { pageNo, pageSize } = pagination;
-    
+    const { pageNo, limit, pageSize } = pagination;
+
     const payload = {
       pageNo: pageNo || 0,
-      pageSize: pageSize || 10,
+      pageSize: limit || pageSize || 10,
       ...filters
     };
     

@@ -16,6 +16,19 @@ interface PredevConfig extends webpack.Configuration {
 
 const predevConfig: PredevConfig = merge(typedCommonConfig, {
   mode: "development",
+  resolve: {
+    fullySpecified: false,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
+    ],
+  },
   output: {
     publicPath: "http://localhost:3005/",
   },
