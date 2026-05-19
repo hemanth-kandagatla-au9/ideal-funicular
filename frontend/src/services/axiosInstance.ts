@@ -1,7 +1,7 @@
 
 import axios, { AxiosInstance as AxiosInstanceType, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import Config from "../config/config";
-import { getIdToken } from "@/utils/TokenService";
+import { getAccessToken } from "@/utils/TokenService";
 
 class AxiosInstance {
   private baseURL: string;
@@ -28,7 +28,7 @@ class AxiosInstance {
   attachRequestInterceptor() {
     this.instance.interceptors.request.use(
       async (config) => {
-        const token = await getIdToken();
+        const token = await getAccessToken();
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }

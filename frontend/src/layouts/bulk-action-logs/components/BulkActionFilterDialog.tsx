@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Box, FormControlLabel, Radio, RadioGroup, Chip, FormControl, InputLabel, Select, MenuItem, OutlinedInput, SelectChangeEvent, Checkbox } from "@mui/material";
+import { Box, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 interface BulkActionFilterProps {
   open: boolean;
@@ -15,21 +16,28 @@ export interface FilterState {
   type: string[];
   user: string[];
   status: string;
+  dateRange: { from: string; to: string };
 }
 
-const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
-  open,
-  onClose,
-  onApply,
-  availableTypes,
-  availableUsers,
-  currentFilters,
-}) => {
+const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({ open, onClose, onApply, availableTypes, availableUsers, currentFilters }) => {
   const [filters, setFilters] = useState<FilterState>(currentFilters);
+  const [typeExpanded, setTypeExpanded] = useState(false);
+  const [userExpanded, setUserExpanded] = useState(false);
+
+  const handleDateChange = (field: "from" | "to", value: string) => {
+    setFilters(prev => ({ ...prev, dateRange: { ...prev.dateRange, [field]: value } }));
+  };
 
   useEffect(() => {
     setFilters(currentFilters);
   }, [currentFilters, open]);
+
+  useEffect(() => {
+    if (!open) {
+      setTypeExpanded(false);
+      setUserExpanded(false);
+    }
+  }, [open]);
 
   const handleTypeToggle = (type: string) => {
     setFilters(prev => ({
@@ -45,27 +53,13 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
     }));
   };
 
-  const handleTypeSelectChange = (event: SelectChangeEvent<string[]>) => {
-    const value = event.target.value as unknown as string[];
-    setFilters(prev => ({ ...prev, type: Array.isArray(value) ? value : [value] }));
-  };
-
-  const handleUserSelectChange = (event: SelectChangeEvent<string[]>) => {
-    const value = event.target.value as unknown as string[];
-    setFilters(prev => ({ ...prev, user: Array.isArray(value) ? value : [value] }));
-  };
-
   const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilters(prev => ({ ...prev, status: event.target.value }));
   };
 
-  const handleRemoveType = (type: string) =>
-    setFilters(prev => ({ ...prev, type: prev.type.filter(t => t !== type) }));
-
-  const handleRemoveUser = (user: string) =>
-    setFilters(prev => ({ ...prev, user: prev.user.filter(u => u !== user) }));
-
-  const handleClearAll = () => setFilters({ type: [], user: [], status: "" });
+  const handleClearAll = () => {
+    setFilters({ type: [], user: [], status: "", dateRange: { from: "", to: "" } });
+  };
 
   const handleApply = () => {
     onApply(filters);
@@ -73,46 +67,144 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
   };
 
   const statusOptions = ["Completed", "Partial", "Failed"];
+  if (!open) return null;
 
-  // Provide fallback mock data when callers don't pass available types/users
-  const types = Array.isArray(availableTypes) && availableTypes.length > 0
-    ? availableTypes
-    : ["Import", "Export", "Delete"];
-
-  const users = Array.isArray(availableUsers) && availableUsers.length > 0
-    ? availableUsers
-    : ["Alice", "Bob", "Charlie"];
-
-  // NOTE: Removed native StyledCheckbox — replaced lists with Select dropdowns
-
-  const chipSx = {
-    height: "22px",
-    fontSize: "10px",
-    fontWeight: 600,
-    backgroundColor: "#EFF6FF",
-    color: "#1D4ED8",
-    borderRadius: "4px",
-    border: "1px solid #BFDBFE",
-    "& .MuiChip-deleteIcon": {
-      color: "#93C5FD",
-      fontSize: "13px",
-      transition: "color 0.15s",
-      "&:hover": { color: "#1D4ED8" },
-    },
+  const sectionLabelSx = {
+    mb: "4px",
+    fontSize: "12px",
+    fontWeight: 700,
+    color: "#0e121b",
   };
 
-  if (!open) return null;
+  const renderAccordionSection = (label: string, items: string[], selected: string[], onToggle: (val: string) => void, expanded: boolean, setExpanded: (v: boolean) => void) => {
+    const hasSelection = selected.length > 0;
+    return (
+      <Box>
+        <Box sx={sectionLabelSx}>{label}</Box>
+        <Box
+          onClick={() => setExpanded(!expanded)}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            border: `1px solid ${expanded ? "#2961F4" : "#d1d5db"}`,
+            borderRadius: expanded ? "10px 10px 0 0" : "10px",
+            height: "36px",
+            padding: "0 10px",
+            cursor: "pointer",
+            backgroundColor: "#fff",
+            transition: "border-color 0.15s",
+            "&:hover": { borderColor: "#2961F4" },
+          }}
+        >
+          <Box
+            sx={{
+              fontSize: "13px",
+              color: hasSelection ? "#0e121b" : "#9CA3AF",
+              fontWeight: hasSelection ? 600 : 400,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              flex: 1,
+              mr: 1,
+            }}
+          >
+            {hasSelection ? `${selected.length} selected` : label}
+          </Box>
+          <KeyboardArrowDownIcon
+            sx={{
+              fontSize: "16px",
+              color: "#9CA3AF",
+              transition: "transform 0.2s",
+              transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+              flexShrink: 0,
+            }}
+          />
+        </Box>
+
+        {expanded && (
+          <Box
+            sx={{
+              border: "1px solid #2961F4",
+              borderTop: "none",
+              borderRadius: "0 0 10px 10px",
+              backgroundColor: "#fff",
+              maxHeight: "96px",
+              overflowY: "auto",
+              "&::-webkit-scrollbar": { width: "3px" },
+              "&::-webkit-scrollbar-track": { background: "transparent" },
+              "&::-webkit-scrollbar-thumb": { background: "#e0e0e0", borderRadius: "2px" },
+            }}
+          >
+            {items.map((item, idx) => {
+              const isChecked = selected.includes(item);
+              return (
+                <Box
+                  key={item}
+                  onClick={() => onToggle(item)}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: "28px",
+                    padding: "0 10px",
+                    cursor: "pointer",
+                    borderTop: idx === 0 ? "1px solid #f0f4ff" : "none",
+                    borderBottom: idx < items.length - 1 ? "1px solid #f0f4ff" : "none",
+                    backgroundColor: isChecked ? "#F5F8FF" : "transparent",
+                    "&:hover": { backgroundColor: "#EEF4FF" },
+                    "&:last-child": { borderRadius: "0 0 9px 9px" },
+                    userSelect: "none",
+                  }}
+                >
+                  <Box sx={{ width: 12, height: 12, flexShrink: 0, mr: "6px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    {isChecked ? (
+                      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" rx="3" fill="#2961F4" />
+                        <path d="M3.5 8L6.5 11L12.5 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    ) : (
+                      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" y="0.5" width="15" height="15" rx="2.5" fill="white" stroke="#d1d5db" />
+                      </svg>
+                    )}
+                  </Box>
+                  <Box sx={{ fontSize: "12px", color: "#374151", fontWeight: 500 }}>{item}</Box>
+                </Box>
+              );
+            })}
+          </Box>
+        )}
+      </Box>
+    );
+  };
+
+  const dateInputSx = (hasValue: boolean) => ({
+    height: "32px",
+    padding: "0 8px",
+    border: `1px solid ${hasValue ? "#2961F4" : "#d1d5db"}`,
+    borderRadius: "8px",
+    fontSize: "12px",
+    color: hasValue ? "#0e121b" : "#9CA3AF",
+    backgroundColor: "#fff",
+    outline: "none",
+    width: "100%",
+    boxSizing: "border-box",
+    cursor: "pointer",
+    fontFamily: "inherit",
+    "&:focus": { borderColor: "#2961F4", boxShadow: "0 0 0 2px rgba(41,97,244,0.08)" },
+    "&::-webkit-calendar-picker-indicator": { cursor: "pointer", opacity: 0.5, width: "12px", height: "12px" },
+  });
 
   return (
     <Box
       sx={{
         position: "absolute",
-        top: "48px",
+        top: "44px",
         right: "0px",
         zIndex: 1000,
         backgroundColor: "#ffffff",
-        width: "340px",
-        borderRadius: "16px",
+        width: "300px",
+        borderRadius: "14px",
         boxShadow: "0px 12px 30px rgba(41,97,244,0.12), 0px 6px 18px rgba(0,0,0,0.08)",
         border: "1px solid #e8f0ff",
         overflow: "hidden",
@@ -126,10 +218,10 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
           alignItems: "center",
           padding: "10px 14px",
           borderBottom: "1px solid #f0f0f0",
-          fontSize: "13px",
+          fontSize: "16px",
           fontWeight: 700,
           color: "#0e121b",
-          background: "linear-gradient(to bottom, #fafafa, #ffffff)",
+          borderRadius: "14px 14px 0 0",
         }}
       >
         <span>Filter</span>
@@ -147,7 +239,7 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
             "&:hover": { color: "#4A90E2" },
           }}
         >
-          <CloseIcon sx={{ fontSize: "18px" }} />
+          <CloseIcon sx={{ fontSize: "16px" }} />
         </Box>
       </Box>
 
@@ -156,150 +248,44 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "14px",
-          maxHeight: "380px",
+          gap: "10px",
+          padding: "10px 14px",
+          maxHeight: "calc(100vh - 180px)",
           overflowY: "auto",
-          padding: "14px",
-          "&::-webkit-scrollbar": { width: "5px" },
+          "&::-webkit-scrollbar": { width: "3px" },
           "&::-webkit-scrollbar-track": { background: "transparent" },
-          "&::-webkit-scrollbar-thumb": {
-            background: "#e0e0e0",
-            borderRadius: "3px",
-            "&:hover": { background: "#d0d0d0" },
-          },
+          "&::-webkit-scrollbar-thumb": { background: "#e0e0e0", borderRadius: "2px" },
         }}
       >
-        {/* TYPE - Checkboxes */}
-        <Box>
-          <Box
-            sx={{
-              mb: "6px",
-              fontSize: "11px",
-              fontWeight: 700,
-              color: "#0e121b",
-              textTransform: "uppercase",
-              letterSpacing: "0.5px",
-            }}
-          >
-            Type
-          </Box>
+        {/* TYPE */}
+        {renderAccordionSection("Type", availableTypes, filters.type, handleTypeToggle, typeExpanded, setTypeExpanded)}
 
-          <FormControl fullWidth size="small">
-            <InputLabel id="type-select-label">Type</InputLabel>
-            <Select
-              labelId="type-select-label"
-              multiple
-              value={filters.type}
-              onChange={handleTypeSelectChange}
-              input={<OutlinedInput label="Type" />}
-              sx={{
-                borderRadius: '12px',
-                height: '44px',
-                '& .MuiOutlinedInput-notchedOutline': { borderRadius: '12px' },
-                '& .MuiSelect-select': { padding: '12px 14px', display: 'flex', alignItems: 'center' },
-              }}
-              renderValue={(selected) => (
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {selected.length === 0 ? (
-                    <Box sx={{ color: '#9CA3AF', fontSize: '12px' }}>Select</Box>
-                  ) : (
-                    selected.map((value) => (
-                      <Chip key={value} label={value} onDelete={() => handleRemoveType(value)} size="small" sx={chipSx} />
-                    ))
-                  )}
-                </Box>
-              )}
-            >
-              {types.map((type) => (
-                <MenuItem key={type} value={type}>
-                  <Checkbox
-                    size="small"
-                    checked={filters.type.includes(type)}
-                    sx={{ color: '#d1d5db', '&.Mui-checked': { color: '#2961F4' }, marginRight: '8px' }}
-                  />
-                  {type}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+        {/* USER */}
+        {renderAccordionSection("User", availableUsers, filters.user, handleUserToggle, userExpanded, setUserExpanded)}
+
+        {/* DATE RANGE */}
+        <Box>
+          <Box sx={sectionLabelSx}>Date Range</Box>
+          <Box sx={{ display: "flex", gap: "8px" }}>
+            {(["from", "to"] as const).map(field => (
+              <Box key={field} sx={{ flex: 1, display: "flex", flexDirection: "column", gap: "3px" }}>
+                <Box sx={{ fontSize: "11px", color: "#6B7280", fontWeight: 500 }}>{field === "from" ? "From" : "To"}</Box>
+                <Box
+                  component="input"
+                  type="date"
+                  value={filters.dateRange?.[field] || ""}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleDateChange(field, e.target.value)}
+                  sx={dateInputSx(!!filters.dateRange?.[field])}
+                />
+              </Box>
+            ))}
+          </Box>
         </Box>
 
-        {/* USER - Checkboxes */}
+        {/* STATUS */}
         <Box>
-          <Box
-            sx={{
-              mb: "6px",
-              fontSize: "11px",
-              fontWeight: 700,
-              color: "#0e121b",
-              textTransform: "uppercase",
-              letterSpacing: "0.5px",
-            }}
-          >
-            User
-          </Box>
-
-          <FormControl fullWidth size="small">
-            <InputLabel id="user-select-label">User</InputLabel>
-            <Select
-              labelId="user-select-label"
-              multiple
-              value={filters.user}
-              onChange={handleUserSelectChange}
-              input={<OutlinedInput label="User" />}
-              sx={{
-                borderRadius: '12px',
-                height: '44px',
-                '& .MuiOutlinedInput-notchedOutline': { borderRadius: '12px' },
-                '& .MuiSelect-select': { padding: '12px 14px', display: 'flex', alignItems: 'center' },
-              }}
-              renderValue={(selected) => (
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {selected.length === 0 ? (
-                    <Box sx={{ color: '#9CA3AF', fontSize: '12px' }}>Tags</Box>
-                  ) : (
-                    selected.map((value) => (
-                      <Chip key={value} label={value} onDelete={() => handleRemoveUser(value)} size="small" sx={chipSx} />
-                    ))
-                  )}
-                </Box>
-              )}
-            >
-              {users.map((user) => (
-                <MenuItem key={user} value={user}>
-                  <Checkbox
-                    size="small"
-                    checked={filters.user.includes(user)}
-                    sx={{ color: '#d1d5db', '&.Mui-checked': { color: '#2961F4' }, marginRight: '8px' }}
-                  />
-                  {user}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-
-        {/* STATUS - Horizontal radio */}
-        <Box>
-          <Box
-            sx={{
-              mb: "6px",
-              fontSize: "11px",
-              fontWeight: 700,
-              color: "#0e121b",
-              textTransform: "uppercase",
-              letterSpacing: "0.5px",
-            }}
-          >
-            Status
-          </Box>
-
-          <RadioGroup
-            row
-            value={filters.status}
-            onChange={handleStatusChange}
-            sx={{ gap: "0px", flexWrap: "wrap" }}
-          >
+          <Box sx={sectionLabelSx}>Status</Box>
+          <RadioGroup row value={filters.status} onChange={handleStatusChange} sx={{ gap: "0px", flexWrap: "wrap" }}>
             {statusOptions.map(status => (
               <FormControlLabel
                 key={status}
@@ -309,7 +295,8 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
                     size="small"
                     sx={{
                       color: "#d1d5db",
-                      padding: "3px",
+                      padding: "2px",
+                      "& .MuiSvgIcon-root": { fontSize: "16px" },
                       "&.Mui-checked": { color: "#2961F4" },
                     }}
                   />
@@ -317,7 +304,7 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
                 label={status}
                 sx={{
                   margin: "0",
-                  marginRight: "12px",
+                  marginRight: "10px",
                   "& .MuiTypography-root": { fontSize: "12px", color: "#374151", fontWeight: 500 },
                 }}
               />
@@ -330,11 +317,12 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-end",
           alignItems: "center",
-          padding: "10px 14px",
+          gap: "10px",
+          padding: "8px 14px",
           borderTop: "1px solid #f0f0f0",
-          background: "linear-gradient(to top, #fafafa, #ffffff)",
+          borderRadius: "0 0 14px 14px",
         }}
       >
         <Box
@@ -344,40 +332,35 @@ const BulkActionFilterDialog: React.FC<BulkActionFilterProps> = ({
             background: "none",
             border: "none",
             cursor: "pointer",
-            padding: "0",
+            padding: "6px 4px",
             fontSize: "13px",
             fontWeight: 600,
             color: "#2961F4",
-            textTransform: "none",
-            letterSpacing: "0",
             "&:hover": { color: "#174FD1" },
           }}
         >
           Clear All
         </Box>
-        <Box sx={{ display: "flex", gap: "7px" }}>
-          <Box
-            component="button"
-            onClick={handleApply}
-            sx={{
-              background: "#2961F4",
-              color: "white",
-              border: "none",
-              fontSize: "11px",
-              fontWeight: 700,
-              borderRadius: "20px",
-              padding: "6px 14px",
-              cursor: "pointer",
-              boxShadow: "0px 2px 8px rgba(41,97,244,0.25)",
-              "&:hover": {
-                backgroundColor: "#174FD1",
-                boxShadow: "0px 4px 14px rgba(41,97,244,0.35)",
-                transform: "translateY(-1px)",
-              },
-            }}
-          >
-            Apply
-          </Box>
+        <Box
+          component="button"
+          onClick={handleApply}
+          sx={{
+            background: "#2961F4",
+            color: "white",
+            border: "none",
+            fontSize: "13px",
+            fontWeight: 600,
+            borderRadius: "20px",
+            padding: "6px 20px",
+            cursor: "pointer",
+            boxShadow: "0px 2px 8px rgba(41,97,244,0.25)",
+            "&:hover": {
+              backgroundColor: "#174FD1",
+              boxShadow: "0px 4px 14px rgba(41,97,244,0.35)",
+            },
+          }}
+        >
+          Apply
         </Box>
       </Box>
     </Box>

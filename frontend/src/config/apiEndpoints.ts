@@ -203,7 +203,7 @@ const apiEndpoints: ApiEndpoints = {
       scheduler: "/agents/updatejob",
       adSyncUp: "/agents/syncCMDBData",
       syncHealthConfigs: "/agents/syncAgentStatus",
-      upgrade: "/agents/upgrade",
+      upgrade: "/agents/agent-upgrade",
       upgradeBulk: "/agents/bulk/upgrade",
       download: "/agents/download",
       envUpgrade: "/agents/bulk/update-env",
@@ -217,7 +217,7 @@ const apiEndpoints: ApiEndpoints = {
     },
   },
   userAuthorization: {
-    baseURL: process.env.REACT_APP_USER_AUTH_URL || "https://predev.agent.ias.apps.jnj.com/api/agent",
+    baseURL: process.env.REACT_APP_USER_AUTH_URL,
     get: {
       users: "/auth/user-details",
       PermissionsList:"auth/permissionsList",
@@ -243,7 +243,7 @@ const apiEndpoints: ApiEndpoints = {
     baseUrl: process.env.REACT_APP_UTILITIES_URL || "https://dev.utilities.rise.apps.jnj.com",
   },
   RBAC_auth: {
-    baseUrl: process.env.AUTH_API_URL || `https://predev.insightsauth.ias.apps.jnj.com/api/insightsauth`,
+    baseUrl: process.env.AUTH_API_URL,
   },
 };
 

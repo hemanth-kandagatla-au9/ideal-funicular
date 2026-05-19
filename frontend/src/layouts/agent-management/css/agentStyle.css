@@ -409,14 +409,16 @@ body {
 }
 
 .riseagent-agentRowFirst {
-  min-width: 3%;
+  min-width: 0;
 }
 
 .riseagent-agentRowSecond {
-  min-width: 20%;
+  min-width: 0;
+  overflow: hidden;
 }
+
 .riseagent-agentRow {
-  min-width: 11.8%;
+  min-width: 0;
 }
 
 .riseagent-agentRowWrapper {

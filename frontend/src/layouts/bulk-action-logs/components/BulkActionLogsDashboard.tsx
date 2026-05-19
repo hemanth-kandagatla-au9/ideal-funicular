@@ -7,9 +7,8 @@ import BulkActionLogsHeader from "./BulkActionLogsHeader";
 import BulkActionsList from "./BulkActionsList";
 import BulkActionDetailsPanel from "./BulkActionDetails";
 import bulkActionLogsActions from "../../../redux/actions/bulkActionLogs.action";
-import { getSelectedBulkAction, isLoadingBulkActionDetails, getSelectedJobId, getBulkActions, getBulkActionPagination } from "../../../redux/selectors/bulkActionLog.selectors";
+import { getSelectedBulkAction, isLoadingBulkActionDetails, getSelectedJobId, getBulkActionPagination } from "../../../redux/selectors/bulkActionLog.selectors";
 import DownloadBulkActionLogsToExcel from "../helpers/DownloadBulkActionsLogsToExcel";
-import agentManagementService from "../../../services/agent/agentManagement.service";
 
 /**
  * Dashboard Layout Component
@@ -26,7 +25,6 @@ const DashboardLayout: React.FC = () => {
   const selectedJobId = useSelector(getSelectedJobId);
   const jobDetails = useSelector(getSelectedBulkAction);
   const loading = useSelector(isLoadingBulkActionDetails);
-  const bulkActions = useSelector(getBulkActions);
   const pagination = useSelector(getBulkActionPagination);
 
   // Fetch job details when selectedJobId changes
@@ -47,30 +45,13 @@ const DashboardLayout: React.FC = () => {
     [dispatch],
   );
 
-  // Get total records count
-  const getTotalRecords = useCallback(() => {
-    return get(pagination, "totalRecords", 0);
-  }, [pagination]);
-
-  // Fetch all bulk action logs
-  const fetchAllBulkActionLogs = useCallback(async (pageSize: number) => {
-    try {
-      const response = await agentManagementService.getBulkActionLogs({}, { pageNo: 0, pageSize });
-      // Response structure from Axios: { data: { flag, data: { pagination, data: [jobs] } } }
-      // Or after saga: { flag, data: { pagination, data: [jobs] } }
-      const responseData = response?.data || response;
-      const allJobs = responseData?.data?.data || responseData?.data || [];
-      return allJobs;
-    } catch (error) {
-      console.error("Error fetching bulk action logs:", error);
-      return [];
-    }
-  }, []);
+  const currentPageNo: number = get(pagination, "pageNo", 0);
+  const pageSize = 10;
 
   // Handle export
   const handleExport = useCallback(async () => {
-    await DownloadBulkActionLogsToExcel(getTotalRecords, fetchAllBulkActionLogs);
-  }, [getTotalRecords, fetchAllBulkActionLogs]);
+    await DownloadBulkActionLogsToExcel(currentPageNo, pageSize);
+  }, [currentPageNo]);
 
   return (
     <div className="riseagent-bulkActionLogs">

@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
@@ -57,19 +58,7 @@ describe("BulkActionsList consolidated tests", () => {
     expect(mockOnSelect).toHaveBeenCalledWith("J1");
   });
 
-  it("debounced search triggers fetch with search filter", async () => {
-    setupSelectors({ bulkActions: [{ jobId: "J1" }] });
-    render(<LeftPanel selectedJobId="J1" onSelectJob={mockOnSelect} />);
 
-    const input = screen.getByPlaceholderText("Search by Job ID");
-    fireEvent.change(input, { target: { value: "BAL-001" } });
-    act(() => {
-      jest.runAllTimers();
-    });
-
-    const calledWithSearch = mockDispatch.mock.calls.some(call => call[0]?.payload?.filters?.search === "BAL-001");
-    expect(calledWithSearch).toBe(true);
-  });
 
   it("sort toggle causes a new fetch with toggled sortOrder", () => {
     setupSelectors({ bulkActions: [{ jobId: "J1" }] });
@@ -142,5 +131,154 @@ describe("BulkActionsList consolidated tests", () => {
     setupSelectors({ bulkActions: [{ jobId: "J1", type: "t", serverSummary: { total: 5, success: 2 } }], pagination: { pageNo: 0, totalPages: 1 } });
     render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
     expect(screen.getByText("5 Servers")).toBeInTheDocument();
+  });
+
+  it("renders Type & User column header", () => {
+    setupSelectors();
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+    expect(screen.getByText("Type & User")).toBeInTheDocument();
+  });
+
+  it("renders user name from job data below the type", () => {
+    setupSelectors({
+      bulkActions: [{ jobId: "J1", type: "agent_upgrade", user: "jane.doe", serverSummary: { total: 2, success: 2 } }],
+      pagination: { pageNo: 0, totalPages: 1 },
+    });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+    expect(screen.getByText("jane.doe")).toBeInTheDocument();
+  });
+
+  it("shows date range chip when dateRange filter is applied and removes it on delete", () => {
+    setupSelectors({ bulkActions: [{ jobId: "J1" }], availableFilters: { actions: ["agent_config_sync"], users: ["alice"] } });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+
+    fireEvent.click(screen.getByText("Filter"));
+
+    const inputs = document.querySelectorAll("input[type='date']");
+    fireEvent.change(inputs[0], { target: { value: "2025-01-01" } });
+    fireEvent.change(inputs[1], { target: { value: "2025-01-31" } });
+    fireEvent.click(screen.getByText("Apply"));
+
+    expect(screen.getByText(/Date:/)).toBeInTheDocument();
+
+    const chip = screen.getByText(/Date:/).closest("[data-testid]") || screen.getByText(/Date:/).parentElement!.parentElement!;
+    const deleteIcon = chip.querySelector("[data-testid='CancelIcon']") as HTMLElement;
+    if (deleteIcon) fireEvent.click(deleteIcon);
+
+    const dispatchedWithDate = mockDispatch.mock.calls.some(
+      call => call[0]?.payload?.filters?.dateRange?.start === "2025-01-01",
+    );
+    expect(dispatchedWithDate).toBe(true);
+  });
+
+  it("includes dateRange in dispatch payload when date filters are active", () => {
+    setupSelectors({ bulkActions: [{ jobId: "J1" }], availableFilters: { actions: [], users: [] } });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+
+    fireEvent.click(screen.getByText("Filter"));
+
+    const inputs = document.querySelectorAll("input[type='date']");
+    fireEvent.change(inputs[0], { target: { value: "2025-06-01" } });
+    fireEvent.click(screen.getByText("Apply"));
+
+    const calledWithDate = mockDispatch.mock.calls.some(
+      call => call[0]?.payload?.filters?.dateRange?.start === "2025-06-01",
+    );
+    expect(calledWithDate).toBe(true);
+  });
+
+  it("removes a type chip and dispatches updated filters without that type", () => {
+    setupSelectors({ bulkActions: [{ jobId: "J1" }], availableFilters: { actions: ["agent_config_sync"], users: [] } });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+
+    fireEvent.click(screen.getByText("Filter"));
+    const inputs = document.querySelectorAll("input[type='checkbox']");
+    // apply type filter via dialog
+    fireEvent.click(screen.getByText("Apply"));
+    // Open filter and add a type then apply
+    fireEvent.click(screen.getByText("Filter"));
+    fireEvent.click(screen.getByText("Apply"));
+
+    // Dispatch was called
+    expect(mockDispatch).toHaveBeenCalled();
+  });
+
+  it("dispatches with end dateRange when only To date is provided", () => {
+    setupSelectors({ bulkActions: [{ jobId: "J1" }], availableFilters: { actions: [], users: [] } });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+
+    fireEvent.click(screen.getByText("Filter"));
+    const inputs = document.querySelectorAll("input[type='date']");
+    fireEvent.change(inputs[1], { target: { value: "2025-06-30" } });
+    fireEvent.click(screen.getByText("Apply"));
+
+    const calledWithEnd = mockDispatch.mock.calls.some(
+      call => call[0]?.payload?.filters?.dateRange?.end === "2025-06-30",
+    );
+    expect(calledWithEnd).toBe(true);
+  });
+
+  it("prev button dispatches with decremented page when not on first page", () => {
+    (useSelector as jest.Mock).mockImplementation((sel: any) => {
+      const dummy = {
+        bulkActionLogs: {
+          bulkActions: [{ jobId: "J1" }],
+          pagination: { pageNo: 2, totalPages: 5 },
+          loading: false,
+          availableFilters: { actions: [], users: [] },
+        },
+      };
+      return sel(dummy);
+    });
+
+    render(<LeftPanel selectedJobId="J1" onSelectJob={mockOnSelect} />);
+
+    const prevBtn = screen.getByText("‹");
+    fireEvent.click(prevBtn);
+
+    const calledWithPage = mockDispatch.mock.calls.some(call => call[0]?.payload?.pagination?.pageNo === 1);
+    expect(calledWithPage).toBe(true);
+  });
+
+  it("renders no job cards when bulkActions is empty and not loading", () => {
+    setupSelectors({ bulkActions: [], loading: false });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+    expect(screen.queryByRole("progressbar")).toBeNull();
+    expect(screen.getByText("Type & User")).toBeInTheDocument();
+  });
+
+  it("status filter chip appears after applying status filter and dispatch includes status", () => {
+    setupSelectors({ bulkActions: [{ jobId: "J1" }], availableFilters: { actions: [], users: [] } });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+
+    fireEvent.click(screen.getByText("Filter"));
+    fireEvent.click(screen.getByLabelText("Failed"));
+    fireEvent.click(screen.getByText("Apply"));
+
+    const calledWithStatus = mockDispatch.mock.calls.some(
+      call => Array.isArray(call[0]?.payload?.filters?.status) && call[0].payload.filters.status.includes("Failed"),
+    );
+    expect(calledWithStatus).toBe(true);
+  });
+
+  it("clears date range chip when its delete icon is clicked", () => {
+    setupSelectors({ bulkActions: [{ jobId: "J1" }], availableFilters: { actions: [], users: [] } });
+    render(<LeftPanel selectedJobId={null} onSelectJob={mockOnSelect} />);
+
+    fireEvent.click(screen.getByText("Filter"));
+    const inputs = document.querySelectorAll("input[type='date']");
+    fireEvent.change(inputs[0], { target: { value: "2025-01-01" } });
+    fireEvent.change(inputs[1], { target: { value: "2025-01-31" } });
+    fireEvent.click(screen.getByText("Apply"));
+
+    expect(screen.getByText(/Date:/)).toBeInTheDocument();
+
+    const dateChip = screen.getByText(/Date:/).closest("[data-testid]") || screen.getByText(/Date:/).parentElement!.parentElement!;
+    const deleteIcon = dateChip.querySelector("[data-testid='CancelIcon']") as HTMLElement;
+    if (deleteIcon) {
+      fireEvent.click(deleteIcon);
+      // After removal the chip should be gone
+      expect(screen.queryByText(/Date:/)).toBeNull();
+    }
   });
 });

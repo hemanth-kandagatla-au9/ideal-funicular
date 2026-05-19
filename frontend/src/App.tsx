@@ -11,11 +11,17 @@ import { Provider } from "react-redux";
  
 import AgentManagement from "./layouts/agent-management/AgentManagement";
 import BulkActionLogs from "./layouts/bulk-action-logs/bulkActionLogs";
- 
 import BinaryVersions from "./layouts/agent-management/components/versionmanagement/BinaryVersions";
 import UserAuthorization from "./layouts/user-authorization/UserAuthorization";
 import Permissions from "./layouts/user-authorization/Permissions";
 import initializeStore from "./redux/initializeStore";
+import ProtectedRoute from "./ProtectedRoute";
+import {
+  RISE_AGENT_VERSIONMANAGEMENT_VIEW,
+  RISE_AGENT_BULK_LOGS_VIEW,
+  RISE_AGENT_USER_AUTHORIZATION_READ,
+  RISE_AGENT_PERMISSION_LIST_READ,
+} from "./config/agentPermissionLabels";
  
 declare global {
   interface Window {
@@ -43,10 +49,10 @@ const App: React.FC = () => {
           <ToastContainer />
           <Switch>
             <Route exact path="/" component={AgentManagement} />
-            <Route path="/versionmanagement" component={BinaryVersions} />
-            <Route path="/bulkActionLogs" component={BulkActionLogs} />
-            <Route path="/userAuthorization" component={UserAuthorization} />
-            <Route path="/permissions" component={Permissions} />
+            <ProtectedRoute path="/versionmanagement" permission={RISE_AGENT_VERSIONMANAGEMENT_VIEW} component={BinaryVersions} />
+            <ProtectedRoute path="/bulkActionLogs" permission={RISE_AGENT_BULK_LOGS_VIEW} component={BulkActionLogs} />
+            <ProtectedRoute path="/userAuthorization" permission={RISE_AGENT_USER_AUTHORIZATION_READ} component={UserAuthorization} />
+            <ProtectedRoute path="/permissions" permission={RISE_AGENT_PERMISSION_LIST_READ} component={Permissions} />
           </Switch>
         </BrowserRouter>
       </Provider>

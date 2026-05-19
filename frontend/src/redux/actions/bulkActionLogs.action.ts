@@ -109,9 +109,9 @@ const failureSyncBulkActionConfig = (error: { message: string }) => ({
  * ACTION 7: Export Bulk Action Logs
  * Exports bulk action logs to CSV or PDF
  */
-const exportBulkActionLogs = (filters?: BulkActionLogsFilter) => ({
+const exportBulkActionLogs = (pagination?: { pageNo: number; pageSize: number }) => ({
   type: BULK_ACTION_LOGS.EXPORT_BULK_ACTION_LOGS,
-  payload: { filters },
+  payload: { pagination: { pageNo: pagination?.pageNo ?? 0, pageSize: pagination?.pageSize ?? 10 } },
 });
 
 const requestExportBulkActionLogs = () => ({

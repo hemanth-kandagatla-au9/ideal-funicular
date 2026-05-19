@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
@@ -49,6 +50,7 @@ const defaultProps: any = {
   healthCheckAgents: jest.fn(),
   openAgentUpgradeModal: jest.fn(),
   openEnvUpgradeModal: jest.fn(),
+  syncAgentConfig: jest.fn(),
   downloadToExcel: jest.fn(),
   sortBy: "",
   sortOrder: null,

@@ -66,6 +66,7 @@ const selectStyles: StylesConfig<OptionType, true> = {
 };
 
 const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = props => {
+  const [searchInput, setSearchInput] = React.useState('');
   const {
     dataOptions,
     dropDownName,
@@ -137,6 +138,13 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = props => {
           tabSelectsValue={false}
           value={value}
           className="riseagent-dropdownMenus"
+          inputValue={searchInput}
+          onInputChange={(val) => setSearchInput(val)}
+          onKeyDown={(e) => {
+            if (e.key === ' ' && searchInput === '') {
+              e.preventDefault();
+            }
+          }}
         />
         {}
         {}

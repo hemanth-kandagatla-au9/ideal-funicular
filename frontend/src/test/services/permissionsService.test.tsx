@@ -6,32 +6,13 @@
  *  - Returns null on error (never throws)
  *  - GET request goes to /auth/getUserPermission
  *
- * NOTE: jest.resetModules() clears the _instance cache between test cases.
+ * NOTE: jest.doMock() inside beforeEach re-registers mocks after each
+ * jest.resetModules() call, ensuring the _instance cache is cleared and
+ * fresh mocks are picked up by the re-required service module.
  */
 
 let mockGet: jest.Mock;
 let mockInit: jest.Mock;
-
-jest.mock("../../services/axiosInstance", () => {
-  return jest.fn().mockImplementation(() => ({
-    init: (token: string) => {
-      mockInit(token);
-      return {
-        get: mockGet,
-      };
-    },
-  }));
-});
-
-jest.mock("../../config/config", () => ({
-  apiEndpoints: {
-    RBAC_auth: { baseUrl: "https://mock-auth-api" },
-  },
-}));
-
-jest.mock("../../utils/TokenService", () => ({
-  getIdToken: jest.fn().mockResolvedValue("mock-token"),
-}));
 
 // ─── tests ───────────────────────────────────────────────────────────────────
 
@@ -42,7 +23,26 @@ describe("permissionsService.fetchMyPermissions", () => {
     jest.resetModules();
     mockGet = jest.fn();
     mockInit = jest.fn();
-    // Re-import after reset to clear _instance cache
+
+    jest.doMock("../../services/axiosInstance", () =>
+      jest.fn().mockImplementation(() => ({
+        init: (token: string) => {
+          mockInit(token);
+          return { get: mockGet };
+        },
+      }))
+    );
+
+    jest.doMock("../../config/config", () => ({
+      apiEndpoints: {
+        RBAC_auth: { baseUrl: "https://mock-auth-api" },
+      },
+    }));
+
+    jest.doMock("../../utils/TokenService", () => ({
+      getAccessToken: jest.fn().mockResolvedValue("mock-token"),
+    }));
+
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     permissionsService = require("../../services/auth/permissionsService").default;
   });

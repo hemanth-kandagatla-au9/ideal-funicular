@@ -37,9 +37,7 @@
         ]
       ],
       "plugins": [
-        // These plugins are only active during testing
-        "@babel/plugin-transform-modules-commonjs",
-        "dynamic-import-node"
+        "@babel/plugin-transform-modules-commonjs"
       ]
     }
   }

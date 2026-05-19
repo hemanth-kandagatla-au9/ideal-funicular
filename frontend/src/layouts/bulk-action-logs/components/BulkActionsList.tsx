@@ -1,9 +1,7 @@
 /* eslint-disable import/namespace */
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, CircularProgress, Chip, Tooltip } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import TuneIcon from "@mui/icons-material/Tune";
 import ArrowUpIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownIcon from "@mui/icons-material/ArrowDownward";
 
@@ -26,9 +24,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
   const availableFiltersFromRedux = useSelector(getAvailableFilters);
 
   const [showFilterDialog, setShowFilterDialog] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
-  const [currentFilters, setCurrentFilters] = useState<FilterState>({ type: [], user: [], status: "" });
+  const [currentFilters, setCurrentFilters] = useState<FilterState>({ type: [], user: [], status: "", dateRange: { from: "", to: "" } });
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showChips, setShowChips] = useState(true);
   const pageSize = 10;
@@ -39,21 +35,9 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
     users: availableFiltersFromRedux?.users || [],
   };
 
-  // Debounce search query
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearchQuery(searchQuery);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [searchQuery]);
-
   // Fetch bulk action logs when filters/search changes (reset to page 0)
   useEffect(() => {
     const filters: any = {};
-
-    if (debouncedSearchQuery) {
-      filters.search = debouncedSearchQuery;
-    }
 
     if (currentFilters.type.length > 0) {
       filters.type = currentFilters.type;
@@ -64,6 +48,12 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
     if (currentFilters.status) {
       filters.status = [currentFilters.status];
     }
+    if (currentFilters.dateRange?.from || currentFilters.dateRange?.to) {
+      filters.dateRange = {
+        ...(currentFilters.dateRange.from && { start: currentFilters.dateRange.from }),
+        ...(currentFilters.dateRange.to && { end: currentFilters.dateRange.to }),
+      };
+    }
 
     // Dispatch Redux action to fetch bulk actions (always reset to page 0 when filters change)
     dispatch(
@@ -72,7 +62,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
         pagination: { pageNo: 0, limit: 10 },
       }),
     );
-  }, [currentFilters, debouncedSearchQuery, sortOrder, dispatch]);
+  }, [currentFilters, sortOrder, dispatch]);
 
   // Auto-select first job whenever list updates (initial load, filters, pagination, search)
   useEffect(() => {
@@ -97,6 +87,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
     return {
       jobId: job.jobId,
       type: job.type,
+      user: job.user || "",
       status: job.status as "Completed" | "Partial" | "Failed" | "InProgress",
       totalServers: job.serverSummary?.total || 0,
       serverIndicators,
@@ -134,10 +125,15 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
   const handlePageChange = (newPageNo: number) => {
     // Always include active filters when paginating — prevents unfiltered results on other pages
     const activeFilters: any = {};
-    if (debouncedSearchQuery) activeFilters.search = debouncedSearchQuery;
     if (currentFilters.type.length > 0) activeFilters.type = currentFilters.type;
     if (currentFilters.user.length > 0) activeFilters.users = currentFilters.user;
     if (currentFilters.status) activeFilters.status = [currentFilters.status];
+    if (currentFilters.dateRange?.from || currentFilters.dateRange?.to) {
+      activeFilters.dateRange = {
+        ...(currentFilters.dateRange.from && { start: currentFilters.dateRange.from }),
+        ...(currentFilters.dateRange.to && { end: currentFilters.dateRange.to }),
+      };
+    }
     dispatch(
       bulkActionLogsActions.fetchBulkActions({
         filters: { ...activeFilters, sortBy: "date", sortOrder },
@@ -173,7 +169,8 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
     return pages;
   };
 
-  const hasActiveFilters = currentFilters.type.length > 0 || currentFilters.user.length > 0 || !!currentFilters.status;
+  const hasDateRange = !!(currentFilters.dateRange?.from || currentFilters.dateRange?.to);
+  const hasActiveFilters = currentFilters.type.length > 0 || currentFilters.user.length > 0 || !!currentFilters.status || hasDateRange;
 
   const navBtn = {
     border: "none",
@@ -184,7 +181,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
     color: "#6B7280",
   };
 
-    const chipSx = {
+  const chipSx = {
     height: "24px",
     fontSize: "11px",
     fontWeight: 500,
@@ -226,50 +223,6 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
           position: "relative",
         }}
       >
-        {/* 1.1 SEARCH INPUT */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "6px",
-            height: "36px",
-            padding: "6px 16px",
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E0E3E7",
-            borderRadius: "36px",
-            cursor: "pointer",
-            fontSize: "13px",
-            fontWeight: 500,
-            color: "#374151",
-            flexShrink: 0,
-            "&:hover": {
-              backgroundColor: "#F9FAFB",
-            },
-          }}
-        >
-          <SearchIcon sx={{ width: "16px", height: "16px", color: "#9CA3AF", flexShrink: 0 }} />
-          <input
-            type="text"
-            placeholder="Search by Job ID"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            style={{
-              flex: 1,
-              border: "none",
-              outline: "none",
-              backgroundColor: "transparent",
-              fontSize: "13px",
-              fontFamily: "inherit",
-              color: "#374151",
-              minWidth: 0,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-            }}
-          />
-        </Box>
-
         {/* 1.3 FILTER BUTTON */}
         <Box
           component="button"
@@ -294,7 +247,14 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
             },
           }}
         >
-          <TuneIcon sx={{ width: "16px", height: "16px" }} />
+          <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.4238 7.08333C11.0786 7.08333 10.7988 6.80351 10.7988 6.45833L10.7988 0.625C10.7988 0.279822 11.0786 0 11.4238 0C11.7689 0 12.0488 0.279822 12.0488 0.625L12.0488 6.45833C12.0488 6.80351 11.7689 7.08333 11.4238 7.08333Z" fill="currentColor"/>
+            <path fillRule="evenodd" clipRule="evenodd" d="M3.125 3.75C4.85089 3.75 6.25 5.14911 6.25 6.875C6.25 8.60089 4.85089 10 3.125 10C1.39911 10 0 8.60089 0 6.875C0 5.14911 1.39911 3.75 3.125 3.75ZM5 6.875C5 5.83947 4.16053 5 3.125 5C2.08947 5 1.25 5.83947 1.25 6.875C1.25 7.91053 2.08947 8.75 3.125 8.75C4.16053 8.75 5 7.91053 5 6.875Z" fill="currentColor"/>
+            <path fillRule="evenodd" clipRule="evenodd" d="M11.4583 14.1667C13.1842 14.1667 14.5833 12.7676 14.5833 11.0417C14.5833 9.31578 13.1842 7.91667 11.4583 7.91667C9.73244 7.91667 8.33333 9.31578 8.33333 11.0417C8.33333 12.7676 9.73244 14.1667 11.4583 14.1667ZM13.3333 11.0417C13.3333 12.0772 12.4939 12.9167 11.4583 12.9167C10.4228 12.9167 9.58333 12.0772 9.58333 11.0417C9.58333 10.0061 10.4228 9.16667 11.4583 9.16667C12.4939 9.16667 13.3333 10.0061 13.3333 11.0417Z" fill="currentColor"/>
+            <path d="M2.46543 11.4583C2.46543 11.1132 2.74526 10.8333 3.09043 10.8333C3.43561 10.8333 3.71543 11.1132 3.71543 11.4583V17.2917C3.71543 17.6368 3.43561 17.9167 3.09043 17.9167C2.74526 17.9167 2.46543 17.6368 2.46543 17.2917V11.4583Z" fill="currentColor"/>
+            <path d="M11.4238 17.9167C11.0786 17.9167 10.7988 17.6368 10.7988 17.2917V15.625C10.7988 15.2798 11.0786 15 11.4238 15C11.7689 15 12.0488 15.2798 12.0488 15.625V17.2917C12.0488 17.6368 11.7689 17.9167 11.4238 17.9167Z" fill="currentColor"/>
+            <path d="M2.46543 0.625C2.46543 0.279822 2.74526 0 3.09043 0C3.43561 0 3.71543 0.279822 3.71543 0.625V2.29167C3.71543 2.63685 3.43561 2.91667 3.09043 2.91667C2.74526 2.91667 2.46543 2.63685 2.46543 2.29167V0.625Z" fill="currentColor"/>
+          </svg>
           <span>Filter</span>
         </Box>
         {/* 1.2 SORT BUTTON */}
@@ -338,7 +298,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
         />
       </Box>
 
-            {/* ── ACTIVE FILTER CHIPS ── */}
+      {/* ── ACTIVE FILTER CHIPS ── */}
       {hasActiveFilters && (
         <Box sx={{ display: "flex", flexDirection: "column", gap: "6px", flexShrink: 0, border: "1px solid #E2E8F0", borderRadius: "8px", padding: "8px 10px" }}>
           <Box sx={{ display: "flex", gap: "6px", flexWrap: "wrap", alignItems: "center" }}>
@@ -377,7 +337,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
                   textAlign: "center",
                 }}
               >
-                {currentFilters.type.length + currentFilters.user.length + (currentFilters.status ? 1 : 0)}
+                {currentFilters.type.length + currentFilters.user.length + (currentFilters.status ? 1 : 0) + (hasDateRange ? 1 : 0)}
               </Box>
             </Box>
 
@@ -385,6 +345,14 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
             {showChips && currentFilters.user.map(u => <Chip key={u} label={`User: ${u}`} onDelete={() => handleRemoveChip(u)} size="small" sx={chipSx} />)}
             {showChips && currentFilters.status && (
               <Chip label={`Status: ${currentFilters.status}`} onDelete={() => handleRemoveChip(currentFilters.status)} size="small" sx={chipSx} />
+            )}
+            {showChips && hasDateRange && (
+              <Chip
+                label={`Date: ${currentFilters.dateRange?.from || "…"} → ${currentFilters.dateRange?.to || "…"}`}
+                onDelete={() => setCurrentFilters(prev => ({ ...prev, dateRange: { from: "", to: "" } }))}
+                size="small"
+                sx={chipSx}
+              />
             )}
           </Box>
         </Box>
@@ -397,7 +365,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
           alignItems: "center",
           gap: "16px",
           padding: "12px",
-          color:"#FAF9F7",
+          color: "#FAF9F7",
           backgroundColor: "#FAF9F7",
           borderRadius: "16px",
           border: "1px solid #E2E8F0",
@@ -414,10 +382,10 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
             color: "#64748B",
             paddingRight: "12px",
             minWidth: 0,
-            fontFamily:"Johnson Text"
+            fontFamily: "Johnson Text",
           }}
         >
-          Job ID & Type
+          Type & User
         </Box>
         <Box
           sx={{
@@ -429,14 +397,12 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
             fontWeight: 500,
             color: "#64748B",
             paddingRight: "12px",
-            fontFamily:"Johnson Text"
+            fontFamily: "Johnson Text",
           }}
         >
           Status
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", flex: 0.2, fontSize: "16px",fontFamily:"Johnson Text",
-            fontWeight: 500,
-            color: "#64748B"}}>Servers</Box>
+        <Box sx={{ display: "flex", alignItems: "center", flex: 0.2, fontSize: "16px", fontFamily: "Johnson Text", fontWeight: 500, color: "#64748B" }}>Servers</Box>
       </Box>
 
       {/* ===== 5. JOBS LIST ===== */}
@@ -475,6 +441,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
               key={job.jobId}
               jobId={job.jobId}
               type={job.type}
+              user={job.user}
               status={job.status}
               totalServers={job.totalServers}
               serverIndicators={job.serverIndicators}
@@ -487,11 +454,14 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
       {/* ===== 5. PAGINATION ===== */}
       <Box
         sx={{
+          width: "100%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: "8px 12px",
-          flexShrink: 0,
+          padding: "1px 4px",
+          backgroundColor: "#FFFFFF",
+          borderTop: "1px solid #E5EAF2",
+          boxSizing: "border-box",
         }}
       >
         <Box
@@ -536,7 +506,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ selectedJobId, onSelectJob }) => 
                   border: currentPage === p ? "1px solid #1d7bd8" : "",
                   fontSize: "11px",
                   cursor: "pointer",
-                  backgroundColor: currentPage === p ? "#2b87e3" : "#FFFFFF",
+                  backgroundColor: currentPage === p ? "#2961F4" : "transparent",
                   color: currentPage === p ? "#fff" : "#374151",
                   display: "flex",
                   alignItems: "center",

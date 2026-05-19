@@ -1,6 +1,8 @@
 import { get } from "lodash";
 import { useMemo, useState } from "react";
 import type { Agent } from "@/types/AgentList";
+import useAgentPermissions from "../../../utils/hooks/useAgentPermissions";
+import AGENT_PERMISSIONS from "../../../config/agentPermissionLabels";
 
 export type HostnameAccordionDetailsProps = {
   agent: Agent & Record<string, any>;
@@ -141,8 +143,18 @@ const buildSections = (agent: Agent & Record<string, any>): Section[] => {
   ];
 };
 
+const SECTION_PERMISSIONS: Record<string, string> = {
+  Agent: AGENT_PERMISSIONS.RISE_AGENT_ACCORDION_AGENT,
+  Supervisor: AGENT_PERMISSIONS.RISE_AGENT_ACCORDION_SUPERVISOR,
+  Cybersphere: AGENT_PERMISSIONS.RISE_AGENT_ACCORDION_CYBERSPHERE,
+  Insights: AGENT_PERMISSIONS.RISE_AGENT_ACCORDION_INSIGHTS,
+  Workflow: AGENT_PERMISSIONS.RISE_AGENT_ACCORDION_WORKFLOW,
+};
+
 const HostnameAccordionDetails = ({ agent }: HostnameAccordionDetailsProps) => {
-  const sections = useMemo(() => buildSections(agent), [agent]);
+  const { hasPermission } = useAgentPermissions();
+  const allSections = useMemo(() => buildSections(agent), [agent]);
+  const sections = allSections.filter(s => hasPermission(SECTION_PERMISSIONS[s.title]));
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
 

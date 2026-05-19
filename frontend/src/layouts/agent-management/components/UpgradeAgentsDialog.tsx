@@ -68,6 +68,7 @@ const UpgradeAgentsDialog: React.FC<UpgradeAgentsDialogProps> = ({ showAgentUpgr
       const jsonData = {
         data,
         risebotAgentVersion,
+        mode: "bulk",
       };
       dispatch(agentManagementActions.upgradeSelectedAgents(jsonData));
       closeAgentUpgrade();

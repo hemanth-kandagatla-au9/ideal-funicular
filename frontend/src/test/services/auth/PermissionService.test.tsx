@@ -34,7 +34,7 @@ describe("permissionsService.fetchMyPermissions", () => {
     }));
 
     jest.doMock("../../../utils/TokenService", () => ({
-      getIdToken: jest.fn().mockResolvedValue("mock-token"),
+      getAccessToken: jest.fn().mockResolvedValue("mock-token"),
     }));
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires

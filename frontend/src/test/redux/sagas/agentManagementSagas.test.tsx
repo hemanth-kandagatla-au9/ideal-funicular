@@ -1297,28 +1297,6 @@ describe('saveSchedulerCommands saga', () => {
       .run();
   });
  
- it("should handle upgrade agent service failure with Promise.reject", () => {
-  const payload = {
-    agentManagerVersion: "1.0.0",
-    osAgentVersion: "1.0.0",
-    schedulerAgentVersion: "1.0.0",
-    data: [
-      {
-        hostname: "test",
-        agents: ["10001"],
-      },
-    ],
-  };
-  const error = new Error("Upgrade failed");
-
-  return expectSaga(upgradeAgents, { props: payload })
-    .put(agentManagementActions.requestUpgradeSelectedAgents())
-    .provide([
-      [call(agentManagementService.upgradeBulkAgents, payload), Promise.reject(error)]
-    ])
-    .put(agentManagementActions.failureUpgradeSelectedAgents(error))
-    .run();
-});
   it("check upgrade agent service error", () => {
     const payload = {
       agentManagerVersion: "1.0.0",

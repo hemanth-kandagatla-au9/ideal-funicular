@@ -74,6 +74,10 @@ interface BulkAgentsData {
   data: { hostname: string; [key: string]: any }[];
 }
 
+interface SingleUpgradeData {
+  hostname: string;
+  version: string;
+}
 
 interface VersionManagementParams {
   versionStatus?: string;
@@ -446,11 +450,22 @@ const healthCheckSelectedAgents = async (data: any) => {
   }
 };
 
-
 const upgradeAgents = async () => {
+ try {
+ const instance = await getAxiosInstance();
+ return await instance.get(`${rustAgent.get.repositories}`);
+  } catch (error: unknown) {
+    return handleAxiosError(error);
+  }
+};
+
+const upgradeAgent = async (jsonData: SingleUpgradeData) => {
   try {
     const instance = await getAxiosInstance();
-    return await instance.get(`${rustAgent.get.repositories}`);
+    return await instance.put(`${rustAgent.put.upgrade}`, {
+      hostname: [jsonData.hostname],
+      version: jsonData.version,
+    });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -460,10 +475,11 @@ const upgradeAgents = async () => {
 const upgradeBulkAgents = async (jsonData: BulkAgentsData) => {
   try {
     const { risebotAgentVersion, data } = jsonData;
-    const payload = Array.isArray(data) ? data : [data];
     const instance = await getAxiosInstance();
-    const endpoint = payload.length === 1 ? rustAgent.put.upgrade : rustAgent.put.upgradeBulk;
-    return await instance.put(`${endpoint}`, { hostname: payload.map((x) => x.hostname), version: risebotAgentVersion });
+    return await instance.put(`${rustAgent.put.upgradeBulk}`, {
+      hostname: data.map((x) => x.hostname),
+      version: risebotAgentVersion,
+    });
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -679,10 +695,10 @@ const getBulkActionDetails = async (jobId: string) => {
 };
 
 
-const exportBulkActionLogs = async () => {
+const exportBulkActionLogs = async (pageNo: number = 0, pageSize: number = 10) => {
   try {
     const instance = await getAxiosInstance();
-    return await instance.get(`${rustAgent.get.exportBulkActionLogs}`);
+    return await instance.get(`${rustAgent.get.exportBulkActionLogs}?pageNo=${pageNo}&pageSize=${pageSize}`);
   } catch (error: unknown) {
     return handleAxiosError(error);
   }
@@ -724,6 +740,7 @@ const agentManagementService = {
   restartSelectedAgents,
   healthCheckSelectedAgents,
   upgradeAgents,
+  upgradeAgent,
   upgradeBulkAgents,
   envUpgradeBulkAgents,
   envUpgradeSingle,

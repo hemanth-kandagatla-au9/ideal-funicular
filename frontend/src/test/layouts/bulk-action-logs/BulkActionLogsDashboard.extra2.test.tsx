@@ -30,16 +30,12 @@ describe("BulkActionLogsDashboard export error handling", () => {
 
   afterEach(() => jest.clearAllMocks());
 
-  it("still calls Download helper when fetchAllBulkActionLogs throws", async () => {
+  it("still calls Download helper with default pageNo when pagination has no pageNo", async () => {
     render((<Dashboard />) as any);
 
     const exportBtn = await screen.findByText("Export");
     fireEvent.click(exportBtn);
 
-    expect(mockDownload).toHaveBeenCalled();
-
-    // getTotalRecords should return 0 as provided by selector state
-    const passedGetTotal = mockDownload.mock.calls[0][0];
-    expect(passedGetTotal()).toBe(0);
+    expect(mockDownload).toHaveBeenCalledWith(0, 10);
   });
 });

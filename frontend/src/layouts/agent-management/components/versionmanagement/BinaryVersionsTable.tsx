@@ -48,46 +48,46 @@ const BinaryVersionsTable = ({ versions, pagination, onView, onEdit, style }: Bi
             },
           }}
           sx={{
-            border: "none",
-            height: "100%",
-            backgroundColor: "#ffffff",
-            "& .MuiDataGrid-main": {
-              backgroundColor: "#ffffff",
-            },
-            "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: "#ffffff",
-              overflowX: "hidden",
-            },
-            "& .MuiDataGrid-virtualScrollerContent": {
-              backgroundColor: "#ffffff",
-            },
-            "& .MuiDataGrid-virtualScrollerRenderZone": {
-              backgroundColor: "#ffffff",
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "#f9fafb",
-              fontWeight: "bold",
-              fontFamily: "Johnson text",
-            },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "none",
-              py: 2,
-              fontFamily: "Johnson text",
-            },
-            "& .MuiDataGrid-row": {
-              backgroundColor: "#ffffff",
-              borderBottom: "1px solid #e5e7eb",
-              "&:hover": {
-                backgroundColor: "rgba(0, 0, 0, 0.04)",
-              },
-              "&.Mui-selected": {
-                backgroundColor: "rgba(144, 106, 255, 0.08)",
-                "&:hover": {
-                  backgroundColor: "rgba(144, 106, 255, 0.1)",
-                },
-              },
-            },
-          }}
+  border: "none",
+  height: "100%",
+  backgroundColor: "#ffffff",
+
+  "& .MuiDataGrid-columnHeaders": {
+    backgroundColor: "#f9fafb",
+  },
+
+  "& .MuiDataGrid-columnHeader": {
+    backgroundColor: "#f9fafb",
+  },
+
+  "& .MuiDataGrid-columnHeaderTitle": {
+    fontFamily: "Johnson text",
+  },
+
+  "& .MuiDataGrid-main": {
+    backgroundColor: "#ffffff",
+  },
+
+  "& .MuiDataGrid-cell": {
+    borderBottom: "none",
+    py: 2,
+    fontFamily: "Johnson text",
+  },
+
+  "& .MuiDataGrid-row": {
+    backgroundColor: "#ffffff",
+    borderBottom: "1px solid #e5e7eb",
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.04)",
+    },
+    "&.Mui-selected": {
+      backgroundColor: "rgba(144, 106, 255, 0.08)",
+      "&:hover": {
+        backgroundColor: "rgba(144, 106, 255, 0.1)",
+      },
+    },
+  },
+}}
           getRowHeight={() => "auto"}
         />
       </Box>

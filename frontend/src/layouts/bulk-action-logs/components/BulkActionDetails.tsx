@@ -1,5 +1,5 @@
 /* eslint-disable import/namespace */
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Box, Typography, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, InputAdornment, Chip, CircularProgress } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { BulkActionDetails, ServerSyncStatus } from "@/types/BulkActionLogsState";
@@ -35,7 +35,6 @@ const getServerStatusStyle = (status: string): { backgroundColor: string; color:
   return styles[status] || styles.Pending;
 };
 
-
 const formatDateTime = (dateString?: string): string => {
   if (!dateString) return "N/A";
   try {
@@ -54,15 +53,19 @@ const formatDateTime = (dateString?: string): string => {
 
 const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
   const [searchText, setSearchText] = useState("");
-  const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>('ALL');
+  const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>("ALL");
 
+  useEffect(() => {
+    setSelectedStatusFilter("ALL");
+    setSearchText("");
+  }, [(jobDetails as any)?.jobId]);
 
   const filteredServers = useMemo(() => {
     if (!jobDetails?.servers) return [];
     let servers = jobDetails.servers.filter(server => server.serverName.toLowerCase().includes(searchText.toLowerCase()));
 
     // Apply status filter if a status is selected
-    if (selectedStatusFilter && selectedStatusFilter !== 'ALL') {
+    if (selectedStatusFilter && selectedStatusFilter !== "ALL") {
       if (selectedStatusFilter === "Failure") {
         servers = servers.filter(server => server.status === "Failure" || server.status === "Failed");
       } else if (selectedStatusFilter === "InProgress") {
@@ -126,23 +129,23 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
 
   const getSelectedStyles = (type: string, isSelected: boolean) => {
     const accent: Record<string, string> = {
-      ALL: 'rgba(37,99,235,0.25)',
-      Success: 'rgba(16,185,129,0.25)',
-      Pending: 'rgba(245,158,11,0.18)',
-      Failure: 'rgba(239,68,68,0.18)',
+      ALL: "rgba(37,99,235,0.25)",
+      Success: "rgba(16,185,129,0.25)",
+      Pending: "rgba(245,158,11,0.18)",
+      Failure: "rgba(239,68,68,0.18)",
     };
     const bg: Record<string, string> = {
-      ALL: '#EBF4FF',
-      Success: '#ECFDF3',
-      Pending: '#FFFBEB',
-      Failure: '#FEF2F2',
+      ALL: "#EBF4FF",
+      Success: "#ECFDF3",
+      Pending: "#FFFBEB",
+      Failure: "#FEF2F2",
     };
 
     return isSelected
       ? {
-          backgroundColor: bg[type as keyof typeof bg] || '#F3F4F6',
-          borderBottom: `3px solid ${accent[type as keyof typeof accent] || 'rgba(224,227,231,1)'}`,
-          transition: 'background-color 0.15s ease, border-bottom 0.15s ease',
+          backgroundColor: bg[type as keyof typeof bg] || "#F3F4F6",
+          borderBottom: `3px solid ${accent[type as keyof typeof accent] || "rgba(224,227,231,1)"}`,
+          transition: "background-color 0.15s ease, border-bottom 0.15s ease",
         }
       : {};
   };
@@ -156,30 +159,20 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
         overflow: "hidden",
         backgroundColor: "#FFFFFF",
         padding: "12px",
-        fontFamily:"Johnson Text"
+        fontFamily: "Johnson Text",
       }}
     >
       {/* ===== TOP HEADER SECTION ===== */}
       <Box sx={{ marginBottom: "8px" }}>
-        {/* Line 1: Job ID + Status Badge */}
+        {/* Line 1: Status Badge only */}
         <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
             alignItems: "center",
             marginBottom: "6px",
           }}
         >
-          <Typography
-            sx={{
-              fontSize: "20px",
-              fontWeight: 500,
-              color: "#2961F4",
-              fontFamily:"Johnson Text"
-            }}
-          >
-            JOB ID : {jobDetails.jobId}
-          </Typography>
           <Chip
             label={jobDetails.status}
             sx={{
@@ -187,7 +180,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
               fontSize: "11px",
               fontWeight: 600,
               padding: "0 8px",
-              fontFamily:"Johnson Text",
+              fontFamily: "Johnson Text",
               ...getStatusBadgeStyle(jobDetails.status),
               "& .MuiChip-label": {
                 padding: "0",
@@ -214,7 +207,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                 fontSize: "14px",
                 color: "#05060F99",
                 fontWeight: 400,
-                fontFamily:"Johnson Text"
+                fontFamily: "Johnson Text",
               }}
             >
               Type
@@ -224,7 +217,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                 fontSize: "14px",
                 color: "#05060F",
                 fontWeight: 500,
-                fontFamily:"Johnson Text"
+                fontFamily: "Johnson Text",
               }}
             >
               {jobDetails.type}
@@ -238,7 +231,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                 fontSize: "14px",
                 color: "#05060F99",
                 fontWeight: 400,
-                fontFamily:"Johnson Text"
+                fontFamily: "Johnson Text",
               }}
             >
               User
@@ -248,7 +241,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                 fontSize: "14px",
                 color: "#05060F",
                 fontWeight: 500,
-                fontFamily:"Johnson Text"
+                fontFamily: "Johnson Text",
               }}
             >
               {jobDetails.user}
@@ -289,12 +282,12 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           overflow: "visible",
           paddingY: "6px",
           justifyContent: "space-between",
-          fontFamily:"Johnson Text"
+          fontFamily: "Johnson Text",
         }}
       >
         {/* Total Card */}
         <Box
-          onClick={() => handleCardClick('ALL')}
+          onClick={() => handleCardClick("ALL")}
           sx={{
             margin: "6px",
             padding: "12px",
@@ -310,17 +303,17 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             justifyContent: "space-evenly",
             cursor: "pointer",
             transition: "all 0.2s ease",
-            ...getSelectedStyles('ALL', selectedStatusFilter === 'ALL'),
+            ...getSelectedStyles("ALL", selectedStatusFilter === "ALL"),
           }}
         >
-          <Typography sx={{ fontSize: "16px", color: "#2961F4", fontWeight: 700,fontFamily:"Johnson Text" }}>Total Servers</Typography>
+          <Typography sx={{ fontSize: "16px", color: "#2961F4", fontWeight: 700, fontFamily: "Johnson Text" }}>Total Servers</Typography>
           <Typography
             sx={{
               fontSize: "12px",
               fontWeight: 500,
               color: "#2F3A4C",
               background: "#f0f0f0",
-              borderradius: "16px",
+              borderRadius: "16px",
               padding: "4px",
             }}
           >
@@ -346,17 +339,17 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             justifyContent: "space-evenly",
             cursor: "pointer",
             transition: "all 0.2s ease",
-            ...getSelectedStyles('ALL', selectedStatusFilter === 'Success'),
+            ...getSelectedStyles("ALL", selectedStatusFilter === "Success"),
           }}
         >
-          <Typography sx={{ fontSize: "16px", color: "#328714", fontWeight: 700,fontFamily:"Johnson Text" }}>Success</Typography>
+          <Typography sx={{ fontSize: "16px", color: "#328714", fontWeight: 700, fontFamily: "Johnson Text" }}>Success</Typography>
           <Typography
             sx={{
               fontSize: "12px",
               fontWeight: 500,
               color: "#2F3A4C",
               background: "#f0f0f0",
-              borderradius: "16px",
+              borderRadius: "16px",
               padding: "4px",
             }}
           >
@@ -382,17 +375,17 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             justifyContent: "space-evenly",
             cursor: "pointer",
             transition: "all 0.2s ease",
-            ...getSelectedStyles('ALL', selectedStatusFilter === 'Pending'),
+            ...getSelectedStyles("ALL", selectedStatusFilter === "Pending"),
           }}
         >
-          <Typography sx={{ fontSize: "16px", color: "#FFB712", fontWeight: 700,fontFamily:"Johnson Text" }}>Pending</Typography>
+          <Typography sx={{ fontSize: "16px", color: "#FFB712", fontWeight: 700, fontFamily: "Johnson Text" }}>Pending</Typography>
           <Typography
             sx={{
               fontSize: "12px",
               fontWeight: 500,
               color: "#2F3A4C",
               background: "#f0f0f0",
-              borderradius: "16px",
+              borderRadius: "16px",
               padding: "4px",
             }}
           >
@@ -418,17 +411,17 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
             justifyContent: "space-evenly",
             cursor: "pointer",
             transition: "all 0.2s ease",
-            ...getSelectedStyles('ALL', selectedStatusFilter === 'Failure'),
+            ...getSelectedStyles("ALL", selectedStatusFilter === "Failure"),
           }}
         >
-          <Typography sx={{ fontSize: "16px", color: "#DB1500", fontWeight: 700,fontFamily:"Johnson Text" }}>Failure</Typography>
+          <Typography sx={{ fontSize: "16px", color: "#DB1500", fontWeight: 700, fontFamily: "Johnson Text" }}>Failure</Typography>
           <Typography
             sx={{
               fontSize: "12px",
               fontWeight: 500,
               color: "#2F3A4C",
               background: "#f0f0f0",
-              borderradius: "16px",
+              borderRadius: "16px",
               padding: "4px",
             }}
           >
@@ -497,7 +490,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
           border: "1px solid #E0E3E7",
           borderBottom: "none",
           tableLayout: "fixed",
-          fontFamily:"Johnson Text"
+          fontFamily: "Johnson Text",
         }}
       >
         <Box
@@ -597,7 +590,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                       fontWeight: 600,
                       padding: "8px 10px",
                       cursor: "pointer",
-                      fontFamily:"Johnson Text"
+                      fontFamily: "Johnson Text",
                     }}
                   >
                     {server.serverName}
@@ -620,12 +613,12 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                         fontSize: "12px",
                         fontWeight: 500,
                         padding: "0 8px",
-                        borderRadius:"6px",
+                        borderRadius: "6px",
                         ...getServerStatusStyle(server.status),
                         "& .MuiChip-label": {
                           padding: "0",
                         },
-                         fontFamily:"Johnson Text"
+                        fontFamily: "Johnson Text",
                       }}
                     />
                   </TableCell>
@@ -641,7 +634,7 @@ const RightPanel: React.FC<RightPanelProps> = ({ jobDetails, loading }) => {
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
-                      fontFamily:"Johnson Text"
+                      fontFamily: "Johnson Text",
                     }}
                     title={server.message}
                   >

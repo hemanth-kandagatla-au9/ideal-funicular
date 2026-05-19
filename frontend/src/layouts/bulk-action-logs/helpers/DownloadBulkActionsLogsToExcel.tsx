@@ -4,9 +4,9 @@ import ExcelUtils from "@/utils/ExportDataToExcel";
 import agentManagementService from "../../../services/agent/agentManagement.service";
 import { errortoast, successtoast } from "../../agent-management/helpers/CustomToast";
 
-export default async function DownloadBulkActionLogsToExcel() {
+export default async function DownloadBulkActionLogsToExcel(pageNo: number = 0, pageSize: number = 10) {
   try {
-    const response = await agentManagementService.exportBulkActionLogs();
+    const response = await agentManagementService.exportBulkActionLogs(pageNo, pageSize);
 
     const payload = response?.data || response;
     const records: any[] = payload?.data || [];

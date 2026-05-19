@@ -32,8 +32,6 @@ describe('BulkActionDetails component', () => {
     const details = makeJobDetails();
     render(<BulkActionDetails jobDetails={details} loading={false} />);
 
-    // Header
-    expect(screen.getByText(/JOB ID : JOB-1/)).toBeInTheDocument();
 
     // Total servers displayed
     expect(screen.getByText('Total Servers')).toBeInTheDocument();

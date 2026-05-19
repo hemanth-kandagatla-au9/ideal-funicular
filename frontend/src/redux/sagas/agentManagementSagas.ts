@@ -463,9 +463,18 @@ export function* healthChecksSelectedAgent({ props }: ActionProps): Generator<an
 export function* upgradeAgents({ props }: ActionProps): Generator<any, void, any> {
   try {
     yield put(agentManagementAction.requestUpgradeSelectedAgents());
-    const output = yield call(agentManagementService.upgradeBulkAgents, props);
+
+    const mode = get(props, "mode", "");
+
+    const output = mode === "bulk"
+      ? yield call(agentManagementService.upgradeBulkAgents, props)
+      : yield call(agentManagementService.upgradeAgent, {
+          hostname: get(props, "data[0].hostname", ""),
+          version: get(props, "risebotAgentVersion", ""),
+        });
+
     yield put(agentManagementAction.successUpgradeSelectedAgents(output));
-    if (get(output, "data.flag") === "success") successtoast(get(output, "output.data", `RISEAGENT upgrade triggerred successfully: ${output.data.data.message}`));
+    if (get(output, "data.flag") === "success") successtoast(get(output, "output.data", `RISEAGENT upgrade triggered successfully: ${output.data.data.message}`));
     else errortoast(get(output, "data.message", "failed to trigger upgrade RISEAGENTs"));
   } catch (error: any) {
     yield put(agentManagementAction.failureUpgradeSelectedAgents(error));

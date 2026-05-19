@@ -52,35 +52,29 @@ describe("BulkActionLogsDashboard consolidated", () => {
     expect(mockDownload).toHaveBeenCalled();
   });
 
-  it("passes getTotalRecords to Download and uses selector pagination totalRecords", async () => {
+  it("passes pageNo and pageSize to Download when Export clicked", async () => {
     const mockDispatch = jest.fn();
     (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
-    (useSelector as jest.Mock).mockImplementation((selector: any) => selector({ bulkActionLogs: { pagination: { totalRecords: 77 } } }));
+    (useSelector as jest.Mock).mockImplementation((selector: any) => selector({ bulkActionLogs: { pagination: { pageNo: 3 } } }));
 
     render((<Dashboard />) as any);
 
     const exportBtn = await screen.findByText("Export");
     fireEvent.click(exportBtn);
 
-    expect(mockDownload).toHaveBeenCalled();
-    const passedGetTotal = mockDownload.mock.calls[0][0];
-    expect(typeof passedGetTotal).toBe("function");
-    expect(passedGetTotal()).toBe(77);
+    expect(mockDownload).toHaveBeenCalledWith(3, 10);
   });
 
-  it("still calls Download helper when service throws", async () => {
-    // Make service throw
-    agentService.getBulkActionLogs.mockImplementation(() => { throw new Error("fetch failed"); });
-
+  it("still calls Download helper with default pageNo when pagination not set", async () => {
     const mockDispatch = jest.fn();
     (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
-    (useSelector as jest.Mock).mockImplementation((sel: any) => sel({ bulkActionLogs: { pagination: { totalRecords: 0 } } }));
+    (useSelector as jest.Mock).mockImplementation((sel: any) => sel({ bulkActionLogs: { pagination: {} } }));
 
     render((<Dashboard />) as any);
 
     const exportBtn = await screen.findByText("Export");
     fireEvent.click(exportBtn);
 
-    expect(mockDownload).toHaveBeenCalled();
+    expect(mockDownload).toHaveBeenCalledWith(0, 10);
   });
 });

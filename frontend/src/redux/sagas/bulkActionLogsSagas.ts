@@ -149,6 +149,20 @@ export function* syncBulkActionConfigSaga({
   }
 }
 
+// ==================== SAGA 6: Export Bulk Action Logs ====================
+export function* exportBulkActionLogsSaga({ payload }: ActionProps): Generator<any, void, any> {
+  try {
+    yield put(bulkActionLogsActions.requestExportBulkActionLogs());
+    const { pageNo = 0, pageSize = 10 } = payload?.pagination || {};
+    const response = yield call(agentManagementService.exportBulkActionLogs, pageNo, pageSize);
+    yield put(bulkActionLogsActions.successExportBulkActionLogs(response?.data || response));
+    successtoast("Export initiated successfully");
+  } catch (error: any) {
+    yield put(bulkActionLogsActions.failureExportBulkActionLogs(error));
+    errortoast("Failed to export bulk action logs");
+  }
+}
+
 // ==================== Root Saga ====================
 /**
  * Root saga that registers all watchers
@@ -183,6 +197,12 @@ export function* bulkActionLogsSaga(): Generator<any, void, any> {
       yield takeLatest(
         BULK_ACTION_LOGS.SYNC_BULK_ACTION_CONFIG,
         syncBulkActionConfigSaga
+      );
+    }),
+    fork(function* () {
+      yield takeLatest(
+        BULK_ACTION_LOGS.EXPORT_BULK_ACTION_LOGS,
+        exportBulkActionLogsSaga
       );
     }),
   ]);

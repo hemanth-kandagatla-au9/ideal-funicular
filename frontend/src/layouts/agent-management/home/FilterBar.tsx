@@ -127,16 +127,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
 const handleSelectChange = (
   key: string,
   selectedOptions: SelectedOption[],
-  event?: any
 ) => {
-
-  if (event?.type === "keydown") {
-    const keyPressed = event?.key || event?.nativeEvent?.key;
-    if (keyPressed === "Enter" || keyPressed === " ") {
-      return;
-    }
-  }
-
   const allRegularOptions = filterOptions[key].map(opt => ({
     label: opt.name,
     value: opt.name,
@@ -238,11 +229,12 @@ const handleSelectChange = (
                   })),
                 ]}
                 value={filters[key] || []}
-               onSelectChange={(selected: SelectedOption[]) => handleSelectChange(key, selected)}
+                onSelectChange={(selected: SelectedOption[]) => handleSelectChange(key, selected)}
                 clearAll={() => clearAll(key)}
                 selectAllOption={() => selectAll(key)}
                 open={!!dropdownOpen[key]}
                 toggleOpen={() => toggleDropdown(key)}
+                
                 toggleTestId={`toggle-${key}`}
                 selectTestId={`select-${key}`}
                 clearTestId={`clear-${key}`}

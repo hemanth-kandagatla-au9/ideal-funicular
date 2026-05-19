@@ -50,6 +50,11 @@ export const RISE_AGENT_DETAILS_READ = "Rise Agent : host_details";
 export const RISE_AGENT_CONFIG_READ  = "Rise Agent : host_config";
 export const RISE_AGENT_LOGS_READ    = "Rise Agent : host_logs";
 export const RISE_AGENT_ACCORDION    = "Rise Agent : accordion";
+export const RISE_AGENT_ACCORDION_AGENT        = "Rise Agent : accordion_agent";
+export const RISE_AGENT_ACCORDION_SUPERVISOR   = "Rise Agent : accordion_supervisor";
+export const RISE_AGENT_ACCORDION_CYBERSPHERE  = "Rise Agent : accordion_cybersphere";
+export const RISE_AGENT_ACCORDION_INSIGHTS     = "Rise Agent : accordion_insights";
+export const RISE_AGENT_ACCORDION_WORKFLOW     = "Rise Agent : accordion_workflow";
 export const RISE_AGENT_GLOBAL_CONFIG_READ = "Rise Agent : global_config_read";
 export const RISE_AGENT_GLOBAL_CONFIG_UPDATE = "Rise Agent : global_config_update";
 export const RISE_AGENT_USER_AUTHORIZATION_READ = "Rise Agent : user_authorization_read";
@@ -92,6 +97,11 @@ export const AGENT_PERMISSIONS = {
   RISE_AGENT_CONFIG_READ,
   RISE_AGENT_LOGS_READ,
   RISE_AGENT_ACCORDION,
+  RISE_AGENT_ACCORDION_AGENT,
+  RISE_AGENT_ACCORDION_SUPERVISOR,
+  RISE_AGENT_ACCORDION_CYBERSPHERE,
+  RISE_AGENT_ACCORDION_INSIGHTS,
+  RISE_AGENT_ACCORDION_WORKFLOW,
   RISE_AGENT_VERSIONMANAGEMENT_VIEW,
   RISE_AGENT_VERSIONMANAGEMENT_EDIT,
   RISE_AGENT_DOWNLOAD_TO_EXCEL,

@@ -54,7 +54,7 @@ describe("AxiosInstance", () => {
   });
 
   it("should add authorization header when token is available", async () => {
-    (TokenService.getIdToken as jest.Mock).mockResolvedValue("access-token");
+    (TokenService.getAccessToken as jest.Mock).mockResolvedValue("access-token");
     instance.init();
     const reqInterceptor = mockedAxios.interceptors.request.use.mock.calls[0][0];
     const config = { headers: {} };
@@ -63,7 +63,7 @@ describe("AxiosInstance", () => {
   });
 
   it("should not add authorization header when token is not available", async () => {
-    (TokenService.getIdToken as jest.Mock).mockResolvedValue(null);
+    (TokenService.getAccessToken as jest.Mock).mockResolvedValue(null);
     instance.init();
     const reqInterceptor = mockedAxios.interceptors.request.use.mock.calls[0][0];
     const config = { headers: {} };

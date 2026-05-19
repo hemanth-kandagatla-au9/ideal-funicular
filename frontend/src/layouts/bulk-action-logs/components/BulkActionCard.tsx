@@ -10,6 +10,7 @@ interface ServerIndicator {
 interface JobCardProps {
   jobId: string;
   type: string;
+  user?: string;
   status: "Completed" | "Partial" | "Failed" | "InProgress";
   totalServers: number;
   serverIndicators: ServerIndicator[];
@@ -51,7 +52,15 @@ const getIndicatorColor = (type: "success" | "pending" | "failed") => {
   return colors[type];
 };
 
-const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, serverIndicators, isActive = false, onClick }) => {
+const JobCard: React.FC<JobCardProps> = ({
+  type,
+  user,
+  status,
+  totalServers,
+  serverIndicators,
+  isActive = false,
+  onClick,
+}) => {
   const statusStyles = getStatusStyles(status);
 
   return (
@@ -89,7 +98,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
           paddingRight: "12px",
         }}
       >
-        {/* Job ID */}
+        {/* Job Type */}
         <Typography
           sx={{
             fontSize: "14px",
@@ -97,25 +106,28 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
             color: "#334155",
             lineHeight: "20px",
             fontFamily: "Johnson Text",
-            wordBreak: "break-all",
-          }}
-        >
-          {jobId}
-        </Typography>
-
-        {/* Job Type */}
-        <Typography
-          sx={{
-            fontSize: "14px",
-            fontWeight: 500,
-            color: "#334155",
-            marginTop: "4px",
-            lineHeight: "20px",
-            fontFamily: "Johnson Text",
           }}
         >
           {type}
         </Typography>
+        {/* User */}
+        {user && (
+          <Typography
+            sx={{
+              fontSize: "11px",
+              fontWeight: 400,
+              color: "#9CA3AF",
+              lineHeight: "16px",
+              fontFamily: "Johnson Text",
+              mt: "2px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {user}
+          </Typography>
+        )}
       </Box>
 
       {/* ===== CENTER SECTION: STATUS ===== */}
@@ -154,62 +166,83 @@ const JobCard: React.FC<JobCardProps> = ({ jobId, type, status, totalServers, se
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
-          gap: "2px",
+          gap: "6px",
           flex: 0.2,
         }}
       >
         {/* Total Servers */}
         <Typography
           sx={{
-            fontSize: "11px",
+            fontSize: "12px",
+            fontWeight: 500,
             color: "#6B7280",
             lineHeight: 1.2,
+            whiteSpace: "nowrap",
           }}
         >
           {totalServers} Servers
         </Typography>
 
-        {/* Server Indicators Row */}
+        {/* Server Indicators Row — wrapped in bordered pill container */}
         <Box
           sx={{
-            display: "flex",
+            display: "inline-flex",
             flexDirection: "row",
             alignItems: "center",
-            gap: "6px",
+            padding: "4px 10px",
+            borderRadius: "20px",
+            border: "1px solid #E2E8F0",
+            backgroundColor: "#FFFFFF",
+            width: "fit-content",
           }}
         >
           {serverIndicators.map((indicator, idx) => (
-            <Box
-              key={idx}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "2px",
-              }}
-            >
-              {/* Dot */}
+            <React.Fragment key={idx}>
+              {/* Divider between indicators */}
+              {idx > 0 && (
+                <Box
+                  sx={{
+                    width: "1px",
+                    height: "12px",
+                    backgroundColor: "#E2E8F0",
+                    flexShrink: 0,
+                  }}
+                />
+              )}
               <Box
                 sx={{
-                  width: "6px",
-                  height: "6px",
-                  borderRadius: "50%",
-                  backgroundColor: getIndicatorColor(indicator.color),
-                  flexShrink: 0,
-                }}
-              />
-              {/* Count */}
-              <Typography
-                sx={{
-                  fontSize: "11px",
-                  fontWeight: 600,
-                  color: "#374151",
-                  lineHeight: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  padding: "0 8px",
+                  "&:first-of-type": { paddingLeft: 0 },
+                  "&:last-of-type": { paddingRight: 0 },
                 }}
               >
-                {indicator.count}
-              </Typography>
-            </Box>
+                {/* Dot — no shadow */}
+                <Box
+                  sx={{
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    backgroundColor: getIndicatorColor(indicator.color),
+                    flexShrink: 0,
+                  }}
+                />
+                {/* Count */}
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    color: "#374151",
+                    lineHeight: 1,
+                    fontFamily: "Johnson Text",
+                  }}
+                >
+                  {indicator.count}
+                </Typography>
+              </Box>
+            </React.Fragment>
           ))}
         </Box>
       </Box>

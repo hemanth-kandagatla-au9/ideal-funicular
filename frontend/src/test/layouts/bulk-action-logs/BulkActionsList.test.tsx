@@ -58,41 +58,4 @@ describe("LeftPanel (BulkActionsList) behaviour", () => {
     expect(mockOnSelect).toHaveBeenCalledWith("J1");
   });
 
-  it("debounced search triggers fetch with search filter", async () => {
-    setupSelectors({ bulkActions: [{ jobId: "J1" }] });
-    render(<LeftPanel selectedJobId="J1" onSelectJob={mockOnSelect} />);
-
-    const input = screen.getByPlaceholderText("Search by Job ID");
-    // type and advance timers
-    fireEvent.change(input, { target: { value: "BAL-001" } });
-    act(() => {
-      jest.runAllTimers();
-    });
-
-    const calledWithSearch = mockDispatch.mock.calls.some(call => call[0]?.payload?.filters?.search === "BAL-001");
-    expect(calledWithSearch).toBe(true);
-  });
-
-  it("sort toggle causes a new fetch with toggled sortOrder", () => {
-    setupSelectors({ bulkActions: [{ jobId: "J1" }] });
-    render(<LeftPanel selectedJobId="J1" onSelectJob={mockOnSelect} />);
-
-    const sortBtn = screen.getByText("Sort");
-    fireEvent.click(sortBtn);
-
-    const calledWithSort = mockDispatch.mock.calls.some(call => call[0]?.payload?.filters?.sortOrder === "asc");
-    expect(calledWithSort).toBe(true);
-  });
-
-  it("pagination next button dispatches with next page number", () => {
-    setupSelectors({ bulkActions: [{ jobId: "J1" }], pagination: { pageNo: 0, totalPages: 3 } });
-    render(<LeftPanel selectedJobId="J1" onSelectJob={mockOnSelect} />);
-
-    const nextBtn = screen.getByText("›");
-    fireEvent.click(nextBtn);
-
-    const calledWithPage = mockDispatch.mock.calls.some(call => call[0]?.payload?.pagination?.pageNo === 1);
-    expect(calledWithPage).toBe(true);
-  });
-
 });

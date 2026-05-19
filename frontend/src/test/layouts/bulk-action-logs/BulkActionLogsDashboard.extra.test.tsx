@@ -44,19 +44,14 @@ describe("BulkActionLogsDashboard export behavior", () => {
     (useSelector as jest.Mock).mockImplementation((selector: any) => selector(state));
   };
 
-  it("calls DownloadBulkActionLogsToExcel when Export clicked and passes getTotalRecords", async () => {
-    setupSelectors({ totalRecords: 77 });
+  it("calls DownloadBulkActionLogsToExcel when Export clicked with correct pageNo and pageSize", async () => {
+    setupSelectors({ pagination: { pageNo: 1, totalRecords: 77 } });
 
     render((<Dashboard />) as any);
 
     const exportBtn = await screen.findByText("Export");
     fireEvent.click(exportBtn);
 
-    expect(mockDownload).toHaveBeenCalled();
-
-    // Inspect functions passed to Download and validate getTotalRecords
-    const passedGetTotal = mockDownload.mock.calls[0][0];
-    const total = passedGetTotal();
-    expect(total).toBe(77);
+    expect(mockDownload).toHaveBeenCalledWith(1, 10);
   });
 });

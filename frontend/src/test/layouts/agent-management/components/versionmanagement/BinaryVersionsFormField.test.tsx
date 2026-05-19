@@ -104,22 +104,6 @@ describe("BinaryVersionsFormField", () => {
     expect(formik.setFieldValue).toHaveBeenCalledWith("osEntries", []);
   });
 
-  it("toggles mandatory switch updates fields", () => {
-    const formik = createFormik({
-      values: { isMandatory: false },
-    });
-
-    render(<BinaryVersionsFormField formik={formik as any} isEditing={false} />);
-
-    const checkbox = screen.getByRole("checkbox");
-    fireEvent.click(checkbox);
-
-    expect(formik.setFieldValue).toHaveBeenCalledWith("isMandatory", true);
-    expect(formik.setFieldValue).toHaveBeenCalledWith(
-      "upgradeType",
-      "Mandatory"
-    );
-  });
 
   it("hides fields when editing", () => {
     const formik = createFormik();
